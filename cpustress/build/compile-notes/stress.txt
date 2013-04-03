@@ -1,0 +1,25 @@
+31 March 2013
+
+The source code of stress can be downloaded here:
+http://weather.ou.edu/~apw/projects/stress/stress-1.0.4.tar.gz
+
+The stress binary is compiled on Ubuntu 12.04.2 LTS (32-bit).
+
+After downloading and unpacking the source code, apply a patch to disable the 
+hdd stressing, because the CPUstress image does not support writing to disks:
+
+ $ cd stress-1.0.4
+ $ patch -p 1 <stress-no-hdd.patch
+
+Then run the configure script and then "make". You will get the binary in the 
+"src" directory. (The default settings by configure should be enough for the 
+CPUstress image.)
+
+ $ ./configure
+ $ make
+
+I stripped the binary after compilation to reduce the file size.
+
+ $ strip ./src/stress
+
+--Explorer <explorer09@gmail.com>

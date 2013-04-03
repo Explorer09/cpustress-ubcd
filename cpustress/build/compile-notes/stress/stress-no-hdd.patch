@@ -1,0 +1,164 @@
+diff -r -u a/src/stress.c b/src/stress.c
+--- a/src/stress.c	2010-03-19 14:48:55.000000000 +0800
++++ b/src/stress.c	2013-03-31 23:33:27.644042415 +0800
+@@ -73,7 +73,6 @@
+ int hogcpu (void);
+ int hogio (void);
+ int hogvm (long long bytes, long long stride, long long hang, int keep);
+-int hoghdd (long long bytes);
+ 
+ int
+ main (int argc, char **argv)
+@@ -93,7 +92,6 @@
+   long long do_vm_hang = -1;
+   int do_vm_keep = 0;
+   long long do_hdd = 0;
+-  long long do_hdd_bytes = 1024 * 1024 * 1024;
+ 
+   /* Record our start time.  */
+   if ((starttime = time (NULL)) == -1)
+@@ -219,26 +217,6 @@
+         {
+           do_vm_keep = 1;
+         }
+-      else if (strcmp (arg, "--hdd") == 0 || strcmp (arg, "-d") == 0)
+-        {
+-          assert_arg ("--hdd");
+-          do_hdd = atoll_b (arg);
+-          if (do_hdd <= 0)
+-            {
+-              err (stderr, "invalid number of hdd hogs: %lli\n", do_hdd);
+-              exit (1);
+-            }
+-        }
+-      else if (strcmp (arg, "--hdd-bytes") == 0)
+-        {
+-          assert_arg ("--hdd-bytes");
+-          do_hdd_bytes = atoll_b (arg);
+-          if (do_hdd_bytes <= 0)
+-            {
+-              err (stderr, "invalid hdd byte value: %lli\n", do_hdd_bytes);
+-              exit (1);
+-            }
+-        }
+       else
+         {
+           err (stderr, "unrecognized option: %s\n", arg);
+@@ -351,27 +329,6 @@
+             }
+           --do_vm;
+         }
+-
+-      if (do_hdd)
+-        {
+-          switch (pid = fork ())
+-            {
+-            case 0:            /* child */
+-              alarm (timeout);
+-              usleep (backoff);
+-              if (do_dryrun)
+-                exit (0);
+-              exit (hoghdd (do_hdd_bytes));
+-            case -1:           /* error */
+-              err (stderr, "fork failed: %s\n", strerror (errno));
+-              break;
+-            default:           /* parent */
+-              dbg (stdout, "--> hoghdd worker %lli [%i] forked\n",
+-                   do_hdd, pid);
+-              ++children;
+-            }
+-          --do_hdd;
+-        }
+     }
+ 
+   /* Wait for our children to exit.  */
+@@ -534,78 +491,6 @@
+   return 0;
+ }
+ 
+-int
+-hoghdd (long long bytes)
+-{
+-  long long i, j;
+-  int fd;
+-  int chunk = (1024 * 1024) - 1;        /* Minimize slow writing.  */
+-  char buff[chunk];
+-
+-  /* Initialize buffer with some random ASCII data.  */
+-  dbg (stdout, "seeding %d byte buffer with random data\n", chunk);
+-  for (i = 0; i < chunk - 1; i++)
+-    {
+-      j = rand ();
+-      j = (j < 0) ? -j : j;
+-      j %= 95;
+-      j += 32;
+-      buff[i] = j;
+-    }
+-  buff[i] = '\n';
+-
+-  while (1)
+-    {
+-      char name[] = "./stress.XXXXXX";
+-
+-      if ((fd = mkstemp (name)) == -1)
+-        {
+-          err (stderr, "mkstemp failed: %s\n", strerror (errno));
+-          return 1;
+-        }
+-
+-      dbg (stdout, "opened %s for writing %lli bytes\n", name, bytes);
+-
+-      dbg (stdout, "unlinking %s\n", name);
+-      if (unlink (name) == -1)
+-        {
+-          err (stderr, "unlink of %s failed: %s\n", name, strerror (errno));
+-          return 1;
+-        }
+-
+-      dbg (stdout, "fast writing to %s\n", name);
+-      for (j = 0; bytes == 0 || j + chunk < bytes; j += chunk)
+-        {
+-          if (write (fd, buff, chunk) == -1)
+-            {
+-              err (stderr, "write failed: %s\n", strerror (errno));
+-              return 1;
+-            }
+-        }
+-
+-      dbg (stdout, "slow writing to %s\n", name);
+-      for (; bytes == 0 || j < bytes - 1; j++)
+-        {
+-          if (write (fd, &buff[j % chunk], 1) == -1)
+-            {
+-              err (stderr, "write failed: %s\n", strerror (errno));
+-              return 1;
+-            }
+-        }
+-      if (write (fd, "\n", 1) == -1)
+-        {
+-          err (stderr, "write failed: %s\n", strerror (errno));
+-          return 1;
+-        }
+-      ++j;
+-
+-      dbg (stdout, "closing %s after %lli bytes\n", name, j);
+-      close (fd);
+-    }
+-
+-  return 0;
+-}
+-
+ /* Convert a string representation of a number with an optional size suffix
+  * to a long long.
+  */
+@@ -750,9 +635,7 @@
+     "     --vm-bytes B   malloc B bytes per vm worker (default is 256MB)\n"
+     "     --vm-stride B  touch a byte every B bytes (default is 4096)\n"
+     "     --vm-hang N    sleep N secs before free (default none, 0 is inf)\n"
+-    "     --vm-keep      redirty memory instead of freeing and reallocating\n"
+-    " -d, --hdd N        spawn N workers spinning on write()/unlink()\n"
+-    "     --hdd-bytes B  write B bytes per hdd worker (default is 1GB)\n\n"
++    "     --vm-keep      redirty memory instead of freeing and reallocating\n\n"
+     "Example: %s --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 10s\n\n"
+     "Note: Numbers may be suffixed with s,m,h,d,y (time) or B,K,M,G (size).\n";
+ 

@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# CPUINFO v1.00
+# =============
+#
+# Displays information provided by the kernel about the different CPUs.
+#
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of
+# the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#
+# Written by Gert Hulselmans.
+# Last updated on 1 March 2013.
+
+
+echo -e "Press any key to start '\033[0;32mCPUinfo v1.00\033[0m'."
+echo -e "  Use \033[0;31m<SPACE>\033[0m, \033[0;31m<PageUp>\033[0m, \033[0;31m<PageDown>\033[0m and the arrow keys to move through a page."
+echo -e "  Press '\033[0;31mq\033[0m' to quit '\033[0;32mCPUinfo v1.00\033[0m'."
+read -s -n1
+
+less -~ /proc/cpuinfo

@@ -1,0 +1,92 @@
+#!/bin/sh
+
+# Change working directory to the directory of the script.
+cd `dirname $0`
+
+if [ "$1" != "no-recurse" -a "`id -u`" != "0" -a `which fakeroot` ]; then
+    echo "Faking root privileges when possible..."
+    fakeroot -- $0 no-recurse
+    exit 0
+fi
+
+# Check that important directories exist, so that we won't build an empty and
+# useless initramfs image.
+HAS_ERRORS=false
+for d in bin dev etc lib proc sbin sys tmp usr; do
+    if [ ! -d "build-initrd/$d" ]; then
+        echo "ERROR: Directory '$d' is missing."
+        HAS_ERRORS=true
+    fi
+done
+
+if [ "$HAS_ERRORS" = "true" ]; then
+    echo "There are important directories missing from 'build-initrd'. Aborting."
+    exit 1
+fi
+
+if [ -e "initrd.gz.old" ]; then
+    rm -i initrd.gz.old
+fi
+if [ -e "initrd.gz" ]; then
+    mv initrd.gz initrd.gz.old
+fi
+
+cd build-initrd
+
+# Optional: if the user is root, set the owner of the files to root.
+if [ "`id -u`" = "0" ]; then
+    chown -Rh 0:0 *
+fi
+
+# Prepare the ignore list.
+# Some VCS, notably Subversion, may create hidden directories all over the 
+# place. I have to ignore instead of remove them.
+# http://www.gnu.org/software/tar/manual/html_section/exclude.html
+if [ -e "../filelist-tmp.sed" ]; then
+    rm -i ../filelist-tmp.sed
+fi
+cat >../filelist-tmp.sed <<FILELIST_SED
+/\.#/ d
+/~$/ d
+/CVS\// d
+/RCS\// d
+/SCCS\// d
+/\.cvsignore/ d
+/\.svn/ d
+/\.git/ d
+/\.bzr/ d
+/\.hg/ d
+FILELIST_SED
+
+echo "Making cpio archive..."
+
+# Method of creating cpio-format initrd file can be found here:
+# http://www.thegeekstuff.com/2009/07/how-to-view-modify-and-recreate-initrd-img/
+find . | LC_ALL=C sort | sed -f ../filelist-tmp.sed | cpio -o -H newc >../initrd
+
+rm ../filelist-tmp.sed
+
+cd ..
+
+echo "Compressing..."
+
+# 7-zip is preferred because it can produce a smaller file size than gzip.
+# 7z and 7za work here, but 7zr doesn't.
+if [ `which 7z` ]; then
+    P7ZIP=7z
+elif [ `which 7za` ]; then
+    P7ZIP=7za
+else
+    P7ZIP=""
+fi
+
+if [ -n "$P7ZIP" ]; then
+    ${P7ZIP} a -tgzip -mx=9 initrd.gz initrd
+else
+    echo "7-zip is not found. Using gzip instead..."
+    gzip -9 -v initrd
+fi
+
+rm -f initrd
+
+echo "Done."

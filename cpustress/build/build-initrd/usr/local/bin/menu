@@ -1,0 +1,93 @@
+#!/bin/sh
+#
+# MENU
+# ====
+#
+# Displays a simple menu from which you can choose which program
+# you want to run.
+#
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of
+# the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#
+# Written by Gert Hulselmans and Explorer.
+# Last updated on 31 March 2013.
+
+
+echo
+echo -e "                                 \033[0;32m********"
+echo -e "                                 * Menu *"
+echo -e "                                 ********"
+echo
+echo -e "                     \033[01;37m1)\033[0m CPU Burn-in v1.00       (cpuburn)"
+echo -e "                     \033[01;37m2)\033[0m CPUinfo v1.00           (cpuinfo)"
+echo -e "                     \033[01;37m3)\033[0m Mersenne Prime v23.9.2  (mprime 23)"
+echo -e "                     \033[01;37m4)\033[0m Mersenne Prime v27.9    (mprime 27)"
+echo -e "                     \033[01;37m5)\033[0m Stress v1.0.4           (stress)"
+echo -e "                     \033[01;37m6)\033[0m CPU stress tester 2.0   (stresscpu2)"
+echo -e "                     \033[01;37m7)\033[0m Helpinfo                (helpinfo)"
+echo
+echo -e "                     \033[01;37m8)\033[0m Reboot                  (reboot)"
+echo -e "                     \033[01;37m9)\033[0m Shutdown                (poweroff)"
+echo
+echo -e "                    \033[01;37m10)\033[0m Exit menu"
+echo
+echo -n 'Choose: '
+read CHOICE
+echo
+
+case "$CHOICE" in
+    1 | "cpuburn")
+        cpuburn
+        ;;
+    2 | "cpuinfo")
+        cpuinfo
+        ;;
+    3 | "mprime23" | "mprime 23")
+        mprime 23
+        ;;
+    4 | "mprime27" | "mprime 27")
+        mprime 27
+        ;;
+    5 | "stress")
+        stress
+        ;;
+    6 | "stresscpu2")
+        stresscpu2
+        ;;
+    7 | "help" | "helpinfo")
+        helpinfo
+        ;;
+    8 | "reboot")
+        reboot
+        ;;
+    9 | "poweroff")
+        poweroff
+        ;;
+    10)
+        # Do nothing.
+        ;;
+    *)
+        echo "This isn't a valid choice."
+esac
+
+case "$CHOICE" in
+    8 | 9 | "reboot" | "poweroff")
+        ;;
+    *)
+        echo -e "menu: Type '\033[01;37mmenu\033[0m' to return to main menu.\n"
+esac
+
+exit 0

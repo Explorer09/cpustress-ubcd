@@ -1,0 +1,161 @@
+Stress
+******
+
+* Menu:
+
+* Overview::                    Overview of `stress'.
+* Invoking stress::             How to run `stress'.
+* Examples::                    Some example invocations.
+* Copying This Manual::
+* Index::
+
+1 Overview of `stress'
+**********************
+
+`stress' is not a benchmark, but is rather a tool designed to put given
+subsytems under a specified load.  Instances in which this is useful
+include those in which a system administrator wishes to perform tuning
+activities, a kernel or libc programmer wishes to evaluate denial of
+service possibilities, etc.
+
+2 Invoking stress
+*****************
+
+The format for running the `stress' program is:
+
+     `stress' [OPTION [ARGS]] ...
+
+   `stress' supports the following options:
+
+`-?'
+`--help'
+     Show help information.
+
+`--version'
+     Show version information.
+
+`-v'
+`--verbose'
+     Turn up verbosity.
+
+`-q'
+`--quiet'
+     Turn down verbosity.
+
+`-n'
+`--dry-run'
+     Show what would have been done.
+
+`-t SECS'
+`--timeout SECS'
+     Time out after SECS seconds.
+
+`--backoff USECS'
+     Wait for factor of USECS microseconds before starting work.
+
+`-c FORKS'
+`--cpu FORKS'
+     Spawn FORKS processes each spinning on `sqrt()'.
+
+`-i FORKS'
+`--io FORKS'
+     Spawn FORKS processes each spinning on `sync()'.
+
+`-m FORKS'
+`--vm FORKS'
+     Spawn FORKS processes each spinning on `malloc()'.
+
+`--vm-bytes BYTES'
+     Allocate BYTES number of bytes.  The default is 1.
+
+`--vm-hang'
+     Instruct each vm hog process to go to sleep after allocating
+     memory.  This contrasts with their normal behavior, which is to
+     free the memory and reallocate _ad infinitum_.  This is useful for
+     simulating low memory conditions on a machine.  For example, the
+     following command allocates 256M of RAM and holds it until killed.
+
+          % stress --vm 2 --vm-bytes 128M --vm-hang
+
+NOTE: Don't use the following options!
+      This cpustress image doesn't support writing to a disk.
+      If you want to stress the hard disk also, use a real linux distribution
+      (e.g. Parted Magic) and run it from there.
+`-d FORKS'
+`--hdd FORKS'
+     Spawn FORKS processes each spinning on `write()'.
+
+`--hdd-bytes BYTES'
+     Write BYTES number of bytes.  The default is 1GB.
+
+`--hdd-noclean'
+     Do not unlink file(s) to which random ASCII data is written.
+
+
+   Note: Suffixes may be s,m,h,d,y (time) or k,m,g (size).
+
+3 Example invocations
+*********************
+
+The simple case is that you just want to bring the system load average
+up to an arbitrary value.  The following forks 13 processes, each of
+which spins in a tight loop calculating the sqrt() of a random number
+acquired with rand().
+
+   % `stress -c 13'
+
+   Long options are supported, as well as is making the output less
+verbose.  The following forks 1024 processes, and only reports error
+messages if any.
+
+   % `stress --quiet --cpu 1k'
+
+   To see how your system performs when it is I/O bound, use the -i
+switch.  The following forks 4 processes, each of which spins in a
+tight loop calling sync(), which is a system call that flushes memory
+buffers to disk.
+
+   % `stress -i 4'
+
+   Multiple hogs may be combined on the same command line.  The
+following does everything the preceding examples did in one command,
+but also turns up the verbosity level as well as showing how to cause
+the command to self-terminate after 1 minute.
+
+   % `stress -c 13 -i 4 --verbose --timeout 1m'
+
+
+NOTE: Don't use the following options!
+      This cpustress image doesn't support writing to a disk.
+      If you want to stress the hard disk also, use a real linux distribution
+      (e.g. Parted Magic) and run it from there.
+
+   You can write a file of arbitrary length to disk.  The file is
+created with mkstemp() in the current directory, the default is to
+unlink it, but unlinking can be overridden with the -hdd-noclean flag.
+
+   % `stress -d 1 --hdd-noclean --hdd-bytes 13'
+
+   Large file support is enabled.
+
+   % `stress -d 1 --hdd-noclean --hdd-bytes 3G'
+
+Appendix A Copying This Manual
+******************************
+
+You may copy this manual under the terms of the GNU General Public
+License.
+
+
+Passing options to stress through the isolinux commandline
+**********************************************************
+
+If you want to run a stress with specific parameters, when you boot the image,
+use something similar to:
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=stress 
+           cmdstress="--quiet -c 1k"
+
+The cmdstress parameter contains the options that you want to pass to stress.

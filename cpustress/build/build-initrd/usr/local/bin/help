@@ -1,0 +1,44 @@
+#!/bin/sh
+#
+# Wrapper for the help program
+# ============================
+#
+# Display a message and redirect the user to 'helpinfo'.
+#
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of
+# the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#
+# Written by Explorer.
+# Last updated on 23 March 2013.
+
+
+echo 'There is no built-in help for the BusyBox ash shell.'
+echo -e "We will start '\033[01;37mhelpinfo\033[0m' instead. ('helpinfo $@')"
+echo
+
+# 'helpinfo' will run a 'less' program if there's no argument given.
+# I'll pause in order for the user to see this message.
+if [ -z "$1" ]; then
+    echo 'Press any key to continue.'
+    read -s -n1
+fi
+
+# Avoid recursion. ('help' calls 'helpinfo' who calls 'help'...)
+if [ "$1" = "help" ]; then
+    helpinfo helpinfo
+else
+    helpinfo "$@"
+fi

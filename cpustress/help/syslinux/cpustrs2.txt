@@ -1,0 +1,22 @@
+0f>> PAGE 207
+
+For 0fStress07 and 0fStressCPU07, you may pass the command-line arguments to the
+program by using the '0fcmdstress07' and '0fcmdstresscpu207' options respectively in
+isolinux. Examples:
+
+> .com32 linux.c32 /ubcd/boot/cpustress/bzImage root=/dev/ram0 ramdisk_size=
+  12000 noapic quiet ubcdcmd=stress 0fcmdstress="--quiet -c 1k"07 initrd=
+  /ubcd/boot/cpustress/initrd.gz
+
+> .com32 linux.c32 /ubcd/boot/cpustress/bzImage root=/dev/ram0 ramdisk_size=
+  12000 noapic quiet ubcdcmd=stresscpu2 0fcmdstresscpu2="-s -t 48:00:00"07 initrd=
+  /ubcd/boot/cpustress/initrd.gz
+
+Other boot options (for debugging use):
+  modprobe="module1 module2 ..."  Loads specific modules during boot.
+  ubcdcmd="dmesg|lsmod|uname"     Run dmesg, lsmod, or uname after boot.
+
+For more information, please run the 0fhelpinfo07 program in the CPUstress image.
+The helpinfo can also be accessed from the menu in it.
+
+<< Press 0f[F1]07 to return to previous page, any other key to return to menu >>

@@ -1,0 +1,57 @@
+#!/bin/sh
+#
+# This script re-creates symlinks in build-initrd. It is useful to people who 
+# lost the symlinks when checking-out from a VCS or moving from one filesystem 
+# to another.
+
+# Change working directory to the directory of the script.
+cd `dirname $0`
+
+cd build-initrd
+
+ln -s bin/busybox init
+
+cd bin
+ln -s busybox ash
+ln -s busybox cat
+ln -s busybox dmesg
+ln -s busybox echo
+ln -s busybox ls
+ln -s busybox mkdir
+ln -s busybox mktemp
+ln -s busybox mount
+ln -s busybox sh
+ln -s busybox umount
+ln -s busybox uname
+cd ..
+
+cd sbin
+ln -s ../bin/busybox halt
+ln -s ../bin/busybox init
+ln -s ../bin/busybox lsmod
+ln -s ../bin/busybox mdev
+ln -s ../bin/busybox modprobe
+ln -s ../bin/busybox poweroff
+ln -s ../bin/busybox reboot
+cd ..
+
+cd usr/bin
+ln -s ../../bin/busybox awk
+ln -s ../../bin/busybox clear
+ln -s ../../bin/busybox cut
+ln -s ../../bin/busybox expr
+ln -s ../../bin/busybox hexdump
+ln -s ../../bin/busybox less
+ln -s ../../bin/busybox pkill
+ln -s ../../bin/busybox seq
+ln -s ../../bin/busybox top
+ln -s ../../bin/busybox which
+cd ../..
+
+cd lib
+ln -s ld-2.17.so ld-linux.so.2
+ln -s libc-2.17.so libc.so.6
+ln -s libm-2.17.so libm.so.6
+ln -s libpthread-2.17.so libpthread.so.0
+ln -s libdl-2.17.so libdl.so.2
+cd ..

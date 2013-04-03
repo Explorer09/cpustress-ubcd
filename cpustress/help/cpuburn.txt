@@ -1,0 +1,114 @@
+CPU Burn-in README
+------------------
+
+What is CPU Burn-in?
+-------------------
+
+CPU Burn-in v1.0 by Michal Mienik is the ultimate stability testing tool for
+overclockers. The program heats up any x86 CPU to the maximum possible
+operating temperature that is achievable by using ordinary software.
+This allows the user to adjust the CPU speed up to the practical maximum while
+still being sure that stability is achieved even under the most stressful
+conditions. The program continuously monitors for erroneous calculations
+ensuring the CPU does not generate errors during calculations.
+
+Note from Gert Hulselmans: 'cpuburn' is a wrapper that automaticly detects the
+number of CPUs so they can be stressed all at the same time. It will run an
+instance of 'cpuburn-in' for each CPU in order to heat all CPUs up at the same
+time.
+
+Why use CPU Burn-in?
+-------------------
+
+In the past overclocking stability was tested by running intensive software
+such as Distributed.Net clients or SETI@home.  Running either piece of software
+for 24 hours would generally show up instability. A looping Quake3 timedemo was
+also a good choice.
+
+However, there are inherent limitations in these tests:
+
+Not every error caused by overclocking causes a program to crash or the system
+to hang. Some errors may be more subtle, such as a slight miscalculation. If
+such an event occurs and causes a pixel to render a slightly different colour
+in Quake3 for example, the user is unlikely to notice and overall this is no
+big deal. However such small errors can have a potentially devastating on
+distributed projects such as SETI@home, which rely on the reliable processing
+of data.
+
+CPU Burn-in consistently delivers a higher CPU operating temperature than the
+above mentioned  applications.  This allows CPU Burn-in to be particularly
+effective at testing overclocking stability and cooling effectiveness.
+
+How does it work?
+----------------
+
+CPU Burn-in constantly cycles FPU intensive functions for a user specified
+period of time. The resultant calculations are constantly checked for data
+integrity.  If the program detects erroneous data the user is immediately
+informed.  Applications such as SETI@home and Distributed.Net perform no such
+data checking.  The user must rely on those programs to crash or the system to
+hang before a problem can be noticed.
+
+Instructions:
+------------
+
+Please Note: Overclocking can potentially be harmful to your CPU.  It may fry
+or fail prematurely in the long term.  I cannot and will not be responsible for
+ any damage you do to your hardware. By it's very nature, CPU Burn-in pushes
+the CPU to the max.  Increasing the voltage, Mhz, or PCI/AGP above the
+recommended levels can cause damage.
+
+CPU Burn-in runs best as a high priority process on an otherwise idle system.
+
+
+
+Run the program with one command line value to specify the length of time to
+run the test:
+
+eg.
+   "cpuburn 10"    will run the test for ten minutes.
+
+
+If you want to run cpuburn-in for a certain time, you can also add a parameter
+to the isolinux config file:
+
+eg. Run cpuburn-in for 10 days.
+
+     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+     INITRD /ubcd/boot/cpustress/initrd.gz
+     APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=cpuburn days=10
+
+
+eg. Run cpuburn-in for 10 hours.
+
+     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+     INITRD /ubcd/boot/cpustress/initrd.gz
+     APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=cpuburn hours=10
+
+
+eg. Run cpuburn-in for 10 minutes.
+
+     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+     INITRD /ubcd/boot/cpustress/initrd.gz
+     APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=cpuburn minutes=10
+
+
+If those parameters are all provided to the APPEND command of the isolinux
+config, the run time will be determined by the first value of the time duration
+which will be searched in the following order: days > hours > minutes.
+So if 'minutes=100000000' and 'days=10' is found, the run time will be set to
+14400 minutes (= 10 days).
+
+
+If cpuburn is called without parameters, it will run cpuburn-in for 10080
+minutes (= 7 days).
+
+
+Contact:
+-------
+   
+If your system experiences instability during the burn-in test or you receive
+error messages it's likely the system has been overclocked too far.
+
+If you believe a bug in the program has been found please email
+cluster2k@hotmail.com 

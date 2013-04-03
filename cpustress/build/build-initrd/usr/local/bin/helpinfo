@@ -1,0 +1,190 @@
+#!/bin/sh
+#
+# HELPINFO
+# ========
+#
+# Gives info about the CPU stress programs and for the BusyBox multi-call
+# binary.
+#
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of
+# the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#
+# Written by Gert Hulselmans and Explorer.
+# Last updated on 3 April 2013.
+
+
+LAST_EDITED="3 April 2013"
+
+showcontrols () {
+    echo -e "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through"
+    echo -e "the text. Press '\033[0;31mq\033[0m' to quit '\033[01;37mhelpinfo\033[0m'."
+    echo
+    echo 'Press any key to display the help text.'
+    echo
+    read -s -n1
+}
+
+[ -d /tmp/helpinfo ] || mkdir -p /tmp/helpinfo
+
+# Prepare the whitespaces for centering the "Last time edited:" text.
+NUM_SPACES=`expr 28 - ${#LAST_EDITED} / 2`
+SPACES=""
+for i in `seq $NUM_SPACES`; do
+    SPACES="$SPACES "
+done
+
+if [ -z "$1" ]; then
+    cat > /tmp/helpinfo/helpinfo.txt << HELPINFO
+
+                            ##################
+                            #    HELPINFO    #
+                            ##################
+
+                        Written by Gert Hulselmans
+${SPACES}Last time edited: ${LAST_EDITED}
+
+'helpinfo' displays the help text in such a way so that you can easily navigate
+through it.
+
+Use '<SPACE>', '<PageUp>', '<PageDown>', '<Up>' and '<Down>' to navigate
+through the text. Press 'q' to quit 'helpinfo'.
+
+
+Some general commands for all programs:
+                            To reboot, press: '<Ctrl> + <Alt> + <Del>'
+                    To quit a program, press: '<Ctrl> + C' or 'q'
+To switch to another virtual terminal, press: '<Alt> + <Left/Right>'
+
+
+'top' is useful program to see the percentage of processing power used by a
+specific program. When you run a CPU stress test, you will see that the 
+total persentage of the processing power is 100%.
+    To quit 'top', you have to press 'q' or '<Ctrl> + C'. 
+
+
+By typing 'menu' at the terminal window, you will get a menu from which you can
+select the following programs:
+        - CPU Burn-in v1.00       (cpuburn)
+        - CPUinfo v1.00           (cpuinfo)
+        - Helpinfo                (helpinfo)
+        - Mersenne Prime v23.9.2  (mprime 23)
+        - Mersenne Prime v27.9    (mprime 27)
+        - Stress v1.0.4           (stress)
+        - CPU stress tester 2.0   (stresscpu2)
+
+
+
+Help is available for the following executables:
+  * CPU stress and info tools:
+        - CPU Burn-in v1.00       (cpuburn)
+        - CPUinfo v1.00           (cpuinfo)
+        - Helpinfo                (helpinfo)
+        - Mersenne Prime          (mprime)
+        - Stress v1.0.4           (stress)
+        - CPU stress tester 2.0   (stresscpu2)
+
+  * Executables from the busybox packet:
+HELPINFO
+
+    busybox | awk 'NR==16,NR==EOF' >> /tmp/helpinfo/helpinfo.txt
+
+    cat >> /tmp/helpinfo/helpinfo.txt << HELPINFO2
+If you want help for one of the programs above, for example 'CPU Burn-in
+v1.00', run 'helpinfo cpuburn' in the terminal.
+
+
+To run Helpinfo from the isolinux commandline, use the following:
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=helpinfo
+
+
+To run Helpinfo for a specific program from the isolinux commandline (e.g.:
+cpuburn), use the following:
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=helpinfo
+           cmdhelpinfo=cpuburn
+HELPINFO2
+    less -~ /tmp/helpinfo/helpinfo.txt
+else
+    echo
+    echo -e '\033[0;32m                            ##################'
+    echo '                            #    HELPINFO    #'
+    echo -e '                            ##################\033[0m'
+    echo
+    echo '                        Written by Gert Hulselmans'
+    echo "${SPACES}Last time edited: ${LAST_EDITED}"
+    echo
+    echo -e "'\033[01;37mhelpinfo\033[0m' displays the help text in such a way so that you can easily navigate"
+    echo 'through it.'
+    echo
+
+    case "$1" in
+        cpuburn | cpuburn-in)
+            showcontrols
+            less -~ /opt/cpuburn/cpuburn.txt
+            ;;
+        cpuinfo)
+            showcontrols
+            less -~ /opt/cpuinfo/cpuinfo.txt
+            ;;
+        help | helpinfo)
+            showcontrols
+            helpinfo
+            ;;
+        mprime)
+            showcontrols
+            less -~ /opt/mprime/mprime.txt
+            ;;
+        stress)
+            showcontrols
+            less -~ /opt/stress/stress.txt
+            ;;
+        stresscpu2)
+            showcontrols
+            stresscpu2 -h > /tmp/helpinfo/stresscpu2.txt
+            cat >> /tmp/helpinfo/stresscpu2.txt << CMDSTRESSCPU2
+Passing options to stresscpu2 through the isolinux commandline
+**************************************************************
+
+If you want to run a stresscpu2 with specific parameters, when you boot the
+image, use something similar to:
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=stresscpu2
+           cmdstresscpu2="-s -t 48:00:00"
+
+The cmdstresscpu2 parameter contains the options that you want to pass to
+stresscpu2.
+CMDSTRESSCPU2
+            less -~ /tmp/helpinfo/stresscpu2.txt
+            ;;
+        *)
+            EXE=`which "$1"`
+            if [ -x "$EXE" ]; then
+                showcontrols
+                $EXE --help 2>&1 | less -~
+            else
+                echo -e "'\033[01;37m${1}\033[0m' is no executable and therefore there is no help text."
+                echo -e "See '\033[01;37mhelpinfo\033[0m' for which executables are supported."
+            fi
+            ;;
+    esac
+fi

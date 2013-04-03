@@ -1,0 +1,22 @@
+# This is run first except when booting in single-user mode.
+#
+::sysinit:/etc/init.d/rcS
+
+# Start an "respawn" shell on tty1 which executes the '/runonce' script once.
+tty1::respawn:/runonce
+# Start an "askfirst" shell on tty2-9.
+tty2::askfirst:/bin/sh --login
+tty3::askfirst:/bin/sh --login
+tty4::askfirst:/bin/sh --login
+tty5::askfirst:/bin/sh --login
+tty6::askfirst:/bin/sh --login
+tty7::askfirst:/bin/sh --login
+tty8::askfirst:/bin/sh --login
+tty9::askfirst:/bin/sh --login
+
+# Stuff to do when restarting the init process.
+ ::restart:/sbin/init
+
+# Stuff to do before rebooting.
+::ctrlaltdel:/sbin/reboot
+::shutdown:/bin/umount -a -r

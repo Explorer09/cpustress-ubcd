@@ -1,0 +1,121 @@
+#!/bin/sh
+#
+# Wrapper for the Mersenne Prime Torture test (mprime)
+# ====================================================
+#
+# 'mprime' is a wrapper that automaticly detects the number of CPUs so they can be
+# stressed all at the same time. It will run an instance of 'mprime' for each
+# CPU in order to heat all CPUs up at the same time. You can do this by running
+# the background option (-bn with n= number of processes). However, this option
+# does not display any output on the screen. This can be solved by running several
+# instances of mprime with the background (&) option of the shell. This method
+# displays the output of the multiple instances of mprime.
+#
+# Since version 25.5, a single mprime instance can support multiple CPUs, so the
+# script won't use the workaround above on mprime 27.9. (This change is made by
+# Explorer and not Gert Hulselmans.) Note that the background option (-b) is no
+# longer supported since 25.5.
+#
+# This wrapper allows the user to choose which version of mprime he wants to use.
+#   mprime          ==> will prompt to ask which version should be used
+#   mprime 23       ==> will run 'Mersenne Prime 23.9.2'
+#   mprime 27       ==> will run 'Mersenne Prime 27.9 build 1'
+#
+# This wrapper avoids specifying the working directory part (-W) and the torture
+# (-t) option of the command 'mprime -t -W/tmp/torture-test/torture.XXXXXX',
+# so the user can run 'mprime' from a terminal without worrying which parameters
+# to add to use the torture test of Mersenne Prime Test. 
+#
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of
+# the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#
+# Written by Gert Hulselmans and Explorer.
+# Last updated on 1 March 2013.
+
+
+CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
+
+mkdir -p /tmp/torture-test/
+
+echo -e '\033[0;32mMersenne Prime Torture test:'
+echo -e '============================\033[0m'
+echo
+
+case "$1" in
+    23)
+        echo "The torture test will be executed with 'Mersenne Prime 23.9.2' (mprime23)."
+        MPRIME=/opt/mprime/mprime23
+        ;;
+    27)
+        echo "The torture test will be executed with 'Mersenne Prime 27.9 build 1' (mprime27)."
+        MPRIME=/opt/mprime/mprime27
+        ;;
+    *)
+        echo "Which version of 'Mersenne Prime' do you want to use?"
+        echo " 1) version 27.9 (default)        Press any key except '2'"
+        echo " 2) version 23.9.2                Press '2'"
+        echo -n 'Choose: '
+        read -n1 -t 15 CHOICE
+        echo
+
+        if [ "$CHOICE" == "2" ]; then
+            echo "The torture test will be executed with 'Mersenne Prime 23.9.2' (mprime23)."
+            MPRIME=/opt/mprime/mprime23
+        else
+            echo "The torture test will be executed with 'Mersenne Prime 27.9 build 1' (mprime27)."
+            MPRIME=/opt/mprime/mprime27
+        fi
+        ;;
+esac
+
+echo
+echo 'Automatic detection of the number of CPUs:'
+echo
+
+if [ "$CPUS" == "1" ]; then
+    WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
+    echo '1 CPU detected.'
+    echo "Running 1 instance of mprime ('$MPRIME -t -W$WORKING_DIR')."
+    echo
+    $MPRIME -t -W$WORKING_DIR
+else
+    echo "$CPUS CPUs detected."
+    if [ "$MPRIME" == "/opt/mprime/mprime23" ]; then
+        echo "To stress all CPUs, $CPUS instances of $MPRIME will be run in the background."
+        echo
+        echo -e '\033[01;31mTo stop the torture test, press any key.\033[0m'
+
+        trap 'pkill mprime; trap - 2 3; exit' 2 3
+
+        for i in `seq 1 $CPUS`; do
+            WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
+            echo
+            echo "mprime: Starting instance $i of mprime ('$MPRIME -t -W$WORKING_DIR &')."
+            echo
+            $MPRIME -t -W$WORKING_DIR &
+        done
+
+        read -s -n1
+        pkill mprime
+
+        trap - 2 3
+    else
+        WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
+        echo "Running 1 instance of mprime ('$MPRIME -t -W$WORKING_DIR')."
+        echo 
+        $MPRIME -t -W$WORKING_DIR
+    fi
+fi

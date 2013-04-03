@@ -1,0 +1,24 @@
+0f>> PAGE 107
+
+The 0fCPUstress07 image is a minimal boot image for stress testing. It contains
+these programs:
+  CPU Burn-in, CPUinfo, Mersenne Prime Test, Stress, and StressCPU.
+
+Other than testing, the image's functionality is little. It does not support
+connection to the Internet or writing to disks.
+
+Some test programs can be tweaked before running. Press 0f[TAB]07 to edit the boot
+options in isolinux. The available tweaks are as follows.
+
+For 0fCPU Burn-in07, you can specify the time it runs by using either '0fdays07',
+'0fhours07', or '0fminutes07' option. By default, CPU Burn-in runs for 7 days
+(=10080 minutes), which is equivalent to this:
+
+> .com32 linux.c32 /ubcd/boot/cpustress/bzImage root=/dev/ram0 ramdisk_size=
+  12000 noapic quiet ubcdcmd=cpuburn 0fdays=707 initrd=
+  /ubcd/boot/cpustress/initrd.gz 
+
+If two or more time options are specified, the run time will be determined by
+the value of larger unit (days > hours > minutes) and the rest are ignored.
+
+<< Press 0f[F2]07 to continue to next page, any other key to return to menu >>

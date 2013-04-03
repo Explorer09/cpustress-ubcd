@@ -1,0 +1,155 @@
+#!/bin/sh
+# CPU stress test boot disk version 2 by Gert Hulselmans
+#
+# This version is designed from scratch. Only 10 lines of code were taken
+# from the CPU stress test boot disk version 1, made by Adrian Stanciu
+# <adrian@sadyc.net>.
+#
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of
+# the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#
+# Written by Gert Hulselmans and Explorer.
+# Last updated on 3 April 2013.
+
+
+export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
+
+# Check if this script is run for the first time or not.
+# If not, run only '/bin/sh'.
+
+if [ ! -e /tmp/firstrun ]; then
+    echo -n > /tmp/firstrun
+
+    clear
+
+    echo -e "\033[01;34m"
+    cat << CPUSTRESS_TEXT
+  ____ ____  _   _     _                       _            _           ____  
+ / ___|  _ \| | | |___| |_ _ __ ___  ___ ___  | |_ ___  ___| |_  __   _|___ \ 
+| |   | |_) | | | / __| __| '__/ _ \/ __/ __| | __/ _ \/ __| __| \ \ / / __) |
+| |___|  __/| |_| \__ \ |_| | |  __/\__ \__ \ | ||  __/\__ \ |_   \ V / / __/ 
+ \____|_|    \___/|___/\__|_|  \___||___/___/  \__\___||___/\__|   \_/ |_____|
+
+CPUSTRESS_TEXT
+    echo -e "\033[0;37m                   v2.2beta3    \033[01;37mbootable image by Gert Hulselmans and Explorer\033[0m\n"
+    echo -e "                            To \033[0;32mreboot\033[0m, press: '\033[0;31m<Ctrl> + <Alt> + <Del>\033[0m'"
+    echo -e "                    To \033[0;32mquit\033[0m a program, press: '\033[0;31m<Ctrl> + C\033[0m' or '\033[0;31mq\033[0m'"
+    echo -e "To switch to another \033[0;32mvirtual terminal\033[0m, press: '\033[0;31m<Alt> + <Left / Right>\033[0m'"
+    echo
+
+    KERNEL_ARGS=`cat /proc/cmdline`
+    KERNEL_ARGS="${KERNEL_ARGS/BOOT_IMAGE=/}"
+
+    # Wrap the $KERNEL_ARGS variable. Output at least 2 lines.
+    echo -e "\033[01;37mKernel args:\033[0m ${KERNEL_ARGS:0:67}"
+    echo "             ${KERNEL_ARGS:67:67}"
+    KERNEL_ARGS="${KERNEL_ARGS:134}"
+    while [ -n "$KERNEL_ARGS" ]; do
+        echo "             ${KERNEL_ARGS:0:67}"
+        KERNEL_ARGS="${KERNEL_ARGS:67}"
+    done
+
+    echo -e "\033[01;37mUBCD args:\033[0m   $ubcdcmd\n"
+
+    VENDOR=`awk '/^vendor_id/ {print $3; exit}' /proc/cpuinfo`
+    CPU_MODEL=`awk '/^model name/ {for (i = 4; i <= NF; i++) printf( "%s ", $i); printf ("\n"); exit}' /proc/cpuinfo`
+    CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
+
+    if [ "$CPUS" == "1" ]; then
+        echo -e 'You have \033[01;37m1\033[0m CPU in your system.'
+    else
+        echo -e 'You have\033[01;37m' $CPUS '\033[0mCPUs in your system.'
+    fi
+
+    echo -e "  ==>  $VENDOR $CPU_MODEL\n"
+
+    # Pause for 30 seconds to make it possible to read the text on the screen.
+    # Pressing any key will result in immediate execution of the rest of the script.
+
+    echo 'Press any key to continue directly.'
+    KEYPRESS="none"
+    for i in `seq 30 -1 1`; do
+        if [ "$i" -eq 1 ]; then
+            echo -e "  Booting will start automatically in \033[01;37m1\033[0m second.  \n"
+        else
+            echo -en "  Booting will start automatically in \033[01;37m$i\033[0m seconds.  \r"
+        fi
+
+        read -s -n1 -t 1 KEYPRESS
+        if [ "$KEYPRESS"X != "noneX" ]; then
+            echo -e '\n'
+            break
+        fi
+    done
+
+    case "$ubcdcmd" in
+        cpuburn)
+            cpuburn
+            ;;
+        cpuinfo)
+            cpuinfo
+            ;;
+        helpinfo)
+            helpinfo $cmdhelpinfo
+            ;;
+        menu)
+            menu
+            ;;
+        mprime)
+            mprime
+            ;;
+        mprime23)
+            mprime 23
+            ;;
+        mprime27)
+            mprime 27
+            ;;
+        stress)
+            stress $cmdstress
+            if [ -z "$cmdstress" -o "$cmdstress" == "-?" -o "$cmdstress" == "--help" ]; then
+                echo 'Press any key to continue.'
+                read -s -n1
+            fi
+            ;;
+        stresscpu2)
+            echo -e "\033[0;32m\nStarting 'CPU stress tester 2.0'   (stresscpu2).\033[0m"
+            stresscpu2 $cmdstresscpu2
+            ;;
+        dmesg)
+            dmesg | less -~
+            ;;
+        lsmod)
+            lsmod | less -~
+            ;;
+        uname)
+            echo -e "\033[01;37muname -a result:\033[0m"
+            uname -a
+            ;;
+        *)
+            echo -e "\nNot recognised UBCD args: '$ubcdcmd'."
+            ;;
+    esac
+
+    echo -e "\r\n"
+    echo -e "\n\nType '\033[01;37mhelpinfo\033[0m' to see which programs are available."
+    echo -e "Type '\033[01;37mmenu\033[0m' to select the available programs from a list.\n"
+    echo -e "Use '\033[0;31m<Alt> + <Left / Right>\033[0m', to switch to the other virtual terminals.\n"
+    echo -e "To \033[0;32mreboot\033[0m, press: '\033[0;31m<Ctrl> + <Alt> + <Del>\033[0m' or type '\033[01;37mreboot\033[0m'."
+    echo -e "To \033[0;32mshutdown\033[0m, type '\033[01;37mpoweroff\033[0m'."
+fi
+
+# Run bash shell after the commands above are executed once.
+/bin/sh --login
