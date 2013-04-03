@@ -1,12 +1,6 @@
 This file documents the changes of CPUstress test from v2.1 to v2.2.
 Changes are made by Explorer <explorer09@gmail.com>
 
-Changes in v2.2
---------------------
-32 April 2013
-
-- Edit various scripts and documentation for v2.2 release.
-
 Changes in v2.2beta3
 --------------------
 2 April 2013
