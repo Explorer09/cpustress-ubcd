@@ -21,6 +21,7 @@ images for different uses. However, there's no Makefile yet so you have to
 execute several scripts in a sequence.
 
 Building CPUstress for Ultimate Boot CD:
+
 1. Run 'cpustress/build/build'
 2. An initrd.gz file should appear at 'cpustress/build', move it to the parent 
    directory (that is, 'cpustress').
@@ -31,6 +32,7 @@ Building CPUstress for Ultimate Boot CD:
    'ubcd/boot/cpustress' of your extracted UBCD directory.
 
 Building CPUstress in a standalone ISO image:
+
 1. Run 'cpustress/build/build'
 2. An initrd.gz file should appear at 'cpustress/build', move it to the parent 
    directory (that is, 'cpustress').
@@ -51,14 +53,16 @@ The image is now modified and maintained by Kang-Che Sung ("Explorer")
 License
 -------
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, version 2 (only).
+This program is free software; you can redistribute it and/or modify it under 
+the terms of the GNU General Public License, version 2 only, as published by 
+the Free Software Foundation.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT 
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+The text of the GNU General Public License version 2 can be read at 
+'cpustress/gpl-2.0.txt'
 
 Please note that some programs included in this image might be licensed under 
 different terms. The GNU General Public License is applied to the initrd 
@@ -71,17 +75,17 @@ Links
 -----
 
 CPU Burn-in
-http://web.archive.org/web/20090620184505/http://users.bigpond.net.au/CPUBURN/
+* http://web.archive.org/web/20090620184505/http://users.bigpond.net.au/CPUBURN/
 
 Prime95
-http://www.mersenne.org/freesoft/
+* http://www.mersenne.org/freesoft/
 
 Stress
-http://weather.ou.edu/~apw/projects/stress/
+* http://weather.ou.edu/~apw/projects/stress/
 
 StressCPU2
-http://www.gromacs.org/Downloads/User_contributions/Other_software/
+* http://www.gromacs.org/Downloads/User_contributions/Other_software/
 
 Ultimate Boot CD
-http://www.ultimatebootcd.com/
+* http://www.ultimatebootcd.com/
 
