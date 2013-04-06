@@ -67,6 +67,8 @@ The format for running the `stress' program is:
 
 `--vm-bytes BYTES'
      Allocate BYTES number of bytes.  The default is 1.
+NOTE: This cpustress image supports up to 4GB of memory, and does not support
+      PAE (Physical Address Extension) or swap spaces.
 
 `--vm-hang'
      Instruct each vm hog process to go to sleep after allocating
