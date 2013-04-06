@@ -24,10 +24,10 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 3 April 2013.
+# Last updated on 6 April 2013.
 
 
-LAST_EDITED="3 April 2013"
+LAST_EDITED="6 April 2013"
 
 showcontrols () {
     echo -e "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through"

@@ -23,7 +23,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 3 April 2013.
+# Last updated on 6 April 2013.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
@@ -45,7 +45,7 @@ if [ ! -e /tmp/firstrun ]; then
  \____|_|    \___/|___/\__|_|  \___||___/___/  \__\___||___/\__|   \_/ |_____|
 
 CPUSTRESS_TEXT
-    echo -e "\033[0;37m                   v2.2beta3    \033[01;37mbootable image by Gert Hulselmans and Explorer\033[0m\n"
+    echo -e "\033[0;37m                        v2.2    \033[01;37mbootable image by Gert Hulselmans and Explorer\033[0m\n"
     echo -e "                            To \033[0;32mreboot\033[0m, press: '\033[0;31m<Ctrl> + <Alt> + <Del>\033[0m'"
     echo -e "                    To \033[0;32mquit\033[0m a program, press: '\033[0;31m<Ctrl> + C\033[0m' or '\033[0;31mq\033[0m'"
     echo -e "To switch to another \033[0;32mvirtual terminal\033[0m, press: '\033[0;31m<Alt> + <Left / Right>\033[0m'"
