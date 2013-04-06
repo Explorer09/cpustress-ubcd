@@ -4,7 +4,7 @@
 #
 # The ! and * are interpreted differently by the shell, so they have to be
 # escaped.
-ARCHIVE_NAME="cpustress-2.2beta3"
+ARCHIVE_NAME="cpustress-2.2"
 
 # Change working directory to the directory of the script.
 cd `dirname $0`

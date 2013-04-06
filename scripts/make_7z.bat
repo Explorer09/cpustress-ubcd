@@ -1,7 +1,7 @@
 REM
 REM Script to make a 7z package for CPUstress release.
 REM
-SET ARCHIVE_NAME="cpustress-2.2beta3"
+SET ARCHIVE_NAME=cpustress-2.2
 
 SET P7ZIP=
 REM Poor man's 'which' command for batch script.

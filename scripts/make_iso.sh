@@ -12,7 +12,7 @@ cd ..
 VOLUME_ID="CPUSTRESS"
 
 # Define ISO filename
-ISO_FILENAME="cpustress-2.2beta3.iso"
+ISO_FILENAME="cpustress-2.2.iso"
 
 ROOT_OF_ISO_PATH="$(pwd)/iso"
 
