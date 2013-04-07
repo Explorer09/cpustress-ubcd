@@ -23,7 +23,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 6 April 2013.
+# Last updated on 7 April 2013.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
@@ -120,7 +120,8 @@ CPUSTRESS_TEXT
             ;;
         stress)
             stress $cmdstress
-            if [ -z "$cmdstress" -o "$cmdstress" == "-?" -o "$cmdstress" == "--help" ]; then
+            if [ -z "$cmdstress" ] || [ "$cmdstress" = "-?" ] || \
+               [ "$cmdstress" = "--help" ]; then
                 echo 'Press any key to continue.'
                 read -s -n1
             fi
@@ -136,7 +137,7 @@ CPUSTRESS_TEXT
             lsmod | less -~
             ;;
         uname)
-            echo -e "\033[01;37muname -a result:\033[0m"
+            echo -e "\033[01;37m'uname -a' result:\033[0m"
             uname -a
             ;;
         *)

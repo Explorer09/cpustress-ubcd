@@ -24,7 +24,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 3 April 2013.
+# Last updated on 7 April 2013.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
@@ -40,7 +40,7 @@ mdev -s
 
 # Load drivers for USB controller, because mdev do not load them automatically.
 # Required only by PMagic kernel.
-modprobe ehci_hcd
+modprobe ehci-hcd
 modprobe uhci-hcd
 modprobe ohci-hcd
 modprobe xhci-hcd

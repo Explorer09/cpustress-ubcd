@@ -24,8 +24,21 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 3 April 2013.
+# Last updated on 7 April 2013.
 
+if [ "$1" = "--help" ]; then
+    # Displays a simple help. Needed by 'helpinfo'.
+    echo
+    echo "                                 ********"
+    echo "                                 * Menu *"
+    echo "                                 ********"
+    echo
+    echo "'menu' displays a simple menu from which you can choose which program you want"
+    echo "to run."
+    echo
+    echo "There are no command-line options for 'menu'."
+    exit 0
+fi
 
 echo
 echo -e "                                 \033[0;32m********"
