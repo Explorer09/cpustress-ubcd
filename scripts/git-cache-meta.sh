@@ -15,8 +15,6 @@ cd ..
 # - save all files metadata not only from other users
 # - save numeric uid and gid
  
-# 2012-03-05 - added filetime, andris9
- 
 : ${GIT_CACHE_META_FILE=.git_cache_meta}
 case $@ in
     --store|--stdout)
@@ -25,15 +23,15 @@ case $@ in
                 exec > $GIT_CACHE_META_FILE;
         esac
         find $(git ls-files)\
-            \( -printf 'touch -c -d "%AY-%Am-%Ad %AH:%AM:%AS" %p\n' \) \
-            \( -printf 'chmod %#m %p\n' \)
+            \( \! -type l -printf 'chmod %#m %p\n' \) , \
+            \( -printf 'touch -c -h -d "%TY-%Tm-%Td %TH:%TM:%TS" %p\n' \)
         find cpustress/build/build-initrd/dev \
              cpustress/build/build-initrd/proc \
              cpustress/build/build-initrd/sys \
              cpustress/build/build-initrd/tmp \
-            \( -printf 'mkdir -p %p\n' \) \
-            \( -printf 'touch -c -d "%AY-%Am-%Ad %AH:%AM:%AS" %p\n' \) \
-            \( -printf 'chmod %#m %p\n' \)
+            \( -printf 'mkdir -p %p\n' \) , \
+            \( \( \! -type l \) -printf 'chmod %#m %p\n' \) , \
+            \( -printf 'touch -c -h -d "%TY-%Tm-%Td %TH:%TM:%TS" %p\n' \)
         ;;
     --apply) sh -e $GIT_CACHE_META_FILE;;
     *) 1>&2 echo "Usage: $0 --store|--stdout|--apply"; exit 1;;
