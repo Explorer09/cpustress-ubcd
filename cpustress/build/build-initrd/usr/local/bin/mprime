@@ -51,9 +51,9 @@ CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
 
 mkdir -p /tmp/torture-test/
 
-echo -e '\033[0;32mMersenne Prime Torture test:'
-echo -e '============================\033[0m'
-echo
+printf '\033[0;32mMersenne Prime Torture test:\n'
+printf '============================\033[0m\n'
+printf '\n'
 
 case "$1" in
     23)
@@ -68,7 +68,7 @@ case "$1" in
         echo "Which version of 'Mersenne Prime' do you want to use?"
         echo " 1) version 27.9 (default)        Press any key except '2'"
         echo " 2) version 23.9.2                Press '2'"
-        echo -n 'Choose: '
+        printf 'Choose: '
         read -n1 -t 15 CHOICE
         echo
 
@@ -97,7 +97,7 @@ else
     if [ "$MPRIME" = "/opt/mprime/mprime23" ]; then
         echo "To stress all CPUs, $CPUS instances of $MPRIME will be run in the background."
         echo
-        echo -e '\033[01;31mTo stop the torture test, press any key.\033[0m'
+        printf '\033[01;31mTo stop the torture test, press any key.\033[0m\n'
 
         trap 'pkill mprime; trap - 1 2 3 15; exit' 1 2 3 15
 

@@ -23,12 +23,12 @@
 #
 #
 # Written by Gert Hulselmans.
-# Last updated on 3 April 2013.
+# Last updated on 8 April 2013.
 
 
-echo -e "Press any key to start '\033[0;32mCPUinfo v1.00\033[0m'."
-echo -e "  Use \033[0;31m<SPACE>\033[0m, \033[0;31m<PageUp>\033[0m, \033[0;31m<PageDown>\033[0m and the arrow keys to move through a page."
-echo -e "  Press '\033[0;31mq\033[0m' to quit '\033[0;32mCPUinfo v1.00\033[0m'."
-read -s -n1
+printf "Press any key to start '\033[0;32mCPUinfo v1.00\033[0m'.\n"
+printf "  Use \033[0;31m<SPACE>\033[0m, \033[0;31m<PageUp>\033[0m, \033[0;31m<PageDown>\033[0m and the arrow keys to move through a page.\n"
+printf "  Press '\033[0;31mq\033[0m' to quit '\033[0;32mCPUinfo v1.00\033[0m'.\n"
+read -s -n1 REPLY
 
 less -~ /proc/cpuinfo

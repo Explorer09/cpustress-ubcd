@@ -32,11 +32,11 @@ export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
 # If not, run only '/bin/sh'.
 
 if [ ! -e /tmp/firstrun ]; then
-    echo -n > /tmp/firstrun
+    printf '' > /tmp/firstrun
 
     clear
 
-    echo -e "\033[01;34m"
+    printf "\033[01;34m\n"
     cat << CPUSTRESS_TEXT
   ____ ____  _   _     _                       _            _           ____  
  / ___|  _ \| | | |___| |_ _ __ ___  ___ ___  | |_ ___  ___| |_  __   _|___ \ 
@@ -45,56 +45,52 @@ if [ ! -e /tmp/firstrun ]; then
  \____|_|    \___/|___/\__|_|  \___||___/___/  \__\___||___/\__|   \_/ |_____|
 
 CPUSTRESS_TEXT
-    echo -e "\033[0;37m                        v2.2    \033[01;37mbootable image by Gert Hulselmans and Explorer\033[0m\n"
-    echo -e "                            To \033[0;32mreboot\033[0m, press: '\033[0;31m<Ctrl> + <Alt> + <Del>\033[0m'"
-    echo -e "                    To \033[0;32mquit\033[0m a program, press: '\033[0;31m<Ctrl> + C\033[0m' or '\033[0;31mq\033[0m'"
-    echo -e "To switch to another \033[0;32mvirtual terminal\033[0m, press: '\033[0;31m<Alt> + <Left / Right>\033[0m'"
-    echo
+    printf "\033[0;37m                        v2.2    \033[01;37mbootable image by Gert Hulselmans and Explorer\033[0m\n\n"
+    printf "                            To \033[0;32mreboot\033[0m, press: '\033[0;31m<Ctrl> + <Alt> + <Del>\033[0m'\n"
+    printf "                    To \033[0;32mquit\033[0m a program, press: '\033[0;31m<Ctrl> + C\033[0m' or '\033[0;31mq\033[0m'\n"
+    printf "To switch to another \033[0;32mvirtual terminal\033[0m, press: '\033[0;31m<Alt> + <Left / Right>\033[0m'\n\n"
 
-    KERNEL_ARGS=`cat /proc/cmdline`
-    KERNEL_ARGS="${KERNEL_ARGS/BOOT_IMAGE=/}"
+    KERNEL_ARGS=`awk '{sub(/BOOT_IMAGE=/, "", $0); print}' /proc/cmdline`
 
     # Wrap the $KERNEL_ARGS variable. Output at least 2 lines.
-    echo -e "\033[01;37mKernel args:\033[0m ${KERNEL_ARGS:0:67}"
-    echo "             ${KERNEL_ARGS:67:67}"
-    KERNEL_ARGS="${KERNEL_ARGS:134}"
-    while [ "X$KERNEL_ARGS" != "X" ]; do
-        echo "             ${KERNEL_ARGS:0:67}"
-        KERNEL_ARGS="${KERNEL_ARGS:67}"
-    done
+    echo "$KERNEL_ARGS" | awk \
+        '{printf("\033[01;37mKernel args:\033[0m %s\n", substr($0, 1, 67));
+          printf("             %s\n", substr($0, 68, 67));
+          for (i = 135; i <= length($0); i += 67)
+              printf("             %s\n", substr($0, i, 67))}'
 
-    echo -e "\033[01;37mUBCD args:\033[0m   $ubcdcmd\n"
+    printf "\033[01;37mUBCD args:\033[0m   $ubcdcmd\n\n"
 
     VENDOR=`awk '/^vendor_id/ {print $3; exit}' /proc/cpuinfo`
-    CPU_MODEL=`awk '/^model name/ {for (i = 4; i <= NF; i++) printf( "%s ", $i); printf ("\n"); exit}' /proc/cpuinfo`
+    CPU_MODEL=`awk '/^model name/ {for (i = 4; i <= NF; i++) printf("%s ", $i); printf("\n"); exit}' /proc/cpuinfo`
     CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
 
     if [ "$CPUS" = "1" ]; then
-        echo -e 'You have \033[01;37m1\033[0m CPU in your system.'
+        printf 'You have \033[01;37m1\033[0m CPU in your system.\n'
     else
-        echo -e 'You have\033[01;37m' $CPUS '\033[0mCPUs in your system.'
+        printf 'You have\033[01;37m' $CPUS '\033[0mCPUs in your system.\n'
     fi
 
-    echo -e "  ==>  $VENDOR $CPU_MODEL\n"
+    printf "  ==>  $VENDOR $CPU_MODEL\n\n"
 
     # Pause for 30 seconds to make it possible to read the text on the screen.
     # Pressing any key will result in immediate execution of the rest of the script.
 
-    echo 'Press any key to continue directly.'
+    printf 'Press any key to continue directly.\n'
     KEYPRESS="none"
     for i in `seq 30 -1 1`; do
         if [ "$i" -eq 1 ]; then
-            echo -e "  Booting will start automatically in \033[01;37m1\033[0m second.  \n"
+            printf "  Booting will start automatically in \033[01;37m1\033[0m second.  \r"
         else
-            echo -en "  Booting will start automatically in \033[01;37m$i\033[0m seconds.  \r"
+            printf "  Booting will start automatically in \033[01;37m$i\033[0m seconds.  \r"
         fi
 
         read -s -n1 -t 1 KEYPRESS
         if [ "X$KEYPRESS" != "Xnone" ]; then
-            echo -e '\n'
             break
         fi
     done
+    printf '\n\n'
 
     case "$ubcdcmd" in
         cpuburn)
@@ -123,11 +119,11 @@ CPUSTRESS_TEXT
             if [ -z "$cmdstress" ] || [ "$cmdstress" = "-?" ] || \
                [ "$cmdstress" = "--help" ]; then
                 echo 'Press any key to continue.'
-                read -s -n1
+                read -s -n1 REPLY
             fi
             ;;
         stresscpu2)
-            echo -e "\033[0;32m\nStarting 'CPU stress tester 2.0'   (stresscpu2).\033[0m"
+            printf "\033[0;32m\nStarting 'CPU stress tester 2.0'   (stresscpu2).\033[0m\n"
             stresscpu2 $cmdstresscpu2
             ;;
         dmesg)
@@ -137,20 +133,20 @@ CPUSTRESS_TEXT
             lsmod | less -~
             ;;
         uname)
-            echo -e "\033[01;37m'uname -a' result:\033[0m"
+            printf "\033[01;37m'uname -a' result:\033[0m\n"
             uname -a
             ;;
         *)
-            echo -e "\nNot recognised UBCD args: '$ubcdcmd'."
+            printf "\nNot recognised UBCD args: '$ubcdcmd'.\n"
             ;;
     esac
 
-    echo -e "\r\n"
-    echo -e "\n\nType '\033[01;37mhelpinfo\033[0m' to see which programs are available."
-    echo -e "Type '\033[01;37mmenu\033[0m' to select the available programs from a list.\n"
-    echo -e "Use '\033[0;31m<Alt> + <Left / Right>\033[0m', to switch to the other virtual terminals.\n"
-    echo -e "To \033[0;32mreboot\033[0m, press: '\033[0;31m<Ctrl> + <Alt> + <Del>\033[0m' or type '\033[01;37mreboot\033[0m'."
-    echo -e "To \033[0;32mshutdown\033[0m, type '\033[01;37mpoweroff\033[0m'."
+    printf "\r\n"
+    printf "\n\nType '\033[01;37mhelpinfo\033[0m' to see which programs are available.\n"
+    printf "Type '\033[01;37mmenu\033[0m' to select the available programs from a list.\n\n"
+    printf "Use '\033[0;31m<Alt> + <Left / Right>\033[0m', to switch to the other virtual terminals.\n\n"
+    printf "To \033[0;32mreboot\033[0m, press: '\033[0;31m<Ctrl> + <Alt> + <Del>\033[0m' or type '\033[01;37mreboot\033[0m'.\n"
+    printf "To \033[0;32mshutdown\033[0m, type '\033[01;37mpoweroff\033[0m'.\n"
 fi
 
 # Run bash shell after the commands above are executed once.

@@ -26,15 +26,14 @@
 # Last updated on 8 April 2013.
 
 
-echo 'There is no built-in help for the BusyBox ash shell.'
-echo -e "We will start '\033[01;37mhelpinfo\033[0m' instead. ('helpinfo $@')"
-echo
+printf "There is no built-in help for the BusyBox ash shell.\n"
+printf "We will start '\033[01;37mhelpinfo\033[0m' instead. ('helpinfo $@')\n\n"
 
 # 'helpinfo' will run a 'less' program if there's no argument given.
 # Pause in order for the user to see this message.
 if [ "X$1" = "X" ]; then
     echo 'Press any key to continue.'
-    read -s -n1
+    read -s -n1 REPLY
 fi
 
 # Avoid recursion. ('help' calls 'helpinfo' which calls 'help'...)

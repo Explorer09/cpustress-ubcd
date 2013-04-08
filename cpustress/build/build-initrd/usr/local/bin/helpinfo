@@ -30,12 +30,10 @@
 LAST_EDITED="8 April 2013"
 
 showcontrols () {
-    echo -e "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through"
-    echo -e "the text. Press '\033[0;31mq\033[0m' to quit '\033[01;37mhelpinfo\033[0m'."
-    echo
-    echo 'Press any key to display the help text.'
-    echo
-    read -s -n1
+    printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
+    printf "the text. Press '\033[0;31mq\033[0m' to quit '\033[01;37mhelpinfo\033[0m'.\n\n"
+    printf "Press any key to display the help text.\n\n"
+    read -s -n1 REPLY
 }
 
 [ -d /tmp/helpinfo ] || mkdir -p /tmp/helpinfo
@@ -124,17 +122,17 @@ cpuburn), use the following:
 HELPINFO2
     less -~ /tmp/helpinfo/helpinfo.txt
 else
-    echo
-    echo -e '\033[0;32m                            ##################'
-    echo '                            #    HELPINFO    #'
-    echo -e '                            ##################\033[0m'
-    echo
-    echo '                        Written by Gert Hulselmans'
-    echo "${SPACES}Last time edited: ${LAST_EDITED}"
-    echo
-    echo -e "'\033[01;37mhelpinfo\033[0m' displays the help text in such a way so that you can easily navigate"
-    echo 'through it.'
-    echo
+    printf "\n"
+    printf "\033[0;32m                            ##################\n"
+    printf "                            #    HELPINFO    #\n"
+    printf "                            ##################\033[0m\n"
+    printf "\n"
+    printf "                        Written by Gert Hulselmans\n"
+    printf "${SPACES}Last time edited: ${LAST_EDITED}\n"
+    printf "\n"
+    printf "'\033[01;37mhelpinfo\033[0m' displays the help text in such a way so that you can easily navigate\n"
+    printf "through it.\n"
+    printf "\n"
 
     case "$1" in
         cpuburn | cpuburn-in)
@@ -183,8 +181,8 @@ CMDSTRESSCPU2
                 showcontrols
                 $EXE --help 2>&1 | less -~
             else
-                echo -e "'\033[01;37m${1}\033[0m' is no executable and therefore there is no help text."
-                echo -e "See '\033[01;37mhelpinfo\033[0m' for which executables are supported."
+                printf "'\033[01;37m${1}\033[0m' is no executable and therefore there is no help text.\n"
+                printf "See '\033[01;37mhelpinfo\033[0m' for which executables are supported.\n"
             fi
             ;;
     esac

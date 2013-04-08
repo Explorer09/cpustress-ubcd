@@ -43,27 +43,27 @@ HELP
     exit 0
 fi
 
-echo
-echo -e "                                 \033[0;32m********"
-echo -e "                                 * Menu *"
-echo -e "                                 ********"
-echo
-echo -e "                     \033[01;37m1)\033[0m CPU Burn-in v1.00       (cpuburn)"
-echo -e "                     \033[01;37m2)\033[0m CPUinfo v1.00           (cpuinfo)"
-echo -e "                     \033[01;37m3)\033[0m Mersenne Prime v23.9.2  (mprime 23)"
-echo -e "                     \033[01;37m4)\033[0m Mersenne Prime v27.9    (mprime 27)"
-echo -e "                     \033[01;37m5)\033[0m Stress v1.0.4           (stress)"
-echo -e "                     \033[01;37m6)\033[0m CPU stress tester 2.0   (stresscpu2)"
-echo -e "                     \033[01;37m7)\033[0m Helpinfo                (helpinfo)"
-echo
-echo -e "                     \033[01;37m8)\033[0m Reboot                  (reboot)"
-echo -e "                     \033[01;37m9)\033[0m Shutdown                (poweroff)"
-echo
-echo -e "                    \033[01;37m10)\033[0m Exit menu"
-echo
-echo -n 'Choose: '
+printf "\n"
+printf "                                 \033[0;32m********\n"
+printf "                                 * Menu *\n"
+printf "                                 ********\n"
+printf "\n"
+printf "                     \033[01;37m1)\033[0m CPU Burn-in v1.00       (cpuburn)\n"
+printf "                     \033[01;37m2)\033[0m CPUinfo v1.00           (cpuinfo)\n"
+printf "                     \033[01;37m3)\033[0m Mersenne Prime v23.9.2  (mprime 23)\n"
+printf "                     \033[01;37m4)\033[0m Mersenne Prime v27.9    (mprime 27)\n"
+printf "                     \033[01;37m5)\033[0m Stress v1.0.4           (stress)\n"
+printf "                     \033[01;37m6)\033[0m CPU stress tester 2.0   (stresscpu2)\n"
+printf "                     \033[01;37m7)\033[0m Helpinfo                (helpinfo)\n"
+printf "\n"
+printf "                     \033[01;37m8)\033[0m Reboot                  (reboot)\n"
+printf "                     \033[01;37m9)\033[0m Shutdown                (poweroff)\n"
+printf "\n"
+printf "                    \033[01;37m10)\033[0m Exit menu\n"
+printf "\n"
+printf "Choose: "
 read CHOICE
-echo
+printf "\n"
 
 case "$CHOICE" in
     1 | "cpuburn")
@@ -97,14 +97,14 @@ case "$CHOICE" in
         # Do nothing.
         ;;
     *)
-        echo "This isn't a valid choice."
+        printf "This isn't a valid choice.\n"
 esac
 
 case "$CHOICE" in
     8 | 9 | "reboot" | "poweroff")
         ;;
     *)
-        echo -e "menu: Type '\033[01;37mmenu\033[0m' to return to main menu.\n"
+        printf "menu: Type '\033[01;37mmenu\033[0m' to return to main menu.\n\n"
 esac
 
 exit 0
