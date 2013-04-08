@@ -44,7 +44,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 3 April 2013.
+# Last updated on 8 April 2013.
 
 
 CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
@@ -99,7 +99,7 @@ else
         echo
         echo -e '\033[01;31mTo stop the torture test, press any key.\033[0m'
 
-        trap 'pkill mprime; trap - 2 3; exit' 2 3
+        trap 'pkill mprime; trap - 1 2 3 15; exit' 1 2 3 15
 
         for i in `seq 1 $CPUS`; do
             WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
@@ -112,7 +112,7 @@ else
         read -s -n1
         pkill mprime
 
-        trap - 2 3
+        trap - 1 2 3 15
     else
         WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
         echo "Running 1 instance of mprime ('$MPRIME -t -W$WORKING_DIR')."
