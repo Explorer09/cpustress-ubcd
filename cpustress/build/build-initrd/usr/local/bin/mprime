@@ -84,7 +84,6 @@ esac
 
 echo
 echo 'Automatic detection of the number of CPUs:'
-echo
 
 if [ "$CPUS" = "1" ]; then
     WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`

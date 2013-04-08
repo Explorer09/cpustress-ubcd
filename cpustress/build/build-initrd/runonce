@@ -68,7 +68,7 @@ CPUSTRESS_TEXT
     if [ "$CPUS" = "1" ]; then
         printf 'You have \033[01;37m1\033[0m CPU in your system.\n'
     else
-        printf 'You have\033[01;37m' $CPUS '\033[0mCPUs in your system.\n'
+        printf "You have \033[01;37m$CPUS\033[0m CPUs in your system.\n"
     fi
 
     printf "  ==>  $VENDOR $CPU_MODEL\n\n"

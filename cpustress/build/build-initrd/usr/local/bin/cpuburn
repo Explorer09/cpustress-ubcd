@@ -46,7 +46,6 @@ else
 fi
 
 echo 'Automatic detection of the number of CPUs:'
-echo
 
 if [ "$CPUS" = "1" ]; then
     echo '1 CPU detected.'
