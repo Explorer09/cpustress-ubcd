@@ -4,6 +4,7 @@ Changes are made by Explorer <explorer09@gmail.com>
 8 April 2013
 
 - Bug fixes regarding '--help' option in various scripts.
+- Edit various shell scripts to improve compatibility to POSIX sh.
 
 Changes in v2.2
 ---------------

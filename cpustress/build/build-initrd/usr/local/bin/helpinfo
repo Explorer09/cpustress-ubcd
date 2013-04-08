@@ -47,7 +47,7 @@ for i in `seq $NUM_SPACES`; do
     SPACES="$SPACES "
 done
 
-if [ -z "$1" ]; then
+if [ "X$1" = "X" ]; then
     cat > /tmp/helpinfo/helpinfo.txt << HELPINFO
 
                             ##################

@@ -6,12 +6,12 @@ SET ARCHIVE_NAME=cpustress-2.2
 SET P7ZIP=
 REM Poor man's 'which' command for batch script.
 FOR %%i IN (7z 7za 7zr) DO (
-    IF "%P7ZIP%"=="" (
+    IF "X%P7ZIP%"=="X" (
         SET P7ZIP=%%~$PATH:i
     )
 )
 
-IF "%P7ZIP%"=="" (
+IF "X%P7ZIP%"=="X" (
     ECHO ERROR: 7-zip is not found. Please download and install 7-zip here
     ECHO ^(http://www.7-zip.org/^).
     GOTO :EOF

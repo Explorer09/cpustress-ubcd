@@ -11,12 +11,12 @@ cd `dirname $0`
 
 P7ZIP=
 for i in 7z 7za 7zr; do
-    if [ -z "$P7ZIP" -a `which ${i}` ]; then
+    if [ "X$P7ZIP" = "X" ] && which ${i}; then
         P7ZIP=${i}
     fi
 done
 
-if [ -z "$P7ZIP" ]; then
+if [ "X$P7ZIP" = "X" ]; then
     echo "ERROR: 7-zip is not found. Please install 'p7zip' from your OS distribution,"
     echo "or download here (http://sourceforge.net/projects/p7zip/)."
     exit 1

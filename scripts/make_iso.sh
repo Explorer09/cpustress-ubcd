@@ -27,7 +27,7 @@ SAVED_IFS=$IFS
 MKISOFS=''
 IFS=:
 for i in $PATH ; do
-    if [ -x "$i/mkisofs" ] ; then
+    if [ -x "$i/mkisofs" ]; then
         MKISOFS="$i/mkisofs"
         break
     fi
@@ -36,7 +36,7 @@ done
 # Restore IFS
 IFS=$SAVED_IFS
 
-if [ -n "$MKISOFS" -a -n "$ROOT_OF_ISO_PATH" ]; then
+if [ -n "$MKISOFS" ] && [ -n "$ROOT_OF_ISO_PATH" ]; then
     if [ -f "${ROOT_OF_ISO_PATH}/boot/syslinux/isolinux.bin" ]; then
         rm -f "${ROOT_OF_ISO_PATH}/boot/syslinux/boot.catalog"
         rm -fR "${ROOT_OF_ISO_PATH}/[BOOT]/"

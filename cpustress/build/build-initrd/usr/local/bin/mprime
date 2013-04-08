@@ -72,7 +72,7 @@ case "$1" in
         read -n1 -t 15 CHOICE
         echo
 
-        if [ "$CHOICE" == "2" ]; then
+        if [ "X$CHOICE" = "X2" ]; then
             echo "The torture test will be executed with 'Mersenne Prime 23.9.2' (mprime23)."
             MPRIME=/opt/mprime/mprime23
         else
@@ -86,7 +86,7 @@ echo
 echo 'Automatic detection of the number of CPUs:'
 echo
 
-if [ "$CPUS" == "1" ]; then
+if [ "$CPUS" = "1" ]; then
     WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
     echo '1 CPU detected.'
     echo "Running 1 instance of mprime ('$MPRIME -t -W$WORKING_DIR')."
@@ -94,7 +94,7 @@ if [ "$CPUS" == "1" ]; then
     $MPRIME -t -W$WORKING_DIR
 else
     echo "$CPUS CPUs detected."
-    if [ "$MPRIME" == "/opt/mprime/mprime23" ]; then
+    if [ "$MPRIME" = "/opt/mprime/mprime23" ]; then
         echo "To stress all CPUs, $CPUS instances of $MPRIME will be run in the background."
         echo
         echo -e '\033[01;31mTo stop the torture test, press any key.\033[0m'

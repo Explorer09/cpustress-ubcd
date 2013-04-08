@@ -18,12 +18,12 @@
 #
 #
 # Written by Explorer.
-# Last updated on 3 April 2013.
+# Last updated on 8 April 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
 
-if [ "$1" != "no-recurse" -a "`id -u`" != "0" -a `which fakeroot` ]; then
+if [ "X$1" != "Xno-recurse" ] && [ `id -u` != "0" ] && [ `which fakeroot` ]; then
     echo "Faking root privileges when possible..."
     fakeroot -- $0 no-recurse
     exit 0
@@ -54,7 +54,7 @@ fi
 cd build-initrd
 
 # Optional: if the user is root, set the owner of the files to root.
-if [ "`id -u`" = "0" ]; then
+if [ `id -u` = "0" ]; then
     chown -Rh 0:0 *
 fi
 
@@ -100,7 +100,7 @@ else
     P7ZIP=""
 fi
 
-if [ -n "$P7ZIP" ]; then
+if [ "X$P7ZIP" != "X" ]; then
     ${P7ZIP} a -tgzip -mx=9 initrd.gz initrd
 else
     echo "7-zip is not found. Using gzip instead..."

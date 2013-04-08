@@ -23,7 +23,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 7 April 2013.
+# Last updated on 8 April 2013.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
@@ -58,7 +58,7 @@ CPUSTRESS_TEXT
     echo -e "\033[01;37mKernel args:\033[0m ${KERNEL_ARGS:0:67}"
     echo "             ${KERNEL_ARGS:67:67}"
     KERNEL_ARGS="${KERNEL_ARGS:134}"
-    while [ -n "$KERNEL_ARGS" ]; do
+    while [ "X$KERNEL_ARGS" != "X" ]; do
         echo "             ${KERNEL_ARGS:0:67}"
         KERNEL_ARGS="${KERNEL_ARGS:67}"
     done
@@ -69,7 +69,7 @@ CPUSTRESS_TEXT
     CPU_MODEL=`awk '/^model name/ {for (i = 4; i <= NF; i++) printf( "%s ", $i); printf ("\n"); exit}' /proc/cpuinfo`
     CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
 
-    if [ "$CPUS" == "1" ]; then
+    if [ "$CPUS" = "1" ]; then
         echo -e 'You have \033[01;37m1\033[0m CPU in your system.'
     else
         echo -e 'You have\033[01;37m' $CPUS '\033[0mCPUs in your system.'
@@ -90,7 +90,7 @@ CPUSTRESS_TEXT
         fi
 
         read -s -n1 -t 1 KEYPRESS
-        if [ "$KEYPRESS"X != "noneX" ]; then
+        if [ "X$KEYPRESS" != "Xnone" ]; then
             echo -e '\n'
             break
         fi

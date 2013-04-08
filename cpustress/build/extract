@@ -18,21 +18,21 @@
 #
 #
 # Written by Explorer.
-# Last updated on 3 April 2013.
+# Last updated on 8 April 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
 
 # Make sure 'build-initrd' is empty, so that we won't overwrite files.
-if [ -d "build-initrd" -a -n "`ls -A "build-initrd"`" ]; then
+if [ -d "build-initrd" ] && [ "X`ls -A 'build-initrd'`" != "X" ]; then
     echo "ERROR: Directory 'build-initrd' is not empty."
-    # exit 1
+    exit 1
 fi
 
 if [ ! -f "initrd.gz" ]; then
     echo "File initrd.gz is not found. Please place the CPUstress initrd image in the "
     echo "same directory as this script."
-    exit
+    exit 1
 fi
 
 echo "Extracting initrd.gz..."

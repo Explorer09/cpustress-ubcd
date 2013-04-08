@@ -32,13 +32,13 @@ echo
 
 # 'helpinfo' will run a 'less' program if there's no argument given.
 # Pause in order for the user to see this message.
-if [ -z "$1" ]; then
+if [ "X$1" = "X" ]; then
     echo 'Press any key to continue.'
     read -s -n1
 fi
 
-# Avoid recursion. ('help' calls 'helpinfo' who calls 'help'...)
-if [ "$1" = "help" ]; then
+# Avoid recursion. ('help' calls 'helpinfo' which calls 'help'...)
+if [ "X$1" = "Xhelp" ]; then
     helpinfo helpinfo
 else
     helpinfo "$@"
