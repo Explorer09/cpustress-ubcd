@@ -23,7 +23,7 @@
 #
 #
 # Written by Explorer.
-# Last updated on 3 April 2013.
+# Last updated on 8 April 2013.
 
 
 echo 'There is no built-in help for the BusyBox ash shell.'
@@ -31,7 +31,7 @@ echo -e "We will start '\033[01;37mhelpinfo\033[0m' instead. ('helpinfo $@')"
 echo
 
 # 'helpinfo' will run a 'less' program if there's no argument given.
-# I'll pause in order for the user to see this message.
+# Pause in order for the user to see this message.
 if [ -z "$1" ]; then
     echo 'Press any key to continue.'
     read -s -n1
