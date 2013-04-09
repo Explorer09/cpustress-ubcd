@@ -15,4 +15,7 @@ if [ -d "build" ]; then
     rm -f build.tar
 else
     echo "ERROR: $(pwd)/build is not a directory."
+    exit 1
 fi
+
+exit 0

@@ -4,10 +4,6 @@
 #
 # This script is modified from ubcd2iso.sh script in Ultimate Boot CD.
 
-# Change working directory to the parent directory of the script.
-cd `dirname $0`
-cd ..
-
 # Define VOLUME_ID (LABEL) of the ISO
 VOLUME_ID="CPUSTRESS"
 
@@ -15,6 +11,30 @@ VOLUME_ID="CPUSTRESS"
 ISO_FILENAME="cpustress-2.2.iso"
 
 ROOT_OF_ISO_PATH="$(pwd)/iso"
+
+# Change working directory to the parent directory of the script.
+cd `dirname $0`
+cd ..
+
+# Execute other build scripts when needed.
+if [ ! -f "cpustress/initrd.gz" ]; then
+    if [ ! -f "cpustress/build/initrd.gz" ]; then
+        echo "Executing ./cpustress/build/build ..."
+        sh ./cpustress/build/build
+        if [ "$?" -ne "0" ]; then
+            exit 1
+        fi
+    fi
+    echo 'cp -a "cpustress/build/initrd.gz" "cpustress/initrd.gz"'
+    cp -a "cpustress/build/initrd.gz" "cpustress/initrd.gz"
+fi
+if [ ! -f "cpustress/build.txz" ]; then
+    echo "Executing ./scripts/pack_buildtxz.sh ..."
+    sh ./scripts/pack_buildtxz.sh
+    if [ "$?" -ne "0" ]; then
+        exit 1
+    fi
+fi
 
 # Copy the cpustress directory for building ISO image.
 rm -rf iso/ubcd/boot/cpustress/*

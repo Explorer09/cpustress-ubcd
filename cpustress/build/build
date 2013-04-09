@@ -18,14 +18,23 @@
 #
 #
 # Written by Explorer.
-# Last updated on 8 April 2013.
+# Last updated on 9 April 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
 
+# Execute the prepare script when needed
+if [ ! -d "build-initrd/dev" ]; then
+    echo "Executing ./prepare ..."
+    sh ./prepare
+    if [ "$?" -ne 0 ]; then
+        exit 1
+    fi
+fi
+
 if [ "X$1" != "Xno-recurse" ] && [ `id -u` != "0" ] && [ `which fakeroot` ]; then
     echo "Faking root privileges when possible..."
-    fakeroot -- $0 no-recurse
+    fakeroot -- "./`basename $0`" no-recurse
     exit 0
 fi
 
@@ -110,3 +119,5 @@ fi
 rm -f initrd
 
 echo "Done."
+
+exit 0

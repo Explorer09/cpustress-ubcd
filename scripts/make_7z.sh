@@ -4,10 +4,32 @@
 #
 # The ! and * are interpreted differently by the shell, so they have to be
 # escaped.
+
 ARCHIVE_NAME="cpustress-2.2"
 
-# Change working directory to the directory of the script.
+# Change working directory to the parent directory of the script.
 cd `dirname $0`
+cd ..
+
+# Execute other build scripts when needed.
+if [ ! -f "cpustress/initrd.gz" ]; then
+    if [ ! -f "cpustress/build/initrd.gz" ]; then
+        echo "Executing ./cpustress/build/build ..."
+        sh ./cpustress/build/build
+        if [ "$?" -ne "0" ]; then
+            exit 1
+        fi
+    fi
+    echo 'cp -a "cpustress/build/initrd.gz" "cpustress/initrd.gz"'
+    cp -a "cpustress/build/initrd.gz" "cpustress/initrd.gz"
+fi
+if [ ! -f "cpustress/build.txz" ]; then
+    echo "Executing ./scripts/pack_buildtxz.sh ..."
+    sh ./scripts/pack_buildtxz.sh
+    if [ "$?" -ne "0" ]; then
+        exit 1
+    fi
+fi
 
 P7ZIP=
 for i in 7z 7za 7zr; do
@@ -22,7 +44,6 @@ if [ "X$P7ZIP" = "X" ]; then
     exit 1
 fi
 
-cd ..
 if [ -e "${ARCHIVE_NAME}" ]; then
     rm -i ${ARCHIVE_NAME}
 fi

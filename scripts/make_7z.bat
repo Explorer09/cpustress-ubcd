@@ -3,6 +3,8 @@ REM Script to make a 7z package for CPUstress release.
 REM
 SET ARCHIVE_NAME=cpustress-2.2
 
+CD ..
+
 SET P7ZIP=
 REM Poor man's 'which' command for batch script.
 FOR %%i IN (7z 7za 7zr) DO (
@@ -17,7 +19,6 @@ IF "X%P7ZIP%"=="X" (
     GOTO :EOF
 )
 
-CD ..
 IF EXIST %ARCHIVE_NAME% (
     DEL /P %ARCHIVE_NAME%
 )
