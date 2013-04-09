@@ -13,6 +13,8 @@ It contains the following tools:
 
 CPUstress is used in Ultimate Boot CD.
 
+![CPUstress test splash screen](./screenshots/cpustress-splash.png "Splash screen")
+
 How to build
 ------------
 

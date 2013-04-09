@@ -1,7 +1,7 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2013-04-09 09:54:12.6586501170" .git_cache_meta
+touch -c -h -d "2013-04-09 11:07:05.9909038990" .git_cache_meta
 chmod 0664 README.md
-touch -c -h -d "2013-04-03 20:42:14.5931084730" README.md
+touch -c -h -d "2013-04-09 11:06:17.0549010600" README.md
 chmod 0775 cpustress/build/build
 touch -c -h -d "2013-04-09 09:53:48.8026487320" cpustress/build/build
 touch -c -h -d "2013-04-06 14:40:37.5290767260" cpustress/build/build-initrd/bin/ash
@@ -378,6 +378,18 @@ chmod 0664 iso/ubcd/menus/syslinux/cpu.cfg
 touch -c -h -d "2013-04-06 15:43:49.4596730390" iso/ubcd/menus/syslinux/cpu.cfg
 chmod 0664 iso/ubcd/menus/syslinux/defaults.cfg
 touch -c -h -d "2013-04-03 12:23:08.0991211180" iso/ubcd/menus/syslinux/defaults.cfg
+chmod 0664 screenshots/cpustress-cpuburn-in.png
+touch -c -h -d "2013-04-09 10:41:40.0000000000" screenshots/cpustress-cpuburn-in.png
+chmod 0664 screenshots/cpustress-helpinfo.png
+touch -c -h -d "2013-04-09 10:41:40.0000000000" screenshots/cpustress-helpinfo.png
+chmod 0664 screenshots/cpustress-mprime.png
+touch -c -h -d "2013-04-09 10:41:41.0000000000" screenshots/cpustress-mprime.png
+chmod 0664 screenshots/cpustress-splash.png
+touch -c -h -d "2013-04-09 10:48:34.0000000000" screenshots/cpustress-splash.png
+chmod 0664 screenshots/cpustress-stress.png
+touch -c -h -d "2013-04-09 10:48:46.0000000000" screenshots/cpustress-stress.png
+chmod 0664 screenshots/cpustress-stresscpu2.png
+touch -c -h -d "2013-04-09 10:48:54.0000000000" screenshots/cpustress-stresscpu2.png
 chmod 0775 scripts/git-cache-meta.sh
 touch -c -h -d "2013-04-08 00:37:39.0951148360" scripts/git-cache-meta.sh
 chmod 0664 scripts/make_7z.bat
