@@ -1,3 +1,5 @@
+11 April 2013
+
 This Mersenne Prime test v23.9 is the dynamically linked version of the 
 official binary.
 
@@ -9,5 +11,9 @@ in my CPUstress image.
 
  $ mv mprime mprime23
  $ strip mprime23
+
+I also used UPX to compress the executable so the file size could be much 
+smaller:
+ $ upx mprime23
 
 --Explorer <explorer09@gmail.com>

@@ -1,4 +1,4 @@
-8 Feburary 2013
+11 April 2013
 
 The mprime27 program included in the image is the official binary, which can 
 be downloaded here:

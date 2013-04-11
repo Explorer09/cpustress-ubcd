@@ -8,6 +8,7 @@ Changes in v2.2.1
 Programs updated or rebuilt:
 - CPU Burn-in now uses the binary from http://cpuburnin.com/. (It's mostly the 
   same as the old one but the new binary uses the http://cpuburnin.com/ URL.)
+- The mprime23 binary is now UPX-compressed.
 
 Changes:
 - Bug fixes regarding '--help' option in various scripts.
@@ -16,8 +17,8 @@ Changes:
 - Removed "root=/dev/ram0 ramdisk_size=12000" from the isolinux command-line.
   Documentation is also updated for this. (Thanks to Icecube for the 
   suggestion.)
-- 'cpuburn' and 'mprime' script improvements. They now also trap signals 1 and 
-  15. 'mprime' now supports command-line arguments.
+- 'cpuburn' and 'mprime' script improvements. They now also trap signals 1 
+  and 15. 'mprime' now supports command-line arguments.
 
 Note:
 - The command-line arguments of mprime rarely do something automatically. Most 

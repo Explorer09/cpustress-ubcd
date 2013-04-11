@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2013-04-11 23:50:49.8916299530" .git_cache_meta
+touch -c -h -d "2013-04-12 00:21:47.6835471250" .git_cache_meta
 chmod 0664 README.md
 touch -c -h -d "2013-04-11 11:16:09.5360097890" README.md
 chmod 0775 cpustress/build/build
@@ -259,10 +259,10 @@ chmod 0664 cpustress/build/build-initrd/opt/cpuinfo/cpuinfo.txt
 touch -c -h -d "2008-10-15 19:58:22.0000000000" cpustress/build/build-initrd/opt/cpuinfo/cpuinfo.txt
 chmod 0664 cpustress/build/build-initrd/opt/mprime/mprime.txt
 touch -c -h -d "2013-04-11 18:44:13.5004501440" cpustress/build/build-initrd/opt/mprime/mprime.txt
-chmod 0775 cpustress/build/build-initrd/opt/mprime/mprime23
-touch -c -h -d "2013-02-09 15:44:17.0000000000" cpustress/build/build-initrd/opt/mprime/mprime23
-chmod 0775 cpustress/build/build-initrd/opt/mprime/mprime27
-touch -c -h -d "2013-02-09 15:44:17.0000000000" cpustress/build/build-initrd/opt/mprime/mprime27
+chmod 0755 cpustress/build/build-initrd/opt/mprime/mprime23
+touch -c -h -d "2013-04-12 00:15:09.0000000000" cpustress/build/build-initrd/opt/mprime/mprime23
+chmod 0755 cpustress/build/build-initrd/opt/mprime/mprime27
+touch -c -h -d "2013-04-12 00:15:09.0000000000" cpustress/build/build-initrd/opt/mprime/mprime27
 chmod 0664 cpustress/build/build-initrd/opt/stress/stress.txt
 touch -c -h -d "2013-04-11 10:03:58.2202028970" cpustress/build/build-initrd/opt/stress/stress.txt
 chmod 0775 cpustress/build/build-initrd/runonce
@@ -325,9 +325,9 @@ touch -c -h -d "2013-04-06 12:28:39.7840775860" cpustress/build/compile-notes/ke
 chmod 0775 cpustress/build/compile-notes/kernel/pmagic-kernel-modules.sh
 touch -c -h -d "2013-04-03 20:35:43.4851259100" cpustress/build/compile-notes/kernel/pmagic-kernel-modules.sh
 chmod 0664 cpustress/build/compile-notes/mprime23.txt
-touch -c -h -d "2013-03-23 13:52:22.0000000000" cpustress/build/compile-notes/mprime23.txt
+touch -c -h -d "2013-04-12 00:19:30.8155532310" cpustress/build/compile-notes/mprime23.txt
 chmod 0664 cpustress/build/compile-notes/mprime27.txt
-touch -c -h -d "2013-03-23 13:52:15.0000000000" cpustress/build/compile-notes/mprime27.txt
+touch -c -h -d "2013-04-12 00:19:14.9875539340" cpustress/build/compile-notes/mprime27.txt
 chmod 0664 cpustress/build/compile-notes/stress.txt
 touch -c -h -d "2013-03-31 23:51:53.0000000000" cpustress/build/compile-notes/stress.txt
 chmod 0664 cpustress/build/compile-notes/stress/stress-no-hdd.patch
@@ -339,7 +339,7 @@ touch -c -h -d "2013-04-06 15:36:16.6916886840" cpustress/build/prepare
 chmod 0664 cpustress/bzImage
 touch -c -h -d "2013-04-06 13:13:04.1679855380" cpustress/bzImage
 chmod 0664 cpustress/changes.txt
-touch -c -h -d "2013-04-11 23:47:33.3356387150" cpustress/changes.txt
+touch -c -h -d "2013-04-12 00:21:21.9275482780" cpustress/changes.txt
 chmod 0664 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0664 cpustress/help/cpuburn.txt
