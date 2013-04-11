@@ -1,11 +1,20 @@
 11 April 2013
 
-The cpuburn-in program included in the image is the official binary from
+The cpuburn-in program included in the image is the official binary from 
 cpuburnin.com, which can be downloaded here:
     http://cpuburnin.com/downloads/cpuburn-in.tar.gz
 
-After downloading, you can strip the binary file to save a few bytes. I did so 
-in my CPUstress image.
+After downloading, make sure you unpack it to an empty directory. (You don't 
+want your files to be replaced, do you?)
+
+ $ tar -x -v -z -f cpuburn-in.tar.gz
+
+The mode of the cpuburn-in binary after unpacking is 644, change it to 775:
+
+ $ chmod 775 cpuburn-in
+
+Then, you can strip the binary file to save a few bytes. I did so in my 
+CPUstress image.
 
  $ strip cpuburn-in
 
