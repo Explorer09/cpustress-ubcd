@@ -1,10 +1,13 @@
 This file documents the changes of CPUstress test from v2.1 to v2.2.
 Changes are made by Explorer <explorer09@gmail.com>
 
-8 April 2013
+11 April 2013
 
 - Bug fixes regarding '--help' option in various scripts.
 - Edit various shell scripts to improve compatibility to POSIX sh.
+- Removed "root=/dev/ram0 ramdisk_size=12000" from the isolinux command-line.
+  Documentation is also updated for this. (Thanks to Icecube for the 
+  suggestion.)
 
 Changes in v2.2
 ---------------

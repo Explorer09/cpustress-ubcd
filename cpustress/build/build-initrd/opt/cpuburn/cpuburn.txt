@@ -1,6 +1,8 @@
 CPU Burn-in README
 ------------------
 
+http://cpuburnin.com
+
 What is CPU Burn-in?
 -------------------
 
@@ -60,13 +62,11 @@ recommended levels can cause damage.
 
 CPU Burn-in runs best as a high priority process on an otherwise idle system.
 
-
-
 Run the program with one command line value to specify the length of time to
 run the test:
 
 eg.
-   "cpuburn 10"    will run the test for ten minutes.
+   "cpuburn 10" will run the test for ten minutes.
 
 
 If you want to run cpuburn-in for a certain time, you can also add a parameter
@@ -111,4 +111,4 @@ If your system experiences instability during the burn-in test or you receive
 error messages it's likely the system has been overclocked too far.
 
 If you believe a bug in the program has been found please email
-cluster2k@hotmail.com 
+info@cpuburnin.com

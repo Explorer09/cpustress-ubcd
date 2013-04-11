@@ -1,11 +1,11 @@
-CPUstress image - version 2.2:
-==============================
+CPUstress image - version 2.2.1:
+================================
 
 Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 6 April 2013.
+Last edited on 11 April 2013.
 
 
 Content of this package:
@@ -66,12 +66,12 @@ e.g.: If you have extracted UBCD to ~/ubcd-extract/, this place is:
 How to edit the CPUstress image?
 ________________________________
 
-Unpack the cpustress-2.2.7z archive (you probably already did this, else you
+Unpack the cpustress-2.2.1.7z archive (you probably already did this, else you
 couldn't read this README.
-$ 7z x "./path/to/file/cpustress-2.2.7z"
+$ 7z x "./path/to/file/cpustress-2.2.1.7z"
 
 Extract the ./build tar archive and the initrd.gz file:
-$ cd cpustress-2.2
+$ cd cpustress-2.2.1
 $ tar xvJf build.txz
 $ cd build
 $ cp ../initrd.gz .
@@ -104,7 +104,7 @@ minutes (= 7 days)).
 
      COM32  linux.c32 /ubcd/boot/cpustress/bzImage
      INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=cpuburn
+     APPEND noapic ubcdcmd=cpuburn
 
 Run cpuburn with a time parameter:
 
@@ -112,21 +112,21 @@ Run cpuburn with a time parameter:
 
      COM32  linux.c32 /ubcd/boot/cpustress/bzImage
      INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=cpuburn days=10
+     APPEND noapic ubcdcmd=cpuburn days=10
 
 
   eg. Run cpuburn for 10 hours.
 
      COM32  linux.c32 /ubcd/boot/cpustress/bzImage
      INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=cpuburn hours=10
+     APPEND noapic ubcdcmd=cpuburn hours=10
 
 
   eg. Run cpuburn for 10 minutes.
 
      COM32  linux.c32 /ubcd/boot/cpustress/bzImage
      INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=cpuburn minutes=10
+     APPEND noapic ubcdcmd=cpuburn minutes=10
 
 
 If those parameters are all provided to the APPEND command of the isolinux
@@ -143,7 +143,7 @@ The following isolinux entry will run CPUinfo:
 
      COM32  linux.c32 /ubcd/boot/cpustress/bzImage
      INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=cpuinfo
+     APPEND noapic ubcdcmd=cpuinfo
 
 
 Helpinfo: helpinfo
@@ -153,15 +153,14 @@ The following isolinux entry will run Helpinfo:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=helpinfo
+    APPEND noapic ubcdcmd=helpinfo
 
 
 The following isolinux entry will run Helpinfo for cpuburn:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=helpinfo
-           cmdhelpinfo=cpuburn
+    APPEND noapic ubcdcmd=helpinfo cmdhelpinfo=cpuburn
 
 You can change the cmdhelpinfo parameter to:
     - cpuburn
@@ -179,7 +178,7 @@ The following isolinux entry will display the menu.
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=menu
+    APPEND noapic ubcdcmd=menu
 
 
 Mersenne Prime Torture test: mprime
@@ -190,20 +189,20 @@ want to run.
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=mprime
+    APPEND noapic ubcdcmd=mprime
 
 If you want to run a specific version of mprime, when you boot the image, use:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=mprime23
+    APPEND noapic ubcdcmd=mprime23
 
       This will start 'Mersenne Prime 23.9.2'.
 
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=mprime27
+    APPEND noapic ubcdcmd=mprime27
 
       This will start 'Mersenne Prime 27.9'.
 
@@ -215,15 +214,14 @@ The following isolinux entry will run stress (will display the help text).
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=stress
+    APPEND noapic ubcdcmd=stress
 
 If you want to run a stress with specific parameters, when you boot the image,
 use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=stress
-           cmdstress="--quiet -c 1k"
+    APPEND noapic ubcdcmd=stress cmdstress="--quiet -c 1k"
 
 The cmdstress parameter contains the options that you want to pass to stress.
 
@@ -235,15 +233,14 @@ The following isolinux entry will run stresscpu2 (will display the help text).
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=stresscpu2
+    APPEND noapic ubcdcmd=stresscpu2
 
 If you want to run a stresscpu2 with specific parameters, when you boot the
 image, use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=stresscpu2
-           cmdstresscpu2="-s -t 48:00:00"
+    APPEND noapic ubcdcmd=stresscpu2 cmdstresscpu2="-s -t 48:00:00"
 
 The cmdstresscpu2 parameter contains the options that you want to pass to
 stresscpu2.

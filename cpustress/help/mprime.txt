@@ -2,7 +2,7 @@ Help: wrapper for the Mersenne Prime Torture test (mprime)
 ==========================================================
 
 Written by Gert Hulselmans and Explorer.
-Last updated on 25 March 2013.
+Last updated on 11 April 2013.
 
 It automaticly detects the number of CPUs to stress them all at the same time.
 This requires to run multiple instances of mprime, because 1 process can only
@@ -28,25 +28,25 @@ The following entry will prompt to ask which version of mprime you want to run.
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=mprime
+    APPEND noapic ubcdcmd=mprime
 
 If you want to run a specific version of mprime, when you boot the image, use:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=mprime23
+    APPEND noapic ubcdcmd=mprime23
 
   This will start 'Mersenne Prime 23.9.2'.
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=mprime27
+    APPEND noapic ubcdcmd=mprime27
 
   This will start 'Mersenne Prime 27.9 build 1'.
 
 
-This wrapper avoids specifying the working directory part (-W) and the torture
-(-t) option of the command 'mprime -t -W/tmp/torture-test/torture.XXXXXX',
+This wrapper avoids specifying the working directory part (-w) and the torture
+(-t) option of the command 'mprime -t -w/tmp/torture-test/torture.XXXXXX',
 so the user can run 'mprime' from a terminal without worrying which parameters
 to add to use the torture test of Mersenne Prime Test.
 

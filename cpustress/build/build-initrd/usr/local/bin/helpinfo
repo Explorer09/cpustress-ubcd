@@ -24,10 +24,10 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 8 April 2013.
+# Last updated on 11 April 2013.
 
 
-LAST_EDITED="8 April 2013"
+LAST_EDITED="11 April 2013"
 
 showcontrols () {
     printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
@@ -109,7 +109,7 @@ To run Helpinfo from the isolinux commandline, use the following:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=helpinfo
+    APPEND noapic ubcdcmd=helpinfo
 
 
 To run Helpinfo for a specific program from the isolinux commandline (e.g.:
@@ -117,8 +117,7 @@ cpuburn), use the following:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=helpinfo
-           cmdhelpinfo=cpuburn
+    APPEND noapic ubcdcmd=helpinfo cmdhelpinfo=cpuburn
 HELPINFO2
     less -~ /tmp/helpinfo/helpinfo.txt
 else
@@ -167,8 +166,7 @@ image, use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=stresscpu2
-           cmdstresscpu2="-s -t 48:00:00"
+    APPEND noapic ubcdcmd=stresscpu2 cmdstresscpu2="-s -t 48:00:00"
 
 The cmdstresscpu2 parameter contains the options that you want to pass to
 stresscpu2.

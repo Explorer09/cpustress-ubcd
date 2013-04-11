@@ -157,7 +157,6 @@ use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=stress 
-           cmdstress="--quiet -c 1k"
+    APPEND noapic ubcdcmd=stress cmdstress="--quiet -c 1k"
 
 The cmdstress parameter contains the options that you want to pass to stress.
