@@ -25,7 +25,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 8 April 2013.
+# Last updated on 11 April 2013.
 
 
 CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
@@ -45,28 +45,27 @@ else
     time="10080"
 fi
 
-echo 'Automatic detection of the number of CPUs:'
+trap 'pkill cpuburn-in; trap - 1 2 3 15; exit 0' 1 2 3 15
 
-if [ "$CPUS" = "1" ]; then
-    echo '1 CPU detected.'
-    echo "Running 1 instance of cpuburn-in ('cpuburn-in $time')."
+printf 'Detecting the number of CPUs: '
+
+if [ "$CPUS" -eq "1" ]; then
+    printf '\033[01;37m1\033[0m CPU detected.\n'
+    echo "Running 1 instance of cpuburn-in ('/opt/cpuburn/cpuburn-in $time')."
     /opt/cpuburn/cpuburn-in $time
 else
-    echo "$CPUS CPUs detected."
+    printf "\033[01;37m$CPUS\033[0m CPUs detected.\n"
     echo "To stress all CPUs, $CPUS instances of cpuburn-in will be run in the background."
     echo
-    echo 'To stop cpuburn-in, press any key.'
-
-    trap 'pkill cpuburn-in; trap - 1 2 3 15; exit 0' 1 2 3 15
+    printf '\033[01;31mTo stop cpuburn-in, press any key.\033[0m\n'
 
     for i in `seq 1 $CPUS`; do
-        echo
-        echo "cpuburn: Starting instance $i of cpuburn-in ('cpuburn-in $time &')."
+        echo "cpuburn: Starting instance $i of cpuburn-in ('/opt/cpuburn/cpuburn-in $time &')."
         /opt/cpuburn/cpuburn-in $time &
     done
 
     read -s -n1 REPLY
     pkill cpuburn-in
-
-    trap - 1 2 3 15
 fi
+
+trap - 1 2 3 15

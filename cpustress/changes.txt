@@ -1,15 +1,28 @@
-This file documents the changes of CPUstress test from v2.1 to v2.2.
+This file documents the changes of CPUstress test from v2.1 to v2.2.1.
 Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in v2.2.1 (Under development)
 -----------------
 11 April 2013
 
+Programs updated or rebuilt:
+- CPU Burn-in now uses the binary from http://cpuburnin.com/. (It's mostly the 
+  same as the old one but the new binary uses the http://cpuburnin.com/ URL.)
+
+Changes:
 - Bug fixes regarding '--help' option in various scripts.
-- Edit various shell scripts to improve compatibility to POSIX sh.
+- Edit various shell scripts to improve compatibility to POSIX sh. Removed 
+  as many bashisms as possible.
 - Removed "root=/dev/ram0 ramdisk_size=12000" from the isolinux command-line.
   Documentation is also updated for this. (Thanks to Icecube for the 
   suggestion.)
+- 'cpuburn' and 'mprime' script improvements. They now also trap signals 1 and 
+  15. 'mprime' now supports command-line arguments.
+
+Note:
+- The command-line arguments of mprime rarely do something automatically. Most 
+  of the arguments will bring user to the interactive menu. So there's not 
+  much use when specifying at boot time.
 
 Changes in v2.2
 ---------------

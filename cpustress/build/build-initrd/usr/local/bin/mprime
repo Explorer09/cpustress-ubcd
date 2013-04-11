@@ -52,17 +52,39 @@ CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
 mkdir -p /tmp/torture-test/
 
 printf '\033[0;32mMersenne Prime Torture test:\n'
-printf '============================\033[0m\n'
-printf '\n'
+printf '============================\033[0m\n\n'
 
 case "$1" in
     23)
-        echo "The torture test will be executed with 'Mersenne Prime 23.9.2' (mprime23)."
         MPRIME=/opt/mprime/mprime23
+        shift
         ;;
     27)
-        echo "The torture test will be executed with 'Mersenne Prime 27.9 build 1' (mprime27)."
         MPRIME=/opt/mprime/mprime27
+        shift
+        ;;
+    --help | -h)
+        cat <<HELP
+Usage: mprime VERSION [-cdhmstv] [-aN] [-wDIR]
+
+VERSION must be either 27 or 23. If unspecified, mprime wrapper will prompt it
+during execution.
+
+-d	Print detailed information to stdout.
+-h	Print this.
+-m	Menu to configure mprime.
+-s	Display status.
+-t	Run the torture test.
+-v	Print the version number.
+-aN	Use an alternate set of INI and output files (obsolete).
+-wDIR	Run from a different working directory.
+
+Without the -a or -w option, this wrapper will create temporary directories in
+/tmp/torture-test as working directories.
+
+Don't use the -c option because the CPUstress image has no Internet connection.
+HELP
+        exit 0
         ;;
     *)
         echo "Which version of 'Mersenne Prime' do you want to use?"
@@ -73,49 +95,98 @@ case "$1" in
         echo
 
         if [ "X$CHOICE" = "X2" ]; then
-            echo "The torture test will be executed with 'Mersenne Prime 23.9.2' (mprime23)."
             MPRIME=/opt/mprime/mprime23
         else
-            echo "The torture test will be executed with 'Mersenne Prime 27.9 build 1' (mprime27)."
             MPRIME=/opt/mprime/mprime27
         fi
         ;;
 esac
 
-echo
-echo 'Automatic detection of the number of CPUs:'
+# This script can run in 3 modes:
+# 3: With '-t', run multiple instances of mprime.
+# 2: With '-t', run single instance of mprime.
+# 1: No '-t', run single instance of mprime.
+MODE=3
 
-if [ "$CPUS" = "1" ]; then
-    WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
-    echo '1 CPU detected.'
-    echo "Running 1 instance of mprime ('$MPRIME -t -w$WORKING_DIR')."
-    echo
-    $MPRIME -t -w$WORKING_DIR
+# If this is N, then temp working directories won't be created.
+NEEDS_TEMP_DIR=Y
+
+if [ "$MPRIME" = "/opt/mprime/mprime23" ]; then
+    echo "The torture test will be executed with 'Mersenne Prime 23.9.2' (mprime23)."
 else
-    echo "$CPUS CPUs detected."
-    if [ "$MPRIME" = "/opt/mprime/mprime23" ]; then
-        echo "To stress all CPUs, $CPUS instances of $MPRIME will be run in the background."
-        echo
-        printf '\033[01;31mTo stop the torture test, press any key.\033[0m\n'
-
-        trap 'pkill mprime; trap - 1 2 3 15; exit' 1 2 3 15
-
-        for i in `seq 1 $CPUS`; do
-            WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
-            echo
-            echo "mprime: Starting instance $i of mprime ('$MPRIME -t -w$WORKING_DIR &')."
-            echo
-            $MPRIME -t -w$WORKING_DIR &
-        done
-
-        read -s -n1
-        pkill mprime
-
-        trap - 1 2 3 15
-    else
-        WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
-        echo "Running 1 instance of mprime ('$MPRIME -t -w$WORKING_DIR')."
-        echo 
-        $MPRIME -t -w$WORKING_DIR
-    fi
+    echo "The torture test will be executed with 'Mersenne Prime 27.9 build 1' (mprime27)."
+    [ "$MODE" -gt "2" ] && MODE=2
 fi
+echo
+printf 'Detecting the number of CPUs: '
+if [ "$CPUS" -eq "1" ]; then
+    printf '\033[01;37m1\033[0m CPU detected.\n'
+    [ "$MODE" -gt "2" ] && MODE=2
+else
+    printf "\033[01;37m$CPUS\033[0m CPUs detected.\n"
+fi
+
+# Parse command-line arguments.
+ARGS=""
+while [ "X$1" != "X" ]; do
+    case "$1" in
+        -[Ww]* | -[Aa]*)
+            # Custom working directory.
+            NEEDS_TEMP_DIR=N
+            [ "$MODE" -gt "2" ] && MODE=2
+            ;;
+        -[Cc]* | -[Dd]* | -[Mm]* | -[Ss]* | -[Tt]*)
+            # The mprime options other than '-t' usually brings the user to an
+            # interactive menu.
+            [ "$MODE" -gt "1" ] && MODE=1
+            ;;
+        -[Bb]*)
+            # '-b' is obsolete except for mprime23.
+            if [ "$MPRIME" != "/opt/mprime/mprime23" ]; then
+                NEEDS_TEMP_DIR=N
+            fi
+            [ "$MODE" -gt "1" ] && MODE=1
+            ;;
+        *)
+            # No actual tests will be run with '-h' or '-v' or invalid option.
+            NEEDS_TEMP_DIR=N
+            [ "$MODE" -gt "1" ] && MODE=1
+            ;;
+    esac
+
+    ARGS="$ARGS $1"
+    shift
+done
+
+trap 'pkill mprime; trap - 1 2 3 15; exit' 1 2 3 15
+
+if [ "$MODE" -eq "3" ]; then
+    echo "To stress all CPUs, $CPUS instances of mprime23 will be run in the background."
+    echo
+    printf '\033[01;31mTo stop the torture test, press any key.\033[0m\n'
+
+    for i in `seq 1 $CPUS`; do
+        WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
+        echo
+        echo "mprime: Starting instance $i of mprime ('$MPRIME -t -w$WORKING_DIR &')."
+        echo
+        $MPRIME -t $WORKING_DIR &
+    done
+
+    read -s -n1
+    pkill mprime
+else
+    if [ "$MODE" -eq "2" ]; then
+        # The first character of ARGS is a space.
+        ARGS=" -t$ARGS"
+    fi
+    if [ "$NEEDS_TEMP_DIR" = "Y" ]; then
+        WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
+        ARGS="$ARGS -w$WORKING_DIR"
+    fi
+    echo "Running 1 instance of mprime ('${MPRIME}$ARGS')."
+    echo
+    ${MPRIME}$ARGS
+fi
+
+trap - 1 2 3 15
