@@ -24,23 +24,21 @@ execute several scripts in a sequence.
 
 Building CPUstress for Ultimate Boot CD:
 
-1. Run 'cpustress/build/build'
-2. An initrd.gz file should appear at 'cpustress/build', move it to the parent 
-   directory (that is, 'cpustress').
-3. Run 'scripts/pack_buildtxz.sh'
-4. Run 'scripts/make_7z.sh'
-5. A 7z archive should appear in the top directory of the repo. This archive 
+1. (Optional) Run 'scripts/git-cache-meta.sh --apply' to update the file 
+   modification dates. Git do not store the file dates normally so these have 
+   to be stored and applied manually.
+2. Run 'scripts/make_7z.sh'
+3. A 7z archive should appear in the top directory of the repo. This archive 
    contains files you need to update CPUstress in UBCD. Unpack it to the 
    'ubcd/boot/cpustress' of your extracted UBCD directory.
 
 Building CPUstress in a standalone ISO image:
 
-1. Run 'cpustress/build/build'
-2. An initrd.gz file should appear at 'cpustress/build', move it to the parent 
-   directory (that is, 'cpustress').
-3. Run 'scripts/pack_buildtxz.sh'
-4. Run 'scripts/make_iso.sh'
-5. An ISO file should appear in the top directory of the repo. You may burn 
+1. (Optional) Run 'scripts/git-cache-meta.sh --apply' to update the file 
+   modification dates. Git do not store the file dates normally so these have 
+   to be stored and applied manually.
+2. Run 'scripts/make_iso.sh'
+3. An ISO file should appear in the top directory of the repo. You may burn 
    it into a CD if you like.
 
 Authors
@@ -77,7 +75,7 @@ Links
 -----
 
 CPU Burn-in
-* http://web.archive.org/web/20090620184505/http://users.bigpond.net.au/CPUBURN/
+* http://cpuburnin.com/
 
 Prime95
 * http://www.mersenne.org/freesoft/
