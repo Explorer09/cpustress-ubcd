@@ -21,8 +21,8 @@
 #   mprime 23       ==> will run 'Mersenne Prime 23.9.2'
 #   mprime 27       ==> will run 'Mersenne Prime 27.9 build 1'
 #
-# This wrapper avoids specifying the working directory part (-W) and the torture
-# (-t) option of the command 'mprime -t -W/tmp/torture-test/torture.XXXXXX',
+# This wrapper avoids specifying the working directory part (-w) and the torture
+# (-t) option of the command 'mprime -t -w/tmp/torture-test/torture.XXXXXX',
 # so the user can run 'mprime' from a terminal without worrying which parameters
 # to add to use the torture test of Mersenne Prime Test. 
 #
@@ -44,7 +44,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 8 April 2013.
+# Last updated on 11 April 2013.
 
 
 CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
@@ -88,9 +88,9 @@ echo 'Automatic detection of the number of CPUs:'
 if [ "$CPUS" = "1" ]; then
     WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
     echo '1 CPU detected.'
-    echo "Running 1 instance of mprime ('$MPRIME -t -W$WORKING_DIR')."
+    echo "Running 1 instance of mprime ('$MPRIME -t -w$WORKING_DIR')."
     echo
-    $MPRIME -t -W$WORKING_DIR
+    $MPRIME -t -w$WORKING_DIR
 else
     echo "$CPUS CPUs detected."
     if [ "$MPRIME" = "/opt/mprime/mprime23" ]; then
@@ -103,9 +103,9 @@ else
         for i in `seq 1 $CPUS`; do
             WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
             echo
-            echo "mprime: Starting instance $i of mprime ('$MPRIME -t -W$WORKING_DIR &')."
+            echo "mprime: Starting instance $i of mprime ('$MPRIME -t -w$WORKING_DIR &')."
             echo
-            $MPRIME -t -W$WORKING_DIR &
+            $MPRIME -t -w$WORKING_DIR &
         done
 
         read -s -n1
@@ -114,8 +114,8 @@ else
         trap - 1 2 3 15
     else
         WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
-        echo "Running 1 instance of mprime ('$MPRIME -t -W$WORKING_DIR')."
+        echo "Running 1 instance of mprime ('$MPRIME -t -w$WORKING_DIR')."
         echo 
-        $MPRIME -t -W$WORKING_DIR
+        $MPRIME -t -w$WORKING_DIR
     fi
 fi
