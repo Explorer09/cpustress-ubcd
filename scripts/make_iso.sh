@@ -8,7 +8,7 @@
 VOLUME_ID="CPUSTRESS"
 
 # Define ISO filename
-ISO_FILENAME="cpustress-2.2.iso"
+ISO_FILENAME="cpustress-2.2.1.iso"
 
 ROOT_OF_ISO_PATH="$(pwd)/iso"
 
