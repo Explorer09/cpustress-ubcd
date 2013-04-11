@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2013-04-11 11:16:34.6320086700" .git_cache_meta
+touch -c -h -d "2013-04-11 16:16:57.8456402530" .git_cache_meta
 chmod 0664 README.md
 touch -c -h -d "2013-04-11 11:16:09.5360097890" README.md
 chmod 0775 cpustress/build/build
@@ -314,6 +314,8 @@ chmod 0664 cpustress/build/compile-notes/busybox/busybox-1.20.2-sys-resource.pat
 touch -c -h -d "2012-10-21 03:44:03.0000000000" cpustress/build/compile-notes/busybox/busybox-1.20.2-sys-resource.patch
 chmod 0664 cpustress/build/compile-notes/busybox/config
 touch -c -h -d "2013-03-31 09:44:14.0000000000" cpustress/build/compile-notes/busybox/config
+chmod 0664 cpustress/build/compile-notes/cpuburn-in.txt
+touch -c -h -d "2013-04-11 15:49:53.8777126570" cpustress/build/compile-notes/cpuburn-in.txt
 chmod 0664 cpustress/build/compile-notes/glibc.txt
 touch -c -h -d "2013-03-31 09:24:36.0000000000" cpustress/build/compile-notes/glibc.txt
 chmod 0664 cpustress/build/compile-notes/kernel.txt

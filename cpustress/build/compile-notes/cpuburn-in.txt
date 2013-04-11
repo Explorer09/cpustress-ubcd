@@ -1,0 +1,14 @@
+11 April 2013
+
+The cpuburn-in program included in the image is the official binary from
+cpuburnin.com, which can be downloaded here:
+    http://cpuburnin.com/downloads/cpuburn-in.tar.gz
+
+After downloading, you can strip the binary file to save a few bytes. I did so 
+in my CPUstress image.
+
+ $ strip cpuburn-in
+
+CPU Burn-in is not open-source.
+
+--Explorer <explorer09@gmail.com>
