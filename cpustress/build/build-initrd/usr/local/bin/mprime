@@ -3,48 +3,22 @@
 # Wrapper for the Mersenne Prime Torture test (mprime)
 # ====================================================
 #
-# 'mprime' is a wrapper that automaticly detects the number of CPUs so they can be
-# stressed all at the same time. It will run an instance of 'mprime' for each
-# CPU in order to heat all CPUs up at the same time. You can do this by running
-# the background option (-bn with n= number of processes). However, this option
-# does not display any output on the screen. This can be solved by running several
-# instances of mprime with the background (&) option of the shell. This method
-# displays the output of the multiple instances of mprime.
-#
-# Since version 25.5, a single mprime instance can support multiple CPUs, so the
-# script won't use the workaround above on mprime 27.9. (This change is made by
-# Explorer and not Gert Hulselmans.) Note that the background option (-b) is no
-# longer supported since 25.5.
-#
-# This wrapper allows the user to choose which version of mprime he wants to use.
-#   mprime          ==> will prompt to ask which version should be used
-#   mprime 23       ==> will run 'Mersenne Prime 23.9.2'
-#   mprime 27       ==> will run 'Mersenne Prime 27.9 build 1'
-#
-# This wrapper avoids specifying the working directory part (-w) and the torture
-# (-t) option of the command 'mprime -t -w/tmp/torture-test/torture.XXXXXX',
-# so the user can run 'mprime' from a terminal without worrying which parameters
-# to add to use the torture test of Mersenne Prime Test. 
+# 'mprime' is a wrapper that does the following tasks:
+# 1. Prompts the user to choose which version of mprime he wants to use.
+# 2. Creates temporary working directories.
+# 3. If needed, runs multiple instances of 'mprime' in order to heat all CPUs
+#    up at the same time.
+# See '/opt/mprime/mprime.txt' for details.
 #
 #
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License as
-# published by the Free Software Foundation; either version 2 of
-# the License, or (at your option) any later version.
+# Licensed under the GNU General Public License, version 2 or later.
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-# 02110-1301 USA.
+# This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
+# <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 11 April 2013.
+# Last updated on 12 April 2013.
 
 
 CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
@@ -103,9 +77,9 @@ HELP
 esac
 
 # This script can run in 3 modes:
-# 3: With '-t', run multiple instances of mprime.
-# 2: With '-t', run single instance of mprime.
-# 1: No '-t', run single instance of mprime.
+# 3: With '-t', multiple instances of mprime.
+# 2: With '-t', single instance of mprime.
+# 1: No '-t', single instance of mprime.
 MODE=3
 
 # If this is N, then temp working directories won't be created.
@@ -136,19 +110,19 @@ while [ "X$1" != "X" ]; do
             [ "$MODE" -gt "2" ] && MODE=2
             ;;
         -[Cc]* | -[Dd]* | -[Mm]* | -[Ss]* | -[Tt]*)
-            # The mprime options other than '-t' usually brings the user to an
+            # '-c', '-d', '-m', or '-s' usually brings the user to an
             # interactive menu.
             [ "$MODE" -gt "1" ] && MODE=1
             ;;
         -[Bb]*)
-            # '-b' is obsolete except for mprime23.
+            # '-b' is invalid except for mprime23.
             if [ "$MPRIME" != "/opt/mprime/mprime23" ]; then
                 NEEDS_TEMP_DIR=N
             fi
             [ "$MODE" -gt "1" ] && MODE=1
             ;;
         *)
-            # No actual tests will be run with '-h' or '-v' or invalid option.
+            # No actual tests will be run with '-h', '-v', or invalid option.
             NEEDS_TEMP_DIR=N
             [ "$MODE" -gt "1" ] && MODE=1
             ;;
