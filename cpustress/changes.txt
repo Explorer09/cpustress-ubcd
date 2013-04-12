@@ -3,7 +3,7 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in v2.2.1
 -----------------
-11 April 2013
+12 April 2013
 
 Programs updated or rebuilt:
 - CPU Burn-in now uses the binary from http://cpuburnin.com/. (It's mostly the 
