@@ -2,7 +2,7 @@ Help: wrapper for the Mersenne Prime Torture test (mprime)
 ==========================================================
 
 Written by Gert Hulselmans and Explorer.
-Last updated on 11 April 2013.
+Last updated on 13 April 2013.
 
 This wrapper allows the user to choose which version of mprime he wants to use.
 When you run the following in the terminal:

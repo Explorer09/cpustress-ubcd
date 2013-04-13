@@ -13,7 +13,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 12 April 2013.
+# Last updated on 13 April 2013.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
@@ -90,7 +90,7 @@ CPUSTRESS_TEXT
             cpuinfo
             ;;
         helpinfo)
-            helpinfo $cmdhelpinfo
+            helpinfo $ubcdargs
             ;;
         menu)
             menu
@@ -105,16 +105,16 @@ CPUSTRESS_TEXT
             mprime 27
             ;;
         stress)
-            stress $cmdstress
-            if [ -z "$cmdstress" ] || [ "$cmdstress" = "-?" ] || \
-               [ "$cmdstress" = "--help" ]; then
+            stress $ubcdargs
+            if [ -z "$ubcdargs" ] || [ "$ubcdargs" = "-?" ] || \
+               [ "$ubcdargs" = "--help" ]; then
                 echo 'Press any key to continue.'
                 read -s -n1 REPLY
             fi
             ;;
         stresscpu2)
             printf "\033[0;32m\nStarting 'CPU stress tester 2.0'   (stresscpu2).\033[0m\n"
-            stresscpu2 $cmdstresscpu2
+            stresscpu2 $ubcdargs
             ;;
         dmesg)
             dmesg | less -~

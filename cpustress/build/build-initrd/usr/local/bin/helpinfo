@@ -14,10 +14,10 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 12 April 2013.
+# Last updated on 13 April 2013.
 
 
-LAST_EDITED="12 April 2013"
+LAST_EDITED="13 April 2013"
 
 showcontrols () {
     printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
@@ -107,7 +107,7 @@ cpuburn), use the following:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND noapic ubcdcmd=helpinfo cmdhelpinfo=cpuburn
+    APPEND noapic ubcdcmd=helpinfo ubcdargs=cpuburn
 HELPINFO2
     less -~ /tmp/helpinfo/helpinfo.txt
 else
@@ -156,9 +156,9 @@ image, use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND noapic ubcdcmd=stresscpu2 cmdstresscpu2="-s -t 48:00:00"
+    APPEND noapic ubcdcmd=stresscpu2 ubcdargs="-s -t 48:00:00"
 
-The cmdstresscpu2 parameter contains the options that you want to pass to
+The ubcdargs parameter contains the options that you want to pass to
 stresscpu2.
 CMDSTRESSCPU2
             less -~ /tmp/helpinfo/stresscpu2.txt
