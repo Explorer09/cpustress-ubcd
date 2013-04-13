@@ -5,7 +5,7 @@ Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 12 April 2013.
+Last edited on 13 April 2013.
 
 
 Content of this package:
@@ -160,9 +160,9 @@ The following isolinux entry will run Helpinfo for cpuburn:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND noapic ubcdcmd=helpinfo cmdhelpinfo=cpuburn
+    APPEND noapic ubcdcmd=helpinfo ubcdargs=cpuburn
 
-You can change the cmdhelpinfo parameter to:
+You can change the ubcdargs parameter to:
     - cpuburn
     - cpuinfo
     - helpinfo
@@ -221,9 +221,9 @@ use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND noapic ubcdcmd=stress cmdstress="--quiet -c 1k"
+    APPEND noapic ubcdcmd=stress ubcdargs="--quiet -c 1k"
 
-The cmdstress parameter contains the options that you want to pass to stress.
+The ubcdargs parameter contains the options that you want to pass to stress.
 
 
 CPU stress tester 2.0: stresscpu2
@@ -240,9 +240,9 @@ image, use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND noapic ubcdcmd=stresscpu2 cmdstresscpu2="-s -t 48:00:00"
+    APPEND noapic ubcdcmd=stresscpu2 ubcdargs="-s -t 48:00:00"
 
-The cmdstresscpu2 parameter contains the options that you want to pass to
+The ubcdargs parameter contains the options that you want to pass to
 stresscpu2.
 
 
