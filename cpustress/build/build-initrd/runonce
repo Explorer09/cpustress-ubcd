@@ -96,13 +96,13 @@ CPUSTRESS_TEXT
             menu
             ;;
         mprime)
-            mprime
+            mprime $ubcdargs
             ;;
         mprime23)
-            mprime 23
+            mprime 23 $ubcdargs
             ;;
         mprime27)
-            mprime 27
+            mprime 27 $ubcdargs
             ;;
         stress)
             stress $ubcdargs

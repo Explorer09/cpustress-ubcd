@@ -1,14 +1,13 @@
 0f>> PAGE 207
 
 For 0fStress07 and 0fStressCPU07, you may pass the command-line arguments to the
-program by using the '0fcmdstress07' and '0fcmdstresscpu207' options respectively in
-isolinux. Examples:
+program by using the '0fubcdargs07' option in isolinux. Examples:
 
 > .com32 linux.c32 /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=stress
-  0fcmdstress="--quiet -c 1k"07 initrd=/ubcd/boot/cpustress/initrd.gz
+  0fubcdargs="--quiet -c 1k"07 initrd=/ubcd/boot/cpustress/initrd.gz
 
 > .com32 linux.c32 /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=stresscpu2
-  0fcmdstresscpu2="-s -t 48:00:00"07 initrd=/ubcd/boot/cpustress/initrd.gz
+  0fubcdargs="-s -t 48:00:00"07 initrd=/ubcd/boot/cpustress/initrd.gz
 
 Other boot options (for debugging use):
   modprobe="module1 module2 ..."  Loads specific modules during boot.

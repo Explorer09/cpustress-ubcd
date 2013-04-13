@@ -26,7 +26,7 @@ initrd /ubcd/boot/cpustress/initrd.gz
 map --unmap=0:0xff
 
 title Stress V1.04\n Simple workload generator for POSIX systems. It imposes a configurable amount\n of CPU, memory, I/O, and disk stress on the system. This menu item launches\n stress with the "--help" parameter that displays all possible options. You\n need to run it again with the stress test options that you prefer.
-kernel /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=stress cmdstress="--help"
+kernel /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=stress ubcdargs="--help"
 initrd /ubcd/boot/cpustress/initrd.gz
 map --unmap=0:0xff
 
