@@ -44,12 +44,13 @@ printf "                     \033[01;37m3)\033[0m Mersenne Prime v23.9.2  (mprim
 printf "                     \033[01;37m4)\033[0m Mersenne Prime v27.9    (mprime 27)\n"
 printf "                     \033[01;37m5)\033[0m Stress v1.0.4           (stress)\n"
 printf "                     \033[01;37m6)\033[0m CPU stress tester 2.0   (stresscpu2)\n"
-printf "                     \033[01;37m7)\033[0m Helpinfo                (helpinfo)\n"
+printf "                     \033[01;37m7)\033[0m System Stability Tester 1.5.1 (systester)\n"
+printf "                     \033[01;37m8)\033[0m Helpinfo                (helpinfo)\n"
 printf "\n"
-printf "                     \033[01;37m8)\033[0m Reboot                  (reboot)\n"
-printf "                     \033[01;37m9)\033[0m Shutdown                (poweroff)\n"
+printf "                     \033[01;37m9)\033[0m Reboot                  (reboot)\n"
+printf "                     \033[01;37m10)\033[0m Shutdown                (poweroff)\n"
 printf "\n"
-printf "                    \033[01;37m10)\033[0m Exit menu\n"
+printf "                    \033[01;37m11)\033[0m Exit menu\n"
 printf "\n"
 printf "Choose: "
 read CHOICE
@@ -74,16 +75,19 @@ case "$CHOICE" in
     6 | "stresscpu2")
         stresscpu2
         ;;
-    7 | "help" | "helpinfo")
+    7 | "systester" | "systester-cli")
+        systester-cli
+        ;;
+    8 | "help" | "helpinfo")
         helpinfo
         ;;
-    8 | "reboot")
+    9 | "reboot")
         reboot
         ;;
-    9 | "poweroff")
+    10 | "poweroff")
         poweroff
         ;;
-    10)
+    11)
         # Do nothing.
         ;;
     *)
@@ -91,7 +95,7 @@ case "$CHOICE" in
 esac
 
 case "$CHOICE" in
-    8 | 9 | "reboot" | "poweroff")
+    9 | 10 | "reboot" | "poweroff")
         ;;
     *)
         printf "menu: Type '\033[01;37mmenu\033[0m' to return to main menu.\n\n"

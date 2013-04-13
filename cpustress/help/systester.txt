@@ -1,0 +1,29 @@
+System Stability Tester. CLI Version 1.5.1.
+Distributed under the terms of the GPL v2.
+Type -help for command line options.
+http://systester.sourceforge.net
+
+Valid command line options
+ -help                  Prints this help screen
+ -qcborwein <digits>	Use Borwein's Quadratic Convergence algorithm
+ -gausslg  <digits>     Use Gauss-Legendre algorithm
+  Valid <digits> values: 128K, 256K, 512K, 1M, 2M, 4M, 8M, 16M, 32M, 64M, 128M
+
+ -threads <nthreads>    The number of threads. Default 1, Maximum 64
+ -turns <nturns>        The number of turns. Default 1
+ -test                  Set operating mode to Test. This is the default
+ -bench                 Set operating mode to Bench
+ -log                   Create the systester.log file
+ -pifile                Create the CPUPI.DAT file
+
+EXAMPLE for Unix systems:
+./systester-cli -gausslg 1M -threads 2 -bench
+
+If you want to run systester with specific parameters, when you boot the image,
+use something similar to:
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=systester ubcdargs="-gausslg 1M -threads 2 -bench"
+
+The ubcdargs parameter contains the options that you want to pass to systester.

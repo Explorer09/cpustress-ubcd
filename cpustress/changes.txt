@@ -1,6 +1,10 @@
 This file documents the changes of CPUstress test from v2.1 to v2.2.1.
 Changes are made by Explorer <explorer09@gmail.com>
 
+13 April 2013
+
+- New program: System Stability Tester 1.5.1 (systester-cli)
+
 Changes in v2.2.1
 -----------------
 12 April 2013

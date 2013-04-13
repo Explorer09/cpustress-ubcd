@@ -116,6 +116,9 @@ CPUSTRESS_TEXT
             printf "\033[0;32m\nStarting 'CPU stress tester 2.0'   (stresscpu2).\033[0m\n"
             stresscpu2 $ubcdargs
             ;;
+        systester | systester-cli)
+            printf "\033[0;32m\nStarting 'System Stability Tester 1.5.1'   (systester).\033[0m\n"
+            systester-cli $ubcdargs
         dmesg)
             dmesg | less -~
             ;;

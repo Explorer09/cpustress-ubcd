@@ -35,6 +35,11 @@ kernel /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=stresscpu2
 initrd /ubcd/boot/cpustress/initrd.gz
 map --unmap=0:0xff
 
+title System Stability Tester 1.5.1\n Test the system's stability by calculating up to 128 millions of Pi digits.\n Supports two calculation algorithms: The Quadratic Convergence of Borwein and\n Gauss-Legendre. Can create up to 32 threads. The calculation results of all\n the threads are compared after each step.
+kernel /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=systester
+initrd /ubcd/boot/cpustress/initrd.gz
+map --unmap=0:0xff
+
 title
 pause
 

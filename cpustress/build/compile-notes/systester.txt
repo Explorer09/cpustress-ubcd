@@ -1,0 +1,41 @@
+13 April 2013
+
+Systester download page:
+  http://systester.sourceforge.net/downloads.php
+
+Systester is compiled on Ubuntu 12.04.2 LTS (32-bit).
+
+It requires GMP library in order to build. You can download GMP form the 
+website <http://gmplib.org/> or use the direct link below.
+
+For the shell commands below, I assume that you would unpack GMP at the home 
+directory, but you may change the path if you like. 
+
+ $ cd $HOME
+ $ wget ftp://ftp.gmplib.org/pub/gmp/gmp-5.1.1.tar.xz
+ $ tar -x -v --xz -f gmp-5.1.1.tar.xz
+ $ cd gmp-5.1.1
+
+Configure and build GMP:
+
+ $ ./configure --disable-shared --host=i486-pc-linux-gnu \
+     CFLAGS='-O3 -Wall -pedantic -mtune=generic -march=i486'
+ $ make
+
+Notes about the configure options:
+1. The configure script of GMP will try to produce the binary optimized to the 
+   build system. (With CFLAGS='-march=<your_arch>') This will make the binary 
+   non-portable. Thus, I force it to produce i486 code but use generic (i686) 
+   code tuning.
+
+Unpack and build Systester (CLI version):
+
+ $ tar -x -v -z -f systester-1.5.1.tar.gz
+ $ cd systester-1.5.1/cli
+ $ CPPFLAGS='-L${HOME}/gmp-5.1.1/.libs -I${HOME}/gmp-5.1.1' make cli
+
+(Optional) To reduce the file size, I stripped the binary after compilation:
+
+ $ strip systester-cli
+
+--Explorer <explorer09@gmail.com>

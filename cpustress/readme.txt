@@ -82,7 +82,7 @@ the ./build script.
 
 ./build-initrd/usr/local/bin/ (/usr/local/bin/ directory in the image) contains
 the cpustress specific programs, like cpuburn, cpuinfo, helpinfo, menu, mprime,
-stress and stresscpu2.
+stress, stresscpu2 and systester.
 
 ./build-initrd/opt/ (/opt/ directory in the image) directory contains some help
 files and some cpustress specific programs.
@@ -169,6 +169,7 @@ You can change the ubcdargs parameter to:
     - mprime
     - stress
     - stresscpu2
+    - systester
 
 
 Menu: menu
@@ -229,13 +230,13 @@ The ubcdargs parameter contains the options that you want to pass to stress.
 CPU stress tester 2.0: stresscpu2
 ----------------------
 
-The following isolinux entry will run stresscpu2 (will display the help text).
+The following isolinux entry will run stresscpu2:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
     APPEND noapic ubcdcmd=stresscpu2
 
-If you want to run a stresscpu2 with specific parameters, when you boot the
+If you want to run stresscpu2 with specific parameters, when you boot the
 image, use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
@@ -244,6 +245,26 @@ image, use something similar to:
 
 The ubcdargs parameter contains the options that you want to pass to
 stresscpu2.
+
+
+System Stability Tester 1.5.1: systester-cli
+------------------------------
+
+The following isolinux entry will run systester in the default test mode.
+('systester -test -qcborwein 128K')
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=systester
+
+If you want to run systester with specific parameters, when you boot the image,
+use something similar to:
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=systester ubcdargs="-gausslg 1M -threads 2 -bench"
+
+The ubcdargs parameter contains the options that you want to pass to systester.
 
 
 You can add 'quiet' to all APPEND lines to suppress the kernel text output at

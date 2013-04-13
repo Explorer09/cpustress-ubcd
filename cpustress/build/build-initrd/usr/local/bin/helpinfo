@@ -73,6 +73,7 @@ select the following programs:
         - Mersenne Prime v27.9    (mprime 27)
         - Stress v1.0.4           (stress)
         - CPU stress tester 2.0   (stresscpu2)
+        - System Stability Tester 1.5.1 (systester)
 
 
 
@@ -84,6 +85,7 @@ Help is available for the following executables:
         - Mersenne Prime          (mprime)
         - Stress v1.0.4           (stress)
         - CPU stress tester 2.0   (stresscpu2)
+        - System Stability Tester 1.5.1 (systester)
 
   * Executables from the busybox packet:
 HELPINFO
@@ -151,7 +153,7 @@ else
 Passing options to stresscpu2 through the isolinux commandline
 **************************************************************
 
-If you want to run a stresscpu2 with specific parameters, when you boot the
+If you want to run stresscpu2 with specific parameters, when you boot the
 image, use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
@@ -163,6 +165,20 @@ stresscpu2.
 CMDSTRESSCPU2
             less -~ /tmp/helpinfo/stresscpu2.txt
             ;;
+        systester | systester-cli)
+            systester-cli -help > /tmp/helpinfo/systester.txt
+            cat >> /tmp/helpinfo/systester.txt << CMDSYSTESTER
+
+If you want to run systester with specific parameters, when you boot the image,
+use something similar to:
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=systester ubcdargs="-gausslg 1M -threads 2 -bench"
+
+The ubcdargs parameter contains the options that you want to pass to systester.
+CMDSYSTESTER
+            less -~ /tmp/helpinfo/systester.txt
         *)
             EXE=`which "$1"`
             if [ -x "$EXE" ]; then
