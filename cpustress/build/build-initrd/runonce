@@ -51,7 +51,7 @@ CPUSTRESS_TEXT
 
     printf "\033[01;37mUBCD args:\033[0m   $ubcdcmd\n\n"
 
-    VENDOR=`awk '/^vendor_id/ {print $3; exit}' /proc/cpuinfo`
+    VENDOR=`awk '/^vendor_id/ {for (i = 3; i < NF; i++) printf("%s ", $i); print $NF; exit}' /proc/cpuinfo`
     CPU_MODEL=`awk '/^model name/ {for (i = 4; i <= NF; i++) printf("%s ", $i); printf("\n"); exit}' /proc/cpuinfo`
     CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
 
