@@ -2,7 +2,7 @@ Help: wrapper for the Mersenne Prime Torture test (mprime)
 ==========================================================
 
 Written by Gert Hulselmans and Explorer.
-Last updated on 13 April 2013.
+Last updated on 14 April 2013.
 
 This wrapper allows the user to choose which version of mprime he wants to use.
 When you run the following in the terminal:
@@ -18,10 +18,10 @@ option does not display any output on the screen. This can be solved by running
 several instances of mprime with the background (&) option of the shell. This
 method displays the output of the multiple instances of mprime.
 
-Since version 25.5, a single mprime instance can support multiple CPUs, so the
-script won't use the workaround above on mprime 27.9. (This change is made by
-Explorer and not Gert Hulselmans.) Note that the background option (-b) is no
-longer supported since 25.5.
+Since version 25.5, a single mprime instance can support multiple CPUs, and it
+runs multi-threaded by default. So the script won't use the workaround above on
+mprime 27.9. (This change is made by Explorer and not Gert Hulselmans.) Note
+that the background option (-b) is no longer supported since 25.5.
 
 
 The following entry will prompt to ask which version of mprime you want to run.
