@@ -13,7 +13,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 13 April 2013.
+# Last updated on 15 April 2013.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
@@ -119,6 +119,7 @@ CPUSTRESS_TEXT
         systester | systester-cli)
             printf "\033[0;32m\nStarting 'System Stability Tester 1.5.1'   (systester).\033[0m\n"
             systester-cli $ubcdargs
+            printf "Test completed. Type '\033[01;37msystester-cli -help\033[0m' for other test options.\n"
             ;;
         dmesg)
             dmesg | less -~
