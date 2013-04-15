@@ -119,6 +119,7 @@ CPUSTRESS_TEXT
         systester | systester-cli)
             printf "\033[0;32m\nStarting 'System Stability Tester 1.5.1'   (systester).\033[0m\n"
             systester-cli $ubcdargs
+            ;;
         dmesg)
             dmesg | less -~
             ;;
