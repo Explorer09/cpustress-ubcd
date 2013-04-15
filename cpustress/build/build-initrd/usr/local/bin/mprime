@@ -18,7 +18,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 12 April 2013.
+# Last updated on 15 April 2013.
 
 
 CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
@@ -29,16 +29,8 @@ printf '\033[0;32mMersenne Prime Torture test:\n'
 printf '============================\033[0m\n\n'
 
 case "$1" in
-    23)
-        MPRIME=/opt/mprime/mprime23
-        shift
-        ;;
-    27)
-        MPRIME=/opt/mprime/mprime27
-        shift
-        ;;
     --help | -h)
-        cat <<HELP
+        cat << HELP
 Usage: mprime VERSION [-cdhmstv] [-aN] [-wDIR]
 
 VERSION must be either 27 or 23. If unspecified, mprime wrapper will prompt it
@@ -59,6 +51,14 @@ Without the -a or -w option, this wrapper will create temporary directories in
 Don't use the -c option because the CPUstress image has no Internet connection.
 HELP
         exit 0
+        ;;
+    23)
+        MPRIME=/opt/mprime/mprime23
+        shift
+        ;;
+    27)
+        MPRIME=/opt/mprime/mprime27
+        shift
         ;;
     *)
         echo "Which version of 'Mersenne Prime' do you want to use?"
