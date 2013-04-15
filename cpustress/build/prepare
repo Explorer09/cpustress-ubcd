@@ -27,10 +27,12 @@ ln -s busybox ash
 ln -s busybox cat
 ln -s busybox dmesg
 ln -s busybox echo
+ln -s busybox kill
 ln -s busybox ls
 ln -s busybox mkdir
 ln -s busybox mktemp
 ln -s busybox mount
+ln -s busybox ps
 ln -s busybox sh
 ln -s busybox umount
 ln -s busybox uname
