@@ -14,8 +14,8 @@ still being sure that stability is achieved even under the most stressful
 conditions. The program continuously monitors for erroneous calculations
 ensuring the CPU does not generate errors during calculations.
 
-Note from Gert Hulselmans: 'cpuburn' is a wrapper that automaticly detects the
-number of CPUs so they can be stressed all at the same time. It will run an
+Note from Gert Hulselmans: 'cpuburn' is a wrapper that automatically detects
+the number of CPUs so they can be stressed all at the same time. It will run an
 instance of 'cpuburn-in' for each CPU in order to heat all CPUs up at the same
 time.
 

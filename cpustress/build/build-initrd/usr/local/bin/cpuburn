@@ -3,9 +3,9 @@
 # Wrapper for CPUburn-in
 # ======================
 #
-# It automaticly detects the number of CPUs to stress them all at the same time.
-# This requires to run multiple instances of cpuburn-in, because 1 process can
-# only be executed on 1 CPU.
+# It automatically detects the number of CPUs to stress them all at the same
+# time. This requires to run multiple instances of cpuburn-in, because 1
+# process can only be executed on 1 CPU.
 #
 #
 # Licensed under the GNU General Public License, version 2 or later.
