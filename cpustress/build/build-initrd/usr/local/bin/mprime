@@ -95,9 +95,15 @@ echo
 printf 'Detecting the number of CPUs: '
 if [ "$CPUS" -eq "1" ]; then
     printf '\033[01;37m1\033[0m CPU detected.\n'
-    [ "$MODE" -gt "2" ] && MODE=2
 else
     printf "\033[01;37m$CPUS\033[0m CPUs detected.\n"
+fi
+# "$instances" is a global variable that may be specified as a boot parameter.
+if [ "X$instances" = "X" ]; then
+    instances="$CPUS"
+fi
+if [ "$instances" -eq "1" ]; then
+    [ "$MODE" -gt "2" ] && MODE=2
 fi
 
 # Parse command-line arguments.
@@ -132,35 +138,33 @@ while [ "X$1" != "X" ]; do
     shift
 done
 
-trap 'pkill mprime; trap - 1 2 3 15; exit' 1 2 3 15
-
 if [ "$MODE" -eq "3" ]; then
-    echo "To stress all CPUs, $CPUS instances of mprime23 will be run in the background."
-    echo
+    printf "To stress all CPUs, $instances instances of mprime23 will be run in the background.\n\n"
     printf '\033[01;31mTo stop the torture test, press any key.\033[0m\n'
 
-    for i in `seq 1 $CPUS`; do
+    PID_LIST=""
+    for i in `seq 1 $instances`; do
         WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
-        echo
-        echo "mprime: Starting instance $i of mprime ('$MPRIME -t -w$WORKING_DIR &')."
-        echo
+        printf "mprime: Starting instance $i of mprime ('$MPRIME -t -w$WORKING_DIR &').\n\n"
         $MPRIME -t $WORKING_DIR &
+        PID_LIST="$PID_LIST $!"
+        trap "kill $PID_LIST; trap - 1 2 3 15; exit 0" 1 2 3 15
     done
 
-    read -s -n1
-    pkill mprime
+    read -s -n1 REPLY
+    kill $PID_LIST
 else
     if [ "$MODE" -eq "2" ]; then
-        # The first character of ARGS is a space.
+        # ARGS always begins with a space.
         ARGS=" -t$ARGS"
     fi
     if [ "$NEEDS_TEMP_DIR" = "Y" ]; then
         WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
         ARGS="$ARGS -w$WORKING_DIR"
     fi
-    echo "Running 1 instance of mprime ('${MPRIME}$ARGS')."
-    echo
+    printf "Running 1 instance of mprime ('${MPRIME}$ARGS').\n\n"
     ${MPRIME}$ARGS
 fi
 
 trap - 1 2 3 15
+exit 0
