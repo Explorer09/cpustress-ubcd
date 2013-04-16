@@ -1,4 +1,4 @@
-11 April 2013
+16 April 2013
 
 The mprime27 program included in the image is the official binary, which can 
 be downloaded here:
@@ -6,15 +6,23 @@ be downloaded here:
 or here:
     http://mersenneforum.org/gimps/p95v279.linux32.tar.gz
 
-After downloading, you can strip the binary file to save a few bytes. I did so 
-in my CPUstress image.
+After downloading, rename the executable to mprime23:
 
  $ mv mprime mprime27
+
+(Optional) You can strip the binary file to save a few bytes. I did so in my 
+CPUstress image:
+
  $ strip mprime27
 
-I also used UPX to compress the executable so the file size could be much 
-smaller:
+(Optional) I also used UPX to compress the executable so the file size could 
+be much smaller:
+
  $ upx mprime27
+
+(Optional)
+
+ $ chmod 775 mprime27
 
 This program depends on these libraies:
     libm.so.6

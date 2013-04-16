@@ -1,4 +1,4 @@
-11 April 2013
+16 April 2013
 
 This Mersenne Prime test v23.9 is the dynamically linked version of the 
 official binary.
@@ -6,14 +6,22 @@ official binary.
 It can be downloaded from here:
     ftp://www.mersenne.org/gimps_archive/archived_executables/mprime239.tar.gz
 
-After downloading, you can strip the binary file to save a few bytes. I did do 
-in my CPUstress image.
+After downloading, rename the executable to mprime23:
 
  $ mv mprime mprime23
+
+(Optional) You can strip the binary file to save a few bytes. I did so in my 
+CPUstress image:
+
  $ strip mprime23
 
-I also used UPX to compress the executable so the file size could be much 
-smaller:
+(Optional) I also used UPX to compress the executable so the file size could 
+be much smaller:
+
  $ upx mprime23
+
+(Optional)
+
+ $ chmod 775 mprime27
 
 --Explorer <explorer09@gmail.com>

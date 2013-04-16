@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2013-04-16 00:14:43.0119996420" .git_cache_meta
+touch -c -h -d "2013-04-16 08:39:33.4951907350" .git_cache_meta
 chmod 0664 README.md
 touch -c -h -d "2013-04-14 00:00:17.5772742860" README.md
 chmod 0775 cpustress/build/build
@@ -259,9 +259,9 @@ chmod 0664 cpustress/build/build-initrd/opt/cpuinfo/cpuinfo.txt
 touch -c -h -d "2008-10-15 19:58:22.0000000000" cpustress/build/build-initrd/opt/cpuinfo/cpuinfo.txt
 chmod 0664 cpustress/build/build-initrd/opt/mprime/mprime.txt
 touch -c -h -d "2013-04-15 00:02:10.0992496490" cpustress/build/build-initrd/opt/mprime/mprime.txt
-chmod 0755 cpustress/build/build-initrd/opt/mprime/mprime23
+chmod 0775 cpustress/build/build-initrd/opt/mprime/mprime23
 touch -c -h -d "2013-04-12 00:15:09.0000000000" cpustress/build/build-initrd/opt/mprime/mprime23
-chmod 0755 cpustress/build/build-initrd/opt/mprime/mprime27
+chmod 0775 cpustress/build/build-initrd/opt/mprime/mprime27
 touch -c -h -d "2013-04-12 00:15:09.0000000000" cpustress/build/build-initrd/opt/mprime/mprime27
 chmod 0664 cpustress/build/build-initrd/opt/stress/stress.txt
 touch -c -h -d "2013-04-13 22:21:21.2575389530" cpustress/build/build-initrd/opt/stress/stress.txt
@@ -328,9 +328,9 @@ touch -c -h -d "2013-04-06 12:28:39.7840775860" cpustress/build/compile-notes/ke
 chmod 0775 cpustress/build/compile-notes/kernel/pmagic-kernel-modules.sh
 touch -c -h -d "2013-04-12 09:09:28.7667030490" cpustress/build/compile-notes/kernel/pmagic-kernel-modules.sh
 chmod 0664 cpustress/build/compile-notes/mprime23.txt
-touch -c -h -d "2013-04-12 00:19:30.8155532310" cpustress/build/compile-notes/mprime23.txt
+touch -c -h -d "2013-04-16 08:34:30.0071731230" cpustress/build/compile-notes/mprime23.txt
 chmod 0664 cpustress/build/compile-notes/mprime27.txt
-touch -c -h -d "2013-04-12 00:19:14.9875539340" cpustress/build/compile-notes/mprime27.txt
+touch -c -h -d "2013-04-16 08:34:30.4751731500" cpustress/build/compile-notes/mprime27.txt
 chmod 0664 cpustress/build/compile-notes/stress.txt
 touch -c -h -d "2013-03-31 23:51:53.0000000000" cpustress/build/compile-notes/stress.txt
 chmod 0664 cpustress/build/compile-notes/stress/stress-no-hdd.patch
