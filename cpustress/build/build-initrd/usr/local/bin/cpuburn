@@ -27,9 +27,9 @@ printf '==================\033[0m\n\n'
 if [ "X$1" != "X" ]; then
     time="$1"
 elif [ "X$days" != "X" ]; then
-    time=`expr $days \* 24 \* 60`
+    time="$(($days*24*60))"
 elif [ "X$hours" != "X" ]; then
-    time=`expr $hours \* 60`
+    time="$(($hours*60))"
 elif [ "X$minutes" != "X" ]; then
     time="$minutes"
 else

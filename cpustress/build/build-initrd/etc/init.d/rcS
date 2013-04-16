@@ -14,7 +14,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 12 April 2013.
+# Last updated on 16 April 2013.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
@@ -45,5 +45,5 @@ MEMORY=`awk '/^MemTotal/ {print $2}' /proc/meminfo`
 if [ "$MEMORY" -lt "100000" ]; then
     mount -n -t tmpfs -o size=12m,mode=0755 tmpfs /tmp
 else
-    mount -n -t tmpfs -o size=`expr $MEMORY / 8`k,mode=0755 tmpfs /tmp
+    mount -n -t tmpfs -o size="$(($MEMORY/8))"k,mode=0755 tmpfs /tmp
 fi

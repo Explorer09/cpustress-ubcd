@@ -14,10 +14,10 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 13 April 2013.
+# Last updated on 16 April 2013.
 
 
-LAST_EDITED="13 April 2013"
+LAST_EDITED="16 April 2013"
 
 showcontrols () {
     printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
@@ -29,7 +29,7 @@ showcontrols () {
 [ -d /tmp/helpinfo ] || mkdir -p /tmp/helpinfo
 
 # Prepare the whitespaces for centering the "Last time edited:" text.
-NUM_SPACES=`expr 28 - ${#LAST_EDITED} / 2`
+NUM_SPACES="$((28-${#LAST_EDITED}/2))"
 SPACES=""
 for i in `seq $NUM_SPACES`; do
     SPACES="$SPACES "
