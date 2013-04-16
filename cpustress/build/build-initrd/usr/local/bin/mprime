@@ -18,10 +18,23 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 15 April 2013.
+# Last updated on 16 April 2013.
 
 
+set -m
 CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
+CHLD_COUNT=0
+
+sigchld_handler () {
+    trap - 17
+    CHLD_COUNT="$(($CHLD_COUNT+1))"
+    if [ "$CHLD_COUNT" -ge "$instances" ]; then
+        trap - 1 2 3 15
+        exit 0;
+    fi
+    trap 'sigchld_handler' 17
+    read -s -n1 REPLY
+}
 
 mkdir -p /tmp/torture-test/
 
@@ -138,20 +151,25 @@ while [ "X$1" != "X" ]; do
     shift
 done
 
+PID_LIST=""
+trap 'trap - 1 2 3 15 17; kill $PID_LIST; exit 0' 1 2 3 15
+
 if [ "$MODE" -eq "3" ]; then
     printf "To stress all CPUs, $instances instances of mprime23 will be run in the background.\n\n"
     printf '\033[01;31mTo stop the torture test, press any key.\033[0m\n'
 
-    PID_LIST=""
     for i in `seq 1 $instances`; do
         WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
         printf "mprime: Starting instance $i of mprime ('$MPRIME -t -w$WORKING_DIR &').\n\n"
         $MPRIME -t $WORKING_DIR &
         PID_LIST="$PID_LIST $!"
-        trap "kill $PID_LIST; trap - 1 2 3 15; exit 0" 1 2 3 15
     done
 
+    trap 'sigchld_handler' 17
+    # This 'read' may be interrupted by a SIGCHLD.
     read -s -n1 REPLY
+
+    trap - 17
     kill $PID_LIST
 else
     if [ "$MODE" -eq "2" ]; then
@@ -166,5 +184,5 @@ else
     ${MPRIME}$ARGS
 fi
 
-trap - 1 2 3 15
+trap - 1 2 3 15 17
 exit 0
