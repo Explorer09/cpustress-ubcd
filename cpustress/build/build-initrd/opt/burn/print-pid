@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# print-pid
+# =========
+#
+# Runs a specified command and prints its process ID and exit status.
+# This small script is useful for Redelmeier's cpuburn programs which print
+# nothing to stdout.
+#
+#
+# Licensed under the GNU General Public License, version 2 or later.
+#
+# This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
+# <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
+#
+#
+# Written by Explorer.
+# Last updated on 16 April 2013.
+
+
+if [ "X$1" = "X" ] || [ "X$1" = "X--help" ]; then
+    echo "Usage: $0 COMMAND [ARGS]"
+    exit 0
+fi
+COMMAND=$1
+shift
+if { which $COMMAND >/dev/null; }; then
+    if [ "$#" -ge "1" ]; then
+        COMMAND="$COMMAND $@"
+    fi
+
+    $COMMAND &
+    PID=$!
+    trap 'kill $PID; trap - 1 2 3 15' 1 2 3 15
+    echo "print-pid: '$COMMAND &' started. PID: $PID"
+    wait $PID
+    echo "print-pid: PID $PID finished with exit status $?."
+    trap - 1 2 3 15
+
+    exit 0
+else
+    echo "print-pid ERROR: '$COMMAND' is not executable."
+    echo "Usage: $0 COMMAND [ARGS]"
+    exit 1
+fi

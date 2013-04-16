@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2013-04-16 21:52:38.2673086250" .git_cache_meta
+touch -c -h -d "2013-04-16 23:19:37.0231921800" .git_cache_meta
 chmod 0664 README.md
 touch -c -h -d "2013-04-14 00:00:17.5772742860" README.md
 chmod 0775 cpustress/build/build
@@ -253,6 +253,22 @@ chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.6-cpustress/modules.symb
 touch -c -h -d "2013-04-06 13:06:16.1199996340" cpustress/build/build-initrd/lib/modules/3.8.6-cpustress/modules.symbols.bin
 chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.6-cpustress/modules.usbmap
 touch -c -h -d "2013-04-06 12:59:46.8080130850" cpustress/build/build-initrd/lib/modules/3.8.6-cpustress/modules.usbmap
+chmod 0664 cpustress/build/build-initrd/opt/burn/burn.txt
+touch -c -h -d "2013-04-16 22:36:33.2512498290" cpustress/build/build-initrd/opt/burn/burn.txt
+chmod 0775 cpustress/build/build-initrd/opt/burn/burnBX
+touch -c -h -d "2013-04-11 20:13:19.0000000000" cpustress/build/build-initrd/opt/burn/burnBX
+chmod 0775 cpustress/build/build-initrd/opt/burn/burnK6
+touch -c -h -d "2013-04-11 20:13:18.0000000000" cpustress/build/build-initrd/opt/burn/burnK6
+chmod 0775 cpustress/build/build-initrd/opt/burn/burnK7
+touch -c -h -d "2013-04-11 20:13:18.0000000000" cpustress/build/build-initrd/opt/burn/burnK7
+chmod 0775 cpustress/build/build-initrd/opt/burn/burnMMX
+touch -c -h -d "2013-04-11 20:13:20.0000000000" cpustress/build/build-initrd/opt/burn/burnMMX
+chmod 0775 cpustress/build/build-initrd/opt/burn/burnP5
+touch -c -h -d "2013-04-11 20:13:18.0000000000" cpustress/build/build-initrd/opt/burn/burnP5
+chmod 0775 cpustress/build/build-initrd/opt/burn/burnP6
+touch -c -h -d "2013-04-11 20:13:18.0000000000" cpustress/build/build-initrd/opt/burn/burnP6
+chmod 0775 cpustress/build/build-initrd/opt/burn/print-pid
+touch -c -h -d "2013-04-16 23:15:39.3911974820" cpustress/build/build-initrd/opt/burn/print-pid
 chmod 0775 cpustress/build/build-initrd/opt/cpuburn-in/cpuburn-in
 touch -c -h -d "2013-04-11 16:29:27.6256068250" cpustress/build/build-initrd/opt/cpuburn-in/cpuburn-in
 chmod 0664 cpustress/build/build-initrd/opt/cpuburn-in/cpuburn-in.txt
@@ -268,7 +284,7 @@ touch -c -h -d "2013-04-12 00:15:09.0000000000" cpustress/build/build-initrd/opt
 chmod 0664 cpustress/build/build-initrd/opt/stress/stress.txt
 touch -c -h -d "2013-04-13 22:21:21.2575389530" cpustress/build/build-initrd/opt/stress/stress.txt
 chmod 0775 cpustress/build/build-initrd/runonce
-touch -c -h -d "2013-04-16 21:49:48.8793124030" cpustress/build/build-initrd/runonce
+touch -c -h -d "2013-04-16 21:55:55.5673042210" cpustress/build/build-initrd/runonce
 touch -c -h -d "2013-04-15 13:20:52.2188533860" cpustress/build/build-initrd/sbin/halt
 touch -c -h -d "2013-04-15 13:20:52.2228533860" cpustress/build/build-initrd/sbin/init
 touch -c -h -d "2013-04-15 13:20:52.2148533860" cpustress/build/build-initrd/sbin/lsmod
@@ -286,6 +302,8 @@ touch -c -h -d "2013-04-15 13:20:52.2228533860" cpustress/build/build-initrd/usr
 touch -c -h -d "2013-04-15 13:20:52.2228533860" cpustress/build/build-initrd/usr/bin/seq
 touch -c -h -d "2013-04-15 13:20:52.2268533850" cpustress/build/build-initrd/usr/bin/top
 touch -c -h -d "2013-04-15 13:20:52.2228533860" cpustress/build/build-initrd/usr/bin/which
+chmod 0775 cpustress/build/build-initrd/usr/local/bin/burn
+touch -c -h -d "2013-04-16 23:03:58.2912131260" cpustress/build/build-initrd/usr/local/bin/burn
 touch -c -h -d "2013-04-16 21:23:38.1153474510" cpustress/build/build-initrd/usr/local/bin/cpuburn-in
 chmod 0775 cpustress/build/build-initrd/usr/local/bin/cpuburn-m
 touch -c -h -d "2013-04-16 21:21:38.1753501280" cpustress/build/build-initrd/usr/local/bin/cpuburn-m
@@ -294,11 +312,11 @@ touch -c -h -d "2013-04-12 09:17:39.8346811550" cpustress/build/build-initrd/usr
 chmod 0775 cpustress/build/build-initrd/usr/local/bin/help
 touch -c -h -d "2013-04-12 09:17:39.4946811700" cpustress/build/build-initrd/usr/local/bin/help
 chmod 0775 cpustress/build/build-initrd/usr/local/bin/helpinfo
-touch -c -h -d "2013-04-16 21:49:20.0833130480" cpustress/build/build-initrd/usr/local/bin/helpinfo
+touch -c -h -d "2013-04-16 21:56:36.5673033060" cpustress/build/build-initrd/usr/local/bin/helpinfo
 chmod 0775 cpustress/build/build-initrd/usr/local/bin/menu
-touch -c -h -d "2013-04-16 21:48:42.4633138850" cpustress/build/build-initrd/usr/local/bin/menu
+touch -c -h -d "2013-04-16 21:56:29.2993034700" cpustress/build/build-initrd/usr/local/bin/menu
 chmod 0775 cpustress/build/build-initrd/usr/local/bin/mprime
-touch -c -h -d "2013-04-16 21:39:48.2193258050" cpustress/build/build-initrd/usr/local/bin/mprime
+touch -c -h -d "2013-04-16 22:20:03.1112719270" cpustress/build/build-initrd/usr/local/bin/mprime
 chmod 0775 cpustress/build/build-initrd/usr/local/bin/stress
 touch -c -h -d "2013-03-31 23:53:02.0000000000" cpustress/build/build-initrd/usr/local/bin/stress
 chmod 0775 cpustress/build/build-initrd/usr/local/bin/stresscpu2
@@ -306,6 +324,8 @@ touch -c -h -d "2008-10-16 00:32:42.0000000000" cpustress/build/build-initrd/usr
 touch -c -h -d "2013-04-13 22:54:21.7614506540" cpustress/build/build-initrd/usr/local/bin/systester
 chmod 0775 cpustress/build/build-initrd/usr/local/bin/systester-cli
 touch -c -h -d "2013-04-14 14:09:15.4126140000" cpustress/build/build-initrd/usr/local/bin/systester-cli
+chmod 0664 cpustress/build/compile-notes/burn.txt
+touch -c -h -d "2013-04-16 23:13:16.9752006600" cpustress/build/compile-notes/burn.txt
 chmod 0664 cpustress/build/compile-notes/busybox.txt
 touch -c -h -d "2013-04-15 13:22:16.5508496260" cpustress/build/compile-notes/busybox.txt
 chmod 0664 cpustress/build/compile-notes/busybox/ash-fix-read-s-ctrl-c.patch
@@ -350,6 +370,8 @@ chmod 0664 cpustress/changes.txt
 touch -c -h -d "2013-04-13 23:34:55.3773421520" cpustress/changes.txt
 chmod 0664 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
+chmod 0664 cpustress/help/burn.txt
+touch -c -h -d "2013-04-16 22:36:31.8112498640" cpustress/help/burn.txt
 chmod 0664 cpustress/help/cpuburn-in.txt
 touch -c -h -d "2013-04-16 21:33:29.2593342610" cpustress/help/cpuburn-in.txt
 chmod 0664 cpustress/help/cpuinfo.txt

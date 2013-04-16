@@ -1,0 +1,224 @@
+#!/bin/sh
+#
+# Wrapper for cpuburn
+# ===================
+#
+# This wrapper script does various things in order to make Redelmeier's cpuburn
+# easy to use.
+# 1. Automatically detects which test program works best for user's CPU model.
+# 2. Prompts the user to choose which test he wants to run.
+# 3. Provides help and command-line arguments in a friendly way.
+# 4. Detects the number of CPUs and runs multiple instances of the test program
+#    if needed.
+#
+#
+# Licensed under the GNU General Public License, version 2 or later.
+#
+# This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
+# <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
+#
+#
+# Written by Explorer.
+# Last updated on 16 April 2013.
+
+
+set -m
+CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
+VENDOR=`awk '/^vendor_id/ {for (i = 3; i < NF; i++) printf("%s ", $i); print $NF; exit}' /proc/cpuinfo`
+FAMILY=`awk '/^cpu family/ {print $4; exit}' /proc/cpuinfo`
+MODEL=`awk '/^model/ {print $3; exit}' /proc/cpuinfo`
+MMX=`awk '/^flags.* mmx/ {print "mmx"; exit}' /proc/cpuinfo`
+CHLD_COUNT=0
+
+sigchld_handler () {
+    trap - 17
+    CHLD_COUNT="$(($CHLD_COUNT+1))"
+    if [ "$CHLD_COUNT" -ge "$instances" ]; then
+        trap - 1 2 3 15
+        exit 0;
+    fi
+    trap 'sigchld_handler' 17
+    read -s -n1 REPLY
+}
+
+printf '\033[0;32mcpuburn v1.4a:\n'
+printf '==============\033[0m\n\n'
+
+# Detect processor type
+MODE=""
+case "$VENDOR" in
+    "GenuineIntel")
+        if [ "$MODEL" -ge "16" ]; then # Core, Atom or newer
+            MODE="P6"
+        elif [ "$FAMILY" -ge "6" ]; then # PentiumPro or newer
+            MODE="P6"
+        elif [ "$FAMILY" -ge "5" ]; then # Pentium or Pentium MMX
+            MODE="P5"
+        fi
+        ;;
+    "AuthenticAMD")
+        # Thanks to http://www.cpu-world.com/ for its CPUID database!
+        if [ "$MODEL" -ge "16" ]; then # Athlon 64 or newer
+            MODE="K7"
+        elif [ "$FAMILY" -ge "6" ]; then # Athlon/Duron
+            MODE="K7"
+        elif [ "$FAMILY" -ge "5" ]; then
+            if [ "$MODEL" -ge "6" ]; then # K6 family
+                MODE="K6"
+            else # AMD K5
+                MODE="P5"
+            fi
+        fi
+        ;;
+    *)
+        # Other CPU manufacturers.
+        # Note: "AMDisbetter!" are early engineering samples of AMD K5
+        # processor.
+        MODE="P5"
+esac
+
+if [ "X$MODE" = "X" ]; then
+    echo "Warning: Your processor may be too old to run 'burn'. You need a Pentium or"
+    echo "newer processor."
+    MODE="P5"
+fi
+
+if [ "X$MMX" = "X" ]; then
+    echo "Warning: Your processor may not have MMX instructions."
+fi
+
+# Parse command-line arguments.
+case "$1" in
+    --help | -h)
+        cat << HELP
+Usage: $0 [MODE [RAMSIZE]]
+
+MODE may be one of the following:
+  P5     for Intel Pentium w&w/o MMX processors
+  P6     for Intel PentiumPro, PentiumII&III and Celeron CPUs
+  K6     for AMD K6 processors
+  K7     for AMD Athlon/Duron processors
+  MMX    test cache/memory interfaces on all CPUs with MMX
+  BX     alternate cache/memory test for Intel CPUs
+
+The BX and MMX tests take an optional RAMSIZE argument.
+RAMSIZE may be one of the following:
+  A =  2k    E =  32k    I = 512k    M =  8M
+  B =  4k    F =  64k    J =   1M    N = 16M
+  C =  8k    G = 128k    K =   2M    O = 32M
+  D = 16k    H = 256k    L =   4M    P = 64M
+You may either specify the size ("64k") or the letter ("F") as the argument.
+HELP
+        exit 0
+        ;;
+    P5 | P6 | K6 | K7)
+        MODE="$1"
+        ;;
+    MMX | BX)
+        MODE="$1"
+        RAMSIZE="$2"
+        ;;
+    *)
+        echo "Which kind of test do you want to run?"
+        echo "  1) P5     (for Intel Pentium w&w/o MMX processors)"
+        echo "  2) P6     (for Intel PentiumPro, PentiumII&III and Celeron CPUs)"
+        echo "  3) K6     (for AMD K6 processors)"
+        echo "  4) K7     (for AMD Athlon/Duron processors)"
+        echo "  5) MMX    (test cache/memory interfaces on all CPUs with MMX)"
+        echo "  6) BX     (alternate cache/memory test for Intel CPUs)"
+        printf "  Default choice is \033[01;37m$MODE\033[0m and will be selected in 30 seconds.\n"
+        printf 'Choose: '
+        read -t 30 CHOICE
+        echo
+        case "$CHOICE" in
+            1 | P5 | p5)    MODE="P5" ;;
+            2 | P6 | p6)    MODE="P6" ;;
+            3 | K6 | k6)    MODE="K6" ;;
+            4 | K7 | k7)    MODE="K7" ;;
+            5 | MMX | mmx)  MODE="MMX" ;;
+            6 | BX | bx)    MODE="BX" ;;
+            *)
+                echo "Invalid choice. Using the default ($MODE)."
+                ;;
+        esac
+        ;;
+esac
+
+ARGS=""
+if [ "$MODE" = "MMX" ] || [ "$MODE" = "BX" ]; then
+    if [ "$MODE" = "MMX" ]; then
+        DEFAULT_SIZE="64k"
+        ARGS=" F"
+    else
+        DEFAULT_SIZE="4M"
+        ARGS=" L"
+    fi
+    if [ "X$RAMSIZE" = "X" ]; then
+        echo "Choose the RAM size to be tested (in bytes):"
+        echo "  (A) 2k  (C)  8k  (E) 32k  (G) 128k  (I) 512k  (K) 2M  (M)  8M  (O) 32M"
+        echo "  (B) 4k  (D) 16k  (F) 64k  (H) 256k  (J)   1M  (L) 4M  (N) 16M  (P) 64M"
+        printf "  Default is \033[01;37m$DEFAULT_SIZE\033[0m and will be selected in 30 seconds.\n"
+        printf 'Choose: '
+        read -t 30 RAMSIZE
+        echo
+    fi
+    case "$RAMSIZE" in
+        A | a | 2[Kk])    ARGS=" A" ;;
+        B | b | 4[Kk])    ARGS=" B" ;;
+        C | c | 8[Kk])    ARGS=" C" ;;
+        D | d | 16[Kk])   ARGS=" D" ;;
+        E | e | 32[Kk])   ARGS=" E" ;;
+        F | f | 64[Kk])   ARGS=" F" ;;
+        G | g | 128[Kk])  ARGS=" G" ;;
+        H | h | 256[Kk])  ARGS=" H" ;;
+        I | i | 512[Kk])  ARGS=" I" ;;
+        J | j | 1[Mm])    ARGS=" J" ;;
+        K | k | 2[Mm])    ARGS=" K" ;;
+        L | l | 4[Mm])    ARGS=" L" ;;
+        M | m | 8[Mm])    ARGS=" M" ;;
+        N | n | 16[Mm])   ARGS=" N" ;;
+        O | o | 32[Mm])   ARGS=" O" ;;
+        P | p | 64[Mm])   ARGS=" P" ;;
+        *)
+            echo "Invalid ramsize argument. Using the default ($DEFAULT_SIZE)."
+            ;;
+    esac
+fi
+
+printf 'Detecting the number of CPUs: '
+if [ "$CPUS" -eq "1" ]; then
+    printf '\033[01;37m1\033[0m CPU detected.\n'
+else
+    printf "\033[01;37m$CPUS\033[0m CPUs detected.\n"
+fi
+# "$instances" is a global variable that may be specified as a boot parameter.
+if [ "X$instances" = "X" ]; then
+    instances="$CPUS"
+fi
+
+PID_LIST=""
+trap 'trap - 1 2 3 15 17; kill $PID_LIST; exit 0' 1 2 3 15
+
+if [ "$instances" -eq "1" ]; then
+    printf "Running 1 instance of burn$MODE ('/opt/burn/print-pid /opt/burn/burn${MODE}$ARGS').\n"
+    /opt/burn/print-pid /opt/burn/burn${MODE}$ARGS
+else
+    printf "To stress all CPUs, $instances instances of burn$MODE will be run in the background.\n\n"
+    printf "\033[01;31mTo stop burn$MODE, press any key.\033[0m\n"
+
+    for i in `seq 1 $instances`; do
+        printf "burn: Starting instance $i of burn$MODE ('/opt/burn/print-pid /opt/burn/burn${MODE}$ARGS &').\n"
+        /opt/burn/print-pid /opt/burn/burn${MODE}$ARGS &
+        PID_LIST="$PID_LIST $!"
+    done
+
+    trap 'sigchld_handler' 17
+    # This 'read' may be interrupted by a SIGCHLD.
+    read -s -n1 REPLY
+
+    trap - 17
+    kill $PID_LIST
+fi
+
+trap - 1 2 3 15 17
+exit 0

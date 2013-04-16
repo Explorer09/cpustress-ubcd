@@ -66,6 +66,7 @@ total percentage of the processing power is 100%.
 
 By typing 'menu' at the terminal window, you will get a menu from which you can
 select the following programs:
+        - cpuburn v1.4a           (burn)
         - CPU Burn-in v1.00       (cpuburn-in)
         - CPUinfo v1.00           (cpuinfo)
         - Helpinfo                (helpinfo)
@@ -79,6 +80,7 @@ select the following programs:
 
 Help is available for the following executables:
   * CPU stress and info tools:
+        - cpuburn v1.4a           (burn)
         - CPU Burn-in v1.00       (cpuburn-in)
         - CPUinfo v1.00           (cpuinfo)
         - Helpinfo                (helpinfo)
@@ -126,6 +128,10 @@ else
     printf "\n"
 
     case "$1" in
+        burn)
+            showcontrols
+            less -~ /opt/burn/burn.txt
+            ;;
         cpuburn-m | cpuburn-in)
             showcontrols
             less -~ /opt/cpuburn-in/cpuburn-in.txt

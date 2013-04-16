@@ -83,6 +83,9 @@ CPUSTRESS_TEXT
     printf '\n\n'
 
     case "$ubcdcmd" in
+        burn)
+            burn $ubcdargs
+            ;;
         cpuburn-m | cpuburn-in)
             cpuburn-m
             ;;

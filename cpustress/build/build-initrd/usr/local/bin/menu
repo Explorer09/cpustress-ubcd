@@ -38,57 +38,61 @@ printf "                                 \033[0;32m********\n"
 printf "                                 * Menu *\n"
 printf "                                 ********\n"
 printf "\n"
-printf "                     \033[01;37m1)\033[0m CPU Burn-in v1.00       (cpuburn-in)\n"
-printf "                     \033[01;37m2)\033[0m CPUinfo v1.00           (cpuinfo)\n"
-printf "                     \033[01;37m3)\033[0m Mersenne Prime v23.9.2  (mprime 23)\n"
-printf "                     \033[01;37m4)\033[0m Mersenne Prime v27.9    (mprime 27)\n"
-printf "                     \033[01;37m5)\033[0m Stress v1.0.4           (stress)\n"
-printf "                     \033[01;37m6)\033[0m CPU stress tester 2.0   (stresscpu2)\n"
-printf "                     \033[01;37m7)\033[0m Systester 1.5.1         (systester)\n"
-printf "                     \033[01;37m8)\033[0m Helpinfo                (helpinfo)\n"
+printf "                     \033[01;37m1)\033[0m cpuburn v1.4a           (burn)\n"
+printf "                     \033[01;37m2)\033[0m CPU Burn-in v1.00       (cpuburn-in)\n"
+printf "                     \033[01;37m3)\033[0m CPUinfo v1.00           (cpuinfo)\n"
+printf "                     \033[01;37m4)\033[0m Mersenne Prime v23.9.2  (mprime 23)\n"
+printf "                     \033[01;37m5)\033[0m Mersenne Prime v27.9    (mprime 27)\n"
+printf "                     \033[01;37m6)\033[0m Stress v1.0.4           (stress)\n"
+printf "                     \033[01;37m7)\033[0m CPU stress tester 2.0   (stresscpu2)\n"
+printf "                     \033[01;37m8)\033[0m Systester 1.5.1         (systester)\n"
+printf "                     \033[01;37m9)\033[0m Helpinfo                (helpinfo)\n"
 printf "\n"
-printf "                     \033[01;37m9)\033[0m Reboot                  (reboot)\n"
-printf "                    \033[01;37m10)\033[0m Shutdown                (poweroff)\n"
+printf "                    \033[01;37m10)\033[0m Reboot                  (reboot)\n"
+printf "                    \033[01;37m11)\033[0m Shutdown                (poweroff)\n"
 printf "\n"
-printf "                    \033[01;37m11)\033[0m Exit menu\n"
+printf "                    \033[01;37m12)\033[0m Exit menu\n"
 printf "\n"
 printf "Choose: "
 read CHOICE
 printf "\n"
 
 case "$CHOICE" in
-    1 | "cpuburn-m" | "cpuburn-in")
+    1 | "burn")
+        burn
+        ;;
+    2 | "cpuburn-m" | "cpuburn-in")
         cpuburn-m
         ;;
-    2 | "cpuinfo")
+    3 | "cpuinfo")
         cpuinfo
         ;;
-    3 | "mprime23" | "mprime 23")
+    4 | "mprime23" | "mprime 23")
         mprime 23
         ;;
-    4 | "mprime27" | "mprime 27")
+    5 | "mprime27" | "mprime 27")
         mprime 27
         ;;
-    5 | "stress")
+    6 | "stress")
         stress
         ;;
-    6 | "stresscpu2")
+    7 | "stresscpu2")
         stresscpu2
         ;;
-    7 | "systester" | "systester-cli")
+    8 | "systester" | "systester-cli")
         systester-cli
         printf "Test completed. Type '\033[01;37msystester-cli -help\033[0m' for other test options.\n"
         ;;
-    8 | "help" | "helpinfo")
+    9 | "help" | "helpinfo")
         helpinfo
         ;;
-    9 | "reboot")
+    10 | "reboot")
         reboot
         ;;
-    10 | "poweroff")
+    11 | "poweroff")
         poweroff
         ;;
-    11)
+    12)
         # Do nothing.
         ;;
     *)
@@ -96,7 +100,7 @@ case "$CHOICE" in
 esac
 
 case "$CHOICE" in
-    9 | 10 | "reboot" | "poweroff")
+    10 | 11 | "reboot" | "poweroff")
         ;;
     *)
         printf "menu: Type '\033[01;37mmenu\033[0m' to return to main menu.\n\n"

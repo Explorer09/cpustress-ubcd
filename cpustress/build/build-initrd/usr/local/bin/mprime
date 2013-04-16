@@ -75,8 +75,8 @@ HELP
         ;;
     *)
         echo "Which version of 'Mersenne Prime' do you want to use?"
-        echo " 1) version 27.9 (default)        Press any key except '2'"
-        echo " 2) version 23.9.2                Press '2'"
+        echo "  1) version 27.9 (default)        Press any key except '2'"
+        echo "  2) version 23.9.2                Press '2'"
         printf 'Choose: '
         read -n1 -t 15 CHOICE
         echo
