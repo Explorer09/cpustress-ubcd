@@ -64,15 +64,15 @@ PID_LIST=""
 trap 'trap - 1 2 3 15 17; kill $PID_LIST; exit 0' 1 2 3 15
 
 if [ "$instances" -eq "1" ]; then
-    printf "Running 1 instance of cpuburn-in ('/opt/cpuburn/cpuburn-in $time').\n"
-    /opt/cpuburn/cpuburn-in $time
+    printf "Running 1 instance of cpuburn-in ('/opt/cpuburn-in/cpuburn-in $time').\n"
+    /opt/cpuburn-in/cpuburn-in $time
 else
     printf "To stress all CPUs, $instances instances of cpuburn-in will be run in the background.\n\n"
     printf '\033[01;31mTo stop cpuburn-in, press any key.\033[0m\n'
 
     for i in `seq 1 $instances`; do
-        printf "cpuburn: Starting instance $i of cpuburn-in ('/opt/cpuburn/cpuburn-in $time &').\n"
-        /opt/cpuburn/cpuburn-in $time &
+        printf "cpuburn-m: Starting instance $i of cpuburn-in ('/opt/cpuburn-in/cpuburn-in $time &').\n"
+        /opt/cpuburn-in/cpuburn-in $time &
         PID_LIST="$PID_LIST $!"
     done
 

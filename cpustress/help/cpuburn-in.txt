@@ -14,7 +14,7 @@ still being sure that stability is achieved even under the most stressful
 conditions. The program continuously monitors for erroneous calculations
 ensuring the CPU does not generate errors during calculations.
 
-Note from Gert Hulselmans: 'cpuburn' is a wrapper that automatically detects
+Note from Gert Hulselmans: 'cpuburn-m' is a wrapper that automatically detects
 the number of CPUs so they can be stressed all at the same time. It will run an
 instance of 'cpuburn-in' for each CPU in order to heat all CPUs up at the same
 time.
@@ -66,7 +66,11 @@ Run the program with one command line value to specify the length of time to
 run the test:
 
 eg.
-   "cpuburn 10" will run the test for ten minutes.
+   "cpuburn-in 10" will run the test for ten minutes.
+
+In the CPUstress image, 'cpuburn-in' is a command alias to cpuburn-m, so when
+you run 'cpuburn-in' on the command line it actually runs the cpuburn-m 
+wrapper.
 
 
 If you want to run cpuburn-in for a certain time, you can also add a parameter
@@ -76,21 +80,21 @@ eg. Run cpuburn-in for 10 days.
 
      COM32  linux.c32 /ubcd/boot/cpustress/bzImage
      INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=cpuburn days=10
+     APPEND noapic ubcdcmd=cpuburn-in days=10
 
 
 eg. Run cpuburn-in for 10 hours.
 
      COM32  linux.c32 /ubcd/boot/cpustress/bzImage
      INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=cpuburn hours=10
+     APPEND noapic ubcdcmd=cpuburn-in hours=10
 
 
 eg. Run cpuburn-in for 10 minutes.
 
      COM32  linux.c32 /ubcd/boot/cpustress/bzImage
      INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND root=/dev/ram0 ramdisk_size=12000 noapic ubcdcmd=cpuburn minutes=10
+     APPEND noapic ubcdcmd=cpuburn-in minutes=10
 
 
 If those parameters are all provided to the APPEND command of the isolinux
@@ -100,7 +104,7 @@ So if 'minutes=100000000' and 'days=10' is found, the run time will be set to
 14400 minutes (= 10 days).
 
 
-If cpuburn is called without parameters, it will run cpuburn-in for 10080
+If cpuburn-m is called without parameters, it will run cpuburn-in for 10080
 minutes (= 7 days).
 
 

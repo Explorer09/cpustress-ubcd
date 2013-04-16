@@ -66,26 +66,26 @@ total percentage of the processing power is 100%.
 
 By typing 'menu' at the terminal window, you will get a menu from which you can
 select the following programs:
-        - CPU Burn-in v1.00       (cpuburn)
+        - CPU Burn-in v1.00       (cpuburn-in)
         - CPUinfo v1.00           (cpuinfo)
         - Helpinfo                (helpinfo)
         - Mersenne Prime v23.9.2  (mprime 23)
         - Mersenne Prime v27.9    (mprime 27)
         - Stress v1.0.4           (stress)
-        - CPU stress tester 2.0   (stresscpu2)
-        - System Stability Tester 1.5.1 (systester)
+        - CPU stress tester v2.0  (stresscpu2)
+        - Systester v1.5.1        (systester)
 
 
 
 Help is available for the following executables:
   * CPU stress and info tools:
-        - CPU Burn-in v1.00       (cpuburn)
+        - CPU Burn-in v1.00       (cpuburn-in)
         - CPUinfo v1.00           (cpuinfo)
         - Helpinfo                (helpinfo)
         - Mersenne Prime          (mprime)
         - Stress v1.0.4           (stress)
-        - CPU stress tester 2.0   (stresscpu2)
-        - System Stability Tester 1.5.1 (systester)
+        - CPU stress tester v2.0  (stresscpu2)
+        - Systester v1.5.1        (systester)
 
   * Executables from the busybox packet:
 HELPINFO
@@ -94,7 +94,7 @@ HELPINFO
 
     cat >> /tmp/helpinfo/helpinfo.txt << HELPINFO2
 If you want help for one of the programs above, for example 'CPU Burn-in
-v1.00', run 'helpinfo cpuburn' in the terminal.
+v1.00', run 'helpinfo cpuburn-in' in the terminal.
 
 
 To run Helpinfo from the isolinux commandline, use the following:
@@ -105,11 +105,11 @@ To run Helpinfo from the isolinux commandline, use the following:
 
 
 To run Helpinfo for a specific program from the isolinux commandline (e.g.:
-cpuburn), use the following:
+cpuburn-in), use the following:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
-    APPEND noapic ubcdcmd=helpinfo ubcdargs=cpuburn
+    APPEND noapic ubcdcmd=helpinfo ubcdargs=cpuburn-in
 HELPINFO2
     less -~ /tmp/helpinfo/helpinfo.txt
 else
@@ -126,9 +126,9 @@ else
     printf "\n"
 
     case "$1" in
-        cpuburn | cpuburn-in)
+        cpuburn-m | cpuburn-in)
             showcontrols
-            less -~ /opt/cpuburn/cpuburn.txt
+            less -~ /opt/cpuburn-in/cpuburn-in.txt
             ;;
         cpuinfo)
             showcontrols

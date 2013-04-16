@@ -13,7 +13,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 15 April 2013.
+# Last updated on 16 April 2013.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
@@ -83,8 +83,8 @@ CPUSTRESS_TEXT
     printf '\n\n'
 
     case "$ubcdcmd" in
-        cpuburn)
-            cpuburn
+        cpuburn-m | cpuburn-in)
+            cpuburn-m
             ;;
         cpuinfo)
             cpuinfo

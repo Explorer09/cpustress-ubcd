@@ -44,7 +44,7 @@ printf '============================\033[0m\n\n'
 case "$1" in
     --help | -h)
         cat << HELP
-Usage: mprime VERSION [-cdhmstv] [-aN] [-wDIR]
+Usage: $0 [VERSION] [-cdhmstv] [-aN] [-wDIR]
 
 VERSION must be either 27 or 23. If unspecified, mprime wrapper will prompt it
 during execution.
