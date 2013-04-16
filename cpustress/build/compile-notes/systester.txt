@@ -1,4 +1,4 @@
-14 April 2013
+15 April 2013
 
 Systester download page:
   http://systester.sourceforge.net/downloads.php
@@ -18,16 +18,19 @@ directory, but you may change the path if you like.
 
 Configure and build GMP:
 
- $ ./configure --disable-shared --host=i486-pc-linux-gnu \
+ $ ./configure --disable-shared ABI=32 \
      CFLAGS='-m32 -O2 -pedantic -fomit-frame-pointer'
  $ make
 
-Note about the configure options:
+Notes about the configure options:
 * The configure script of GMP would try to produce the binary optimized to the 
   build system. (With CFLAGS='-march=<your_arch>') This would make the binary 
   non-portable. Thus, I overwrite CFLAGS so that '-mtune' and '-march' are 
   not used. The CFLAGS specified here are the same as the systester compiled 
   in Parted Magic.
+* If you have a 64-bit processor, the configure script might set the build 
+  system to 64-bit (even though the OS is 32-bit). With the overwritten CFLAGS 
+  this will generate en error. "ABI=32" solves this.
 
 Unpack and build Systester (CLI version):
 
