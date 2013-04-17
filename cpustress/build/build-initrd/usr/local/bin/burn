@@ -19,7 +19,7 @@
 #
 #
 # Written by Explorer.
-# Last updated on 16 April 2013.
+# Last updated on 17 April 2013.
 
 
 set -m
@@ -72,8 +72,6 @@ case "$VENDOR" in
         ;;
     *)
         # Other CPU manufacturers.
-        # Note: "AMDisbetter!" are early engineering samples of AMD K5
-        # processor.
         MODE="P5"
 esac
 
