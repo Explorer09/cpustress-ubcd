@@ -1,10 +1,10 @@
-16 April 2013
+17 April 2013
 
 This Mersenne Prime test v23.9 is the dynamically linked version of the 
 official binary.
 
 It can be downloaded from here:
-    ftp://www.mersenne.org/gimps_archive/archived_executables/mprime239.tar.gz
+ftp://www.mersenne.org/gimps_archive/archived_executables/mprime239.tar.gz
 
 After downloading, rename the executable to mprime23:
 

@@ -1,10 +1,10 @@
-16 April 2013
+17 April 2013
 
 The mprime27 program included in the image is the official binary, which can 
 be downloaded here:
-    ftp://mersenne.org/gimps/p95v279.linux32.tar.gz
+ftp://mersenne.org/gimps/p95v279.linux32.tar.gz
 or here:
-    http://mersenneforum.org/gimps/p95v279.linux32.tar.gz
+http://mersenneforum.org/gimps/p95v279.linux32.tar.gz
 
 After downloading, rename the executable to mprime23:
 
@@ -30,8 +30,5 @@ This program depends on these libraies:
     libdl.so.2
     libc.so.6
     /lib/ld-linux.so.2
-
-Unfortunately I can't build a static version from source, so these libraries 
-have to be carried to the CPUstress image.
 
 --Explorer <explorer09@gmail.com>
