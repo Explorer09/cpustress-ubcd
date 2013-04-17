@@ -1,5 +1,7 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2013-04-17 15:30:00.7502496260" .git_cache_meta
+touch -c -h -d "2013-04-17 15:38:57.8422256800" .git_cache_meta
+chmod 0664 .gitignore
+touch -c -h -d "2013-04-17 15:37:57.9902283480" .gitignore
 chmod 0664 README.md
 touch -c -h -d "2013-04-14 00:00:17.5772742860" README.md
 chmod 0775 cpustress/build/build
