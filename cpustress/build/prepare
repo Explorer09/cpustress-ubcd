@@ -12,7 +12,7 @@
 #
 #
 # Written by Explorer.
-# Last updated on 12 April 2013.
+# Last updated on 17 April 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -25,13 +25,14 @@ ln -s bin/busybox init
 cd bin
 ln -s busybox ash
 ln -s busybox cat
+ln -s busybox date
 ln -s busybox dmesg
-ln -s busybox echo
 ln -s busybox kill
 ln -s busybox ls
 ln -s busybox mkdir
 ln -s busybox mktemp
 ln -s busybox mount
+ln -s busybox mpstat
 ln -s busybox ps
 ln -s busybox sh
 ln -s busybox umount
@@ -53,11 +54,13 @@ ln -s ../../bin/busybox awk
 ln -s ../../bin/busybox clear
 ln -s ../../bin/busybox cut
 ln -s ../../bin/busybox expr
+ln -s ../../bin/busybox free
 ln -s ../../bin/busybox hexdump
 ln -s ../../bin/busybox less
 ln -s ../../bin/busybox pkill
 ln -s ../../bin/busybox seq
 ln -s ../../bin/busybox top
+ln -s ../../bin/busybox uptime
 ln -s ../../bin/busybox which
 cd ../..
 
