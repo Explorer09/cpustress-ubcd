@@ -25,6 +25,7 @@ ln -s bin/busybox init
 cd bin
 ln -s busybox ash
 ln -s busybox cat
+ln -s busybox cp
 ln -s busybox date
 ln -s busybox dmesg
 ln -s busybox kill
@@ -37,6 +38,7 @@ ln -s busybox ps
 ln -s busybox sh
 ln -s busybox umount
 ln -s busybox uname
+ln -s busybox vi
 cd ..
 
 cd sbin

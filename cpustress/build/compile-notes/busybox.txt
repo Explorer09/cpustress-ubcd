@@ -1,14 +1,10 @@
-17 April 2013
+18 April 2013
 
-The BusyBox source code and the patches can be downloaded here:
-http://busybox.net/downloads/busybox-1.20.2.tar.bz2
-http://busybox.net/downloads/fixes-1.20.2/busybox-1.20.2-kernel_ver.patch
-http://busybox.net/downloads/fixes-1.20.2/busybox-1.20.2-ntpd.patch
-http://busybox.net/downloads/fixes-1.20.2/busybox-1.20.2-pkg-config-selinux.patch
-http://busybox.net/downloads/fixes-1.20.2/busybox-1.20.2-sys-resource.patch
-
-The patch "ash-fix-read-s-ctrl-c.patch" is cherry-picked from the upstream 
-git source tree. It fixes an annoying bug for me.
+The BusyBox source code and the official patches can be downloaded here:
+http://busybox.net/downloads/busybox-1.21.0.tar.bz2
+http://busybox.net/downloads/fixes-1.21.0/busybox-1.21.0-mdev.patch
+http://busybox.net/downloads/fixes-1.21.0/busybox-1.21.0-platform.patch
+http://busybox.net/downloads/fixes-1.21.0/busybox-1.21.0-xz.patch
 
 The BusyBox binary is compiled on Ubuntu 12.04.2 LTS (32-bit).
 
@@ -16,15 +12,14 @@ After downloading and unpacking the source code, copy the file "config" and
 the ".patch" files into the source code directory. Then apply the patches and 
 the config:
 
- $ cd busybox-1.20.2
- $ patch -p 1 <busybox-1.20.2-kernel_ver.patch
- $ patch -p 1 <busybox-1.20.2-ntpd.patch
- $ patch -p 1 <busybox-1.20.2-pkg-config-selinux.patch
- $ patch -p 1 <busybox-1.20.2-sys-resource.patch
- $ patch -p 1 <ash-fix-read-s-ctrl-c.patch
+ $ cd busybox-1.21.0
+ $ patch -p 1 <busybox-1.21.0-mdev.patch
+ $ patch -p 1 <busybox-1.21.0-platform.patch
+ $ patch -p 1 <busybox-1.21.0-xz.patch.patch
  $ mv config .config
 
 Finally, build BusyBox:
+
  $ make
  $ make install
 
