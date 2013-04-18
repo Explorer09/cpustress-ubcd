@@ -1,0 +1,100 @@
+17 April 2013
+
+GCC 4.7 website:
+http://gcc.gnu.org/gcc-4.7/
+
+Building GCC requires GMP, MPFR and MPC:
+http://gmplib.org/
+http://www.mpfr.org/
+http://www.multiprecision.org/
+
+The libgcc in CPUstress image is compiled on Ubuntu 12.04.2 LTS (32-bit).
+
+For the shell code example below, I assume that you would download all the 
+source code in ${HOME}, and install all tools in "${HOME}/tools". You may use 
+another directory -- just change the paths in the code below.
+
+Download the source code:
+
+ $ cd ${HOME}
+ $ wget ftp://ftp.gmplib.org/pub/gmp/gmp-5.1.1.tar.xz
+ $ wget http://www.mpfr.org/mpfr-current/mpfr-3.1.2.tar.xz
+ $ wget http://www.multiprecision.org/mpc/download/mpc-1.0.1.tar.gz
+ $ wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.7.3/gcc-4.7.3.tar.bz2
+
+The code below will extract, build, and install the tools into "${HOME}/tools".
+
+ $ cd ${HOME}
+ $ tar -x -v --xz -f gmp-5.1.1.tar.xz
+ $ cd gmp-5.1.1
+ $ ./configure --prefix=${HOME}/tools --build=i386-pc-linux-gnu \
+     --disable-shared ABI=32 CFLAGS='-m32 -O2 -pedantic -fomit-frame-pointer'
+ $ make
+ $ make install
+
+ $ cd ${HOME}
+ $ tar -x -v --xz -f mpfr-3.1.2.tar.xz
+ $ cd mpfr-3.1.2
+ $ ./configure --prefix=${HOME}/tools --disable-shared --with-gmp=${HOME}/tools
+ $ make
+ $ make install
+
+ $ cd ${HOME}
+ $ tar -x -v -z -f mpc-1.0.1.tar.gz
+ $ cd mpc-1.0.1
+ $ ./configure --prefix=${HOME}/tools --disable-shared \
+     --with-gmp=${HOME}/tools --with-mpfr=${HOME}/tools
+ $ make
+ $ make install
+
+Extract the GCC source code:
+
+ $ cd ${HOME}
+ $ tar -x -v --bzip2 -f gcc-4.7.3.tar.bz2
+
+The GCC documentation recommends us to use a separate build directory to build 
+the code.
+
+ $ mkdir gcc-build
+ $ cd gcc-build
+
+Configure and build GCC:
+
+ $ ../gcc-4.7.3/configure --prefix=/usr --libexecdir=/usr/lib \
+     --disable-multilib --disable-nls --enable-clocale=gnu \
+     --enable-languages=c,lto --enable-threads=posix \
+     --with-gmp=${HOME}/tools --with-mpfr=${HOME}/tools \
+     --with-mpc=${HOME}/tools
+ $ make
+
+Note about the configure options:
+* The i686 gcc can produce i386-compatible code. So we use native build here.
+  (See also <http://gcc.gnu.org/ml/gcc-bugs/2000-03/msg00437.html>)
+* The configure options will build the whole C compiler, not just libgcc. It
+  will be built in bootstrap mode. So it might take you hours to build. If you 
+  want it faster, add "--disable-bootstrap". If you know others ways to make 
+  it faster then please let me know.
+
+Because we only need libgcc_s.so in the CPUstress image, you don't need to run 
+"make install". Instead just copy the file to the cpustress initrd directory:
+(Replace ${cpustress_initrd} with the root path of your extracted initrd 
+image.)
+
+ $ cp -a "$(../gcc-4.7.3/config.guess)/libgcc/libgcc_s.so.1" \
+         "${cpustress_initrd}/usr/lib/libgcc_s.so.1"
+
+The "make install" changes the mode of the file, so you should manually do the 
+same:
+
+ $ cd ${cpustress_initrd}/usr/lib
+ $ chmod 644 libgcc_s.so.1
+
+Then, create a symlink:
+
+ $ ln -s libgcc_s.so.1 libgcc_s.so
+
+(Optional) To reduce the file size, I stripped the binary after compilation:
+
+ $ strip --strip-unneeded libgcc_s.so.1
+
+--Explorer <explorer09@gmail.com>
