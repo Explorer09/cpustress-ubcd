@@ -16,6 +16,7 @@
 # Written by Gert Hulselmans and Explorer.
 # Last updated on 16 April 2013.
 
+
 if [ "X$1" = "X--help" ]; then
     # Displays a simple help. Needed by 'helpinfo'.
     cat << HELP
