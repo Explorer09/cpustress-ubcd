@@ -1,4 +1,4 @@
-6 April 2013
+18 April 2013
 
 The Linux kernel for CPUstress is compiled on Ubuntu 12.04.2 LTS (32-bit).
 
@@ -7,40 +7,40 @@ additional patch is applied.
 
 Download the source code and then prepare the source directory for building:
 
- $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.8.6.tar.xz
- $ tar -x -v --xz -f linux-3.8.6.tar.xz
- $ cd linux-3.8.6
+ $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.8.8.tar.xz
+ $ tar -x -v --xz -f linux-3.8.8.tar.xz
+ $ cd linux-3.8.8
  $ make mrproper
 
-Copy the "config-3.8.6-cpustress" file into the source code directory, then 
+Copy the "config-3.8.8-cpustress" file into the source code directory, then 
 rename it:
 
- $ mv config-3.8.6-cpustress .config
+ $ mv config-3.8.8-cpustress .config
 
-Build the kernel:
+Build the kernel, if you don't want to configure anything else:
 
  $ make
 
 Copy the kernel bzImage, which is located at "arch/x86/boot/bzImage", to a 
 directory that you can boot from. For example in UBCD it's 
-"${ubcd-extract}/ubcd/boot/cpustress/bzImage".
+"${ubcd_extract}/ubcd/boot/cpustress/bzImage".
 
 Install the modules (drivers) to a temporary directory: (I put them in the 
-directory "/home/explorer/modules", but you may change the path if you like.)
+directory "${HOME}/modules", but you may change the path if you like.)
 
- $ make INSTALL_MOD_PATH=/home/explorer/modules modules_install
+ $ make INSTALL_MOD_PATH=${HOME}/modules modules_install
 
 Remove some unnecessary files in the modules directory:
 
- $ cd /home/explorer/modules/lib/modules/3.8.6-cpustress
+ $ cd ${HOME}/modules/lib/modules/3.8.8-cpustress
  $ rm build source
  $ rm modules.ccwmap modules.ieee1394map modules.inputmap modules.isapnpmap
 
-Copy the modules to the CPUstress initrd image: (Assume that ${cpustress} is 
-set to your "build-initrd" directory of the CPUstress image.)
+Copy the modules to the CPUstress initrd image:  (Replace ${cpustress_initrd} 
+with the root path of your extracted initrd image.)
 
- $ cd /home/explorer/modules
- $ cp -aR lib/modules ${cpustress}/lib
+ $ cd ${HOME}/modules
+ $ cp -aR lib/modules ${cpustress_initrd}/lib
 
 That's finished.
 

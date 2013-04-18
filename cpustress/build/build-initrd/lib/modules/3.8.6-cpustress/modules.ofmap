@@ -1,5 +1,0 @@
-# of module          name                 type                 compatible
-isp1760              *                    *                    nxp,usb-isp1760
-isp1760              *                    *                    nxp,usb-isp1761
-ci13xxx_imx          *                    *                    fsl,imx27-usb
-altera_ps2           *                    *                    ALTR,ps2-1.0
