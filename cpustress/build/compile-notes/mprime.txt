@@ -1,0 +1,49 @@
+17 April 2013
+
+Website of the Mersenne Prime test program (a.k.a. mprime or prime95):
+http://www.mersenne.org/freesoft/
+
+The mprime23 and mprime27 programs included in the CPUstress image are the 
+official binaries. Both are dynamically linked versions (not static).
+
+Below are direct download links:
+  mprime v23.9
+ftp://www.mersenne.org/gimps_archive/archived_executables/mprime239.tar.gz
+  mprime v27.9 (there may be other mirrors)
+ftp://mersenne.org/gimps/p95v279.linux32.tar.gz
+http://mersenneforum.org/gimps/p95v279.linux32.tar.gz
+
+After downloading, make sure you unpack them to 2 separate empty directories, 
+such as 'mprime239' and 'p95v279'. (You don't want your files to be replaced, 
+do you?)
+
+Rename the executables to 'mprime23' and 'mprime27' respectively:
+
+ $ mv mprime239/mprime mprime239/mprime23
+ $ mv p95v279/mprime   p95v279/mprime27
+
+(Optional) You can strip the binary file to save a few bytes. I did so in my 
+CPUstress image:
+
+ $ strip mprime239/mprime23
+ $ strip p95v279/mprime27
+
+(Optional) I also used UPX to compress the executable so the file size could 
+be much smaller: <http://upx.sourceforge.net/>
+
+ $ upx mprime239/mprime23
+ $ upx p95v279/mprime27
+
+(Optional) Change the mode of the binaries:
+
+ $ chmod 775 mprime239/mprime23
+ $ chmod 775 p95v279/mprime27
+
+The programs depend on these libraies:
+    libm.so.6
+    libpthread.so.0 (mprime27 only)
+    libdl.so.2 (mprime27 only)
+    libc.so.6
+    /lib/ld-linux.so.2
+
+--Explorer <explorer09@gmail.com>
