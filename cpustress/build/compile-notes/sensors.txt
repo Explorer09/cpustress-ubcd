@@ -1,0 +1,55 @@
+17 April 2013
+
+lm-sensors website:
+http://lm-sensors.org/
+
+The 'sensors' program is compiled on Ubuntu 12.04.2 LTS (32-bit).
+
+In addition to the build-essential tools, you also need Bison and Flex.
+Install these in Ubuntu:
+
+ $ sudo apt-get install bison flex
+
+Download and unpack the code:
+
+ $ wget http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-3.3.3.tar.bz2
+ $ tar -x -v --bzip2 -f lm_sensors-3.3.3.tar.bz2
+ $ cd lm_sensors-3.3.3
+
+Originally lm-sensors will produce 'libsensors.so' shared library and the 
+'sensors' program that depends on it. We don't want to copy the whole library 
+when only one program needs it. So I edit the linker flags in the makefile:
+
+ $ sed -e 's@-Llib -lsensors@-Llib -l:libsensors.a -lc -lm@' \
+     -i.old prog/sensors/Module.mk
+
+This forces the linker to link to the static 'libsensors.a'.
+Build the code:
+
+ $ make
+
+Install lm-sensors to a temporary directory: (I put them in the directory
+"${HOME}/lm-sensors-install", but you may change the path if you like.)
+
+ $ make DESTDIR="${HOME}/lm-sensors-install" install
+
+In the temporary directory, we need to copy only these files to the CPUstress 
+image:
+    etc/sensors3.conf, etc/sensors.d, usr/local/bin/sensors
+The other files are either not needed at the time of this writing, or 
+requiring command interpreters (Bash or Perl) that CPUstress don't have.
+
+Copy the files:  (Replace ${cpustress_initrd} with the root path of your 
+extracted initrd image.)
+
+ $ cd ${HOME}/lm-sensors-install
+ $ cp -a "etc/sensors3.conf"     "${cpustress_initrd}/etc/sensors3.conf"
+ $ cp -a "etc/sensors.d"         "${cpustress_initrd}/etc/sensors.d"
+ $ cp -a "usr/local/bin/sensors" "${cpustress_initrd}/usr/local/bin/sensors"
+
+(Optional) To reduce the file size, I stripped the binaries after compilation:
+
+ $ cd ${cpustress_initrd}/usr/local/bin
+ $ strip sensors
+
+--Explorer <explorer09@gmail.com>

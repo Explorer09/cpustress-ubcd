@@ -1,0 +1,7 @@
+Sample Intel(R) Optimized LINPACK Benchmark data file (lininput_xeon32)
+Intel(R) Optimized LINPACK Benchmark data
+9                                                  # number of tests
+15000 14000 13000 12000 11000 10000 8000 6000 1000 # problem sizes
+15000 14008 13000 12008 11000 10008 8008 6008 1000 # leading dimensions
+1 2 2 2 2 2 2 3 4                                  # times (trials) to run a test
+4 4 4 4 4 4 4 4 4                                  # alignment values (in KBytes)

@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# Wrapper for Intel Optimized LINPACK benchmark
+# =============================================
+#
+# This wrapper sets up KMP_AFFINITY and OMP_NUM_THREADS for xlinpack_xeon32.
+# It also processes the "--help" switches.
+#
+#
+# Licensed under the GNU General Public License, version 2 or later.
+#
+# This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
+# <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
+#
+#
+# Written by Explorer.
+# Last updated on 18 April 2013.
+
+
+# Setting up affinity for better threading performance
+export KMP_AFFINITY=nowarnings,compact,1,0,granularity=fine
+
+if [ "X$instances" != "X" ] && [ "X$OMP_NUM_THREADS" != "X" ]; then
+    export OMP_NUM_THREADS="$instances"
+fi
+
+# Don't call xlinpack_xeon32 just to display help.
+ARGS=`echo $1 | awk '/^-h[e[l[p]?]?]?/ {print "-h"}'`
+ARGS=`echo $1 | awk '/^-e[x[t[e[n[d[e[d[_[h[e[l[p]?]?]?]?]?]?]?]?]?]?]?]?/ {print "-e"}'`
+if [ "X$1" = "X--help" ]; then
+    ARGS="-h"
+fi
+case "$ARGS" in
+    -h)
+        cat /opt/linpack/help.lpk
+        exit 0
+        ;;
+    -e)
+        less -~ /opt/linpack/xhelp.lpk
+        exit 0
+        ;;
+esac
+
+cd /opt/linpack
+/opt/linpack/xlinpack_xeon32 "$@"

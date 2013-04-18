@@ -14,10 +14,10 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 16 April 2013.
+# Last updated on 18 April 2013.
 
 
-LAST_EDITED="16 April 2013"
+LAST_EDITED="18 April 2013"
 
 showcontrols () {
     printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
@@ -66,28 +66,32 @@ total percentage of the processing power is 100%.
 
 By typing 'menu' at the terminal window, you will get a menu from which you can
 select the following programs:
-        - cpuburn v1.4a           (burn)
-        - CPU Burn-in v1.00       (cpuburn-in)
-        - CPUinfo v1.00           (cpuinfo)
-        - Helpinfo                (helpinfo)
-        - Mersenne Prime v23.9.2  (mprime 23)
-        - Mersenne Prime v27.9    (mprime 27)
-        - Stress v1.0.4           (stress)
-        - CPU stress tester v2.0  (stresscpu2)
-        - Systester v1.5.1        (systester)
+        - cpuburn v1.4a                   (burn)
+        - CPU Burn-in v1.00               (cpuburn-in)
+        - CPUinfo v1.00                   (cpuinfo)
+        - Helpinfo                        (helpinfo)
+        - Intel Optimized LINPACK 11.0.3  (linpack)
+        - Mersenne Prime test v23.9.2     (mprime 23)
+        - Mersenne Prime test v27.9       (mprime 27)
+        - sensors v3.3.3                  (sensors)
+        - Stress v1.0.4                   (stress)
+        - CPU stress tester 2.0           (stresscpu2)
+        - System Stability Tester 1.5.1   (systester)
 
 
 
 Help is available for the following executables:
   * CPU stress and info tools:
-        - cpuburn v1.4a           (burn)
-        - CPU Burn-in v1.00       (cpuburn-in)
-        - CPUinfo v1.00           (cpuinfo)
-        - Helpinfo                (helpinfo)
-        - Mersenne Prime          (mprime)
-        - Stress v1.0.4           (stress)
-        - CPU stress tester v2.0  (stresscpu2)
-        - Systester v1.5.1        (systester)
+        - cpuburn v1.4a                   (burn)
+        - CPU Burn-in v1.00               (cpuburn-in)
+        - CPUinfo v1.00                   (cpuinfo)
+        - Helpinfo                        (helpinfo)
+        - Intel Optimized LINPACK 11.0.3  (linpack)
+        - Mersenne Prime test             (mprime)
+        - sensors v3.3.3                  (sensors)
+        - Stress v1.0.4                   (stress)
+        - CPU stress tester 2.0           (stresscpu2)
+        - System Stability Tester 1.5.1   (systester)
 
   * Executables from the busybox packet:
 HELPINFO
@@ -144,9 +148,17 @@ else
             showcontrols
             helpinfo
             ;;
+        linpack)
+            showcontrols
+            less -~ /opt/linpack/xhelp.lpk
+            ;;
         mprime)
             showcontrols
             less -~ /opt/mprime/mprime.txt
+            ;;
+        sensors)
+            showcontrols
+            less -~ /opt/sensors/sensors.txt
             ;;
         stress)
             showcontrols
@@ -172,6 +184,7 @@ CMDSTRESSCPU2
             less -~ /tmp/helpinfo/stresscpu2.txt
             ;;
         systester | systester-cli)
+            showcontrols
             systester-cli -help > /tmp/helpinfo/systester.txt
             cat >> /tmp/helpinfo/systester.txt << CMDSYSTESTER
 

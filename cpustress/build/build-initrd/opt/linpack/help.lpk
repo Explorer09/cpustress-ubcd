@@ -1,0 +1,10 @@
+Intel(R) Optimized LINPACK Benchmark help information
+
+Usage:
+
+linpack
+linpack -h[elp]
+linpack -e[xtended_help]
+linpack [-i[nput_file]] data_file
+linpack < data_file
+

@@ -1,0 +1,37 @@
+18 April 2013
+
+The Intel Optimized LINPACK Benchmark can be downloaded here:
+http://software.intel.com/en-us/articles/intel-math-kernel-library-linpack-download
+
+Direct link:
+http://registrationcenter.intel.com/irc_nas/3058/l_lpk_p_11.0.3.008.tgz
+
+ $ tar -x -v -z -f l_lpk_p_11.0.3.008.tgz
+
+After unpacking the archive, you will find the binaries of Intel LINPACK at 
+this directory: "linpack_11.0.3/benchmarks/linpack"
+
+ $ cd linpack_11.0.3/benchmarks/linpack
+
+We need only these files:
+    help.lpk and xhelp.lpk (help files)
+    lininput_xeon32 (sample input config file)
+    xlinpack_xeon32 (32-bit executable)
+
+All of these files were in mode 755. Change them:
+
+ $ chmod 664 help.lpk xhelp.lpk lininput_xeon32
+ $ chmod 775 xlinpack_xeon32
+
+Note: Don't rename help.lpk or xhelp.lpk as xlinpack_xeon32 reads these files 
+for displaying its help text.
+
+The program depends on these libraies:
+    libpthread.so.0
+    libm.so.6
+    libgcc_s.so.1
+    libc.so.6
+    /lib/ld-linux.so.2
+    libdl.so.2
+
+--Explorer <explorer09@gmail.com>

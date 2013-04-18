@@ -12,7 +12,7 @@
 #
 #
 # Written by Explorer.
-# Last updated on 17 April 2013.
+# Last updated on 18 April 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -73,3 +73,7 @@ ln -s libm-2.17.so libm.so.6
 ln -s libpthread-2.17.so libpthread.so.0
 ln -s libdl-2.17.so libdl.so.2
 cd ..
+
+cd usr/lib
+ln -s libgcc_s.so.1 libgcc_s.so
+cd ../..
