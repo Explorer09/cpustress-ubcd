@@ -1,4 +1,7 @@
-31 March 2013
+17 April 2013
+
+eglibc home page:
+http://www.eglibc.org/home
 
 The GNU C Library (glibc) is compiled on Ubuntu 12.04.2 LTS (32-bit).
 
@@ -16,19 +19,19 @@ if you don't.
  $ sudo apt-get install subversion gawk autoconf gettext texinfo
 
 In addition, glibc needs the linux kernel headers to compile.
-I use the headers from version 3.8.5. Please search the web to see how you 
+I use the headers from version 3.8.8. Please search the web to see how you 
 make the API headers from the kernel source. I will omit the details, but 
 basically you need to do these:
 
- $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.8.5.tar.xz
- $ tar -x -v --xz -f linux-3.8.5.tar.xz
- $ cd linux-3.8.5
+ $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.8.8.tar.xz
+ $ tar -x -v --xz -f linux-3.8.8.tar.xz
+ $ cd linux-3.8.8
  $ make mrproper
- $ make headers_install INSTALL_HDR_PATH=/home/explorer/headers-3.8.5
+ $ make ARCH=i386 INSTALL_HDR_PATH=${HOME}/headers-3.8.8 headers_install
  $ cd ..
 
-(I put the headers in the directory "/home/explorer/headers-3.8.5", but you 
-may change the path if you like.)
+(I put the headers in the directory "${HOME}/headers-3.8.8", but you may 
+change the path if you like.)
 
 Make a directory somewhere and get the code:
 
@@ -41,27 +44,32 @@ code.
 
  $ mkdir build
  $ cd build
+
+Configure and build eglibc:
+
  $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib \
      --enable-kernel=3.7.5 --enable-add-ons --disable-profile --without-gd \
-     --without-selinux --with-headers=/home/explorer/headers-3.8.5/include
+     --without-selinux --with-headers=${HOME}/headers-3.8.8/include
  $ make
 
-(If you wan't to make the libraty compatible with the old CPUstress kernel 
-from Icecube, set the switch "--enable-kernel=2.6.28" instead of "3.7.5".)
+Note about the configure options:
+* If you wan't to make the library compatible with the old CPUstress kernel 
+  from Icecube, set "--enable-kernel=2.6.28" instead of "3.7.5".
 
 For cpustress image, you don't need to run "make install". Instead just copy 
-these files to the cpustress initrd directory:
+these files to the CPUstress initrd directory:  (Replace ${cpustress_initrd} 
+with the root path of your extracted initrd image.)
 
- $ cp elf/ld.so ${cpustress}/lib/ld-2.17.so
- $ cp libc.so ${cpustress}/lib/libc-2.17.so
- $ cp math/libm.so ${cpustress}/lib/libm-2.17.so
- $ cp nptl/libpthread.so ${cpustress}/lib/libpthread-2.17.so
- $ cp dlfcn/libdl.so ${cpustress}/lib/libdl-2.17.so
+ $ cp -a "elf/ld.so"          "${cpustress_initrd}/lib/ld-2.17.so"
+ $ cp -a "libc.so"            "${cpustress_initrd}/lib/libc-2.17.so"
+ $ cp -a "math/libm.so"       "${cpustress_initrd}/lib/libm-2.17.so"
+ $ cp -a "nptl/libpthread.so" "${cpustress_initrd}/lib/libpthread-2.17.so"
+ $ cp -a "dlfcn/libdl.so"     "${cpustress_initrd}/lib/libdl-2.17.so"
 
-The "make install" changes the mode of these files, so you should also do so 
-manually:
+The "make install" changes the mode of these files, so you should manually do 
+the same:
 
- $ cd ${cpustress}/lib
+ $ cd ${cpustress_initrd}/lib
  $ chmod 755 *-2.17.so
 
 Then, create symlinks:
@@ -72,14 +80,10 @@ Then, create symlinks:
  $ ln -s libpthread-2.17.so libpthread.so.0
  $ ln -s libdl-2.17.so libdl.so.2
 
-To reduce the file size, I stripped the binary after compilation:
+(Optional) To reduce the file size, I stripped the binaries after compilation:
 
- $ strip --strip-unneeded ld-2.17.so
- $ strip --strip-unneeded libc-2.17.so
- $ strip --strip-unneeded libm-2.17.so
- $ strip --strip-unneeded libpthread-2.17.so
- $ strip --strip-unneeded libdl-2.17.so
+ $ strip --strip-unneeded *-2.17.so
 
-That's it. You have the updated libraries for the cpustress image!
+That's it. You have the updated libraries for the CPUstress image!
 
 --Explorer <explorer09@gmail.com>
