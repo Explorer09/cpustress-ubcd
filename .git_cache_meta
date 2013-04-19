@@ -1,37 +1,37 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2013-04-19 09:40:55.6120294890" .git_cache_meta
+touch -c -h -d "2013-04-19 11:26:42.6317465110" .git_cache_meta
 chmod 0664 .gitignore
 touch -c -h -d "2013-04-17 15:37:57.9902283480" .gitignore
 chmod 0664 README.md
 touch -c -h -d "2013-04-18 23:25:03.1025325270" README.md
 chmod 0775 cpustress/build/build
-touch -c -h -d "2013-04-12 09:16:12.3026850580" cpustress/build/build
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/ash
+touch -c -h -d "2013-04-19 10:00:58.7959758470" cpustress/build/build
+touch -c -h -d "2013-04-19 11:21:42.9437598690" cpustress/build/build-initrd/bin/ash
 chmod 0755 cpustress/build/build-initrd/bin/busybox
-touch -c -h -d "2013-04-17 22:55:24.0000000000" cpustress/build/build-initrd/bin/busybox
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/cat
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/cp
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/date
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/dmesg
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/kill
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/ls
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/mkdir
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/mktemp
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/mount
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/mpstat
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/ps
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/sh
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/umount
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/uname
-touch -c -h -d "2013-04-18 08:13:51.7174723570" cpustress/build/build-initrd/bin/vi
+touch -c -h -d "2013-04-19 10:10:15.0000000000" cpustress/build/build-initrd/bin/busybox
+touch -c -h -d "2013-04-19 11:21:42.9437598690" cpustress/build/build-initrd/bin/cat
+touch -c -h -d "2013-04-19 11:21:42.9437598690" cpustress/build/build-initrd/bin/cp
+touch -c -h -d "2013-04-19 11:21:42.9437598690" cpustress/build/build-initrd/bin/date
+touch -c -h -d "2013-04-19 11:21:42.9477598700" cpustress/build/build-initrd/bin/dmesg
+touch -c -h -d "2013-04-19 11:21:42.9477598700" cpustress/build/build-initrd/bin/kill
+touch -c -h -d "2013-04-19 11:21:42.9477598700" cpustress/build/build-initrd/bin/ls
+touch -c -h -d "2013-04-19 11:21:42.9477598700" cpustress/build/build-initrd/bin/mkdir
+touch -c -h -d "2013-04-19 11:21:42.9477598700" cpustress/build/build-initrd/bin/mktemp
+touch -c -h -d "2013-04-19 11:21:42.9477598700" cpustress/build/build-initrd/bin/mount
+touch -c -h -d "2013-04-19 11:21:42.9477598700" cpustress/build/build-initrd/bin/mpstat
+touch -c -h -d "2013-04-19 11:21:42.9477598700" cpustress/build/build-initrd/bin/ps
+touch -c -h -d "2013-04-19 11:21:42.9477598700" cpustress/build/build-initrd/bin/sh
+touch -c -h -d "2013-04-19 11:21:42.9477598700" cpustress/build/build-initrd/bin/umount
+touch -c -h -d "2013-04-19 11:21:42.9477598700" cpustress/build/build-initrd/bin/uname
+touch -c -h -d "2013-04-19 11:21:42.9477598700" cpustress/build/build-initrd/bin/vi
 chmod 0664 cpustress/build/build-initrd/etc/group
 touch -c -h -d "2008-07-23 03:12:52.0000000000" cpustress/build/build-initrd/etc/group
 chmod 0775 cpustress/build/build-initrd/etc/init.d/rcS
-touch -c -h -d "2013-04-19 00:59:39.6672437620" cpustress/build/build-initrd/etc/init.d/rcS
+touch -c -h -d "2013-04-19 09:57:27.0000000000" cpustress/build/build-initrd/etc/init.d/rcS
 chmod 0664 cpustress/build/build-initrd/etc/inittab
 touch -c -h -d "2008-10-29 02:55:52.0000000000" cpustress/build/build-initrd/etc/inittab
 chmod 0664 cpustress/build/build-initrd/etc/mdev.conf
-touch -c -h -d "2013-03-23 00:57:28.0000000000" cpustress/build/build-initrd/etc/mdev.conf
+touch -c -h -d "2013-04-19 09:56:22.0000000000" cpustress/build/build-initrd/etc/mdev.conf
 chmod 0664 cpustress/build/build-initrd/etc/modprobe.d/isapnp.conf
 touch -c -h -d "2013-03-23 00:56:59.0000000000" cpustress/build/build-initrd/etc/modprobe.d/isapnp.conf
 chmod 0664 cpustress/build/build-initrd/etc/modprobe.d/usb-controller.conf
@@ -42,7 +42,7 @@ chmod 0664 cpustress/build/build-initrd/etc/profile
 touch -c -h -d "2008-10-29 01:15:04.0000000000" cpustress/build/build-initrd/etc/profile
 chmod 0664 cpustress/build/build-initrd/etc/sensors3.conf
 touch -c -h -d "2013-04-17 23:59:47.0000000000" cpustress/build/build-initrd/etc/sensors3.conf
-touch -c -h -d "2013-04-18 08:14:32.5214705390" cpustress/build/build-initrd/init
+touch -c -h -d "2013-04-19 10:10:15.0000000000" cpustress/build/build-initrd/init
 chmod 0755 cpustress/build/build-initrd/lib/ld-2.17.so
 touch -c -h -d "2013-04-17 23:35:53.0000000000" cpustress/build/build-initrd/lib/ld-2.17.so
 touch -c -h -d "2013-04-18 13:10:40.1197436120" cpustress/build/build-initrd/lib/ld-linux.so.2
@@ -58,514 +58,6 @@ touch -c -h -d "2013-04-18 13:10:40.1237436130" cpustress/build/build-initrd/lib
 chmod 0755 cpustress/build/build-initrd/lib/libpthread-2.17.so
 touch -c -h -d "2013-04-17 23:35:54.0000000000" cpustress/build/build-initrd/lib/libpthread-2.17.so
 touch -c -h -d "2013-04-18 13:10:40.1277436130" cpustress/build/build-initrd/lib/libpthread.so.0
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/arch/x86/kernel/microcode.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/arch/x86/kernel/microcode.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/arch/x86/platform/iris/iris.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/arch/x86/platform/iris/iris.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/arch/x86/platform/scx200/scx200.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/arch/x86/platform/scx200/scx200.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/ac.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/ac.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/acpi_i2c.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/acpi_i2c.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/acpi_pad.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/acpi_pad.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/battery.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/battery.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/button.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/button.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/container.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/container.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/fan.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/fan.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/processor.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/processor.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/thermal.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/acpi/thermal.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/char/i8k.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/char/i8k.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/char/toshiba.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/char/toshiba.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/clocksource/scx200_hrt.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/clocksource/scx200_hrt.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-a4tech.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-a4tech.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-apple.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-apple.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-belkin.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-belkin.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-cherry.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-cherry.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-chicony.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-chicony.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-cypress.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-cypress.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-ezkey.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-ezkey.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-generic.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-generic.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-gyration.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-gyration.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-holtek-kbd.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-holtek-kbd.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-holtekff.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-holtekff.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-kensington.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-kensington.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-keytouch.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-keytouch.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-logitech.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-logitech.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-microsoft.ko
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-microsoft.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-monterey.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-monterey.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-ortek.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-ortek.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-petalynx.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-petalynx.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-pl.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-pl.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-primax.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-primax.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-arvo.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-arvo.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-common.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-common.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-isku.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-isku.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-kone.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-kone.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-koneplus.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-koneplus.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-kovaplus.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-kovaplus.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-lua.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-lua.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-pyra.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-pyra.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-savu.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat-savu.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-roccat.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-samsung.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-samsung.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-sony.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-sony.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-sunplus.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid-sunplus.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/hid.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/usbhid/usbhid.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hid/usbhid/usbhid.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/abituguru.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/abituguru.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/abituguru3.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/abituguru3.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/acpi_power_meter.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/acpi_power_meter.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ad7414.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ad7414.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ad7418.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ad7418.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adm1021.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adm1021.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adm1025.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adm1025.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adm1026.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adm1026.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adm1029.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adm1029.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adm1031.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adm1031.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adm9240.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adm9240.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ads1015.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ads1015.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ads7828.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ads7828.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adt7410.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adt7410.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adt7411.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adt7411.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adt7462.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adt7462.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adt7470.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adt7470.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adt7475.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/adt7475.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/amc6821.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/amc6821.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/applesmc.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/applesmc.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/asb100.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/asb100.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/asc7621.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/asc7621.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/asus_atk0110.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/asus_atk0110.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/atxp1.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/atxp1.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/coretemp.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/coretemp.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/dme1737.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/dme1737.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ds1621.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ds1621.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ds620.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ds620.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/emc1403.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/emc1403.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/emc2103.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/emc2103.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/emc6w201.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/emc6w201.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/f71805f.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/f71805f.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/f71882fg.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/f71882fg.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/f75375s.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/f75375s.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/fam15h_power.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/fam15h_power.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/fschmd.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/fschmd.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/g760a.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/g760a.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/gl518sm.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/gl518sm.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/gl520sm.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/gl520sm.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/hih6130.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/hih6130.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/hwmon-vid.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/hwmon-vid.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/hwmon.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/hwmon.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/i5k_amb.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/i5k_amb.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ina2xx.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ina2xx.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/it87.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/it87.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/jc42.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/jc42.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/k10temp.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/k10temp.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/k8temp.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/k8temp.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lineage-pem.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lineage-pem.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm63.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm63.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm73.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm73.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm75.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm75.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm77.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm77.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm78.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm78.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm80.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm80.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm83.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm83.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm85.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm85.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm87.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm87.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm90.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm90.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm92.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm92.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm93.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm93.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm95241.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm95241.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm95245.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/lm95245.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ltc4151.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ltc4151.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ltc4215.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ltc4215.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ltc4245.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ltc4245.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ltc4261.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ltc4261.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max16065.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max16065.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max1619.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max1619.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max1668.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max1668.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max197.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max197.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max6639.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max6639.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max6642.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max6642.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max6650.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/max6650.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/mcp3021.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/mcp3021.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ntc_thermistor.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/ntc_thermistor.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pc87360.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pc87360.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pc87427.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pc87427.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pcf8591.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pcf8591.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/adm1275.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/adm1275.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/lm25066.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/lm25066.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/ltc2978.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/ltc2978.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/max16064.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/max16064.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/max34440.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/max34440.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/max8688.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/max8688.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/pmbus.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/pmbus.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/pmbus_core.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/pmbus_core.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/ucd9000.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/ucd9000.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/ucd9200.ko
-touch -c -h -d "2013-04-18 11:36:27.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/ucd9200.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/zl6100.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/pmbus/zl6100.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/sht15.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/sht15.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/sht21.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/sht21.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/sis5595.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/sis5595.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/smm665.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/smm665.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/smsc47b397.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/smsc47b397.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/smsc47m1.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/smsc47m1.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/smsc47m192.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/smsc47m192.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/thmc50.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/thmc50.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/tmp102.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/tmp102.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/tmp401.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/tmp401.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/tmp421.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/tmp421.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/via-cputemp.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/via-cputemp.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/via686a.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/via686a.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/vt1211.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/vt1211.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/vt8231.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/vt8231.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83627ehf.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83627ehf.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83627hf.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83627hf.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83781d.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83781d.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83791d.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83791d.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83792d.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83792d.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83793.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83793.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83795.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83795.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83l785ts.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83l785ts.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83l786ng.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/hwmon/w83l786ng.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/algos/i2c-algo-bit.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/algos/i2c-algo-bit.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/algos/i2c-algo-pca.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/algos/i2c-algo-pca.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-ali1535.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-ali1535.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-ali1563.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-ali1563.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-ali15x3.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-ali15x3.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-amd756-s4882.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-amd756-s4882.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-amd756.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-amd756.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-amd8111.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-amd8111.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-designware-core.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-designware-core.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-designware-pci.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-designware-pci.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-eg20t.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-eg20t.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-i801.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-i801.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-intel-mid.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-intel-mid.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-isch.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-isch.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-nforce2-s4985.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-nforce2-s4985.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-nforce2.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-nforce2.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-ocores.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-ocores.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-pca-platform.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-pca-platform.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-piix4.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-piix4.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-pxa.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-pxa.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-scmi.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-scmi.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-simtec.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-simtec.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-sis5595.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-sis5595.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-sis630.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-sis630.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-sis96x.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-sis96x.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-via.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-via.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-viapro.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-viapro.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-xiic.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/busses/i2c-xiic.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/i2c-core.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/i2c-core.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/i2c-dev.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/i2c-dev.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/i2c-mux.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/i2c-mux.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/muxes/i2c-mux-pca9541.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/muxes/i2c-mux-pca9541.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/muxes/i2c-mux-pca954x.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/i2c/muxes/i2c-mux-pca954x.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/input-polldev.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/input-polldev.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/mouse/psmouse.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/mouse/psmouse.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/serio/altera_ps2.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/serio/altera_ps2.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/serio/pcips2.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/serio/pcips2.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/serio/ps2mult.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/serio/ps2mult.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/serio/serio_raw.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/serio/serio_raw.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/serio/serport.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/input/serio/serport.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/leds/led-class.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/leds/led-class.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/mfd/lpc_sch.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/mfd/lpc_sch.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/mfd/mfd-core.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/mfd/mfd-core.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/of/of_i2c.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/of/of_i2c.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/platform/x86/acerhdf.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/platform/x86/acerhdf.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/scsi/sg.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/scsi/sg.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/thermal/thermal_sys.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/thermal/thermal_sys.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/chipidea/ci13xxx_imx.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/chipidea/ci13xxx_imx.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/chipidea/ci13xxx_msm.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/chipidea/ci13xxx_msm.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/chipidea/ci13xxx_pci.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/chipidea/ci13xxx_pci.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/chipidea/ci_hdrc.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/chipidea/ci_hdrc.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/chipidea/usbmisc_imx6q.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/chipidea/usbmisc_imx6q.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/hwa-hc.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/hwa-hc.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/isp116x-hcd.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/isp116x-hcd.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/isp1362-hcd.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/isp1362-hcd.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/isp1760.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/isp1760.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/oxu210hp-hcd.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/oxu210hp-hcd.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/r8a66597-hcd.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/r8a66597-hcd.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/sl811-hcd.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/sl811-hcd.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/whci/whci-hcd.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/host/whci/whci-hcd.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/wusbcore/wusb-cbaf.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/wusbcore/wusb-cbaf.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/wusbcore/wusb-wa.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/wusbcore/wusb-wa.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/wusbcore/wusbcore.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/usb/wusbcore/wusbcore.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/uwb/hwa-rc.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/uwb/hwa-rc.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/uwb/umc.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/uwb/umc.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/uwb/uwb.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/uwb/uwb.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/uwb/whc-rc.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/uwb/whc-rc.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/uwb/whci.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/drivers/uwb/whci.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/binfmt_aout.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/binfmt_aout.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/binfmt_misc.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/binfmt_misc.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/ext2/ext2.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/ext2/ext2.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/nls/nls_ascii.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/nls/nls_ascii.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/nls/nls_cp437.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/nls/nls_cp437.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/nls/nls_iso8859-1.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/nls/nls_iso8859-1.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/nls/nls_utf8.ko
-touch -c -h -d "2013-04-18 11:36:28.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/kernel/fs/nls/nls_utf8.ko
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.alias
-touch -c -h -d "2013-04-18 11:36:29.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.alias
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.alias.bin
-touch -c -h -d "2013-04-18 11:36:29.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.alias.bin
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.builtin
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.builtin
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.builtin.bin
-touch -c -h -d "2013-04-18 11:36:29.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.builtin.bin
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.dep
-touch -c -h -d "2013-04-18 11:36:29.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.dep
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.dep.bin
-touch -c -h -d "2013-04-18 11:36:29.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.dep.bin
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.devname
-touch -c -h -d "2013-04-18 11:36:29.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.devname
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.ofmap
-touch -c -h -d "2013-04-18 11:36:29.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.ofmap
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.order
-touch -c -h -d "2013-04-18 11:36:26.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.order
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.pcimap
-touch -c -h -d "2013-04-18 11:36:29.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.pcimap
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.seriomap
-touch -c -h -d "2013-04-18 11:36:29.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.seriomap
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.softdep
-touch -c -h -d "2013-04-18 11:36:29.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.softdep
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.symbols
-touch -c -h -d "2013-04-18 11:36:29.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.symbols
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.symbols.bin
-touch -c -h -d "2013-04-18 11:36:29.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.symbols.bin
-chmod 0664 cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.usbmap
-touch -c -h -d "2013-04-18 11:36:29.0000000000" cpustress/build/build-initrd/lib/modules/3.8.8-cpustress/modules.usbmap
 chmod 0664 cpustress/build/build-initrd/opt/burn/burn.txt
 touch -c -h -d "2013-04-16 22:36:33.2512498290" cpustress/build/build-initrd/opt/burn/burn.txt
 chmod 0775 cpustress/build/build-initrd/opt/burn/burnBX
@@ -607,26 +99,24 @@ touch -c -h -d "2013-04-17 01:09:29.0000000000" cpustress/build/build-initrd/opt
 chmod 0664 cpustress/build/build-initrd/opt/stress/stress.txt
 touch -c -h -d "2013-04-13 22:21:21.2575389530" cpustress/build/build-initrd/opt/stress/stress.txt
 chmod 0775 cpustress/build/build-initrd/runonce
-touch -c -h -d "2013-04-18 17:26:50.3885761580" cpustress/build/build-initrd/runonce
-touch -c -h -d "2013-04-18 08:13:59.7574719980" cpustress/build/build-initrd/sbin/halt
-touch -c -h -d "2013-04-18 08:13:59.7574719980" cpustress/build/build-initrd/sbin/init
-touch -c -h -d "2013-04-18 08:13:59.7574719980" cpustress/build/build-initrd/sbin/lsmod
-touch -c -h -d "2013-04-18 08:13:59.7574719980" cpustress/build/build-initrd/sbin/mdev
-touch -c -h -d "2013-04-18 08:13:59.7574719980" cpustress/build/build-initrd/sbin/modprobe
-touch -c -h -d "2013-04-18 08:13:59.7574719980" cpustress/build/build-initrd/sbin/poweroff
-touch -c -h -d "2013-04-18 08:13:59.7574719980" cpustress/build/build-initrd/sbin/reboot
-touch -c -h -d "2013-04-18 08:14:14.8934713230" cpustress/build/build-initrd/usr/bin/awk
-touch -c -h -d "2013-04-18 08:14:14.8934713230" cpustress/build/build-initrd/usr/bin/clear
-touch -c -h -d "2013-04-18 08:14:14.8934713230" cpustress/build/build-initrd/usr/bin/cut
-touch -c -h -d "2013-04-18 08:14:14.8934713230" cpustress/build/build-initrd/usr/bin/expr
-touch -c -h -d "2013-04-18 08:14:14.8934713230" cpustress/build/build-initrd/usr/bin/free
-touch -c -h -d "2013-04-18 08:14:14.8934713230" cpustress/build/build-initrd/usr/bin/hexdump
-touch -c -h -d "2013-04-18 08:14:14.8974713230" cpustress/build/build-initrd/usr/bin/less
-touch -c -h -d "2013-04-18 08:14:14.8974713230" cpustress/build/build-initrd/usr/bin/pkill
-touch -c -h -d "2013-04-18 08:14:14.8974713230" cpustress/build/build-initrd/usr/bin/seq
-touch -c -h -d "2013-04-18 08:14:14.8974713230" cpustress/build/build-initrd/usr/bin/top
-touch -c -h -d "2013-04-18 08:14:14.8974713230" cpustress/build/build-initrd/usr/bin/uptime
-touch -c -h -d "2013-04-18 08:14:14.8974713230" cpustress/build/build-initrd/usr/bin/which
+touch -c -h -d "2013-04-19 09:55:49.0000000000" cpustress/build/build-initrd/runonce
+touch -c -h -d "2013-04-19 11:21:01.3317617290" cpustress/build/build-initrd/sbin/halt
+touch -c -h -d "2013-04-19 11:21:01.3317617290" cpustress/build/build-initrd/sbin/init
+touch -c -h -d "2013-04-19 11:21:01.3317617290" cpustress/build/build-initrd/sbin/mdev
+touch -c -h -d "2013-04-19 11:21:01.3317617290" cpustress/build/build-initrd/sbin/poweroff
+touch -c -h -d "2013-04-19 11:21:01.3317617290" cpustress/build/build-initrd/sbin/reboot
+touch -c -h -d "2013-04-19 11:20:44.1717624910" cpustress/build/build-initrd/usr/bin/awk
+touch -c -h -d "2013-04-19 11:20:44.1757624920" cpustress/build/build-initrd/usr/bin/clear
+touch -c -h -d "2013-04-19 11:20:44.1757624920" cpustress/build/build-initrd/usr/bin/cut
+touch -c -h -d "2013-04-19 11:20:44.1757624920" cpustress/build/build-initrd/usr/bin/expr
+touch -c -h -d "2013-04-19 11:20:44.1757624920" cpustress/build/build-initrd/usr/bin/free
+touch -c -h -d "2013-04-19 11:20:44.1757624920" cpustress/build/build-initrd/usr/bin/hexdump
+touch -c -h -d "2013-04-19 11:20:44.1757624920" cpustress/build/build-initrd/usr/bin/less
+touch -c -h -d "2013-04-19 11:20:44.1757624920" cpustress/build/build-initrd/usr/bin/pkill
+touch -c -h -d "2013-04-19 11:20:44.1757624920" cpustress/build/build-initrd/usr/bin/seq
+touch -c -h -d "2013-04-19 11:20:44.1757624920" cpustress/build/build-initrd/usr/bin/top
+touch -c -h -d "2013-04-19 11:20:44.1757624920" cpustress/build/build-initrd/usr/bin/uptime
+touch -c -h -d "2013-04-19 11:20:44.1757624920" cpustress/build/build-initrd/usr/bin/which
 touch -c -h -d "2013-04-17 14:29:07.3264125110" cpustress/build/build-initrd/usr/lib/libgcc_s.so
 chmod 0775 cpustress/build/build-initrd/usr/lib/libgcc_s.so.1
 touch -c -h -d "2013-04-17 14:29:53.6544104450" cpustress/build/build-initrd/usr/lib/libgcc_s.so.1
@@ -667,17 +157,23 @@ touch -c -h -d "2013-03-05 07:31:14.0000000000" cpustress/build/compile-notes/bu
 chmod 0664 cpustress/build/compile-notes/busybox/busybox-1.21.0-xz.patch
 touch -c -h -d "2013-03-05 07:31:15.0000000000" cpustress/build/compile-notes/busybox/busybox-1.21.0-xz.patch
 chmod 0664 cpustress/build/compile-notes/busybox/config
-touch -c -h -d "2013-04-17 22:48:12.0000000000" cpustress/build/compile-notes/busybox/config
+touch -c -h -d "2013-04-19 10:08:37.9520230000" cpustress/build/compile-notes/busybox/config
 chmod 0664 cpustress/build/compile-notes/cpuburn-in.txt
 touch -c -h -d "2013-04-18 23:28:05.4585406410" cpustress/build/compile-notes/cpuburn-in.txt
 chmod 0664 cpustress/build/compile-notes/glibc.txt
 touch -c -h -d "2013-04-18 23:33:54.1105561560" cpustress/build/compile-notes/glibc.txt
 chmod 0664 cpustress/build/compile-notes/kernel.txt
-touch -c -h -d "2013-04-18 15:35:58.0000000000" cpustress/build/compile-notes/kernel.txt
+touch -c -h -d "2013-04-19 11:05:58.4198019830" cpustress/build/compile-notes/kernel.txt
 chmod 0664 cpustress/build/compile-notes/kernel/config-3.8.8-cpustress
-touch -c -h -d "2013-04-18 15:31:31.0000000000" cpustress/build/compile-notes/kernel/config-3.8.8-cpustress
-chmod 0775 cpustress/build/compile-notes/kernel/pmagic-kernel-modules.sh
-touch -c -h -d "2013-04-18 15:51:51.0000000000" cpustress/build/compile-notes/kernel/pmagic-kernel-modules.sh
+touch -c -h -d "2013-04-18 21:26:30.0591180000" cpustress/build/compile-notes/kernel/config-3.8.8-cpustress
+chmod 0664 cpustress/build/compile-notes/kernel/pmagic/compile-notes.patch
+touch -c -h -d "2013-04-19 10:38:55.0000000000" cpustress/build/compile-notes/kernel/pmagic/compile-notes.patch
+chmod 0664 cpustress/build/compile-notes/kernel/pmagic/initrd-modules-support.patch
+touch -c -h -d "2013-04-19 11:18:00.0757698070" cpustress/build/compile-notes/kernel/pmagic/initrd-modules-support.patch
+chmod 0775 cpustress/build/compile-notes/kernel/pmagic/pmagic-kernel-modules.sh
+touch -c -h -d "2013-04-18 15:51:51.0000000000" cpustress/build/compile-notes/kernel/pmagic/pmagic-kernel-modules.sh
+chmod 0664 cpustress/build/compile-notes/kernel/pmagic/readme.txt
+touch -c -h -d "2013-04-19 11:08:51.8837942480" cpustress/build/compile-notes/kernel/pmagic/readme.txt
 chmod 0664 cpustress/build/compile-notes/libgcc.txt
 touch -c -h -d "2013-04-18 00:14:03.0000000000" cpustress/build/compile-notes/libgcc.txt
 chmod 0664 cpustress/build/compile-notes/linpack.txt
@@ -697,9 +193,9 @@ touch -c -h -d "2013-04-17 12:53:29.1390603390" cpustress/build/compile-notes/sy
 chmod 0775 cpustress/build/extract
 touch -c -h -d "2013-04-12 09:16:11.7746850810" cpustress/build/extract
 chmod 0775 cpustress/build/prepare
-touch -c -h -d "2013-04-18 16:08:58.5683050520" cpustress/build/prepare
+touch -c -h -d "2013-04-19 11:22:03.2437589680" cpustress/build/prepare
 chmod 0664 cpustress/bzImage
-touch -c -h -d "2013-04-18 11:34:56.0000000000" cpustress/bzImage
+touch -c -h -d "2013-04-19 10:21:45.0000000000" cpustress/bzImage
 chmod 0664 cpustress/changes.txt
 touch -c -h -d "2013-04-13 23:34:55.3773421520" cpustress/changes.txt
 chmod 0664 cpustress/gpl-2.0.txt
@@ -719,7 +215,7 @@ touch -c -h -d "2013-04-13 22:21:10.1695394470" cpustress/help/stress.txt
 chmod 0664 cpustress/help/syslinux/cpustrs1.txt
 touch -c -h -d "2013-04-11 10:03:23.8282044300" cpustress/help/syslinux/cpustrs1.txt
 chmod 0664 cpustress/help/syslinux/cpustrs2.txt
-touch -c -h -d "2013-04-13 22:32:47.8055083440" cpustress/help/syslinux/cpustrs2.txt
+touch -c -h -d "2013-04-19 11:14:03.8517803390" cpustress/help/syslinux/cpustrs2.txt
 chmod 0664 cpustress/help/systester.txt
 touch -c -h -d "2013-04-13 23:13:04.1174006140" cpustress/help/systester.txt
 chmod 0664 cpustress/readme.txt
@@ -761,7 +257,7 @@ touch -c -h -d "2013-04-09 10:48:46.0000000000" screenshots/cpustress-stress.png
 chmod 0664 screenshots/cpustress-stresscpu2.png
 touch -c -h -d "2013-04-09 10:48:54.0000000000" screenshots/cpustress-stresscpu2.png
 chmod 0775 scripts/git-cache-meta.sh
-touch -c -h -d "2013-04-08 00:37:39.0951148360" scripts/git-cache-meta.sh
+touch -c -h -d "2013-04-19 10:00:58.7999758430" scripts/git-cache-meta.sh
 chmod 0664 scripts/make_7z.bat
 touch -c -h -d "2013-04-11 10:29:23.5761348910" scripts/make_7z.bat
 chmod 0775 scripts/make_7z.sh

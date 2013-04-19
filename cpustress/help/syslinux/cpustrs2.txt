@@ -10,9 +10,7 @@ program by using the '0fubcdargs07' option in isolinux. Examples:
   0fubcdargs="-s -t 48:00:00"07 initrd=/ubcd/boot/cpustress/initrd.gz
 
 Other boot options (for debugging use):
-  modprobe="module1 module2 ..."  Loads specific modules during boot.
   ubcdcmd="dmesg"                 Run 'dmesg | less' after boot.
-  ubcdcmd="lsmod"                 Run 'lsmod | less' after boot.
   ubcdcmd="uname"                 Run 'uname -a' after boot.
 
 For more information, please run the 0fhelpinfo07 program in the CPUstress image.

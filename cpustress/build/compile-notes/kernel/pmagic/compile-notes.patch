@@ -1,0 +1,57 @@
+diff -r -u a/compile-notes/busybox/config b/compile-notes/busybox/config
+--- a/compile-notes/busybox/config	2013-04-19 10:08:37.000000000 +0800
++++ b/compile-notes/busybox/config	2013-04-19 10:38:12.223876268 +0800
+@@ -494,9 +494,9 @@
+ # CONFIG_FEATURE_MODPROBE_SMALL_CHECK_ALREADY_LOADED is not set
+ # CONFIG_INSMOD is not set
+ # CONFIG_RMMOD is not set
+-# CONFIG_LSMOD is not set
++CONFIG_LSMOD=y
+ # CONFIG_FEATURE_LSMOD_PRETTY_2_6_OUTPUT is not set
+-# CONFIG_MODPROBE is not set
++CONFIG_MODPROBE=y
+ # CONFIG_FEATURE_MODPROBE_BLACKLIST is not set
+ # CONFIG_DEPMOD is not set
+ 
+@@ -510,11 +510,11 @@
+ # CONFIG_FEATURE_INSMOD_LOADINKMEM is not set
+ # CONFIG_FEATURE_INSMOD_LOAD_MAP is not set
+ # CONFIG_FEATURE_INSMOD_LOAD_MAP_FULL is not set
+-# CONFIG_FEATURE_CHECK_TAINTED_MODULE is not set
+-# CONFIG_FEATURE_MODUTILS_ALIAS is not set
+-# CONFIG_FEATURE_MODUTILS_SYMBOLS is not set
+-CONFIG_DEFAULT_MODULES_DIR=""
+-CONFIG_DEFAULT_DEPMOD_FILE=""
++CONFIG_FEATURE_CHECK_TAINTED_MODULE=y
++CONFIG_FEATURE_MODUTILS_ALIAS=y
++CONFIG_FEATURE_MODUTILS_SYMBOLS=y
++CONFIG_DEFAULT_MODULES_DIR="/lib/modules"
++CONFIG_DEFAULT_DEPMOD_FILE="modules.dep"
+ 
+ #
+ # Linux System Utilities
+diff -r -u a/compile-notes/kernel.txt b/compile-notes/kernel.txt
+--- a/compile-notes/kernel.txt	2013-04-19 10:36:27.543880936 +0800
++++ b/compile-notes/kernel.txt	2013-04-19 10:35:41.000000000 +0800
+@@ -25,4 +25,21 @@
+ directory that you can boot from. For example in UBCD it's 
+ "${ubcd_extract}/ubcd/boot/cpustress/bzImage".
+ 
++Install the modules (drivers) to a temporary directory: (I put them in the 
++directory "${HOME}/modules", but you may change the path if you like.)
++
++ $ make INSTALL_MOD_PATH=${HOME}/modules modules_install
++
++Remove some unnecessary files in the modules directory:
++
++ $ cd ${HOME}/modules/lib/modules/3.8.8-cpustress
++ $ rm build source
++ $ rm modules.ccwmap modules.ieee1394map modules.inputmap modules.isapnpmap
++
++Copy the modules to the CPUstress initrd image:  (Replace ${cpustress_initrd} 
++with the root path of your extracted initrd image.)
++
++ $ cd ${HOME}/modules
++ $ cp -aR lib/modules ${cpustress_initrd}/lib
++
+ --Explorer <explorer09@gmail.com>

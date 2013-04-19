@@ -1,4 +1,4 @@
-18 April 2013
+19 April 2013
 
 The Linux kernel for CPUstress is compiled on Ubuntu 12.04.2 LTS (32-bit).
 
@@ -24,24 +24,5 @@ Build the kernel, if you don't want to configure anything else:
 Copy the kernel bzImage, which is located at "arch/x86/boot/bzImage", to a 
 directory that you can boot from. For example in UBCD it's 
 "${ubcd_extract}/ubcd/boot/cpustress/bzImage".
-
-Install the modules (drivers) to a temporary directory: (I put them in the 
-directory "${HOME}/modules", but you may change the path if you like.)
-
- $ make INSTALL_MOD_PATH=${HOME}/modules modules_install
-
-Remove some unnecessary files in the modules directory:
-
- $ cd ${HOME}/modules/lib/modules/3.8.8-cpustress
- $ rm build source
- $ rm modules.ccwmap modules.ieee1394map modules.inputmap modules.isapnpmap
-
-Copy the modules to the CPUstress initrd image:  (Replace ${cpustress_initrd} 
-with the root path of your extracted initrd image.)
-
- $ cd ${HOME}/modules
- $ cp -aR lib/modules ${cpustress_initrd}/lib
-
-That's finished.
 
 --Explorer <explorer09@gmail.com>

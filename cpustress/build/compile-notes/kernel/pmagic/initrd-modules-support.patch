@@ -1,0 +1,69 @@
+diff -r -u a/etc/init.d/rcS b/etc/init.d/rcS
+--- a/etc/init.d/rcS	2013-04-19 09:57:27.711985257 +0800
++++ b/etc/init.d/rcS	2013-04-19 09:44:47.000000000 +0800
+@@ -29,6 +29,22 @@
+ echo /sbin/mdev > /proc/sys/kernel/hotplug
+ mdev -s
+ 
++# Load drivers for USB controller, because mdev does not load them
++# automatically. Required only by PMagic kernel.
++case `uname -r` in
++    *pmagic)
++        modprobe ehci-hcd
++        modprobe uhci-hcd
++        modprobe ohci-hcd
++        modprobe xhci-hcd
++
++        # Modprobe modules from the boot command-line
++        for i in $modprobe; do
++            modprobe $i
++        done
++        ;;
++esac
++
+ # Create tmpfs on /tmp for mprime
+ MEMORY=`awk '/^MemTotal/ {print $2}' /proc/meminfo`
+ if [ "$MEMORY" -lt "100000" ]; then
+diff -r -u a/etc/mdev.conf b/etc/mdev.conf
+--- a/etc/mdev.conf	2013-04-19 09:56:22.727988153 +0800
++++ b/etc/mdev.conf	2013-03-23 00:57:28.000000000 +0800
+@@ -1,3 +1,6 @@
++# support module loading on hotplug
++$MODALIAS=.*	0:0 660 @modprobe "$MODALIAS"
++
+ # input stuff
+ event[0-9]+	0:0 640 =input/
+ mice		0:0 640 =input/
+diff -r -u a/etc/modprobe.d/isapnp.conf b/etc/modprobe.d/isapnp.conf
+--- a/etc/modprobe.d/isapnp.conf	2013-04-19 11:16:32.263773723 +0800
++++ b/etc/modprobe.d/isapnp.conf	2013-03-23 00:56:59.000000000 +0800
+@@ -0,0 +1,8 @@
++# These aliases are here because many PnP modules do not
++# provide aliases for them.
++alias pnp:dPNP0B00 rtc
++alias acpi:PNP0B00: rtc-cmos
++alias acpi:PNP0B01: rtc-cmos
++alias acpi:PNP0B02: rtc-cmos
++alias pnp:dPNP0F13 psmouse
++alias pnp:dPNP0303 atkbd
+diff -r -u a/etc/modprobe.d/usb-controller.conf b/etc/modprobe.d/usb-controller.conf
+--- a/etc/modprobe.d/usb-controller.conf	2013-04-19 11:16:34.855773609 +0800
++++ b/etc/modprobe.d/usb-controller.conf	2013-04-12 08:27:17.000000000 +0800
+@@ -0,0 +1,4 @@
++# Make sure that ehci-hcd is always loaded before uhci-hci
++# or ohci-hcd to prevent a kernel warning:
++install uhci-hcd /sbin/modprobe ehci-hcd ; /sbin/modprobe -i uhci-hcd
++install ohci-hcd /sbin/modprobe ehci-hcd ; /sbin/modprobe -i ohci-hcd
+diff -r -u a/runonce b/runonce
+--- a/runonce	2013-04-19 09:55:49.339989641 +0800
++++ b/runonce	2013-04-19 09:44:24.000000000 +0800
+@@ -103,6 +103,9 @@
+             printf "\033[0;32m\nStarting 'Intel Optimized LINPACK 11.0.3'  (linpack).\033[0m\n"
+             linpack
+             ;;
++        lsmod)
++            lsmod | less -~
++            ;;
+         menu)
+             menu
+             ;;

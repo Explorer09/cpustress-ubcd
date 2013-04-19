@@ -12,7 +12,7 @@
 #
 #
 # Written by Explorer.
-# Last updated on 18 April 2013.
+# Last updated on 19 April 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -44,9 +44,7 @@ cd ..
 cd sbin
 ln -s ../bin/busybox halt
 ln -s ../bin/busybox init
-ln -s ../bin/busybox lsmod
 ln -s ../bin/busybox mdev
-ln -s ../bin/busybox modprobe
 ln -s ../bin/busybox poweroff
 ln -s ../bin/busybox reboot
 cd ..
