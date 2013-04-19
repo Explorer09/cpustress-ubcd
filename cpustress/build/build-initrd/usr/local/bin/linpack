@@ -14,7 +14,7 @@
 #
 #
 # Written by Explorer.
-# Last updated on 18 April 2013.
+# Last updated on 19 April 2013.
 
 
 # Setting up affinity for better threading performance
@@ -25,8 +25,8 @@ if [ "X$instances" != "X" ] && [ "X$OMP_NUM_THREADS" == "X" ]; then
 fi
 
 # Don't call xlinpack_xeon32 just to display help.
-ARGS=`echo $1 | awk '/^-h[e[l[p]?]?]?/ {print "-h"}'`
-ARGS=`echo $1 | awk '/^-e[x[t[e[n[d[e[d[_[h[e[l[p]?]?]?]?]?]?]?]?]?]?]?]?/ {print "-e"}'`
+ARGS=`echo "X$1" | awk '/^X-h[e[l[p]?]?]?/ {print "-h"}'`
+ARGS=`echo "X$1" | awk '/^X-e[x[t[e[n[d[e[d[_[h[e[l[p]?]?]?]?]?]?]?]?]?]?]?]?/ {print "-e"}'`
 if [ "X$1" = "X--help" ]; then
     ARGS="-h"
 fi
