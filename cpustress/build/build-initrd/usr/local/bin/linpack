@@ -25,8 +25,11 @@ if [ "X$instances" != "X" ] && [ "X$OMP_NUM_THREADS" == "X" ]; then
 fi
 
 # Don't call xlinpack_xeon32 just to display help.
-ARGS=`echo "X$1" | awk '/^X-h[e[l[p]?]?]?/ {print "-h"}'`
-ARGS=`echo "X$1" | awk '/^X-e[x[t[e[n[d[e[d[_[h[e[l[p]?]?]?]?]?]?]?]?]?]?]?]?/ {print "-e"}'`
+ARGS=`echo "X$1" | awk '/^X-e(x(t(e(n(d(e(d(_(h(e(l(p)?)?)?)?)?)?)?)?)?)?)?)?$/ {print "-e"}'`
+if [ "X$ARGS" = "X" ]; then
+    ARGS=`echo "X$1" | awk '/^X-h(e(l(p)?)?)?$/ {print "-h"}'`
+fi
+
 if [ "X$1" = "X--help" ]; then
     ARGS="-h"
 fi
