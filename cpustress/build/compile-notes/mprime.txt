@@ -22,6 +22,11 @@ Rename the executables to 'mprime23' and 'mprime27' respectively:
  $ mv mprime239/mprime mprime239/mprime23
  $ mv p95v279/mprime   p95v279/mprime27
 
+(Optional) Change the mode of the binaries:
+
+ $ chmod 775 mprime239/mprime23
+ $ chmod 775 p95v279/mprime27
+
 (Optional) You can strip the binary file to save a few bytes. I did so in my 
 CPUstress image:
 
@@ -33,11 +38,6 @@ be much smaller: <http://upx.sourceforge.net/>
 
  $ upx mprime239/mprime23
  $ upx p95v279/mprime27
-
-(Optional) Change the mode of the binaries:
-
- $ chmod 775 mprime239/mprime23
- $ chmod 775 p95v279/mprime27
 
 The programs depend on these libraies:
     libm.so.6

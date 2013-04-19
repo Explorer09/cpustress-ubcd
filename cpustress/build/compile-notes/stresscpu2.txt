@@ -1,0 +1,22 @@
+18 April 2013
+
+The stresscpu2 program included in the CPUstress image in the official binary.
+
+stresscpu2 can be downloaded here:
+http://www.gromacs.org/@api/deki/files/43/=stresscpu2.tgz
+
+After downloading and unpacking, rename the executable:
+
+ $ cd stresscpu2
+ $ mv stresscpu2_linux32 stresscpu2
+
+(Optional) Change the mode of the binary:
+
+ $ chmod 775 stresscpu2
+
+(Optional) You can strip the binary file to save a few bytes. I did so in my 
+CPUstress image:
+
+ $ strip stresscpu2
+
+--Explorer <explorer09@gmail.com>

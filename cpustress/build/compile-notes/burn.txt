@@ -1,4 +1,4 @@
-16 April 2013
+18 April 2013
 
 Homepage of cpuburn by Robert Redelmeier:
 http://web.archive.org/web/20110623074500/http://pages.sbcglobal.net/redelm/
@@ -17,7 +17,8 @@ Unpack and build the code:
 
 Copy the executables:
 
- $ cp -a burnP5 burnP6 burnK6 burnK7 burnBX burnMMX ${cpustress}/opt/burn
+ $ cp -a burnP5 burnP6 burnK6 burnK7 burnBX burnMMX \
+         ${cpustress_initrd}/opt/burn
 
 That's it. Because the code is written in assembly language there is nothing 
 for you to configure.

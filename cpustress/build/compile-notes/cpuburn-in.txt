@@ -13,11 +13,11 @@ The mode of the cpuburn-in binary after unpacking is 644, change it to 775:
 
  $ chmod 775 cpuburn-in
 
-Then, you can strip the binary file to save a few bytes. I did so in my 
+(Optional) You can strip the binary file to save a few bytes. I did so in my 
 CPUstress image.
 
  $ strip cpuburn-in
 
-CPU Burn-in is not open-source.
+CPU Burn-in is a closed-source program.
 
 --Explorer <explorer09@gmail.com>

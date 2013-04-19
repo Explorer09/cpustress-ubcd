@@ -1,11 +1,11 @@
-CPUstress image - version 2.2.1:
-================================
+CPUstress image - version 2.3:
+==============================
 
 Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 13 April 2013.
+Last edited on 19 April 2013.
 
 
 Content of this package:
@@ -66,12 +66,12 @@ e.g.: If you have extracted UBCD to ~/ubcd-extract/, this place is:
 How to edit the CPUstress image?
 ________________________________
 
-Unpack the cpustress-2.2.1.7z archive (you probably already did this, else you
+Unpack the cpustress-2.3.7z archive (you probably already did this, else you
 couldn't read this README.
-$ 7z x "./path/to/file/cpustress-2.2.1.7z"
+$ 7z x "./path/to/file/cpustress-2.3.7z"
 
 Extract the ./build tar archive and the initrd.gz file:
-$ cd cpustress-2.2.1
+$ cd cpustress-2.3
 $ tar xvJf build.txz
 $ cd build
 $ cp ../initrd.gz .
@@ -96,37 +96,57 @@ ______________________________________
   #         For readability reasons it is placed on 2 lines. #
   ############################################################
 
-CPU Burn-in v1.00: cpuburn
+CPUburn v1.4a: burn
+--------------
+
+The following isolinux entry will run burn, which automatically detects which
+test to run:
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=burn
+
+If you want to run burn with a different test, use something similar to:
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=burn ubcdargs="MMX 64k"
+
+You can specify which test to run in the ubcdargs parameter, as well as the
+option that you want to pass to the test program.
+
+
+CPU Burn-in v1.00: cpuburn-in
 ------------------
 
-Run cpuburn without time parameter (it will run cpuburn-in for 10080
+Run cpuburn-in without time parameter (it will run cpuburn-in for 10080
 minutes (= 7 days)).
 
-     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-     INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND noapic ubcdcmd=cpuburn
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=cpuburn-in
 
-Run cpuburn with a time parameter:
+Run cpuburn-in with a time parameter:
 
-  eg. Run cpuburn for 10 days.
+  eg. Run cpuburn-in for 10 days.
 
-     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-     INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND noapic ubcdcmd=cpuburn days=10
-
-
-  eg. Run cpuburn for 10 hours.
-
-     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-     INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND noapic ubcdcmd=cpuburn hours=10
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=cpuburn-in days=10
 
 
-  eg. Run cpuburn for 10 minutes.
+  eg. Run cpuburn-in for 10 hours.
 
-     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-     INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND noapic ubcdcmd=cpuburn minutes=10
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=cpuburn-in hours=10
+
+
+  eg. Run cpuburn-in for 10 minutes.
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=cpuburn-in minutes=10
 
 
 If those parameters are all provided to the APPEND command of the isolinux
@@ -141,9 +161,9 @@ CPUinfo v1.00: cpuinfo
 
 The following isolinux entry will run CPUinfo:
 
-     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-     INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND noapic ubcdcmd=cpuinfo
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=cpuinfo
 
 
 Helpinfo: helpinfo
@@ -163,13 +183,32 @@ The following isolinux entry will run Helpinfo for cpuburn:
     APPEND noapic ubcdcmd=helpinfo ubcdargs=cpuburn
 
 You can change the ubcdargs parameter to:
-    - cpuburn
+    - burn
+    - cpuburn-in
     - cpuinfo
     - helpinfo
+    - linpack
     - mprime
+    - sensors
     - stress
     - stresscpu2
     - systester
+
+
+Intel Optimized LINPACK 11.0.3: linpack
+-------------------------------
+
+The following isolinux entry will run the LINPACK benchmark in interactive
+mode:
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=helpinfo ubcdargs=linpack
+
+The LINPACK benchmark accepts input data files. A sample data file is included
+in the /opt/linpack directory in the cpustress image. After booting, you can
+edit the data file using vi. To run LINPACK benchmark with the data file, use
+something like 'linpack /opt/linpack/lininput_xeon32' on the command-line.
 
 
 Menu: menu
@@ -267,8 +306,22 @@ use something similar to:
 The ubcdargs parameter contains the options that you want to pass to systester.
 
 
+Other notes:
+------------
+
 You can add 'quiet' to all APPEND lines to suppress the kernel text output at
 boot time.
+
+You can specify how many child processes or threads the program creates. The
+way to specify this is different among programs.
+
+    burn, cpuburn-in, and mprime23: Add instances=N to the APPEND line,
+                                    where N is a positive integer.
+    linpack:    Add OMP_NUM_THREADS=N to the APPEND line.
+    stresscpu2: Add ubcdargs="-n N" to the APPEND line.
+    systester:  Add ubcdargs="-threads N" to the APPEND line.
+    mprime27:   You need to use the interactive menu. Adding ubcdargs="-m" will
+                take you the menu.
 
 
 Thanks:

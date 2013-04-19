@@ -14,7 +14,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 17 April 2013.
+# Last updated on 18 April 2013.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
@@ -28,21 +28,21 @@ mount -n -t sysfs sysfs /sys
 echo /sbin/mdev > /proc/sys/kernel/hotplug
 mdev -s
 
-# Load drivers for USB controller, because mdev do not load them automatically.
-# Required only by PMagic kernel.
+# Load drivers for USB controller, because mdev does not load them
+# automatically. Required only by PMagic kernel.
 case `uname -r` in
     *pmagic)
         modprobe ehci-hcd
         modprobe uhci-hcd
         modprobe ohci-hcd
         modprobe xhci-hcd
+
+        # Modprobe modules from the boot command-line
+        for i in $modprobe; do
+            modprobe $i
+        done
         ;;
 esac
-
-# Modprobe modules from the boot command-line
-for i in $modprobe; do
-    modprobe $i
-done
 
 # Create tmpfs on /tmp for mprime
 MEMORY=`awk '/^MemTotal/ {print $2}' /proc/meminfo`

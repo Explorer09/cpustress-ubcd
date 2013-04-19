@@ -78,23 +78,23 @@ to the isolinux config file:
 
 eg. Run cpuburn-in for 10 days.
 
-     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-     INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND noapic ubcdcmd=cpuburn-in days=10
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=cpuburn-in days=10
 
 
 eg. Run cpuburn-in for 10 hours.
 
-     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-     INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND noapic ubcdcmd=cpuburn-in hours=10
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=cpuburn-in hours=10
 
 
 eg. Run cpuburn-in for 10 minutes.
 
-     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-     INITRD /ubcd/boot/cpustress/initrd.gz
-     APPEND noapic ubcdcmd=cpuburn-in minutes=10
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=cpuburn-in minutes=10
 
 
 If those parameters are all provided to the APPEND command of the isolinux

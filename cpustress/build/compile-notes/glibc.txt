@@ -12,16 +12,13 @@ important bugs fixes that glibc would not fix until their next release.
 is not fixed except in eglibc.)
 
 First, you need svn client to fetch out the eglibc source code and gawk for 
-the configure script to work. Please also install autoconf, gettext, and 
-texinfo. They are not strictly necessary but configure will generate warnings 
-if you don't.
+the configure script to work. Autoconf, gettext, and texinfo are not strictly 
+necessary but configure will generate warnings if you don't have them.
 
  $ sudo apt-get install subversion gawk autoconf gettext texinfo
 
-In addition, glibc needs the linux kernel headers to compile.
-I use the headers from version 3.8.8. Please search the web to see how you 
-make the API headers from the kernel source. I will omit the details, but 
-basically you need to do these:
+In addition, glibc needs the linux kernel headers to compile. I use the 
+headers from version 3.8.8.
 
  $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.8.8.tar.xz
  $ tar -x -v --xz -f linux-3.8.8.tar.xz
@@ -83,7 +80,5 @@ Then, create symlinks:
 (Optional) To reduce the file size, I stripped the binaries after compilation:
 
  $ strip --strip-unneeded *-2.17.so
-
-That's it. You have the updated libraries for the CPUstress image!
 
 --Explorer <explorer09@gmail.com>

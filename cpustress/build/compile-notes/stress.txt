@@ -12,13 +12,12 @@ hdd stressing, because the CPUstress image does not support writing to disks:
  $ patch -p 1 <stress-no-hdd.patch
 
 Then run the configure script and then "make". You will get the binary in the 
-"src" directory. (The default settings by configure should be enough for the 
-CPUstress image.)
+"src" directory.
 
  $ ./configure
  $ make
 
-I stripped the binary after compilation to reduce the file size.
+(Optional) To reduce the file size, I stripped the binary after compilation:
 
  $ strip ./src/stress
 

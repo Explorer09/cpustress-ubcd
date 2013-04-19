@@ -5,11 +5,15 @@ The CPUstress test image is an initramfs image that contains several tools for
 CPU stressing.
 
 It contains the following tools:
+* CPUburn
 * CPU Burn-in
 * CPUinfo
+* Intel Optimized LINPACK Benchmark
 * Mersenne Prime Test (prime95)
 * Stress
 * StressCPU
+* System Stability Tester
+* 'sensors' program from lm_sensors
 
 CPUstress is used in Ultimate Boot CD.
 
@@ -74,10 +78,16 @@ website or the about page of that specific program.
 Links
 -----
 
+CPUburn
+* http://web.archive.org/web/20110623074500/http://pages.sbcglobal.net/redelm/
+
 CPU Burn-in
 * http://cpuburnin.com/
 
-Prime95
+Intel Optimized LINPACK Benchmark
+* http://software.intel.com/en-us/articles/intel-math-kernel-library-linpack-download
+
+Mersenne Prime test (Prime95)
 * http://www.mersenne.org/freesoft/
 
 Stress
@@ -88,6 +98,9 @@ StressCPU2
 
 System Stability Tester
 * http://systester.sourceforge.net/
+
+Lm_sensors
+* http://www.lm-sensors.org/
 
 Ultimate Boot CD
 * http://www.ultimatebootcd.com/

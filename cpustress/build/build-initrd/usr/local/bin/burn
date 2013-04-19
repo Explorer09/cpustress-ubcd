@@ -41,7 +41,7 @@ sigchld_handler () {
     read -s -n1 REPLY
 }
 
-printf '\033[0;32mcpuburn v1.4a:\n'
+printf '\033[0;32mCPUburn v1.4a:\n'
 printf '==============\033[0m\n\n'
 
 # Detect processor type

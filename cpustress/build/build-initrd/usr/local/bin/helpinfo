@@ -66,14 +66,14 @@ total percentage of the processing power is 100%.
 
 By typing 'menu' at the terminal window, you will get a menu from which you can
 select the following programs:
-        - cpuburn v1.4a                   (burn)
+        - CPUburn v1.4a                   (burn)
         - CPU Burn-in v1.00               (cpuburn-in)
         - CPUinfo v1.00                   (cpuinfo)
         - Helpinfo                        (helpinfo)
         - Intel Optimized LINPACK 11.0.3  (linpack)
         - Mersenne Prime test v23.9.2     (mprime 23)
         - Mersenne Prime test v27.9       (mprime 27)
-        - sensors v3.3.3                  (sensors)
+        - Sensors v3.3.3                  (sensors)
         - Stress v1.0.4                   (stress)
         - CPU stress tester 2.0           (stresscpu2)
         - System Stability Tester 1.5.1   (systester)
@@ -82,13 +82,13 @@ select the following programs:
 
 Help is available for the following executables:
   * CPU stress and info tools:
-        - cpuburn v1.4a                   (burn)
+        - CPUburn v1.4a                   (burn)
         - CPU Burn-in v1.00               (cpuburn-in)
         - CPUinfo v1.00                   (cpuinfo)
         - Helpinfo                        (helpinfo)
         - Intel Optimized LINPACK 11.0.3  (linpack)
         - Mersenne Prime test             (mprime)
-        - sensors v3.3.3                  (sensors)
+        - Sensors v3.3.3                  (sensors)
         - Stress v1.0.4                   (stress)
         - CPU stress tester 2.0           (stresscpu2)
         - System Stability Tester 1.5.1   (systester)
