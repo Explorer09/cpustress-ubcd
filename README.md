@@ -13,7 +13,7 @@ It contains the following tools:
 * Stress
 * StressCPU
 * System Stability Tester
-* 'sensors' program from lm_sensors
+* Sensors (from lm_sensors)
 
 CPUstress is used in Ultimate Boot CD.
 

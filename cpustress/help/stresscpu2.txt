@@ -1,0 +1,38 @@
+CPU stress tester 2.0 (-h for help)
+Architecture: ia32/x86 (32bit)
+Copyright (c) Erik Lindahl <lindahl@cbr.su.se> 2004-2007
+
+This program accomplishes two things:
+
+1. It heats your CPU by running hand-tuned SSE assembly
+2. It checks the results to find memory and similar subtle errors
+
+The actual code is a custom version of the GROMACS assembly loops.
+Check out http://www.gromacs.org for details.
+
+Available options:
+ -h            Print this help message.
+ -s            Completely silent execution (only print errors)
+ -n #          Set # threads manually instead of automatically
+ -t hh:mm:ss   Runtime
+
+If an error occurs, executions stops with a string including 'ERROR'.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+Other usage is normally fine too, contact the author for permission.
+
+Passing options to stresscpu2 through the isolinux commandline
+**************************************************************
+
+If you want to run stresscpu2 with specific parameters, when you boot the
+image, use something similar to:
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=stresscpu2 ubcdargs="-s -t 48:00:00"
+
+The ubcdargs parameter contains the options that you want to pass to
+stresscpu2.

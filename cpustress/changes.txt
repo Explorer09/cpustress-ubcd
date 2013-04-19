@@ -1,9 +1,40 @@
-This file documents the changes of CPUstress test from v2.1 to v2.2.1.
+This file documents the changes of CPUstress test from v2.1 to v2.3.
 Changes are made by Explorer <explorer09@gmail.com>
 
-13 April 2013
+Changes in v2.3
+---------------
+19 April 2013
 
-- New program: System Stability Tester 1.5.1 (systester-cli)
+New programs:
+- CPUburn v1.4a
+- Intel Optimized LINPACK Benchmark 11.0.3
+- System Stability Tester 1.5.1 (CLI version)
+- Sensors v3.3.3
+
+Programs updated or rebuilt:
+- Updated kernel to 3.8.8. Added drivers of I2C buses and hardware sensors.
+  Disabled loadable module support in kernel.
+- BusyBox updated to 1.21.0. Added 'free', 'mpstat', 'ps', 'uptime', 'kill', 
+  'date', 'cp', and 'vi'. 'echo' now becomes ash built-in. Removed 'modprobe' 
+  and 'lsmod'.
+- Added libgcc_s.so. This file is required by linpack.
+- Rebuilt eglibc (same version).
+
+Changes:
+- Renamed 'cpuburn' wrapper to cpuburn-m.
+- The cpuburn-m and mprime wrappers are now conservative when killing 
+  processes. (They now kill by PID rather than by name.) They now also reap 
+  zombie processes.
+- Use "ubcdargs" instead of cmdhelpinfo, cmdstress, etc. in isolinux options.
+- Other minor bug fixes.
+
+Note:
+- Please check your isolinux config files when you upgrade your CPUstress 
+  image to this version. There are 2 boot options incompatible with this new 
+  version:
+  1. "ubcdcmd=cpuburn" no longer works. Use "ubcdcmd=cpuburn-in" instead.
+  2. The options "cmdhelpinfo", "cmdstress", and "cmdstresscpu2" are obsolete.
+     Use "ubcdargs" instead.
 
 Changes in v2.2.1
 -----------------

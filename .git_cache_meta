@@ -1,9 +1,9 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2013-04-19 11:26:42.6317465110" .git_cache_meta
+touch -c -h -d "2013-04-19 14:28:16.1908129750" .git_cache_meta
 chmod 0664 .gitignore
 touch -c -h -d "2013-04-17 15:37:57.9902283480" .gitignore
 chmod 0664 README.md
-touch -c -h -d "2013-04-18 23:25:03.1025325270" README.md
+touch -c -h -d "2013-04-19 11:33:12.0000000000" README.md
 chmod 0775 cpustress/build/build
 touch -c -h -d "2013-04-19 10:00:58.7959758470" cpustress/build/build
 touch -c -h -d "2013-04-19 11:21:42.9437598690" cpustress/build/build-initrd/bin/ash
@@ -197,7 +197,7 @@ touch -c -h -d "2013-04-19 11:22:03.2437589680" cpustress/build/prepare
 chmod 0664 cpustress/bzImage
 touch -c -h -d "2013-04-19 10:21:45.0000000000" cpustress/bzImage
 chmod 0664 cpustress/changes.txt
-touch -c -h -d "2013-04-13 23:34:55.3773421520" cpustress/changes.txt
+touch -c -h -d "2013-04-19 14:27:49.3068141740" cpustress/changes.txt
 chmod 0664 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0664 cpustress/help/burn.txt
@@ -212,10 +212,12 @@ chmod 0664 cpustress/help/sensors.txt
 touch -c -h -d "2013-04-17 09:16:50.9263376290" cpustress/help/sensors.txt
 chmod 0664 cpustress/help/stress.txt
 touch -c -h -d "2013-04-13 22:21:10.1695394470" cpustress/help/stress.txt
+chmod 0664 cpustress/help/stresscpu2.txt
+touch -c -h -d "2013-04-19 09:53:11.0000000000" cpustress/help/stresscpu2.txt
 chmod 0664 cpustress/help/syslinux/cpustrs1.txt
-touch -c -h -d "2013-04-11 10:03:23.8282044300" cpustress/help/syslinux/cpustrs1.txt
+touch -c -h -d "2013-04-19 14:08:49.1628650060" cpustress/help/syslinux/cpustrs1.txt
 chmod 0664 cpustress/help/syslinux/cpustrs2.txt
-touch -c -h -d "2013-04-19 11:14:03.8517803390" cpustress/help/syslinux/cpustrs2.txt
+touch -c -h -d "2013-04-19 13:30:12.0000000000" cpustress/help/syslinux/cpustrs2.txt
 chmod 0664 cpustress/help/systester.txt
 touch -c -h -d "2013-04-13 23:13:04.1174006140" cpustress/help/systester.txt
 chmod 0664 cpustress/readme.txt
