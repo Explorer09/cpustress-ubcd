@@ -10,11 +10,10 @@ VOLUME_ID="CPUSTRESS"
 # Define ISO filename
 ISO_FILENAME="cpustress-2.3.iso"
 
-ROOT_OF_ISO_PATH="$(pwd)/iso"
-
 # Change working directory to the parent directory of the script.
 cd `dirname $0`
 cd ..
+ROOT_OF_ISO_PATH="$(pwd)/iso"
 
 # Execute other build scripts when needed.
 if [ ! -f "cpustress/initrd.gz" ]; then
