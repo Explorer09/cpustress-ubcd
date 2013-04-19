@@ -152,7 +152,7 @@ while [ "X$1" != "X" ]; do
 done
 
 PID_LIST=""
-trap 'trap - 1 2 3 15 17; kill $PID_LIST; exit 0' 1 2 3 15
+trap 'trap - 17; kill $PID_LIST; wait; trap - 1 2 3 15; exit 0' 1 2 3 15
 
 if [ "$MODE" -eq "3" ]; then
     printf "To stress all CPUs, $instances instances of mprime23 will be run in the background.\n\n"
@@ -169,8 +169,8 @@ if [ "$MODE" -eq "3" ]; then
     # This 'read' may be interrupted by a SIGCHLD.
     read -s -n1 REPLY
 
-    trap - 17
-    kill $PID_LIST
+    echo "mprime: Terminating."
+    trap - 17; kill $PID_LIST; wait; trap - 1 2 3 15; exit 0
 else
     if [ "$MODE" -eq "2" ]; then
         # ARGS always begins with a space.

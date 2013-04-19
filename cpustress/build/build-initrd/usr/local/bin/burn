@@ -161,22 +161,22 @@ if [ "$MODE" = "MMX" ] || [ "$MODE" = "BX" ]; then
         echo
     fi
     case "$RAMSIZE" in
-        A | a | 2[Kk])    ARGS=" A" ;;
-        B | b | 4[Kk])    ARGS=" B" ;;
-        C | c | 8[Kk])    ARGS=" C" ;;
-        D | d | 16[Kk])   ARGS=" D" ;;
-        E | e | 32[Kk])   ARGS=" E" ;;
-        F | f | 64[Kk])   ARGS=" F" ;;
-        G | g | 128[Kk])  ARGS=" G" ;;
-        H | h | 256[Kk])  ARGS=" H" ;;
-        I | i | 512[Kk])  ARGS=" I" ;;
-        J | j | 1[Mm])    ARGS=" J" ;;
-        K | k | 2[Mm])    ARGS=" K" ;;
-        L | l | 4[Mm])    ARGS=" L" ;;
-        M | m | 8[Mm])    ARGS=" M" ;;
-        N | n | 16[Mm])   ARGS=" N" ;;
-        O | o | 32[Mm])   ARGS=" O" ;;
-        P | p | 64[Mm])   ARGS=" P" ;;
+        [Aa] | 2[Kk])    ARGS=" A" ;;
+        [Bb] | 4[Kk])    ARGS=" B" ;;
+        [Cc] | 8[Kk])    ARGS=" C" ;;
+        [Dd] | 16[Kk])   ARGS=" D" ;;
+        [Ee] | 32[Kk])   ARGS=" E" ;;
+        [Ff] | 64[Kk])   ARGS=" F" ;;
+        [Gg] | 128[Kk])  ARGS=" G" ;;
+        [Hh] | 256[Kk])  ARGS=" H" ;;
+        [Ii] | 512[Kk])  ARGS=" I" ;;
+        [Jj] | 1[Mm])    ARGS=" J" ;;
+        [Kk] | 2[Mm])    ARGS=" K" ;;
+        [Ll] | 4[Mm])    ARGS=" L" ;;
+        [Mm] | 8[Mm])    ARGS=" M" ;;
+        [Nn] | 16[Mm])   ARGS=" N" ;;
+        [Oo] | 32[Mm])   ARGS=" O" ;;
+        [Pp] | 64[Mm])   ARGS=" P" ;;
         *)
             echo "Invalid ramsize argument. Using the default ($DEFAULT_SIZE)."
             ;;
@@ -195,7 +195,7 @@ if [ "X$instances" = "X" ]; then
 fi
 
 PID_LIST=""
-trap 'trap - 1 2 3 15 17; kill $PID_LIST; exit 0' 1 2 3 15
+trap 'trap - 1 2 3 15 17; kill $PID_LIST; wait; exit 0' 1 2 3 15
 
 if [ "$instances" -eq "1" ]; then
     printf "Running 1 instance of burn$MODE ('/opt/burn/print-pid /opt/burn/burn${MODE}$ARGS').\n"
@@ -214,8 +214,8 @@ else
     # This 'read' may be interrupted by a SIGCHLD.
     read -s -n1 REPLY
 
-    trap - 17
-    kill $PID_LIST
+    echo "burn: Terminating."
+    trap - 17; kill $PID_LIST; wait; trap - 1 2 3 15; exit 0
 fi
 
 trap - 1 2 3 15 17
