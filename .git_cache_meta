@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2013-04-20 11:27:41.0721714160" .git_cache_meta
+touch -c -h -d "2013-04-20 17:37:09.2048127670" .git_cache_meta
 chmod 0664 .gitignore
 touch -c -h -d "2013-04-17 15:37:57.9902283480" .gitignore
 chmod 0664 README.md
@@ -246,18 +246,24 @@ chmod 0664 iso/ubcd/menus/syslinux/cpu.cfg
 touch -c -h -d "2013-04-20 11:24:58.3961786700" iso/ubcd/menus/syslinux/cpu.cfg
 chmod 0664 iso/ubcd/menus/syslinux/defaults.cfg
 touch -c -h -d "2013-04-03 12:23:08.0991211180" iso/ubcd/menus/syslinux/defaults.cfg
-chmod 0664 screenshots/cpustress-cpuburn-in.png
-touch -c -h -d "2013-04-09 10:41:40.0000000000" screenshots/cpustress-cpuburn-in.png
-chmod 0664 screenshots/cpustress-helpinfo.png
-touch -c -h -d "2013-04-09 10:41:40.0000000000" screenshots/cpustress-helpinfo.png
+chmod 0600 screenshots/cpustress-burn.png
+touch -c -h -d "2013-04-20 16:46:10.0000000000" screenshots/cpustress-burn.png
+chmod 0600 screenshots/cpustress-cpuburn-in.png
+touch -c -h -d "2013-04-20 16:46:31.0000000000" screenshots/cpustress-cpuburn-in.png
+chmod 0600 screenshots/cpustress-helpinfo.png
+touch -c -h -d "2013-04-20 16:46:01.0000000000" screenshots/cpustress-helpinfo.png
+chmod 0600 screenshots/cpustress-intel-linpack.png
+touch -c -h -d "2013-04-20 16:46:15.0000000000" screenshots/cpustress-intel-linpack.png
 chmod 0664 screenshots/cpustress-mprime.png
 touch -c -h -d "2013-04-09 10:41:41.0000000000" screenshots/cpustress-mprime.png
-chmod 0664 screenshots/cpustress-splash.png
-touch -c -h -d "2013-04-09 10:48:34.0000000000" screenshots/cpustress-splash.png
+chmod 0600 screenshots/cpustress-splash.png
+touch -c -h -d "2013-04-20 16:46:39.0000000000" screenshots/cpustress-splash.png
 chmod 0664 screenshots/cpustress-stress.png
 touch -c -h -d "2013-04-09 10:48:46.0000000000" screenshots/cpustress-stress.png
 chmod 0664 screenshots/cpustress-stresscpu2.png
 touch -c -h -d "2013-04-09 10:48:54.0000000000" screenshots/cpustress-stresscpu2.png
+chmod 0600 screenshots/cpustress-systester.png
+touch -c -h -d "2013-04-20 16:46:43.0000000000" screenshots/cpustress-systester.png
 chmod 0775 scripts/clean.sh
 touch -c -h -d "2013-04-20 11:24:21.3161803220" scripts/clean.sh
 chmod 0775 scripts/git-cache-meta.sh
