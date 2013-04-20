@@ -15,10 +15,6 @@ cd `dirname $0`
 cd ..
 ROOT_OF_ISO_PATH="$(pwd)/iso-tmp"
 
-if [ -e "$ROOT_OF_ISO_PATH" ]; then
-    rm -Ri "$ROOT_OF_ISO_PATH"
-fi
-
 # Execute other build scripts when needed.
 if [ ! -f "cpustress/initrd.gz" ]; then
     if [ ! -f "cpustress/build/initrd.gz" ]; then
@@ -39,10 +35,17 @@ if [ ! -f "cpustress/build.txz" ]; then
     fi
 fi
 
-# Copy the cpustress directory for building ISO image.
+if [ -e "$ROOT_OF_ISO_PATH" ]; then
+    rm -Ri "$ROOT_OF_ISO_PATH"
+fi
+
+# Clone the directory so that the "iso" directory can stay intact.
 cp -aR iso "$ROOT_OF_ISO_PATH"
+# Copy the cpustress directory for building ISO image.
 rm -fR "$ROOT_OF_ISO_PATH/ubcd/boot/cpustress"/*
 cp -aR cpustress/* "$ROOT_OF_ISO_PATH/ubcd/boot/cpustress"
+# Don't include the source directory.
+rm -fR "$ROOT_OF_ISO_PATH/ubcd/boot/cpustress/build"
 
 # Save IFS
 SAVED_IFS=$IFS
