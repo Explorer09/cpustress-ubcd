@@ -13,7 +13,11 @@ ISO_FILENAME="cpustress-2.3.iso"
 # Change working directory to the parent directory of the script.
 cd `dirname $0`
 cd ..
-ROOT_OF_ISO_PATH="$(pwd)/iso"
+ROOT_OF_ISO_PATH="$(pwd)/iso-tmp"
+
+if [ -e "$ROOT_OF_ISO_PATH" ]; then
+    rm -Ri "$ROOT_OF_ISO_PATH"
+fi
 
 # Execute other build scripts when needed.
 if [ ! -f "cpustress/initrd.gz" ]; then
@@ -36,8 +40,9 @@ if [ ! -f "cpustress/build.txz" ]; then
 fi
 
 # Copy the cpustress directory for building ISO image.
-rm -rf iso/ubcd/boot/cpustress/*
-cp -aR cpustress/* iso/ubcd/boot/cpustress
+cp -aR iso "$ROOT_OF_ISO_PATH"
+rm -fR "$ROOT_OF_ISO_PATH/ubcd/boot/cpustress"/*
+cp -aR cpustress/* "$ROOT_OF_ISO_PATH/ubcd/boot/cpustress"
 
 # Save IFS
 SAVED_IFS=$IFS
@@ -89,14 +94,6 @@ elif [ -z "$MKISOFS" ]; then
 fi
 
 # Clean up.
-rm -rf iso/ubcd/boot/cpustress/*
-cat >iso/ubcd/boot/cpustress/NOTICE.txt <<NOTICE
-Please don't put any files inside this directory. They will be DELETED when 
-building the ISO image.
+rm -fR "$ROOT_OF_ISO_PATH"
 
-The make_iso.sh script will temporarily copy the contents from the cpustress 
-directory (at the top of the repo) to here. Then this directory will be 
-cleaned up again, leaving only this NOTICE.txt.
-NOTICE
-
-echo "'iso/ubcd/boot/cpustress' has been cleaned up."
+echo "'$ROOT_OF_ISO_PATH' has been cleaned up."
