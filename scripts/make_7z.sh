@@ -5,7 +5,7 @@
 # The ! and * are interpreted differently by the shell, so they have to be
 # escaped.
 
-ARCHIVE_NAME="cpustress-2.3"
+ARCHIVE_NAME="cpustress-2.3.1"
 
 # Change working directory to the parent directory of the script.
 cd `dirname $0`

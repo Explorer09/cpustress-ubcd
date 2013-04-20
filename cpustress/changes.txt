@@ -1,5 +1,11 @@
-This file documents the changes of CPUstress test from v2.1 to v2.3.
+This file documents the changes of CPUstress test from v2.1 to v2.3.1.
 Changes are made by Explorer <explorer09@gmail.com>
+
+Changes in v2.3.1
+-----------------
+20 April 2013
+
+- Fix 'trap 1 2 3 15' bug in burn and cpuburn-m wrappers.
 
 Changes in v2.3
 ---------------
