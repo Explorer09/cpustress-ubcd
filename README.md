@@ -26,6 +26,15 @@ This repositories contains a few shell scripts that allows you to build disk
 images for different uses. However, there's no Makefile yet so you have to 
 execute several scripts in a sequence.
 
+Tools required:
+
+1. XZ-Utils
+2. p7zip
+3. mkisofs or genisoimage
+
+Except for p7zip, your Linux distribution should have provided these
+off-the-shelf.
+
 Building CPUstress for Ultimate Boot CD:
 
 1. (Optional) Run 'scripts/git-cache-meta.sh --apply' to update the file 
