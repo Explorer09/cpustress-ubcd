@@ -1,6 +1,6 @@
 color cyan/black black/light-gray green/black yellow/black
 
-title CPUstress V2.3.1\n A minimal Linux boot image that is used to run several stress-testing tools on\n the UBCD. This entry will launch the internal menu, in which you can select\n which stress program to run.
+title CPUstress development\n A minimal Linux boot image that is used to run several stress-testing tools on\n the UBCD. This entry will launch the internal menu, in which you can select\n which stress program to run.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=menu
 initrd /ubcd/boot/cpustress/initrd.gz
 map --unmap=0:0xff
