@@ -321,7 +321,7 @@ way to specify this is different among programs.
     stresscpu2: Add ubcdargs="-n N" to the APPEND line.
     systester:  Add ubcdargs="-threads N" to the APPEND line.
     mprime27:   You need to use the interactive menu. Adding ubcdargs="-m" will
-                take you the menu.
+                take you to the menu.
 
 
 Thanks:
