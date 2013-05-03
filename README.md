@@ -66,20 +66,15 @@ The image is now modified and maintained by Kang-Che Sung ("Explorer")
 License
 -------
 
-This program is free software; you can redistribute it and/or modify it under 
-the terms of the GNU General Public License, version 2 only, as published by 
-the Free Software Foundation.
+The CPUstress image contains non-free programs, please read 
+'cpustress/nonfree.txt' for details. Unless mentioned otherwise, the programs 
+are licensed under the GNU General Public License version 2:
 
-This program is distributed in the hope that it will be useful, but WITHOUT 
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
-FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+The text of the GNU General Public License version 2 is available at 
+'cpustress/gpl-2.0.txt'.
 
-The text of the GNU General Public License version 2 can be read at 
-'cpustress/gpl-2.0.txt'
-
-Please note that some programs included in this image might be licensed under 
-different terms. The GNU General Public License is applied to the initrd 
-image and the shell scripts only.
+The GNU General Public License is applied to the shell scripts and build 
+scripts of the initrd image.
 
 For licensing information about individual programs, please refer to the 
 website or the about page of that specific program.
