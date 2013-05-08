@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2013-05-03 14:11:58.5516981730" .git_cache_meta
+touch -c -h -d "2013-05-08 10:42:53.6325468860" .git_cache_meta
 chmod 0664 .gitignore
 touch -c -h -d "2013-04-17 15:37:57.9902283480" .gitignore
 chmod 0664 README.md
@@ -224,8 +224,8 @@ chmod 0664 cpustress/nonfree.txt
 touch -c -h -d "2013-05-03 13:28:07.1143576800" cpustress/nonfree.txt
 chmod 0664 cpustress/readme.txt
 touch -c -h -d "2013-05-03 14:10:44.8117014610" cpustress/readme.txt
-chmod 0664 iso/boot/grub/grldr
-touch -c -h -d "2013-04-03 12:23:08.0791211190" iso/boot/grub/grldr
+chmod 0644 iso/boot/grub/grldr
+touch -c -h -d "2013-04-19 13:54:36.0000000000" iso/boot/grub/grldr
 chmod 0664 iso/boot/grub/menu.lst
 touch -c -h -d "2013-04-03 12:23:08.0911211190" iso/boot/grub/menu.lst
 chmod 0664 iso/boot/syslinux/isolinux.bin
@@ -243,7 +243,7 @@ touch -c -h -d "2013-04-03 12:23:08.0991211180" iso/boot/syslinux/syslinux.cfg
 chmod 0664 iso/ubcd/boot/cpustress/NOTICE.txt
 touch -c -h -d "2013-04-19 18:19:06.7639773540" iso/ubcd/boot/cpustress/NOTICE.txt
 chmod 0664 iso/ubcd/menus/grub4dos/cpu.lst
-touch -c -h -d "2013-04-29 11:09:18.4897389080" iso/ubcd/menus/grub4dos/cpu.lst
+touch -c -h -d "2013-05-08 10:42:40.2965461120" iso/ubcd/menus/grub4dos/cpu.lst
 chmod 0664 iso/ubcd/menus/syslinux/cpu.cfg
 touch -c -h -d "2013-04-29 11:09:17.3097389600" iso/ubcd/menus/syslinux/cpu.cfg
 chmod 0664 iso/ubcd/menus/syslinux/defaults.cfg
