@@ -1,8 +1,9 @@
-18 April 2013
+18 May 2013
 
 The BusyBox source code and the official patches can be downloaded here:
 http://busybox.net/downloads/busybox-1.21.0.tar.bz2
 http://busybox.net/downloads/fixes-1.21.0/busybox-1.21.0-mdev.patch
+http://busybox.net/downloads/fixes-1.21.0/busybox-1.21.0-ntfs.patch
 http://busybox.net/downloads/fixes-1.21.0/busybox-1.21.0-platform.patch
 http://busybox.net/downloads/fixes-1.21.0/busybox-1.21.0-xz.patch
 
@@ -14,8 +15,9 @@ the config:
 
  $ cd busybox-1.21.0
  $ patch -p 1 <busybox-1.21.0-mdev.patch
+ $ patch -p 1 <busybox-1.21.0-ntfs.patch
  $ patch -p 1 <busybox-1.21.0-platform.patch
- $ patch -p 1 <busybox-1.21.0-xz.patch.patch
+ $ patch -p 1 <busybox-1.21.0-xz.patch
  $ mv config .config
 
 Finally, build BusyBox:
