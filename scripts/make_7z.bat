@@ -7,7 +7,7 @@ CD ..
 
 SET P7ZIP=
 REM Poor man's 'which' command for batch script.
-FOR %%i IN (7z 7za 7zr) DO (
+FOR %%i IN (7z.exe 7za.exe 7zr.exe) DO (
     IF "X%P7ZIP%"=="X" (
         SET P7ZIP=%%~$PATH:i
     )
@@ -19,13 +19,13 @@ IF "X%P7ZIP%"=="X" (
     GOTO :EOF
 )
 
-IF EXIST %ARCHIVE_NAME% (
-    DEL /P %ARCHIVE_NAME%
+IF EXIST "%ARCHIVE_NAME%" (
+    DEL /P "%ARCHIVE_NAME%"
 )
-COPY cpustress %ARCHIVE_NAME%
-%P7ZIP% a -t7z -mx=9 %ARCHIVE_NAME%.7z %ARCHIVE_NAME%\* -xr-!%ARCHIVE_NAME%\build -xr!*.txz -xr!*.gz -xr!bzImage
-%P7ZIP% a -t7z -mx=0 %ARCHIVE_NAME%.7z %ARCHIVE_NAME%\build.txz %ARCHIVE_NAME%\initrd.gz %ARCHIVE_NAME%\bzImage
+COPY cpustress "%ARCHIVE_NAME%"
+"%P7ZIP%" a -t7z -mx=9 "%ARCHIVE_NAME%.7z" "%ARCHIVE_NAME%\*" -xr-!"%ARCHIVE_NAME%\build" -xr!*.txz -xr!*.gz -xr!bzImage
+"%P7ZIP%" a -t7z -mx=0 "%ARCHIVE_NAME%.7z" "%ARCHIVE_NAME%\build.txz" "%ARCHIVE_NAME%\initrd.gz" "%ARCHIVE_NAME%\bzImage"
 REM Delete the temp directory.
-DEL /F %ARCHIVE_NAME%
+DEL /F "%ARCHIVE_NAME%"
 
 ECHO Done.
