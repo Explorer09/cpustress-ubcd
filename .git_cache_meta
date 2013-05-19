@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2013-05-19 21:14:33.0490427090" .git_cache_meta
+touch -c -h -d "2013-05-19 21:24:23.7930163710" .git_cache_meta
 chmod 0664 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0664 .gitignore
@@ -210,6 +210,8 @@ chmod 0664 cpustress/help/cpuburn-in.txt
 touch -c -h -d "2013-04-19 08:42:37.3378305290" cpustress/help/cpuburn-in.txt
 chmod 0664 cpustress/help/cpuinfo.txt
 touch -c -h -d "2013-05-19 21:05:46.8330661700" cpustress/help/cpuinfo.txt
+chmod 0664 cpustress/help/linpack.txt
+touch -c -h -d "2013-05-19 21:22:43.6770208350" cpustress/help/linpack.txt
 chmod 0664 cpustress/help/mprime.txt
 touch -c -h -d "2013-04-15 00:01:50.8432505070" cpustress/help/mprime.txt
 chmod 0664 cpustress/help/sensors.txt
