@@ -68,7 +68,7 @@ License
 
 The CPUstress image contains non-free programs, please read 
 'cpustress/nonfree.txt' for details. Unless mentioned otherwise, the programs 
-are licensed under the GNU General Public License version 2:
+are licensed under the GNU General Public License version 2.
 
 The text of the GNU General Public License version 2 is available at 
 'cpustress/gpl-2.0.txt'.
