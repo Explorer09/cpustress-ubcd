@@ -1,0 +1,26 @@
+# See also: https://help.github.com/articles/dealing-with-line-endings
+
+# Overwrite the "core.autocrlf" global setting. This repository has binary and
+# text files in both LF and CRLF line endings. So no automatic end-of-line
+# conversion unless explicitly told below.
+* -text
+
+# Shell scripts.
+*.sh text=auto eol=lf
+*.bat text=auto eol=crlf
+
+# Patch files in compile-notes.
+*.patch text eol.lf
+
+# Grub4dos config file. Use CRLF line ending like in UBCD.
+*.lst text=auto eol=crlf
+
+# Syslinux config file. Use CRLF line ending like in UBCD.
+*.cfg text=auto eol=crlf
+
+# Plain texts are a little bit complicated. They have to be LF-ending in
+# initrd and build.txz, but CRLF-ending in other places so that Windows users
+# can open and read them.
+cpustress/*.txt text eol=crlf
+cpustress/help/*.txt text eol=crlf
+cpustress/build/**/*.txt text eol=lf
