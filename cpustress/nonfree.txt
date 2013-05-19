@@ -24,7 +24,7 @@ of the extracted initrd image.
   that is incompatible with GPL. Specifically, the license has a requirement 
   that if the user finds a prime number using the program he must credit GIMPS 
   as the discoverer and may not claim prizes on his own. It is technically not 
-  free software.
+  free software for this reason.
   Files: opt/mprime/*
          usr/local/bin/mprime
 
