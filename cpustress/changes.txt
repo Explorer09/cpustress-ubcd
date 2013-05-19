@@ -1,17 +1,28 @@
-This file documents the changes of CPUstress test from v2.1 to v2.3.2.
+This file documents the changes of CPUstress test from v2.1 to v2.3.3.
 Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-3 May 2013
+19 May 2013
 
+
+Changes in v2.3.3
+-----------------
+19 May 2013
+
+- Updated kernel to 3.8.13.
+- Rebuilt BusyBox and eglibc (same version).
+- The "ubcdargs" boot option is now also shown in "UBCD args" field in splash 
+  screen.
+- Add "help/linpack.txt".
+- Minor fixes in scripts and documentation.
 
 Changes in v2.3.2
 -----------------
 3 May 2013
 
 - Updated kernel to 3.8.11.
-- Add clarifications to licenses.
+- Add clarifications to licenses (see also nonfree.txt).
 - Minor fixes in scripts and documentation.
 
 Changes in v2.3.1
@@ -73,11 +84,6 @@ Changes:
   suggestion.)
 - 'cpuburn' and 'mprime' script improvements. They now also trap signals 1 
   and 15. 'mprime' now supports command-line arguments.
-
-Note:
-- The command-line arguments of mprime rarely do something automatically. Most 
-  of the arguments will bring user to the interactive menu. So there's not 
-  much use when specifying at boot time.
 
 Changes in v2.2
 ---------------
