@@ -13,7 +13,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 29 April 2013.
+# Last updated on 19 May 2013.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
@@ -50,7 +50,7 @@ CPUSTRESS_TEXT
           for (i = 135; i <= length($0); i += 67)
               printf("             %s\n", substr($0, i, 67))}'
 
-    printf "\033[01;37mUBCD args:\033[0m   $ubcdcmd\n\n"
+    printf "\033[01;37mUBCD args:\033[0m   $ubcdcmd $ubcdargs\n\n"
 
     VENDOR=`awk '/^vendor_id/ {for (i = 3; i < NF; i++) printf("%s ", $i); print $NF; exit}' /proc/cpuinfo`
     CPU_MODEL=`awk '/^model name/ {for (i = 4; i <= NF; i++) printf("%s ", $i); printf("\n"); exit}' /proc/cpuinfo`
@@ -120,8 +120,8 @@ CPUSTRESS_TEXT
             ;;
         stress)
             stress $ubcdargs
-            if [ -z "$ubcdargs" ] || [ "$ubcdargs" = "-?" ] || \
-               [ "$ubcdargs" = "--help" ]; then
+            if [ "X$ubcdargs" = "X" ] || [ "X$ubcdargs" = "X-?" ] || \
+               [ "X$ubcdargs" = "X--help" ]; then
                 echo 'Press any key to continue.'
                 read -s -n1 REPLY
             fi
