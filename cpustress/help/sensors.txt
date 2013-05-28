@@ -32,7 +32,10 @@ OPTIONS
        -A, --no-adapter
               Do not show the adapter for each chip.
 
-       -u     Raw output. This mode is only meant for debugging.
+       -u     Raw output. This mode is suitable for debugging and for post-
+              processing of the output by scripts. It is also useful when
+              writing a configuration file because it shows the raw input names
+              which must be referenced in the configuration file.
 
        -v, --version
               Print the program version and exit.
@@ -60,4 +63,4 @@ SEE ALSO
 AUTHOR
        Frodo Looijaard and the lm_sensors group http://www.lm-sensors.org/
 
-lm-sensors 3                      October 2007                       sensors(1)
+lm-sensors 3                     November 2012                       sensors(1)

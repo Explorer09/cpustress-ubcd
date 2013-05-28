@@ -3,7 +3,9 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-19 May 2013
+28 May 2013
+
+- Updated Sensors to v3.3.4 (from v3.3.3).
 
 
 Changes in v2.3.3

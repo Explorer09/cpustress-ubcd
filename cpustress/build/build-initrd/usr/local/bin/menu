@@ -14,7 +14,7 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 18 April 2013.
+# Last updated on 28 May 2013.
 
 
 if [ "X$1" = "X--help" ]; then
@@ -50,7 +50,7 @@ printf "                 \033[01;37m8)\033[0m System Stability Tester 1.5.1   (s
 printf "\n"
 printf "                 \033[01;37m9)\033[0m CPUinfo v1.00                   (cpuinfo)\n"
 printf "                \033[01;37m10)\033[0m Helpinfo                        (helpinfo)\n"
-printf "                \033[01;37m11)\033[0m Sensors v3.3.3                  (sensors)\n"
+printf "                \033[01;37m11)\033[0m Sensors v3.3.4                  (sensors)\n"
 printf "\n"
 printf "                \033[01;37m12)\033[0m Reboot                          (reboot)\n"
 printf "                \033[01;37m13)\033[0m Shutdown                        (poweroff)\n"
