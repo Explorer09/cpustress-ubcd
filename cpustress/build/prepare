@@ -12,14 +12,15 @@
 #
 #
 # Written by Explorer.
-# Last updated on 19 April 2013.
+# Last updated on 30 May 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
 
+chmod 755 build-initrd
 cd build-initrd
 
-mkdir -p -m 775 dev proc sys tmp
+mkdir -p -m 755 dev proc sys tmp
 ln -s bin/busybox init
 
 cd bin

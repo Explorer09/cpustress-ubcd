@@ -1,10 +1,10 @@
-18 April 2013
+30 May 2013
 
 The Intel Optimized LINPACK Benchmark can be downloaded here:
 http://software.intel.com/en-us/articles/intel-math-kernel-library-linpack-download
 
 Direct link:
-http://registrationcenter.intel.com/irc_nas/3058/l_lpk_p_11.0.3.008.tgz
+http://registrationcenter-download.intel.com/akdlm/irc_nas/3058/l_lpk_p_11.0.3.008.tgz
 
  $ tar -x -v -z -f l_lpk_p_11.0.3.008.tgz
 
@@ -20,8 +20,8 @@ We need only these files:
 
 All of these files were in mode 755. Change them:
 
- $ chmod 664 help.lpk xhelp.lpk lininput_xeon32
- $ chmod 775 xlinpack_xeon32
+ $ chmod 644 help.lpk xhelp.lpk lininput_xeon32
+ $ chmod 755 xlinpack_xeon32
 
 Note: Don't rename help.lpk or xhelp.lpk as xlinpack_xeon32 reads these files 
 for displaying its help text.
