@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2013-05-28 21:30:59.3230409640" .git_cache_meta
+touch -c -h -d "2013-05-30 08:56:43.2346960530" .git_cache_meta
 chmod 0664 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0664 .gitignore
@@ -139,7 +139,7 @@ chmod 0775 cpustress/build/build-initrd/usr/local/bin/menu
 touch -c -h -d "2013-05-28 21:24:30.4230583030" cpustress/build/build-initrd/usr/local/bin/menu
 chmod 0775 cpustress/build/build-initrd/usr/local/bin/mprime
 touch -c -h -d "2013-04-29 11:21:58.5526537860" cpustress/build/build-initrd/usr/local/bin/mprime
-chmod 0755 cpustress/build/build-initrd/usr/local/bin/sensors
+chmod 0775 cpustress/build/build-initrd/usr/local/bin/sensors
 touch -c -h -d "2013-05-28 20:57:26.1871307180" cpustress/build/build-initrd/usr/local/bin/sensors
 chmod 0775 cpustress/build/build-initrd/usr/local/bin/stress
 touch -c -h -d "2013-03-31 23:53:02.0000000000" cpustress/build/build-initrd/usr/local/bin/stress
