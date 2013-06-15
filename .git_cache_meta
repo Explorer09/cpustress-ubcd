@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-05-30 11:27:34.5524172640" .git_cache_meta
+touch -c -h -d "2013-06-15 17:11:48.5563215460" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -141,6 +141,8 @@ chmod 0755 cpustress/build/build-initrd/usr/local/bin/mprime
 touch -c -h -d "2013-04-29 11:21:58.5526537860" cpustress/build/build-initrd/usr/local/bin/mprime
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/sensors
 touch -c -h -d "2013-05-28 20:57:26.1871307180" cpustress/build/build-initrd/usr/local/bin/sensors
+chmod 0664 cpustress/build/build-initrd/usr/local/bin/sensors-detect
+touch -c -h -d "2013-06-15 13:53:20.7488524470" cpustress/build/build-initrd/usr/local/bin/sensors-detect
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/stress
 touch -c -h -d "2013-03-31 23:53:02.0000000000" cpustress/build/build-initrd/usr/local/bin/stress
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/stresscpu2
@@ -201,7 +203,7 @@ touch -c -h -d "2013-05-30 11:00:51.8924887170" cpustress/build/prepare
 chmod 0644 cpustress/bzImage
 touch -c -h -d "2013-05-12 23:59:35.0000000000" cpustress/bzImage
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2013-05-28 21:27:31.8670502130" cpustress/changes.txt
+touch -c -h -d "2013-06-15 13:56:42.9008434340" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
