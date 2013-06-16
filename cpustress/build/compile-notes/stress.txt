@@ -1,7 +1,7 @@
-31 March 2013
+16 June 2013
 
 The source code of stress can be downloaded here:
-http://weather.ou.edu/~apw/projects/stress/stress-1.0.4.tar.gz
+http://web.archive.org/web/20130116202706/http://weather.ou.edu/~apw/projects/stress/stress-1.0.4.tar.gz
 
 The stress binary is compiled on Ubuntu 12.04.2 LTS (32-bit).
 
