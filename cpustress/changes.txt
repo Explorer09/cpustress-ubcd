@@ -3,9 +3,10 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-15 June 2013
+16 June 2013
 
 - Updated Sensors to v3.3.4 (from v3.3.3).
+- Updated eglibc to 2.17-r23298 (from 2.17-r22665).
 - Added sensors-detect wrapper.
 
 
