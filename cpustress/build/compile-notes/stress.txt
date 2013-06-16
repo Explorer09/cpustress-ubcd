@@ -1,7 +1,13 @@
 16 June 2013
 
+Homepage of stress by Amos Waterland:
+http://web.archive.org/web/20130520190152/http://weather.ou.edu/~apw/projects/stress/
+
 The source code of stress can be downloaded here:
 http://web.archive.org/web/20130116202706/http://weather.ou.edu/~apw/projects/stress/stress-1.0.4.tar.gz
+
+The original website <http://weather.ou.edu/~apw/projects/stress/> is dead, so 
+the code have to be downloaded from a mirror.
 
 The stress binary is compiled on Ubuntu 12.04.2 LTS (32-bit).
 
