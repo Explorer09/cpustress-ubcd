@@ -3,18 +3,16 @@
 # MENU
 # ====
 #
-# Displays a simple menu from which you can choose which program
-# you want to run.
+# Displays a simple menu from which you can choose which program you want
+# to run.
 #
 #
 # Licensed under the GNU General Public License, version 2 or later.
-#
 # This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
-#
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 28 May 2013.
+# Last updated on 18 June 2013.
 
 
 if [ "X$1" = "X--help" ]; then
