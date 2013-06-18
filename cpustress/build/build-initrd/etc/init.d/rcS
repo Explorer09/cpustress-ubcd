@@ -14,11 +14,10 @@
 #
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 19 April 2013.
+# Last updated on 18 June 2013.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
-export HOME='/root'
 
 #set-up kernel file systems and mdev
 mount -n -t tmpfs -o size=64k,mode=0755 tmpfs /dev
