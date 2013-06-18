@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-06-18 13:55:46.0716970810" .git_cache_meta
+touch -c -h -d "2013-06-18 14:01:54.0836806730" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -231,7 +231,7 @@ touch -c -h -d "2013-06-17 22:39:59.2126994450" cpustress/help/systester.txt
 chmod 0644 cpustress/nonfree.txt
 touch -c -h -d "2013-05-19 20:51:56.2411032010" cpustress/nonfree.txt
 chmod 0644 cpustress/readme.txt
-touch -c -h -d "2013-05-03 14:10:44.8117014610" cpustress/readme.txt
+touch -c -h -d "2013-06-18 14:00:37.9276840690" cpustress/readme.txt
 chmod 0644 iso/boot/grub/grldr
 touch -c -h -d "2013-05-21 11:28:00.0000000000" iso/boot/grub/grldr
 chmod 0644 iso/boot/grub/menu.lst

@@ -5,7 +5,7 @@ Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 3 May 2013.
+Last edited on 18 June 2013.
 
 
 Content of this package:
@@ -24,6 +24,8 @@ _________________________
                      the image itself)
 
 ./initrd.gz      ==> initrd
+
+./nonfree.txt    ==> notes about the non-free programs
 
 ./readme.txt     ==> this readme file
 
