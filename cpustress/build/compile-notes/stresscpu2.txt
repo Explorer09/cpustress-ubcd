@@ -1,4 +1,4 @@
-18 April 2013
+30 May 2013
 
 The stresscpu2 program included in the CPUstress image in the official binary.
 
@@ -12,7 +12,7 @@ After downloading and unpacking, rename the executable:
 
 (Optional) Change the mode of the binary:
 
- $ chmod 775 stresscpu2
+ $ chmod 755 stresscpu2
 
 (Optional) You can strip the binary file to save a few bytes. I did so in my 
 CPUstress image:

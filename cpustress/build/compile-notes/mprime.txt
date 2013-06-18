@@ -1,4 +1,4 @@
-17 April 2013
+30 May 2013
 
 Website of the Mersenne Prime test program (a.k.a. mprime or prime95):
 http://www.mersenne.org/freesoft/
@@ -24,8 +24,8 @@ Rename the executables to 'mprime23' and 'mprime27' respectively:
 
 (Optional) Change the mode of the binaries:
 
- $ chmod 775 mprime239/mprime23
- $ chmod 775 p95v279/mprime27
+ $ chmod 755 mprime239/mprime23
+ $ chmod 755 p95v279/mprime27
 
 (Optional) You can strip the binary file to save a few bytes. I did so in my 
 CPUstress image:

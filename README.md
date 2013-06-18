@@ -95,7 +95,7 @@ Mersenne Prime test (Prime95)
 * http://www.mersenne.org/freesoft/
 
 Stress
-* http://weather.ou.edu/~apw/projects/stress/
+* http://web.archive.org/web/20130520190152/http://weather.ou.edu/~apw/projects/stress/
 
 StressCPU2
 * http://www.gromacs.org/Downloads/User_contributions/Other_software/

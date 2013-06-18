@@ -7,13 +7,11 @@
 #
 #
 # Licensed under the GNU General Public License, version 2 or later.
-#
 # This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
-#
 # Written by Gert Hulselmans.
-# Last updated on 12 April 2013.
+# Last updated on 18 June 2013.
 
 
 printf "Press any key to start '\033[0;32mCPUinfo v1.00\033[0m'.\n"

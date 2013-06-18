@@ -7,13 +7,11 @@
 #
 #
 # Licensed under the GNU General Public License, version 2 or later.
-#
 # This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
-#
 # Written by Explorer.
-# Last updated on 12 April 2013.
+# Last updated on 19 June 2013.
 
 
 printf "There is no built-in help for the BusyBox ash shell.\n"

@@ -1,5 +1,15 @@
-This file documents the changes of CPUstress test from v2.1 to v2.3.3.
+This file documents the changes of CPUstress test from v2.1 to v2.3.4.
 Changes are made by Explorer <explorer09@gmail.com>
+
+Changes in v2.3.4
+-----------------
+18 June 2013
+
+- Updated Sensors to v3.3.4 (from v3.3.3).
+- Updated eglibc to 2.17-r23298 (from 2.17-r22665).
+- Rebuilt systester-cli (same version).
+- Added sensors-detect wrapper.
+- Minor fixes in scripts and documentation.
 
 Changes in v2.3.3
 -----------------

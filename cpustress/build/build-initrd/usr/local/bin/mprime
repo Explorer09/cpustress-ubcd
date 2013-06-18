@@ -12,13 +12,11 @@
 #
 #
 # Licensed under the GNU General Public License, version 2 or later.
-#
 # This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
-#
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 29 April 2013.
+# Last updated on 18 June 2013.
 
 
 set -m
@@ -49,14 +47,14 @@ Usage: $0 [VERSION] [-cdhmstv] [-aN] [-wDIR]
 VERSION must be either 27 or 23. If unspecified, mprime wrapper will prompt it
 during execution.
 
--d	Print detailed information to stdout.
--h	Print this.
--m	Menu to configure mprime.
--s	Display status.
--t	Run the torture test.
--v	Print the version number.
--aN	Use an alternate set of INI and output files (obsolete).
--wDIR	Run from a different working directory.
+-d      Print detailed information to stdout.
+-h      Print this.
+-m      Menu to configure mprime.
+-s      Display status.
+-t      Run the torture test.
+-v      Print the version number.
+-aN     Use an alternate set of INI and output files (obsolete).
+-wDIR   Run from a different working directory.
 
 Without the -a or -w option, this wrapper will create temporary directories in
 /tmp/torture-test as working directories.

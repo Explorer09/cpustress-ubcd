@@ -5,7 +5,7 @@ http://systester.sourceforge.net
 
 Valid command line options
  -help                  Prints this help screen
- -qcborwein <digits>	Use Borwein's Quadratic Convergence algorithm
+ -qcborwein <digits>    Use Borwein's Quadratic Convergence algorithm
  -gausslg  <digits>     Use Gauss-Legendre algorithm
   Valid <digits> values: 128K, 256K, 512K, 1M, 2M, 4M, 8M, 16M, 32M, 64M, 128M
 

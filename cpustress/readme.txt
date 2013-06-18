@@ -1,11 +1,11 @@
-CPUstress image - version 2.3.3:
+CPUstress image - version 2.3.4:
 ================================
 
 Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 19 May 2013.
+Last edited on 18 June 2013.
 
 
 Content of this package:
@@ -24,6 +24,8 @@ _________________________
                      the image itself)
 
 ./initrd.gz      ==> initrd
+
+./nonfree.txt    ==> notes about the non-free programs
 
 ./readme.txt     ==> this readme file
 
@@ -66,12 +68,12 @@ e.g.: If you have extracted UBCD to ~/ubcd-extract/, this place is:
 How to edit the CPUstress image?
 ________________________________
 
-Unpack the cpustress-2.3.3.7z archive (you probably already did this, else you
+Unpack the cpustress-2.3.4.7z archive (you probably already did this, else you
 couldn't read this README.
-$ 7z x "./path/to/file/cpustress-2.3.3.7z"
+$ 7z x "./path/to/file/cpustress-2.3.4.7z"
 
 Extract the ./build tar archive and the initrd.gz file:
-$ cd cpustress-2.3.3
+$ cd cpustress-2.3.4
 $ tar xvJf build.txz
 $ cd build
 $ cp ../initrd.gz .

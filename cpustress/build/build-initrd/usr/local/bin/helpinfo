@@ -8,16 +8,14 @@
 #
 #
 # Licensed under the GNU General Public License, version 2 or later.
-#
 # This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
-#
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 19 May 2013.
+# Last updated on 18 June 2013.
 
 
-LAST_EDITED="19 May 2013"
+LAST_EDITED="18 June 2013"
 
 showcontrols () {
     printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
@@ -58,7 +56,7 @@ Some general commands for all programs:
 To switch to another virtual terminal, press: '<Alt> + <Left/Right>'
 
 
-'top' is useful program to see the percentage of processing power used by a
+'top' is a useful program to see the percentage of processing power used by a
 specific program. When you run a CPU stress test, you will see that the 
 total percentage of the processing power is 100%.
     To quit 'top', you have to press 'q' or '<Ctrl> + C'. 
@@ -73,7 +71,7 @@ select the following programs:
         - Intel Optimized LINPACK 11.0.3  (linpack)
         - Mersenne Prime test v23.9.2     (mprime 23)
         - Mersenne Prime test v27.9       (mprime 27)
-        - Sensors v3.3.3                  (sensors)
+        - Sensors v3.3.4                  (sensors)
         - Stress v1.0.4                   (stress)
         - CPU stress tester 2.0           (stresscpu2)
         - System Stability Tester 1.5.1   (systester)
@@ -88,7 +86,7 @@ Help is available for the following executables:
         - Helpinfo                        (helpinfo)
         - Intel Optimized LINPACK 11.0.3  (linpack)
         - Mersenne Prime test             (mprime)
-        - Sensors v3.3.3                  (sensors)
+        - Sensors v3.3.4                  (sensors)
         - Stress v1.0.4                   (stress)
         - CPU stress tester 2.0           (stresscpu2)
         - System Stability Tester 1.5.1   (systester)

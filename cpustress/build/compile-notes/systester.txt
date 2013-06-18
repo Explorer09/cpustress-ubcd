@@ -1,4 +1,4 @@
-17 April 2013
+17 June 2013
 
 Systester download page:
 http://systester.sourceforge.net/downloads.php
@@ -12,9 +12,9 @@ For the shell commands below, I assume that you would unpack GMP at the home
 directory, but you may change the path if you like. 
 
  $ cd ${HOME}
- $ wget ftp://ftp.gmplib.org/pub/gmp/gmp-5.1.1.tar.xz
- $ tar -x -v --xz -f gmp-5.1.1.tar.xz
- $ cd gmp-5.1.1
+ $ wget ftp://ftp.gmplib.org/pub/gmp/gmp-5.1.2.tar.xz
+ $ tar -x -v --xz -f gmp-5.1.2.tar.xz
+ $ cd gmp-5.1.2
 
 Configure and build GMP:
 
@@ -29,18 +29,24 @@ Notes about the configure options:
   used. The CFLAGS specified here are the same as the systester compiled in 
   Parted Magic.
 * The "--build=i386-pc-linux-gnu" option forces GMP to include a generic 
-  header (gmp-mparam.h) instead of a header optimized for a particular
+  header (gmp-mparam.h) instead of a header optimized for a particular 
   architecture.
 * If you have a 64-bit processor, the configure script might set the build 
-  system to 64-bit (even though the OS is 32-bit). With the overwritten CFLAGS 
-  this will generate an error saying that you need "ABI=32".
+  system to 64-bit (even though the OS is 32-bit) if you don't specify 
+  "ABI=32". With the overwritten CFLAGS this will generate an error.
 
 Unpack and build Systester (CLI version):
 
  $ cd ${HOME}
  $ tar -x -v -z -f systester-1.5.1.tar.gz
  $ cd systester-1.5.1/cli
- $ CPPFLAGS='-L${HOME}/gmp-5.1.1/.libs -I${HOME}/gmp-5.1.1' make cli
+ $ sed -e 's/qcborwein <digits>\tUse/qcborwein <digits>    Use/g' \
+     -i.bak systester-cli.c
+ $ CPPFLAGS='-L${HOME}/gmp-5.1.2/.libs -I${HOME}/gmp-5.1.2' make cli
+
+(The sed command fixes a minor error about whitespaces in 
+"systester-cli -help" output. The fix is temporary and may be removed in the 
+new version of systester.)
 
 (Optional) To reduce the file size, I stripped the binary after compilation:
 
