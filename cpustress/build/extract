@@ -28,6 +28,6 @@ fi
 echo "Extracting initrd.gz..."
 gzip -d -v -c initrd.gz >build-initrd/initrd
 cd build-initrd
-cpio -i -m <initrd
+cpio -i -m -d -u <initrd
 rm initrd
 echo "Done."
