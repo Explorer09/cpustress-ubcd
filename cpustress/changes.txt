@@ -6,6 +6,7 @@ Changes in development version
 5 July 2013
 
 - Updated Intel LINPACK to v11.0.5 (from v11.0.3)
+- stresscpu2 is rebuilt with dynamic linking.
 
 Changes in v2.3.4
 -----------------
