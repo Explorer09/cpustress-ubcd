@@ -1,5 +1,5 @@
 #!/bin/sh
-
+#
 # This script collects the linux kernel modules from Parted Magic to use with 
 # CPUstress initrd. To use this script:
 #   1. Boot a Parted Magic live CD (either on a real machine or a VM)
@@ -14,13 +14,11 @@
 #
 #
 # Licensed under the GNU General Public License, version 2 or later.
-#
 # This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
-#
 # Written by Explorer.
-# Last updated on 18 April 2013.
+# Last updated on 6 July 2013.
 
 uname -r | grep 'pmagic64' > /dev/null
 if [ "$?" -eq "0" ]; then
