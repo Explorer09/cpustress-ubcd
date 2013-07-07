@@ -3,10 +3,12 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-5 July 2013
+7 July 2013
 
 - Updated Intel LINPACK to v11.0.5 (from v11.0.3)
 - stresscpu2 is rebuilt with dynamic linking.
+- Updated kernel to 3.9.9. Added drivers for keypads.
+- Rebuilt eglibc (2.17-r23365).
 
 Changes in v2.3.4
 -----------------
