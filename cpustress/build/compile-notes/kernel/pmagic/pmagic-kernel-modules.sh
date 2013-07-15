@@ -18,7 +18,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 7 July 2013.
+# Last updated on 15 July 2013.
 
 uname -r | grep 'pmagic64' > /dev/null
 if [ "$?" -eq "0" ]; then
@@ -98,6 +98,7 @@ drivers/hwmon/adt7411.ko
 drivers/hwmon/adt7462.ko
 drivers/hwmon/adt7470.ko
 drivers/hwmon/adt7475.ko
+drivers/hwmon/adt7x10.ko
 drivers/hwmon/amc6821.ko
 drivers/hwmon/applesmc.ko
 drivers/hwmon/asb100.ko
@@ -123,6 +124,7 @@ drivers/hwmon/hih6130.ko
 drivers/hwmon/hwmon-vid.ko
 drivers/hwmon/hwmon.ko
 drivers/hwmon/i5k_amb.ko
+drivers/hwmon/iio_hwmon.ko
 drivers/hwmon/ina209.ko
 drivers/hwmon/ina2xx.ko
 drivers/hwmon/it87.ko
@@ -142,6 +144,7 @@ drivers/hwmon/lm87.ko
 drivers/hwmon/lm90.ko
 drivers/hwmon/lm92.ko
 drivers/hwmon/lm93.ko
+drivers/hwmon/lm95234.ko
 drivers/hwmon/lm95241.ko
 drivers/hwmon/lm95245.ko
 drivers/hwmon/ltc4151.ko
@@ -157,6 +160,7 @@ drivers/hwmon/max6642.ko
 drivers/hwmon/max6650.ko
 drivers/hwmon/max6697.ko
 drivers/hwmon/mcp3021.ko
+drivers/hwmon/nct6775.ko
 drivers/hwmon/ntc_thermistor.ko
 drivers/hwmon/pc87360.ko
 drivers/hwmon/pc87427.ko
@@ -229,9 +233,11 @@ drivers/i2c/i2c-dev.ko
 drivers/i2c/i2c-mux.ko
 drivers/i2c/muxes/i2c-mux-pca9541.ko
 drivers/i2c/muxes/i2c-mux-pca954x.ko
+drivers/iio/industrialio.ko
 drivers/input/input-polldev.ko
 drivers/input/keyboard/adp5588-keys.ko
 drivers/input/keyboard/adp5589-keys.ko
+drivers/input/keyboard/cros_ec_keyb.ko
 drivers/input/keyboard/lm8323.ko
 drivers/input/keyboard/lm8333.ko
 drivers/input/keyboard/max7359_keypad.ko
@@ -251,6 +257,8 @@ drivers/input/serio/pcips2.ko
 drivers/input/serio/ps2mult.ko
 drivers/input/serio/serio_raw.ko
 drivers/input/serio/serport.ko
+drivers/mfd/cros_ec.ko
+drivers/mfd/cros_ec_i2c.ko
 drivers/mfd/lpc_sch.ko
 drivers/mfd/mfd-core.ko
 drivers/of/of_i2c.ko
@@ -262,7 +270,7 @@ drivers/usb/chipidea/ci13xxx_imx.ko
 drivers/usb/chipidea/ci13xxx_msm.ko
 drivers/usb/chipidea/ci13xxx_pci.ko
 drivers/usb/chipidea/ci_hdrc.ko
-drivers/usb/chipidea/usbmisc_imx6q.ko
+drivers/usb/chipidea/usbmisc_imx.ko
 drivers/usb/dwc3/dwc3-exynos.ko
 drivers/usb/dwc3/dwc3-omap.ko
 drivers/usb/dwc3/dwc3-pci.ko

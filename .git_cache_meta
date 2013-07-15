@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-07-07 20:54:55.7746588500" .git_cache_meta
+touch -c -h -d "2013-07-15 22:57:25.4612380890" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -46,19 +46,19 @@ chmod 0644 cpustress/build/build-initrd/etc/sensors3.conf
 touch -c -h -d "2013-05-28 20:12:53.0000000000" cpustress/build/build-initrd/etc/sensors3.conf
 touch -c -h -d "2013-04-19 10:10:15.0000000000" cpustress/build/build-initrd/init
 chmod 0755 cpustress/build/build-initrd/lib/ld-2.17.so
-touch -c -h -d "2013-07-06 18:50:18.4974800000" cpustress/build/build-initrd/lib/ld-2.17.so
+touch -c -h -d "2013-07-15 22:54:58.6012440000" cpustress/build/build-initrd/lib/ld-2.17.so
 touch -c -h -d "2013-04-18 13:10:40.1197436120" cpustress/build/build-initrd/lib/ld-linux.so.2
 chmod 0755 cpustress/build/build-initrd/lib/libc-2.17.so
-touch -c -h -d "2013-07-06 18:50:22.4174800000" cpustress/build/build-initrd/lib/libc-2.17.so
+touch -c -h -d "2013-07-15 22:54:58.6052440000" cpustress/build/build-initrd/lib/libc-2.17.so
 touch -c -h -d "2013-04-18 13:10:40.1197436120" cpustress/build/build-initrd/lib/libc.so.6
 chmod 0755 cpustress/build/build-initrd/lib/libdl-2.17.so
-touch -c -h -d "2013-07-06 18:50:25.7814800780" cpustress/build/build-initrd/lib/libdl-2.17.so
+touch -c -h -d "2013-07-15 22:54:58.6092440000" cpustress/build/build-initrd/lib/libdl-2.17.so
 touch -c -h -d "2013-04-18 13:10:40.1237436130" cpustress/build/build-initrd/lib/libdl.so.2
 chmod 0755 cpustress/build/build-initrd/lib/libm-2.17.so
-touch -c -h -d "2013-07-06 18:50:34.6254796840" cpustress/build/build-initrd/lib/libm-2.17.so
+touch -c -h -d "2013-07-15 22:54:58.6092440000" cpustress/build/build-initrd/lib/libm-2.17.so
 touch -c -h -d "2013-04-18 13:10:40.1237436130" cpustress/build/build-initrd/lib/libm.so.6
 chmod 0755 cpustress/build/build-initrd/lib/libpthread-2.17.so
-touch -c -h -d "2013-07-06 18:50:37.9214795370" cpustress/build/build-initrd/lib/libpthread-2.17.so
+touch -c -h -d "2013-07-15 22:54:58.6092440000" cpustress/build/build-initrd/lib/libpthread-2.17.so
 touch -c -h -d "2013-04-18 13:10:40.1277436130" cpustress/build/build-initrd/lib/libpthread.so.0
 chmod 0644 cpustress/build/build-initrd/opt/burn/burn.txt
 touch -c -h -d "2013-05-19 20:59:27.4890830830" cpustress/build/build-initrd/opt/burn/burn.txt
@@ -167,17 +167,17 @@ touch -c -h -d "2013-05-18 00:40:25.0000000000" cpustress/build/compile-notes/bu
 chmod 0644 cpustress/build/compile-notes/cpuburn-in.txt
 touch -c -h -d "2013-05-30 10:17:08.1006056970" cpustress/build/compile-notes/cpuburn-in.txt
 chmod 0644 cpustress/build/compile-notes/glibc.txt
-touch -c -h -d "2013-07-07 20:40:15.0026981190" cpustress/build/compile-notes/glibc.txt
+touch -c -h -d "2013-07-15 22:53:08.6732495380" cpustress/build/compile-notes/glibc.txt
 chmod 0644 cpustress/build/compile-notes/kernel.txt
-touch -c -h -d "2013-07-07 19:21:27.3429088980" cpustress/build/compile-notes/kernel.txt
-chmod 0644 cpustress/build/compile-notes/kernel/config-3.9.9-cpustress
-touch -c -h -d "2013-07-07 18:30:46.0000000000" cpustress/build/compile-notes/kernel/config-3.9.9-cpustress
+touch -c -h -d "2013-07-15 22:47:56.6772634480" cpustress/build/compile-notes/kernel.txt
+chmod 0664 cpustress/build/compile-notes/kernel/config-3.10.1-cpustress
+touch -c -h -d "2013-07-15 22:11:20.0000000000" cpustress/build/compile-notes/kernel/config-3.10.1-cpustress
 chmod 0644 cpustress/build/compile-notes/kernel/pmagic/compile-notes.patch
-touch -c -h -d "2013-07-07 19:27:01.7708939880" cpustress/build/compile-notes/kernel/pmagic/compile-notes.patch
+touch -c -h -d "2013-07-15 22:51:39.7972535010" cpustress/build/compile-notes/kernel/pmagic/compile-notes.patch
 chmod 0644 cpustress/build/compile-notes/kernel/pmagic/initrd-modules-support.patch
 touch -c -h -d "2013-07-07 18:40:23.8870187300" cpustress/build/compile-notes/kernel/pmagic/initrd-modules-support.patch
 chmod 0755 cpustress/build/compile-notes/kernel/pmagic/pmagic-kernel-modules.sh
-touch -c -h -d "2013-07-07 18:33:53.8750361180" cpustress/build/compile-notes/kernel/pmagic/pmagic-kernel-modules.sh
+touch -c -h -d "2013-07-15 22:46:09.7932682140" cpustress/build/compile-notes/kernel/pmagic/pmagic-kernel-modules.sh
 chmod 0644 cpustress/build/compile-notes/kernel/pmagic/readme.txt
 touch -c -h -d "2013-04-19 11:08:51.8837942480" cpustress/build/compile-notes/kernel/pmagic/readme.txt
 chmod 0644 cpustress/build/compile-notes/libgcc.txt
@@ -200,10 +200,10 @@ chmod 0755 cpustress/build/extract
 touch -c -h -d "2013-07-06 22:10:28.7024105760" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2013-07-06 22:11:00.6024091540" cpustress/build/prepare
-chmod 0644 cpustress/bzImage
-touch -c -h -d "2013-07-07 18:42:32.0000000000" cpustress/bzImage
+chmod 0664 cpustress/bzImage
+touch -c -h -d "2013-07-15 22:21:08.0000000000" cpustress/bzImage
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2013-07-07 20:50:09.9826715920" cpustress/changes.txt
+touch -c -h -d "2013-07-15 22:57:15.9772385120" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt

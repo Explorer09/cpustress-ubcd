@@ -31,8 +31,8 @@ diff -r -u a/compile-notes/busybox/config b/compile-notes/busybox/config
  #
  # Linux System Utilities
 diff -r -u a/compile-notes/kernel.txt b/compile-notes/kernel.txt
---- a/compile-notes/kernel.txt	2013-07-07 19:21:27.342908898 +0800
-+++ b/compile-notes/kernel.txt	2013-07-07 19:23:31.054903383 +0800
+--- a/compile-notes/kernel.txt	2013-07-15 22:47:56.677263448 +0800
++++ b/compile-notes/kernel.txt	2013-07-15 22:48:30.385261945 +0800
 @@ -25,4 +25,21 @@
  directory that you can boot from. For example in UBCD it's 
  "${ubcd_extract}/ubcd/boot/cpustress/bzImage".
@@ -44,7 +44,7 @@ diff -r -u a/compile-notes/kernel.txt b/compile-notes/kernel.txt
 +
 +Remove some unnecessary files in the modules directory:
 +
-+ $ cd ${HOME}/modules/lib/modules/3.9.9-cpustress
++ $ cd ${HOME}/modules/lib/modules/*-cpustress
 + $ rm build source
 + $ rm modules.ccwmap modules.ieee1394map modules.inputmap modules.isapnpmap
 +
