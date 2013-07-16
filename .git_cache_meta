@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-07-15 22:57:25.4612380890" .git_cache_meta
+touch -c -h -d "2013-07-16 21:43:35.4186262420" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -149,7 +149,7 @@ chmod 0755 cpustress/build/build-initrd/usr/local/bin/stresscpu2
 touch -c -h -d "2013-07-05 19:05:54.0000000000" cpustress/build/build-initrd/usr/local/bin/stresscpu2
 touch -c -h -d "2013-04-13 22:54:21.7614506540" cpustress/build/build-initrd/usr/local/bin/systester
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/systester-cli
-touch -c -h -d "2013-06-17 11:39:51.0000000000" cpustress/build/build-initrd/usr/local/bin/systester-cli
+touch -c -h -d "2013-07-16 21:21:22.9066856510" cpustress/build/build-initrd/usr/local/bin/systester-cli
 chmod 0644 cpustress/build/compile-notes/burn.txt
 touch -c -h -d "2013-04-18 23:27:19.0985385790" cpustress/build/compile-notes/burn.txt
 chmod 0644 cpustress/build/compile-notes/busybox.txt
@@ -195,7 +195,15 @@ touch -c -h -d "2013-03-31 23:36:12.0000000000" cpustress/build/compile-notes/st
 chmod 0644 cpustress/build/compile-notes/stresscpu2.txt
 touch -c -h -d "2013-07-05 20:05:06.9162509190" cpustress/build/compile-notes/stresscpu2.txt
 chmod 0644 cpustress/build/compile-notes/systester.txt
-touch -c -h -d "2013-06-17 12:12:08.8303789520" cpustress/build/compile-notes/systester.txt
+touch -c -h -d "2013-07-16 21:17:24.8426962650" cpustress/build/compile-notes/systester.txt
+chmod 0644 cpustress/build/compile-notes/systester/changes.txt
+touch -c -h -d "2013-07-16 21:14:00.8827053590" cpustress/build/compile-notes/systester/changes.txt
+chmod 0644 cpustress/build/compile-notes/systester/systester-cli-changes.patch
+touch -c -h -d "2013-07-16 20:34:51.5668101010" cpustress/build/compile-notes/systester/systester-cli-changes.patch
+chmod 0644 cpustress/build/compile-notes/systester/systester-column-align.patch
+touch -c -h -d "2013-07-16 20:46:43.7307783500" cpustress/build/compile-notes/systester/systester-column-align.patch
+chmod 0644 cpustress/build/compile-notes/systester/systester-log-file-format.patch
+touch -c -h -d "2013-07-16 20:19:17.7908517330" cpustress/build/compile-notes/systester/systester-log-file-format.patch
 chmod 0755 cpustress/build/extract
 touch -c -h -d "2013-07-06 22:10:28.7024105760" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
@@ -203,7 +211,7 @@ touch -c -h -d "2013-07-06 22:11:00.6024091540" cpustress/build/prepare
 chmod 0664 cpustress/bzImage
 touch -c -h -d "2013-07-15 22:21:08.0000000000" cpustress/bzImage
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2013-07-15 22:57:15.9772385120" cpustress/changes.txt
+touch -c -h -d "2013-07-16 21:40:40.8146340270" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
@@ -227,7 +235,7 @@ touch -c -h -d "2013-04-19 14:08:49.1628650060" cpustress/help/syslinux/cpustrs1
 chmod 0644 cpustress/help/syslinux/cpustrs2.txt
 touch -c -h -d "2013-04-19 13:30:12.0000000000" cpustress/help/syslinux/cpustrs2.txt
 chmod 0644 cpustress/help/systester.txt
-touch -c -h -d "2013-06-17 22:39:59.2126994450" cpustress/help/systester.txt
+touch -c -h -d "2013-07-16 21:27:16.8346698720" cpustress/help/systester.txt
 chmod 0644 cpustress/nonfree.txt
 touch -c -h -d "2013-05-19 20:51:56.2411032010" cpustress/nonfree.txt
 chmod 0644 cpustress/readme.txt
@@ -251,9 +259,9 @@ touch -c -h -d "2013-04-03 12:23:08.0991211180" iso/boot/syslinux/syslinux.cfg
 chmod 0644 iso/ubcd/boot/cpustress/NOTICE.txt
 touch -c -h -d "2013-04-19 18:19:06.7639773540" iso/ubcd/boot/cpustress/NOTICE.txt
 chmod 0644 iso/ubcd/menus/grub4dos/cpu.lst
-touch -c -h -d "2013-05-30 11:23:56.6844269770" iso/ubcd/menus/grub4dos/cpu.lst
+touch -c -h -d "2013-07-16 21:31:05.2826596870" iso/ubcd/menus/grub4dos/cpu.lst
 chmod 0644 iso/ubcd/menus/syslinux/cpu.cfg
-touch -c -h -d "2013-04-29 11:09:17.3097389600" iso/ubcd/menus/syslinux/cpu.cfg
+touch -c -h -d "2013-07-16 21:30:52.5306602550" iso/ubcd/menus/syslinux/cpu.cfg
 chmod 0644 iso/ubcd/menus/syslinux/defaults.cfg
 touch -c -h -d "2013-04-03 12:23:08.0991211180" iso/ubcd/menus/syslinux/defaults.cfg
 chmod 0644 screenshots/cpustress-burn.png

@@ -1,0 +1,210 @@
+diff -r -u a/master.cpp b/master.cpp
+--- a/master.cpp	2012-07-09 04:41:48.000000000 +0800
++++ b/master.cpp	2013-07-16 16:13:38.025625918 +0800
+@@ -38,7 +38,7 @@
+   unsigned long long prec = 0, bits, i = 0, n = 1;
+   int p[MAX_THREADS], k = 0;
+   char *pistr = NULL;
+-  char column[111] = "", pxdigits[13] = "", ptime[13] = "", failtime[13] =
++  char column[56] = "", pxdigits[13] = "", ptime[16] = "", failtime[16] =
+     "No fail yet", xstr[256];
+ 
+   if (algo == 0)		/* Borwein */
+@@ -90,9 +90,9 @@
+   PRINT (" Turn:%4d  ", pass);
+   PRINT ("Errors:%4d       ", errors);
+   PRINT ("Threads:%4d\n", threads);
+-  PRINT (" Running For: %12s  ", ptime);
++  PRINT (" Running For: %15s  ", ptime);
+   PRINT ("ChkErr:%4d\n", chksum_err);
+-  PRINT (" Failed After: %12s\n", failtime);
++  PRINT (" Failed After: %15s\n", failtime);
+   PRINT ("%s", " -----------------------------------------\n");
+   PRINT ("%s", " Loop Digits State    Time\n");
+   PRINT ("%s", " ---------------------------------\n");
+@@ -335,30 +335,30 @@
+       //fp = fopen ("CPUPI.DAT", "w");
+       fp = fopen (CPUPI_FILE_PATH, "w");
+ 
+-      fprintf (fp, " PI=3.%c%c", 10, 13);
+-      memset (column, ' ', 110);
+-      column[110] = 0;
++      fprintf (fp, " PI=3.\n");
++      memset (column, ' ', 55);
++      column[55] = 0;
+       k = 0;
+       n = 1;
+       for (i = 1; i < prec; i += 10)
+ 	{
+ 	  memcpy (&column[n], &pistr[i], 10);
+ 	  n += 11;
+-	  if (n > 110)
++	  if (n > 55)
+ 	    {
+-	      fprintf (fp, "%s%c%c", column, 10, 13);
++	      fprintf (fp, "%s\n", column);
+ 	      n = 1;
+ 	      k++;
+-	      if (k == 10)
++	      if (k == 20)
+ 		{
+-		  fprintf (fp, " %c%c", 10, 13);
++		  fprintf (fp, " \n");
+ 		  k = 0;
+ 		}
+ 	    }
+ 	}
+       n = 1;
+-      i = prec - (prec % 100) + 1;
+-      memset (column, ' ', 110);
++      i = prec - (prec % 50) + 1;
++      memset (column, ' ', 55);
+       for (; i < prec + 1; i++)
+ 	{
+ 	  column[n] = pistr[i];
+@@ -369,7 +369,7 @@
+ 	      n++;
+ 	    }
+ 	}
+-      fprintf (fp, "%s%c%c", column, 10, 13);
++      fprintf (fp, "%s\n", column);
+ 
+       fclose (fp);
+       PRINT ("%s", "done!!! \n\n");
+@@ -389,11 +389,11 @@
+     {
+       //logfile = fopen ("systester.log", "a+");
+       logfile = fopen (LOG_FILE_PATH, "a+");
+-      fprintf (logfile, " Turn:%4d  Errors:%4d  Threads:%4d", pass, errors,
++      fprintf (logfile, " Turn:%4d  Errors:%4d  Threads:%4d\n", pass, errors,
+ 	       threads);
+       fprintf (logfile,
+-	       " Running For: %12s Failed After: %12s - Checksum Errors: %4d%c%c",
+-	       ptime, failtime, chksum_err, 10, 13);
++	       " Running For: %15s Failed After: %15s\n - Checksum Errors: %4d\n\n",
++	       ptime, failtime, chksum_err);
+       fclose (logfile);
+     }
+ 
+diff -r -u a/tests/borwein/borwein.cpp b/tests/borwein/borwein.cpp
+--- a/tests/borwein/borwein.cpp	2012-07-09 04:41:48.000000000 +0800
++++ b/tests/borwein/borwein.cpp	2013-07-16 12:39:32.144171089 +0800
+@@ -15,7 +15,7 @@
+   mp_exp_t expvar;
+   unsigned long long prec = 4, bits, i = 0, n = 1, xdigits;
+   int iter, thread = 0, k = 0;
+-  char column[111] = "";
++  char column[56] = "";
+ 	
+ 	if (argc == 1)
+ 	  {
+@@ -71,30 +71,30 @@
+   mpf_get_str (pistr, &expvar, 10, prec + 10, bd[0].p2);
+   fp = fopen ("CPUPI.DAT", "w");
+   
+-  fprintf (fp, " PI=3.%c%c", 10, 13);
+-      memset (column, ' ', 110);
+-      column[110] = 0;
++  fprintf (fp, " PI=3.\n");
++      memset (column, ' ', 55);
++      column[55] = 0;
+       k = 0;
+       n = 1;
+       for (i = 1; i < prec; i += 10)
+ 	{
+ 	  memcpy (&column[n], &pistr[i], 10);
+ 	  n += 11;
+-	  if (n > 110)
++	  if (n > 55)
+ 	    {
+-	      fprintf (fp, "%s%c%c", column, 10, 13);
++	      fprintf (fp, "%s\n", column);
+ 	      n = 1;
+ 	      k++;
+-	      if (k == 10)
++	      if (k == 20)
+ 		{
+-		  fprintf (fp, " %c%c", 10, 13);
++		  fprintf (fp, " \n");
+ 		  k = 0;
+ 		}
+ 	    }
+ 	}
+ 	   n = 1;
+-	   i = prec - (prec % 100) + 1;
+-	   memset (column, ' ', 110);
++	   i = prec - (prec % 50) + 1;
++	   memset (column, ' ', 55);
+ 	   for (; i < prec + 1; i++)
+ 	     {
+ 	     	column[n] = pistr[i];
+@@ -105,7 +105,7 @@
+ 	     	  	n++;
+ 		      }	
+ 	     }	 
+-       fprintf (fp, "%s%c%c", column, 10, 13);
++       fprintf (fp, "%s\n", column);
+ 
+       free (pistr);
+       fclose (fp);
+diff -r -u a/tests/gauss-legendre/gauss.cpp b/tests/gauss-legendre/gauss.cpp
+--- a/tests/gauss-legendre/gauss.cpp	2012-07-09 04:41:48.000000000 +0800
++++ b/tests/gauss-legendre/gauss.cpp	2013-07-16 12:38:36.828173555 +0800
+@@ -15,7 +15,7 @@
+   mp_exp_t expvar;
+   unsigned long long prec = 2, bits, i = 0, n = 1, xdigits;
+   int iter, thread = 0, k = 0;
+-  char column[111] = "";
++  char column[56] = "";
+ 	
+ 	if (argc == 1)
+ 	  {
+@@ -71,30 +71,30 @@
+   mpf_get_str (pistr, &expvar, 10, prec + 10, gd[0].pi);
+   fp = fopen ("CPUPI.DAT", "w");
+   
+-  fprintf (fp, " PI=3.%c%c", 10, 13);
+-      memset (column, ' ', 110);
+-      column[110] = 0;
++  fprintf (fp, " PI=3.\n");
++      memset (column, ' ', 55);
++      column[55] = 0;
+       k = 0;
+       n = 1;
+       for (i = 1; i < prec; i += 10)
+ 	{
+ 	  memcpy (&column[n], &pistr[i], 10);
+ 	  n += 11;
+-	  if (n > 110)
++	  if (n > 55)
+ 	    {
+-	      fprintf (fp, "%s%c%c", column, 10, 13);
++	      fprintf (fp, "%s\n", column);
+ 	      n = 1;
+ 	      k++;
+-	      if (k == 10)
++	      if (k == 20)
+ 		{
+-		  fprintf (fp, " %c%c", 10, 13);
++		  fprintf (fp, " \n");
+ 		  k = 0;
+ 		}
+ 	    }
+ 	}
+ 	   n = 1;
+-	   i = prec - (prec % 100) + 1;
+-	   memset (column, ' ', 110);
++	   i = prec - (prec % 50) + 1;
++	   memset (column, ' ', 55);
+ 	   for (; i < prec + 1; i++)
+ 	     {
+ 	     	column[n] = pistr[i];
+@@ -105,7 +105,7 @@
+ 	     	  	n++;
+ 		      }	
+ 	     }	 
+-       fprintf (fp, "%s%c%c", column, 10, 13);
++       fprintf (fp, "%s\n", column);
+ 
+       free (pistr);
+       fclose (fp);

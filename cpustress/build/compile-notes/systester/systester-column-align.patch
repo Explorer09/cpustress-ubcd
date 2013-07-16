@@ -1,0 +1,30 @@
+diff -r -u a/master.cpp b/master.cpp
+--- a/master.cpp	2012-07-09 04:41:48.000000000 +0800
++++ b/master.cpp	2013-07-16 20:43:59.930785653 +0800
+@@ -109,7 +109,7 @@
+     sprintf (xstr, " N/A ");
+   if ((threads > 1) && (mode == 0))
+     {
+-      sprintf (xstr, " OK ");
++      sprintf (xstr, "  OK ");
+       for (k = 1; k < threads; k++)
+ 
+ 	if (algo == 0)		/* Borwein */
+@@ -185,7 +185,7 @@
+ 
+       if ((threads > 1) && (mode == 0))
+ 	{
+-	  sprintf (xstr, " OK ");
++	  sprintf (xstr, "  OK ");
+ 	  for (k = 1; k < threads; k++)
+ 
+ 	    if (algo == 0)	/* Borwein */
+@@ -254,7 +254,7 @@
+     sprintf (xstr, " N/A ");
+   if ((threads > 1) && (mode == 0))
+     {
+-      sprintf (xstr, " OK ");
++      sprintf (xstr, "  OK ");
+       for (k = 1; k < threads; k++)
+ 	{
+ 	  if (algo == 0)	/* Borwein */
