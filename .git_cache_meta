@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-07-16 21:43:35.4186262420" .git_cache_meta
+touch -c -h -d "2013-07-16 21:50:41.5506072440" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -170,7 +170,7 @@ chmod 0644 cpustress/build/compile-notes/glibc.txt
 touch -c -h -d "2013-07-15 22:53:08.6732495380" cpustress/build/compile-notes/glibc.txt
 chmod 0644 cpustress/build/compile-notes/kernel.txt
 touch -c -h -d "2013-07-15 22:47:56.6772634480" cpustress/build/compile-notes/kernel.txt
-chmod 0664 cpustress/build/compile-notes/kernel/config-3.10.1-cpustress
+chmod 0644 cpustress/build/compile-notes/kernel/config-3.10.1-cpustress
 touch -c -h -d "2013-07-15 22:11:20.0000000000" cpustress/build/compile-notes/kernel/config-3.10.1-cpustress
 chmod 0644 cpustress/build/compile-notes/kernel/pmagic/compile-notes.patch
 touch -c -h -d "2013-07-15 22:51:39.7972535010" cpustress/build/compile-notes/kernel/pmagic/compile-notes.patch
@@ -208,7 +208,7 @@ chmod 0755 cpustress/build/extract
 touch -c -h -d "2013-07-06 22:10:28.7024105760" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2013-07-06 22:11:00.6024091540" cpustress/build/prepare
-chmod 0664 cpustress/bzImage
+chmod 0644 cpustress/bzImage
 touch -c -h -d "2013-07-15 22:21:08.0000000000" cpustress/bzImage
 chmod 0644 cpustress/changes.txt
 touch -c -h -d "2013-07-16 21:40:40.8146340270" cpustress/changes.txt
