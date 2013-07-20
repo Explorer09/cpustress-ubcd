@@ -6,6 +6,7 @@ Changes in development version
 20 July 2013
 
 - Updated Intel LINPACK to v11.0.5 (from v11.0.3)
+- Updated BusyBox to v1.21.1 (from v1.21.0)
 - stresscpu2 is rebuilt with dynamic linking.
 - Patched and rebuilt systester-cli. See the compile note for the list of 
   changes.
