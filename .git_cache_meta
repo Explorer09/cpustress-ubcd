@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-07-20 15:45:15.5412385800" .git_cache_meta
+touch -c -h -d "2013-07-20 16:21:25.6771418260" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -154,7 +154,7 @@ chmod 0644 cpustress/build/compile-notes/burn.txt
 touch -c -h -d "2013-04-18 23:27:19.0985385790" cpustress/build/compile-notes/burn.txt
 chmod 0644 cpustress/build/compile-notes/busybox.txt
 touch -c -h -d "2013-07-20 13:02:58.0878531520" cpustress/build/compile-notes/busybox.txt
-chmod 0664 cpustress/build/compile-notes/busybox/config
+chmod 0644 cpustress/build/compile-notes/busybox/config
 touch -c -h -d "2013-07-06 09:45:00.0000000000" cpustress/build/compile-notes/busybox/config
 chmod 0644 cpustress/build/compile-notes/cpuburn-in.txt
 touch -c -h -d "2013-05-30 10:17:08.1006056970" cpustress/build/compile-notes/cpuburn-in.txt
@@ -205,7 +205,7 @@ touch -c -h -d "2013-07-06 22:11:00.6024091540" cpustress/build/prepare
 chmod 0644 cpustress/bzImage
 touch -c -h -d "2013-07-15 22:21:08.0000000000" cpustress/bzImage
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2013-07-20 13:11:15.5478309740" cpustress/changes.txt
+touch -c -h -d "2013-07-20 16:19:51.9211460060" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
