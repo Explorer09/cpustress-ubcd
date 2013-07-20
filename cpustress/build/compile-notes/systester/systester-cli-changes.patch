@@ -1,6 +1,6 @@
 diff -r -u a/cli/systester-cli.c b/cli/systester-cli.c
 --- a/cli/systester-cli.c	2012-07-09 04:41:47.000000000 +0800
-+++ b/cli/systester-cli.c	2013-07-16 20:22:56.126841999 +0800
++++ b/cli/systester-cli.c	2013-07-20 11:19:06.012131005 +0800
 @@ -69,10 +69,12 @@
  void
  intro ()
@@ -52,7 +52,44 @@ diff -r -u a/cli/systester-cli.c b/cli/systester-cli.c
  
  /* Argument parsing */
    if (argc > 1)
-@@ -234,10 +246,6 @@
+@@ -206,7 +218,11 @@
+ 	    {
+ 	      algo = 0;
+ 	      arg++;
+-	      loops = determine_loops (argv[arg], algo);
++	      if (arg < argc)
++		loops = determine_loops (argv[arg], algo);
++	      else
++		loops = -1;
++
+ 	      if (loops == -1)
+ 		{
+ 		  help ();
+@@ -217,7 +233,11 @@
+ 	    {
+ 	      algo = 1;
+ 	      arg++;
+-	      loops = determine_loops (argv[arg], algo);
++	      if (arg < argc)
++		loops = determine_loops (argv[arg], algo);
++	      else
++		loops = -1;
++
+ 	      if (loops == -1)
+ 		{
+ 		  help ();
+@@ -227,22 +247,25 @@
+ 	  else if (strcmp (argv[arg], "-threads") == 0)
+ 	    {
+ 	      arg++;
+-	      threads = atoi (argv[arg]);
++	      if (arg < argc)
++		threads = atoi (argv[arg]);
++	      else
++		threads = 0;
+ 
+ 	      if (threads < 1)
+ 		{
  		  help ();
  		  exit (0);
  		}
@@ -63,7 +100,17 @@ diff -r -u a/cli/systester-cli.c b/cli/systester-cli.c
  	    }
  	  else if (strcmp (argv[arg], "-turns") == 0)
  	    {
-@@ -264,6 +272,9 @@
+ 	      arg++;
+-	      executions = atoi (argv[arg]);
++	      if (arg < argc)
++		executions = atoi (argv[arg]);
++	      else
++		executions = 1;
++
+ 	      if (executions < 1)
+ 		executions = 1;
+ 	    }
+@@ -264,6 +287,9 @@
  	}
      }
  

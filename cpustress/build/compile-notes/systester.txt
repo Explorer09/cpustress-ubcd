@@ -1,4 +1,4 @@
-16 July 2013
+20 July 2013
 
 Systester download page:
 http://systester.sourceforge.net/downloads.php
@@ -45,12 +45,17 @@ Copy the ".patch" files into the source code directory. Then apply the patches:
  $ cd systester-1.5.1
  $ patch -p 1 <systester-cli-changes.patch
  $ patch -p 1 <systester-column-align.patch
+ $ patch -p 1 <systester-gui-64-threads.patch
  $ patch -p 1 <systester-log-file-format.patch
 
 Build Systester (CLI version):
 
  $ cd cli
  $ CPPFLAGS='-L${HOME}/gmp-5.1.2/.libs -I${HOME}/gmp-5.1.2' make cli
+
+(Optional) Change the mode of the binary:
+
+ $ chmod 755 stresscpu2
 
 (Optional) To reduce the file size, I stripped the binary after compilation:
 

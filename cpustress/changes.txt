@@ -3,7 +3,7 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-16 July 2013
+20 July 2013
 
 - Updated Intel LINPACK to v11.0.5 (from v11.0.3)
 - stresscpu2 is rebuilt with dynamic linking.

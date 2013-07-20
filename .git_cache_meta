@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-07-16 21:50:41.5506072440" .git_cache_meta
+touch -c -h -d "2013-07-20 11:31:15.4400984840" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -149,7 +149,7 @@ chmod 0755 cpustress/build/build-initrd/usr/local/bin/stresscpu2
 touch -c -h -d "2013-07-05 19:05:54.0000000000" cpustress/build/build-initrd/usr/local/bin/stresscpu2
 touch -c -h -d "2013-04-13 22:54:21.7614506540" cpustress/build/build-initrd/usr/local/bin/systester
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/systester-cli
-touch -c -h -d "2013-07-16 21:21:22.9066856510" cpustress/build/build-initrd/usr/local/bin/systester-cli
+touch -c -h -d "2013-07-20 11:28:00.9641070000" cpustress/build/build-initrd/usr/local/bin/systester-cli
 chmod 0644 cpustress/build/compile-notes/burn.txt
 touch -c -h -d "2013-04-18 23:27:19.0985385790" cpustress/build/compile-notes/burn.txt
 chmod 0644 cpustress/build/compile-notes/busybox.txt
@@ -195,13 +195,15 @@ touch -c -h -d "2013-03-31 23:36:12.0000000000" cpustress/build/compile-notes/st
 chmod 0644 cpustress/build/compile-notes/stresscpu2.txt
 touch -c -h -d "2013-07-05 20:05:06.9162509190" cpustress/build/compile-notes/stresscpu2.txt
 chmod 0644 cpustress/build/compile-notes/systester.txt
-touch -c -h -d "2013-07-16 21:17:24.8426962650" cpustress/build/compile-notes/systester.txt
+touch -c -h -d "2013-07-20 11:29:12.0281039860" cpustress/build/compile-notes/systester.txt
 chmod 0644 cpustress/build/compile-notes/systester/changes.txt
-touch -c -h -d "2013-07-16 21:14:00.8827053590" cpustress/build/compile-notes/systester/changes.txt
+touch -c -h -d "2013-07-20 11:07:48.6641612040" cpustress/build/compile-notes/systester/changes.txt
 chmod 0644 cpustress/build/compile-notes/systester/systester-cli-changes.patch
-touch -c -h -d "2013-07-16 20:34:51.5668101010" cpustress/build/compile-notes/systester/systester-cli-changes.patch
+touch -c -h -d "2013-07-20 11:19:59.2921286300" cpustress/build/compile-notes/systester/systester-cli-changes.patch
 chmod 0644 cpustress/build/compile-notes/systester/systester-column-align.patch
 touch -c -h -d "2013-07-16 20:46:43.7307783500" cpustress/build/compile-notes/systester/systester-column-align.patch
+chmod 0664 cpustress/build/compile-notes/systester/systester-gui-64-threads.patch
+touch -c -h -d "2013-07-17 07:25:12.9329147000" cpustress/build/compile-notes/systester/systester-gui-64-threads.patch
 chmod 0644 cpustress/build/compile-notes/systester/systester-log-file-format.patch
 touch -c -h -d "2013-07-16 20:19:17.7908517330" cpustress/build/compile-notes/systester/systester-log-file-format.patch
 chmod 0755 cpustress/build/extract
@@ -211,7 +213,7 @@ touch -c -h -d "2013-07-06 22:11:00.6024091540" cpustress/build/prepare
 chmod 0644 cpustress/bzImage
 touch -c -h -d "2013-07-15 22:21:08.0000000000" cpustress/bzImage
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2013-07-16 21:40:40.8146340270" cpustress/changes.txt
+touch -c -h -d "2013-07-20 11:25:55.8921127310" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
