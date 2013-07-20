@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-07-20 11:31:15.4400984840" .git_cache_meta
+touch -c -h -d "2013-07-20 11:34:42.1240892690" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -202,7 +202,7 @@ chmod 0644 cpustress/build/compile-notes/systester/systester-cli-changes.patch
 touch -c -h -d "2013-07-20 11:19:59.2921286300" cpustress/build/compile-notes/systester/systester-cli-changes.patch
 chmod 0644 cpustress/build/compile-notes/systester/systester-column-align.patch
 touch -c -h -d "2013-07-16 20:46:43.7307783500" cpustress/build/compile-notes/systester/systester-column-align.patch
-chmod 0664 cpustress/build/compile-notes/systester/systester-gui-64-threads.patch
+chmod 0644 cpustress/build/compile-notes/systester/systester-gui-64-threads.patch
 touch -c -h -d "2013-07-17 07:25:12.9329147000" cpustress/build/compile-notes/systester/systester-gui-64-threads.patch
 chmod 0644 cpustress/build/compile-notes/systester/systester-log-file-format.patch
 touch -c -h -d "2013-07-16 20:19:17.7908517330" cpustress/build/compile-notes/systester/systester-log-file-format.patch
