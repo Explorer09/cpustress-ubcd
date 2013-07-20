@@ -1,5 +1,5 @@
-CPUstress image - development version:
-======================================
+CPUstress image - version 2.3.5:
+================================
 
 Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
@@ -68,12 +68,12 @@ e.g.: If you have extracted UBCD to ~/ubcd-extract/, this place is:
 How to edit the CPUstress image?
 ________________________________
 
-Unpack the cpustress-develop.7z archive (you probably already did this, else you
+Unpack the cpustress-2.3.5.7z archive (you probably already did this, else you
 couldn't read this README.
-$ 7z x "./path/to/file/cpustress-develop.7z"
+$ 7z x "./path/to/file/cpustress-2.3.5.7z"
 
 Extract the ./build tar archive and the initrd.gz file:
-$ cd cpustress-develop
+$ cd cpustress-2.3.5
 $ tar xvJf build.txz
 $ cd build
 $ cp ../initrd.gz .

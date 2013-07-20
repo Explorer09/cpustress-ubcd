@@ -33,7 +33,7 @@ if [ ! -e /tmp/firstrun ]; then
  \____|_|    \___/|___/\__|_|  \___||___/___/  \__\___||___/\__|   \_/ |_____|
 
 CPUSTRESS_TEXT
-    printf "\033[0;37m                 development    \033[01;37mbootable image by Gert Hulselmans and Explorer\033[0m\n\n"
+    printf "\033[0;37m                      v2.3.5    \033[01;37mbootable image by Gert Hulselmans and Explorer\033[0m\n\n"
     printf "                            To \033[0;32mreboot\033[0m, press: '\033[0;31m<Ctrl> + <Alt> + <Del>\033[0m'\n"
     printf "                    To \033[0;32mquit\033[0m a program, press: '\033[0;31m<Ctrl> + C\033[0m' or '\033[0;31mq\033[0m'\n"
     printf "To switch to another \033[0;32mvirtual terminal\033[0m, press: '\033[0;31m<Alt> + <Left / Right>\033[0m'\n\n"
