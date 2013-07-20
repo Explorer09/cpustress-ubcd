@@ -1,5 +1,5 @@
 #!/bin/sh
-
+#
 # This script collects the linux kernel modules from Parted Magic to use with 
 # CPUstress initrd. To use this script:
 #   1. Boot a Parted Magic live CD (either on a real machine or a VM)
@@ -14,13 +14,11 @@
 #
 #
 # Licensed under the GNU General Public License, version 2 or later.
-#
 # This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
-#
 # Written by Explorer.
-# Last updated on 18 April 2013.
+# Last updated on 15 July 2013.
 
 uname -r | grep 'pmagic64' > /dev/null
 if [ "$?" -eq "0" ]; then
@@ -51,7 +49,6 @@ drivers/acpi/acpi_i2c.ko
 drivers/acpi/acpi_pad.ko
 drivers/acpi/battery.ko
 drivers/acpi/button.ko
-drivers/acpi/container.ko
 drivers/acpi/fan.ko
 drivers/acpi/processor.ko
 drivers/acpi/thermal.ko
@@ -78,16 +75,6 @@ drivers/hid/hid-ortek.ko
 drivers/hid/hid-petalynx.ko
 drivers/hid/hid-pl.ko
 drivers/hid/hid-primax.ko
-drivers/hid/hid-roccat-arvo.ko
-drivers/hid/hid-roccat-common.ko
-drivers/hid/hid-roccat-isku.ko
-drivers/hid/hid-roccat-kone.ko
-drivers/hid/hid-roccat-koneplus.ko
-drivers/hid/hid-roccat-kovaplus.ko
-drivers/hid/hid-roccat-lua.ko
-drivers/hid/hid-roccat-pyra.ko
-drivers/hid/hid-roccat-savu.ko
-drivers/hid/hid-roccat.ko
 drivers/hid/hid-samsung.ko
 drivers/hid/hid-sony.ko
 drivers/hid/hid-sunplus.ko
@@ -111,6 +98,7 @@ drivers/hwmon/adt7411.ko
 drivers/hwmon/adt7462.ko
 drivers/hwmon/adt7470.ko
 drivers/hwmon/adt7475.ko
+drivers/hwmon/adt7x10.ko
 drivers/hwmon/amc6821.ko
 drivers/hwmon/applesmc.ko
 drivers/hwmon/asb100.ko
@@ -136,6 +124,8 @@ drivers/hwmon/hih6130.ko
 drivers/hwmon/hwmon-vid.ko
 drivers/hwmon/hwmon.ko
 drivers/hwmon/i5k_amb.ko
+drivers/hwmon/iio_hwmon.ko
+drivers/hwmon/ina209.ko
 drivers/hwmon/ina2xx.ko
 drivers/hwmon/it87.ko
 drivers/hwmon/jc42.ko
@@ -154,6 +144,7 @@ drivers/hwmon/lm87.ko
 drivers/hwmon/lm90.ko
 drivers/hwmon/lm92.ko
 drivers/hwmon/lm93.ko
+drivers/hwmon/lm95234.ko
 drivers/hwmon/lm95241.ko
 drivers/hwmon/lm95245.ko
 drivers/hwmon/ltc4151.ko
@@ -167,7 +158,9 @@ drivers/hwmon/max197.ko
 drivers/hwmon/max6639.ko
 drivers/hwmon/max6642.ko
 drivers/hwmon/max6650.ko
+drivers/hwmon/max6697.ko
 drivers/hwmon/mcp3021.ko
+drivers/hwmon/nct6775.ko
 drivers/hwmon/ntc_thermistor.ko
 drivers/hwmon/pc87360.ko
 drivers/hwmon/pc87427.ko
@@ -221,12 +214,12 @@ drivers/i2c/busses/i2c-eg20t.ko
 drivers/i2c/busses/i2c-i801.ko
 drivers/i2c/busses/i2c-intel-mid.ko
 drivers/i2c/busses/i2c-isch.ko
+drivers/i2c/busses/i2c-ismt.ko
 drivers/i2c/busses/i2c-nforce2-s4985.ko
 drivers/i2c/busses/i2c-nforce2.ko
 drivers/i2c/busses/i2c-ocores.ko
 drivers/i2c/busses/i2c-pca-platform.ko
 drivers/i2c/busses/i2c-piix4.ko
-drivers/i2c/busses/i2c-pxa.ko
 drivers/i2c/busses/i2c-scmi.ko
 drivers/i2c/busses/i2c-simtec.ko
 drivers/i2c/busses/i2c-sis5595.ko
@@ -240,26 +233,50 @@ drivers/i2c/i2c-dev.ko
 drivers/i2c/i2c-mux.ko
 drivers/i2c/muxes/i2c-mux-pca9541.ko
 drivers/i2c/muxes/i2c-mux-pca954x.ko
+drivers/iio/industrialio.ko
 drivers/input/input-polldev.ko
+drivers/input/keyboard/adp5588-keys.ko
+drivers/input/keyboard/adp5589-keys.ko
+drivers/input/keyboard/cros_ec_keyb.ko
+drivers/input/keyboard/lm8323.ko
+drivers/input/keyboard/lm8333.ko
+drivers/input/keyboard/max7359_keypad.ko
+drivers/input/keyboard/mcs_touchkey.ko
+drivers/input/keyboard/mpr121_touchkey.ko
+drivers/input/keyboard/opencores-kbd.ko
+drivers/input/keyboard/qt1070.ko
+drivers/input/keyboard/qt2160.ko
+drivers/input/keyboard/samsung-keypad.ko
+drivers/input/keyboard/stowaway.ko
+drivers/input/keyboard/tca6416-keypad.ko
+drivers/input/keyboard/tca8418_keypad.ko
+drivers/input/matrix-keymap.ko
 drivers/input/mouse/psmouse.ko
 drivers/input/serio/altera_ps2.ko
 drivers/input/serio/pcips2.ko
 drivers/input/serio/ps2mult.ko
 drivers/input/serio/serio_raw.ko
 drivers/input/serio/serport.ko
-drivers/leds/led-class.ko
+drivers/mfd/cros_ec.ko
+drivers/mfd/cros_ec_i2c.ko
 drivers/mfd/lpc_sch.ko
 drivers/mfd/mfd-core.ko
 drivers/of/of_i2c.ko
 drivers/platform/x86/acerhdf.ko
+drivers/platform/x86/chromeos_laptop.ko
 drivers/scsi/sg.ko
 drivers/thermal/thermal_sys.ko
 drivers/usb/chipidea/ci13xxx_imx.ko
 drivers/usb/chipidea/ci13xxx_msm.ko
 drivers/usb/chipidea/ci13xxx_pci.ko
 drivers/usb/chipidea/ci_hdrc.ko
-drivers/usb/chipidea/usbmisc_imx6q.ko
+drivers/usb/chipidea/usbmisc_imx.ko
+drivers/usb/dwc3/dwc3-exynos.ko
+drivers/usb/dwc3/dwc3-omap.ko
+drivers/usb/dwc3/dwc3-pci.ko
+drivers/usb/dwc3/dwc3.ko
 drivers/usb/host/ehci-hcd.ko
+drivers/usb/host/ehci-pci.ko
 drivers/usb/host/hwa-hc.ko
 drivers/usb/host/isp116x-hcd.ko
 drivers/usb/host/isp1362-hcd.ko

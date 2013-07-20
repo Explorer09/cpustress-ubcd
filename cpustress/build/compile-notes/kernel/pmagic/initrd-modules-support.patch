@@ -55,10 +55,10 @@ diff -r -u a/etc/modprobe.d/usb-controller.conf b/etc/modprobe.d/usb-controller.
 +install uhci-hcd /sbin/modprobe ehci-hcd ; /sbin/modprobe -i uhci-hcd
 +install ohci-hcd /sbin/modprobe ehci-hcd ; /sbin/modprobe -i ohci-hcd
 diff -r -u a/runonce b/runonce
---- a/runonce	2013-04-19 09:55:49.339989641 +0800
-+++ b/runonce	2013-04-19 09:44:24.000000000 +0800
-@@ -103,6 +103,9 @@
-             printf "\033[0;32m\nStarting 'Intel Optimized LINPACK 11.0.3'  (linpack).\033[0m\n"
+--- a/runonce	2013-07-05 09:45:42.808584540 +0800
++++ b/runonce	2013-07-07 18:38:31.739023730 +0800
+@@ -100,6 +100,9 @@
+             printf "\033[0;32m\nStarting 'Intel Optimized LINPACK 11.0.5'  (linpack).\033[0m\n"
              linpack
              ;;
 +        lsmod)

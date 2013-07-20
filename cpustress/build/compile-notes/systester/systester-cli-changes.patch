@@ -1,0 +1,122 @@
+diff -r -u a/cli/systester-cli.c b/cli/systester-cli.c
+--- a/cli/systester-cli.c	2012-07-09 04:41:47.000000000 +0800
++++ b/cli/systester-cli.c	2013-07-20 11:19:06.012131005 +0800
+@@ -69,10 +69,12 @@
+ void
+ intro ()
+ {
++#if !defined(_LITE)
+   unsigned long long freq;
+   int cpu, activecpus;
+-  char osstring[80], ChipID[64] = "", VendorID[64] = "",
+-    gmpverstring[12], xstr[255];
++  char ChipID[64] = "", VendorID[64] = "";
++#endif
++  char osstring[80], gmpverstring[12], xstr[255];
+ 
+ #if !defined(_LITE)
+   cpu = CPUID (ChipID, VendorID);
+@@ -132,14 +134,20 @@
+   PRINT ("%s\n", "Valid command line options");
+   PRINT ("%s\n", " -help                  Prints this help screen");
+   PRINT ("%s\n",
+-	 " -qcborwein <digits>	Use Borwein's Quadratic Convergence algorithm");
++	 " -qcborwein <digits>    Use Borwein's Quadratic Convergence algorithm");
+   PRINT ("%s\n", " -gausslg  <digits>     Use Gauss-Legendre algorithm");
+   PRINT ("%s\n\n",
+ 	 "  Valid <digits> values: 128K, 256K, 512K, 1M, 2M, 4M, 8M, 16M, 32M, 64M, 128M");
+ 
++#if !defined(_LITE)
++  sprintf (xstr,
++	   " -threads <nthreads>    The number of threads. Default is auto, Maximum %d",
++	   MAX_THREADS);
++#else
+   sprintf (xstr,
+ 	   " -threads <nthreads>    The number of threads. Default 1, Maximum %d",
+ 	   MAX_THREADS);
++#endif
+   PRINT ("%s\n", xstr);
+   PRINT ("%s\n", " -turns <nturns>        The number of turns. Default 1");
+   PRINT ("%s\n",
+@@ -193,8 +201,12 @@
+   algo = 0;			/* Borwein */
+   mode = 0;			/* Test */
+   loops = 16;			/* 128 K */
+-  threads = 1;
+   executions = 1;
++#if !defined(_LITE)
++  threads = ncpus ();
++#else
++  threads = 1;
++#endif
+ 
+ /* Argument parsing */
+   if (argc > 1)
+@@ -206,7 +218,11 @@
+ 	    {
+ 	      algo = 0;
+ 	      arg++;
+-	      loops = determine_loops (argv[arg], algo);
++	      if (arg < argc)
++		loops = determine_loops (argv[arg], algo);
++	      else
++		loops = -1;
++
+ 	      if (loops == -1)
+ 		{
+ 		  help ();
+@@ -217,7 +233,11 @@
+ 	    {
+ 	      algo = 1;
+ 	      arg++;
+-	      loops = determine_loops (argv[arg], algo);
++	      if (arg < argc)
++		loops = determine_loops (argv[arg], algo);
++	      else
++		loops = -1;
++
+ 	      if (loops == -1)
+ 		{
+ 		  help ();
+@@ -227,22 +247,25 @@
+ 	  else if (strcmp (argv[arg], "-threads") == 0)
+ 	    {
+ 	      arg++;
+-	      threads = atoi (argv[arg]);
++	      if (arg < argc)
++		threads = atoi (argv[arg]);
++	      else
++		threads = 0;
+ 
+ 	      if (threads < 1)
+ 		{
+ 		  help ();
+ 		  exit (0);
+ 		}
+-
+-	      if (threads > MAX_THREADS)
+-		threads = MAX_THREADS;
+-
+ 	    }
+ 	  else if (strcmp (argv[arg], "-turns") == 0)
+ 	    {
+ 	      arg++;
+-	      executions = atoi (argv[arg]);
++	      if (arg < argc)
++		executions = atoi (argv[arg]);
++	      else
++		executions = 1;
++
+ 	      if (executions < 1)
+ 		executions = 1;
+ 	    }
+@@ -264,6 +287,9 @@
+ 	}
+     }
+ 
++  if (threads > MAX_THREADS)
++    threads = MAX_THREADS;
++
+ /* Shoot */
+   intro ();
+ 

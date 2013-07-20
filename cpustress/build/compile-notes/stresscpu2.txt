@@ -1,22 +1,37 @@
-30 May 2013
+5 July 2013
 
-The stresscpu2 program included in the CPUstress image in the official binary.
-
-stresscpu2 can be downloaded here:
+StressCPU2 can be downloaded here:
 http://www.gromacs.org/@api/deki/files/43/=stresscpu2.tgz
 
-After downloading and unpacking, rename the executable:
+The stresscpu2 binary included in CPUstress is compiled on Ubuntu 12.04.2 LTS 
+(32-bit).
+
+The precompiled binaries in the stresscpu2 package is statically linked. But I 
+prefer dynamically linked version because it is smaller.
+
+After downloading and unpacking, build the dynamically linked binary from 
+source:
 
  $ cd stresscpu2
- $ mv stresscpu2_linux32 stresscpu2
+ $ sed -e 's/-static//' <Makefile.Linux32 >Makefile
+ $ make
 
 (Optional) Change the mode of the binary:
 
  $ chmod 755 stresscpu2
 
-(Optional) You can strip the binary file to save a few bytes. I did so in my 
-CPUstress image:
+(Optional) To reduce the file size, I stripped the binary after compilation:
 
  $ strip stresscpu2
+
+Additional note:
+According to my experiment, the original binary "stresscpu2_linux32" is likely 
+to be compiled on CentOS 4.4 (i386) without any post-release update.
+The toolchain was as follows:
+   GNU libc version 2.3.4-2.25
+   GNU Binutils version 2.15.92.0.2-21 20040927
+   GCC version 3.4.6 20060404 (Red Hat 3.4.6-3)
+I didn't contact the author for this so I might be wrong. But at least I get 
+the identical executable when compiling there.
 
 --Explorer <explorer09@gmail.com>

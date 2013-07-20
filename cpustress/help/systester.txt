@@ -9,7 +9,7 @@ Valid command line options
  -gausslg  <digits>     Use Gauss-Legendre algorithm
   Valid <digits> values: 128K, 256K, 512K, 1M, 2M, 4M, 8M, 16M, 32M, 64M, 128M
 
- -threads <nthreads>    The number of threads. Default 1, Maximum 64
+ -threads <nthreads>    The number of threads. Default is auto, Maximum 64
  -turns <nturns>        The number of turns. Default 1
  -test                  Set operating mode to Test. This is the default
  -bench                 Set operating mode to Bench

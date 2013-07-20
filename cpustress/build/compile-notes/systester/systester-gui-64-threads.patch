@@ -1,0 +1,15 @@
+diff -r -u a/MainWindow.ui b/MainWindow.ui
+--- a/MainWindow.ui	2012-07-09 04:41:47.000000000 +0800
++++ b/MainWindow.ui	2013-07-17 07:19:14.556930678 +0800
+@@ -2819,6 +2819,11 @@
+        <string>32</string>
+       </property>
+      </item>
++     <item>
++      <property name="text">
++       <string>64</string>
++      </property>
++     </item>
+     </widget>
+     <widget class="QPushButton" name="modeButton">
+      <property name="enabled">

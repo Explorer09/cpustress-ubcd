@@ -1,7 +1,7 @@
 REM
 REM Script to make a 7z package for CPUstress release.
 REM
-SET ARCHIVE_NAME=cpustress-2.3.4
+SET ARCHIVE_NAME=cpustress-2.3.5
 
 CD ..
 

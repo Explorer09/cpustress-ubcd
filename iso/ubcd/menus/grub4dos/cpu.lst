@@ -1,7 +1,7 @@
 color cyan/black black/light-gray green/black yellow/black
 color standard=light-gray/black border=blue/black
 
-title CPUstress V2.3.4\n A minimal Linux boot image that is used to run several stress-testing tools on\n the UBCD. This entry will launch the internal menu, in which you can select\n which stress program to run.
+title CPUstress V2.3.5\n A minimal Linux boot image that is used to run several stress-testing tools on\n the UBCD. This entry will launch the internal menu, in which you can select\n which stress program to run.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=menu
 initrd /ubcd/boot/cpustress/initrd.gz
 map --unmap=0:0xff
@@ -21,7 +21,7 @@ kernel /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=cpuinfo
 initrd /ubcd/boot/cpustress/initrd.gz
 map --unmap=0:0xff
 
-title Intel Optimized LINPACK Benchmark V11.0.3\n A generalization of the LINPACK 1000 benchmark. Solves a dense (real*8) system\n of linear equations (Ax=b), measures the amount of time it takes to factor and\n solve the system, converts that time into a performance rate, and tests the\n results for accuracy.
+title Intel Optimized LINPACK Benchmark V11.0.5\n A generalization of the LINPACK 1000 benchmark. Solves a dense (real*8) system\n of linear equations (Ax=b), measures the amount of time it takes to factor and\n solve the system, converts that time into a performance rate, and tests the\n results for accuracy.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=linpack
 initrd /ubcd/boot/cpustress/initrd.gz
 map --unmap=0:0xff
@@ -46,7 +46,7 @@ kernel /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=stresscpu2
 initrd /ubcd/boot/cpustress/initrd.gz
 map --unmap=0:0xff
 
-title System Stability Tester V1.5.1\n Test the system's stability by calculating up to 128 millions of Pi digits.\n Supports two calculation algorithms: The Quadratic Convergence of Borwein and\n Gauss-Legendre. Can create up to 32 threads. The calculation results of all\n the threads are compared after each step.
+title System Stability Tester V1.5.1\n Test the system's stability by calculating up to 128 millions of Pi digits.\n Supports two calculation algorithms: The Quadratic Convergence of Borwein and\n Gauss-Legendre. Can create up to 64 threads. The calculation results of all\n the threads are compared after each step.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=systester
 initrd /ubcd/boot/cpustress/initrd.gz
 map --unmap=0:0xff

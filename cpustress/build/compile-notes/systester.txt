@@ -1,4 +1,4 @@
-17 June 2013
+20 July 2013
 
 Systester download page:
 http://systester.sourceforge.net/downloads.php
@@ -35,18 +35,27 @@ Notes about the configure options:
   system to 64-bit (even though the OS is 32-bit) if you don't specify 
   "ABI=32". With the overwritten CFLAGS this will generate an error.
 
-Unpack and build Systester (CLI version):
+Unpack Systester:
 
  $ cd ${HOME}
  $ tar -x -v -z -f systester-1.5.1.tar.gz
- $ cd systester-1.5.1/cli
- $ sed -e 's/qcborwein <digits>\tUse/qcborwein <digits>    Use/g' \
-     -i.bak systester-cli.c
+
+Copy the ".patch" files into the source code directory. Then apply the patches:
+
+ $ cd systester-1.5.1
+ $ patch -p 1 <systester-cli-changes.patch
+ $ patch -p 1 <systester-column-align.patch
+ $ patch -p 1 <systester-gui-64-threads.patch
+ $ patch -p 1 <systester-log-file-format.patch
+
+Build Systester (CLI version):
+
+ $ cd cli
  $ CPPFLAGS='-L${HOME}/gmp-5.1.2/.libs -I${HOME}/gmp-5.1.2' make cli
 
-(The sed command fixes a minor error about whitespaces in 
-"systester-cli -help" output. The fix is temporary and may be removed in the 
-new version of systester.)
+(Optional) Change the mode of the binary:
+
+ $ chmod 755 stresscpu2
 
 (Optional) To reduce the file size, I stripped the binary after compilation:
 
