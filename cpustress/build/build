@@ -6,7 +6,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 6 July 2013.
+# Last updated on 13 August 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -18,12 +18,6 @@ if [ ! -d "build-initrd/dev" ]; then
     if [ "$?" -ne 0 ]; then
         exit 1
     fi
-fi
-
-if [ "X$1" != "Xno-recurse" ] && [ `id -u` != "0" ] && [ `which fakeroot` ]; then
-    echo "Faking root privileges when possible..."
-    fakeroot -- "./`basename $0`" no-recurse
-    exit 0
 fi
 
 # Check that important directories exist, so that we won't build an empty and
@@ -50,11 +44,6 @@ fi
 
 cd build-initrd
 
-# Optional: if the user is root, set the owner of the files to root.
-if [ `id -u` = "0" ]; then
-    chown -Rh 0:0 *
-fi
-
 # Prepare the ignore list.
 # Some VCS, notably Subversion, may create hidden directories all over the 
 # place. I have to ignore instead of remove them.
@@ -79,7 +68,12 @@ echo "Making cpio archive..."
 
 # Method of creating cpio-format initrd file can be found here:
 # http://www.thegeekstuff.com/2009/07/how-to-view-modify-and-recreate-initrd-img/
-find . | LC_ALL=C sort | sed -f ../filelist-tmp.sed | cpio -o -H newc >../initrd
+# Notes:
+# I support only GNU cpio and bsdcpio. Others such as Solaris cpio simply won't
+# work here.
+# -H (synonym of --format) does not work with old bsdcpio.
+# --owner (synonym of -R) might be GNU-only.
+find . | LC_ALL=C sort | sed -f ../filelist-tmp.sed | cpio -o --format newc -R root:root >../initrd
 
 rm ../filelist-tmp.sed
 
