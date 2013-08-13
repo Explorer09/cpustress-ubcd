@@ -74,6 +74,11 @@ echo "Making cpio archive..."
 # -H (synonym of --format) does not work with old bsdcpio.
 # --owner (synonym of -R) might be GNU-only.
 find . | LC_ALL=C sort | sed -f ../filelist-tmp.sed | cpio -o --format newc -R root:root >../initrd
+STATUS="$?"
+if [ "$STATUS" -ne "0" ]; then
+    echo "ERROR: cpio error with exit code $STATUS."
+    exit 1
+fi
 
 rm ../filelist-tmp.sed
 
@@ -93,9 +98,19 @@ fi
 
 if [ "X$P7ZIP" != "X" ]; then
     ${P7ZIP} a -tgzip -mx=9 initrd.gz initrd
+    STATUS="$?"
+    if [ "$STATUS" -ne "0" ]; then
+        echo "ERROR: ${P7ZIP} error with exit code $STATUS."
+        exit 1
+    fi
 else
     echo "7-zip is not found. Using gzip instead..."
     gzip -9 -v initrd
+    STATUS="$?"
+    if [ "$STATUS" -ne "0" ]; then
+        echo "ERROR: gzip error with exit code $STATUS."
+        exit 1
+    fi
 fi
 
 rm -f initrd
