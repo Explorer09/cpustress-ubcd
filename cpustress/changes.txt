@@ -3,7 +3,7 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-20 July 2013
+20 August 2013
 
 
 Changes in v2.3.5
@@ -163,7 +163,8 @@ Notes:
   whether it was fixed or not. If anyone has the hardware and can test it, 
   then I appreciate for your help.
 - Since Linux kernel 3.8, the i386 architecture is no longer supported. If you 
-  have 80386 you'll probably need to build a 3.7.x Linux kernel.
+  have a 80386 you need to upgrade. (Even though you can build a Linux kernel 
+  for it, the C library (glibc) doesn't support i386. So it won't work.)
 
 Changes in v2.1expl7
 --------------------
