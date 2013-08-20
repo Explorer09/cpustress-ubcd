@@ -1,4 +1,4 @@
-20 July 2013
+20 August 2013
 
 Systester download page:
 http://systester.sourceforge.net/downloads.php
@@ -32,8 +32,8 @@ Notes about the configure options:
   header (gmp-mparam.h) instead of a header optimized for a particular 
   architecture.
 * If you have a 64-bit processor, the configure script might set the build 
-  system to 64-bit (even though the OS is 32-bit) if you don't specify 
-  "ABI=32". With the overwritten CFLAGS this will generate an error.
+  system to 64-bit (even though the OS is 32-bit). With the overwritten CFLAGS 
+  this will generate an error, unless you also specify "ABI=32".
 
 Unpack Systester:
 
