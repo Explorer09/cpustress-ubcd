@@ -3,8 +3,11 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-20 August 2013
+5 September 2013
 
+- Updated eglibc to 2.18-r23787 (from 2.17-r23365). Also I removed several 
+  functions in this libc build, so the library is slightly smaller. See the 
+  compile note for details.
 
 Changes in v2.3.5
 -----------------
