@@ -4,32 +4,32 @@ eglibc home page:
 http://www.eglibc.org/home
 
 ******************************************************************************
-NOTICE: The C library included in CPUstress is a REDUCED build. It does not 
-contain every function that you may find in the normal glibc. When adding a 
-new program to CPUstress, make sure that the library provides the functions 
-you need. You may use the 'ldd' utility to check library dependencies and 
-'readelf --dyn-syms' to list the symbols available in libc.so and what are 
+NOTICE: The C library included in CPUstress is a REDUCED build. It does not
+contain every function that you may find in the normal glibc. When adding a
+new program to CPUstress, make sure that the library provides the functions
+you need. You may use the 'ldd' utility to check library dependencies and
+'readelf --dyn-syms' to list the symbols available in libc.so and what are
 needed by your program.
 
-If you are not sure, compile the library without the "option-groups.config" 
+If you are not sure, compile the library without the "option-groups.config"
 file.
 ******************************************************************************
 
 The GNU C Library (glibc) is compiled on Ubuntu 12.04.3 LTS (32-bit).
 
-I choose the eglibc variant over the original glibc because eglibc have 
+I choose the eglibc variant over the original glibc because eglibc have
 important bugs fixes that glibc would not fix until their next release.
 
-(Previously, glibc 2.16 had a security bug (CVE-2012-3480). Before 2.17 this 
+(Previously, glibc 2.16 had a security bug (CVE-2012-3480). Before 2.17 this
 is not fixed except in eglibc.)
 
-First, you need svn client to fetch out the eglibc source code and gawk for 
-the configure script to work. Autoconf, gettext, and texinfo are not strictly 
+First, you need svn client to fetch out the eglibc source code and gawk for
+the configure script to work. Autoconf, gettext, and texinfo are not strictly
 necessary but configure will generate warnings if you don't have them.
 
  $ sudo apt-get install subversion gawk autoconf gettext texinfo
 
-In addition, glibc needs the linux kernel headers to compile. I use the 
+In addition, glibc needs the linux kernel headers to compile. I use the
 headers from version 3.11.
 
  $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.11.tar.xz
@@ -39,7 +39,7 @@ headers from version 3.11.
  $ make ARCH=i386 INSTALL_HDR_PATH=${HOME}/headers-3.11 headers_install
  $ cd ..
 
-(I put the headers in the directory "${HOME}/headers-3.11", but you may 
+(I put the headers in the directory "${HOME}/headers-3.11", but you may
 change the path if you like.)
 
 Make a directory somewhere and get the code:
@@ -48,15 +48,15 @@ Make a directory somewhere and get the code:
  $ cd eglibc-2.18
  $ svn checkout http://www.eglibc.org/svn/branches/eglibc-2_18/libc/
 
-eglibc, like the original glibc, needs a separate build directory to build the 
+eglibc, like the original glibc, needs a separate build directory to build the
 code.
 
  $ mkdir build
  $ cd build
 
-Copy the "option-groups.config" file from this compile-notes directory to 
-eglibc "build" directory. This config file disables various functions in order 
-to make the library smaller and build process faster. Also read the notice 
+Copy the "option-groups.config" file from this compile-notes directory to
+eglibc "build" directory. This config file disables various functions in order
+to make the library smaller and build process faster. Also read the notice
 above.
 
 Configure and build eglibc:
@@ -69,15 +69,15 @@ Configure and build eglibc:
 
 Notes about the configure options:
 * The config.guess output should be "i686-pc-linux-gnu" in your system.
-* If you wan't to make the library compatible with the old CPUstress kernel 
+* If you wan't to make the library compatible with the old CPUstress kernel
   from Icecube, set "--enable-kernel=2.6.28" instead of "2.6.36".
-  Setting any version higher than 2.6.36 optimizes nothing in the code, but it 
+  Setting any version higher than 2.6.36 optimizes nothing in the code, but it
   makes your library less compatible.
-* Currently eglibc comes with nptl and libidn add-ons. Only nptl is needed by 
+* Currently eglibc comes with nptl and libidn add-ons. Only nptl is needed by
   CPUstress.
 
-For CPUstress image, you don't need to run "make install". Instead just copy 
-these files to the CPUstress initrd directory:  (Replace ${cpustress_initrd} 
+For CPUstress image, you don't need to run "make install". Instead just copy
+these files to the CPUstress initrd directory:  (Replace ${cpustress_initrd}
 with the root path of your extracted initrd image.)
 
  $ cp -a elf/ld.so           "${cpustress_initrd}/lib/ld-2.18.so"
@@ -87,7 +87,7 @@ with the root path of your extracted initrd image.)
  $ cp -a nss/libnss_files.so "${cpustress_initrd}/lib/libnss_files-2.18.so"
  $ cp -a nptl/libpthread.so  "${cpustress_initrd}/lib/libpthread-2.18.so"
 
-The "make install" changes the mode of these files, so you should manually do 
+The "make install" changes the mode of these files, so you should manually do
 the same:
 
  $ cd ${cpustress_initrd}/lib
@@ -108,9 +108,9 @@ Then, create symlinks:
 
 Additional note:
 
-The precompiled libraries in CPUstress were compiled with different 
-"enable-kernel" switches. Although this is unnecessary and time-consuming, I 
-did this to minimize the version requirements of the individual file, while 
+The precompiled libraries in CPUstress were compiled with different
+"enable-kernel" switches. Although this is unnecessary and time-consuming, I
+did this to minimize the version requirements of the individual file, while
 keeping the code optimized for the latest kernel. The switches are as follows:
    libdl.so, libm.so:    --enable-kernel=2.6.16
    libnss_files.so:      --enable-kernel=2.6.23

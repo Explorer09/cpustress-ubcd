@@ -110,7 +110,7 @@ minutes (= 7 days).
 
 Contact:
 -------
-   
+
 If your system experiences instability during the burn-in test or you receive
 error messages it's likely the system has been overclocked too far.
 

@@ -1,11 +1,11 @@
 #!/bin/sh
 #
-# This script collects the linux kernel modules from Parted Magic to use with 
+# This script collects the linux kernel modules from Parted Magic to use with
 # CPUstress initrd. To use this script:
 #   1. Boot a Parted Magic live CD (either on a real machine or a VM)
-#   2. Copy this script (pmagic-kernel-modules.sh) to the home directory 
+#   2. Copy this script (pmagic-kernel-modules.sh) to the home directory
 #      (usually /root) on PMagic.
-#   3. Run pmagic-kernel-modules.sh and watch the modules being prepared in 
+#   3. Run pmagic-kernel-modules.sh and watch the modules being prepared in
 #      the "fmu" directory inside home.
 #   4. Copy the "lib" directory in "fmu" to the CPUstress initrd.
 #
@@ -18,7 +18,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 15 July 2013.
+# Last updated on 5 September 2013.
 
 uname -r | grep 'pmagic64' > /dev/null
 if [ "$?" -eq "0" ]; then

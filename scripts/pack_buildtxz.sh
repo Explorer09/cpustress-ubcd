@@ -7,7 +7,7 @@ cd ../cpustress
 
 if [ -d "build" ]; then
     rm -i build.txz build.tar
-    # The files in build/build-initrd are excluded, but the directory itself 
+    # The files in build/build-initrd are excluded, but the directory itself
     # isn't.
     tar -c -v --exclude='build/build-initrd/*' --exclude='build/initrd.gz' \
       --exclude-backups --exclude-vcs -f build.tar build

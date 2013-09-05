@@ -14,7 +14,7 @@ cd ..
 #modified by n1k
 # - save all files metadata not only from other users
 # - save numeric uid and gid
- 
+
 : ${GIT_CACHE_META_FILE=.git_cache_meta}
 case $@ in
     --store|--stdout)

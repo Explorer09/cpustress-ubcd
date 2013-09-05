@@ -14,8 +14,8 @@ burnP5   is optimized for Intel Pentium w&w/o MMX processors
     BX   is an alternate cache/memory test for Intel CPUs
 
 TO USE:  root priviliges are NOT required.  It has been designed for ELF
-         Linux, but also tested under FreeBSD. and a.out.  Burn Testing 
-         is best done from a ramdisk distribution (tomsrtbt) or with 
+         Linux, but also tested under FreeBSD. and a.out.  Burn Testing
+         is best done from a ramdisk distribution (tomsrtbt) or with
          filesystems unmounted or mounted read-only.
 
 The CPUstress image contains a wrapper script that makes it easy for the user
@@ -49,7 +49,7 @@ burnBX and burnMMX are essentially very intense RAM testers.  They can
 also take an optional parameter indicating the RAM size to be tested:
 
   A =  2 kB   E =  32 kB   I = 512 kB   M =  8 MB
-  B =  4      F =  64      J =   1 MB   N = 16   
+  B =  4      F =  64      J =   1 MB   N = 16
   C =  8      G = 128      K =   2      O = 32
   D = 16      H = 256      L =   4      P = 64
 

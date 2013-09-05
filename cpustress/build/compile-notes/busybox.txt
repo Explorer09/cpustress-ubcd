@@ -1,15 +1,15 @@
-20 July 2013
+5 September 2013
 
 The BusyBox source code and the official patches can be downloaded here:
 http://busybox.net/downloads/busybox-1.21.1.tar.bz2
-(At the time of the writing, there were no official patches for 1.21.1. You 
-can check the official patches at 
+(At the time of the writing, there were no official patches for 1.21.1. You
+can check the official patches at
 <http://busybox.net/downloads/fixes-1.21.1/>.)
 
 The BusyBox binary is compiled on Ubuntu 12.04.2 LTS (32-bit).
 
-After downloading and unpacking the source code, copy the file "config" and 
-the ".patch" files into the source code directory. Then apply the patches and 
+After downloading and unpacking the source code, copy the file "config" and
+the ".patch" files into the source code directory. Then apply the patches and
 the config:
 
  $ cd busybox-1.21.1
@@ -20,7 +20,7 @@ Finally, build BusyBox:
  $ make
  $ make install
 
-The binary will be ready in a directory named "_install" inside the busybox 
+The binary will be ready in a directory named "_install" inside the busybox
 source, as well as the necessary symlinks.
 
 --Explorer <explorer09@gmail.com>

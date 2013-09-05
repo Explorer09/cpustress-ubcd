@@ -1,4 +1,4 @@
-16 June 2013
+5 September 2013
 
 Homepage of stress by Amos Waterland:
 http://web.archive.org/web/20130520190152/http://weather.ou.edu/~apw/projects/stress/
@@ -6,18 +6,18 @@ http://web.archive.org/web/20130520190152/http://weather.ou.edu/~apw/projects/st
 The source code of stress can be downloaded here:
 http://web.archive.org/web/20130116202706/http://weather.ou.edu/~apw/projects/stress/stress-1.0.4.tar.gz
 
-The original website <http://weather.ou.edu/~apw/projects/stress/> is dead, so 
+The original website <http://weather.ou.edu/~apw/projects/stress/> is dead, so
 the code have to be downloaded from a mirror.
 
 The stress binary is compiled on Ubuntu 12.04.2 LTS (32-bit).
 
-After downloading and unpacking the source code, apply a patch to disable the 
+After downloading and unpacking the source code, apply a patch to disable the
 hdd stressing, because the CPUstress image does not support writing to disks:
 
  $ cd stress-1.0.4
  $ patch -p 1 <stress-no-hdd.patch
 
-Then run the configure script and then "make". You will get the binary in the 
+Then run the configure script and then "make". You will get the binary in the
 "src" directory.
 
  $ ./configure

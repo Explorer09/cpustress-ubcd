@@ -1,7 +1,7 @@
 0f>> PAGE 107
 
 The 0fCPUstress07 image is a minimal boot image for stress testing. It contains
-these programs:  CPUburn, CPU Burn-in, CPUinfo, LINPACK, Mersenne Prime Test, 
+these programs:  CPUburn, CPU Burn-in, CPUinfo, LINPACK, Mersenne Prime Test,
 Sensors, Stress, StressCPU and Systester.
 
 Other than testing, the image's functionality is little. It does not support

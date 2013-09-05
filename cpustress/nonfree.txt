@@ -1,14 +1,14 @@
-This CPUstress image contains non-free programs, and programs not compatible 
-with GNU GPL. When you distribute this image, you have to inform the users 
-about these non-free components, because the image as a whole cannot be 
+This CPUstress image contains non-free programs, and programs not compatible
+with GNU GPL. When you distribute this image, you have to inform the users
+about these non-free components, because the image as a whole cannot be
 distributed under GPL without modification.
 
-Below is the list of programs that are either non-free (i.e. not "free as in 
-freedom") or are under a license incompatible with GPL. If you wish to 
-distribute an image that is free software only, this document shows you what 
+Below is the list of programs that are either non-free (i.e. not "free as in
+freedom") or are under a license incompatible with GPL. If you wish to
+distribute an image that is free software only, this document shows you what
 files you need to remove in order to do so.
 
-All paths are relative to the "build-initrd" directory, or the root directory 
+All paths are relative to the "build-initrd" directory, or the root directory
 of the extracted initrd image.
 
 * CPU Burn-in - This program is a closed-source freeware.
@@ -20,16 +20,16 @@ of the extracted initrd image.
   Files: opt/linpack/*
          usr/local/bin/linpack
 
-* Mersenne Prime test - This program is under an (almost) permissive license 
-  that is incompatible with GPL. Specifically, the license has a requirement 
-  that if the user finds a prime number using the program he must credit GIMPS 
-  as the discoverer and may not claim prizes on his own. It is technically not 
+* Mersenne Prime test - This program is under an (almost) permissive license
+  that is incompatible with GPL. Specifically, the license has a requirement
+  that if the user finds a prime number using the program he must credit GIMPS
+  as the discoverer and may not claim prizes on his own. It is technically not
   free software for this reason.
   Files: opt/mprime/*
          usr/local/bin/mprime
 
-After removing the files, you should consider editing the menus and 
-documentation to reflect the changes. Below is the list of files you may need 
+After removing the files, you should consider editing the menus and
+documentation to reflect the changes. Below is the list of files you may need
 to edit. (Inside "build-initrd")
 
   usr/local/bin/helpinfo

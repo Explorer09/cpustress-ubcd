@@ -6,7 +6,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 13 August 2013.
+# Last updated on 5 September 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -18,7 +18,7 @@ if [ -d "build-initrd" ] && [ "X`ls -A 'build-initrd'`" != "X" ]; then
 fi
 
 if [ ! -f "initrd.gz" ]; then
-    echo "File initrd.gz is not found. Please place the CPUstress initrd image in the "
+    echo "File initrd.gz is not found. Please place the CPUstress initrd image in the"
     echo "same directory as this script."
     exit 1
 fi
