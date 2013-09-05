@@ -8,6 +8,7 @@ Changes in development version
 - Updated eglibc to 2.18-r23787 (from 2.17-r23365). Also I removed several 
   functions in this libc build, so the library is slightly smaller. See the 
   compile note for details.
+- Removed build-initrd/etc/modprobe.d
 
 Changes in v2.3.5
 -----------------

@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-09-05 18:54:59.8401093970" .git_cache_meta
+touch -c -h -d "2013-09-05 19:02:59.2520987000" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -34,10 +34,6 @@ chmod 0644 cpustress/build/build-initrd/etc/inittab
 touch -c -h -d "2008-10-29 02:55:52.0000000000" cpustress/build/build-initrd/etc/inittab
 chmod 0644 cpustress/build/build-initrd/etc/mdev.conf
 touch -c -h -d "2013-06-17 22:38:20.7927038330" cpustress/build/build-initrd/etc/mdev.conf
-chmod 0644 cpustress/build/build-initrd/etc/modprobe.d/isapnp.conf
-touch -c -h -d "2013-03-23 00:56:59.0000000000" cpustress/build/build-initrd/etc/modprobe.d/isapnp.conf
-chmod 0644 cpustress/build/build-initrd/etc/modprobe.d/usb-controller.conf
-touch -c -h -d "2013-04-12 08:27:17.0572989180" cpustress/build/build-initrd/etc/modprobe.d/usb-controller.conf
 chmod 0644 cpustress/build/build-initrd/etc/passwd
 touch -c -h -d "2008-07-23 03:14:36.0000000000" cpustress/build/build-initrd/etc/passwd
 chmod 0644 cpustress/build/build-initrd/etc/profile
@@ -210,7 +206,7 @@ touch -c -h -d "2013-07-06 22:11:00.6024091540" cpustress/build/prepare
 chmod 0644 cpustress/bzImage
 touch -c -h -d "2013-07-15 22:21:08.0000000000" cpustress/bzImage
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2013-09-05 18:51:54.4721135330" cpustress/changes.txt
+touch -c -h -d "2013-09-05 19:02:15.6920996720" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
