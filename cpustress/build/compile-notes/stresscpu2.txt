@@ -25,6 +25,7 @@ source:
  $ strip stresscpu2
 
 Additional note:
+
 According to my experiment, the original binary "stresscpu2_linux32" is likely
 to be compiled on CentOS 4.4 (i386) without any post-release update.
 The toolchain was as follows:

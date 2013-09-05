@@ -39,7 +39,7 @@ be much smaller: <http://upx.sourceforge.net/>
  $ upx mprime239/mprime23
  $ upx p95v279/mprime27
 
-The programs depend on these libraies:
+The programs depend on these libraries:
     libm.so.6
     libpthread.so.0 (mprime27 only)
     libdl.so.2 (mprime27 only)

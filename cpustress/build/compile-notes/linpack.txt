@@ -36,7 +36,7 @@ be much smaller: <http://upx.sourceforge.net/>
 
  $ upx xlinpack_xeon32
 
-The program depends on these libraies:
+The program depends on these libraries:
     libpthread.so.0
     libm.so.6
     libgcc_s.so.1
