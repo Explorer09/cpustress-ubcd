@@ -1,21 +1,21 @@
-5 September 2013
+6 September 2013
 
-The Linux kernel for CPUstress is compiled on Ubuntu 12.04.2 LTS (32-bit).
+The Linux kernel for CPUstress is compiled on Ubuntu 12.04.3 LTS (32-bit).
 
 The source code of the kernel is from the official kernel.org site. No
 additional patch is applied.
 
 Download the source code and then prepare the source directory for building:
 
- $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.10.1.tar.xz
- $ tar -x -v --xz -f linux-3.10.1.tar.xz
- $ cd linux-3.9.9
+ $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.11.tar.xz
+ $ tar -x -v --xz -f linux-3.11.tar.xz
+ $ cd linux-3.11
  $ make mrproper
 
-Copy the "config-3.10.1-cpustress" file into the source code directory, then
+Copy the "config-3.11.0-cpustress" file into the source code directory, then
 rename it:
 
- $ mv config-3.10.1-cpustress .config
+ $ mv config-3.11.0-cpustress .config
 
 Build the kernel, if you don't want to configure anything else:
 

@@ -18,7 +18,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 5 September 2013.
+# Last updated on 6 September 2013.
 
 uname -r | grep 'pmagic64' > /dev/null
 if [ "$?" -eq "0" ]; then
@@ -118,6 +118,7 @@ drivers/hwmon/f75375s.ko
 drivers/hwmon/fam15h_power.ko
 drivers/hwmon/fschmd.ko
 drivers/hwmon/g760a.ko
+drivers/hwmon/g762.ko
 drivers/hwmon/gl518sm.ko
 drivers/hwmon/gl520sm.ko
 drivers/hwmon/hih6130.ko
@@ -212,9 +213,9 @@ drivers/i2c/busses/i2c-designware-core.ko
 drivers/i2c/busses/i2c-designware-pci.ko
 drivers/i2c/busses/i2c-eg20t.ko
 drivers/i2c/busses/i2c-i801.ko
-drivers/i2c/busses/i2c-intel-mid.ko
 drivers/i2c/busses/i2c-isch.ko
 drivers/i2c/busses/i2c-ismt.ko
+drivers/i2c/busses/i2c-kempld.ko
 drivers/i2c/busses/i2c-nforce2-s4985.ko
 drivers/i2c/busses/i2c-nforce2.ko
 drivers/i2c/busses/i2c-ocores.ko
@@ -253,12 +254,14 @@ drivers/input/keyboard/tca8418_keypad.ko
 drivers/input/matrix-keymap.ko
 drivers/input/mouse/psmouse.ko
 drivers/input/serio/altera_ps2.ko
+drivers/input/serio/olpc_apsp.ko
 drivers/input/serio/pcips2.ko
 drivers/input/serio/ps2mult.ko
 drivers/input/serio/serio_raw.ko
 drivers/input/serio/serport.ko
 drivers/mfd/cros_ec.ko
 drivers/mfd/cros_ec_i2c.ko
+drivers/mfd/kempld-core.ko
 drivers/mfd/lpc_sch.ko
 drivers/mfd/mfd-core.ko
 drivers/of/of_i2c.ko
@@ -277,11 +280,13 @@ drivers/usb/dwc3/dwc3-pci.ko
 drivers/usb/dwc3/dwc3.ko
 drivers/usb/host/ehci-hcd.ko
 drivers/usb/host/ehci-pci.ko
+drivers/usb/host/fusbh200-hcd.ko
 drivers/usb/host/hwa-hc.ko
 drivers/usb/host/isp116x-hcd.ko
 drivers/usb/host/isp1362-hcd.ko
 drivers/usb/host/isp1760.ko
 drivers/usb/host/ohci-hcd.ko
+drivers/usb/host/ohci-pci.ko
 drivers/usb/host/oxu210hp-hcd.ko
 drivers/usb/host/r8a66597-hcd.ko
 drivers/usb/host/sl811-hcd.ko
