@@ -21,8 +21,7 @@ if [ "X$1" = "X" ] || [ "X$1" = "X--help" ]; then
     exit 1
 fi
 
-EXE=`which -- "$1"`
-if [ -x "$EXE" ]; then
+if [ -x "`which -- "$1"`" ]; then
     COMMAND=$1
     shift
     if [ "$#" -ge "1" ]; then
