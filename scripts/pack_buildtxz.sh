@@ -7,17 +7,25 @@ cd ../cpustress
 
 if [ -d "build" ]; then
     rm -f build.txz build.tar
-    # The files in build/build-initrd are excluded, but the directory itself
-    # isn't.
+    # The --exclude switch excludes files in build/build-initrd, but not the
+    # directory itself.
     case `tar --version | sed -n -e '1 p'` in
     *GNU*)
-        tar -c -v --exclude='build/build-initrd/*' --exclude='build/initrd.gz' \
-            --exclude-backups --exclude-vcs -f build.tar build
+        find build \( -type d -exec printf '%s/\n' '{}' \; \) -o -print |
+            LC_ALL=C sort |
+            tar -c -v --no-recursion --format=ustar -f build.tar -T - \
+                --exclude='build/build-initrd/*' --exclude='build/initrd.gz' \
+                --exclude-backups --exclude-vcs
         STATUS="$?"
         ;;
     *bsdtar*)
-        tar -c -v --exclude 'build/build-initrd/*' --exclude 'build/initrd.gz' \
-            -f build.tar build
+        # Note: --no-recursion is a synonym of -n but does not work with old
+        # version of bsdtar. (Don't confuse with -n in GNU tar which means
+        # --seek.)
+        find build \( -type d -exec printf '%s/\n' '{}' \; \) -o -print |
+            LC_ALL=C sort |
+            tar -c -v -n --format ustar -f build.tar -T - \
+                --exclude 'build/build-initrd/*' --exclude 'build/initrd.gz'
         STATUS="$?"
         ;;
     *)
