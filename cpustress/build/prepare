@@ -10,7 +10,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 5 September 2013.
+# Last updated on 7 September 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -64,11 +64,15 @@ ln -s ../../bin/busybox which
 cd ../..
 
 cd lib
-ln -s ld-2.17.so ld-linux.so.2
-ln -s libc-2.17.so libc.so.6
-ln -s libm-2.17.so libm.so.6
-ln -s libpthread-2.17.so libpthread.so.0
-ln -s libdl-2.17.so libdl.so.2
+if ls ld-*.so >>/dev/null; then
+    GLIBC_VER=`ls ld-*.so | sed -n -e 's/^ld-\(.*\)\.so/\1/' -e '1 p'`
+    ln -s "ld-${GLIBC_VER}.so" ld-linux.so.2
+    ln -s "libc-${GLIBC_VER}.so" libc.so.6
+    ln -s "libdl-${GLIBC_VER}.so" libdl.so.2
+    ln -s "libm-${GLIBC_VER}.so" libm.so.6
+    ln -s "libnss_files-${GLIBC_VER}.so" libnss_files.so.2
+    ln -s "libpthread-${GLIBC_VER}.so" libpthread.so.0
+fi
 cd ..
 
 cd usr/lib
