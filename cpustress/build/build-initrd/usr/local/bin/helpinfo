@@ -12,10 +12,10 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 5 September 2013.
+# Last updated on 7 September 2013.
 
 
-LAST_EDITED="5 September 2013"
+LAST_EDITED="7 September 2013"
 
 showcontrols () {
     printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
@@ -198,7 +198,7 @@ CMDSYSTESTER
             less -~ /tmp/helpinfo/systester.txt
             ;;
         *)
-            EXE=`which "$1"`
+            EXE=`which -- "$1"`
             if [ -x "$EXE" ]; then
                 showcontrols
                 $EXE --help 2>&1 | less -~

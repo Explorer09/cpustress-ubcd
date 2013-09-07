@@ -13,16 +13,18 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 18 June 2013.
+# Last updated on 7 September 2013.
 
 
 if [ "X$1" = "X" ] || [ "X$1" = "X--help" ]; then
     echo "Usage: $0 COMMAND [ARGS]"
-    exit 0
+    exit 1
 fi
-COMMAND=$1
-shift
-if { which $COMMAND >/dev/null; }; then
+
+EXE=`which -- "$1"`
+if [ -x "$EXE" ]; then
+    COMMAND=$1
+    shift
     if [ "$#" -ge "1" ]; then
         COMMAND="$COMMAND $@"
     fi
@@ -37,7 +39,7 @@ if { which $COMMAND >/dev/null; }; then
 
     exit 0
 else
-    echo "print-pid ERROR: '$COMMAND' is not executable."
+    echo "print-pid ERROR: '$1' is not executable."
     echo "Usage: $0 COMMAND [ARGS]"
     exit 1
 fi
