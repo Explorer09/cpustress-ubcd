@@ -14,7 +14,7 @@ if [ -d "build" ]; then
     xz -F xz -6 -c <build.tar >build.txz
     rm -f build.tar
 else
-    echo "ERROR: $(pwd)/build is not a directory."
+    echo "ERROR: $(pwd)/build is not a directory." >&2
     exit 1
 fi
 

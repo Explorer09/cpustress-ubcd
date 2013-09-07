@@ -39,8 +39,8 @@ for i in 7z 7za 7zr; do
 done
 
 if [ "X$P7ZIP" = "X" ]; then
-    echo "ERROR: 7-zip is not found. Please install 'p7zip' from your OS distribution,"
-    echo "or download here (http://sourceforge.net/projects/p7zip/)."
+    echo "ERROR: 7-zip is not found. Please install 'p7zip' from your OS distribution," >&2
+    echo "or download here (http://sourceforge.net/projects/p7zip/)." >&2
     exit 1
 fi
 

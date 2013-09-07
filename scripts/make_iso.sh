@@ -87,13 +87,13 @@ if [ -n "$MKISOFS" ] && [ -n "$ROOT_OF_ISO_PATH" ]; then
             echo "'${ISO_FILENAME}' was successfully created."
         else
             echo
-            echo "ERROR: Something went wrong, while creating '${ISO_FILENAME}'".
+            echo "ERROR: Something went wrong, while creating '${ISO_FILENAME}'." >&2
         fi
     else
-        echo "ERROR: '${ROOT_OF_ISO_PATH}/boot/syslinux/isolinux.bin' could not be found."
+        echo "ERROR: '${ROOT_OF_ISO_PATH}/boot/syslinux/isolinux.bin' could not be found." >&2
     fi
 elif [ -z "$MKISOFS" ]; then
-    echo "ERROR: The 'mkisofs' program could not be found. Install it and try again."
+    echo "ERROR: The 'mkisofs' program could not be found. Install it and try again." >&2
 fi
 
 # Clean up.
