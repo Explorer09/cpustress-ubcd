@@ -29,7 +29,7 @@ cd build-initrd
 cpio -i -m -d -u <initrd
 STATUS="$?"
 if [ "$STATUS" -ne "0" ]; then
-    echo "ERROR: cpio error with exit code $STATUS."
+    echo "ERROR: cpio error with exit code ${STATUS}."
     exit 1
 fi
 rm initrd

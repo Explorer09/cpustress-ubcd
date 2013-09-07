@@ -6,7 +6,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 5 September 2013.
+# Last updated on 6 September 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -76,7 +76,7 @@ echo "Making cpio archive..."
 find . | LC_ALL=C sort | sed -f ../filelist-tmp.sed | cpio -o --format newc -R root:root >../initrd
 STATUS="$?"
 if [ "$STATUS" -ne "0" ]; then
-    echo "ERROR: cpio error with exit code $STATUS."
+    echo "ERROR: cpio error with exit code ${STATUS}."
     exit 1
 fi
 
@@ -100,7 +100,7 @@ if [ "X$P7ZIP" != "X" ]; then
     ${P7ZIP} a -tgzip -mx=9 initrd.gz initrd
     STATUS="$?"
     if [ "$STATUS" -ne "0" ]; then
-        echo "ERROR: ${P7ZIP} error with exit code $STATUS."
+        echo "ERROR: ${P7ZIP} error with exit code ${STATUS}."
         exit 1
     fi
 else
@@ -108,7 +108,7 @@ else
     gzip -9 -v initrd
     STATUS="$?"
     if [ "$STATUS" -ne "0" ]; then
-        echo "ERROR: gzip error with exit code $STATUS."
+        echo "ERROR: gzip error with exit code ${STATUS}."
         exit 1
     fi
 fi
