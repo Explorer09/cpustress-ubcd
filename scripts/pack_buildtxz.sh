@@ -6,16 +6,31 @@ cd `dirname $0`
 cd ../cpustress
 
 if [ -d "build" ]; then
-    rm -i build.txz build.tar
+    rm -f build.txz build.tar
     # The files in build/build-initrd are excluded, but the directory itself
     # isn't.
-    tar -c -v --exclude='build/build-initrd/*' --exclude='build/initrd.gz' \
-      --exclude-backups --exclude-vcs -f build.tar build
-    xz -F xz -6 -c <build.tar >build.txz
+    case `tar --version | sed -n -e '1 p'` in
+    *GNU*)
+        tar -c -v --exclude='build/build-initrd/*' --exclude='build/initrd.gz' \
+            --exclude-backups --exclude-vcs -f build.tar build
+        STATUS="$?"
+        ;;
+    *bsdtar*)
+        tar -c -v --exclude 'build/build-initrd/*' --exclude 'build/initrd.gz' \
+            -f build.tar build
+        STATUS="$?"
+        ;;
+    *)
+        echo "ERROR: This script requires a GNU tar or bsdtar." >&2
+        exit 1
+    esac
+    if [ "$STATUS" -eq 0 ]; then
+        xz -F xz -6 -c <build.tar >build.txz
+        STATUS="$?"
+    fi
     rm -f build.tar
+    exit $STATUS
 else
     echo "ERROR: $(pwd)/build is not a directory." >&2
     exit 1
 fi
-
-exit 0
