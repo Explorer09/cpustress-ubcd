@@ -26,8 +26,8 @@ without parameters and the menu and choices will be shown to you.
 The `burn` wrapper accepts two optional parameters:
 `burn [MODE [RAMSIZE]]`
 where MODE is either "P5", "P6", "K6", "K7", "MMX", or "BX";
-RAMSIZE is one of the 16 RAM ram sizes documented below. You may either specify
-the size ("64k") or the letter ("F") as the RAMSIZE argument.
+RAMSIZE is one of the 16 RAM ram sizes documented below. You may either
+specify the size ("64k") or the letter ("F") as the RAMSIZE argument.
 
 Examples:
 `burn P6`
@@ -86,10 +86,11 @@ components.  Nor will it catch all flaws.   *** USE AT YOUR OWN RISK ***
 
 
 Additional notes for the CPUstress image:
+-----------------------------------------
 
-In order to make the user easy to use these programs, the `burn` wrapper script
-automatically detects the following from /proc/cpuinfo, so that the user don't
-have to worry about them:
+In order to make the user easy to use these programs, the `burn` wrapper
+script automatically detects the following from /proc/cpuinfo, so that the
+user don't have to worry about them:
 
 - Number of processors (or cores)
 - CPU model and which burn program works best
@@ -101,9 +102,15 @@ that user can make different choices.
 `burn` can also run multiple instances of the burn program at the same time,
 when you have multiple processors.
 
-All of these burn programs produce no output at all, except for the exit code.
-The `print-pid` script in /opt/burn outputs the program's exit code to the
-terminal. It is used in the `burn` wrapper script.
+All of these burn programs produce no output at all, except for the exit
+status (a.k.a. error code). The `print-pid` script in /opt/burn can output the
+program's exit status to the terminal. It is used in the `burn` wrapper
+script.
+
+If you terminate the burn program, either via the `burn` wrapper or `kill`,
+the exit status will probably be 130 or 143. This is normal. The statuses are
+reported by the shell and indicate that the program is terminated by a signal
+(INT or TERM, respectively).
 
 If you want to run cpuburn when you boot the image, add the following to the
 isolinux config file:

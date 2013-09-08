@@ -34,7 +34,11 @@ if [ -x "`which -- "$1"`" ]; then
     echo "print-pid: [`date +'%b %d %T'`] PID $PID, '$COMMAND &' started."
     wait $PID
     STATUS=$?
-    echo "print-pid: [`date +'%b %d %T'`] PID $PID finished with exit status $STATUS."
+    SIGNAL=""
+    if [ "$STATUS" -gt 128 ] && [ "$STATUS" -le 159 ]; then
+        SIGNAL=" (`kill -l "$STATUS"`)"
+    fi
+    echo "print-pid: [`date +'%b %d %T'`] PID $PID finished with exit status ${STATUS}${SIGNAL}."
     trap - 1 2 3 15
 
     exit $STATUS
