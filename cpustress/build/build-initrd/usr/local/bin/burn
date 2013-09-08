@@ -17,7 +17,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 7 September 2013.
+# Last updated on 8 September 2013.
 
 
 set -m
@@ -38,6 +38,13 @@ sigchld_handler () {
     trap 'sigchld_handler' 17
     read -s -n1 REPLY
 }
+
+# This script expects that 'read' be interrupted by a signal. Notably bash
+# doesn't do this.
+if [ "X$BASH" != "X" ]; then
+    echo "Don't run this script in bash." >&2
+    exit 1
+fi
 
 printf '\033[0;32mCPUburn v1.4a:\n'
 printf '==============\033[0m\n\n'
