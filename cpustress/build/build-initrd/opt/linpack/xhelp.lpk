@@ -20,9 +20,11 @@ Binaries and the running environment.
 Intel Optimized LINPACK Benchmark uses these names for the executables to be
 run:
     linpack_xeon32.exe        Windows*, Intel(R) Xeon(R) 32-bit
-    linpack_xeon64.exe        Windows*, Intel(R) Xeon(R) 64-bit
+    linpack_xeon64.exe        Windows*, Intel(R) Xeon(R) 64-bit, supports
+                                        Automatic Offload mode
     xlinpack_xeon32           Linux*, Intel(R) Xeon(R) 32-bit
-    xlinpack_xeon64           Linux*, Intel(R) Xeon(R) 64-bit
+    xlinpack_xeon64           Linux*, Intel(R) Xeon(R) 64-bit, supports
+                                      Automatic Offload mode
     xlinpack_mic              Linux*, Intel(R) MIC(R) 64-bit
     linpack_cd32.app          OS X*, Intel(R) Core(TM) microarchitecture 32-bit
     linpack_cd64.app          OS X*, Intel(R) Core(TM) microarchitecture 64-bit
