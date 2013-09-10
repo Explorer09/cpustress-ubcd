@@ -31,11 +31,19 @@ if [ ! -f "cpustress/build.txz" ]; then
     fi
 fi
 
-P7ZIP=
-for i in 7z 7za 7zr; do
-    if [ "X$P7ZIP" = "X" ] && which ${i}; then
-        P7ZIP=${i}
-    fi
+# Save IFS
+SAVED_IFS=$IFS
+
+# Poor man's 'which' command
+IFS=:
+P7ZIP=""
+for n in 7z 7za 7zr; do
+    for d in $PATH ; do
+        if [ -x "$d/$n" ]; then
+            P7ZIP="$n"
+            break 2
+        fi
+    done
 done
 
 if [ "X$P7ZIP" = "X" ]; then
@@ -43,6 +51,9 @@ if [ "X$P7ZIP" = "X" ]; then
     echo "or download here (http://sourceforge.net/projects/p7zip/)." >&2
     exit 1
 fi
+
+# Restore IFS
+IFS=$SAVED_IFS
 
 if [ -e "${ARCHIVE_NAME}" ]; then
     rm -Ri ${ARCHIVE_NAME}
