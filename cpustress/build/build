@@ -61,7 +61,7 @@ for n in 7z 7za; do
     for d in $PATH ; do
         if [ -x "$d/$n" ]; then
             P7ZIP="$n"
-            break
+            break 2
         fi
     done
 done
