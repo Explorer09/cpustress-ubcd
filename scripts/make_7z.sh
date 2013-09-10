@@ -20,8 +20,8 @@ if [ ! -f "cpustress/initrd.gz" ]; then
             exit 1
         fi
     fi
-    echo 'cp -a "cpustress/build/initrd.gz" "cpustress/initrd.gz"'
-    cp -a "cpustress/build/initrd.gz" "cpustress/initrd.gz"
+    echo 'cp -PRp "cpustress/build/initrd.gz" "cpustress/initrd.gz"'
+    cp -PRp "cpustress/build/initrd.gz" "cpustress/initrd.gz"
 fi
 if [ ! -f "cpustress/build.txz" ]; then
     echo "Executing ./scripts/pack_buildtxz.sh ..."
@@ -45,12 +45,12 @@ if [ "X$P7ZIP" = "X" ]; then
 fi
 
 if [ -e "${ARCHIVE_NAME}" ]; then
-    rm -i ${ARCHIVE_NAME}
+    rm -Ri ${ARCHIVE_NAME}
 fi
-cp -aR cpustress ${ARCHIVE_NAME}
+cp -PRp cpustress ${ARCHIVE_NAME}
 ${P7ZIP} a -t7z -mx=9 ${ARCHIVE_NAME}.7z ${ARCHIVE_NAME}/\* -xr-\!${ARCHIVE_NAME}/build -xr\!\*.txz -xr\!\*.gz -xr\!bzImage
 ${P7ZIP} a -t7z -mx=0 ${ARCHIVE_NAME}.7z ${ARCHIVE_NAME}/build.txz ${ARCHIVE_NAME}/initrd.gz ${ARCHIVE_NAME}/bzImage
 # Delete the temp directory.
-rm -rf ${ARCHIVE_NAME}
+rm -Rf ${ARCHIVE_NAME}
 
 echo "Done."

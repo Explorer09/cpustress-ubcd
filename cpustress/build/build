@@ -6,7 +6,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 7 September 2013.
+# Last updated on 10 September 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -80,7 +80,7 @@ fi
 IFS=$SAVED_IFS
 
 if [ -e "initrd.gz.old" ]; then
-    rm -i initrd.gz.old
+    rm -Ri initrd.gz.old
 fi
 if [ -e "initrd.gz" ]; then
     mv initrd.gz initrd.gz.old
@@ -93,7 +93,7 @@ cd build-initrd
 # place. I have to ignore instead of remove them.
 # http://www.gnu.org/software/tar/manual/html_section/exclude.html
 if [ -e "../filelist-tmp.sed" ]; then
-    rm -i ../filelist-tmp.sed
+    rm -Ri ../filelist-tmp.sed
 fi
 cat >../filelist-tmp.sed <<FILELIST_SED
 /\.#/ d

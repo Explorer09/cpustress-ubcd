@@ -6,7 +6,7 @@ cd `dirname $0`
 cd ../cpustress
 
 if [ -d "build" ]; then
-    rm -f build.txz build.tar
+    rm -Ri build.txz build.tar
     # The --exclude switch excludes files in build/build-initrd, but not the
     # directory itself.
     case `tar --version | sed -n -e '1 p'` in

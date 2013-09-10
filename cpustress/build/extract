@@ -6,7 +6,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 7 September 2013.
+# Last updated on 10 September 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -28,9 +28,9 @@ gzip -d -v -c initrd.gz >build-initrd/initrd
 cd build-initrd
 cpio -i -m -d -u <initrd
 STATUS="$?"
+rm initrd
 if [ "$STATUS" -ne "0" ]; then
     echo "ERROR: cpio error with exit code ${STATUS}." >&2
-    exit 1
+    exit $STATUS
 fi
-rm initrd
 echo "Done."
