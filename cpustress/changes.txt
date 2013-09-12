@@ -3,15 +3,23 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-10 September 2013
+12 September 2013
 
 - Updated Intel LINPACK to v11.1.0 (from v11.0.5)
-- Updated kernel to 3.11.0.
+- Updated kernel to 3.11.0. Changes in this kernel build:
+  1. Disable CC_OPTIMIZE_FOR_SIZE
+  2. Support x86 extended platforms (Intel MID, Medfield)
+  3. Add hwmon drivers connected through SPI and IPMI
+  4. Removed hwmon drivers that depend on Industrial I/O
+  5. Removed I2C system bus drivers (for embedded)
 - Updated eglibc to 2.18-r23787 (from 2.17-r23365). Also I removed several
   functions in this libc build, so the library is slightly smaller. See the
   compile note for details.
+- Improvements to the build script. Root privilege or fakeroot is no longer
+  needed to create initramfs image. Works with both GNU cpio and bsdcpio.
 - Removed build-initrd/etc/modprobe.d
 - Removed all trailing whitespace in scripts and documentation.
+- Minor fixes in scripts and documentation.
 
 Changes in v2.3.5
 -----------------
@@ -211,7 +219,7 @@ Updated programs:
 - Updated eglibc to 2.17 (from 2.16.1).
 
 Changes:
-- Modifed the readme.txt to reflect the changes documented here.
+- Modified the readme.txt to reflect the changes documented here.
 - Changed the isolinux entries in various documentation and scripts. Since
   UBCD 5.1, CPUstress should be booted using Parted Magic's kernel image. The
   new entries are like this:
