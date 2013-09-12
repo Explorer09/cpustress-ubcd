@@ -1,7 +1,7 @@
 diff -r -u a/etc/init.d/rcS b/etc/init.d/rcS
---- a/etc/init.d/rcS	2013-04-19 09:57:27.711985257 +0800
-+++ b/etc/init.d/rcS	2013-04-19 09:44:47.000000000 +0800
-@@ -29,6 +29,22 @@
+--- a/etc/init.d/rcS	2013-06-18 13:38:03.827744440 +0800
++++ b/etc/init.d/rcS	2013-09-12 10:51:28.246111000 +0800
+@@ -26,6 +26,22 @@
  echo /sbin/mdev > /proc/sys/kernel/hotplug
  mdev -s
  
@@ -25,18 +25,18 @@ diff -r -u a/etc/init.d/rcS b/etc/init.d/rcS
  MEMORY=`awk '/^MemTotal/ {print $2}' /proc/meminfo`
  if [ "$MEMORY" -lt "100000" ]; then
 diff -r -u a/etc/mdev.conf b/etc/mdev.conf
---- a/etc/mdev.conf	2013-04-19 09:56:22.727988153 +0800
-+++ b/etc/mdev.conf	2013-03-23 00:57:28.000000000 +0800
+--- a/etc/mdev.conf	2013-06-17 22:38:20.792703833 +0800
++++ b/etc/mdev.conf	2013-09-12 10:51:28.250111000 +0800
 @@ -1,3 +1,6 @@
 +# support module loading on hotplug
-+$MODALIAS=.*	0:0 660 @modprobe "$MODALIAS"
++$MODALIAS=.*    0:0 660 @modprobe "$MODALIAS"
 +
  # input stuff
- event[0-9]+	0:0 640 =input/
- mice		0:0 640 =input/
+ event[0-9]+     0:0 640 =input/
+ mice            0:0 640 =input/
 diff -r -u a/etc/modprobe.d/isapnp.conf b/etc/modprobe.d/isapnp.conf
 --- a/etc/modprobe.d/isapnp.conf	2013-04-19 11:16:32.263773723 +0800
-+++ b/etc/modprobe.d/isapnp.conf	2013-03-23 00:56:59.000000000 +0800
++++ b/etc/modprobe.d/isapnp.conf	2013-09-12 10:51:28.250111000 +0800
 @@ -0,0 +1,8 @@
 +# These aliases are here because many PnP modules do not
 +# provide aliases for them.
@@ -48,7 +48,7 @@ diff -r -u a/etc/modprobe.d/isapnp.conf b/etc/modprobe.d/isapnp.conf
 +alias pnp:dPNP0303 atkbd
 diff -r -u a/etc/modprobe.d/usb-controller.conf b/etc/modprobe.d/usb-controller.conf
 --- a/etc/modprobe.d/usb-controller.conf	2013-04-19 11:16:34.855773609 +0800
-+++ b/etc/modprobe.d/usb-controller.conf	2013-04-12 08:27:17.000000000 +0800
++++ b/etc/modprobe.d/usb-controller.conf	2013-09-12 10:51:28.250111000 +0800
 @@ -0,0 +1,4 @@
 +# Make sure that ehci-hcd is always loaded before uhci-hci
 +# or ohci-hcd to prevent a kernel warning:
@@ -56,7 +56,7 @@ diff -r -u a/etc/modprobe.d/usb-controller.conf b/etc/modprobe.d/usb-controller.
 +install ohci-hcd /sbin/modprobe ehci-hcd ; /sbin/modprobe -i ohci-hcd
 diff -r -u a/runonce b/runonce
 --- a/runonce	2013-09-12 10:16:07.462206136 +0800
-+++ b/runonce	2013-09-12 10:21:17.722192304 +0800
++++ b/runonce	2013-09-12 10:51:28.250111000 +0800
 @@ -101,5 +101,8 @@
              linpack
              ;;
