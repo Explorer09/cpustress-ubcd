@@ -12,7 +12,7 @@ Changes in development version
   3. Add hwmon drivers connected through SPI and IPMI
   4. Removed hwmon drivers that depend on Industrial I/O
   5. Removed I2C system bus drivers (for embedded)
-- Updated eglibc to 2.18-r23787 (from 2.17-r23365). Also I removed several
+- Updated eglibc to 2.18-r23929 (from 2.17-r23365). Also I removed several
   functions in this libc build, so the library is slightly smaller. See the
   compile note for details.
 - Improvements to the build script. Root privilege or fakeroot is no longer
