@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-09-15 15:03:23.2175498570" .git_cache_meta
+touch -c -h -d "2013-09-15 16:08:05.7913631690" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -264,18 +264,18 @@ touch -c -h -d "2013-04-20 16:46:10.0000000000" screenshots/cpustress-burn.png
 chmod 0644 screenshots/cpustress-cpuburn-in.png
 touch -c -h -d "2013-04-20 16:46:31.0000000000" screenshots/cpustress-cpuburn-in.png
 chmod 0644 screenshots/cpustress-helpinfo.png
-touch -c -h -d "2013-04-20 16:46:01.0000000000" screenshots/cpustress-helpinfo.png
+touch -c -h -d "2013-09-15 15:51:46.5288990000" screenshots/cpustress-helpinfo.png
 chmod 0644 screenshots/cpustress-intel-linpack.png
 touch -c -h -d "2013-04-20 16:46:15.0000000000" screenshots/cpustress-intel-linpack.png
 chmod 0644 screenshots/cpustress-mprime.png
 touch -c -h -d "2013-04-09 10:41:41.0000000000" screenshots/cpustress-mprime.png
 chmod 0644 screenshots/cpustress-splash.png
-touch -c -h -d "2013-05-19 23:02:10.9940990000" screenshots/cpustress-splash.png
+touch -c -h -d "2013-09-15 15:51:40.2215390000" screenshots/cpustress-splash.png
 chmod 0644 screenshots/cpustress-stress.png
 touch -c -h -d "2013-04-09 10:48:46.0000000000" screenshots/cpustress-stress.png
 chmod 0644 screenshots/cpustress-stresscpu2.png
 touch -c -h -d "2013-04-09 10:48:54.0000000000" screenshots/cpustress-stresscpu2.png
-chmod 0600 screenshots/cpustress-systester.png
+chmod 0644 screenshots/cpustress-systester.png
 touch -c -h -d "2013-07-20 15:21:43.8627110000" screenshots/cpustress-systester.png
 chmod 0755 scripts/clean.sh
 touch -c -h -d "2013-09-15 15:01:33.2255547600" scripts/clean.sh
