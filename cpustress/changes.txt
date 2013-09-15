@@ -1,8 +1,8 @@
-This file documents the changes of CPUstress test from v2.1 to v2.3.5.
+This file documents the changes of CPUstress test from v2.1 to v2.3.6.
 Changes are made by Explorer <explorer09@gmail.com>
 
-Changes in development version
-------------------------------
+Changes in v2.3.6
+-----------------
 15 September 2013
 
 - Updated Intel LINPACK to v11.1.0 (from v11.0.5)
