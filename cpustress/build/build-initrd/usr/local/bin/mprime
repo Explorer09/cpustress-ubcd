@@ -34,6 +34,13 @@ sigchld_handler () {
     read -s -n1 REPLY
 }
 
+# This script expects that 'read' be interrupted by a signal. Notably bash
+# doesn't do this.
+if [ "X$BASH" != "X" ]; then
+    echo "Don't run this script in bash." >&2
+    exit 1
+fi
+
 mkdir -p /tmp/torture-test/
 
 printf '\033[0;32mMersenne Prime Torture test:\n'
@@ -178,8 +185,8 @@ else
         WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
         ARGS="$ARGS -w$WORKING_DIR"
     fi
-    printf "Running 1 instance of mprime ('${MPRIME}$ARGS').\n\n"
-    ${MPRIME}$ARGS
+    printf "Running 1 instance of mprime ('${MPRIME}${ARGS}').\n\n"
+    ${MPRIME}${ARGS}
 fi
 
 trap - 1 2 3 15 17

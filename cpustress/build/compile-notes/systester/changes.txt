@@ -1,28 +1,28 @@
-20 July 2013
+5 September 2013
 
 Changes in systester-log-file-format.patch:
 - Fixed a buffer overflow regression in 'ptime' and 'failtime' variables.
   (https://sourceforge.net/p/systester/discussion/701352/thread/e1915972/)
 - Removed ^M (CR) at the beginning of lines of the log file and CPUPI.DAT.
-- Edited the column width of CPUPI.DAT output so that it's readable in 
+- Edited the column width of CPUPI.DAT output so that it's readable in
   80-character terminals.
-- Added line breaks in log file output so that it's readable in 80-character 
+- Added line breaks in log file output so that it's readable in 80-character
   terminals.
 
 Changes in systester-cli-changes.patch:
 - Fixed a small typo in 'systester-cli -help' text.
 - In Lite build, the unnecessary variables are removed in intro().
-- The default number of threads is now automatically detected, instead of the 
+- The default number of threads is now automatically detected, instead of the
   fixed value 1. This applies to CLI build only, and not to GUI or Lite.
 - Add bound checks to fix segmentation faults in parsing command-line args.
   (https://sourceforge.net/p/systester/discussion/701352/thread/c37851fe/)
 
 Changes in systester-column-align.patch:
-- On the terminal output, a space is added to the 'OK' string so that the 
+- On the terminal output, a space is added to the 'OK' string so that the
   State column is aligned.
 
 Changes in systester-gui-64-threads.patch:
-- Added a dropdown entry in systester GUI that supports 64 threads. This is 
-  the real limit set by systester. For more threads you need to adjust 
+- Added a dropdown entry in systester GUI that supports 64 threads. This is
+  the real limit set by systester. For more threads you need to adjust
   MAX_THREADS in pi.h, but beware of OS restrictions.
   (https://sourceforge.net/p/systester/discussion/701352/thread/6825213b/)

@@ -14,8 +14,8 @@ burnP5   is optimized for Intel Pentium w&w/o MMX processors
     BX   is an alternate cache/memory test for Intel CPUs
 
 TO USE:  root priviliges are NOT required.  It has been designed for ELF
-         Linux, but also tested under FreeBSD. and a.out.  Burn Testing 
-         is best done from a ramdisk distribution (tomsrtbt) or with 
+         Linux, but also tested under FreeBSD. and a.out.  Burn Testing
+         is best done from a ramdisk distribution (tomsrtbt) or with
          filesystems unmounted or mounted read-only.
 
 The CPUstress image contains a wrapper script that makes it easy for the user
@@ -26,8 +26,8 @@ without parameters and the menu and choices will be shown to you.
 The `burn` wrapper accepts two optional parameters:
 `burn [MODE [RAMSIZE]]`
 where MODE is either "P5", "P6", "K6", "K7", "MMX", or "BX";
-RAMSIZE is one of the 16 RAM ram sizes documented below. You may either specify
-the size ("64k") or the letter ("F") as the RAMSIZE argument.
+RAMSIZE is one of the 16 RAM ram sizes documented below. You may either
+specify the size ("64k") or the letter ("F") as the RAMSIZE argument.
 
 Examples:
 `burn P6`
@@ -49,7 +49,7 @@ burnBX and burnMMX are essentially very intense RAM testers.  They can
 also take an optional parameter indicating the RAM size to be tested:
 
   A =  2 kB   E =  32 kB   I = 512 kB   M =  8 MB
-  B =  4      F =  64      J =   1 MB   N = 16   
+  B =  4      F =  64      J =   1 MB   N = 16
   C =  8      G = 128      K =   2      O = 32
   D = 16      H = 256      L =   4      P = 64
 
@@ -86,10 +86,11 @@ components.  Nor will it catch all flaws.   *** USE AT YOUR OWN RISK ***
 
 
 Additional notes for the CPUstress image:
+-----------------------------------------
 
-In order to make the user easy to use these programs, the `burn` wrapper script
-automatically detects the following from /proc/cpuinfo, so that the user don't
-have to worry about them:
+In order to make the user easy to use these programs, the `burn` wrapper
+script automatically detects the following from /proc/cpuinfo, so that the
+user don't have to worry about them:
 
 - Number of processors (or cores)
 - CPU model and which burn program works best
@@ -101,9 +102,15 @@ that user can make different choices.
 `burn` can also run multiple instances of the burn program at the same time,
 when you have multiple processors.
 
-All of these burn programs produce no output at all, except for the exit code.
-The `print-pid` script in /opt/burn outputs the program's exit code to the
-terminal. It is used in the `burn` wrapper script.
+All of these burn programs produce no output at all, except for the exit
+status (a.k.a. error code). The `print-pid` script in /opt/burn can output the
+program's exit status to the terminal. It is used in the `burn` wrapper
+script.
+
+If you terminate the burn program, either via the `burn` wrapper or `kill`,
+the exit status will probably be 130 or 143. This is normal. The statuses are
+reported by the shell and indicate that the program is terminated by a signal
+(INT or TERM, respectively).
 
 If you want to run cpuburn when you boot the image, add the following to the
 isolinux config file:

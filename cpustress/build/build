@@ -6,12 +6,12 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 6 July 2013.
+# Last updated on 10 September 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
 
-# Execute the prepare script when needed
+# Execute the prepare script when needed.
 if [ ! -d "build-initrd/dev" ]; then
     echo "Executing ./prepare ..."
     sh ./prepare
@@ -20,29 +20,67 @@ if [ ! -d "build-initrd/dev" ]; then
     fi
 fi
 
-if [ "X$1" != "Xno-recurse" ] && [ `id -u` != "0" ] && [ `which fakeroot` ]; then
-    echo "Faking root privileges when possible..."
-    fakeroot -- "./`basename $0`" no-recurse
-    exit 0
-fi
-
 # Check that important directories exist, so that we won't build an empty and
 # useless initramfs image.
 HAS_ERRORS=false
 for d in bin dev etc lib proc sbin sys tmp usr; do
     if [ ! -d "build-initrd/$d" ]; then
-        echo "ERROR: Directory '$d' is missing."
+        echo "ERROR: Directory '$d' is missing." >&2
         HAS_ERRORS=true
     fi
 done
 
 if [ "$HAS_ERRORS" = "true" ]; then
-    echo "There are important directories missing from 'build-initrd'. Aborting."
+    echo "There are important directories missing from 'build-initrd'. Aborting." >&2
     exit 1
 fi
 
+# Check cpio.
+# I support only GNU cpio and bsdcpio. Others such as Solaris cpio simply
+# won't work here.
+case `cpio --version | sed -n -e '1 p'` in
+    *GNU* | *bsdcpio*)
+        ;;
+    *)
+        echo "ERROR: This script needs a GNU cpio or bsdcpio." >&2
+        exit 1
+esac
+
+# Check 7-zip and gzip.
+# 7-zip is preferred because it can produce a smaller file size than gzip.
+# 7z and 7za work here, but 7zr doesn't.
+
+# Save IFS
+SAVED_IFS=$IFS
+
+# Poor man's 'which' command
+IFS=:
+P7ZIP=""
+GZIP=""
+for n in 7z 7za; do
+    for d in $PATH ; do
+        if [ -x "$d/$n" ]; then
+            P7ZIP="$n"
+            break 2
+        fi
+    done
+done
+for d in $PATH ; do
+    if [ -x "$d/gzip" ]; then
+        GZIP="gzip"
+        break
+    fi
+done
+if [ "X$P7ZIP" = "X" ] && [ "X$GZIP" = "X" ]; then
+    echo "ERROR: This script needs p7zip or gzip." >&2
+    exit 1
+fi
+
+# Restore IFS
+IFS=$SAVED_IFS
+
 if [ -e "initrd.gz.old" ]; then
-    rm -i initrd.gz.old
+    rm -Ri initrd.gz.old
 fi
 if [ -e "initrd.gz" ]; then
     mv initrd.gz initrd.gz.old
@@ -50,17 +88,12 @@ fi
 
 cd build-initrd
 
-# Optional: if the user is root, set the owner of the files to root.
-if [ `id -u` = "0" ]; then
-    chown -Rh 0:0 *
-fi
-
 # Prepare the ignore list.
-# Some VCS, notably Subversion, may create hidden directories all over the 
+# Some VCS, notably Subversion, may create hidden directories all over the
 # place. I have to ignore instead of remove them.
 # http://www.gnu.org/software/tar/manual/html_section/exclude.html
 if [ -e "../filelist-tmp.sed" ]; then
-    rm -i ../filelist-tmp.sed
+    rm -Ri ../filelist-tmp.sed
 fi
 cat >../filelist-tmp.sed <<FILELIST_SED
 /\.#/ d
@@ -79,29 +112,41 @@ echo "Making cpio archive..."
 
 # Method of creating cpio-format initrd file can be found here:
 # http://www.thegeekstuff.com/2009/07/how-to-view-modify-and-recreate-initrd-img/
-find . | LC_ALL=C sort | sed -f ../filelist-tmp.sed | cpio -o -H newc >../initrd
+# Notes:
+# -H (synonym of --format) does not work with old bsdcpio.
+# --owner (synonym of -R) might be GNU-only.
+find . \( -type d -exec printf '%s/\n' '{}' \; \) -o -print |
+    LC_ALL=C sort |
+    sed -f ../filelist-tmp.sed |
+    cpio -o --format newc -R 0:0 >../initrd
+STATUS="$?"
 
 rm ../filelist-tmp.sed
+
+if [ "$STATUS" -ne "0" ]; then
+    echo "ERROR: cpio error with exit code ${STATUS}." >&2
+    exit 1
+fi
 
 cd ..
 
 echo "Compressing..."
 
-# 7-zip is preferred because it can produce a smaller file size than gzip.
-# 7z and 7za work here, but 7zr doesn't.
-if [ `which 7z` ]; then
-    P7ZIP=7z
-elif [ `which 7za` ]; then
-    P7ZIP=7za
-else
-    P7ZIP=""
-fi
-
 if [ "X$P7ZIP" != "X" ]; then
     ${P7ZIP} a -tgzip -mx=9 initrd.gz initrd
+    STATUS="$?"
+    if [ "$STATUS" -ne "0" ]; then
+        echo "ERROR: ${P7ZIP} error with exit code ${STATUS}." >&2
+        exit 1
+    fi
 else
     echo "7-zip is not found. Using gzip instead..."
     gzip -9 -v initrd
+    STATUS="$?"
+    if [ "$STATUS" -ne "0" ]; then
+        echo "ERROR: gzip error with exit code ${STATUS}." >&2
+        exit 1
+    fi
 fi
 
 rm -f initrd

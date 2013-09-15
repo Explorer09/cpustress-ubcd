@@ -13,16 +13,17 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 18 June 2013.
+# Last updated on 8 September 2013.
 
 
 if [ "X$1" = "X" ] || [ "X$1" = "X--help" ]; then
     echo "Usage: $0 COMMAND [ARGS]"
-    exit 0
+    exit 1
 fi
-COMMAND=$1
-shift
-if { which $COMMAND >/dev/null; }; then
+
+if [ -x "`which -- "$1"`" ]; then
+    COMMAND=$1
+    shift
     if [ "$#" -ge "1" ]; then
         COMMAND="$COMMAND $@"
     fi
@@ -32,12 +33,17 @@ if { which $COMMAND >/dev/null; }; then
     trap 'kill $PID; trap - 1 2 3 15' 1 2 3 15
     echo "print-pid: [`date +'%b %d %T'`] PID $PID, '$COMMAND &' started."
     wait $PID
-    echo "print-pid: [`date +'%b %d %T'`] PID $PID finished with exit status $?."
+    STATUS=$?
+    SIGNAL=""
+    if [ "$STATUS" -gt 128 ] && [ "$STATUS" -le 159 ]; then
+        SIGNAL=" (`kill -l "$STATUS"`)"
+    fi
+    echo "print-pid: [`date +'%b %d %T'`] PID $PID finished with exit status ${STATUS}${SIGNAL}."
     trap - 1 2 3 15
 
-    exit 0
+    exit $STATUS
 else
-    echo "print-pid ERROR: '$COMMAND' is not executable."
+    echo "print-pid ERROR: '$1' is not executable."
     echo "Usage: $0 COMMAND [ARGS]"
     exit 1
 fi

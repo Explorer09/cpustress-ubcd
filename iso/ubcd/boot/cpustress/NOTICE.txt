@@ -1,6 +1,6 @@
-Please don't put any files inside this directory. They will be DELETED when 
+Please don't put any files inside this directory. They will be DELETED when
 building the ISO image.
 
-The make_iso.sh script will temporarily copy the contents from the cpustress 
-directory (at the top of the repo) to here. Then this directory will be 
+The make_iso.sh script will temporarily copy the contents from the cpustress
+directory (at the top of the repo) to here. Then this directory will be
 cleaned up again, leaving only this NOTICE.txt.

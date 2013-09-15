@@ -1,11 +1,11 @@
 #!/bin/sh
 #
-# This script collects the linux kernel modules from Parted Magic to use with 
+# This script collects the linux kernel modules from Parted Magic to use with
 # CPUstress initrd. To use this script:
 #   1. Boot a Parted Magic live CD (either on a real machine or a VM)
-#   2. Copy this script (pmagic-kernel-modules.sh) to the home directory 
+#   2. Copy this script (pmagic-kernel-modules.sh) to the home directory
 #      (usually /root) on PMagic.
-#   3. Run pmagic-kernel-modules.sh and watch the modules being prepared in 
+#   3. Run pmagic-kernel-modules.sh and watch the modules being prepared in
 #      the "fmu" directory inside home.
 #   4. Copy the "lib" directory in "fmu" to the CPUstress initrd.
 #
@@ -18,7 +18,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 15 July 2013.
+# Last updated on 6 September 2013.
 
 uname -r | grep 'pmagic64' > /dev/null
 if [ "$?" -eq "0" ]; then
@@ -54,6 +54,9 @@ drivers/acpi/processor.ko
 drivers/acpi/thermal.ko
 drivers/char/i8k.ko
 drivers/char/toshiba.ko
+drivers/char/ipmi/ipmi_msghandler.ko
+drivers/char/ipmi/ipmi_poweroff.ko
+drivers/char/ipmi/ipmi_si.ko
 drivers/clocksource/scx200_hrt.ko
 drivers/hid/hid-a4tech.ko
 drivers/hid/hid-apple.ko
@@ -118,13 +121,15 @@ drivers/hwmon/f75375s.ko
 drivers/hwmon/fam15h_power.ko
 drivers/hwmon/fschmd.ko
 drivers/hwmon/g760a.ko
+drivers/hwmon/g762.ko
 drivers/hwmon/gl518sm.ko
 drivers/hwmon/gl520sm.ko
 drivers/hwmon/hih6130.ko
 drivers/hwmon/hwmon-vid.ko
 drivers/hwmon/hwmon.ko
 drivers/hwmon/i5k_amb.ko
-drivers/hwmon/iio_hwmon.ko
+drivers/hwmon/ibmaem.ko
+drivers/hwmon/ibmpex.ko
 drivers/hwmon/ina209.ko
 drivers/hwmon/ina2xx.ko
 drivers/hwmon/it87.ko
@@ -161,7 +166,6 @@ drivers/hwmon/max6650.ko
 drivers/hwmon/max6697.ko
 drivers/hwmon/mcp3021.ko
 drivers/hwmon/nct6775.ko
-drivers/hwmon/ntc_thermistor.ko
 drivers/hwmon/pc87360.ko
 drivers/hwmon/pc87427.ko
 drivers/hwmon/pcf8591.ko
@@ -176,7 +180,9 @@ drivers/hwmon/pmbus/pmbus_core.ko
 drivers/hwmon/pmbus/ucd9000.ko
 drivers/hwmon/pmbus/ucd9200.ko
 drivers/hwmon/pmbus/zl6100.ko
-drivers/hwmon/sht15.ko
+drivers/hwmon/sch5627.ko
+drivers/hwmon/sch5636.ko
+drivers/hwmon/sch56xx-common.ko
 drivers/hwmon/sht21.ko
 drivers/hwmon/sis5595.ko
 drivers/hwmon/smm665.ko
@@ -208,32 +214,24 @@ drivers/i2c/busses/i2c-ali15x3.ko
 drivers/i2c/busses/i2c-amd756-s4882.ko
 drivers/i2c/busses/i2c-amd756.ko
 drivers/i2c/busses/i2c-amd8111.ko
-drivers/i2c/busses/i2c-designware-core.ko
-drivers/i2c/busses/i2c-designware-pci.ko
-drivers/i2c/busses/i2c-eg20t.ko
 drivers/i2c/busses/i2c-i801.ko
-drivers/i2c/busses/i2c-intel-mid.ko
 drivers/i2c/busses/i2c-isch.ko
 drivers/i2c/busses/i2c-ismt.ko
 drivers/i2c/busses/i2c-nforce2-s4985.ko
 drivers/i2c/busses/i2c-nforce2.ko
-drivers/i2c/busses/i2c-ocores.ko
-drivers/i2c/busses/i2c-pca-platform.ko
 drivers/i2c/busses/i2c-piix4.ko
 drivers/i2c/busses/i2c-scmi.ko
-drivers/i2c/busses/i2c-simtec.ko
 drivers/i2c/busses/i2c-sis5595.ko
 drivers/i2c/busses/i2c-sis630.ko
 drivers/i2c/busses/i2c-sis96x.ko
 drivers/i2c/busses/i2c-via.ko
 drivers/i2c/busses/i2c-viapro.ko
-drivers/i2c/busses/i2c-xiic.ko
+drivers/i2c/busses/scx200_acb.ko
 drivers/i2c/i2c-core.ko
 drivers/i2c/i2c-dev.ko
 drivers/i2c/i2c-mux.ko
 drivers/i2c/muxes/i2c-mux-pca9541.ko
 drivers/i2c/muxes/i2c-mux-pca954x.ko
-drivers/iio/industrialio.ko
 drivers/input/input-polldev.ko
 drivers/input/keyboard/adp5588-keys.ko
 drivers/input/keyboard/adp5589-keys.ko
@@ -253,6 +251,7 @@ drivers/input/keyboard/tca8418_keypad.ko
 drivers/input/matrix-keymap.ko
 drivers/input/mouse/psmouse.ko
 drivers/input/serio/altera_ps2.ko
+drivers/input/serio/olpc_apsp.ko
 drivers/input/serio/pcips2.ko
 drivers/input/serio/ps2mult.ko
 drivers/input/serio/serio_raw.ko
@@ -277,11 +276,13 @@ drivers/usb/dwc3/dwc3-pci.ko
 drivers/usb/dwc3/dwc3.ko
 drivers/usb/host/ehci-hcd.ko
 drivers/usb/host/ehci-pci.ko
+drivers/usb/host/fusbh200-hcd.ko
 drivers/usb/host/hwa-hc.ko
 drivers/usb/host/isp116x-hcd.ko
 drivers/usb/host/isp1362-hcd.ko
 drivers/usb/host/isp1760.ko
 drivers/usb/host/ohci-hcd.ko
+drivers/usb/host/ohci-pci.ko
 drivers/usb/host/oxu210hp-hcd.ko
 drivers/usb/host/r8a66597-hcd.ko
 drivers/usb/host/sl811-hcd.ko

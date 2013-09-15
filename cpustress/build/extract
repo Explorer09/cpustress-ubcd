@@ -6,20 +6,20 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 6 July 2013.
+# Last updated on 10 September 2013.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
 
 # Make sure 'build-initrd' is empty, so that we won't overwrite files.
 if [ -d "build-initrd" ] && [ "X`ls -A 'build-initrd'`" != "X" ]; then
-    echo "ERROR: Directory 'build-initrd' is not empty."
+    echo "ERROR: Directory 'build-initrd' is not empty." >&2
     exit 1
 fi
 
 if [ ! -f "initrd.gz" ]; then
-    echo "File initrd.gz is not found. Please place the CPUstress initrd image in the "
-    echo "same directory as this script."
+    echo "File initrd.gz is not found. Please place the CPUstress initrd image in the"
+    echo "same directory as this script." >&2
     exit 1
 fi
 
@@ -27,5 +27,10 @@ echo "Extracting initrd.gz..."
 gzip -d -v -c initrd.gz >build-initrd/initrd
 cd build-initrd
 cpio -i -m -d -u <initrd
+STATUS="$?"
 rm initrd
+if [ "$STATUS" -ne "0" ]; then
+    echo "ERROR: cpio error with exit code ${STATUS}." >&2
+    exit $STATUS
+fi
 echo "Done."

@@ -1,4 +1,4 @@
-18 June 2013
+5 September 2013
 
 GCC 4.7 website:
 http://gcc.gnu.org/gcc-4.7/
@@ -10,8 +10,8 @@ http://www.multiprecision.org/
 
 The libgcc in CPUstress image is compiled on Ubuntu 12.04.2 LTS (32-bit).
 
-For the shell code example below, I assume that you would download all the 
-source code in ${HOME}, and install all tools in "${HOME}/tools". You may use 
+For the shell code example below, I assume that you would download all the
+source code in ${HOME}, and install all tools in "${HOME}/tools". You may use
 another directory -- just change the paths in the code below.
 
 Download the source code:
@@ -52,7 +52,7 @@ Extract the GCC source code:
  $ cd ${HOME}
  $ tar -x -v --bzip2 -f gcc-4.7.3.tar.bz2
 
-The GCC documentation recommends us to use a separate build directory to build 
+The GCC documentation recommends us to use a separate build directory to build
 the code.
 
  $ mkdir gcc-build
@@ -72,19 +72,19 @@ Configure and build GCC:
 Notes about the configure options:
 * The i686 gcc can produce i386-compatible code. So we use native build here.
   (See also <http://gcc.gnu.org/ml/gcc-bugs/2000-03/msg00437.html>)
-* The configure options will build a whole C compiler, then use the compiler 
+* The configure options will build a whole C compiler, then use the compiler
   just built to build libgcc. We don't need the compiler after that.
 * All other target libraries (libgomp, libitm, etc.) are disabled.
 
-Because we only need libgcc_s.so in the CPUstress image, you don't need to run 
+Because we only need libgcc_s.so in the CPUstress image, you don't need to run
 "make install". Instead just copy the file to the cpustress initrd directory:
-(Replace ${cpustress_initrd} with the root path of your extracted initrd 
+(Replace ${cpustress_initrd} with the root path of your extracted initrd
 image.)
 
  $ cp -a "$(../gcc-4.7.3/config.guess)/libgcc/libgcc_s.so.1" \
          "${cpustress_initrd}/usr/lib/libgcc_s.so.1"
 
-The "make install" changes the mode of the file, so you should manually do the 
+The "make install" changes the mode of the file, so you should manually do the
 same:
 
  $ cd ${cpustress_initrd}/usr/lib

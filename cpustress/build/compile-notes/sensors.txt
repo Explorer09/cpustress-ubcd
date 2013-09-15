@@ -1,4 +1,4 @@
-28 May 2013
+5 September 2013
 
 lm-sensors website:
 http://lm-sensors.org/
@@ -16,8 +16,8 @@ Download and unpack the code:
  $ tar -x -v --bzip2 -f lm_sensors-3.3.4.tar.bz2
  $ cd lm_sensors-3.3.4
 
-Originally lm-sensors will produce 'libsensors.so' shared library and the 
-'sensors' program that depends on it. We don't want to copy the whole library 
+Originally lm-sensors will produce 'libsensors.so' shared library and the
+'sensors' program that depends on it. We don't want to copy the whole library
 when only one program needs it. So I edit the linker flags in the makefile:
 
  $ sed -e 's@-Llib -lsensors@-Llib -l:libsensors.a -lc -lm@' \
@@ -33,21 +33,21 @@ Install lm-sensors to a temporary directory: (I put them in the directory
 
  $ make DESTDIR="${HOME}/lm-sensors-install" install
 
-In the temporary directory, we need to copy only these files to the CPUstress 
+In the temporary directory, we need to copy only these files to the CPUstress
 image:
     etc/sensors3.conf, usr/local/bin/sensors
-The other files are either not needed at the time of this writing, or they 
+The other files are either not needed at the time of this writing, or they
 require command interpreters (Bash or Perl) that CPUstress doesn't have.
 
-Copy the files:  (Replace ${cpustress_initrd} with the root path of your 
+Copy the files:  (Replace ${cpustress_initrd} with the root path of your
 extracted initrd image.)
 
  $ cd ${HOME}/lm-sensors-install
  $ cp -a "etc/sensors3.conf"     "${cpustress_initrd}/etc/sensors3.conf"
  $ cp -a "usr/local/bin/sensors" "${cpustress_initrd}/usr/local/bin/sensors"
 
-(Optional) The help text of 'sensors' is copied from the man page in the temp 
-directory at "usr/local/man/man1/sensors.1". It is viewed in a terminal window 
+(Optional) The help text of 'sensors' is copied from the man page in the temp
+directory at "usr/local/man/man1/sensors.1". It is viewed in a terminal window
 that is 82-column wide. The 'man' command is invoked like this:
 
  $ man --no-hyphenation --no-justification usr/local/man/man1/sensors.1

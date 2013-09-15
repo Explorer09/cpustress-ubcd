@@ -17,7 +17,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 18 June 2013.
+# Last updated on 8 September 2013.
 
 
 set -m
@@ -38,6 +38,13 @@ sigchld_handler () {
     trap 'sigchld_handler' 17
     read -s -n1 REPLY
 }
+
+# This script expects that 'read' be interrupted by a signal. Notably bash
+# doesn't do this.
+if [ "X$BASH" != "X" ]; then
+    echo "Don't run this script in bash." >&2
+    exit 1
+fi
 
 printf '\033[0;32mCPUburn v1.4a:\n'
 printf '==============\033[0m\n\n'
@@ -193,18 +200,18 @@ if [ "X$instances" = "X" ]; then
 fi
 
 if [ "$instances" -eq "1" ]; then
-    printf "Running 1 instance of burn$MODE ('/opt/burn/print-pid /opt/burn/burn${MODE}$ARGS').\n"
-    /opt/burn/print-pid /opt/burn/burn${MODE}$ARGS
+    printf "Running 1 instance of burn${MODE} ('/opt/burn/print-pid /opt/burn/burn${MODE}${ARGS}').\n"
+    /opt/burn/print-pid /opt/burn/burn${MODE}${ARGS}
 else
-    printf "To stress all CPUs, $instances instances of burn$MODE will be run in the background.\n\n"
-    printf "\033[01;31mTo stop burn$MODE, press any key.\033[0m\n"
+    printf "To stress all CPUs, $instances instances of burn${MODE} will be run in the background.\n\n"
+    printf "\033[01;31mTo stop burn${MODE}, press any key.\033[0m\n"
 
     PID_LIST=""
     trap 'trap - 17; kill $PID_LIST; wait; trap - 1 2 3 15; exit 0' 1 2 3 15
 
     for i in `seq 1 $instances`; do
-        printf "burn: Starting instance $i of burn$MODE ('/opt/burn/print-pid /opt/burn/burn${MODE}$ARGS &').\n"
-        /opt/burn/print-pid /opt/burn/burn${MODE}$ARGS &
+        printf "burn: Starting instance $i of burn${MODE} ('/opt/burn/print-pid /opt/burn/burn${MODE}${ARGS} &').\n"
+        /opt/burn/print-pid /opt/burn/burn${MODE}${ARGS} &
         PID_LIST="$PID_LIST $!"
     done
 

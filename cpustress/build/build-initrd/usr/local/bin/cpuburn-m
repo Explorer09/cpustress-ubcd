@@ -31,6 +31,13 @@ sigchld_handler () {
     read -s -n1 REPLY
 }
 
+# This script expects that 'read' be interrupted by a signal. Notably bash
+# doesn't do this.
+if [ "X$BASH" != "X" ]; then
+    echo "Don't run this script in bash." >&2
+    exit 1
+fi
+
 printf '\033[0;32mCPU Burn-in v1.00:\n'
 printf '==================\033[0m\n\n'
 

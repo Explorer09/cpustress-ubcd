@@ -1,15 +1,15 @@
-20 July 2013
+5 September 2013
 
 Systester download page:
 http://systester.sourceforge.net/downloads.php
 
 Systester is compiled on Ubuntu 12.04.2 LTS (32-bit).
 
-It requires GMP library in order to build. You can download GMP form the 
+It requires GMP library in order to build. You can download GMP form the
 website <http://gmplib.org/> or use the direct link below.
 
-For the shell commands below, I assume that you would unpack GMP at the home 
-directory, but you may change the path if you like. 
+For the shell commands below, I assume that you would unpack GMP at the home
+directory, but you may change the path if you like.
 
  $ cd ${HOME}
  $ wget ftp://ftp.gmplib.org/pub/gmp/gmp-5.1.2.tar.xz
@@ -23,17 +23,17 @@ Configure and build GMP:
  $ make
 
 Notes about the configure options:
-* The configure script of GMP would try to produce the binary optimized to the 
-  build system. (With CFLAGS='-march=<your_arch>') This would make the binary 
-  un-portable. Thus, I overwrite CFLAGS so that '-mtune' and '-march' are not 
-  used. The CFLAGS specified here are the same as the systester compiled in 
+* The configure script of GMP would try to produce the binary optimized to the
+  build system. (With CFLAGS='-march=<your_arch>') This would make the binary
+  un-portable. Thus, I overwrite CFLAGS so that '-mtune' and '-march' are not
+  used. The CFLAGS specified here are the same as the systester compiled in
   Parted Magic.
-* The "--build=i386-pc-linux-gnu" option forces GMP to include a generic 
-  header (gmp-mparam.h) instead of a header optimized for a particular 
+* The "--build=i386-pc-linux-gnu" option forces GMP to include a generic
+  header (gmp-mparam.h) instead of a header optimized for a particular
   architecture.
-* If you have a 64-bit processor, the configure script might set the build 
-  system to 64-bit (even though the OS is 32-bit) if you don't specify 
-  "ABI=32". With the overwritten CFLAGS this will generate an error.
+* If you have a 64-bit processor, the configure script might set the build
+  system to 64-bit (even though the OS is 32-bit). With the overwritten CFLAGS
+  this will generate an error, unless you also specify "ABI=32".
 
 Unpack Systester:
 

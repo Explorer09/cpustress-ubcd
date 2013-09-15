@@ -1,5 +1,25 @@
-This file documents the changes of CPUstress test from v2.1 to v2.3.5.
+This file documents the changes of CPUstress test from v2.1 to v2.3.6.
 Changes are made by Explorer <explorer09@gmail.com>
+
+Changes in v2.3.6
+-----------------
+15 September 2013
+
+- Updated Intel LINPACK to v11.1.0 (from v11.0.5)
+- Updated kernel to 3.11.1. Changes in this kernel build:
+  1. Disable CC_OPTIMIZE_FOR_SIZE
+  2. Support x86 extended platforms (Intel MID, Medfield)
+  3. Add hwmon drivers connected through SPI and IPMI
+  4. Removed hwmon drivers that depend on Industrial I/O
+  5. Removed I2C system bus drivers (for embedded)
+- Updated eglibc to 2.18-r23929 (from 2.17-r23365). Also I removed several
+  functions in this libc build, so the library is slightly smaller. See the
+  compile note for details.
+- Improvements to the build script. Root privilege or fakeroot is no longer
+  needed to create initramfs image. Works with both GNU cpio and bsdcpio.
+- Removed build-initrd/etc/modprobe.d
+- Removed all trailing whitespace in scripts and documentation.
+- Minor fixes in scripts and documentation.
 
 Changes in v2.3.5
 -----------------
@@ -7,7 +27,7 @@ Changes in v2.3.5
 
 - Updated Intel LINPACK to v11.0.5 (from v11.0.3)
 - stresscpu2 is rebuilt with dynamic linking.
-- Patched and rebuilt systester-cli. See the compile note for the list of 
+- Patched and rebuilt systester-cli. See the compile note for the list of
   changes.
 - Updated kernel to 3.10.1. Added drivers for keypads.
 - Rebuilt eglibc (2.17-r23365).
@@ -29,7 +49,7 @@ Changes in v2.3.3
 
 - Updated kernel to 3.8.13.
 - Rebuilt BusyBox and eglibc (same version).
-- The "ubcdargs" boot option is now also shown in "UBCD args" field in splash 
+- The "ubcdargs" boot option is now also shown in "UBCD args" field in splash
   screen.
 - Add "help/linpack.txt".
 - Minor fixes in scripts and documentation.
@@ -61,23 +81,23 @@ New programs:
 Programs updated or rebuilt:
 - Updated kernel to 3.8.8. Added drivers of I2C buses and hardware sensors.
   Disabled loadable module support in kernel.
-- BusyBox updated to 1.21.0. Added 'free', 'mpstat', 'ps', 'uptime', 'kill', 
-  'date', 'cp', and 'vi'. 'echo' now becomes ash built-in. Removed 'modprobe' 
+- BusyBox updated to 1.21.0. Added 'free', 'mpstat', 'ps', 'uptime', 'kill',
+  'date', 'cp', and 'vi'. 'echo' now becomes ash built-in. Removed 'modprobe'
   and 'lsmod'.
 - Added libgcc_s.so. This file is required by linpack.
 - Rebuilt eglibc (same version).
 
 Changes:
 - Renamed 'cpuburn' wrapper to cpuburn-m.
-- The cpuburn-m and mprime wrappers are now conservative when killing 
-  processes. (They now kill by PID rather than by name.) They now also reap 
+- The cpuburn-m and mprime wrappers are now conservative when killing
+  processes. (They now kill by PID rather than by name.) They now also reap
   zombie processes.
 - Use "ubcdargs" instead of cmdhelpinfo, cmdstress, etc. in isolinux options.
 - Other minor bug fixes.
 
 Note:
-- Please check your isolinux config files when you upgrade your CPUstress 
-  image to this version. There are 2 boot options incompatible with this new 
+- Please check your isolinux config files when you upgrade your CPUstress
+  image to this version. There are 2 boot options incompatible with this new
   version:
   1. "ubcdcmd=cpuburn" no longer works. Use "ubcdcmd=cpuburn-in" instead.
   2. The options "cmdhelpinfo", "cmdstress", and "cmdstresscpu2" are obsolete.
@@ -88,18 +108,18 @@ Changes in v2.2.1
 12 April 2013
 
 Programs updated or rebuilt:
-- CPU Burn-in now uses the binary from http://cpuburnin.com/. (It's mostly the 
+- CPU Burn-in now uses the binary from http://cpuburnin.com/. (It's mostly the
   same as the old one but the new binary uses the http://cpuburnin.com/ URL.)
 - The mprime23 binary is now UPX-compressed.
 
 Changes:
 - Bug fixes regarding '--help' option in various scripts.
-- Edit various shell scripts to improve compatibility to POSIX sh. Removed 
-  as many bashisms as possible.
+- Edit various shell scripts to improve compatibility to POSIX sh. Removed as
+  many bashisms as possible.
 - Removed "root=/dev/ram0 ramdisk_size=12000" from the isolinux command-line.
-  Documentation is also updated for this. (Thanks to Icecube for the 
+  Documentation is also updated for this. (Thanks to Icecube for the
   suggestion.)
-- 'cpuburn' and 'mprime' script improvements. They now also trap signals 1 
+- 'cpuburn' and 'mprime' script improvements. They now also trap signals 1
   and 15. 'mprime' now supports command-line arguments.
 
 Changes in v2.2
@@ -113,18 +133,18 @@ Changes in v2.2beta3
 --------------------
 2 April 2013
 
-- Linux kernel is rebuilt (3.8.5-cpustress2), which fixes a bug below and adds 
+- Linux kernel is rebuilt (3.8.5-cpustress2), which fixes a bug below and adds
   minor improvements.
 - stress is rebuilt (same version), but with hard-disk stressing disabled.
 
 Fixes:
 - For some computers, the kernel might have detected only one CPU when ACPI
-  support is disabled. (This happened on my Fujitsu laptop.) Now ACPI support 
+  support is disabled. (This happened on my Fujitsu laptop.) Now ACPI support
   is added in the kernel.
 - Fix the "Kernel args:" field output in the "/runonce" script.
 
 Changes:
-- The 'ubcdcmd' boot option now accepts dmesg, lsmod, and uname for debugging 
+- The 'ubcdcmd' boot option now accepts dmesg, lsmod, and uname for debugging
   use.
 - Adds the 'modprobe' boot option allowing the user to load modules.
 
@@ -133,11 +153,11 @@ Changes in v2.2beta2
 31 March 2013
 
 Updated programs:
-- CPUstress now uses a kernel built by myself rather than the one from Parted 
-  Magic. The custom kernel (3.8.5-cpustress) fixes two bugs below and is more 
+- CPUstress now uses a kernel built by myself rather than the one from Parted
+  Magic. The custom kernel (3.8.5-cpustress) fixes two bugs below and is more
   friendly to old processors (i486). It supports SMP but not PAE.
 - eglibc updated to 2.17-r22665 (from 2.17-r22243).
-- BusyBox is rebuilt (same version). Now "modprobe", "lsmod", and "uname" are 
+- BusyBox is rebuilt (same version). Now "modprobe", "lsmod", and "uname" are
   added.
 
 Fixes:
@@ -154,11 +174,12 @@ Changes:
 
 Notes:
 - I do not test the lockup problem (http://www.ultimatebootcd.com/forums/
-  viewtopic.php?t=3390) that happened in the old kernel, so I'm not sure 
-  whether it was fixed or not. If anyone has the hardware and can test it, 
+  viewtopic.php?t=3390) that happened in the old kernel, so I'm not sure
+  whether it was fixed or not. If anyone has the hardware and can test it,
   then I appreciate for your help.
-- Since Linux kernel 3.8, the i386 architecture is no longer supported. If you 
-  have 80386 you'll probably need to build a 3.7.x Linux kernel.
+- Since Linux kernel 3.8, the i386 architecture is no longer supported. If you
+  have a 80386 you need to upgrade. (Even though you can build a Linux kernel
+  for it, the C library (glibc) doesn't support i386. So it won't work.)
 
 Changes in v2.1expl7
 --------------------
@@ -175,15 +196,15 @@ Changes in v2.1expl6
 
 - Add help files that can be displayed in UBCD.
 - The hint in "menu" no longer appears after running Stress.
-- Support boot option 'cmdstresscpu2'. It works the same way as 'cmdstress', 
-  allowing user to pass command-line switches from isolinux to the stresscpu2 
+- Support boot option 'cmdstresscpu2'. It works the same way as 'cmdstress',
+  allowing user to pass command-line switches from isolinux to the stresscpu2
   program.
 
 Changes in v2.1expl5.1
 ----------------------
 9 Feburary 2013
 
-- Use linux.c32 in the isolinux entries in the documentation. (Thanks to ady 
+- Use linux.c32 in the isolinux entries in the documentation. (Thanks to ady
   for the suggestion.)
     COM32  linux.c32
     APPEND /pmagic/bzImage initrd=/ubcd/boot/cpustress/initrd.gz
@@ -198,21 +219,21 @@ Updated programs:
 - Updated eglibc to 2.17 (from 2.16.1).
 
 Changes:
-- Modifed the readme.txt to reflect the changes documented here.
-- Changed the isolinux entries in various documentation and scripts. Since 
-  UBCD 5.1, CPUstress should be booted using Parted Magic's kernel image. The 
+- Modified the readme.txt to reflect the changes documented here.
+- Changed the isolinux entries in various documentation and scripts. Since
+  UBCD 5.1, CPUstress should be booted using Parted Magic's kernel image. The
   new entries are like this:
     KERNEL /pmagic/bzImage
-    APPEND initrd=/ubcd/boot/cpustress/initrd.gz root=/dev/ram0 
+    APPEND initrd=/ubcd/boot/cpustress/initrd.gz root=/dev/ram0
            ramdisk_size=12000 noapic <other-parameters...>
 
 Changes in v2.1expl4
 --------------------
 27 October 2012
 
-- I re-downloaded and re-compiled eglibc and Busybox. The new binaries should 
+- I re-downloaded and re-compiled eglibc and Busybox. The new binaries should
   have some upstream bugs fixed.
-- Fixed this bug more completely in cpuburn and mprime: 
+- Fixed this bug more completely in cpuburn and mprime:
   http://www.ultimatebootcd.com/forums/viewtopic.php?f=12&t=14429
 
 Changes in v2.1expl3
@@ -220,31 +241,31 @@ Changes in v2.1expl3
 9 September 2012
 
 Updated programs:
-- Updated Mersenne Prime test to v27.7 build 2 (from v24.14). Note that 
+- Updated Mersenne Prime test to v27.7 build 2 (from v24.14). Note that
   v23.9.2 is still available for people who run Pentium III or older CPUs.
 - Updated Stress to v1.0.4 (from v1.0.0)
 - Updated Busybox to v1.20.2 (from v1.13.2)
 - Updated ld-linux, libc, libm (part of eglibc) to v2.16 (from v2.8.90)
-- Added libdl and libpthread (also part of eglibc) v2.16. These two files are 
+- Added libdl and libpthread (also part of eglibc) v2.16. These two files are
   required for mprime27.
 
 Fixes:
-- Repacked ubcd/boot/cpustress/initrd.gz to cpio+gzip format. This prevents a 
+- Repacked ubcd/boot/cpustress/initrd.gz to cpio+gzip format. This prevents a
   kernel panic when booting.
   (http://www.ultimatebootcd.com/forums/viewtopic.php?f=12&t=6488)
-- The version number of Mersenne Prime test 23 is actually 23.9.2. Fixed the 
+- The version number of Mersenne Prime test 23 is actually 23.9.2. Fixed the
   documentation bug in various scripts and help files.
-- Add signal traps to terminate cpuburn-in or mprime when user terminates the 
+- Add signal traps to terminate cpuburn-in or mprime when user terminates the
   wrapper scripts via Ctrl+C (SIGINT) or Ctrl+\ (SIGQUIT).
   (http://www.ultimatebootcd.com/forums/viewtopic.php?f=12&t=14429)
 - Minor bug fixes in scripts.
 
 Changes:
 - Added "help" as an alias to "helpinfo" command.
-- In "menu" the user can now type the command name as the choice rather than 
+- In "menu" the user can now type the command name as the choice rather than
   number.
 - Added a hint "Type 'menu' to return to main menu." in "menu".
-- Use dynamically linked executable for mprime23, since the CPUstress image 
+- Use dynamically linked executable for mprime23, since the CPUstress image
   have all the libraries it depends on already.
 - Change the path in /lib/* symlinks from absolute to relative paths.
 
@@ -259,9 +280,9 @@ CPUstress image v2.1
 * Updated busybox to v1.13.2
 
 * Corrected the 'FATAL ERROR: Writing to temp file' bug with mprime AGAIN.
-It should work now with a 'infinite' number of CPUs, as long as you have 
-enough RAM. It makes a temp directory with a size of 1/8 of your RAM. So 
-mprime shouldn't complain with multi-core CPUS, unless you have a quad core 
+It should work now with a 'infinite' number of CPUs, as long as you have
+enough RAM. It makes a temp directory with a size of 1/8 of your RAM. So
+mprime shouldn't complain with multi-core CPUS, unless you have a quad core
 with only 128MB of RAM, which is very unlikely :P.
 * Display a countdown timer on the first screen.
 * Changed the colors of colored text.
@@ -270,9 +291,9 @@ with only 128MB of RAM, which is very unlikely :P.
 (2 December 2008)
 
 Solved some bugs:
-Mprime and CPUburn should work correctly with multicore CPUs ( 'Starting 
-instance {1..2} of mprime' is corrected to 'Starting instance 1 of mprime' for 
-the first instance of mprime and 'Starting instance 2 of mprime' for the 
+Mprime and CPUburn should work correctly with multicore CPUs ( 'Starting
+instance {1..2} of mprime' is corrected to 'Starting instance 1 of mprime' for
+the first instance of mprime and 'Starting instance 2 of mprime' for the
 second instance of mprime, etc.)
 
 Corrected the 'FATAL ERROR: Writing to temp file' bug with mprime.

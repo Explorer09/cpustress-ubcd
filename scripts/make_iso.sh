@@ -8,7 +8,7 @@
 VOLUME_ID="CPUSTRESS"
 
 # Define ISO filename
-ISO_FILENAME="cpustress-2.3.5.iso"
+ISO_FILENAME="cpustress-2.3.6.iso"
 
 # Change working directory to the parent directory of the script.
 cd `dirname $0`
@@ -24,8 +24,8 @@ if [ ! -f "cpustress/initrd.gz" ]; then
             exit 1
         fi
     fi
-    echo 'cp -a "cpustress/build/initrd.gz" "cpustress/initrd.gz"'
-    cp -a "cpustress/build/initrd.gz" "cpustress/initrd.gz"
+    echo 'cp -PRp "cpustress/build/initrd.gz" "cpustress/initrd.gz"'
+    cp -PRp "cpustress/build/initrd.gz" "cpustress/initrd.gz"
 fi
 if [ ! -f "cpustress/build.txz" ]; then
     echo "Executing ./scripts/pack_buildtxz.sh ..."
@@ -40,12 +40,12 @@ if [ -e "$ROOT_OF_ISO_PATH" ]; then
 fi
 
 # Clone the directory so that the "iso" directory can stay intact.
-cp -aR iso "$ROOT_OF_ISO_PATH"
+cp -PRp iso "$ROOT_OF_ISO_PATH"
 # Copy the cpustress directory for building ISO image.
-rm -fR "$ROOT_OF_ISO_PATH/ubcd/boot/cpustress"/*
-cp -aR cpustress/* "$ROOT_OF_ISO_PATH/ubcd/boot/cpustress"
+rm -Rf "$ROOT_OF_ISO_PATH/ubcd/boot/cpustress"/*
+cp -PRp cpustress/* "$ROOT_OF_ISO_PATH/ubcd/boot/cpustress"
 # Don't include the source directory.
-rm -fR "$ROOT_OF_ISO_PATH/ubcd/boot/cpustress/build"
+rm -Rf "$ROOT_OF_ISO_PATH/ubcd/boot/cpustress/build"
 
 # Save IFS
 SAVED_IFS=$IFS
@@ -66,8 +66,8 @@ IFS=$SAVED_IFS
 if [ -n "$MKISOFS" ] && [ -n "$ROOT_OF_ISO_PATH" ]; then
     if [ -f "${ROOT_OF_ISO_PATH}/boot/syslinux/isolinux.bin" ]; then
         rm -f "${ROOT_OF_ISO_PATH}/boot/syslinux/boot.catalog"
-        rm -fR "${ROOT_OF_ISO_PATH}/[BOOT]/"
-        rm -fR "${ROOT_OF_ISO_PATH}/boot.images/"
+        rm -Rf "${ROOT_OF_ISO_PATH}/[BOOT]/"
+        rm -Rf "${ROOT_OF_ISO_PATH}/boot.images/"
 
         # mkisofs manpage: http://linux.die.net/man/8/mkisofs
         #
@@ -87,16 +87,16 @@ if [ -n "$MKISOFS" ] && [ -n "$ROOT_OF_ISO_PATH" ]; then
             echo "'${ISO_FILENAME}' was successfully created."
         else
             echo
-            echo "ERROR: Something went wrong, while creating '${ISO_FILENAME}'".
+            echo "ERROR: Something went wrong, while creating '${ISO_FILENAME}'." >&2
         fi
     else
-        echo "ERROR: '${ROOT_OF_ISO_PATH}/boot/syslinux/isolinux.bin' could not be found."
+        echo "ERROR: '${ROOT_OF_ISO_PATH}/boot/syslinux/isolinux.bin' could not be found." >&2
     fi
 elif [ -z "$MKISOFS" ]; then
-    echo "ERROR: The 'mkisofs' program could not be found. Install it and try again."
+    echo "ERROR: The 'mkisofs' program could not be found. Install it and try again." >&2
 fi
 
 # Clean up.
-rm -fR "$ROOT_OF_ISO_PATH"
+rm -Rf "$ROOT_OF_ISO_PATH"
 
 echo "'$ROOT_OF_ISO_PATH' has been cleaned up."

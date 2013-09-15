@@ -1,4 +1,4 @@
-18 April 2013
+5 September 2013
 
 Homepage of cpuburn by Robert Redelmeier:
 http://web.archive.org/web/20110623074500/http://pages.sbcglobal.net/redelm/
@@ -6,7 +6,7 @@ http://web.archive.org/web/20110623074500/http://pages.sbcglobal.net/redelm/
 The cpuburn source code can be downloaded here:
 http://web.archive.org/web/20110110021132/http://pages.sbcglobal.net/redelm/cpuburn_1_4a_tar.gz
 
-The original website <http://pages.sbcglobal.net/redelm/> is dead, so the code 
+The original website <http://pages.sbcglobal.net/redelm/> is dead, so the code
 have to be downloaded from a mirror.
 
 Unpack and build the code:
@@ -20,7 +20,7 @@ Copy the executables:
  $ cp -a burnP5 burnP6 burnK6 burnK7 burnBX burnMMX \
          ${cpustress_initrd}/opt/burn
 
-That's it. Because the code is written in assembly language there is nothing 
+That's it. Because the code is written in assembly language there is nothing
 for you to configure.
 
 --Explorer <explorer09@gmail.com>

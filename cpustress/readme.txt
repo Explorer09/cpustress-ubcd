@@ -1,11 +1,11 @@
-CPUstress image - version 2.3.5:
+CPUstress image - version 2.3.6:
 ================================
 
 Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 20 July 2013.
+Last edited on 15 September 2013.
 
 
 Content of this package:
@@ -68,12 +68,12 @@ e.g.: If you have extracted UBCD to ~/ubcd-extract/, this place is:
 How to edit the CPUstress image?
 ________________________________
 
-Unpack the cpustress-2.3.5.7z archive (you probably already did this, else you
+Unpack the cpustress-2.3.6.7z archive (you probably already did this, else you
 couldn't read this README.
-$ 7z x "./path/to/file/cpustress-2.3.5.7z"
+$ 7z x "./path/to/file/cpustress-2.3.6.7z"
 
 Extract the ./build tar archive and the initrd.gz file:
-$ cd cpustress-2.3.5
+$ cd cpustress-2.3.6
 $ tar xvJf build.txz
 $ cd build
 $ cp ../initrd.gz .
@@ -197,7 +197,7 @@ You can change the ubcdargs parameter to:
     - systester
 
 
-Intel Optimized LINPACK 11.0.5: linpack
+Intel Optimized LINPACK 11.1.0: linpack
 -------------------------------
 
 The following isolinux entry will run the LINPACK benchmark in interactive

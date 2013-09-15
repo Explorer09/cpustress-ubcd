@@ -34,10 +34,10 @@ diff -r -u a/compile-notes/kernel.txt b/compile-notes/kernel.txt
 --- a/compile-notes/kernel.txt	2013-07-15 22:47:56.677263448 +0800
 +++ b/compile-notes/kernel.txt	2013-07-15 22:48:30.385261945 +0800
 @@ -25,4 +25,21 @@
- directory that you can boot from. For example in UBCD it's 
+ directory that you can boot from. For example in UBCD it's
  "${ubcd_extract}/ubcd/boot/cpustress/bzImage".
  
-+Install the modules (drivers) to a temporary directory: (I put them in the 
++Install the modules (drivers) to a temporary directory: (I put them in the
 +directory "${HOME}/modules", but you may change the path if you like.)
 +
 + $ make INSTALL_MOD_PATH=${HOME}/modules modules_install
@@ -48,7 +48,7 @@ diff -r -u a/compile-notes/kernel.txt b/compile-notes/kernel.txt
 + $ rm build source
 + $ rm modules.ccwmap modules.ieee1394map modules.inputmap modules.isapnpmap
 +
-+Copy the modules to the CPUstress initrd image:  (Replace ${cpustress_initrd} 
++Copy the modules to the CPUstress initrd image:  (Replace ${cpustress_initrd}
 +with the root path of your extracted initrd image.)
 +
 + $ cd ${HOME}/modules
