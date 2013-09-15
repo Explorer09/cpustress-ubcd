@@ -5,7 +5,7 @@ Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 12 September 2013.
+Last edited on 15 September 2013.
 
 
 Content of this package:

@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-09-15 14:52:01.1808388920" .git_cache_meta
+touch -c -h -d "2013-09-15 16:38:27.7900385610" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -206,7 +206,7 @@ touch -c -h -d "2013-09-07 09:00:27.1423517960" cpustress/build/prepare
 chmod 0644 cpustress/bzImage
 touch -c -h -d "2013-09-15 14:44:15.6266917000" cpustress/bzImage
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2013-09-15 14:51:44.9650427520" cpustress/changes.txt
+touch -c -h -d "2013-09-15 16:37:44.4580404920" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
@@ -234,7 +234,7 @@ touch -c -h -d "2013-07-16 21:27:16.8346698720" cpustress/help/systester.txt
 chmod 0644 cpustress/nonfree.txt
 touch -c -h -d "2013-09-05 20:54:44.5159490880" cpustress/nonfree.txt
 chmod 0644 cpustress/readme.txt
-touch -c -h -d "2013-09-12 10:15:28.5302078720" cpustress/readme.txt
+touch -c -h -d "2013-09-15 16:37:12.6300419110" cpustress/readme.txt
 chmod 0644 iso/boot/grub/grldr
 touch -c -h -d "2013-07-24 12:02:17.0000000000" iso/boot/grub/grldr
 chmod 0644 iso/boot/grub/menu.lst
