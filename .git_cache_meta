@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-09-13 11:41:20.7675423140" .git_cache_meta
+touch -c -h -d "2013-09-15 14:46:24.7690681610" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -162,9 +162,9 @@ touch -c -h -d "2013-09-05 20:08:00.4040116550" cpustress/build/compile-notes/eg
 chmod 0644 cpustress/build/compile-notes/glibc.txt
 touch -c -h -d "2013-09-05 20:14:48.9880025380" cpustress/build/compile-notes/glibc.txt
 chmod 0644 cpustress/build/compile-notes/kernel.txt
-touch -c -h -d "2013-09-09 20:36:43.2919674780" cpustress/build/compile-notes/kernel.txt
-chmod 0644 cpustress/build/compile-notes/kernel/config-3.11.0-cpustress
-touch -c -h -d "2013-09-09 12:25:41.0000000000" cpustress/build/compile-notes/kernel/config-3.11.0-cpustress
+touch -c -h -d "2013-09-15 14:17:25.3149360610" cpustress/build/compile-notes/kernel.txt
+chmod 0644 cpustress/build/compile-notes/kernel/config-3.11.1-cpustress
+touch -c -h -d "2013-09-15 14:33:12.5430277910" cpustress/build/compile-notes/kernel/config-3.11.1-cpustress
 chmod 0644 cpustress/build/compile-notes/kernel/pmagic/compile-notes.patch
 touch -c -h -d "2013-09-05 20:10:00.6800089710" cpustress/build/compile-notes/kernel/pmagic/compile-notes.patch
 chmod 0644 cpustress/build/compile-notes/kernel/pmagic/initrd-modules-support.patch
@@ -203,8 +203,10 @@ chmod 0755 cpustress/build/extract
 touch -c -h -d "2013-09-10 10:36:57.1092868100" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2013-09-07 09:00:27.1423517960" cpustress/build/prepare
+chmod 0644 cpustress/bzImage
+touch -c -h -d "2013-09-15 14:44:15.6266917000" cpustress/bzImage
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2013-09-12 08:48:40.6666801310" cpustress/changes.txt
+touch -c -h -d "2013-09-15 14:36:55.9322194080" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt

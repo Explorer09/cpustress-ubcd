@@ -3,10 +3,10 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-12 September 2013
+15 September 2013
 
 - Updated Intel LINPACK to v11.1.0 (from v11.0.5)
-- Updated kernel to 3.11.0. Changes in this kernel build:
+- Updated kernel to 3.11.1. Changes in this kernel build:
   1. Disable CC_OPTIMIZE_FOR_SIZE
   2. Support x86 extended platforms (Intel MID, Medfield)
   3. Add hwmon drivers connected through SPI and IPMI
