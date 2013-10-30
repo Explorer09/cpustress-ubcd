@@ -5,7 +5,7 @@ Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 15 September 2013.
+Last edited on 30 October 2013.
 
 
 Content of this package:
@@ -197,7 +197,7 @@ You can change the ubcdargs parameter to:
     - systester
 
 
-Intel Optimized LINPACK 11.1.0: linpack
+Intel Optimized LINPACK 11.1.1: linpack
 -------------------------------
 
 The following isolinux entry will run the LINPACK benchmark in interactive

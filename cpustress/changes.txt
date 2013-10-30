@@ -3,8 +3,9 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-15 September 2013
+30 October 2013
 
+- Updated Intel LINPACK to v11.1.1 (from v11.1.0)
 
 Changes in v2.3.6
 -----------------

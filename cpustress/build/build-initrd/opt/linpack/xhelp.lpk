@@ -26,8 +26,8 @@ run:
     xlinpack_xeon64           Linux*, Intel(R) Xeon(R) 64-bit, supports
                                       Automatic Offload mode
     xlinpack_mic              Linux*, Intel(R) MIC(R) 64-bit
-    linpack_cd32.app          OS X*, Intel(R) Core(TM) microarchitecture 32-bit
-    linpack_cd64.app          OS X*, Intel(R) Core(TM) microarchitecture 64-bit
+    linpack_cd32              OS X*, Intel(R) Core(TM) microarchitecture 32-bit
+    linpack_cd64              OS X*, Intel(R) Core(TM) microarchitecture 64-bit
 The name 'linpack' stands for any of these binaries below in the text of this
 extended help information.  'LINPACK' shall stand for this Intel Optimized
 LINPACK Benchmark application.  Which of these binaries will be present in the
@@ -65,7 +65,7 @@ linpack
         The output will contain the system information, input data and test
         results.
         See notes on the output data format below.
-        The "linpack_cd32.app" will hang without a data file.
+        The "linpack_cd32" will hang without a data file.
 
 linpack -h[elp]
         prints brief usage information and quits

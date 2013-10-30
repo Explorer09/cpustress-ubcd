@@ -11,7 +11,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 12 September 2013.
+# Last updated on 30 October 2013.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
@@ -97,7 +97,7 @@ CPUSTRESS_TEXT
             helpinfo $ubcdargs
             ;;
         linpack)
-            printf "\033[0;32m\nStarting 'Intel Optimized LINPACK 11.1.0'  (linpack).\033[0m\n"
+            printf "\033[0;32m\nStarting 'Intel Optimized LINPACK 11.1.1'  (linpack).\033[0m\n"
             linpack
             ;;
         menu)
