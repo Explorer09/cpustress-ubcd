@@ -1,18 +1,22 @@
-5 September 2013
+31 October 2013
 
 StressCPU2 can be downloaded here:
 http://www.gromacs.org/@api/deki/files/43/=stresscpu2.tgz
 
-The stresscpu2 binary included in CPUstress is compiled on Ubuntu 12.04.2 LTS
+The stresscpu2 binary included in CPUstress is compiled on Ubuntu 12.04.3 LTS
 (32-bit).
 
 The precompiled binaries in the stresscpu2 package is statically linked. But I
 prefer dynamically linked version because it is smaller.
 
-After downloading and unpacking, build the dynamically linked binary from
-source:
+After downloading and unpacking, apply a patch that lets stresscpu2 accept the
+'--help' command-line option:
 
  $ cd stresscpu2
+ $ patch -p 1 <stresscpu2-long-help-option.patch
+
+Then build the dynamically linked binary from source:
+
  $ sed -e 's/-static//' <Makefile.Linux32 >Makefile
  $ make
 

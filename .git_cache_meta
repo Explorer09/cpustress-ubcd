@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-10-31 17:11:44.8186621530" .git_cache_meta
+touch -c -h -d "2013-10-31 21:43:36.0619349280" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -145,7 +145,7 @@ touch -c -h -d "2013-06-18 13:44:23.4957275130" cpustress/build/build-initrd/usr
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/stress
 touch -c -h -d "2013-03-31 23:53:02.0000000000" cpustress/build/build-initrd/usr/local/bin/stress
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/stresscpu2
-touch -c -h -d "2013-07-05 19:05:54.0000000000" cpustress/build/build-initrd/usr/local/bin/stresscpu2
+touch -c -h -d "2013-10-31 20:43:17.7316908560" cpustress/build/build-initrd/usr/local/bin/stresscpu2
 touch -c -h -d "2013-04-13 22:54:21.7614506540" cpustress/build/build-initrd/usr/local/bin/systester
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/systester-cli
 touch -c -h -d "2013-07-20 11:28:00.9641070000" cpustress/build/build-initrd/usr/local/bin/systester-cli
@@ -186,7 +186,9 @@ touch -c -h -d "2013-09-05 20:49:47.7279557100" cpustress/build/compile-notes/st
 chmod 0644 cpustress/build/compile-notes/stress/stress-no-hdd.patch
 touch -c -h -d "2013-03-31 23:36:12.0000000000" cpustress/build/compile-notes/stress/stress-no-hdd.patch
 chmod 0644 cpustress/build/compile-notes/stresscpu2.txt
-touch -c -h -d "2013-09-05 21:24:03.0239098510" cpustress/build/compile-notes/stresscpu2.txt
+touch -c -h -d "2013-10-31 21:39:51.2179449530" cpustress/build/compile-notes/stresscpu2.txt
+chmod 0644 cpustress/build/compile-notes/stresscpu2/stresscpu2-long-help-option.patch
+touch -c -h -d "2013-10-31 18:06:43.0585150000" cpustress/build/compile-notes/stresscpu2/stresscpu2-long-help-option.patch
 chmod 0644 cpustress/build/compile-notes/systester.txt
 touch -c -h -d "2013-09-05 20:50:19.7839549950" cpustress/build/compile-notes/systester.txt
 chmod 0644 cpustress/build/compile-notes/systester/changes.txt
@@ -206,7 +208,7 @@ touch -c -h -d "2013-09-07 09:00:27.1423517960" cpustress/build/prepare
 chmod 0644 cpustress/bzImage
 touch -c -h -d "2013-09-15 14:44:15.6266917000" cpustress/bzImage
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2013-10-30 10:31:05.4507506020" cpustress/changes.txt
+touch -c -h -d "2013-10-31 21:43:23.2339355000" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt

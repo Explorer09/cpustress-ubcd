@@ -3,9 +3,10 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-30 October 2013
+31 October 2013
 
 - Updated Intel LINPACK to v11.1.1 (from v11.1.0)
+- Patched and rebuilt stresscpu2 to accept '--help' option on the command-line.
 
 Changes in v2.3.6
 -----------------

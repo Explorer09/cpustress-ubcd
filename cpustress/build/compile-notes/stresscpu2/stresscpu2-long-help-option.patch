@@ -1,0 +1,14 @@
+diff -r -u a/main.c b/main.c
+--- a/main.c	2007-02-10 02:22:54.000000000 +0800
++++ b/main.c	2013-10-31 18:05:36.458518073 +0800
+@@ -173,6 +173,10 @@
+             {
+                 help=1;
+             }
++            if(strlen(argv[i])>1 && !strncmp(argv[i],"--help",6))
++            {
++                help=1;
++            }
+             if(strlen(argv[i])>1 && !strncmp(argv[i],"-s",2))
+             {
+                 silent=1;
