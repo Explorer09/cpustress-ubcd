@@ -56,7 +56,7 @@ Instructions:
 
 Please Note: Overclocking can potentially be harmful to your CPU.  It may fry
 or fail prematurely in the long term.  I cannot and will not be responsible for
- any damage you do to your hardware. By it's very nature, CPU Burn-in pushes
+any damage you do to your hardware. By it's very nature, CPU Burn-in pushes
 the CPU to the max.  Increasing the voltage, Mhz, or PCI/AGP above the
 recommended levels can cause damage.
 
@@ -66,15 +66,14 @@ Run the program with one command line value to specify the length of time to
 run the test:
 
 eg.
-   "cpuburn-in 10" will run the test for ten minutes.
+    "cpuburn-in 10" will run the test for ten minutes.
 
 In the CPUstress image, 'cpuburn-in' is a command alias to cpuburn-m, so when
-you run 'cpuburn-in' on the command line it actually runs the cpuburn-m
+you run 'cpuburn-in' on the command line it actually runs the cpuburn-m 
 wrapper.
 
-
-If you want to run cpuburn-in for a certain time, you can also add a parameter
-to the isolinux config file:
+If you want to run cpuburn-in for a certain time when you boot the image, you
+can add a parameter to the isolinux config file:
 
 eg. Run cpuburn-in for 10 days.
 
@@ -82,13 +81,11 @@ eg. Run cpuburn-in for 10 days.
     INITRD /ubcd/boot/cpustress/initrd.gz
     APPEND noapic ubcdcmd=cpuburn-in days=10
 
-
 eg. Run cpuburn-in for 10 hours.
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.gz
     APPEND noapic ubcdcmd=cpuburn-in hours=10
-
 
 eg. Run cpuburn-in for 10 minutes.
 
@@ -96,17 +93,28 @@ eg. Run cpuburn-in for 10 minutes.
     INITRD /ubcd/boot/cpustress/initrd.gz
     APPEND noapic ubcdcmd=cpuburn-in minutes=10
 
-
 If those parameters are all provided to the APPEND command of the isolinux
 config, the run time will be determined by the first value of the time duration
 which will be searched in the following order: days > hours > minutes.
 So if 'minutes=100000000' and 'days=10' is found, the run time will be set to
 14400 minutes (= 10 days).
 
-
 If cpuburn-m is called without parameters, it will run cpuburn-in for 10080
 minutes (= 7 days).
 
+You can specify how many instances of cpuburn-in will be run, despite the
+number of CPUs. To do this, export the 'instances' shell variable before
+running cpuburn-m:
+
+eg. 
+    "export instances=1" will run only one instance of cpuburn-in.
+
+Or add the 'instances' parameter to the isolinux config file:
+
+eg.
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.gz
+    APPEND noapic ubcdcmd=cpuburn-in days=10 instances=1
 
 Contact:
 -------

@@ -17,7 +17,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 8 September 2013.
+# Last updated on 31 October 2013.
 
 
 set -m
@@ -111,6 +111,10 @@ RAMSIZE may be one of the following:
   C =  8k    G = 128k    K =   2M    O = 32M
   D = 16k    H = 256k    L =   4M    P = 64M
 You may either specify the size ("64k") or the letter ("F") as the argument.
+
+To specify how many instances of test program will be run, export the
+'instances' shell variable before running this script.
+e.g. 'export instances=1'
 HELP
         exit 0
         ;;
