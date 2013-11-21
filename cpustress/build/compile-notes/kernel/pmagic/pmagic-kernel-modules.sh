@@ -18,7 +18,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 6 September 2013.
+# Last updated on 10 November 2013.
 
 uname -r | grep 'pmagic64' > /dev/null
 if [ "$?" -eq "0" ]; then
@@ -45,7 +45,6 @@ arch/x86/kernel/microcode.ko
 arch/x86/platform/iris/iris.ko
 arch/x86/platform/scx200/scx200.ko
 drivers/acpi/ac.ko
-drivers/acpi/acpi_i2c.ko
 drivers/acpi/acpi_pad.ko
 drivers/acpi/battery.ko
 drivers/acpi/button.ko
@@ -125,6 +124,7 @@ drivers/hwmon/g762.ko
 drivers/hwmon/gl518sm.ko
 drivers/hwmon/gl520sm.ko
 drivers/hwmon/hih6130.ko
+drivers/hwmon/htu21.ko
 drivers/hwmon/hwmon-vid.ko
 drivers/hwmon/hwmon.ko
 drivers/hwmon/i5k_amb.ko
@@ -260,7 +260,6 @@ drivers/mfd/cros_ec.ko
 drivers/mfd/cros_ec_i2c.ko
 drivers/mfd/lpc_sch.ko
 drivers/mfd/mfd-core.ko
-drivers/of/of_i2c.ko
 drivers/platform/x86/acerhdf.ko
 drivers/platform/x86/chromeos_laptop.ko
 drivers/scsi/sg.ko
@@ -276,6 +275,7 @@ drivers/usb/dwc3/dwc3-pci.ko
 drivers/usb/dwc3/dwc3.ko
 drivers/usb/host/ehci-hcd.ko
 drivers/usb/host/ehci-pci.ko
+drivers/usb/host/fotg210-hcd.ko
 drivers/usb/host/fusbh200-hcd.ko
 drivers/usb/host/hwa-hc.ko
 drivers/usb/host/isp116x-hcd.ko

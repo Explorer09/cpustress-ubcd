@@ -1,4 +1,4 @@
-15 September 2013
+21 November 2013
 
 The Linux kernel for CPUstress is compiled on Ubuntu 12.04.3 LTS (32-bit).
 
@@ -7,22 +7,25 @@ additional patch is applied.
 
 Download the source code and then prepare the source directory for building:
 
- $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.11.1.tar.xz
- $ tar -x -v --xz -f linux-3.11.1.tar.xz
- $ cd linux-3.11.1
+ $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.12.1.tar.xz
+ $ tar -x -v --xz -f linux-3.12.1.tar.xz
+ $ cd linux-3.12.1
  $ make mrproper
 
-Copy the "config-3.11.1-cpustress" file into the source code directory, then
+Copy the "config-3.12-cpustress" file into the source code directory, then
 rename it:
 
- $ mv config-3.11.1-cpustress .config
+ $ mv config-3.12-cpustress .config
 
 Build the kernel, if you don't want to configure anything else:
 
+ $ make oldconfig
  $ make
 
 Copy the kernel bzImage, which is located at "arch/x86/boot/bzImage", to a
 directory that you can boot from. For example in UBCD it's
 "${ubcd_extract}/ubcd/boot/cpustress/bzImage".
+
+ $ cp -a arch/x86/boot/bzImage "${ubcd_extract}/ubcd/boot/cpustress/bzImage"
 
 --Explorer <explorer09@gmail.com>
