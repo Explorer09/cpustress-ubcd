@@ -13,7 +13,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 18 June 2013.
+# Last updated on 31 October 2013.
 
 
 set -m
@@ -40,6 +40,21 @@ fi
 
 printf '\033[0;32mCPU Burn-in v1.00:\n'
 printf '==================\033[0m\n\n'
+
+case "$1" in
+    --help | -h)
+        cat << HELP
+Usage: $0 [TIME]
+
+Run cpuburn-in and stress test for TIME minutes.
+If TIME is not specified, run cpuburn-in for 10080 minutes (= 7 days).
+
+To specify how many instances of cpuburn-in will be run, export the 'instances'
+shell variable before running this script. e.g. 'export instances=1'
+HELP
+        exit 0
+        ;;
+esac
 
 # $days, $hours, and $minutes are global variables and boot parameters.
 if [ "X$1" != "X" ]; then

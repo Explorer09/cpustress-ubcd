@@ -1,4 +1,4 @@
-15 September 2013
+21 November 2013
 
 eglibc home page:
 http://www.eglibc.org/home
@@ -20,9 +20,6 @@ The GNU C Library (glibc) is compiled on Ubuntu 12.04.3 LTS (32-bit).
 I choose the eglibc variant over the original glibc because eglibc have
 important bugs fixes that glibc would not fix until their next release.
 
-(Previously, glibc 2.16 had a security bug (CVE-2012-3480). Before 2.17 this
-is not fixed except in eglibc.)
-
 First, you need svn client to fetch out the eglibc source code and gawk for
 the configure script to work. Autoconf, gettext, and texinfo are not strictly
 necessary but configure will generate warnings if you don't have them.
@@ -30,16 +27,16 @@ necessary but configure will generate warnings if you don't have them.
  $ sudo apt-get install subversion gawk autoconf gettext texinfo
 
 In addition, glibc needs the linux kernel headers to compile. I use the
-headers from version 3.11.1.
+headers from version 3.12.1.
 
- $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.11.1.tar.xz
- $ tar -x -v --xz -f linux-3.11.1.tar.xz
- $ cd linux-3.11.1
+ $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.12.1.tar.xz
+ $ tar -x -v --xz -f linux-3.12.1.tar.xz
+ $ cd linux-3.12.1
  $ make mrproper
- $ make ARCH=i386 INSTALL_HDR_PATH=${HOME}/headers-3.11.1 headers_install
+ $ make INSTALL_HDR_PATH=${HOME}/headers-3.12.1 headers_install
  $ cd ..
 
-(I put the headers in the directory "${HOME}/headers-3.11.1", but you may
+(I put the headers in the directory "${HOME}/headers-3.12.1", but you may
 change the path if you like.)
 
 Make a directory somewhere and get the code:
@@ -59,17 +56,19 @@ eglibc "build" directory. This config file disables various functions in order
 to make the library smaller and build process faster. Also read the notice
 above.
 
+ $ cp ${compile_notes}/eglibc/option-groups.config option-groups.config
+
 Configure and build eglibc:
 
  $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib \
      --enable-kernel=2.6.36 --enable-add-ons=nptl --disable-nscd \
      --disable-profile --without-gd --without-selinux \
-     --with-headers=${HOME}/headers-3.11.1/include
+     --with-headers=${HOME}/headers-3.12.1/include
  $ make
 
 Notes about the configure options:
 * The config.guess output should be "i686-pc-linux-gnu" in your system.
-* If you wan't to make the library compatible with the old CPUstress kernel
+* If you want to make the library compatible with the old CPUstress kernel
   from Icecube, set "--enable-kernel=2.6.28" instead of "2.6.36".
   Setting any version higher than 2.6.36 optimizes nothing in the code, but it
   makes your library less compatible.

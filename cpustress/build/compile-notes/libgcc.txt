@@ -1,55 +1,25 @@
-5 September 2013
+22 November 2013
 
 GCC 4.7 website:
 http://gcc.gnu.org/gcc-4.7/
 
-Building GCC requires GMP, MPFR and MPC:
-http://gmplib.org/
-http://www.mpfr.org/
-http://www.multiprecision.org/
+The libgcc in CPUstress image is compiled on Ubuntu 12.04.3 LTS (32-bit).
 
-The libgcc in CPUstress image is compiled on Ubuntu 12.04.2 LTS (32-bit).
+I choose to build a temporary compiler and use it to build libgcc. Because the
+compiler is temporary, there's no need to bootstrap and it's fine to use GMP,
+MPFR and MPC libraries from OS distribution. (The libraries are used to build
+GCC but not used when building libgcc.)
 
-For the shell code example below, I assume that you would download all the
-source code in ${HOME}, and install all tools in "${HOME}/tools". You may use
-another directory -- just change the paths in the code below.
+Install the library development files:
 
-Download the source code:
+ $ sudo apt-get install libgmp-dev libmpfr-dev libmpc-dev
 
- $ cd ${HOME}
- $ wget ftp://ftp.gmplib.org/pub/gmp/gmp-5.1.2.tar.xz
- $ wget http://www.mpfr.org/mpfr-current/mpfr-3.1.2.tar.xz
- $ wget http://www.multiprecision.org/mpc/download/mpc-1.0.1.tar.gz
+See <http://gcc.gnu.org/wiki/InstallingGCC#Support_libraries> if you not using
+an Ubuntu-based system.
+
+Download and unpack the GCC source code:
+
  $ wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.7.3/gcc-4.7.3.tar.bz2
-
-The code below will extract, build, and install the tools into "${HOME}/tools".
-
- $ cd ${HOME}
- $ tar -x -v --xz -f gmp-5.1.2.tar.xz
- $ cd gmp-5.1.2
- $ ./configure --prefix=${HOME}/tools --build=i386-pc-linux-gnu \
-     --disable-shared ABI=32 CFLAGS='-m32 -O2 -pedantic -fomit-frame-pointer'
- $ make
- $ make install
-
- $ cd ${HOME}
- $ tar -x -v --xz -f mpfr-3.1.2.tar.xz
- $ cd mpfr-3.1.2
- $ ./configure --prefix=${HOME}/tools --disable-shared --with-gmp=${HOME}/tools
- $ make
- $ make install
-
- $ cd ${HOME}
- $ tar -x -v -z -f mpc-1.0.1.tar.gz
- $ cd mpc-1.0.1
- $ ./configure --prefix=${HOME}/tools --disable-shared \
-     --with-gmp=${HOME}/tools --with-mpfr=${HOME}/tools
- $ make
- $ make install
-
-Extract the GCC source code:
-
- $ cd ${HOME}
  $ tar -x -v --bzip2 -f gcc-4.7.3.tar.bz2
 
 The GCC documentation recommends us to use a separate build directory to build
@@ -64,16 +34,12 @@ Configure and build GCC:
      --enable-languages=c --enable-shared=libgcc --enable-threads=posix \
      --disable-bootstrap --disable-lto --disable-multilib --disable-nls \
      --disable-libgomp --disable-libitm --disable-libmudflap \
-     --disable-libquadmath --disable-libssp --disable-libstdc++-v3 \
-     --with-gmp=${HOME}/tools --with-mpfr=${HOME}/tools \
-     --with-mpc=${HOME}/tools
+     --disable-libquadmath --disable-libssp --disable-libstdc++-v3
  $ make
 
 Notes about the configure options:
 * The i686 gcc can produce i386-compatible code. So we use native build here.
   (See also <http://gcc.gnu.org/ml/gcc-bugs/2000-03/msg00437.html>)
-* The configure options will build a whole C compiler, then use the compiler
-  just built to build libgcc. We don't need the compiler after that.
 * All other target libraries (libgomp, libitm, etc.) are disabled.
 
 Because we only need libgcc_s.so in the CPUstress image, you don't need to run
