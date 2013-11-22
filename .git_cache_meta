@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-11-22 21:07:51.6683433500" .git_cache_meta
+touch -c -h -d "2013-11-22 23:15:49.9200010200" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -244,15 +244,13 @@ touch -c -h -d "2013-10-30 21:17:26.0000000000" iso/boot/grub/grldr
 chmod 0644 iso/boot/grub/menu.lst
 touch -c -h -d "2013-04-03 12:23:08.0911211190" iso/boot/grub/menu.lst
 chmod 0644 iso/boot/syslinux/isolinux.bin
-touch -c -h -d "2013-04-03 12:23:08.0911211190" iso/boot/syslinux/isolinux.bin
-chmod 0644 iso/boot/syslinux/ldlinux.sys
-touch -c -h -d "2013-04-03 12:23:08.0951211190" iso/boot/syslinux/ldlinux.sys
-chmod 0644 iso/boot/syslinux/linux.c32
-touch -c -h -d "2013-04-03 12:23:08.0951211190" iso/boot/syslinux/linux.c32
-chmod 0644 iso/boot/syslinux/menu.c32
-touch -c -h -d "2013-04-03 12:23:08.0951211190" iso/boot/syslinux/menu.c32
-chmod 0644 iso/boot/syslinux/reboot.c32
-touch -c -h -d "2013-04-03 12:23:08.0991211180" iso/boot/syslinux/reboot.c32
+touch -c -h -d "2013-07-25 17:35:31.0000000000" iso/boot/syslinux/isolinux.bin
+chmod 0755 iso/boot/syslinux/linux.c32
+touch -c -h -d "2013-07-25 17:35:05.0000000000" iso/boot/syslinux/linux.c32
+chmod 0755 iso/boot/syslinux/menu.c32
+touch -c -h -d "2013-07-25 17:35:08.0000000000" iso/boot/syslinux/menu.c32
+chmod 0755 iso/boot/syslinux/reboot.c32
+touch -c -h -d "2013-07-25 17:35:05.0000000000" iso/boot/syslinux/reboot.c32
 chmod 0644 iso/boot/syslinux/syslinux.cfg
 touch -c -h -d "2013-04-03 12:23:08.0991211180" iso/boot/syslinux/syslinux.cfg
 chmod 0644 iso/ubcd/boot/cpustress/NOTICE.txt
