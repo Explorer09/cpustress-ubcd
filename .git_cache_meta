@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2013-11-22 23:51:13.2642186820" .git_cache_meta
+touch -c -h -d "2013-11-22 23:52:39.5254368360" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -272,7 +272,7 @@ touch -c -h -d "2013-04-20 16:46:15.0000000000" screenshots/cpustress-intel-linp
 chmod 0644 screenshots/cpustress-mprime.png
 touch -c -h -d "2013-04-09 10:41:41.0000000000" screenshots/cpustress-mprime.png
 chmod 0644 screenshots/cpustress-splash.png
-touch -c -h -d "2013-05-19 23:02:10.9940990000" screenshots/cpustress-splash.png
+touch -c -h -d "2013-11-22 23:43:01.8100380000" screenshots/cpustress-splash.png
 chmod 0644 screenshots/cpustress-stress.png
 touch -c -h -d "2013-04-09 10:48:46.0000000000" screenshots/cpustress-stress.png
 chmod 0644 screenshots/cpustress-stresscpu2.png
