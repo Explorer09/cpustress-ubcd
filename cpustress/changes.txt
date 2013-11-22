@@ -3,12 +3,13 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-21 November 2013
+22 November 2013
 
 - Updated kernel to 3.12.1.
 - Rebuilt eglibc (2.18-r24307).
 - Updated Intel LINPACK to v11.1.1 (from v11.1.0)
 - Patched and rebuilt stresscpu2 to accept '--help' option on the command-line.
+- Rebuilt systester-cli with GMP 5.1.3.
 
 Changes in v2.3.6
 -----------------

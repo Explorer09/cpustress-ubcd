@@ -1,9 +1,9 @@
-5 September 2013
+22 November 2013
 
 Systester download page:
 http://systester.sourceforge.net/downloads.php
 
-Systester is compiled on Ubuntu 12.04.2 LTS (32-bit).
+Systester is compiled on Ubuntu 12.04.3 LTS (32-bit).
 
 It requires GMP library in order to build. You can download GMP form the
 website <http://gmplib.org/> or use the direct link below.
@@ -12,9 +12,9 @@ For the shell commands below, I assume that you would unpack GMP at the home
 directory, but you may change the path if you like.
 
  $ cd ${HOME}
- $ wget ftp://ftp.gmplib.org/pub/gmp/gmp-5.1.2.tar.xz
- $ tar -x -v --xz -f gmp-5.1.2.tar.xz
- $ cd gmp-5.1.2
+ $ wget ftp://ftp.gmplib.org/pub/gmp/gmp-5.1.3.tar.xz
+ $ tar -x -v --xz -f gmp-5.1.3.tar.xz
+ $ cd gmp-5.1.3
 
 Configure and build GMP:
 
@@ -51,7 +51,7 @@ Copy the ".patch" files into the source code directory. Then apply the patches:
 Build Systester (CLI version):
 
  $ cd cli
- $ CPPFLAGS='-L${HOME}/gmp-5.1.2/.libs -I${HOME}/gmp-5.1.2' make cli
+ $ CPPFLAGS='-L${HOME}/gmp-5.1.3/.libs -I${HOME}/gmp-5.1.3' make cli
 
 (Optional) Change the mode of the binary:
 
