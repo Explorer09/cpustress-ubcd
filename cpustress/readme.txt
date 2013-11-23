@@ -197,7 +197,7 @@ You can change the ubcdargs parameter to:
     - systester
 
 
-Intel Optimized LINPACK 11.1.0: linpack
+Intel Optimized LINPACK 11.1.1: linpack
 -------------------------------
 
 The following isolinux entry will run the LINPACK benchmark in interactive
