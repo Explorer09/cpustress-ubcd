@@ -15,7 +15,7 @@ For 0fCPU Burn-in07, you can specify the time it runs by using either '0fdays
 (=10080 minutes), which is equivalent to this:
 
 > .com32 linux.c32 /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=cpuburn-in
-  0fdays=707 initrd=/ubcd/boot/cpustress/initrd.gz
+  0fdays=707 initrd=/ubcd/boot/cpustress/initrd.xz
 
 If two or more time options are specified, the run time will be determined by
 the value of larger unit (days > hours > minutes) and the rest are ignored.

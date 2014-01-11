@@ -12,10 +12,10 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 31 October 2013.
+# Last updated on 11 January 2014.
 
 
-LAST_EDITED="31 October 2013"
+LAST_EDITED="11 January 2014"
 
 showcontrols () {
     printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
@@ -104,7 +104,7 @@ v1.00', run 'helpinfo cpuburn-in' in the terminal.
 To run Helpinfo from the isolinux commandline, use the following:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=helpinfo
 
 
@@ -112,7 +112,7 @@ To run Helpinfo for a specific program from the isolinux commandline (e.g.:
 cpuburn-in), use the following:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=helpinfo ubcdargs=cpuburn-in
 HELPINFO2
     less -~ /tmp/helpinfo/helpinfo.txt
@@ -173,7 +173,7 @@ If you want to run stresscpu2 with specific parameters, when you boot the
 image, use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=stresscpu2 ubcdargs="-s -t 48:00:00"
 
 The ubcdargs parameter contains the options that you want to pass to
@@ -190,7 +190,7 @@ If you want to run systester with specific parameters, when you boot the image,
 use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=systester ubcdargs="-gausslg 1M -threads 2 -bench"
 
 The ubcdargs parameter contains the options that you want to pass to systester.

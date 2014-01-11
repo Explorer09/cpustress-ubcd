@@ -3,8 +3,13 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-22 November 2013
+11 January 2014
 
+- Changed kernel and initrd compression from gzip to XZ. Build scripts and
+  help documents are all updated to reflect this change. This makes the
+  compressed kernel+initrd image 790KiB smaller, although the memory required
+  for decompression increases from 0.5MiB to 5MiB. (For old hardware, you'll
+  still need 16MiB of memory to load CPUstress either way.)
 
 Changes in v2.3.7
 -----------------

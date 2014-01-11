@@ -27,19 +27,19 @@ that the background option (-b) is no longer supported since 25.5.
 The following entry will prompt to ask which version of mprime you want to run.
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=mprime
 
 If you want to run a specific version of mprime, when you boot the image, use:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=mprime23
 
   This will start 'Mersenne Prime 23.9.2'.
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=mprime27
 
   This will start 'Mersenne Prime 27.9 build 1'.

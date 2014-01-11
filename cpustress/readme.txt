@@ -5,7 +5,7 @@ Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 30 October 2013.
+Last edited on 11 January 2014.
 
 
 Content of this package:
@@ -23,7 +23,7 @@ _________________________
 ./help/          ==> contains help texts for some programs (also available in
                      the image itself)
 
-./initrd.gz      ==> initrd
+./initrd.xz      ==> initrd
 
 ./nonfree.txt    ==> notes about the non-free programs
 
@@ -40,17 +40,17 @@ ____________________________________
 
 ./build          ==> build script to build the image
 
-./extract        ==> script to extract the initrd.gz image
+./extract        ==> script to extract the initrd.xz image
 
 The ./build-initrd/ directory is empty. See the section below for how to
-extract the files from initrd.gz.
+extract the files from initrd.xz.
 
 
 How to start?
 _____________
 
 
-Copy initrd.gz to ./ubcd/boot/cpustress/ of your extracted UBCD iso.
+Copy initrd.xz to ./ubcd/boot/cpustress/ of your extracted UBCD iso.
 
 Windows:
 --------
@@ -72,14 +72,14 @@ Unpack the cpustress-develop.7z archive (you probably already did this, else you
 couldn't read this README.
 $ 7z x "./path/to/file/cpustress-develop.7z"
 
-Extract the ./build tar archive and the initrd.gz file:
+Extract the ./build tar archive and the initrd.xz file:
 $ cd cpustress-develop
 $ tar xvJf build.txz
 $ cd build
-$ cp ../initrd.gz .
+$ cp ../initrd.xz .
 $ ./extract
 
-Now you can edit the files in ./build-initrd/ and remaster the initrd.gz with
+Now you can edit the files in ./build-initrd/ and remaster the initrd.xz with
 the ./build script.
 
 ./build-initrd/usr/local/bin/ (/usr/local/bin/ directory in the image) contains
@@ -105,13 +105,13 @@ The following isolinux entry will run burn, which automatically detects which
 test to run:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=burn
 
 If you want to run burn with a different test, use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=burn ubcdargs="MMX 64k"
 
 You can specify which test to run in the ubcdargs parameter, as well as the
@@ -125,7 +125,7 @@ Run cpuburn-in without time parameter (it will run cpuburn-in for 10080
 minutes (= 7 days)).
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=cpuburn-in
 
 Run cpuburn-in with a time parameter:
@@ -133,21 +133,21 @@ Run cpuburn-in with a time parameter:
   eg. Run cpuburn-in for 10 days.
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=cpuburn-in days=10
 
 
   eg. Run cpuburn-in for 10 hours.
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=cpuburn-in hours=10
 
 
   eg. Run cpuburn-in for 10 minutes.
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=cpuburn-in minutes=10
 
 
@@ -164,7 +164,7 @@ CPUinfo v1.00: cpuinfo
 The following isolinux entry will run CPUinfo:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=cpuinfo
 
 
@@ -174,14 +174,14 @@ Helpinfo: helpinfo
 The following isolinux entry will run Helpinfo:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=helpinfo
 
 
 The following isolinux entry will run Helpinfo for cpuburn:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=helpinfo ubcdargs=cpuburn
 
 You can change the ubcdargs parameter to:
@@ -204,7 +204,7 @@ The following isolinux entry will run the LINPACK benchmark in interactive
 mode:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=helpinfo ubcdargs=linpack
 
 The LINPACK benchmark accepts input data files. A sample data file is included
@@ -219,7 +219,7 @@ Menu: menu
 The following isolinux entry will display the menu.
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=menu
 
 
@@ -230,20 +230,20 @@ The following isolinux entry will prompt to ask which version of mprime you
 want to run.
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=mprime
 
 If you want to run a specific version of mprime, when you boot the image, use:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=mprime23
 
       This will start 'Mersenne Prime 23.9.2'.
 
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=mprime27
 
       This will start 'Mersenne Prime 27.9'.
@@ -255,14 +255,14 @@ Stress v1.0.4: stress
 The following isolinux entry will run stress (will display the help text).
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=stress
 
 If you want to run a stress with specific parameters, when you boot the image,
 use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=stress ubcdargs="--quiet -c 1k"
 
 The ubcdargs parameter contains the options that you want to pass to stress.
@@ -274,14 +274,14 @@ CPU stress tester 2.0: stresscpu2
 The following isolinux entry will run stresscpu2:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=stresscpu2
 
 If you want to run stresscpu2 with specific parameters, when you boot the
 image, use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=stresscpu2 ubcdargs="-s -t 48:00:00"
 
 The ubcdargs parameter contains the options that you want to pass to
@@ -295,14 +295,14 @@ The following isolinux entry will run systester in the default test mode.
 ('systester -test -qcborwein 128K')
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=systester
 
 If you want to run systester with specific parameters, when you boot the image,
 use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=systester ubcdargs="-gausslg 1M -threads 2 -bench"
 
 The ubcdargs parameter contains the options that you want to pass to systester.

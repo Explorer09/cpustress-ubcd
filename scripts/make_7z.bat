@@ -23,8 +23,8 @@ IF EXIST "%ARCHIVE_NAME%" (
     DEL /P "%ARCHIVE_NAME%"
 )
 COPY cpustress "%ARCHIVE_NAME%"
-"%P7ZIP%" a -t7z -mx=9 "%ARCHIVE_NAME%.7z" "%ARCHIVE_NAME%\*" -xr-!"%ARCHIVE_NAME%\build" -xr!*.txz -xr!*.gz -xr!bzImage
-"%P7ZIP%" a -t7z -mx=0 "%ARCHIVE_NAME%.7z" "%ARCHIVE_NAME%\build.txz" "%ARCHIVE_NAME%\initrd.gz" "%ARCHIVE_NAME%\bzImage"
+"%P7ZIP%" a -t7z -mx=9 "%ARCHIVE_NAME%.7z" "%ARCHIVE_NAME%\*" -xr-!"%ARCHIVE_NAME%\build" -xr!*.txz -xr!*.xz -xr!bzImage
+"%P7ZIP%" a -t7z -mx=0 "%ARCHIVE_NAME%.7z" "%ARCHIVE_NAME%\build.txz" "%ARCHIVE_NAME%\initrd.xz" "%ARCHIVE_NAME%\bzImage"
 REM Delete the temp directory.
 DEL /F "%ARCHIVE_NAME%"
 

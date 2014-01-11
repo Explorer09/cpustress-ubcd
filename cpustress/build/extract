@@ -6,7 +6,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 10 September 2013.
+# Last updated on 11 January 2014.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -17,14 +17,14 @@ if [ -d "build-initrd" ] && [ "X`ls -A 'build-initrd'`" != "X" ]; then
     exit 1
 fi
 
-if [ ! -f "initrd.gz" ]; then
-    echo "File initrd.gz is not found. Please place the CPUstress initrd image in the"
+if [ ! -f "initrd.xz" ]; then
+    echo "File initrd.xz is not found. Please place the CPUstress initrd image in the"
     echo "same directory as this script." >&2
     exit 1
 fi
 
-echo "Extracting initrd.gz..."
-gzip -d -v -c initrd.gz >build-initrd/initrd
+echo "Extracting initrd.xz..."
+xz -d -v -c initrd.xz >build-initrd/initrd
 cd build-initrd
 cpio -i -m -d -u <initrd
 STATUS="$?"
