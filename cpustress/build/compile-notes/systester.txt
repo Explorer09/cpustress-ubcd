@@ -1,4 +1,4 @@
-22 November 2013
+12 January 2014
 
 Systester download page:
 http://systester.sourceforge.net/downloads.php
@@ -60,5 +60,15 @@ Build Systester (CLI version):
 (Optional) To reduce the file size, I stripped the binary after compilation:
 
  $ strip systester-cli
+
+(Optional) I also used UPX to compress the executable so the file size could
+be much smaller: <http://upx.sourceforge.net/>
+
+ $ upx --ultra-brute systester-cli
+
+The program depends on these libraries:
+    libpthread.so.0
+    libc.so.6
+    /lib/ld-linux.so.2
 
 --Explorer <explorer09@gmail.com>

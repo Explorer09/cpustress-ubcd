@@ -1,4 +1,4 @@
-5 September 2013
+12 January 2014
 
 lm-sensors website:
 http://lm-sensors.org/
@@ -56,5 +56,15 @@ that is 82-column wide. The 'man' command is invoked like this:
 
  $ cd ${cpustress_initrd}/usr/local/bin
  $ strip sensors
+
+(Optional) I also used UPX to compress the executable so the file size could
+be much smaller: <http://upx.sourceforge.net/>
+
+ $ upx --ultra-brute sensors
+
+The program depends on these libraries:
+    libc.so.6
+    libm.so.6
+    /lib/ld-linux.so.2
 
 --Explorer <explorer09@gmail.com>

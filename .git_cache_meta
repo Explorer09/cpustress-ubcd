@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-01-12 00:08:20.4668340030" .git_cache_meta
+touch -c -h -d "2014-01-12 12:30:26.7356818070" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -139,16 +139,16 @@ touch -c -h -d "2013-10-30 10:26:14.3827635800" cpustress/build/build-initrd/usr
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/mprime
 touch -c -h -d "2013-09-08 07:56:45.2421756640" cpustress/build/build-initrd/usr/local/bin/mprime
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/sensors
-touch -c -h -d "2013-05-28 20:57:26.1871307180" cpustress/build/build-initrd/usr/local/bin/sensors
+touch -c -h -d "2013-05-28 20:57:26.0000000000" cpustress/build/build-initrd/usr/local/bin/sensors
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/sensors-detect
 touch -c -h -d "2013-06-18 13:44:23.4957275130" cpustress/build/build-initrd/usr/local/bin/sensors-detect
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/stress
 touch -c -h -d "2013-03-31 23:53:02.0000000000" cpustress/build/build-initrd/usr/local/bin/stress
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/stresscpu2
-touch -c -h -d "2013-10-31 20:43:17.7316908560" cpustress/build/build-initrd/usr/local/bin/stresscpu2
+touch -c -h -d "2013-10-31 20:43:17.0000000000" cpustress/build/build-initrd/usr/local/bin/stresscpu2
 touch -c -h -d "2013-04-13 22:54:21.7614506540" cpustress/build/build-initrd/usr/local/bin/systester
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/systester-cli
-touch -c -h -d "2013-11-13 19:47:27.3176998070" cpustress/build/build-initrd/usr/local/bin/systester-cli
+touch -c -h -d "2013-11-13 19:47:27.0000000000" cpustress/build/build-initrd/usr/local/bin/systester-cli
 chmod 0644 cpustress/build/compile-notes/burn.txt
 touch -c -h -d "2013-09-05 20:46:35.7279599940" cpustress/build/compile-notes/burn.txt
 chmod 0644 cpustress/build/compile-notes/busybox.txt
@@ -180,21 +180,21 @@ touch -c -h -d "2013-09-05 20:09:14.3080100060" cpustress/build/compile-notes/ke
 chmod 0644 cpustress/build/compile-notes/libgcc.txt
 touch -c -h -d "2013-11-22 00:38:04.5025962260" cpustress/build/compile-notes/libgcc.txt
 chmod 0644 cpustress/build/compile-notes/linpack.txt
-touch -c -h -d "2013-10-30 10:00:29.6908324490" cpustress/build/compile-notes/linpack.txt
+touch -c -h -d "2014-01-12 02:27:04.6464628750" cpustress/build/compile-notes/linpack.txt
 chmod 0644 cpustress/build/compile-notes/mprime.txt
-touch -c -h -d "2013-09-05 21:24:00.2199099140" cpustress/build/compile-notes/mprime.txt
+touch -c -h -d "2014-01-12 02:27:02.8504629550" cpustress/build/compile-notes/mprime.txt
 chmod 0644 cpustress/build/compile-notes/sensors.txt
-touch -c -h -d "2013-09-05 20:49:42.4719558270" cpustress/build/compile-notes/sensors.txt
+touch -c -h -d "2014-01-12 12:21:25.1277059540" cpustress/build/compile-notes/sensors.txt
 chmod 0644 cpustress/build/compile-notes/stress.txt
-touch -c -h -d "2013-09-05 20:49:47.7279557100" cpustress/build/compile-notes/stress.txt
+touch -c -h -d "2014-01-12 12:21:24.6797059740" cpustress/build/compile-notes/stress.txt
 chmod 0644 cpustress/build/compile-notes/stress/stress-no-hdd.patch
 touch -c -h -d "2013-03-31 23:36:12.0000000000" cpustress/build/compile-notes/stress/stress-no-hdd.patch
 chmod 0644 cpustress/build/compile-notes/stresscpu2.txt
-touch -c -h -d "2013-10-31 21:39:51.2179449530" cpustress/build/compile-notes/stresscpu2.txt
+touch -c -h -d "2014-01-12 12:21:23.8597060100" cpustress/build/compile-notes/stresscpu2.txt
 chmod 0644 cpustress/build/compile-notes/stresscpu2/stresscpu2-long-help-option.patch
 touch -c -h -d "2013-10-31 18:06:43.0585150000" cpustress/build/compile-notes/stresscpu2/stresscpu2-long-help-option.patch
 chmod 0644 cpustress/build/compile-notes/systester.txt
-touch -c -h -d "2013-11-22 09:39:40.9590569710" cpustress/build/compile-notes/systester.txt
+touch -c -h -d "2014-01-12 12:21:23.5757060230" cpustress/build/compile-notes/systester.txt
 chmod 0644 cpustress/build/compile-notes/systester/changes.txt
 touch -c -h -d "2013-09-05 20:50:59.0759541180" cpustress/build/compile-notes/systester/changes.txt
 chmod 0644 cpustress/build/compile-notes/systester/systester-cli-changes.patch
@@ -210,7 +210,7 @@ touch -c -h -d "2014-01-11 23:02:18.0110106660" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2013-09-07 09:00:27.1423517960" cpustress/build/prepare
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2014-01-12 00:08:06.0268346460" cpustress/changes.txt
+touch -c -h -d "2014-01-12 12:30:14.3356823590" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt

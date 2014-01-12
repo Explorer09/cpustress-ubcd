@@ -1,4 +1,4 @@
-30 October 2013
+12 January 2014
 
 The Intel Optimized LINPACK Benchmark can be downloaded here:
 http://software.intel.com/en-us/articles/intel-math-kernel-library-linpack-download
@@ -35,7 +35,7 @@ CPUstress image:
 (Optional) I also used UPX to compress the executable so the file size could
 be much smaller: <http://upx.sourceforge.net/>
 
- $ upx xlinpack_xeon32
+ $ upx --ultra-brute xlinpack_xeon32
 
 The program depends on these libraries:
     libpthread.so.0

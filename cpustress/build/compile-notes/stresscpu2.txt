@@ -1,4 +1,4 @@
-31 October 2013
+12 January 2014
 
 StressCPU2 can be downloaded here:
 http://www.gromacs.org/@api/deki/files/43/=stresscpu2.tgz
@@ -27,6 +27,16 @@ Then build the dynamically linked binary from source:
 (Optional) To reduce the file size, I stripped the binary after compilation:
 
  $ strip stresscpu2
+
+(Optional) I also used UPX to compress the executable so the file size could
+be much smaller: <http://upx.sourceforge.net/>
+
+ $ upx --ultra-brute stresscpu2
+
+The program depends on these libraries:
+    libpthread.so.0
+    libc.so.6
+    /lib/ld-linux.so.2
 
 Additional note:
 
