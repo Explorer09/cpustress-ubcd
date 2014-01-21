@@ -18,7 +18,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 10 November 2013.
+# Last updated on 21 January 2014.
 
 uname -r | grep 'pmagic64' > /dev/null
 if [ "$?" -eq "0" ]; then
@@ -57,29 +57,21 @@ drivers/char/ipmi/ipmi_msghandler.ko
 drivers/char/ipmi/ipmi_poweroff.ko
 drivers/char/ipmi/ipmi_si.ko
 drivers/clocksource/scx200_hrt.ko
-drivers/hid/hid-a4tech.ko
 drivers/hid/hid-apple.ko
 drivers/hid/hid-belkin.ko
 drivers/hid/hid-cherry.ko
 drivers/hid/hid-chicony.ko
-drivers/hid/hid-cypress.ko
 drivers/hid/hid-ezkey.ko
 drivers/hid/hid-generic.ko
-drivers/hid/hid-gyration.ko
 drivers/hid/hid-holtek-kbd.ko
 drivers/hid/hid-holtekff.ko
-drivers/hid/hid-kensington.ko
 drivers/hid/hid-keytouch.ko
 drivers/hid/hid-logitech.ko
 drivers/hid/hid-microsoft.ko
 drivers/hid/hid-monterey.ko
 drivers/hid/hid-ortek.ko
-drivers/hid/hid-petalynx.ko
-drivers/hid/hid-pl.ko
 drivers/hid/hid-primax.ko
 drivers/hid/hid-samsung.ko
-drivers/hid/hid-sony.ko
-drivers/hid/hid-sunplus.ko
 drivers/hid/hid.ko
 drivers/hid/usbhid/usbhid.ko
 drivers/hwmon/abituguru.ko
@@ -249,7 +241,6 @@ drivers/input/keyboard/stowaway.ko
 drivers/input/keyboard/tca6416-keypad.ko
 drivers/input/keyboard/tca8418_keypad.ko
 drivers/input/matrix-keymap.ko
-drivers/input/mouse/psmouse.ko
 drivers/input/serio/altera_ps2.ko
 drivers/input/serio/olpc_apsp.ko
 drivers/input/serio/pcips2.ko
@@ -262,17 +253,12 @@ drivers/mfd/lpc_sch.ko
 drivers/mfd/mfd-core.ko
 drivers/platform/x86/acerhdf.ko
 drivers/platform/x86/chromeos_laptop.ko
-drivers/scsi/sg.ko
 drivers/thermal/thermal_sys.ko
 drivers/usb/chipidea/ci13xxx_imx.ko
 drivers/usb/chipidea/ci13xxx_msm.ko
 drivers/usb/chipidea/ci13xxx_pci.ko
 drivers/usb/chipidea/ci_hdrc.ko
 drivers/usb/chipidea/usbmisc_imx.ko
-drivers/usb/dwc3/dwc3-exynos.ko
-drivers/usb/dwc3/dwc3-omap.ko
-drivers/usb/dwc3/dwc3-pci.ko
-drivers/usb/dwc3/dwc3.ko
 drivers/usb/host/ehci-hcd.ko
 drivers/usb/host/ehci-pci.ko
 drivers/usb/host/fotg210-hcd.ko
@@ -297,9 +283,6 @@ drivers/uwb/umc.ko
 drivers/uwb/uwb.ko
 drivers/uwb/whc-rc.ko
 drivers/uwb/whci.ko
-fs/binfmt_aout.ko
-fs/binfmt_misc.ko
-fs/ext2/ext2.ko
 fs/nls/nls_ascii.ko
 fs/nls/nls_cp437.ko
 fs/nls/nls_iso8859-1.ko
