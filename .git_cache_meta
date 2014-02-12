@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-01-21 23:36:49.1750173460" .git_cache_meta
+touch -c -h -d "2014-02-12 20:08:40.1583128360" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -162,13 +162,15 @@ touch -c -h -d "2013-09-05 20:08:00.4040116550" cpustress/build/compile-notes/eg
 chmod 0644 cpustress/build/compile-notes/glibc.txt
 touch -c -h -d "2013-11-21 11:26:51.1672190350" cpustress/build/compile-notes/glibc.txt
 chmod 0644 cpustress/build/compile-notes/kernel.txt
-touch -c -h -d "2013-11-21 11:26:13.7592207030" cpustress/build/compile-notes/kernel.txt
+touch -c -h -d "2014-02-12 20:06:28.5903187010" cpustress/build/compile-notes/kernel.txt
 chmod 0644 cpustress/build/compile-notes/kernel/config-3.10-cpustress
-touch -c -h -d "2014-01-21 21:33:24.7108200000" cpustress/build/compile-notes/kernel/config-3.10-cpustress
+touch -c -h -d "2014-02-12 15:48:11.1001550000" cpustress/build/compile-notes/kernel/config-3.10-cpustress
 chmod 0644 cpustress/build/compile-notes/kernel/config-3.11-cpustress
-touch -c -h -d "2014-01-21 19:30:14.7766230000" cpustress/build/compile-notes/kernel/config-3.11-cpustress
+touch -c -h -d "2014-02-12 15:59:53.9153200000" cpustress/build/compile-notes/kernel/config-3.11-cpustress
 chmod 0644 cpustress/build/compile-notes/kernel/config-3.12-cpustress
-touch -c -h -d "2014-01-21 17:59:06.9733620000" cpustress/build/compile-notes/kernel/config-3.12-cpustress
+touch -c -h -d "2014-02-12 16:10:36.3232440000" cpustress/build/compile-notes/kernel/config-3.12-cpustress
+chmod 0644 cpustress/build/compile-notes/kernel/config-3.13-cpustress
+touch -c -h -d "2014-02-12 16:20:35.5317110000" cpustress/build/compile-notes/kernel/config-3.13-cpustress
 chmod 0644 cpustress/build/compile-notes/kernel/pmagic/compile-notes.patch
 touch -c -h -d "2013-09-05 20:10:00.6800089710" cpustress/build/compile-notes/kernel/pmagic/compile-notes.patch
 chmod 0644 cpustress/build/compile-notes/kernel/pmagic/initrd-modules-support.patch
@@ -210,7 +212,7 @@ touch -c -h -d "2014-01-11 23:02:18.0110106660" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2013-09-07 09:00:27.1423517960" cpustress/build/prepare
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2014-01-21 23:36:35.9510179350" cpustress/changes.txt
+touch -c -h -d "2014-02-12 20:02:22.5783296700" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
