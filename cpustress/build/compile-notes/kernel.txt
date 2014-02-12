@@ -1,4 +1,4 @@
-12 Feburary 2014
+12 February 2014
 
 The Linux kernel for CPUstress is compiled on Ubuntu 12.04.4 LTS (32-bit).
 

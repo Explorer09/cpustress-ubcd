@@ -3,7 +3,7 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-12 Feburary 2014
+12 February 2014
 
 - Changed kernel and initrd compression from gzip to XZ. Build scripts and
   help documents are all updated to reflect this change. This makes the
