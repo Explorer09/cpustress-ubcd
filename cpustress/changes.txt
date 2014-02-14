@@ -3,7 +3,7 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-12 February 2014
+14 February 2014
 
 - Changed kernel and initrd compression from gzip to XZ. Build scripts and
   help documents are all updated to reflect this change. This makes the
@@ -11,7 +11,7 @@ Changes in development version
   for decompression increases from 0.5MiB to 5MiB. (For old hardware, you'll
   still need 16MiB of memory to load CPUstress either way.)
   Note: The older cpustress initrd files won't load with this new kernel.
-- Updated kernel to 3.13.2. Config changes in this kernel build:
+- Updated kernel to 3.13.3. Config changes in this kernel build:
   1. No more CONFIG_IKCONFIG
   2. Block layer and ext2 filesystem support removed.
   3. Timer interrupt frequency is set to 100Hz (from 250Hz)
