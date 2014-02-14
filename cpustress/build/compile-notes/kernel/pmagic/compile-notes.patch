@@ -1,7 +1,7 @@
 diff -r -u a/compile-notes/busybox/config b/compile-notes/busybox/config
---- a/compile-notes/busybox/config	2013-04-19 10:08:37.000000000 +0800
-+++ b/compile-notes/busybox/config	2013-04-19 10:38:12.223876268 +0800
-@@ -494,9 +494,9 @@
+--- a/compile-notes/busybox/config	2014-02-14 10:35:06.456234406 +0800
++++ b/compile-notes/busybox/config	2014-02-14 12:52:32.318900341 +0800
+@@ -496,9 +496,9 @@
  # CONFIG_FEATURE_MODPROBE_SMALL_CHECK_ALREADY_LOADED is not set
  # CONFIG_INSMOD is not set
  # CONFIG_RMMOD is not set
@@ -13,7 +13,7 @@ diff -r -u a/compile-notes/busybox/config b/compile-notes/busybox/config
  # CONFIG_FEATURE_MODPROBE_BLACKLIST is not set
  # CONFIG_DEPMOD is not set
  
-@@ -510,11 +510,11 @@
+@@ -512,11 +512,11 @@
  # CONFIG_FEATURE_INSMOD_LOADINKMEM is not set
  # CONFIG_FEATURE_INSMOD_LOAD_MAP is not set
  # CONFIG_FEATURE_INSMOD_LOAD_MAP_FULL is not set
