@@ -1,9 +1,9 @@
-12 January 2014
+15 February 2014
 
 lm-sensors website:
 http://lm-sensors.org/
 
-The 'sensors' program is compiled on Ubuntu 12.04.2 LTS (32-bit).
+The 'sensors' program is compiled on Ubuntu 12.04.4 LTS (32-bit).
 
 In addition to the build-essential tools, you also need Bison and Flex.
 Install these in Ubuntu:
@@ -12,15 +12,15 @@ Install these in Ubuntu:
 
 Download and unpack the code:
 
- $ wget http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-3.3.4.tar.bz2
- $ tar -x -v --bzip2 -f lm_sensors-3.3.4.tar.bz2
- $ cd lm_sensors-3.3.4
+ $ wget http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-3.3.5.tar.bz2
+ $ tar -x -v --bzip2 -f lm_sensors-3.3.5.tar.bz2
+ $ cd lm_sensors-3.3.5
 
 Originally lm-sensors will produce 'libsensors.so' shared library and the
 'sensors' program that depends on it. We don't want to copy the whole library
 when only one program needs it. So I edit the linker flags in the makefile:
 
- $ sed -e 's@-Llib -lsensors@-Llib -l:libsensors.a -lc -lm@' \
+ $ sed -e 's/-Llib -lsensors/-Llib -l:libsensors.a -lc -lm/' \
      -i.old prog/sensors/Module.mk
 
 This forces the linker to link to the static 'libsensors.a'.

@@ -3,7 +3,7 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-14 February 2014
+15 February 2014
 
 - Changed kernel and initrd compression from gzip to XZ. Build scripts and
   help documents are all updated to reflect this change. This makes the
@@ -12,6 +12,7 @@ Changes in development version
   still need 16MiB of memory to load CPUstress either way.)
   Note: The older cpustress initrd files won't load with this new kernel.
 - Updated BusyBox to v1.22.1 (from v1.21.1)
+- Updated Sensors to v3.3.5 (from v3.3.4).
 - Updated kernel to 3.13.3. Config changes in this kernel build:
   1. No more CONFIG_IKCONFIG
   2. Block layer and ext2 filesystem support removed.
