@@ -12,7 +12,8 @@ Changes in development version
   still need 16MiB of memory to load CPUstress either way.)
   Note: The older cpustress initrd files won't load with this new kernel.
 - Updated BusyBox to v1.22.1 (from v1.21.1)
-- Updated Sensors to v3.3.5 (from v3.3.4).
+- Updated Sensors to v3.3.5 (from v3.3.4)
+- Updated Intel LINPACK to v11.1.2 (from v11.1.1)
 - Updated kernel to 3.13.3. Config changes in this kernel build:
   1. No more CONFIG_IKCONFIG
   2. Block layer and ext2 filesystem support removed.

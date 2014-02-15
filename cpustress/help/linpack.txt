@@ -249,4 +249,4 @@ subsidiaries in the United States and other countries.
 
 * Other names and brands may be claimed as the property of others
 
-Copyright(C) 2000-2013 Intel Corporation. All rights reserved.
+Copyright(C) 2000-2014 Intel Corporation. All rights reserved.
