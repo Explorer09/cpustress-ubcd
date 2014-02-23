@@ -6,7 +6,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 11 January 2014.
+# Last updated on 24 February 2014.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -97,9 +97,16 @@ cd ..
 
 echo "Compressing..."
 
-# Note: The kernel xz decompressor supports --check=crc32 but not
-# --check=crc64 (the xz default).
-xz --check=crc32 --x86 --lzma2=preset=6 -v initrd
+# Notes:
+# The kernel xz decompressor supports --check=crc32 but not --check=crc64
+# (the xz default).
+# When decompressing initramfs, the kernel dynamically allocates memory for
+# dictionary. Because the size it saves in the compressed image is very little
+# comparing to dictionary size increased, I have to set the size to as small
+# as possible. 64KiB is the largest I can use while keeping the minimum
+# decompression memory (tested with the xz userspace program, not with a
+# kernel decompressor.)
+xz --check=crc32 --x86 --lzma2=dict=64KiB -v initrd
 STATUS="$?"
 if [ "$STATUS" -ne "0" ]; then
     echo "ERROR: xz error with exit code ${STATUS}." >&2
