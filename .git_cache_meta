@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-02-23 22:00:08.2449500690" .git_cache_meta
+touch -c -h -d "2014-02-23 22:01:33.2969462770" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
@@ -41,22 +41,22 @@ touch -c -h -d "2008-10-29 01:15:04.0000000000" cpustress/build/build-initrd/etc
 chmod 0644 cpustress/build/build-initrd/etc/sensors3.conf
 touch -c -h -d "2013-09-05 21:09:19.4079295670" cpustress/build/build-initrd/etc/sensors3.conf
 touch -c -h -d "2014-02-14 10:36:08.3122335790" cpustress/build/build-initrd/init
-chmod 0775 cpustress/build/build-initrd/lib/ld-2.19.so
+chmod 0755 cpustress/build/build-initrd/lib/ld-2.19.so
 touch -c -h -d "2014-02-23 21:58:34.6249542430" cpustress/build/build-initrd/lib/ld-2.19.so
 touch -c -h -d "2014-02-15 21:43:08.9574272140" cpustress/build/build-initrd/lib/ld-linux.so.2
-chmod 0775 cpustress/build/build-initrd/lib/libc-2.19.so
+chmod 0755 cpustress/build/build-initrd/lib/libc-2.19.so
 touch -c -h -d "2014-02-23 21:58:34.6329542430" cpustress/build/build-initrd/lib/libc-2.19.so
 touch -c -h -d "2014-02-15 21:43:08.9614272140" cpustress/build/build-initrd/lib/libc.so.6
-chmod 0775 cpustress/build/build-initrd/lib/libdl-2.19.so
+chmod 0755 cpustress/build/build-initrd/lib/libdl-2.19.so
 touch -c -h -d "2014-02-23 21:58:34.6369542430" cpustress/build/build-initrd/lib/libdl-2.19.so
 touch -c -h -d "2014-02-15 21:43:08.9654272140" cpustress/build/build-initrd/lib/libdl.so.2
-chmod 0775 cpustress/build/build-initrd/lib/libm-2.19.so
+chmod 0755 cpustress/build/build-initrd/lib/libm-2.19.so
 touch -c -h -d "2014-02-23 21:58:34.6409542430" cpustress/build/build-initrd/lib/libm-2.19.so
 touch -c -h -d "2014-02-15 21:43:08.9694272140" cpustress/build/build-initrd/lib/libm.so.6
-chmod 0775 cpustress/build/build-initrd/lib/libnss_files-2.19.so
+chmod 0755 cpustress/build/build-initrd/lib/libnss_files-2.19.so
 touch -c -h -d "2014-02-23 21:58:34.6409542430" cpustress/build/build-initrd/lib/libnss_files-2.19.so
 touch -c -h -d "2014-02-15 21:43:08.9694272140" cpustress/build/build-initrd/lib/libnss_files.so.2
-chmod 0775 cpustress/build/build-initrd/lib/libpthread-2.19.so
+chmod 0755 cpustress/build/build-initrd/lib/libpthread-2.19.so
 touch -c -h -d "2014-02-23 21:58:34.6409542430" cpustress/build/build-initrd/lib/libpthread-2.19.so
 touch -c -h -d "2014-02-15 21:43:09.8094272140" cpustress/build/build-initrd/lib/libpthread.so.0
 chmod 0644 cpustress/build/build-initrd/opt/burn/burn.txt
