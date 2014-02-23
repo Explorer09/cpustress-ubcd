@@ -1,4 +1,4 @@
-15 February 2014
+23 February 2014
 
 eglibc home page:
 http://www.eglibc.org/home
@@ -27,16 +27,16 @@ necessary but configure will generate warnings if you don't have them.
  $ sudo apt-get install subversion gawk autoconf gettext texinfo
 
 In addition, glibc needs the linux kernel headers to compile. I use the
-headers from version 3.13.3.
+headers from version 3.13.5.
 
- $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.13.3.tar.xz
- $ tar -x -v --xz -f linux-3.13.3.tar.xz
- $ cd linux-3.13.3
+ $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.13.5.tar.xz
+ $ tar -x -v --xz -f linux-3.13.5.tar.xz
+ $ cd linux-3.13.5
  $ make mrproper
- $ make INSTALL_HDR_PATH=${HOME}/headers-3.13.3 headers_install
+ $ make INSTALL_HDR_PATH=${HOME}/headers-3.13.5 headers_install
  $ cd ..
 
-(I put the headers in the directory "${HOME}/headers-3.13.3", but you may
+(I put the headers in the directory "${HOME}/headers-3.13.5", but you may
 change the path if you like.)
 
 Make a directory somewhere and get the code:
@@ -63,7 +63,7 @@ Configure and build eglibc:
  $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib \
      --enable-kernel=2.6.36 --enable-add-ons=nptl --disable-nscd \
      --disable-profile --without-gd --without-selinux \
-     --with-headers=${HOME}/headers-3.13.3/include
+     --with-headers=${HOME}/headers-3.13.5/include
  $ make
 
 Notes about the configure options:
