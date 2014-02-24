@@ -145,10 +145,10 @@ touch -c -h -d "2013-06-18 13:44:23.4957275130" cpustress/build/build-initrd/usr
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/stress
 touch -c -h -d "2013-03-31 23:53:02.0000000000" cpustress/build/build-initrd/usr/local/bin/stress
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/stresscpu2
-touch -c -h -d "2013-10-31 20:43:17.0000000000" cpustress/build/build-initrd/usr/local/bin/stresscpu2
+touch -c -h -d "2013-10-31 20:43:17.7316908560" cpustress/build/build-initrd/usr/local/bin/stresscpu2
 touch -c -h -d "2013-04-13 22:54:21.7614506540" cpustress/build/build-initrd/usr/local/bin/systester
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/systester-cli
-touch -c -h -d "2013-11-13 19:47:27.0000000000" cpustress/build/build-initrd/usr/local/bin/systester-cli
+touch -c -h -d "2013-11-13 19:47:27.3176998070" cpustress/build/build-initrd/usr/local/bin/systester-cli
 chmod 0644 cpustress/build/compile-notes/burn.txt
 touch -c -h -d "2013-09-05 20:46:35.7279599940" cpustress/build/compile-notes/burn.txt
 chmod 0644 cpustress/build/compile-notes/busybox.txt
@@ -159,7 +159,7 @@ chmod 0644 cpustress/build/compile-notes/busybox/busybox-1.22.1-date.patch
 touch -c -h -d "2014-01-23 19:36:35.0000000000" cpustress/build/compile-notes/busybox/busybox-1.22.1-date.patch
 chmod 0644 cpustress/build/compile-notes/busybox/busybox-1.22.1-iplink.patch
 touch -c -h -d "2014-01-23 19:36:36.0000000000" cpustress/build/compile-notes/busybox/busybox-1.22.1-iplink.patch
-chmod 0664 cpustress/build/compile-notes/busybox/config
+chmod 0644 cpustress/build/compile-notes/busybox/config
 touch -c -h -d "2014-02-14 10:35:06.4562344060" cpustress/build/compile-notes/busybox/config
 chmod 0644 cpustress/build/compile-notes/cpuburn-in.txt
 touch -c -h -d "2013-09-05 20:46:51.9879596310" cpustress/build/compile-notes/cpuburn-in.txt
