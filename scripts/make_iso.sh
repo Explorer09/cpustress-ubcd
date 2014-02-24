@@ -8,7 +8,7 @@
 VOLUME_ID="CPUSTRESS"
 
 # Define ISO filename
-ISO_FILENAME="cpustress-develop.iso"
+ISO_FILENAME="cpustress-2.4.0.iso"
 
 # Change working directory to the parent directory of the script.
 cd `dirname $0`
