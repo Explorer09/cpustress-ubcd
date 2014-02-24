@@ -1,9 +1,9 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-02-24 10:20:38.9160741440" .git_cache_meta
+touch -c -h -d "2014-02-24 12:27:45.8654032200" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680" .gitattributes
 chmod 0644 .gitignore
-touch -c -h -d "2013-04-17 15:37:57.9902283480" .gitignore
+touch -c -h -d "2014-02-24 12:27:41.5614031620" .gitignore
 chmod 0644 README.md
 touch -c -h -d "2014-02-23 09:04:30.4834824500" README.md
 chmod 0755 cpustress/build/build
@@ -217,10 +217,8 @@ chmod 0755 cpustress/build/extract
 touch -c -h -d "2014-01-11 23:02:18.0110106660" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2013-09-07 09:00:27.1423517960" cpustress/build/prepare
-chmod 0644 cpustress/bzImage
-touch -c -h -d "2014-02-23 10:20:09.0000000000" cpustress/bzImage
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2014-02-24 08:57:27.3351539870" cpustress/changes.txt
+touch -c -h -d "2014-02-24 10:56:32.0399781490" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
@@ -250,7 +248,7 @@ touch -c -h -d "2013-09-05 20:54:44.5159490880" cpustress/nonfree.txt
 chmod 0644 cpustress/readme.txt
 touch -c -h -d "2014-02-24 09:01:00.4671444850" cpustress/readme.txt
 chmod 0644 iso/boot/grub/grldr
-touch -c -h -d "2014-01-17 15:33:05.0000000000" iso/boot/grub/grldr
+touch -c -h -d "2013-10-30 21:17:26.0000000000" iso/boot/grub/grldr
 chmod 0644 iso/boot/grub/menu.lst
 touch -c -h -d "2013-04-03 12:23:08.0911211190" iso/boot/grub/menu.lst
 chmod 0644 iso/boot/syslinux/isolinux.bin
@@ -282,7 +280,7 @@ touch -c -h -d "2013-04-20 16:46:15.0000000000" screenshots/cpustress-intel-linp
 chmod 0644 screenshots/cpustress-mprime.png
 touch -c -h -d "2013-04-09 10:41:41.0000000000" screenshots/cpustress-mprime.png
 chmod 0644 screenshots/cpustress-splash.png
-touch -c -h -d "2014-02-24 09:48:08.0459750000" screenshots/cpustress-splash.png
+touch -c -h -d "2013-05-19 23:02:10.9940990000" screenshots/cpustress-splash.png
 chmod 0644 screenshots/cpustress-stress.png
 touch -c -h -d "2013-04-09 10:48:46.0000000000" screenshots/cpustress-stress.png
 chmod 0644 screenshots/cpustress-stresscpu2.png
