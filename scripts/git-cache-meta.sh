@@ -24,9 +24,9 @@ case $@ in
         esac
         git ls-files -z | xargs -0 -I NAME find NAME \
             \( \! -type l -printf 'chmod %#m ' \
-                  -exec ls --quote-name '{}' \; \) , \
+                  -exec ls --quoting-style=shell '{}' \; \) , \
             \( -printf 'touch -c -h -d "%TY-%Tm-%Td %TH:%TM:%TS %Tz" ' \
-                  -exec ls --quote-name '{}' \; \)
+                  -exec ls --quoting-style=shell '{}' \; \)
         find cpustress/build/build-initrd/dev \
              cpustress/build/build-initrd/proc \
              cpustress/build/build-initrd/sys \
