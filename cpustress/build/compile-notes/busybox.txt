@@ -1,18 +1,21 @@
-5 September 2013
+14 February 2013
 
 The BusyBox source code and the official patches can be downloaded here:
-http://busybox.net/downloads/busybox-1.21.1.tar.bz2
-(At the time of the writing, there were no official patches for 1.21.1. You
-can check the official patches at
-<http://busybox.net/downloads/fixes-1.21.1/>.)
+http://busybox.net/downloads/busybox-1.22.1.tar.bz2
+http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-ash.patch
+http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-date.patch
+http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-iplink.patch
 
-The BusyBox binary is compiled on Ubuntu 12.04.2 LTS (32-bit).
+The BusyBox binary is compiled on Ubuntu 12.04.4 LTS (32-bit).
 
 After downloading and unpacking the source code, copy the file "config" and
 the ".patch" files into the source code directory. Then apply the patches and
 the config:
 
- $ cd busybox-1.21.1
+ $ cd busybox-1.22.1
+ $ patch -p 1 <busybox-1.22.1-ash.patch
+ $ patch -p 1 <busybox-1.22.1-date.patch
+ $ patch -p 1 <busybox-1.22.1-iplink.patch
  $ mv config .config
 
 Finally, build BusyBox:
@@ -21,6 +24,10 @@ Finally, build BusyBox:
  $ make install
 
 The binary will be ready in a directory named "_install" inside the busybox
-source, as well as the necessary symlinks.
+source, as well as the necessary symlinks. Because CPUstress uses an initramfs
+image, you need to rename the symlink "linuxrc" in the directory to "init":
+
+ $ cd _install
+ $ mv linuxrc init
 
 --Explorer <explorer09@gmail.com>

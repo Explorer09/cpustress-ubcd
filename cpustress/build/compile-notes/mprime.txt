@@ -1,4 +1,4 @@
-5 September 2013
+12 January 2014
 
 Website of the Mersenne Prime test program (a.k.a. mprime or prime95):
 http://www.mersenne.org/freesoft/
@@ -36,8 +36,8 @@ CPUstress image:
 (Optional) I also used UPX to compress the executable so the file size could
 be much smaller: <http://upx.sourceforge.net/>
 
- $ upx mprime239/mprime23
- $ upx p95v279/mprime27
+ $ upx --ultra-brute mprime239/mprime23
+ $ upx --ultra-brute p95v279/mprime27
 
 The programs depend on these libraries:
     libm.so.6

@@ -1,4 +1,4 @@
-5 September 2013
+12 January 2014
 
 Homepage of stress by Amos Waterland:
 http://web.archive.org/web/20130520190152/http://weather.ou.edu/~apw/projects/stress/
@@ -26,5 +26,15 @@ Then run the configure script and then "make". You will get the binary in the
 (Optional) To reduce the file size, I stripped the binary after compilation:
 
  $ strip ./src/stress
+
+(Optional) I also used UPX to compress the executable so the file size could
+be much smaller: <http://upx.sourceforge.net/>
+
+ $ upx --ultra-brute ./src/stress
+
+The program depends on these libraries:
+    libm.so.6
+    libc.so.6
+    /lib/ld-linux.so.2
 
 --Explorer <explorer09@gmail.com>

@@ -156,7 +156,7 @@ If you want to run a stress with specific parameters, when you boot the image,
 use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=stress ubcdargs="--quiet -c 1k"
 
 The ubcdargs parameter contains the options that you want to pass to stress.

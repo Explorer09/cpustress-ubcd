@@ -6,7 +6,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 10 September 2013.
+# Last updated on 24 February 2014.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -46,44 +46,11 @@ case `cpio --version | sed -n -e '1 p'` in
         exit 1
 esac
 
-# Check 7-zip and gzip.
-# 7-zip is preferred because it can produce a smaller file size than gzip.
-# 7z and 7za work here, but 7zr doesn't.
-
-# Save IFS
-SAVED_IFS=$IFS
-
-# Poor man's 'which' command
-IFS=:
-P7ZIP=""
-GZIP=""
-for n in 7z 7za; do
-    for d in $PATH ; do
-        if [ -x "$d/$n" ]; then
-            P7ZIP="$n"
-            break 2
-        fi
-    done
-done
-for d in $PATH ; do
-    if [ -x "$d/gzip" ]; then
-        GZIP="gzip"
-        break
-    fi
-done
-if [ "X$P7ZIP" = "X" ] && [ "X$GZIP" = "X" ]; then
-    echo "ERROR: This script needs p7zip or gzip." >&2
-    exit 1
+if [ -e "initrd.xz.old" ]; then
+    rm -Ri initrd.xz.old
 fi
-
-# Restore IFS
-IFS=$SAVED_IFS
-
-if [ -e "initrd.gz.old" ]; then
-    rm -Ri initrd.gz.old
-fi
-if [ -e "initrd.gz" ]; then
-    mv initrd.gz initrd.gz.old
+if [ -e "initrd.xz" ]; then
+    mv initrd.xz initrd.xz.old
 fi
 
 cd build-initrd
@@ -110,8 +77,6 @@ FILELIST_SED
 
 echo "Making cpio archive..."
 
-# Method of creating cpio-format initrd file can be found here:
-# http://www.thegeekstuff.com/2009/07/how-to-view-modify-and-recreate-initrd-img/
 # Notes:
 # -H (synonym of --format) does not work with old bsdcpio.
 # --owner (synonym of -R) might be GNU-only.
@@ -132,21 +97,20 @@ cd ..
 
 echo "Compressing..."
 
-if [ "X$P7ZIP" != "X" ]; then
-    ${P7ZIP} a -tgzip -mx=9 initrd.gz initrd
-    STATUS="$?"
-    if [ "$STATUS" -ne "0" ]; then
-        echo "ERROR: ${P7ZIP} error with exit code ${STATUS}." >&2
-        exit 1
-    fi
-else
-    echo "7-zip is not found. Using gzip instead..."
-    gzip -9 -v initrd
-    STATUS="$?"
-    if [ "$STATUS" -ne "0" ]; then
-        echo "ERROR: gzip error with exit code ${STATUS}." >&2
-        exit 1
-    fi
+# Notes:
+# The kernel xz decompressor supports --check=crc32 but not --check=crc64
+# (the xz default).
+# When decompressing initramfs, the kernel dynamically allocates memory for
+# dictionary. Because the size it saves in the compressed image is very little
+# comparing to dictionary size increased, I have to set the size to as small
+# as possible. 64KiB is the largest I can use while keeping the minimum
+# decompression memory (tested with the xz userspace program, not with a
+# kernel decompressor.)
+xz --check=crc32 --x86 --lzma2=dict=64KiB -v initrd
+STATUS="$?"
+if [ "$STATUS" -ne "0" ]; then
+    echo "ERROR: xz error with exit code ${STATUS}." >&2
+    exit $STATUS
 fi
 
 rm -f initrd

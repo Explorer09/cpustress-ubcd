@@ -116,13 +116,13 @@ If you want to run cpuburn when you boot the image, add the following to the
 isolinux config file:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=burn
 
 You may also specify which test to run with the ubcdargs parameter:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=burn ubcdargs="MMX 64k"
 
 The example above will start the MMX test with 64kB RAM size.
@@ -135,5 +135,5 @@ instance of the test program.
 You can add the 'instances' parameter to the isolinux config file, like this:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
-    INITRD /ubcd/boot/cpustress/initrd.gz
+    INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=burn instances=1

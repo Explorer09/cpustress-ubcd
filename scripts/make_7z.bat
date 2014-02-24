@@ -1,7 +1,7 @@
 REM
 REM Script to make a 7z package for CPUstress release.
 REM
-SET ARCHIVE_NAME=cpustress-2.3.7
+SET ARCHIVE_NAME=cpustress-2.4.0
 
 CD ..
 
@@ -23,8 +23,8 @@ IF EXIST "%ARCHIVE_NAME%" (
     DEL /P "%ARCHIVE_NAME%"
 )
 COPY cpustress "%ARCHIVE_NAME%"
-"%P7ZIP%" a -t7z -mx=9 "%ARCHIVE_NAME%.7z" "%ARCHIVE_NAME%\*" -xr-!"%ARCHIVE_NAME%\build" -xr!*.txz -xr!*.gz -xr!bzImage
-"%P7ZIP%" a -t7z -mx=0 "%ARCHIVE_NAME%.7z" "%ARCHIVE_NAME%\build.txz" "%ARCHIVE_NAME%\initrd.gz" "%ARCHIVE_NAME%\bzImage"
+"%P7ZIP%" a -t7z -mx=9 "%ARCHIVE_NAME%.7z" "%ARCHIVE_NAME%\*" -xr-!"%ARCHIVE_NAME%\build" -xr!*.txz -xr!*.xz -xr!bzImage
+"%P7ZIP%" a -t7z -mx=0 "%ARCHIVE_NAME%.7z" "%ARCHIVE_NAME%\build.txz" "%ARCHIVE_NAME%\initrd.xz" "%ARCHIVE_NAME%\bzImage"
 REM Delete the temp directory.
 DEL /F "%ARCHIVE_NAME%"
 

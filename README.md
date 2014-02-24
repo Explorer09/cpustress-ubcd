@@ -22,7 +22,7 @@ CPUstress is used in Ultimate Boot CD.
 How to build
 ------------
 
-This repositories contains a few shell scripts that allows you to build disk
+This repository contains a few shell scripts that allows you to build disk
 images for different uses. However, there's no Makefile yet so you have to
 execute several scripts in a sequence.
 
@@ -92,7 +92,7 @@ Intel Optimized LINPACK Benchmark
 * http://software.intel.com/en-us/articles/intel-math-kernel-library-linpack-download
 
 Mersenne Prime test (Prime95)
-* http://www.mersenne.org/freesoft/
+* http://www.mersenne.org/download/index.php
 
 Stress
 * http://web.archive.org/web/20130520190152/http://weather.ou.edu/~apw/projects/stress/

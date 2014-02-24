@@ -1,5 +1,29 @@
-This file documents the changes of CPUstress test from v2.1 to v2.3.7.
+This file documents the changes of CPUstress test from v2.1 to v2.4.0.
 Changes are made by Explorer <explorer09@gmail.com>
+
+Changes in v2.4.0
+------------------------------
+24 February 2014
+
+Programs updated or rebuilt:
+- Updated Intel LINPACK to v11.1.2 (from v11.1.1)
+- Updated Sensors to v3.3.5 (from v3.3.4)
+- Updated BusyBox to v1.22.1 (from v1.21.1)
+- Updated eglibc to 2.19-r25243 (from 2.18-r24307)
+- Updated kernel to 3.13.5. Config changes in this kernel build:
+  1. No more CONFIG_IKCONFIG
+  2. Block layer and ext2 filesystem support removed.
+  3. Timer interrupt frequency is set to 100Hz (from 250Hz)
+  4. Remove drivers of mouse and HID devices that are useless with cpustress.
+Changes:
+- Changed kernel and initrd compression from gzip to XZ. Build scripts and
+  help documents are all updated to reflect this change. This makes the
+  compressed kernel+initrd image 648KiB smaller, although the memory required
+  for decompression increases from 600KiB to 800KiB.
+- Use --ultra-brute switch in upx to re-compress linpack and mprime binaries.
+  Also compress sensors, stress, stresscpu2, and systester-cli binaries.
+Note:
+- The older cpustress initrd files won't load with this new kernel.
 
 Changes in v2.3.7
 -----------------

@@ -5,23 +5,23 @@
 # The ! and * are interpreted differently by the shell, so they have to be
 # escaped.
 
-ARCHIVE_NAME="cpustress-2.3.7"
+ARCHIVE_NAME="cpustress-2.4.0"
 
 # Change working directory to the parent directory of the script.
 cd `dirname $0`
 cd ..
 
 # Execute other build scripts when needed.
-if [ ! -f "cpustress/initrd.gz" ]; then
-    if [ ! -f "cpustress/build/initrd.gz" ]; then
+if [ ! -f "cpustress/initrd.xz" ]; then
+    if [ ! -f "cpustress/build/initrd.xz" ]; then
         echo "Executing ./cpustress/build/build ..."
         sh ./cpustress/build/build
         if [ "$?" -ne "0" ]; then
             exit 1
         fi
     fi
-    echo 'cp -PRp "cpustress/build/initrd.gz" "cpustress/initrd.gz"'
-    cp -PRp "cpustress/build/initrd.gz" "cpustress/initrd.gz"
+    echo 'cp -PRp "cpustress/build/initrd.xz" "cpustress/initrd.xz"'
+    cp -PRp "cpustress/build/initrd.xz" "cpustress/initrd.xz"
 fi
 if [ ! -f "cpustress/build.txz" ]; then
     echo "Executing ./scripts/pack_buildtxz.sh ..."
@@ -59,8 +59,8 @@ if [ -e "${ARCHIVE_NAME}" ]; then
     rm -Ri ${ARCHIVE_NAME}
 fi
 cp -PRp cpustress ${ARCHIVE_NAME}
-${P7ZIP} a -t7z -mx=9 ${ARCHIVE_NAME}.7z ${ARCHIVE_NAME}/\* -xr-\!${ARCHIVE_NAME}/build -xr\!\*.txz -xr\!\*.gz -xr\!bzImage
-${P7ZIP} a -t7z -mx=0 ${ARCHIVE_NAME}.7z ${ARCHIVE_NAME}/build.txz ${ARCHIVE_NAME}/initrd.gz ${ARCHIVE_NAME}/bzImage
+${P7ZIP} a -t7z -mx=9 ${ARCHIVE_NAME}.7z ${ARCHIVE_NAME}/\* -xr-\!${ARCHIVE_NAME}/build -xr\!\*.txz -xr\!\*.xz -xr\!bzImage
+${P7ZIP} a -t7z -mx=0 ${ARCHIVE_NAME}.7z ${ARCHIVE_NAME}/build.txz ${ARCHIVE_NAME}/initrd.xz ${ARCHIVE_NAME}/bzImage
 # Delete the temp directory.
 rm -Rf ${ARCHIVE_NAME}
 

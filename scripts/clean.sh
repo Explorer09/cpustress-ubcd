@@ -7,14 +7,14 @@
 cd `dirname $0`
 cd ..
 
-ISO_FILENAME="cpustress-2.3.7.iso"
+ISO_FILENAME="cpustress-2.4.0.iso"
 
-ARCHIVE_NAME="cpustress-2.3.7"
+ARCHIVE_NAME="cpustress-2.4.0"
 
 rm -f "$ISO_FILENAME"
 rm -f "${ARCHIVE_NAME}.7z"
 rm -f "cpustress/build.txz"
-rm -f "cpustress/initrd.gz"
+rm -f "cpustress/initrd.xz"
 rm -f "cpustress/build/initrd"
-rm -f "cpustress/build/initrd.gz"
-rm -f "cpustress/build/initrd.gz.old"
+rm -f "cpustress/build/initrd.xz"
+rm -f "cpustress/build/initrd.xz.old"

@@ -8,7 +8,7 @@
 VOLUME_ID="CPUSTRESS"
 
 # Define ISO filename
-ISO_FILENAME="cpustress-2.3.7.iso"
+ISO_FILENAME="cpustress-2.4.0.iso"
 
 # Change working directory to the parent directory of the script.
 cd `dirname $0`
@@ -16,16 +16,16 @@ cd ..
 ROOT_OF_ISO_PATH="$(pwd)/iso-tmp"
 
 # Execute other build scripts when needed.
-if [ ! -f "cpustress/initrd.gz" ]; then
-    if [ ! -f "cpustress/build/initrd.gz" ]; then
+if [ ! -f "cpustress/initrd.xz" ]; then
+    if [ ! -f "cpustress/build/initrd.xz" ]; then
         echo "Executing ./cpustress/build/build ..."
         sh ./cpustress/build/build
         if [ "$?" -ne "0" ]; then
             exit 1
         fi
     fi
-    echo 'cp -PRp "cpustress/build/initrd.gz" "cpustress/initrd.gz"'
-    cp -PRp "cpustress/build/initrd.gz" "cpustress/initrd.gz"
+    echo 'cp -PRp "cpustress/build/initrd.xz" "cpustress/initrd.xz"'
+    cp -PRp "cpustress/build/initrd.xz" "cpustress/initrd.xz"
 fi
 if [ ! -f "cpustress/build.txz" ]; then
     echo "Executing ./scripts/pack_buildtxz.sh ..."

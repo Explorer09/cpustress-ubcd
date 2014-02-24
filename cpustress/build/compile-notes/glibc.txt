@@ -1,4 +1,4 @@
-21 November 2013
+23 February 2014
 
 eglibc home page:
 http://www.eglibc.org/home
@@ -15,7 +15,7 @@ If you are not sure, compile the library without the "option-groups.config"
 file.
 ******************************************************************************
 
-The GNU C Library (glibc) is compiled on Ubuntu 12.04.3 LTS (32-bit).
+The GNU C Library (glibc) is compiled on Ubuntu 12.04.4 LTS (32-bit).
 
 I choose the eglibc variant over the original glibc because eglibc have
 important bugs fixes that glibc would not fix until their next release.
@@ -27,23 +27,23 @@ necessary but configure will generate warnings if you don't have them.
  $ sudo apt-get install subversion gawk autoconf gettext texinfo
 
 In addition, glibc needs the linux kernel headers to compile. I use the
-headers from version 3.12.1.
+headers from version 3.13.5.
 
- $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.12.1.tar.xz
- $ tar -x -v --xz -f linux-3.12.1.tar.xz
- $ cd linux-3.12.1
+ $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.13.5.tar.xz
+ $ tar -x -v --xz -f linux-3.13.5.tar.xz
+ $ cd linux-3.13.5
  $ make mrproper
- $ make INSTALL_HDR_PATH=${HOME}/headers-3.12.1 headers_install
+ $ make INSTALL_HDR_PATH=${HOME}/headers-3.13.5 headers_install
  $ cd ..
 
-(I put the headers in the directory "${HOME}/headers-3.12.1", but you may
+(I put the headers in the directory "${HOME}/headers-3.13.5", but you may
 change the path if you like.)
 
 Make a directory somewhere and get the code:
 
- $ mkdir eglibc-2.18
- $ cd eglibc-2.18
- $ svn checkout http://www.eglibc.org/svn/branches/eglibc-2_18/libc/
+ $ mkdir eglibc-2.19
+ $ cd eglibc-2.19
+ $ svn checkout http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
 
 eglibc, like the original glibc, needs a separate build directory to build the
 code.
@@ -63,7 +63,7 @@ Configure and build eglibc:
  $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib \
      --enable-kernel=2.6.36 --enable-add-ons=nptl --disable-nscd \
      --disable-profile --without-gd --without-selinux \
-     --with-headers=${HOME}/headers-3.12.1/include
+     --with-headers=${HOME}/headers-3.13.5/include
  $ make
 
 Notes about the configure options:
@@ -79,31 +79,31 @@ For CPUstress image, you don't need to run "make install". Instead just copy
 these files to the CPUstress initrd directory:  (Replace ${cpustress_initrd}
 with the root path of your extracted initrd image.)
 
- $ cp -a elf/ld.so           "${cpustress_initrd}/lib/ld-2.18.so"
- $ cp -a libc.so             "${cpustress_initrd}/lib/libc-2.18.so"
- $ cp -a dlfcn/libdl.so      "${cpustress_initrd}/lib/libdl-2.18.so"
- $ cp -a math/libm.so        "${cpustress_initrd}/lib/libm-2.18.so"
- $ cp -a nss/libnss_files.so "${cpustress_initrd}/lib/libnss_files-2.18.so"
- $ cp -a nptl/libpthread.so  "${cpustress_initrd}/lib/libpthread-2.18.so"
+ $ cp -a elf/ld.so           "${cpustress_initrd}/lib/ld-2.19.so"
+ $ cp -a libc.so             "${cpustress_initrd}/lib/libc-2.19.so"
+ $ cp -a dlfcn/libdl.so      "${cpustress_initrd}/lib/libdl-2.19.so"
+ $ cp -a math/libm.so        "${cpustress_initrd}/lib/libm-2.19.so"
+ $ cp -a nss/libnss_files.so "${cpustress_initrd}/lib/libnss_files-2.19.so"
+ $ cp -a nptl/libpthread.so  "${cpustress_initrd}/lib/libpthread-2.19.so"
 
 The "make install" changes the mode of these files, so you should manually do
 the same:
 
  $ cd ${cpustress_initrd}/lib
- $ chmod 755 *-2.18.so
+ $ chmod 755 *-2.19.so
 
 Then, create symlinks:
 
- $ ln -s ld-2.18.so           ld-linux.so.2
- $ ln -s libc-2.18.so         libc.so.6
- $ ln -s libdl-2.18.so        libdl.so.2
- $ ln -s libm-2.18.so         libm.so.6
- $ ln -s libnss_files-2.18.so libnss_files.so.2
- $ ln -s libpthread-2.18.so   libpthread.so.0
+ $ ln -s ld-2.19.so           ld-linux.so.2
+ $ ln -s libc-2.19.so         libc.so.6
+ $ ln -s libdl-2.19.so        libdl.so.2
+ $ ln -s libm-2.19.so         libm.so.6
+ $ ln -s libnss_files-2.19.so libnss_files.so.2
+ $ ln -s libpthread-2.19.so   libpthread.so.0
 
 (Optional) To reduce the file size, I stripped the binaries after compilation:
 
- $ strip --strip-unneeded *-2.18.so
+ $ strip --strip-unneeded *-2.19.so
 
 Additional note:
 
@@ -111,9 +111,9 @@ The precompiled libraries in CPUstress were compiled with different
 "enable-kernel" switches. Although this is unnecessary and time-consuming, I
 did this to minimize the version requirements of the individual file, while
 keeping the code optimized for the latest kernel. The switches are as follows:
-   libdl.so, libm.so:    --enable-kernel=2.6.16
-   libnss_files.so:      --enable-kernel=2.6.23
-   ld.so, libpthread.so: --enable-kernel=2.6.29
-   libc.so:              --enable-kernel=2.6.36
+   libdl.so, libm.so: --enable-kernel=2.6.16
+   libnss_files.so:   --enable-kernel=2.6.23
+   libpthread.so:     --enable-kernel=2.6.29
+   ld.so, libc.so:    --enable-kernel=2.6.36
 
 --Explorer <explorer09@gmail.com>
