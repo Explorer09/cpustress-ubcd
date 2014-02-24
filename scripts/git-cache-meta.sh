@@ -22,16 +22,18 @@ case $@ in
             --store)
                 exec > $GIT_CACHE_META_FILE;
         esac
-        find $(git ls-files)\
-            \( \! -type l -printf 'chmod %#m %p\n' \) , \
-            \( -printf 'touch -c -h -d "%TY-%Tm-%Td %TH:%TM:%TS" %p\n' \)
+        git ls-files -z | xargs -0 -I NAME find NAME \
+            \( \! -type l -printf 'chmod %#m ' \
+                  -exec ls --quote-name '{}' \; \) , \
+            \( -printf 'touch -c -h -d "%TY-%Tm-%Td %TH:%TM:%TS %Tz" ' \
+                  -exec ls --quote-name '{}' \; \)
         find cpustress/build/build-initrd/dev \
              cpustress/build/build-initrd/proc \
              cpustress/build/build-initrd/sys \
              cpustress/build/build-initrd/tmp \
             \( -printf 'mkdir -p %p\n' \) , \
             \( \( \! -type l \) -printf 'chmod %#m %p\n' \) , \
-            \( -printf 'touch -c -h -d "%TY-%Tm-%Td %TH:%TM:%TS" %p\n' \)
+            \( -printf 'touch -c -h -d "%TY-%Tm-%Td %TH:%TM:%TS %Tz" %p\n' \)
         ;;
     --apply) sh -e $GIT_CACHE_META_FILE;;
     *) 1>&2 echo "Usage: $0 --store|--stdout|--apply"; exit 1;;
