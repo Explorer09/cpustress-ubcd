@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 3.13.5 Kernel Configuration
+# Linux/x86 3.13.8 Kernel Configuration
 #
 # CONFIG_64BIT is not set
 CONFIG_X86_32=y
@@ -130,7 +130,7 @@ CONFIG_NAMESPACES=y
 # CONFIG_USER_NS is not set
 # CONFIG_PID_NS is not set
 # CONFIG_NET_NS is not set
-# CONFIG_UIDGID_STRICT_TYPE_CHECKS is not set
+CONFIG_UIDGID_STRICT_TYPE_CHECKS=y
 # CONFIG_SCHED_AUTOGROUP is not set
 # CONFIG_SYSFS_DEPRECATED is not set
 # CONFIG_RELAY is not set
