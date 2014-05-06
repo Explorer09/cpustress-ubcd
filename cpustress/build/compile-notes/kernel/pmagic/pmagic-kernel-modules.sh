@@ -14,11 +14,11 @@
 #
 #
 # Licensed under the GNU General Public License, version 2 or later.
-# This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
+# This program comes with ABSOLUTELY NO WARRANTY. See the GNU GPL for details:
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 21 January 2014.
+# Last updated on 6 May 2014.
 
 uname -r | grep 'pmagic64' > /dev/null
 if [ "$?" -eq "0" ]; then
