@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-05-12 09:29:24.6480895790 +0800" .git_cache_meta
+touch -c -h -d "2014-05-13 14:48:09.4831273480 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -82,13 +82,13 @@ touch -c -h -d "2014-01-11 23:17:32.9029698760 +0800" cpustress/build/build-init
 chmod 0644 cpustress/build/build-initrd/opt/cpuinfo/cpuinfo.txt
 touch -c -h -d "2013-05-19 21:05:46.6130661800 +0800" cpustress/build/build-initrd/opt/cpuinfo/cpuinfo.txt
 chmod 0644 cpustress/build/build-initrd/opt/linpack/help.lpk
-touch -c -h -d "2014-01-30 10:36:18.0000000000 +0800" cpustress/build/build-initrd/opt/linpack/help.lpk
+touch -c -h -d "2014-04-28 16:40:54.0000000000 +0800" cpustress/build/build-initrd/opt/linpack/help.lpk
 chmod 0644 cpustress/build/build-initrd/opt/linpack/lininput_xeon32
-touch -c -h -d "2014-01-30 10:36:21.0000000000 +0800" cpustress/build/build-initrd/opt/linpack/lininput_xeon32
+touch -c -h -d "2014-04-28 16:41:01.0000000000 +0800" cpustress/build/build-initrd/opt/linpack/lininput_xeon32
 chmod 0644 cpustress/build/build-initrd/opt/linpack/xhelp.lpk
-touch -c -h -d "2014-02-15 10:45:27.0142005890 +0800" cpustress/build/build-initrd/opt/linpack/xhelp.lpk
+touch -c -h -d "2014-05-13 14:40:13.5544005210 +0800" cpustress/build/build-initrd/opt/linpack/xhelp.lpk
 chmod 0755 cpustress/build/build-initrd/opt/linpack/xlinpack_xeon32
-touch -c -h -d "2014-02-15 10:40:04.0000000000 +0800" cpustress/build/build-initrd/opt/linpack/xlinpack_xeon32
+touch -c -h -d "2014-05-13 14:37:53.0000000000 +0800" cpustress/build/build-initrd/opt/linpack/xlinpack_xeon32
 chmod 0644 cpustress/build/build-initrd/opt/mprime/mprime.txt
 touch -c -h -d "2014-01-11 23:17:59.9549686700 +0800" cpustress/build/build-initrd/opt/mprime/mprime.txt
 chmod 0755 cpustress/build/build-initrd/opt/mprime/mprime23
@@ -100,7 +100,7 @@ touch -c -h -d "2013-05-28 20:38:00.8311826750 +0800" cpustress/build/build-init
 chmod 0644 cpustress/build/build-initrd/opt/stress/stress.txt
 touch -c -h -d "2014-01-11 23:18:05.9109684040 +0800" cpustress/build/build-initrd/opt/stress/stress.txt
 chmod 0755 cpustress/build/build-initrd/runonce
-touch -c -h -d "2014-05-06 20:56:24.9583464850 +0800" cpustress/build/build-initrd/runonce
+touch -c -h -d "2014-05-13 14:45:34.5936320100 +0800" cpustress/build/build-initrd/runonce
 touch -c -h -d "2014-02-14 10:36:08.3162335790 +0800" cpustress/build/build-initrd/sbin/halt
 touch -c -h -d "2014-02-14 10:36:08.3202335790 +0800" cpustress/build/build-initrd/sbin/init
 touch -c -h -d "2014-02-14 10:36:08.3282335790 +0800" cpustress/build/build-initrd/sbin/mdev
@@ -131,11 +131,11 @@ touch -c -h -d "2014-05-06 20:59:58.6646795100 +0800" cpustress/build/build-init
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/help
 touch -c -h -d "2014-05-06 20:59:05.7960160570 +0800" cpustress/build/build-initrd/usr/local/bin/help
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/helpinfo
-touch -c -h -d "2014-05-06 21:00:32.3571018190 +0800" cpustress/build/build-initrd/usr/local/bin/helpinfo
+touch -c -h -d "2014-05-13 14:44:27.6489749940 +0800" cpustress/build/build-initrd/usr/local/bin/helpinfo
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/linpack
 touch -c -h -d "2014-05-06 20:59:34.4683759880 +0800" cpustress/build/build-initrd/usr/local/bin/linpack
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/menu
-touch -c -h -d "2014-05-06 20:58:45.5117876670 +0800" cpustress/build/build-initrd/usr/local/bin/menu
+touch -c -h -d "2014-05-13 14:44:35.5850532680 +0800" cpustress/build/build-initrd/usr/local/bin/menu
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/mprime
 touch -c -h -d "2014-05-06 21:01:29.5298175540 +0800" cpustress/build/build-initrd/usr/local/bin/mprime
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/sensors
@@ -190,7 +190,7 @@ touch -c -h -d "2013-09-05 20:09:14.3080100060 +0800" cpustress/build/compile-no
 chmod 0644 cpustress/build/compile-notes/libgcc.txt
 touch -c -h -d "2013-11-22 00:38:04.5025962260 +0800" cpustress/build/compile-notes/libgcc.txt
 chmod 0644 cpustress/build/compile-notes/linpack.txt
-touch -c -h -d "2014-02-15 10:49:29.8861897610 +0800" cpustress/build/compile-notes/linpack.txt
+touch -c -h -d "2014-05-13 14:34:11.4584945630 +0800" cpustress/build/compile-notes/linpack.txt
 chmod 0644 cpustress/build/compile-notes/mprime.txt
 touch -c -h -d "2014-01-12 02:27:02.8504629550 +0800" cpustress/build/compile-notes/mprime.txt
 chmod 0644 cpustress/build/compile-notes/sensors.txt
@@ -220,7 +220,7 @@ touch -c -h -d "2014-05-06 21:03:22.9432341320 +0800" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2014-05-06 21:03:08.1710498620 +0800" cpustress/build/prepare
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2014-02-24 10:56:32.0399781490 +0800" cpustress/changes.txt
+touch -c -h -d "2014-05-13 14:47:03.0144894700 +0800" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000 +0800" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
@@ -248,7 +248,7 @@ touch -c -h -d "2014-01-11 23:18:19.6829677900 +0800" cpustress/help/systester.t
 chmod 0644 cpustress/nonfree.txt
 touch -c -h -d "2013-09-05 20:54:44.5159490880 +0800" cpustress/nonfree.txt
 chmod 0644 cpustress/readme.txt
-touch -c -h -d "2014-02-24 09:01:00.4671444850 +0800" cpustress/readme.txt
+touch -c -h -d "2014-05-13 14:47:25.4987058410 +0800" cpustress/readme.txt
 chmod 0644 iso/boot/grub/grldr
 touch -c -h -d "2013-10-30 21:17:26.0000000000 +0800" iso/boot/grub/grldr
 chmod 0644 iso/boot/grub/menu.lst
@@ -266,9 +266,9 @@ touch -c -h -d "2013-04-03 12:23:08.0991211180 +0800" iso/boot/syslinux/syslinux
 chmod 0644 iso/ubcd/boot/cpustress/NOTICE.txt
 touch -c -h -d "2013-09-05 21:02:57.0119380990 +0800" iso/ubcd/boot/cpustress/NOTICE.txt
 chmod 0644 iso/ubcd/menus/grub4dos/cpu.lst
-touch -c -h -d "2014-02-24 09:01:48.1551423580 +0800" iso/ubcd/menus/grub4dos/cpu.lst
+touch -c -h -d "2014-05-13 14:46:05.7579354820 +0800" iso/ubcd/menus/grub4dos/cpu.lst
 chmod 0644 iso/ubcd/menus/syslinux/cpu.cfg
-touch -c -h -d "2014-02-24 09:02:04.3991416340 +0800" iso/ubcd/menus/syslinux/cpu.cfg
+touch -c -h -d "2014-05-13 14:46:22.7741005910 +0800" iso/ubcd/menus/syslinux/cpu.cfg
 chmod 0644 iso/ubcd/menus/syslinux/defaults.cfg
 touch -c -h -d "2013-04-03 12:23:08.0991211180 +0800" iso/ubcd/menus/syslinux/defaults.cfg
 chmod 0644 screenshots/cpustress-burn.png
