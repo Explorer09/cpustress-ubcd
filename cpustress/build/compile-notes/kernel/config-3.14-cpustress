@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 3.14.3 Kernel Configuration
+# Linux/x86 3.14.6 Kernel Configuration
 #
 # CONFIG_64BIT is not set
 CONFIG_X86_32=y
@@ -414,6 +414,7 @@ CONFIG_ARCH_ENABLE_MEMORY_HOTPLUG=y
 # CONFIG_PM_RUNTIME is not set
 CONFIG_ACPI=y
 # CONFIG_ACPI_PROCFS is not set
+# CONFIG_ACPI_PROCFS_POWER is not set
 # CONFIG_ACPI_EC_DEBUGFS is not set
 CONFIG_ACPI_AC=y
 CONFIG_ACPI_BATTERY=y
