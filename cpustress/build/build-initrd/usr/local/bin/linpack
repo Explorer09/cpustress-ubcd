@@ -18,7 +18,7 @@
 # Setting up affinity for better threading performance
 export KMP_AFFINITY=nowarnings,compact,1,0,granularity=fine
 
-if [ "X$instances" != X ] && [ "X$OMP_NUM_THREADS" == X ]; then
+if [ "X$instances" != X ] && [ "X$OMP_NUM_THREADS" = X ]; then
     export OMP_NUM_THREADS="$instances"
 fi
 
