@@ -11,7 +11,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans.
-# Last updated on 6 May 2014.
+# Last updated on 20 June 2014.
 
 
 printf "Press any key to start '\033[0;32mCPUinfo v1.00\033[0m'.\n"
@@ -19,4 +19,4 @@ printf "  Use \033[0;31m<SPACE>\033[0m, \033[0;31m<PageUp>\033[0m, \033[0;31m<Pa
 printf "  Press '\033[0;31mq\033[0m' to quit '\033[0;32mCPUinfo v1.00\033[0m'.\n"
 read -s -n1 REPLY
 
-less -~ /proc/cpuinfo
+exec less -~ /proc/cpuinfo

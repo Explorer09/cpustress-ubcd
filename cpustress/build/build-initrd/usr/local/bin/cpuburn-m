@@ -13,7 +13,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 19 June 2014.
+# Last updated on 20 June 2014.
 
 
 set -m
@@ -38,8 +38,8 @@ if [ "X$BASH" != X ]; then
     exit 1
 fi
 
-printf '\033[0;32mCPU Burn-in v1.00:\n'
-printf '==================\033[0m\n\n'
+printf "\033[0;32mCPU Burn-in v1.00:\n"
+printf "==================\033[0m\n\n"
 
 case "$1" in
     --help | -h)
@@ -82,7 +82,7 @@ fi
 
 if [ "$instances" -eq 1 ]; then
     printf "Running 1 instance of cpuburn-in ('/opt/cpuburn-in/cpuburn-in $time').\n"
-    /opt/cpuburn-in/cpuburn-in $time
+    exec /opt/cpuburn-in/cpuburn-in $time
 else
     printf "$instances instances of cpuburn-in will be run in the background.\n\n"
     printf "\033[01;31mTo stop cpuburn-in, press any key.\033[0m\n"
@@ -103,6 +103,3 @@ else
     echo "cpuburn-m: Terminating."
     trap - 17; kill $PID_LIST; wait; trap - 1 2 3 15; exit 0
 fi
-
-trap - 1 2 3 15 17
-exit 0

@@ -11,7 +11,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 13 May 2014.
+# Last updated on 20 June 2014.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
@@ -53,8 +53,8 @@ CPUSTRESS_TEXT
     CPU_MODEL=`awk '/^model name/ {for (i = 4; i <= NF; i++) printf("%s ", $i); printf("\n"); exit}' /proc/cpuinfo`
     CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
 
-    if [ "$CPUS" = "1" ]; then
-        printf 'You have \033[01;37m1\033[0m CPU in your system.\n'
+    if [ "$CPUS" -eq 1 ]; then
+        printf "You have \033[01;37m1\033[0m CPU in your system.\n"
     else
         printf "You have \033[01;37m$CPUS\033[0m CPUs in your system.\n"
     fi
@@ -64,7 +64,7 @@ CPUSTRESS_TEXT
     # Pause for 30 seconds to make it possible to read the text on the screen.
     # Pressing any key will result in immediate execution of the rest of the script.
 
-    printf 'Press any key to continue directly.\n'
+    printf "Press any key to continue directly.\n"
     KEYPRESS="none"
     for i in `seq 30 -1 1`; do
         if [ "$i" -eq 1 ]; then
@@ -78,7 +78,7 @@ CPUSTRESS_TEXT
             break
         fi
     done
-    printf '\n\n'
+    printf "\n\n"
 
     case "$ubcdcmd" in
         burn)
@@ -117,11 +117,12 @@ CPUSTRESS_TEXT
             ;;
         stress)
             stress $ubcdargs
-            if [ "X$ubcdargs" = "X" ] || [ "X$ubcdargs" = "X-?" ] || \
-               [ "X$ubcdargs" = "X--help" ]; then
-                echo 'Press any key to continue.'
-                read -s -n1 REPLY
-            fi
+            case "$ubcdargs" in
+                "" | -? | --help)
+                    echo "Press any key to continue."
+                    read -s -n1 REPLY
+                    ;;
+            esac
             ;;
         stresscpu2)
             printf "\033[0;32m\nStarting 'CPU stress tester 2.0'   (stresscpu2).\033[0m\n"
@@ -150,4 +151,4 @@ CPUSTRESS_TEXT
 fi
 
 # Run bash shell after the commands above are executed once.
-/bin/sh --login
+exec /bin/sh --login

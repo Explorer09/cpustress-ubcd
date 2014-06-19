@@ -46,8 +46,8 @@ if [ "X$BASH" != X ]; then
     exit 1
 fi
 
-printf '\033[0;32mCPUburn v1.4a:\n'
-printf '==============\033[0m\n\n'
+printf "\033[0;32mCPUburn v1.4a:\n"
+printf "==============\033[0m\n\n"
 
 # Detect processor type
 MODE=""
@@ -194,7 +194,7 @@ fi
 # "$instances" is a global variable that may be specified as a boot parameter.
 if [ "X$instances" = X ]; then
     printf "Detecting the number of CPUs: "
-    if [ "$CPUS" -eq "1" ]; then
+    if [ "$CPUS" -eq 1 ]; then
         printf "\033[01;37m1\033[0m CPU detected.\n"
     else
         printf "\033[01;37m$CPUS\033[0m CPUs detected.\n"
@@ -204,7 +204,7 @@ fi
 
 if [ "$instances" -eq 1 ]; then
     printf "Running 1 instance of burn${MODE} ('/opt/burn/print-pid /opt/burn/burn${MODE}${ARGS}').\n"
-    /opt/burn/print-pid /opt/burn/burn${MODE}${ARGS}
+    exec /opt/burn/print-pid /opt/burn/burn${MODE}${ARGS}
 else
     printf "$instances instances of burn${MODE} will be run in the background.\n\n"
     printf "\033[01;31mTo stop burn${MODE}, press any key.\033[0m\n"
@@ -225,6 +225,3 @@ else
     echo "burn: Terminating."
     trap - 17; kill $PID_LIST; wait; trap - 1 2 3 15; exit 0
 fi
-
-trap - 1 2 3 15 17
-exit 0

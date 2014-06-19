@@ -13,10 +13,10 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 6 May 2014.
+# Last updated on 20 June 2014.
 
 
-if [ "X$1" = "X" ] || [ "X$1" = "X--help" ]; then
+if [ "X$1" = X ] || [ "X$1" = X--help ]; then
     echo "Usage: $0 COMMAND [ARGS]"
     exit 1
 fi
@@ -24,7 +24,7 @@ fi
 if [ -x "`which -- "$1"`" ]; then
     COMMAND=$1
     shift
-    if [ "$#" -ge "1" ]; then
+    if [ "$#" -ge 1 ]; then
         COMMAND="$COMMAND $@"
     fi
 
