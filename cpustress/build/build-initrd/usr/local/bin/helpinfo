@@ -29,7 +29,7 @@ mkdir -p /tmp/helpinfo
 NUM_SPACES=$((28-${#LAST_EDITED}/2))
 SPACES=`printf '%*s' $NUM_SPACES ''`
 
-if [ "X$1" = "X" ]; then
+if [ "X$1" = X ]; then
     cat > /tmp/helpinfo/helpinfo.txt << HELPINFO
 
                             ##################
@@ -111,7 +111,7 @@ cpuburn-in), use the following:
     INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=helpinfo ubcdargs=cpuburn-in
 HELPINFO2
-    less -~ /tmp/helpinfo/helpinfo.txt
+    exec less -~ /tmp/helpinfo/helpinfo.txt
 else
     printf "\n"
     printf "\033[0;32m                            ##################\n"
@@ -128,35 +128,35 @@ else
     case "$1" in
         burn)
             showcontrols
-            less -~ /opt/burn/burn.txt
+            exec less -~ /opt/burn/burn.txt
             ;;
         cpuburn-m | cpuburn-in)
             showcontrols
-            less -~ /opt/cpuburn-in/cpuburn-in.txt
+            exec less -~ /opt/cpuburn-in/cpuburn-in.txt
             ;;
         cpuinfo)
             showcontrols
-            less -~ /opt/cpuinfo/cpuinfo.txt
+            exec less -~ /opt/cpuinfo/cpuinfo.txt
             ;;
         help | helpinfo | -h | --help)
             showcontrols
-            helpinfo
+            exec helpinfo
             ;;
         linpack)
             showcontrols
-            less -~ /opt/linpack/xhelp.lpk
+            exec less -~ /opt/linpack/xhelp.lpk
             ;;
         mprime)
             showcontrols
-            less -~ /opt/mprime/mprime.txt
+            exec less -~ /opt/mprime/mprime.txt
             ;;
         sensors)
             showcontrols
-            less -~ /opt/sensors/sensors.txt
+            exec less -~ /opt/sensors/sensors.txt
             ;;
         stress)
             showcontrols
-            less -~ /opt/stress/stress.txt
+            exec less -~ /opt/stress/stress.txt
             ;;
         stresscpu2)
             showcontrols
@@ -175,7 +175,7 @@ image, use something similar to:
 The ubcdargs parameter contains the options that you want to pass to
 stresscpu2.
 CMDSTRESSCPU2
-            less -~ /tmp/helpinfo/stresscpu2.txt
+            exec less -~ /tmp/helpinfo/stresscpu2.txt
             ;;
         systester | systester-cli)
             showcontrols
@@ -191,7 +191,7 @@ use something similar to:
 
 The ubcdargs parameter contains the options that you want to pass to systester.
 CMDSYSTESTER
-            less -~ /tmp/helpinfo/systester.txt
+            exec less -~ /tmp/helpinfo/systester.txt
             ;;
         *)
             EXE=`which -- "$1"`
