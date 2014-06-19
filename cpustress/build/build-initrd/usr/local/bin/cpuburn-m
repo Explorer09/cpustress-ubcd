@@ -13,7 +13,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 6 May 2014.
+# Last updated on 19 June 2014.
 
 
 set -m
@@ -22,7 +22,7 @@ CHLD_COUNT=0
 
 sigchld_handler () {
     trap - 17
-    CHLD_COUNT="$(($CHLD_COUNT+1))"
+    CHLD_COUNT=$(($CHLD_COUNT+1))
     if [ "$CHLD_COUNT" -ge "$instances" ]; then
         trap - 1 2 3 15
         exit 0;
@@ -33,7 +33,7 @@ sigchld_handler () {
 
 # This script expects that 'read' be interrupted by a signal. Notably bash
 # doesn't do this.
-if [ "X$BASH" != "X" ]; then
+if [ "X$BASH" != X ]; then
     echo "Don't run this script in bash." >&2
     exit 1
 fi
@@ -57,35 +57,35 @@ HELP
 esac
 
 # $days, $hours, and $minutes are global variables and boot parameters.
-if [ "X$1" != "X" ]; then
+if [ "X$1" != X ]; then
     time="$1"
-elif [ "X$days" != "X" ]; then
-    time="$(($days*24*60))"
-elif [ "X$hours" != "X" ]; then
-    time="$(($hours*60))"
-elif [ "X$minutes" != "X" ]; then
+elif [ "X$days" != X ]; then
+    time=$(($days*24*60))
+elif [ "X$hours" != X ]; then
+    time=$(($hours*60))
+elif [ "X$minutes" != X ]; then
     time="$minutes"
 else
-    time="10080"
+    time=10080
 fi
 
-printf 'Detecting the number of CPUs: '
-if [ "$CPUS" -eq "1" ]; then
-    printf '\033[01;37m1\033[0m CPU detected.\n'
-else
-    printf "\033[01;37m$CPUS\033[0m CPUs detected.\n"
-fi
 # "$instances" is a global variable that may be specified as a boot parameter.
-if [ "X$instances" = "X" ]; then
+if [ "X$instances" = X ]; then
+    printf "Detecting the number of CPUs: "
+    if [ "$CPUS" -eq 1 ]; then
+        printf "\033[01;37m1\033[0m CPU detected.\n"
+    else
+        printf "\033[01;37m$CPUS\033[0m CPUs detected.\n"
+    fi
     instances="$CPUS"
 fi
 
-if [ "$instances" -eq "1" ]; then
+if [ "$instances" -eq 1 ]; then
     printf "Running 1 instance of cpuburn-in ('/opt/cpuburn-in/cpuburn-in $time').\n"
     /opt/cpuburn-in/cpuburn-in $time
 else
-    printf "To stress all CPUs, $instances instances of cpuburn-in will be run in the background.\n\n"
-    printf '\033[01;31mTo stop cpuburn-in, press any key.\033[0m\n'
+    printf "$instances instances of cpuburn-in will be run in the background.\n\n"
+    printf "\033[01;31mTo stop cpuburn-in, press any key.\033[0m\n"
 
     PID_LIST=""
     trap 'trap - 17; kill $PID_LIST; wait; trap - 1 2 3 15; exit 0' 1 2 3 15
