@@ -17,7 +17,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 6 May 2014.
+# Last updated on 19 June 2014.
 
 
 set -m
@@ -25,12 +25,12 @@ CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
 VENDOR=`awk '/^vendor_id/ {for (i = 3; i < NF; i++) printf("%s ", $i); print $NF; exit}' /proc/cpuinfo`
 FAMILY=`awk '/^cpu family/ {print $4; exit}' /proc/cpuinfo`
 MODEL=`awk '/^model/ {print $3; exit}' /proc/cpuinfo`
-MMX=`awk '/^flags.* mmx/ {print "mmx"; exit}' /proc/cpuinfo`
+MMX=`awk '/mmx/ {print "Y"; exit}' /proc/cpuinfo`
 CHLD_COUNT=0
 
 sigchld_handler () {
     trap - 17
-    CHLD_COUNT="$(($CHLD_COUNT+1))"
+    CHLD_COUNT=$(($CHLD_COUNT+1))
     if [ "$CHLD_COUNT" -ge "$instances" ]; then
         trap - 1 2 3 15
         exit 0;
@@ -41,7 +41,7 @@ sigchld_handler () {
 
 # This script expects that 'read' be interrupted by a signal. Notably bash
 # doesn't do this.
-if [ "X$BASH" != "X" ]; then
+if [ "X$BASH" != X ]; then
     echo "Don't run this script in bash." >&2
     exit 1
 fi
@@ -52,41 +52,40 @@ printf '==============\033[0m\n\n'
 # Detect processor type
 MODE=""
 case "$VENDOR" in
-    "GenuineIntel")
-        if [ "$MODEL" -ge "16" ]; then # Core, Atom or newer
-            MODE="P6"
-        elif [ "$FAMILY" -ge "6" ]; then # PentiumPro or newer
-            MODE="P6"
-        elif [ "$FAMILY" -ge "5" ]; then # Pentium or Pentium MMX
-            MODE="P5"
+    GenuineIntel)
+        if [ "$MODEL" -ge 16 ]; then # Core, Atom or newer
+            MODE=P6
+        elif [ "$FAMILY" -ge 6 ]; then # PentiumPro or newer
+            MODE=P6
+        elif [ "$FAMILY" -ge 5 ]; then # Pentium or Pentium MMX
+            MODE=P5
         fi
         ;;
-    "AuthenticAMD")
-        # Thanks to http://www.cpu-world.com/ for its CPUID database!
-        if [ "$MODEL" -ge "16" ]; then # Athlon 64 or newer
-            MODE="K7"
-        elif [ "$FAMILY" -ge "6" ]; then # Athlon/Duron
-            MODE="K7"
-        elif [ "$FAMILY" -ge "5" ]; then
-            if [ "$MODEL" -ge "6" ]; then # K6 family
-                MODE="K6"
+    AuthenticAMD)
+        if [ "$MODEL" -ge 16 ]; then # Athlon 64 or newer
+            MODE=K7
+        elif [ "$FAMILY" -ge 6 ]; then # Athlon/Duron
+            MODE=K7
+        elif [ "$FAMILY" -ge 5 ]; then
+            if [ "$MODEL" -ge 6 ]; then # K6 family
+                MODE=K6
             else # AMD K5
-                MODE="P5"
+                MODE=P5
             fi
         fi
         ;;
     *)
-        # Other CPU manufacturers.
-        MODE="P5"
+        MODE=P5
+        ;;
 esac
 
-if [ "X$MODE" = "X" ]; then
+if [ "X$MODE" = X ]; then
     echo "Warning: Your processor may be too old to run 'burn'. You need a Pentium or"
     echo "newer processor."
-    MODE="P5"
+    MODE=P5
 fi
 
-if [ "X$MMX" = "X" ]; then
+if [ "X$MMX" = X ]; then
     echo "Warning: Your processor may not have MMX instructions."
 fi
 
@@ -134,16 +133,16 @@ HELP
         echo "  5) MMX    (test cache/memory interfaces on all CPUs with MMX)"
         echo "  6) BX     (alternate cache/memory test for Intel CPUs)"
         printf "  Default choice is \033[01;37m$MODE\033[0m and will be selected in 30 seconds.\n"
-        printf 'Choose: '
+        printf "Choose: "
         read -t 30 CHOICE
         echo
         case "$CHOICE" in
-            1 | P5 | p5)    MODE="P5" ;;
-            2 | P6 | p6)    MODE="P6" ;;
-            3 | K6 | k6)    MODE="K6" ;;
-            4 | K7 | k7)    MODE="K7" ;;
-            5 | MMX | mmx)  MODE="MMX" ;;
-            6 | BX | bx)    MODE="BX" ;;
+            1 | P5 | p5)   MODE=P5 ;;
+            2 | P6 | p6)   MODE=P6 ;;
+            3 | K6 | k6)   MODE=K6 ;;
+            4 | K7 | k7)   MODE=K7 ;;
+            5 | MMX | mmx) MODE=MMX ;;
+            6 | BX | bx)   MODE=BX ;;
             *)
                 echo "Invalid choice. Using the default ($MODE)."
                 ;;
@@ -152,62 +151,62 @@ HELP
 esac
 
 ARGS=""
-if [ "$MODE" = "MMX" ] || [ "$MODE" = "BX" ]; then
-    if [ "$MODE" = "MMX" ]; then
-        DEFAULT_SIZE="64k"
+if [ "$MODE" = MMX ] || [ "$MODE" = BX ]; then
+    if [ "$MODE" = MMX ]; then
+        DEFAULT_SIZE=64k
         ARGS=" F"
     else
-        DEFAULT_SIZE="4M"
+        DEFAULT_SIZE=4M
         ARGS=" L"
     fi
-    if [ "X$RAMSIZE" = "X" ]; then
+    if [ "X$RAMSIZE" = X ]; then
         echo "Choose the RAM size to be tested (in bytes):"
         echo "  (A) 2k  (C)  8k  (E) 32k  (G) 128k  (I) 512k  (K) 2M  (M)  8M  (O) 32M"
         echo "  (B) 4k  (D) 16k  (F) 64k  (H) 256k  (J)   1M  (L) 4M  (N) 16M  (P) 64M"
         printf "  Default is \033[01;37m$DEFAULT_SIZE\033[0m and will be selected in 30 seconds.\n"
-        printf 'Choose: '
+        printf "Choose: "
         read -t 30 RAMSIZE
         echo
     fi
     case "$RAMSIZE" in
-        [Aa] | 2[Kk])    ARGS=" A" ;;
-        [Bb] | 4[Kk])    ARGS=" B" ;;
-        [Cc] | 8[Kk])    ARGS=" C" ;;
-        [Dd] | 16[Kk])   ARGS=" D" ;;
-        [Ee] | 32[Kk])   ARGS=" E" ;;
-        [Ff] | 64[Kk])   ARGS=" F" ;;
-        [Gg] | 128[Kk])  ARGS=" G" ;;
-        [Hh] | 256[Kk])  ARGS=" H" ;;
-        [Ii] | 512[Kk])  ARGS=" I" ;;
-        [Jj] | 1[Mm])    ARGS=" J" ;;
-        [Kk] | 2[Mm])    ARGS=" K" ;;
-        [Ll] | 4[Mm])    ARGS=" L" ;;
-        [Mm] | 8[Mm])    ARGS=" M" ;;
-        [Nn] | 16[Mm])   ARGS=" N" ;;
-        [Oo] | 32[Mm])   ARGS=" O" ;;
-        [Pp] | 64[Mm])   ARGS=" P" ;;
+        [Aa] | 2[Kk])   ARGS=" A" ;;
+        [Bb] | 4[Kk])   ARGS=" B" ;;
+        [Cc] | 8[Kk])   ARGS=" C" ;;
+        [Dd] | 16[Kk])  ARGS=" D" ;;
+        [Ee] | 32[Kk])  ARGS=" E" ;;
+        [Ff] | 64[Kk])  ARGS=" F" ;;
+        [Gg] | 128[Kk]) ARGS=" G" ;;
+        [Hh] | 256[Kk]) ARGS=" H" ;;
+        [Ii] | 512[Kk]) ARGS=" I" ;;
+        [Jj] | 1[Mm])   ARGS=" J" ;;
+        [Kk] | 2[Mm])   ARGS=" K" ;;
+        [Ll] | 4[Mm])   ARGS=" L" ;;
+        [Mm] | 8[Mm])   ARGS=" M" ;;
+        [Nn] | 16[Mm])  ARGS=" N" ;;
+        [Oo] | 32[Mm])  ARGS=" O" ;;
+        [Pp] | 64[Mm])  ARGS=" P" ;;
         *)
             echo "Invalid ramsize argument. Using the default ($DEFAULT_SIZE)."
             ;;
     esac
 fi
 
-printf 'Detecting the number of CPUs: '
-if [ "$CPUS" -eq "1" ]; then
-    printf '\033[01;37m1\033[0m CPU detected.\n'
-else
-    printf "\033[01;37m$CPUS\033[0m CPUs detected.\n"
-fi
 # "$instances" is a global variable that may be specified as a boot parameter.
-if [ "X$instances" = "X" ]; then
+if [ "X$instances" = X ]; then
+    printf "Detecting the number of CPUs: "
+    if [ "$CPUS" -eq "1" ]; then
+        printf "\033[01;37m1\033[0m CPU detected.\n"
+    else
+        printf "\033[01;37m$CPUS\033[0m CPUs detected.\n"
+    fi
     instances="$CPUS"
 fi
 
-if [ "$instances" -eq "1" ]; then
+if [ "$instances" -eq 1 ]; then
     printf "Running 1 instance of burn${MODE} ('/opt/burn/print-pid /opt/burn/burn${MODE}${ARGS}').\n"
     /opt/burn/print-pid /opt/burn/burn${MODE}${ARGS}
 else
-    printf "To stress all CPUs, $instances instances of burn${MODE} will be run in the background.\n\n"
+    printf "$instances instances of burn${MODE} will be run in the background.\n\n"
     printf "\033[01;31mTo stop burn${MODE}, press any key.\033[0m\n"
 
     PID_LIST=""
