@@ -12,13 +12,13 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 20 June 2014.
+# Last updated on 22 June 2014.
 
 
 # Setting up affinity for better threading performance
 export KMP_AFFINITY=nowarnings,compact,1,0,granularity=fine
 
-if [ "X$instances" != X ] && [ "X$OMP_NUM_THREADS" = X ]; then
+if [ "X$OMP_NUM_THREADS" = X ] && [ "$instances" -gt 0 ] 2>/dev/null; then
     export OMP_NUM_THREADS="$instances"
 fi
 

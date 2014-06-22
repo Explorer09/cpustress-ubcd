@@ -13,7 +13,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 20 June 2014.
+# Last updated on 22 June 2014.
 
 
 set -m
@@ -70,7 +70,9 @@ else
 fi
 
 # "$instances" is a global variable that may be specified as a boot parameter.
-if [ "X$instances" = X ]; then
+if [ "$instances" -gt 0 ] 2>/dev/null; then
+    :
+else
     printf "Detecting the number of CPUs: "
     if [ "$CPUS" -eq 1 ]; then
         printf "\033[01;37m1\033[0m CPU detected.\n"
