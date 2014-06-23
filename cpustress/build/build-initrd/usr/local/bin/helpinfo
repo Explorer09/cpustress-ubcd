@@ -12,10 +12,10 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 20 June 2014.
+# Last updated on 23 June 2014.
 
 
-LAST_EDITED="20 June 2014"
+LAST_EDITED="23 June 2014"
 
 showcontrols () {
     printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
@@ -27,7 +27,7 @@ showcontrols () {
 mkdir -p /tmp/helpinfo
 
 NUM_SPACES=$((28-${#LAST_EDITED}/2))
-SPACES=`printf '%*s' $NUM_SPACES ''`
+SPACES=`printf '%*s' "$NUM_SPACES" ""`
 
 if [ "X$1" = X ]; then
     cat > /tmp/helpinfo/helpinfo.txt << HELPINFO
