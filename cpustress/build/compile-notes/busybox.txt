@@ -1,10 +1,11 @@
-14 February 2013
+24 June 2014
 
 The BusyBox source code and the official patches can be downloaded here:
 http://busybox.net/downloads/busybox-1.22.1.tar.bz2
 http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-ash.patch
 http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-date.patch
 http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-iplink.patch
+http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-nc.patch
 
 The BusyBox binary is compiled on Ubuntu 12.04.4 LTS (32-bit).
 
@@ -16,6 +17,7 @@ the config:
  $ patch -p 1 <busybox-1.22.1-ash.patch
  $ patch -p 1 <busybox-1.22.1-date.patch
  $ patch -p 1 <busybox-1.22.1-iplink.patch
+ $ patch -p 1 <busybox-1.22.1-nc.patch
  $ mv config .config
 
 Finally, build BusyBox:
