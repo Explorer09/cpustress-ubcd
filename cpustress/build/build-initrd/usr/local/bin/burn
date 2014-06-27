@@ -17,7 +17,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 22 June 2014.
+# Last updated on 27 June 2014.
 
 
 set -m
@@ -90,6 +90,8 @@ if [ "X$MMX" = X ]; then
 fi
 
 # Parse command-line arguments.
+RAMSIZE=""
+ASK_RAMSIZE=N
 case "$1" in
     --help | -h)
         cat << HELP
@@ -105,11 +107,12 @@ MODE may be one of the following:
 
 The BX and MMX tests take an optional RAMSIZE argument.
 RAMSIZE may be one of the following:
-  A =  2k    E =  32k    I = 512k    M =  8M
-  B =  4k    F =  64k    J =   1M    N = 16M
-  C =  8k    G = 128k    K =   2M    O = 32M
-  D = 16k    H = 256k    L =   4M    P = 64M
+  A =  2kB    E =  32kB    I = 512kB    M =  8MB
+  B =  4kB    F =  64kB    J =   1MB    N = 16MB
+  C =  8kB    G = 128kB    K =   2MB    O = 32MB
+  D = 16kB    H = 256kB    L =   4MB    P = 64MB
 You may either specify the size ("64k") or the letter ("F") as the argument.
+The size value is per instance.
 
 To specify how many instances of test program will be run, export the
 'instances' shell variable before running this script.
@@ -125,71 +128,84 @@ HELP
         RAMSIZE="$2"
         ;;
     *)
-        echo "Which kind of test do you want to run?"
-        echo "  1) P5     (for Intel Pentium w&w/o MMX processors)"
-        echo "  2) P6     (for Intel PentiumPro, PentiumII&III and Celeron CPUs)"
-        echo "  3) K6     (for AMD K6 processors)"
-        echo "  4) K7     (for AMD Athlon/Duron processors)"
-        echo "  5) MMX    (test cache/memory interfaces on all CPUs with MMX)"
-        echo "  6) BX     (alternate cache/memory test for Intel CPUs)"
-        printf "  Default choice is \033[01;37m$MODE\033[0m and will be selected in 30 seconds.\n"
-        printf "Choose: "
-        read -t 30 CHOICE
-        echo
-        case "$CHOICE" in
-            1 | P5 | p5)   MODE=P5 ;;
-            2 | P6 | p6)   MODE=P6 ;;
-            3 | K6 | k6)   MODE=K6 ;;
-            4 | K7 | k7)   MODE=K7 ;;
-            5 | MMX | mmx) MODE=MMX ;;
-            6 | BX | bx)   MODE=BX ;;
-            *)
-                echo "Invalid choice. Using the default ($MODE)."
-                ;;
-        esac
+        ASK_RAMSIZE=Y
+        while :; do
+            cat << MODE
+Which kind of test do you want to run?"
+  1) P5     (for Intel Pentium w&w/o MMX processors)"
+  2) P6     (for Intel PentiumPro, PentiumII&III and Celeron CPUs)"
+  3) K6     (for AMD K6 processors)"
+  4) K7     (for AMD Athlon/Duron processors)"
+  5) MMX    (test cache/memory interfaces on all CPUs with MMX)"
+  6) BX     (alternate cache/memory test for Intel CPUs)"
+MODE
+            printf "  Default choice is \033[01;37m$MODE\033[0m.\n"
+            printf "Choose: "
+            read CHOICE
+            case "$CHOICE" in
+                1 | P5 | p5)   MODE=P5;  break ;;
+                2 | P6 | p6)   MODE=P6;  break ;;
+                3 | K6 | k6)   MODE=K6;  break ;;
+                4 | K7 | k7)   MODE=K7;  break ;;
+                5 | MMX | mmx) MODE=MMX; break ;;
+                6 | BX | bx)   MODE=BX;  break ;;
+                "") break ;;
+                *) echo "Invalid choice." ;;
+            esac
+        done
         ;;
 esac
 
 ARGS=""
-if [ "$MODE" = MMX ] || [ "$MODE" = BX ]; then
+while :; do
     if [ "$MODE" = MMX ]; then
-        DEFAULT_SIZE=64k
+        DEFAULT_SIZE=64kB
         ARGS=" F"
-    else
-        DEFAULT_SIZE=4M
+    elif [ "$MODE" = BX ]; then
+        DEFAULT_SIZE=4MB
         ARGS=" L"
-    fi
-    if [ "X$RAMSIZE" = X ]; then
-        echo "Choose the RAM size to be tested (in bytes):"
-        echo "  (A) 2k  (C)  8k  (E) 32k  (G) 128k  (I) 512k  (K) 2M  (M)  8M  (O) 32M"
-        echo "  (B) 4k  (D) 16k  (F) 64k  (H) 256k  (J)   1M  (L) 4M  (N) 16M  (P) 64M"
-        printf "  Default is \033[01;37m$DEFAULT_SIZE\033[0m and will be selected in 30 seconds.\n"
-        printf "Choose: "
-        read -t 30 RAMSIZE
-        echo
+    else
+        break
     fi
     case "$RAMSIZE" in
-        [Aa] | 2[Kk])   ARGS=" A" ;;
-        [Bb] | 4[Kk])   ARGS=" B" ;;
-        [Cc] | 8[Kk])   ARGS=" C" ;;
-        [Dd] | 16[Kk])  ARGS=" D" ;;
-        [Ee] | 32[Kk])  ARGS=" E" ;;
-        [Ff] | 64[Kk])  ARGS=" F" ;;
-        [Gg] | 128[Kk]) ARGS=" G" ;;
-        [Hh] | 256[Kk]) ARGS=" H" ;;
-        [Ii] | 512[Kk]) ARGS=" I" ;;
-        [Jj] | 1[Mm])   ARGS=" J" ;;
-        [Kk] | 2[Mm])   ARGS=" K" ;;
-        [Ll] | 4[Mm])   ARGS=" L" ;;
-        [Mm] | 8[Mm])   ARGS=" M" ;;
-        [Nn] | 16[Mm])  ARGS=" N" ;;
-        [Oo] | 32[Mm])  ARGS=" O" ;;
-        [Pp] | 64[Mm])  ARGS=" P" ;;
+        [Aa] | 2[Kk] | 2[Kk][Bb])     ARGS=" A"; break ;;
+        [Bb] | 4[Kk] | 4[Kk][Bb])     ARGS=" B"; break ;;
+        [Cc] | 8[Kk] | 8[Kk][Bb])     ARGS=" C"; break ;;
+        [Dd] | 16[Kk] | 16[Kk][Bb])   ARGS=" D"; break ;;
+        [Ee] | 32[Kk] | 32[Kk][Bb])   ARGS=" E"; break ;;
+        [Ff] | 64[Kk] | 64[Kk][Bb])   ARGS=" F"; break ;;
+        [Gg] | 128[Kk] | 128[Kk][Bb]) ARGS=" G"; break ;;
+        [Hh] | 256[Kk] | 256[Kk][Bb]) ARGS=" H"; break ;;
+        [Ii] | 512[Kk] | 512[Kk][Bb]) ARGS=" I"; break ;;
+        [Jj] | 1[Mm] | 1[Mm][Bb])     ARGS=" J"; break ;;
+        [Kk] | 2[Mm] | 2[Mm][Bb])     ARGS=" K"; break ;;
+        [Ll] | 4[Mm] | 4[Mm][Bb])     ARGS=" L"; break ;;
+        [Mm] | 8[Mm] | 8[Mm][Bb])     ARGS=" M"; break ;;
+        [Nn] | 16[Mm] | 16[Mm][Bb])   ARGS=" N"; break ;;
+        [Oo] | 32[Mm] | 32[Mm][Bb])   ARGS=" O"; break ;;
+        [Pp] | 64[Mm] | 64[Mm][Bb])   ARGS=" P"; break ;;
+        "")
+            if [ "$ASK_RAMSIZE" = N ]; then
+                echo "Using the default RAM size ($DEFAULT_SIZE)."
+                break
+            fi
+            ;;
         *)
-            echo "Invalid ramsize argument. Using the default ($DEFAULT_SIZE)."
+            echo "Invalid RAM size argument."
             ;;
     esac
-fi
+    cat << RAMSIZE
+Choose the RAM size to be tested:
+  (A)  2kB    (E)  32kB    (I) 512kB    (M)  8MB
+  (B)  4kB    (F)  64kB    (J)   1MB    (N) 16MB
+  (C)  8kB    (G) 128kB    (K)   2MB    (O) 32MB
+  (D) 16kB    (H) 256kB    (L)   4MB    (P) 64MB
+RAMSIZE
+    printf "  Default is \033[01;37m$DEFAULT_SIZE\033[0m. Value is per instance.\n"
+    printf "Choose: "
+    read RAMSIZE
+    ASK_RAMSIZE=N
+done
 
 # "$instances" is a global variable that may be specified as a boot parameter.
 if [ "$instances" -gt 0 ] 2>/dev/null; then
