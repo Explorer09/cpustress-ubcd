@@ -106,13 +106,12 @@ MODE may be one of the following:
   BX     alternate cache/memory test for Intel CPUs
 
 The BX and MMX tests take an optional RAMSIZE argument.
-RAMSIZE may be one of the following:
+RAMSIZE may be one of the following: (Value is per instance.)
   A =  2kB    E =  32kB    I = 512kB    M =  8MB
   B =  4kB    F =  64kB    J =   1MB    N = 16MB
   C =  8kB    G = 128kB    K =   2MB    O = 32MB
   D = 16kB    H = 256kB    L =   4MB    P = 64MB
 You may either specify the size ("64k") or the letter ("F") as the argument.
-The size value is per instance.
 
 To specify how many instances of test program will be run, export the
 'instances' shell variable before running this script.
