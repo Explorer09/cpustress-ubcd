@@ -1,9 +1,9 @@
-22 November 2013
+30 June 2014
 
 GCC 4.7 website:
 http://gcc.gnu.org/gcc-4.7/
 
-The libgcc in CPUstress image is compiled on Ubuntu 12.04.3 LTS (32-bit).
+The libgcc in CPUstress image is compiled on Ubuntu 12.04.4 LTS (32-bit).
 
 I choose to build a temporary compiler and use it to build libgcc. Because the
 compiler is temporary, there's no need to bootstrap and it's fine to use GMP,
@@ -19,8 +19,8 @@ an Ubuntu-based system.
 
 Download and unpack the GCC source code:
 
- $ wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.7.3/gcc-4.7.3.tar.bz2
- $ tar -x -v --bzip2 -f gcc-4.7.3.tar.bz2
+ $ wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.7.4/gcc-4.7.4.tar.bz2
+ $ tar -x -v --bzip2 -f gcc-4.7.4.tar.bz2
 
 The GCC documentation recommends us to use a separate build directory to build
 the code.
@@ -30,7 +30,7 @@ the code.
 
 Configure and build GCC:
 
- $ ../gcc-4.7.3/configure --prefix=/usr --libexecdir=/usr/lib \
+ $ ../gcc-4.7.4/configure --prefix=/usr --libexecdir=/usr/lib \
      --enable-languages=c --enable-shared=libgcc --enable-threads=posix \
      --disable-bootstrap --disable-lto --disable-multilib --disable-nls \
      --disable-libgomp --disable-libitm --disable-libmudflap \
@@ -47,7 +47,7 @@ Because we only need libgcc_s.so in the CPUstress image, you don't need to run
 (Replace ${cpustress_initrd} with the root path of your extracted initrd
 image.)
 
- $ cp -a "$(../gcc-4.7.3/config.guess)/libgcc/libgcc_s.so.1" \
+ $ cp -a "$(../gcc-4.7.4/config.guess)/libgcc/libgcc_s.so.1" \
          "${cpustress_initrd}/usr/lib/libgcc_s.so.1"
 
 The "make install" changes the mode of the file, so you should manually do the

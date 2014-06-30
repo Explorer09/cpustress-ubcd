@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-06-30 09:21:59.5894120300 +0800" .git_cache_meta
+touch -c -h -d "2014-06-30 10:47:45.2185186840 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -121,7 +121,7 @@ touch -c -h -d "2014-06-24 11:44:51.7279778250 +0800" cpustress/build/build-init
 touch -c -h -d "2014-06-24 11:44:51.7319777750 +0800" cpustress/build/build-initrd/usr/bin/which
 touch -c -h -d "2013-04-17 14:29:07.3264125110 +0800" cpustress/build/build-initrd/usr/lib/libgcc_s.so
 chmod 0644 cpustress/build/build-initrd/usr/lib/libgcc_s.so.1
-touch -c -h -d "2013-04-17 14:29:53.6544104450 +0800" cpustress/build/build-initrd/usr/lib/libgcc_s.so.1
+touch -c -h -d "2014-06-30 10:38:00.5994887980 +0800" cpustress/build/build-initrd/usr/lib/libgcc_s.so.1
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/burn
 touch -c -h -d "2014-06-30 09:20:12.4294981180 +0800" cpustress/build/build-initrd/usr/local/bin/burn
 touch -c -h -d "2013-04-16 21:23:38.1153474510 +0800" cpustress/build/build-initrd/usr/local/bin/cpuburn-in
@@ -193,7 +193,7 @@ touch -c -h -d "2014-05-06 21:02:37.8466713670 +0800" cpustress/build/compile-no
 chmod 0644 cpustress/build/compile-notes/kernel/pmagic/readme.txt
 touch -c -h -d "2013-09-05 20:09:14.3080100060 +0800" cpustress/build/compile-notes/kernel/pmagic/readme.txt
 chmod 0644 cpustress/build/compile-notes/libgcc.txt
-touch -c -h -d "2013-11-22 00:38:04.5025962260 +0800" cpustress/build/compile-notes/libgcc.txt
+touch -c -h -d "2014-06-30 10:18:11.5410740000 +0800" cpustress/build/compile-notes/libgcc.txt
 chmod 0644 cpustress/build/compile-notes/linpack.txt
 touch -c -h -d "2014-05-13 14:34:11.4584945630 +0800" cpustress/build/compile-notes/linpack.txt
 chmod 0644 cpustress/build/compile-notes/mprime.txt
@@ -225,7 +225,7 @@ touch -c -h -d "2014-05-06 21:03:22.9432341320 +0800" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2014-06-24 11:45:37.7321406560 +0800" cpustress/build/prepare
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2014-05-13 14:47:03.0144894700 +0800" cpustress/changes.txt
+touch -c -h -d "2014-06-30 10:46:49.4659453270 +0800" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000 +0800" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
