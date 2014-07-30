@@ -1,0 +1,65 @@
+Technical notes for mprime wrapper script.
+
+Command-line arguments
+----------------------
+
+The command-line arguments of GIMPS's mprime program have a precedence that is
+not officially documented, but can be figured out by reading the source code.
+The following is the list from the highest precedence to the lowest:
+
+    Switch                Note
+1.  -h                    Displays help and exits.
+2.  -v                    Displays version and exits.
+3.  Invalid switch        Displays message and exits.
+4.  -w                    chdir(2)
+5.  -b                    Overrides '-a' switch below.
+6.  -a
+7.  -t                    Implies '-d'.
+8.  StressTester=1        Sets '-d' and '-m'.
+    StressTester not set  Sets '-d'. Displays welcome screen. Ignores '-c'.
+9.  -c                    Implies '-d'.
+10. -m                    Displays main menu.
+11. -s
+12. -d
+
+In mprime 25+, the 'StressTester=1' INI setting will ignore '-c' switch and
+display the menu. In mprime 23 '-c' will still connect to server despite the
+setting.
+
+It is possible for '-b' to do nothing and wait indefinitely in mprime 23, in
+fact the switch is buggy, especially when '-b' and '-m' are set together. The
+wrapper script will workaround this bug by displaying an error message and
+stop when both switches are detected.
+
+When writing the INI file
+-------------------------
+
+The mv(1) command should be an atomic 'move and replace' operation. This is
+true for Linux kernel and BusyBox. (BusyBox's mv(1) uses rename(2) which is an
+atomic system call in Linux.)
+
+Note that rename(2) doesn't alter the file descriptors already opened. This
+means that, for example, rename(oldfile, newfile); , file discriptors opened
+for oldfile will still refer to the "oldfile" under the new name "newfile", and
+file descriptors for the original "newfile" will now refer to a file whose name
+is deleted. (Like unlink(2), the file will still exist on the disk but no
+longer visible in the directory tree or openable by open(2). Closing the file
+descriptors will actually delete the file.)
+
+Luckily mprime doesn't keep the file descriptors open for all of its INI
+configuration files. So mv command in the wrapper script won't mess up with
+mprime's INI read and write operations. However, mprime keeps a cache of the
+INI contents so it is possible for the settings you made in the wrapper script
+to get overwritten by mprime. The only way to prevent this is to make sure no
+other instance of mprime is running when you configure the torture test in the
+wrapper script.
+
+Variables
+---------
+
+TEMPDIR=N    This is an internal state for the wrapper script to never create
+             temporary directories or write configuration to prime.{txt,ini}
+             files. Because running multiple instances of mprime 23 requires
+             temporary directories, this state also means that only one
+             instance will be run. The 'instances' variable will stop working
+             as a result.

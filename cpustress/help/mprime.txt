@@ -2,27 +2,95 @@ Help: wrapper for the Mersenne Prime Torture test (mprime)
 ==========================================================
 
 Written by Gert Hulselmans and Explorer.
-Last updated on 14 April 2013.
+Last updated on 30 July 2014.
 
-This wrapper allows the user to choose which version of mprime he wants to use.
-When you run the following in the terminal:
-  mprime          ==> will prompt to ask which version should be used
-  mprime 23       ==> will run 'Mersenne Prime 23.9.2'
-  mprime 27       ==> will run 'Mersenne Prime 27.9 build 1'
+The mprime wrapper script is made to overcome several design limitations of the
+original mprime program and to make a unified command-line interface for use in
+the CPUstress image.
 
-When running mprime 23.9.2, the wrapper automaticly detects the number of CPUs
-to stress them all at the same time. It will run an instance of 'mprime' for
-each CPU in order to heat all CPUs up at the same time. You can do this by
-running the background option (-bn with n= number of processes). However, this
-option does not display any output on the screen. This can be solved by running
-several instances of mprime with the background (&) option of the shell. This
-method displays the output of the multiple instances of mprime.
+Usage: mprime [VERSION] [OPTIONS...]
 
-Since version 25.5, a single mprime instance can support multiple CPUs, and it
-runs multi-threaded by default. So the script won't use the workaround above on
-mprime 27.9. (This change is made by Explorer and not Gert Hulselmans.) Note
-that the background option (-b) is no longer supported since 25.5.
+The VERSION argument specifies which versions of mprime should be used.
+Currently there are two included in CPUstress:
+        23 (version 23.9.2)
+        27 (version 27.9 build 1)
+If VERSION is unspecified, the wrapper will prompt to ask it during execution.
 
+Mersenne Prime v27.9 is a recent version that supports modern processors and
+multi-threading. Usually you will choose this version over the old one.
+Mprime v23.9 is a backup version for people who have Pentium III or older CPUs,
+since it is said in the changelog that mprime 24.6+ have worse perfomance on
+Pertium I, II, or III.
+
+Mprime v23.9 does not support multi-threading like recent versions do, but the
+wrapper script will workaround this problem by running multiple instances of
+mprime at the same time. It is done using the background option (&) of the
+shell, so the output of mprime will be displayed.
+
+The wrapper will present you several options to configure the torture test.
+This was a feature available in v25.5+ through the interactive menu, but this
+wrapper makes the options available to v23.9 as well.
+
+You may edit the prime.ini or prime.txt file to configure the torture test
+manually. Change these variables:
+        TortureThreads=    ; Default is to detect automatically.
+        MinTortureFFT=8    ; In K
+        MaxTortureFFT=4096 ; In K
+        TortureMem=8       ; In MiB. Value is per thread.
+        TortureTime=15     ; In minutes
+If TortureMem is set to 8MB or less, then the torture test does FFTs in-place.
+
+You may look up the cache sizes of your processor when configuring the torture
+test. To do this, bring up mprime's menu ('mprime 27 -m'), and then choose
+"Option/CPU".
+
+Environment variable
+--------------------
+
+instances=N  Specify the number (N) of touture test threads to run.
+
+Command-line options
+--------------------
+
+--noconfig   Skip the touture test configuration.
+--tempdir    Always create a temporary working directory (in
+             "/tmp/torture-test") when running mprime. This is useful if you
+             want to run multiple instances of mprime, each with different
+             torture test settings.
+-h           Print a help message. If you specify '-h' after a version argument
+             (e.g. 'mprime 23 -h'), the help message of that version will be
+             displayed. If you invoke just 'mprime -h' without a version, the
+             help of the wrapper script will be displayed.
+-m           Display mprime's main menu. As the CPUstress image does not have
+             Internet connection you cannot connect to PrimeNet. However, you
+             may run Advanced tests through the menu. The result of Advanced
+             test will be stored in results.txt as usual.
+-v           Print the version number of mprime.
+
+The wrapper script might pass additional switches internally to mprime
+executable, therefore it is not recommended to specify any of the options
+below, or it may conflict with some wrapper script features:
+
+-t           Run the torture test. The wrapper passes this switch internally
+             unless when '-m' is specified. If you specify '-t' manually the
+             wrapper will disable all of its own features.
+-aN          Obsolete. Tells mprime to use a different set of INI and output
+             files. N is an integer which is part of the filename like
+             "primNNNN.txt" and "locaNNNN.txt".
+-bN          Mprime 23 only. Run N instances of mprime in the background,
+             displaying no output.
+-wDIRECTORY  Run from a different working directory.
+
+Specifying either '-a', '-b', or '-w' disables torture test configuration,
+temporary directory ('--tempdir'), and can run only single instance of mprime.
+The 'instances' variable may also not work.
+
+These three options are useless without PrimeNet and shouldn't be used in
+CPUstress: '-c', '-d', and '-s'. Mprime can accept these switches but will have
+no effect other than displaying a menu like '-m'.
+
+Running mprime through the isolinux commandline
+-----------------------------------------------
 
 The following entry will prompt to ask which version of mprime you want to run.
 
@@ -44,9 +112,13 @@ If you want to run a specific version of mprime, when you boot the image, use:
 
   This will start 'Mersenne Prime 27.9 build 1'.
 
+If you want to run mprime with specific parameters, when you boot the image,
+use something similar to:
 
-This wrapper avoids specifying the working directory part (-w) and the torture
-(-t) option of the command 'mprime -t -w/tmp/torture-test/torture.XXXXXX',
-so the user can run 'mprime' from a terminal without worrying which parameters
-to add to use the torture test of Mersenne Prime Test.
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.xz
+    APPEND noapic ubcdcmd=mprime27 instances=2 ubcdargs='--noconfig'
 
+The ubcdargs parameter contains the options that you want to pass to mprime.
+The instances parameter may be specified for the number of threads to be run.
+Both parameters are optional.

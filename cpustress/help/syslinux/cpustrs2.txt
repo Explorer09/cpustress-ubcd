@@ -11,9 +11,9 @@ the '0fubcdargs07' option in isolinux. Here are examples for 0fStress07 and 
 You can specify how many (N) instances or threads the program should create,
 instead of detecting automatically.
 
-  burn, cpuburn-in, and mprime23 - Add '0finstances=N07' option.
-  linpack                        - Add '0fOMP_NUM_THREADS=N07' option.
-  stresscpu2 and systester       - Use 0fubcdargs07 to pass arguments.
+  burn, cpuburn-in, and mprime - Add '0finstances=N07' option.
+  linpack                      - Add '0fOMP_NUM_THREADS=N07' option.
+  stresscpu2 and systester     - Use 0fubcdargs07 to pass arguments.
 
 For more information, please run the 0fhelpinfo07 program in the CPUstress image.
 The helpinfo can also be accessed from the menu in it.

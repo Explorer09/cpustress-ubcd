@@ -5,7 +5,7 @@ Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 13 May 2014.
+Last edited on 30 July 2014.
 
 
 Content of this package:
@@ -246,7 +246,18 @@ If you want to run a specific version of mprime, when you boot the image, use:
     INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=mprime27
 
-      This will start 'Mersenne Prime 27.9'.
+      This will start 'Mersenne Prime 27.9 build 1'.
+
+If you want to run mprime with specific parameters, when you boot the image,
+use something similar to:
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.xz
+    APPEND noapic ubcdcmd=mprime27 instances=2 ubcdargs='--noconfig'
+
+The ubcdargs parameter contains the options that you want to pass to mprime.
+The instances parameter may be specified for the number of threads to be run.
+Both parameters are optional.
 
 
 Stress v1.0.4: stress

@@ -1,0 +1,12 @@
+V24OptionsConverted=1
+WGUID_version=2
+StressTester=1
+UsePrimenet=0
+; TortureThreads is not set
+; MinTortureFFT is not set
+; MaxTortureFFT is not set
+; TortureMem is not set
+; TortureTime is not set
+
+[PrimeNet]
+Debug=0
