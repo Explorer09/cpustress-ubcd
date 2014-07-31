@@ -17,7 +17,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 27 June 2014.
+# Last updated on 31 July 2014.
 
 
 set -m
@@ -128,8 +128,7 @@ HELP
         ;;
     *)
         ASK_RAMSIZE=Y
-        while :; do
-            cat << MODE
+        cat << MODE
 Which kind of test do you want to run?"
   1) P5     (for Intel Pentium w&w/o MMX processors)"
   2) P6     (for Intel PentiumPro, PentiumII&III and Celeron CPUs)"
@@ -138,6 +137,7 @@ Which kind of test do you want to run?"
   5) MMX    (test cache/memory interfaces on all CPUs with MMX)"
   6) BX     (alternate cache/memory test for Intel CPUs)"
 MODE
+        while :; do
             printf "  Default choice is \033[01;37m$MODE\033[0m.\n"
             printf "Choose: "
             read CHOICE
@@ -154,6 +154,18 @@ MODE
         done
         ;;
 esac
+
+if [ "$instances" -gt 0 ] 2>/dev/null; then
+    :
+else
+    printf "Detecting the number of CPUs: $CPUS detected.\n"
+    instances="$CPUS"
+fi
+if [ "$instances" -eq 1 ]; then
+    printf "1 instance of burn${MODE} will be run.\n"
+else
+    printf "$instances instances of burn${MODE} will be run in the background.\n"
+fi
 
 ARGS=""
 while :; do
@@ -206,24 +218,10 @@ RAMSIZE
     ASK_RAMSIZE=N
 done
 
-# "$instances" is a global variable that may be specified as a boot parameter.
-if [ "$instances" -gt 0 ] 2>/dev/null; then
-    :
-else
-    printf "Detecting the number of CPUs: "
-    if [ "$CPUS" -eq 1 ]; then
-        printf "\033[01;37m1\033[0m CPU detected.\n"
-    else
-        printf "\033[01;37m$CPUS\033[0m CPUs detected.\n"
-    fi
-    instances="$CPUS"
-fi
-
 if [ "$instances" -eq 1 ]; then
     printf "Running 1 instance of burn${MODE} ('/opt/burn/print-pid /opt/burn/burn${MODE}${ARGS}').\n"
     exec /opt/burn/print-pid /opt/burn/burn${MODE}${ARGS}
 else
-    printf "$instances instances of burn${MODE} will be run in the background.\n\n"
     printf "\033[01;31mTo stop burn${MODE}, press any key.\033[0m\n"
 
     PID_LIST=""
