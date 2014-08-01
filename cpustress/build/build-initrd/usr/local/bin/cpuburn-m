@@ -13,7 +13,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 22 June 2014.
+# Last updated on 1 August 2014.
 
 
 set -m
@@ -56,45 +56,40 @@ HELP
         ;;
 esac
 
-# $days, $hours, and $minutes are global variables and boot parameters.
+# $days, $hours, and $minutes are environment variables as well as boot
+# parameters.
 if [ "X$1" != X ]; then
-    time="$1"
+    TIME="$1"
 elif [ "X$days" != X ]; then
-    time=$(($days*24*60))
+    TIME=$(($days*24*60))
 elif [ "X$hours" != X ]; then
-    time=$(($hours*60))
+    TIME=$(($hours*60))
 elif [ "X$minutes" != X ]; then
-    time="$minutes"
+    TIME="$minutes"
 else
-    time=10080
+    TIME=10080
 fi
 
-# "$instances" is a global variable that may be specified as a boot parameter.
 if [ "$instances" -gt 0 ] 2>/dev/null; then
     :
 else
-    printf "Detecting the number of CPUs: "
-    if [ "$CPUS" -eq 1 ]; then
-        printf "\033[01;37m1\033[0m CPU detected.\n"
-    else
-        printf "\033[01;37m$CPUS\033[0m CPUs detected.\n"
-    fi
+    echo "Detecting the number of CPUs: $CPUS detected."
     instances="$CPUS"
 fi
 
 if [ "$instances" -eq 1 ]; then
-    printf "Running 1 instance of cpuburn-in ('/opt/cpuburn-in/cpuburn-in $time').\n"
-    exec /opt/cpuburn-in/cpuburn-in $time
+    echo "Running 1 instance of cpuburn-in ('/opt/cpuburn-in/cpuburn-in $TIME')."
+    exec /opt/cpuburn-in/cpuburn-in $TIME
 else
-    printf "$instances instances of cpuburn-in will be run in the background.\n\n"
+    echo "$instances instances of cpuburn-in will be run in the background."
     printf "\033[01;31mTo stop cpuburn-in, press any key.\033[0m\n"
 
     PID_LIST=""
     trap 'trap - 17; kill $PID_LIST; wait; trap - 1 2 3 15; exit 0' 1 2 3 15
 
     for i in `seq 1 $instances`; do
-        printf "cpuburn-m: Starting instance $i of cpuburn-in ('/opt/cpuburn-in/cpuburn-in $time &').\n"
-        /opt/cpuburn-in/cpuburn-in $time &
+        echo "cpuburn-m: Starting instance $i of cpuburn-in ('/opt/cpuburn-in/cpuburn-in $TIME &')."
+        /opt/cpuburn-in/cpuburn-in $TIME &
         PID_LIST="$PID_LIST $!"
     done
 
