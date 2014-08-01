@@ -2,11 +2,16 @@ Help: wrapper for the Mersenne Prime Torture test (mprime)
 ==========================================================
 
 Written by Gert Hulselmans and Explorer.
-Last updated on 30 July 2014.
+Last updated on 1 August 2014.
 
 The mprime wrapper script is made to overcome several design limitations of the
 original mprime program and to make a unified command-line interface for use in
 the CPUstress image.
+
+The mprime program is from Great Internet Mersenne Prime Search (GIMPS)
+project. Their website is here: http://mersenne.org/
+Please see the terms and conditions at http://mersenne.org/legal/ when using
+the program.
 
 Usage: mprime [VERSION] [OPTIONS...]
 
@@ -18,9 +23,9 @@ If VERSION is unspecified, the wrapper will prompt to ask it during execution.
 
 Mersenne Prime v27.9 is a recent version that supports modern processors and
 multi-threading. Usually you will choose this version over the old one.
-Mprime v23.9 is a backup version for people who have Pentium III or older CPUs,
-since it is said in the changelog that mprime 24.6+ have worse perfomance on
-Pertium I, II, or III.
+Mersenne Prime v23.9 is a backup version for people who have Pentium III or
+older CPUs, since it is said in the changelog that mprime 24.6+ have worse
+perfomance on Pertium I, II, or III.
 
 Mprime v23.9 does not support multi-threading like recent versions do, but the
 wrapper script will workaround this problem by running multiple instances of
