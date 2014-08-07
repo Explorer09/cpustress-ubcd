@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-08-07 19:08:54.2727183010 +0800" .git_cache_meta
+touch -c -h -d "2014-08-07 19:15:48.1221096260 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -283,15 +283,15 @@ touch -c -h -d "2014-05-13 14:46:22.7741005910 +0800" iso/ubcd/menus/syslinux/cp
 chmod 0644 iso/ubcd/menus/syslinux/defaults.cfg
 touch -c -h -d "2013-04-03 12:23:08.0991211180 +0800" iso/ubcd/menus/syslinux/defaults.cfg
 chmod 0644 screenshots/cpustress-burn.png
-touch -c -h -d "2013-04-20 16:46:10.0000000000 +0800" screenshots/cpustress-burn.png
+touch -c -h -d "2014-08-07 14:16:50.1834990000 +0800" screenshots/cpustress-burn.png
 chmod 0644 screenshots/cpustress-cpuburn-in.png
-touch -c -h -d "2013-04-20 16:46:31.0000000000 +0800" screenshots/cpustress-cpuburn-in.png
+touch -c -h -d "2014-08-07 16:20:24.7168390000 +0800" screenshots/cpustress-cpuburn-in.png
 chmod 0644 screenshots/cpustress-helpinfo.png
 touch -c -h -d "2014-02-24 09:49:41.2933400000 +0800" screenshots/cpustress-helpinfo.png
 chmod 0644 screenshots/cpustress-intel-linpack.png
 touch -c -h -d "2013-04-20 16:46:15.0000000000 +0800" screenshots/cpustress-intel-linpack.png
 chmod 0644 screenshots/cpustress-mprime.png
-touch -c -h -d "2013-04-09 10:41:41.0000000000 +0800" screenshots/cpustress-mprime.png
+touch -c -h -d "2014-08-07 14:17:12.0547370000 +0800" screenshots/cpustress-mprime.png
 chmod 0644 screenshots/cpustress-splash.png
 touch -c -h -d "2013-05-19 23:02:10.9940990000 +0800" screenshots/cpustress-splash.png
 chmod 0644 screenshots/cpustress-stress.png
