@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-08-07 13:20:05.4308865620 +0800" .git_cache_meta
+touch -c -h -d "2014-08-07 13:44:30.2177135830 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -99,7 +99,7 @@ touch -c -h -d "2013-04-12 00:15:09.0000000000 +0800" cpustress/build/build-init
 chmod 0644 cpustress/build/build-initrd/opt/mprime/27/prime.txt
 touch -c -h -d "2014-05-31 17:11:33.6269387380 +0800" cpustress/build/build-initrd/opt/mprime/27/prime.txt
 chmod 0644 cpustress/build/build-initrd/opt/mprime/mprime.txt
-touch -c -h -d "2014-08-01 14:21:46.5118144960 +0800" cpustress/build/build-initrd/opt/mprime/mprime.txt
+touch -c -h -d "2014-08-07 13:44:18.2855928020 +0800" cpustress/build/build-initrd/opt/mprime/mprime.txt
 chmod 0644 cpustress/build/build-initrd/opt/sensors/sensors.txt
 touch -c -h -d "2013-05-28 20:38:00.8311826750 +0800" cpustress/build/build-initrd/opt/sensors/sensors.txt
 chmod 0644 cpustress/build/build-initrd/opt/stress/stress.txt
@@ -243,7 +243,7 @@ touch -c -h -d "2013-05-19 21:05:46.8330661700 +0800" cpustress/help/cpuinfo.txt
 chmod 0644 cpustress/help/linpack.txt
 touch -c -h -d "2014-02-15 10:45:26.7742006000 +0800" cpustress/help/linpack.txt
 chmod 0644 cpustress/help/mprime.txt
-touch -c -h -d "2014-08-01 14:22:22.9082441660 +0800" cpustress/help/mprime.txt
+touch -c -h -d "2014-08-07 13:44:19.3776038550 +0800" cpustress/help/mprime.txt
 chmod 0644 cpustress/help/sensors.txt
 touch -c -h -d "2013-05-28 20:38:01.0511826650 +0800" cpustress/help/sensors.txt
 chmod 0644 cpustress/help/stress.txt
