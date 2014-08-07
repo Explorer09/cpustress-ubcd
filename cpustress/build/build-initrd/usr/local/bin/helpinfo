@@ -12,10 +12,10 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 23 June 2014.
+# Last updated on 7 August 2014.
 
 
-LAST_EDITED="23 June 2014"
+LAST_EDITED="7 August 2014"
 
 showcontrols () {
     printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
@@ -94,7 +94,8 @@ HELPINFO
 
     cat >> /tmp/helpinfo/helpinfo.txt << HELPINFO2
 If you want help for one of the programs above, for example 'CPU Burn-in
-v1.00', run 'helpinfo cpuburn-in' in the terminal.
+v1.00', run 'helpinfo cpuburn-in' in the terminal. Specify the program name as
+the argument to Helpinfo.
 
 
 To run Helpinfo from the isolinux commandline, use the following:

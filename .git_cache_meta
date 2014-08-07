@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-08-01 14:35:16.2093731930 +0800" .git_cache_meta
+touch -c -h -d "2014-08-07 13:20:05.4308865620 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -136,7 +136,7 @@ touch -c -h -d "2014-06-20 00:50:08.4459001650 +0800" cpustress/build/build-init
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/help
 touch -c -h -d "2014-06-19 23:51:50.8134870580 +0800" cpustress/build/build-initrd/usr/local/bin/help
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/helpinfo
-touch -c -h -d "2014-06-23 16:08:05.4176962070 +0800" cpustress/build/build-initrd/usr/local/bin/helpinfo
+touch -c -h -d "2014-08-07 13:19:55.2187831920 +0800" cpustress/build/build-initrd/usr/local/bin/helpinfo
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/linpack
 touch -c -h -d "2014-06-22 15:26:26.8347096670 +0800" cpustress/build/build-initrd/usr/local/bin/linpack
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/menu
