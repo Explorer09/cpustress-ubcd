@@ -16,7 +16,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 1 August 2014.
+# Last updated on 7 August 2014.
 
 
 set -m
@@ -156,7 +156,6 @@ if [ "$instances" -gt 0 ] 2>/dev/null; then
     :
 else
     instances=0
-    echo "Detecting the number of CPUs: $CPUS detected."
 fi
 
 AWK_SUB=""
@@ -166,11 +165,18 @@ BLENDMEMORY=8
 TIMEFFT=15
 
 if [ "$VER" = 23 ]; then
+    echo "The torture test will be executed with 'Mersenne Prime 23.9.2'."
     if [ "$instances" = 0 ]; then
         instances="$CPUS"
+        echo "Detecting the number of CPUs: $CPUS detected."
     fi
     if [ "$instances" -eq 1 ]; then
         [ "$MODE" -gt 2 ] && MODE=2
+    fi
+    if [ "$MODE" -eq 3 ]; then
+        echo "$instances instances of mprime will be run in the background."
+    elif [ "$MODE" -eq 2 ]; then
+        echo "1 instance of mprime will be run."
     fi
     if [ "$MEMTOTAL" -gt 256 ]; then
         BLENDMEMORY=$(($MEMTOTAL-128))
@@ -179,19 +185,25 @@ if [ "$VER" = 23 ]; then
     fi
     MEMORY_MAX="$BLENDMEMORY"
     PRIME_INI=prime.ini
-    echo "The torture test will be executed with 'Mersenne Prime 23.9.2'."
 else
+    echo "The torture test will be executed with 'Mersenne Prime 27.9 build 1'."
     if [ "$ARG_B" = Y ]; then
         MODE=1
     fi
     [ "$MODE" -gt 2 ] && MODE=2
     if [ "$instances" = 0 ]; then
         instances="$CPUS"
+        echo "Detecting the number of CPUs: $CPUS detected."
     else
         AWK_SUB="sub(/^(; )?TortureThreads[^\n]*\$/, \"TortureThreads=$instances\");"
     fi
-    if [ "$CONFIG" = Y ]; then
+    if [ "$MODE" -gt 1 ] && [ "$CONFIG" = Y ]; then
         AWK_SUB="sub(/^(; )?TortureThreads[^\n]*\$/, \"TortureThreads=$instances\");"
+        if [ "$instances" -eq 1 ]; then
+            echo "1 touture test thread will be run."
+        else
+            echo "$instances touture test threads will be run."
+        fi
     fi
     if [ "X$SSE2" = XY ]; then
         MAXFFT_MAX=32768
@@ -205,7 +217,6 @@ else
     fi
     MEMORY_MAX="$MEMTOTAL"
     PRIME_INI=prime.txt
-    echo "The torture test will be executed with 'Mersenne Prime 27.9 build 1'."
 fi
 
 cd /opt/mprime/$VER
@@ -271,7 +282,6 @@ fi
 
 # Launch mprime
 if [ "$MODE" -eq 3 ]; then
-    echo "$instances instances of mprime will be run in the background."
     printf "\033[01;31mTo stop the torture test, press any key.\033[0m\n"
 
     PID_LIST=""
