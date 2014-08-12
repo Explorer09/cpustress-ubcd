@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-08-07 19:15:48.1221096260 +0800" .git_cache_meta
+touch -c -h -d "2014-08-12 20:02:57.3558620670 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -51,6 +51,9 @@ touch -c -h -d "2014-02-15 21:43:08.9614272140 +0800" cpustress/build/build-init
 chmod 0755 cpustress/build/build-initrd/lib/libdl-2.19.so
 touch -c -h -d "2014-02-23 21:58:34.6369542430 +0800" cpustress/build/build-initrd/lib/libdl-2.19.so
 touch -c -h -d "2014-02-15 21:43:08.9654272140 +0800" cpustress/build/build-initrd/lib/libdl.so.2
+touch -c -h -d "2013-04-17 14:29:07.3264125110 +0800" cpustress/build/build-initrd/lib/libgcc_s.so
+chmod 0644 cpustress/build/build-initrd/lib/libgcc_s.so.1
+touch -c -h -d "2014-06-30 10:38:00.5994887980 +0800" cpustress/build/build-initrd/lib/libgcc_s.so.1
 chmod 0755 cpustress/build/build-initrd/lib/libm-2.19.so
 touch -c -h -d "2014-02-23 21:58:34.6409542430 +0800" cpustress/build/build-initrd/lib/libm-2.19.so
 touch -c -h -d "2014-02-15 21:43:08.9694272140 +0800" cpustress/build/build-initrd/lib/libm.so.6
@@ -123,9 +126,6 @@ touch -c -h -d "2014-06-24 11:44:51.7199779250 +0800" cpustress/build/build-init
 touch -c -h -d "2014-06-24 11:44:51.7239778750 +0800" cpustress/build/build-initrd/usr/bin/top
 touch -c -h -d "2014-06-24 11:44:51.7279778250 +0800" cpustress/build/build-initrd/usr/bin/uptime
 touch -c -h -d "2014-06-24 11:44:51.7319777750 +0800" cpustress/build/build-initrd/usr/bin/which
-touch -c -h -d "2013-04-17 14:29:07.3264125110 +0800" cpustress/build/build-initrd/usr/lib/libgcc_s.so
-chmod 0644 cpustress/build/build-initrd/usr/lib/libgcc_s.so.1
-touch -c -h -d "2014-06-30 10:38:00.5994887980 +0800" cpustress/build/build-initrd/usr/lib/libgcc_s.so.1
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/burn
 touch -c -h -d "2014-08-01 13:28:30.6020859280 +0800" cpustress/build/build-initrd/usr/local/bin/burn
 touch -c -h -d "2013-04-16 21:23:38.1153474510 +0800" cpustress/build/build-initrd/usr/local/bin/cpuburn-in
