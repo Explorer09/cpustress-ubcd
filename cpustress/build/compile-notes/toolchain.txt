@@ -242,4 +242,11 @@ The ".so" binary files in CPUstress are stripped binaries.
  $ strip --strip-unneeded ${SYSROOT_DIR}/lib/libgcc_s.so.1
  $ strip --strip-unneeded *-2.19.so
 
+Change mode bits (Optional)
+---------------------------
+
+ $ cd ${SYSROOT_DIR}/lib
+ $ chmod 644 *-2.19.so
+ $ chmod 755 ld-2.19.so libc-2.19.so libpthread-2.19.so
+
 --Explorer <explorer09@gmail.com>

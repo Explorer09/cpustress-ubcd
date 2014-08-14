@@ -44,6 +44,11 @@ CPUstress image needs only 6 '.so' files from the build directory. Namely:
    nss/libnss_files.so (libnss_files-2.19.so libnss_files.so.2)
    nptl/libpthread.so  (libpthread-2.19.so   libpthread.so.0  )
 
+Only 3 '.so' files in glibc are actually executable. They are ld.so, libc.so,
+and libpthread.so, the rest of the '.so' files will 'Segmentation fault' when
+being executed, and so their execution bit should be removed. (Mode bit should
+be 644 not 755.) Ubuntu does this in its system libraries.
+
 The precompiled libraries in CPUstress were compiled with different
 "enable-kernel" switches. Although this is unnecessary and time-consuming, I
 did this to minimize the version requirements of the individual file, while
