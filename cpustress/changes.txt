@@ -10,7 +10,7 @@ Programs updated or rebuilt:
 - Rebuilt systester-cli with GMP 6.0.0. Also GMP is now built as a fat binary.
 - Rebuilt BusyBox and added 'mv' command.
 - Updated libgcc to v4.9.1 (from v4.7.3)
-- Updated kernel to 3.15.9.
+- Updated kernel to 3.16.1.
 - All programs and libraries (except cpuburn-in, linpack, and mprime) are re-
   compiled with a custom toolchain so that they are compatible with i486 CPUs.
   All CPUstress releases since v2.1expl3 and until this version are not really

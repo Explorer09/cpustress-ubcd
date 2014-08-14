@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-08-14 23:03:31.0447176970 +0800" .git_cache_meta
+touch -c -h -d "2014-08-14 23:19:35.9225841730 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -177,19 +177,21 @@ touch -c -h -d "2013-09-05 20:08:00.4040116550 +0800" cpustress/build/compile-no
 chmod 0644 cpustress/build/compile-notes/glibc.txt
 touch -c -h -d "2014-08-14 14:22:36.8161983120 +0800" cpustress/build/compile-notes/glibc.txt
 chmod 0644 cpustress/build/compile-notes/kernel.txt
-touch -c -h -d "2014-08-14 15:21:10.0595468990 +0800" cpustress/build/compile-notes/kernel.txt
+touch -c -h -d "2014-08-14 23:16:18.2125622420 +0800" cpustress/build/compile-notes/kernel.txt
 chmod 0644 cpustress/build/compile-notes/kernel/config-3.10-cpustress
-touch -c -h -d "2014-08-13 10:06:24.9417912370 +0800" cpustress/build/compile-notes/kernel/config-3.10-cpustress
+touch -c -h -d "2014-08-14 21:39:29.6831514820 +0800" cpustress/build/compile-notes/kernel/config-3.10-cpustress
 chmod 0644 cpustress/build/compile-notes/kernel/config-3.11-cpustress
-touch -c -h -d "2014-08-13 10:19:13.5977674830 +0800" cpustress/build/compile-notes/kernel/config-3.11-cpustress
+touch -c -h -d "2014-08-14 21:53:01.8192001290 +0800" cpustress/build/compile-notes/kernel/config-3.11-cpustress
 chmod 0644 cpustress/build/compile-notes/kernel/config-3.12-cpustress
-touch -c -h -d "2014-08-13 10:34:28.5177392080 +0800" cpustress/build/compile-notes/kernel/config-3.12-cpustress
+touch -c -h -d "2014-08-14 22:05:32.3432450860 +0800" cpustress/build/compile-notes/kernel/config-3.12-cpustress
 chmod 0644 cpustress/build/compile-notes/kernel/config-3.13-cpustress
-touch -c -h -d "2014-08-13 10:48:39.1497129210 +0800" cpustress/build/compile-notes/kernel/config-3.13-cpustress
+touch -c -h -d "2014-08-14 22:18:18.9472910060 +0800" cpustress/build/compile-notes/kernel/config-3.13-cpustress
 chmod 0644 cpustress/build/compile-notes/kernel/config-3.14-cpustress
-touch -c -h -d "2014-08-13 11:01:59.9656881730 +0800" cpustress/build/compile-notes/kernel/config-3.14-cpustress
+touch -c -h -d "2014-08-14 22:31:38.1393388780 +0800" cpustress/build/compile-notes/kernel/config-3.14-cpustress
 chmod 0644 cpustress/build/compile-notes/kernel/config-3.15-cpustress
-touch -c -h -d "2014-08-13 11:15:11.7776637030 +0800" cpustress/build/compile-notes/kernel/config-3.15-cpustress
+touch -c -h -d "2014-08-14 22:45:32.0873888330 +0800" cpustress/build/compile-notes/kernel/config-3.15-cpustress
+chmod 0644 cpustress/build/compile-notes/kernel/config-3.16-cpustress
+touch -c -h -d "2014-08-14 22:59:45.7034399650 +0800" cpustress/build/compile-notes/kernel/config-3.16-cpustress
 chmod 0644 cpustress/build/compile-notes/linpack.txt
 touch -c -h -d "2014-05-13 14:34:11.4584945630 +0800" cpustress/build/compile-notes/linpack.txt
 chmod 0644 cpustress/build/compile-notes/mprime.txt
@@ -219,13 +221,13 @@ touch -c -h -d "2013-07-17 07:25:12.9329147000 +0800" cpustress/build/compile-no
 chmod 0644 cpustress/build/compile-notes/systester/systester-log-file-format.patch
 touch -c -h -d "2013-07-16 20:19:17.7908517330 +0800" cpustress/build/compile-notes/systester/systester-log-file-format.patch
 chmod 0644 cpustress/build/compile-notes/toolchain.txt
-touch -c -h -d "2014-08-14 14:31:30.1296066170 +0800" cpustress/build/compile-notes/toolchain.txt
+touch -c -h -d "2014-08-14 23:16:08.9884678220 +0800" cpustress/build/compile-notes/toolchain.txt
 chmod 0755 cpustress/build/extract
 touch -c -h -d "2014-05-06 21:03:22.9432341320 +0800" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2014-06-24 11:45:37.7321406560 +0800" cpustress/build/prepare
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2014-08-14 21:27:29.2011117790 +0800" cpustress/changes.txt
+touch -c -h -d "2014-08-14 23:19:16.1423828710 +0800" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000 +0800" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt

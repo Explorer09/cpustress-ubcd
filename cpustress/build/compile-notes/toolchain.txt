@@ -43,7 +43,7 @@ Preparation
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.12.2.tar.bz2
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/cloog-0.18.1.tar.gz
      wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.9.1/gcc-4.9.1.tar.bz2
-     wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.15.9.tar.xz
+     wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.16.1.tar.xz
      svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
      }
  $ extract () {
@@ -54,7 +54,7 @@ Preparation
      tar -x --bzip2 -f isl-0.12.2.tar.bz2
      tar -x -z -f cloog-0.18.1.tar.gz
      tar -x --bzip2 -f gcc-4.9.1.tar.bz2
-     tar -x --xz -f linux-3.15.9.tar.xz
+     tar -x --xz -f linux-3.16.1.tar.xz
      mv gmp-6.0.0    gcc-4.9.1/gmp
      mv mpfr-3.1.2   gcc-4.9.1/mpfr
      mv mpc-1.0.2    gcc-4.9.1/mpc
@@ -64,7 +64,7 @@ Preparation
 
  $ download
  $ extract
- $ for i in binutils-2.24 gcc-4.9.1 linux-3.15.9 libc; do
+ $ for i in binutils-2.24 gcc-4.9.1 linux-3.16.1 libc; do
      if [ ! -d "$i" ]; then exit 1; fi; done
 
 Copy the "option-groups.config" file from the compile-notes directory to
@@ -146,7 +146,7 @@ Notes:
 3. Linux kernel headers for libc
 --------------------------------
 
- $ cd ../linux-3.15.9
+ $ cd ../linux-3.16.1
  $ make mrproper
  $ make INSTALL_HDR_PATH=${SYSROOT_DIR}/usr headers_install
  $ cd ${BASEDIR}
