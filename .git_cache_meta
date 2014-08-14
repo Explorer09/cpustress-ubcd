@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-08-14 15:13:05.7587043240 +0800" .git_cache_meta
+touch -c -h -d "2014-08-14 15:21:39.4958415530 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -177,7 +177,7 @@ touch -c -h -d "2013-09-05 20:08:00.4040116550 +0800" cpustress/build/compile-no
 chmod 0644 cpustress/build/compile-notes/glibc.txt
 touch -c -h -d "2014-08-14 14:22:36.8161983120 +0800" cpustress/build/compile-notes/glibc.txt
 chmod 0644 cpustress/build/compile-notes/kernel.txt
-touch -c -h -d "2014-06-27 16:57:37.8304369340 +0800" cpustress/build/compile-notes/kernel.txt
+touch -c -h -d "2014-08-14 15:21:10.0595468990 +0800" cpustress/build/compile-notes/kernel.txt
 chmod 0644 cpustress/build/compile-notes/kernel/config-3.10-cpustress
 touch -c -h -d "2014-08-13 10:06:24.9417912370 +0800" cpustress/build/compile-notes/kernel/config-3.10-cpustress
 chmod 0644 cpustress/build/compile-notes/kernel/config-3.11-cpustress
