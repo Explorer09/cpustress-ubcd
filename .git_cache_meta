@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-08-15 00:56:04.9270125410 +0800" .git_cache_meta
+touch -c -h -d "2014-08-15 01:09:57.9731184060 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -226,8 +226,8 @@ chmod 0755 cpustress/build/extract
 touch -c -h -d "2014-05-06 21:03:22.9432341320 +0800" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2014-06-24 11:45:37.7321406560 +0800" cpustress/build/prepare
-chmod 0644 cpustress/changes.txt
-touch -c -h -d "2014-08-15 00:55:21.6282280600 +0800" cpustress/changes.txt
+chmod 0664 cpustress/changes.txt
+touch -c -h -d "2014-08-15 01:08:54.8284700000 +0800" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000 +0800" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
