@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-08-14 15:21:39.4958415530 +0800" .git_cache_meta
+touch -c -h -d "2014-08-14 15:28:28.8118780580 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2013-05-19 20:48:32.8811122680 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -144,7 +144,7 @@ touch -c -h -d "2014-06-20 01:00:17.3560899270 +0800" cpustress/build/build-init
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/mprime
 touch -c -h -d "2014-08-07 19:07:48.8807062330 +0800" cpustress/build/build-initrd/usr/local/bin/mprime
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/sensors
-touch -c -h -d "2014-02-15 09:56:04.9472301110 +0800" cpustress/build/build-initrd/usr/local/bin/sensors
+touch -c -h -d "2014-08-13 11:50:57.0000000000 +0800" cpustress/build/build-initrd/usr/local/bin/sensors
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/sensors-detect
 touch -c -h -d "2014-05-06 21:00:54.9413846810 +0800" cpustress/build/build-initrd/usr/local/bin/sensors-detect
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/stress
@@ -205,7 +205,7 @@ touch -c -h -d "2014-06-13 21:10:54.9269853970 +0800" cpustress/build/compile-no
 chmod 0644 cpustress/build/compile-notes/mprime/note.txt
 touch -c -h -d "2014-07-30 14:20:27.9579466360 +0800" cpustress/build/compile-notes/mprime/note.txt
 chmod 0644 cpustress/build/compile-notes/sensors.txt
-touch -c -h -d "2014-02-15 09:43:48.5143654840 +0800" cpustress/build/compile-notes/sensors.txt
+touch -c -h -d "2014-08-14 15:27:41.3354240350 +0800" cpustress/build/compile-notes/sensors.txt
 chmod 0644 cpustress/build/compile-notes/stress.txt
 touch -c -h -d "2014-07-01 09:56:51.2274040910 +0800" cpustress/build/compile-notes/stress.txt
 chmod 0644 cpustress/build/compile-notes/stress/stress-no-hdd.patch
