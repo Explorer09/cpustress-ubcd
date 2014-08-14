@@ -15,7 +15,7 @@ Programs updated or rebuilt:
   compiled with a custom toolchain so that they are compatible with i486 CPUs.
   All CPUstress releases since v2.1expl3 and until this version are not really
   compatible with i486 and Pentium CPUs, due to the Ubuntu GCC that generates
-  i686-only code. Now this regression is fixed with the custom toolchain.
+  i686-only code. This regression is now fixed.
 Changes:
 - New wrapper script for Mersenne Prime test (mprime). This wrapper can now ask
   user for which type of torture test to run, and tune the torture test
