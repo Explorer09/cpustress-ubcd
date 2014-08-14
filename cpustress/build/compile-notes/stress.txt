@@ -1,4 +1,4 @@
-12 January 2014
+14 August 2014
 
 Homepage of stress by Amos Waterland:
 http://web.archive.org/web/20130520190152/http://weather.ou.edu/~apw/projects/stress/
@@ -9,7 +9,12 @@ http://web.archive.org/web/20130116202706/http://weather.ou.edu/~apw/projects/st
 The original website <http://weather.ou.edu/~apw/projects/stress/> is dead, so
 the code have to be downloaded from a mirror.
 
-The stress binary is compiled on Ubuntu 12.04.2 LTS (32-bit).
+The stress binary is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom
+cross-toolchain described in "toolchain.txt". Before compiling, make sure you
+have the toolchain built already and the PATH variable containing the 'bin'
+directory of the toolchain:
+
+ $ export PATH="${TOOLS_DIR}/bin:${PATH}"
 
 After downloading and unpacking the source code, apply a patch to disable the
 hdd stressing, because the CPUstress image does not support writing to disks:
@@ -17,20 +22,23 @@ hdd stressing, because the CPUstress image does not support writing to disks:
  $ cd stress-1.0.4
  $ patch -p 1 <stress-no-hdd.patch
 
-Then run the configure script and then "make". You will get the binary in the
-"src" directory.
+Then run the configure script and then "make":
 
- $ ./configure
+ $ ./configure CC=i486-pc-linux-gnu-gcc
  $ make
+
+(Optional) Change the mode of the binary:
+
+ $ chmod 755 src/stress
 
 (Optional) To reduce the file size, I stripped the binary after compilation:
 
- $ strip ./src/stress
+ $ strip src/stress
 
 (Optional) I also used UPX to compress the executable so the file size could
 be much smaller: <http://upx.sourceforge.net/>
 
- $ upx --ultra-brute ./src/stress
+ $ upx --ultra-brute src/stress
 
 The program depends on these libraries:
     libm.so.6

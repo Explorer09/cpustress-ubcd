@@ -1,0 +1,252 @@
+15 August 2014
+
+The compilers in Ubuntu (or other modern Linux distros) are configured to
+generate i686-only code by default. If you compile programs with the native
+toolchain, the programs may not work with older CPUs due to new instructions
+like CMOV. Although some programs can avoid the problem by specifying '-march'
+compiler flag (Linux kernel and BusyBox did this automatically), the main C
+library cannot be built this way. As the C library depends on several compiled
+code in libgcc, building it to work with i486 CPUs requires building the whole
+toolchain. This document describes how to build a cross-toolchain for CPUstress
+image.
+
+I build this toolchain on Ubuntu 12.04.5 LTS (32-bit). Other distros are not
+tested.
+
+This document assumes that you are familiar with the build process of GNU
+toolchain, thus many explanations of the command-line options are omitted.
+
+The build process is similar to the one described in "EGLIBC.cross-building"
+document in the EGLIBC source. For explanation of each step, it is good to read
+the document before building the tools below.
+
+For beginners, the Linux From Scratch <http://www.linuxfromscratch.org/lfs/>
+book is also useful. However, there are differences in the procedure between
+in the book and below, which are noted.
+
+This document may be converted to a workable shell script. To do this, run
+"doc-to-sh.sh".
+
+First, prepare an empty directory for building the toolchain:
+
+ $ mkdir toolchain || exit 1
+ $ cd toolchain
+
+Preparation
+-----------
+
+ $ download () {
+     wget http://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.bz2
+     wget https://ftp.gnu.org/gnu/gmp/gmp-6.0.0a.tar.xz
+     wget http://www.mpfr.org/mpfr-current/mpfr-3.1.2.tar.xz
+     wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.2.tar.gz
+     wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.12.2.tar.bz2
+     wget ftp://gcc.gnu.org/pub/gcc/infrastructure/cloog-0.18.1.tar.gz
+     wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.9.1/gcc-4.9.1.tar.bz2
+     wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.16.1.tar.xz
+     svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
+     }
+ $ extract () {
+     tar -x --bzip2 -f binutils-2.24.tar.bz2
+     tar -x --xz -f gmp-6.0.0a.tar.xz
+     tar -x --xz -f mpfr-3.1.2.tar.xz
+     tar -x -z -f mpc-1.0.2.tar.gz
+     tar -x --bzip2 -f isl-0.12.2.tar.bz2
+     tar -x -z -f cloog-0.18.1.tar.gz
+     tar -x --bzip2 -f gcc-4.9.1.tar.bz2
+     tar -x --xz -f linux-3.16.1.tar.xz
+     mv gmp-6.0.0    gcc-4.9.1/gmp
+     mv mpfr-3.1.2   gcc-4.9.1/mpfr
+     mv mpc-1.0.2    gcc-4.9.1/mpc
+     mv isl-0.12.2   gcc-4.9.1/isl
+     mv cloog-0.18.1 gcc-4.9.1/cloog
+     }
+
+ $ download
+ $ extract
+ $ for i in binutils-2.24 gcc-4.9.1 linux-3.16.1 libc; do
+     if [ ! -d "$i" ]; then exit 1; fi; done
+
+Copy the "option-groups.config" file from the compile-notes directory to
+the current directory where we have the source code. (You need to do this
+manually - the script can't locate where the file is.)
+
+ $ [ -f option-groups.config ] || exit 1
+
+Make two directories, 'sysroot' and 'tools':
+
+ $ mkdir sysroot  # This stores the target (i486) libraries and include files.
+ $ mkdir tools    # This stores the cross-compile tools (binutils & GCC).
+ $ SYSROOT_DIR="${PWD}/sysroot"
+ $ TOOLS_DIR="${PWD}/tools"
+
+Add the 'tools' directory to PATH, so that our cross tools (binutils & GCC) can
+be found as soon as they are available.
+
+ $ export PATH="${TOOLS_DIR}/bin:${PATH}"
+
+Make separate build directories:
+
+ $ mkdir binutils-build gcc-build eglibc-build
+
+Note that we clean up the build directories (make distclean && rm -r *) as soon
+as they are no longer needed.
+
+1. Cross-Binutils
+-----------------
+
+ $ cd binutils-build
+ $ ../binutils-2.24/configure --prefix=${TOOLS_DIR} \
+     --target=i486-pc-linux-gnu --with-sysroot=${SYSROOT_DIR}
+ $ make
+ $ make install
+ $ make distclean && rm -r *
+ $ cd ..
+
+Note: If you build Binutils 2.24 with GCC 4.9, you'll see a compile error. This
+is a bug known upstream. Read these web pages for information and patches:
+https://sourceware.org/ml/binutils/2014-01/msg00334.html
+https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;a=commit;h=27b829ee701e29804216b3803fbaeb629be27491
+https://sourceware.org/ml/binutils/2014-02/msg00000.html
+https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;a=commit;h=0a09fb4a09e80c36fa3ef763ae276fd13d272a36
+
+2. Cross-GCC without libc headers
+---------------------------------
+
+These target libraries cannot be built because we have no libc in the target
+system. Disable these until we have EGLIBC in the final build of GCC:  (If you
+have GCC 4.8 or older, you should also --disable-libmudflap .)
+
+ $ DISABLE_TARGET_LIBS="
+     --disable-libstdc++-v3 --disable-libsanitizer --disable-libvtv
+     --disable-libcilkrts --disable-libssp --disable-libquadmath
+     --disable-libgomp --disable-libitm --disable-libatomic"
+
+ $ cd gcc-build
+ $ ../gcc-4.9.1/configure --prefix=${TOOLS_DIR} --target=i486-pc-linux-gnu \
+     --enable-languages=c,c++ --disable-shared --disable-threads \
+     --enable-linker-build-id --disable-bootstrap --disable-multilib \
+     ${DISABLE_TARGET_LIBS} --without-headers --with-newlib \
+     --with-sysroot=${SYSROOT_DIR} --with-arch-32=i486 --with-tune=generic
+ $ make
+ $ make install-strip
+ $ make distclean && rm -r *
+ $ cd ..
+
+Notes:
+* The --disable-libstdcxx switch doesn't seem to work, so here I use the old,
+  undocumented switch --disable-libstdc++-v3 .
+* Without libc headers, the TARGET_LIBC_PROVIDES_SSP macro should be undefined
+  (in "gcc/auto-host.h") now. Trying to build EGLIBC at this time will result
+  in "undefined reference to __stack_chk_guard" error. Linux From Scratch (LFS)
+  solves this by hacking GCC's configure script to force
+  "gcc_cv_libc_provides_ssp=yes". I don't take this approach, instead I install
+  the libc headers first and then re-configure GCC.
+
+3. Linux kernel headers for libc
+--------------------------------
+
+ $ cd ../linux-3.16.1
+ $ make mrproper
+ $ make INSTALL_HDR_PATH=${SYSROOT_DIR}/usr headers_install
+ $ cd ${BASEDIR}
+
+4. EGLIBC headers and startup files
+-----------------------------------
+
+ $ cd eglibc-build
+
+ $ cp ../option-groups.config .
+ $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib \
+     --build=$(../libc/scripts/config.guess) --host=i486-pc-linux-gnu \
+     --enable-kernel=2.6.36 --enable-add-ons=nptl --disable-nscd \
+     --disable-profile --without-gd --without-selinux \
+     --with-headers=${SYSROOT_DIR}/usr/include
+
+Install libc headers:
+
+ $ make install-headers install-bootstrap-headers=yes \
+     install_root=${SYSROOT_DIR}
+
+Make startup files (crt*.o):
+
+ $ make csu/subdir_lib
+ $ mkdir ${SYSROOT_DIR}/usr/lib
+ $ cp csu/crt*.o ${SYSROOT_DIR}/usr/lib
+
+Make dummy libc.so:
+
+ $ i486-pc-linux-gnu-gcc -nostdlib -shared -x c /dev/null \
+     -o ${SYSROOT_DIR}/usr/lib/libc.so
+
+ $ cd ..
+
+5. Cross-GCC for building libc
+------------------------------
+
+Note the switch '--enable-shared=libgcc'.
+
+ $ cd gcc-build
+ $ ../gcc-4.9.1/configure --prefix=${TOOLS_DIR} --target=i486-pc-linux-gnu \
+     --enable-languages=c,c++ --enable-shared=libgcc --disable-threads \
+     --enable-linker-build-id --disable-bootstrap --disable-multilib \
+     ${DISABLE_TARGET_LIBS} \
+     --with-sysroot=${SYSROOT_DIR} --with-arch-32=i486 --with-tune=generic
+ $ make
+ $ make install-strip
+ $ make distclean && rm -r *
+ $ cd ..
+
+6. EGLIBC, full
+---------------
+
+If you didn't clean up the eglibc-build directory at section 4, you don't need
+to run 'configure' again. Just use the last configuration.
+
+ $ cd eglibc-build
+ $ make clean
+ $ make
+ $ make install install_root=${SYSROOT_DIR}
+ $ make distclean && rm -r *
+ $ cd ..
+
+7. Cross-GCC, full
+------------------
+
+This build of GCC enables threads, locales, LTO, and all target libraries.
+Only libgcc is built with a shared library. Other target libraries, including
+libstdc++, are built as static libraries only.
+
+ $ cd gcc-build
+ $ ../gcc-4.9.1/configure --prefix=${TOOLS_DIR} --target=i486-pc-linux-gnu \
+     --enable-languages=c,c++ --enable-shared=libgcc --enable-threads=posix \
+     --enable-clocale=gnu --enable-lto \
+     --enable-linker-build-id --disable-bootstrap --disable-multilib \
+     --with-sysroot=${SYSROOT_DIR} --with-arch-32=i486 --with-tune=generic
+ $ make
+ $ make install-strip
+ $ make distclean && rm -r *
+ $ cd ..
+
+Copy libgcc_s.so.1 from 'tools' directory to the target's 'sysroot' directory,
+because GCC's makefile won't do this automatically when installing:
+
+ $ cp -d ${TOOLS_DIR}/i486-pc-linux-gnu/lib/libgcc_s.so* ${SYSROOT_DIR}/lib
+
+Stripping binaries (Optional)
+-----------------------------
+
+The ".so" binary files in CPUstress are stripped binaries.
+
+ $ cd ${SYSROOT_DIR}/lib
+ $ strip --strip-unneeded ${SYSROOT_DIR}/lib/libgcc_s.so.1
+ $ strip --strip-unneeded *-2.19.so
+
+Change mode bits (Optional)
+---------------------------
+
+ $ cd ${SYSROOT_DIR}/lib
+ $ chmod 644 *-2.19.so
+ $ chmod 755 ld-2.19.so libc-2.19.so libpthread-2.19.so
+
+--Explorer <explorer09@gmail.com>

@@ -1,15 +1,19 @@
-12 January 2014
+14 August 2014
 
 StressCPU2 can be downloaded here:
 http://www.gromacs.org/@api/deki/files/43/=stresscpu2.tgz
 
-The stresscpu2 binary included in CPUstress is compiled on Ubuntu 12.04.3 LTS
-(32-bit).
+The StressCPU2 binary included in CPUstress is compiled on Ubuntu 12.04.5 LTS
+(32-bit), with a custom cross-toolchain described in "toolchain.txt". Before
+compiling, make sure you have the toolchain built already and the PATH variable
+containing the 'bin' directory of the toolchain:
 
-The precompiled binaries in the stresscpu2 package is statically linked. But I
+ $ export PATH="${TOOLS_DIR}/bin:${PATH}"
+
+The precompiled binaries in the StressCPU2 package is statically linked. But I
 prefer dynamically linked version because it is smaller.
 
-After downloading and unpacking, apply a patch that lets stresscpu2 accept the
+After downloading and unpacking, apply a patch that lets StressCPU2 accept the
 '--help' command-line option:
 
  $ cd stresscpu2
@@ -17,8 +21,14 @@ After downloading and unpacking, apply a patch that lets stresscpu2 accept the
 
 Then build the dynamically linked binary from source:
 
- $ sed -e 's/-static//' <Makefile.Linux32 >Makefile
- $ make
+ $ sed -e 's/-static//' -e 's/^\tcc/\t$(CC)/' <Makefile.Linux32 >Makefile
+ $ make CC=i486-pc-linux-gnu-gcc LDFLAGS='-static-libgcc' \
+     CFLAGS='-O3 -flto -march=pentium3 -mtune=generic'
+
+Note:
+* This build enables Link Time Optimization (-flto) from gcc to produce a
+  smaller binary. However the LTO'd binary will unnecessarily depend on
+  libgcc_s.so, therefore -static-libgcc is specified to avoid it.
 
 (Optional) Change the mode of the binary:
 

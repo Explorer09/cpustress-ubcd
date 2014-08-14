@@ -1,9 +1,14 @@
-15 February 2014
+14 August 2014
 
 lm-sensors website:
 http://lm-sensors.org/
 
-The 'sensors' program is compiled on Ubuntu 12.04.4 LTS (32-bit).
+The 'sensors' program is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom
+cross-toolchain described in "toolchain.txt". Before compiling, make sure you
+have the toolchain built already and the PATH variable containing the 'bin'
+directory of the toolchain:
+
+ $ export PATH="${TOOLS_DIR}/bin:${PATH}"
 
 In addition to the build-essential tools, you also need Bison and Flex.
 Install these in Ubuntu:
@@ -26,12 +31,12 @@ when only one program needs it. So I edit the linker flags in the makefile:
 This forces the linker to link to the static 'libsensors.a'.
 Build the code:
 
- $ make
+ $ make CC=i486-pc-linux-gnu-gcc
 
 Install lm-sensors to a temporary directory: (I put them in the directory
 "${HOME}/lm-sensors-install", but you may change the path if you like.)
 
- $ make DESTDIR="${HOME}/lm-sensors-install" install
+ $ make CC=i486-pc-linux-gnu-gcc DESTDIR="${HOME}/lm-sensors-install" install
 
 In the temporary directory, we need to copy only these files to the CPUstress
 image:

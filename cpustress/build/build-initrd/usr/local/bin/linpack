@@ -8,27 +8,27 @@
 #
 #
 # Licensed under the GNU General Public License, version 2 or later.
-# This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
+# This program comes with ABSOLUTELY NO WARRANTY. See the GNU GPL for details:
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 18 June 2013.
+# Last updated on 22 June 2014.
 
 
 # Setting up affinity for better threading performance
 export KMP_AFFINITY=nowarnings,compact,1,0,granularity=fine
 
-if [ "X$instances" != "X" ] && [ "X$OMP_NUM_THREADS" == "X" ]; then
+if [ "X$OMP_NUM_THREADS" = X ] && [ "$instances" -gt 0 ] 2>/dev/null; then
     export OMP_NUM_THREADS="$instances"
 fi
 
 # Don't call xlinpack_xeon32 just to display help.
-ARGS=`echo "X$1" | awk '/^X-e(x(t(e(n(d(e(d(_(h(e(l(p)?)?)?)?)?)?)?)?)?)?)?)?$/ {print "-e"}'`
-if [ "X$ARGS" = "X" ]; then
-    ARGS=`echo "X$1" | awk '/^X-h(e(l(p)?)?)?$/ {print "-h"}'`
+ARGS=`echo "X$1" | awk '/^X-e(x(t(e(n(d(e(d(_(h(e(lp?)?)?)?)?)?)?)?)?)?)?)?$/ {print "-e"}'`
+if [ "X$ARGS" = X ]; then
+    ARGS=`echo "X$1" | awk '/^X-h(e(lp?)?)?$/ {print "-h"}'`
 fi
 
-if [ "X$1" = "X--help" ]; then
+if [ "X$1" = X--help ]; then
     ARGS="-h"
 fi
 case "$ARGS" in
@@ -37,10 +37,9 @@ case "$ARGS" in
         exit 0
         ;;
     -e)
-        less -~ /opt/linpack/xhelp.lpk
-        exit 0
+        exec less -~ /opt/linpack/xhelp.lpk
         ;;
 esac
 
 cd /opt/linpack
-/opt/linpack/xlinpack_xeon32 "$@"
+exec /opt/linpack/xlinpack_xeon32 "$@"

@@ -1,27 +1,35 @@
-14 February 2013
+14 August 2014
 
-The BusyBox source code and the official patches can be downloaded here:
+The BusyBox binary is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom
+cross-toolchain described in "toolchain.txt". Before compiling, make sure you
+have the toolchain built already and the PATH variable containing the 'bin'
+directory of the toolchain:
+
+ $ export PATH="${TOOLS_DIR}/bin:${PATH}"
+
+Download BusyBox source code and the official patches:
 http://busybox.net/downloads/busybox-1.22.1.tar.bz2
 http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-ash.patch
 http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-date.patch
 http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-iplink.patch
+http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-nc.patch
 
-The BusyBox binary is compiled on Ubuntu 12.04.4 LTS (32-bit).
+ $ tar -x -v --bzip2 -f busybox-1.22.1.tar.bz2
 
-After downloading and unpacking the source code, copy the file "config" and
-the ".patch" files into the source code directory. Then apply the patches and
-the config:
+Copy the file "config" and the ".patch" files into the source code directory.
+Then apply the patches and the config:
 
  $ cd busybox-1.22.1
  $ patch -p 1 <busybox-1.22.1-ash.patch
  $ patch -p 1 <busybox-1.22.1-date.patch
  $ patch -p 1 <busybox-1.22.1-iplink.patch
+ $ patch -p 1 <busybox-1.22.1-nc.patch
  $ mv config .config
 
 Finally, build BusyBox:
 
- $ make
- $ make install
+ $ make CROSS_COMPILE="i486-pc-linux-gnu-"
+ $ make CROSS_COMPILE="i486-pc-linux-gnu-" install
 
 The binary will be ready in a directory named "_install" inside the busybox
 source, as well as the necessary symlinks. Because CPUstress uses an initramfs

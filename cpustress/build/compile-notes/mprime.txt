@@ -1,15 +1,15 @@
-12 January 2014
+2 June 2014
 
 Website of the Mersenne Prime test program (a.k.a. mprime or prime95):
-http://www.mersenne.org/freesoft/
+http://www.mersenne.org/download/
 
-The mprime23 and mprime27 programs included in the CPUstress image are the
-official binaries. Both are dynamically linked versions (not static).
+The mprime programs included in the CPUstress image are official binaries.
+Both are dynamically linked versions (not static).
 
 Below are direct download links:
-  mprime v23.9
+mprime v23.9
 ftp://www.mersenne.org/gimps_archive/archived_executables/mprime239.tar.gz
-  mprime v27.9 (there may be other mirrors)
+mprime v27.9 (there may be other mirrors)
 ftp://mersenne.org/gimps/p95v279.linux32.tar.gz
 http://mersenneforum.org/gimps/p95v279.linux32.tar.gz
 
@@ -17,27 +17,22 @@ After downloading, make sure you unpack them to 2 separate empty directories,
 such as 'mprime239' and 'p95v279'. (You don't want your files to be replaced,
 do you?)
 
-Rename the executables to 'mprime23' and 'mprime27' respectively:
-
- $ mv mprime239/mprime mprime239/mprime23
- $ mv p95v279/mprime   p95v279/mprime27
-
 (Optional) Change the mode of the binaries:
 
- $ chmod 755 mprime239/mprime23
- $ chmod 755 p95v279/mprime27
+ $ chmod 755 mprime239/mprime
+ $ chmod 755 p95v279/mprime
 
 (Optional) You can strip the binary file to save a few bytes. I did so in my
 CPUstress image:
 
- $ strip mprime239/mprime23
- $ strip p95v279/mprime27
+ $ strip mprime239/mprime
+ $ strip p95v279/mprime
 
 (Optional) I also used UPX to compress the executable so the file size could
 be much smaller: <http://upx.sourceforge.net/>
 
- $ upx --ultra-brute mprime239/mprime23
- $ upx --ultra-brute p95v279/mprime27
+ $ upx --ultra-brute mprime239/mprime
+ $ upx --ultra-brute p95v279/mprime
 
 The programs depend on these libraries:
     libm.so.6
@@ -45,5 +40,9 @@ The programs depend on these libraries:
     libdl.so.2 (mprime27 only)
     libc.so.6
     /lib/ld-linux.so.2
+
+Note that the mprime wrapper script in the CPUstress image depends on the hand-
+written prime.ini or prime.txt to work, so don't delete the files or edit their
+contents. (The comments in the INI are there for a reason.)
 
 --Explorer <explorer09@gmail.com>

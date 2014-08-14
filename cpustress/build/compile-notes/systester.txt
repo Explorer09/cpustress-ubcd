@@ -1,39 +1,37 @@
-12 January 2014
+14 August 2014
 
 Systester download page:
 http://systester.sourceforge.net/downloads.php
 
-Systester is compiled on Ubuntu 12.04.3 LTS (32-bit).
+The Systester binary is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom
+cross-toolchain described in "toolchain.txt". Before compiling, make sure you
+have the toolchain built already and the PATH variable containing the 'bin'
+directory of the toolchain:
 
-It requires GMP library in order to build. You can download GMP form the
+ $ export PATH="${TOOLS_DIR}/bin:${PATH}"
+
+It requires GMP library in order to build. You can download GMP from the
 website <http://gmplib.org/> or use the direct link below.
 
 For the shell commands below, I assume that you would unpack GMP at the home
 directory, but you may change the path if you like.
 
  $ cd ${HOME}
- $ wget ftp://ftp.gmplib.org/pub/gmp/gmp-5.1.3.tar.xz
- $ tar -x -v --xz -f gmp-5.1.3.tar.xz
- $ cd gmp-5.1.3
+ $ wget ftp://ftp.gmplib.org/pub/gmp/gmp-6.0.0a.tar.xz
+ $ tar -x -v --xz -f gmp-6.0.0a.tar.xz
+ $ cd gmp-6.0.0
 
 Configure and build GMP:
 
- $ ./configure --build=i386-pc-linux-gnu --disable-shared ABI=32 \
-     CFLAGS='-m32 -O2 -pedantic -fomit-frame-pointer'
+ $ ./configure --host=i486-pc-linux-gnu --enable-fat --disable-shared
  $ make
 
-Notes about the configure options:
-* The configure script of GMP would try to produce the binary optimized to the
-  build system. (With CFLAGS='-march=<your_arch>') This would make the binary
-  un-portable. Thus, I overwrite CFLAGS so that '-mtune' and '-march' are not
-  used. The CFLAGS specified here are the same as the systester compiled in
-  Parted Magic.
-* The "--build=i386-pc-linux-gnu" option forces GMP to include a generic
-  header (gmp-mparam.h) instead of a header optimized for a particular
-  architecture.
-* If you have a 64-bit processor, the configure script might set the build
-  system to 64-bit (even though the OS is 32-bit). With the overwritten CFLAGS
-  this will generate an error, unless you also specify "ABI=32".
+(Optional) Because GMP is cross-compiled, Systester will show "Compiler used
+for GMP: i486-pc-linux-gnu-gcc" when compiled with this library. I want the
+field to show "gcc" instead, as if Systester and GMP were compiled with a
+native compiler. Edit gmp.h to do this:
+
+ $ sed -i.bak -e 's/__GMP_CC[^\n]*/__GMP_CC "gcc -std=gnu99"/' gmp.h
 
 Unpack Systester:
 
@@ -51,11 +49,17 @@ Copy the ".patch" files into the source code directory. Then apply the patches:
 Build Systester (CLI version):
 
  $ cd cli
- $ CPPFLAGS='-L${HOME}/gmp-5.1.3/.libs -I${HOME}/gmp-5.1.3' make cli
+ $ CPPFLAGS='-L${HOME}/gmp-6.0.0/.libs -I${HOME}/gmp-6.0.0' \
+     CC=i486-pc-linux-gnu-gcc make cli
+
+Note:
+* Don't override the CPPFLAGS variable here because the makefile has an
+  additional flag to add. Specifying CPPFLAGS as an environment variable
+  prevents the override, and this makefile is able to detect it.
 
 (Optional) Change the mode of the binary:
 
- $ chmod 755 stresscpu2
+ $ chmod 755 systester-cli
 
 (Optional) To reduce the file size, I stripped the binary after compilation:
 

@@ -1,11 +1,11 @@
-CPUstress image - version 2.4.0:
+CPUstress image - version 2.5.0:
 ================================
 
 Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 24 February 2014.
+Last edited on 15 August 2014.
 
 
 Content of this package:
@@ -68,12 +68,12 @@ e.g.: If you have extracted UBCD to ~/ubcd-extract/, this place is:
 How to edit the CPUstress image?
 ________________________________
 
-Unpack the cpustress-2.4.0.7z archive (you probably already did this, else you
+Unpack the cpustress-2.5.0.7z archive (you probably already did this, else you
 couldn't read this README.
-$ 7z x "./path/to/file/cpustress-2.4.0.7z"
+$ 7z x "./path/to/file/cpustress-2.5.0.7z"
 
 Extract the ./build tar archive and the initrd.xz file:
-$ cd cpustress-2.4.0
+$ cd cpustress-2.5.0
 $ tar xvJf build.txz
 $ cd build
 $ cp ../initrd.xz .
@@ -197,7 +197,7 @@ You can change the ubcdargs parameter to:
     - systester
 
 
-Intel Optimized LINPACK 11.1.2: linpack
+Intel Optimized LINPACK 11.1.3: linpack
 -------------------------------
 
 The following isolinux entry will run the LINPACK benchmark in interactive
@@ -246,7 +246,18 @@ If you want to run a specific version of mprime, when you boot the image, use:
     INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=mprime27
 
-      This will start 'Mersenne Prime 27.9'.
+      This will start 'Mersenne Prime 27.9 build 1'.
+
+If you want to run mprime with specific parameters, when you boot the image,
+use something similar to:
+
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.xz
+    APPEND noapic ubcdcmd=mprime27 instances=2 ubcdargs='--noconfig'
+
+The ubcdargs parameter contains the options that you want to pass to mprime.
+The instances parameter may be specified for the number of threads to be run.
+Both parameters are optional.
 
 
 Stress v1.0.4: stress

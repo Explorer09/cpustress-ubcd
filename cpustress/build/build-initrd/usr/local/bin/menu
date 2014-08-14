@@ -8,14 +8,14 @@
 #
 #
 # Licensed under the GNU General Public License, version 2 or later.
-# This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
+# This program comes with ABSOLUTELY NO WARRANTY. See the GNU GPL for details:
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 15 February 2014.
+# Last updated on 20 June 2014.
 
 
-if [ "X$1" = "X--help" ]; then
+if [ "X$1" = X--help ]; then
     # Displays a simple help. Needed by 'helpinfo'.
     cat << HELP
 
@@ -39,7 +39,7 @@ printf "                                 ********\n"
 printf "\n"
 printf "                 \033[01;37m1)\033[0m CPUburn v1.4a                   (burn)\n"
 printf "                 \033[01;37m2)\033[0m CPU Burn-in v1.00               (cpuburn-in)\n"
-printf "                 \033[01;37m3)\033[0m Intel Optimized LINPACK 11.1.2  (linpack)\n"
+printf "                 \033[01;37m3)\033[0m Intel Optimized LINPACK 11.1.3  (linpack)\n"
 printf "                 \033[01;37m4)\033[0m Mersenne Prime test v23.9.2     (mprime 23)\n"
 printf "                 \033[01;37m5)\033[0m Mersenne Prime test v27.9       (mprime 27)\n"
 printf "                 \033[01;37m6)\033[0m Stress v1.0.4                   (stress)\n"
@@ -60,44 +60,44 @@ read CHOICE
 printf "\n"
 
 case "$CHOICE" in
-    1 | "burn")
+    1 | burn)
         burn
         ;;
-    2 | "cpuburn-m" | "cpuburn-in")
+    2 | cpuburn-m | cpuburn-in)
         cpuburn-m
         ;;
-    3 | "linpack")
+    3 | linpack)
         linpack
         ;;
-    4 | "mprime23" | "mprime 23")
+    4 | mprime23 | "mprime 23")
         mprime 23
         ;;
-    5 | "mprime27" | "mprime 27")
+    5 | mprime27 | "mprime 27")
         mprime 27
         ;;
-    6 | "stress")
+    6 | stress)
         stress
         ;;
-    7 | "stresscpu2")
+    7 | stresscpu2)
         stresscpu2
         ;;
-    8 | "systester" | "systester-cli")
+    8 | systester | systester-cli)
         systester-cli
         printf "Test completed. Type '\033[01;37msystester-cli -help\033[0m' for other test options.\n"
         ;;
-    9 | "cpuinfo")
+    9 | cpuinfo)
         cpuinfo
         ;;
-    10 | "help" | "helpinfo")
+    10 | help | helpinfo)
         helpinfo
         ;;
-    11 | "sensors")
+    11 | sensors)
         sensors
         ;;
-    12 | "reboot")
+    12 | reboot)
         reboot
         ;;
-    13 | "poweroff")
+    13 | poweroff)
         poweroff
         ;;
     14)
@@ -105,13 +105,15 @@ case "$CHOICE" in
         ;;
     *)
         printf "This isn't a valid choice.\n"
+        ;;
 esac
 
 case "$CHOICE" in
-    12 | 13 | "reboot" | "poweroff")
+    12 | 13 | reboot | poweroff)
         ;;
     *)
         printf "menu: Type '\033[01;37mmenu\033[0m' to return to main menu.\n\n"
+        ;;
 esac
 
 exit 0

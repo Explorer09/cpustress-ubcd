@@ -4,28 +4,32 @@
 # ====================================================
 #
 # 'mprime' is a wrapper that does the following tasks:
-# 1. Prompts the user to choose which version of mprime he wants to use.
-# 2. Creates temporary working directories.
-# 3. If needed, runs multiple instances of 'mprime' in order to heat all CPUs
-#    up at the same time.
+# 1. Prompts the user to ask which version of mprime to use.
+# 2. Shows the user the options to configure the torture test.
+# 3. If needed, creates temporary working directories and runs multiple
+#    instances of 'mprime' in order to heat all CPUs up at the same time.
 # See '/opt/mprime/mprime.txt' for details.
 #
 #
 # Licensed under the GNU General Public License, version 2 or later.
-# This program comes with ABSOLUTLY NO WARRANTY. See the GNU GPL for details:
+# This program comes with ABSOLUTELY NO WARRANTY. See the GNU GPL for details:
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 18 June 2013.
+# Last updated on 7 August 2014.
 
 
 set -m
 CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
+SSE2=`awk '/sse2/ {print "Y"; exit}' /proc/cpuinfo`
+MEMTOTAL=`awk '/^MemTotal/ {print $2}' /proc/meminfo`
+# Convert KiB to MiB
+MEMTOTAL=$(($MEMTOTAL/1024))
 CHLD_COUNT=0
 
 sigchld_handler () {
     trap - 17
-    CHLD_COUNT="$(($CHLD_COUNT+1))"
+    CHLD_COUNT=$(($CHLD_COUNT+1))
     if [ "$CHLD_COUNT" -ge "$instances" ]; then
         trap - 1 2 3 15
         exit 0;
@@ -34,139 +38,260 @@ sigchld_handler () {
     read -s -n1 REPLY
 }
 
+read_num () {
+    printf "$1 [$2]: "
+    while :; do
+        read REPLY
+        if [ "X$REPLY" = X ]; then
+            REPLY="$2"
+            return
+        fi
+        if [ "$REPLY" -ge "$3" ] 2>/dev/null && [ "$REPLY" -le "$4" ]; then
+            return
+        fi
+        printf "Please enter a value between $3 and $4 [default=$2]: "
+    done
+}
+
 # This script expects that 'read' be interrupted by a signal. Notably bash
 # doesn't do this.
-if [ "X$BASH" != "X" ]; then
+if [ "X$BASH" != X ]; then
     echo "Don't run this script in bash." >&2
     exit 1
 fi
 
 mkdir -p /tmp/torture-test/
 
-printf '\033[0;32mMersenne Prime Torture test:\n'
-printf '============================\033[0m\n\n'
+printf "\033[0;32mMersenne Prime Torture test:\n"
+printf "============================\033[0m\n\n"
 
-case "$1" in
-    --help | -h)
-        cat << HELP
-Usage: $0 [VERSION] [-cdhmstv] [-aN] [-wDIR]
+# 3: '-t', multiple instances of mprime, temp directories always created.
+# 2: '-t', single instance of mprime.
+# 1: No '-t', single instance of mprime, no torture test config.
+MODE=3
+
+VER=0
+CONFIG=Y
+TEMPDIR=AUTO
+
+# Parse command-line arguments.
+ARG_B=N
+ARG_T=N
+ARGS=""
+while [ "X$1" != X ]; do
+    case "$1" in
+        --help | -[Hh\?]*)
+            if [ "$VER" = 0 ]; then
+                cat << HELP
+Usage: $0 [VERSION] [OPTIONS...]
 
 VERSION must be either 27 or 23. If unspecified, mprime wrapper will prompt it
 during execution.
 
--d      Print detailed information to stdout.
--h      Print this.
--m      Menu to configure mprime.
--s      Display status.
--t      Run the torture test.
--v      Print the version number.
--aN     Use an alternate set of INI and output files (obsolete).
--wDIR   Run from a different working directory.
+--noconfig  Skip the touture test configuration.
+--tempdir   Create a temporary working directory and run mprime from there.
+-h          Print this.
+-m          Menu to configure mprime.
+-v          Print the version number.
+-t          Run the torture test.
+-aN         Use an alternate set of INI and output files (obsolete).
+-wDIR       Run from a different working directory.
 
-Without the -a or -w option, this wrapper will create temporary directories in
-/tmp/torture-test as working directories.
-
-Don't use the -c option because the CPUstress image has no Internet connection.
+To specify how many torture test threads to run, export the 'instances' shell
+variable before running this script. e.g. 'export instances=1'
 HELP
-        exit 0
-        ;;
-    23)
-        MPRIME=/opt/mprime/mprime23
-        shift
-        ;;
-    27)
-        MPRIME=/opt/mprime/mprime27
-        shift
-        ;;
-    *)
-        echo "Which version of 'Mersenne Prime' do you want to use?"
-        echo "  1) version 27.9 (default)        Press any key except '2'"
-        echo "  2) version 23.9.2                Press '2'"
-        printf 'Choose: '
-        read -n1 -t 15 CHOICE
-        echo
-
-        if [ "X$CHOICE" = "X2" ]; then
-            MPRIME=/opt/mprime/mprime23
-        else
-            MPRIME=/opt/mprime/mprime27
-        fi
-        ;;
-esac
-
-# This script can run in 3 modes:
-# 3: With '-t', multiple instances of mprime.
-# 2: With '-t', single instance of mprime.
-# 1: No '-t', single instance of mprime.
-MODE=3
-
-# If this is N, then temp working directories won't be created.
-NEEDS_TEMP_DIR=Y
-
-if [ "$MPRIME" = "/opt/mprime/mprime23" ]; then
-    echo "The torture test will be executed with 'Mersenne Prime 23.9.2' (mprime23)."
-else
-    echo "The torture test will be executed with 'Mersenne Prime 27.9 build 1' (mprime27)."
-    [ "$MODE" -gt "2" ] && MODE=2
-fi
-echo
-printf 'Detecting the number of CPUs: '
-if [ "$CPUS" -eq "1" ]; then
-    printf '\033[01;37m1\033[0m CPU detected.\n'
-else
-    printf "\033[01;37m$CPUS\033[0m CPUs detected.\n"
-fi
-# "$instances" is a global variable that may be specified as a boot parameter.
-if [ "X$instances" = "X" ]; then
-    instances="$CPUS"
-fi
-if [ "$instances" -eq "1" ]; then
-    [ "$MODE" -gt "2" ] && MODE=2
-fi
-
-# Parse command-line arguments.
-ARGS=""
-while [ "X$1" != "X" ]; do
-    case "$1" in
-        -[Ww]* | -[Aa]*)
-            # Custom working directory.
-            NEEDS_TEMP_DIR=N
-            [ "$MODE" -gt "2" ] && MODE=2
+                exit 0
+            else
+                MODE=1; TEMPDIR=N; ARGS="$ARGS -h"
+            fi
             ;;
-        -[Cc]* | -[Dd]* | -[Mm]* | -[Ss]* | -[Tt]*)
-            # '-c', '-d', '-m', or '-s' usually brings the user to an
-            # interactive menu.
-            [ "$MODE" -gt "1" ] && MODE=1
+        23 | 27)
+            VER="$1"
+            ;;
+        --noconfig)
+            CONFIG=N
+            ;;
+        --tempdir)
+            [ "$TEMPDIR" != N ] && TEMPDIR=Y
+            ;;
+        -[WwAa]*)
+            [ "$MODE" -gt 2 ] && MODE=2
+            CONFIG=N; TEMPDIR=N; ARGS="$ARGS $1"
             ;;
         -[Bb]*)
-            # '-b' is invalid except for mprime23.
-            if [ "$MPRIME" != "/opt/mprime/mprime23" ]; then
-                NEEDS_TEMP_DIR=N
-            fi
-            [ "$MODE" -gt "1" ] && MODE=1
+            [ "$MODE" -gt 2 ] && MODE=2
+            CONFIG=N; TEMPDIR=N; ARG_B=Y; ARGS="$ARGS $1"
+            ;;
+        -[Tt]*)
+            MODE=1; ARG_T=Y; ARGS="$ARGS $1"
+            ;;
+        -[CcMmSsDd]*)
+            MODE=1; ARGS="$ARGS $1"
             ;;
         *)
-            # No actual tests will be run with '-h', '-v', or invalid option.
-            NEEDS_TEMP_DIR=N
-            [ "$MODE" -gt "1" ] && MODE=1
+            MODE=1; TEMPDIR=N; ARGS="$ARGS $1"
             ;;
     esac
-
-    ARGS="$ARGS $1"
     shift
 done
 
-if [ "$MODE" -eq "3" ]; then
-    printf "To stress all CPUs, $instances instances of mprime23 will be run in the background.\n\n"
-    printf '\033[01;31mTo stop the torture test, press any key.\033[0m\n'
+if [ "$MODE$ARG_B$ARG_T" = 1YN ]; then
+    echo "The -b switch is not supposed to work without -t in Stress Tester." >&2
+    exit 1
+fi
+
+if [ "$VER" = 0 ]; then
+    echo "Which version of 'Mersenne Prime' do you want to use?"
+    echo "  1) version 27.9 (default)"
+    echo "  2) version 23.9.2"
+    read_num "Choose" 1 1 2
+    if [ "$REPLY" = 2 ]; then
+        VER=23
+    else
+        VER=27
+    fi
+fi
+
+if [ "$instances" -gt 0 ] 2>/dev/null; then
+    :
+else
+    instances=0
+fi
+
+AWK_SUB=""
+MAXFFT_MIN=8
+MAXFFT_MAX=4096
+BLENDMEMORY=8
+TIMEFFT=15
+
+if [ "$VER" = 23 ]; then
+    echo "The torture test will be executed with 'Mersenne Prime 23.9.2'."
+    if [ "$instances" = 0 ]; then
+        instances="$CPUS"
+        echo "Detecting the number of CPUs: $CPUS detected."
+    fi
+    if [ "$instances" -eq 1 ]; then
+        [ "$MODE" -gt 2 ] && MODE=2
+    fi
+    if [ "$MODE" -eq 3 ]; then
+        echo "$instances instances of mprime will be run in the background."
+    elif [ "$MODE" -eq 2 ]; then
+        echo "1 instance of mprime will be run."
+    fi
+    if [ "$MEMTOTAL" -gt 256 ]; then
+        BLENDMEMORY=$(($MEMTOTAL-128))
+    elif [ "$MEMTOTAL" -gt 32 ]; then
+        BLENDMEMORY=$(($MEMTOTAL/2))
+    fi
+    MEMORY_MAX="$BLENDMEMORY"
+    PRIME_INI=prime.ini
+else
+    echo "The torture test will be executed with 'Mersenne Prime 27.9 build 1'."
+    if [ "$ARG_B" = Y ]; then
+        MODE=1
+    fi
+    [ "$MODE" -gt 2 ] && MODE=2
+    if [ "$instances" = 0 ]; then
+        instances="$CPUS"
+        echo "Detecting the number of CPUs: $CPUS detected."
+    else
+        AWK_SUB="sub(/^(; )?TortureThreads[^\n]*\$/, \"TortureThreads=$instances\");"
+    fi
+    if [ "$MODE" -gt 1 ] && [ "$CONFIG" = Y ]; then
+        AWK_SUB="sub(/^(; )?TortureThreads[^\n]*\$/, \"TortureThreads=$instances\");"
+        if [ "$instances" -eq 1 ]; then
+            echo "1 touture test thread will be run."
+        else
+            echo "$instances touture test threads will be run."
+        fi
+    fi
+    if [ "X$SSE2" = XY ]; then
+        MAXFFT_MAX=32768
+    fi
+    if [ "$MEMTOTAL" -ge 2000 ]; then
+        BLENDMEMORY=1600
+    elif [ "$MEMTOTAL" -ge 500 ]; then
+        BLENDMEMORY=$(($MEMTOTAL-256))
+    elif [ "$MEMTOTAL" -ge 200 ]; then
+        BLENDMEMORY=$(($MEMTOTAL/2))
+    fi
+    MEMORY_MAX="$MEMTOTAL"
+    PRIME_INI=prime.txt
+fi
+
+cd /opt/mprime/$VER
+
+# Configure torture test.
+if [ "$MODE" -gt 1 ] && [ "$CONFIG" = Y ]; then
+    ps | awk '/mprime/ && (! /awk|sh/) {
+        print "Warning: Another instance of mprime is running. Your configuration might get"
+        print "overwritten."; exit}' >&2
+    cat << TORTURE_TYPE
+Choose a type of torture test to run.
+  1) Small FFTs (maximum heat and FPU stress, data fits in L2 cache, RAM not
+     tested much).
+  2) In-place large FFTs (maximum heat and power consumption, some RAM tested).
+  3) Blend (tests some of everything, lots of RAM tested).
+Blend is the default.  NOTE: if you fail the blend test, but can pass the small
+FFT test then your problem is likely bad memory or a bad memory controller.
+TORTURE_TYPE
+    read_num "Type of torture test to run" 3 1 3
+    case "$REPLY" in
+        1) MINFFT=8  ; MAXFFT=64  ; TORTURE_MEM=0 ;;
+        2) MINFFT=128; MAXFFT=1024; TORTURE_MEM=0 ;;
+        3) MINFFT=8  ; MAXFFT=4096; TORTURE_MEM="$BLENDMEMORY" ;;
+    esac
+    printf "Min FFT Size: %5dK" "$MINFFT"
+    if [ "$TORTURE_MEM" -le 8 ]; then
+        printf "  Memory to use:           (in-place FFTs)\n"
+    else
+        printf "  Memory to use: %5dMiB, %5dMiB/thread\n" "$TORTURE_MEM" $(($TORTURE_MEM/$instances))
+    fi
+    printf "Max FFT size: %5dK  Time to run each FFT size: %5d minutes\n" "$MAXFFT" "$TIMEFFT"
+    while :; do
+        printf "Fine tune the selection [y/N]? "
+        read REPLY
+        case "$REPLY" in
+            [Yy]) REPLY=Y ; break ;;
+            "" | [Nn]) break ;;
+        esac
+    done
+    if [ "X$REPLY" = XY ]; then
+        read_num "Min FFT size (in K)" "$MINFFT" "$MAXFFT_MIN" "$MAXFFT_MAX"
+        MINFFT="$REPLY"
+        read_num "Max FFT size (in K)" "$MAXFFT" "$MAXFFT_MIN" "$MAXFFT_MAX"
+        MAXFFT="$REPLY"
+        if [ "$BLENDMEMORY" -gt 8 ]; then
+            read_num "Memory to use (in MiB, 0 = in-place FFTs)" "$TORTURE_MEM" 0 "$MEMORY_MAX"
+            TORTURE_MEM="$REPLY"
+        fi
+        read_num "Time to run each FFT size (in minutes)" "$TIMEFFT" 1 60
+        TIMEFFT="$REPLY"
+    fi
+    TORTURE_MEM=$(($TORTURE_MEM/$instances))
+    awk "{sub(/^(; )?MinTortureFFT[^\n]*\$/, \"MinTortureFFT=$MINFFT\");
+          sub(/^(; )?MaxTortureFFT[^\n]*\$/, \"MaxTortureFFT=$MAXFFT\");
+          sub(/^(; )?TortureMem[^\n]*\$/, \"TortureMem=$TORTURE_MEM\");
+          sub(/^(; )?TortureTime[^\n]*\$/, \"TortureTime=$TIMEFFT\");
+          $AWK_SUB print}" "$PRIME_INI" > "${PRIME_INI}.tmp"
+    mv -f "${PRIME_INI}.tmp" "$PRIME_INI"
+elif [ "$TEMPDIR" != N ] && [ "X$AWK_SUB" != X ]; then
+    awk "{$AWK_SUB print}" "$PRIME_INI" > "${PRIME_INI}.tmp"
+    mv -f "${PRIME_INI}.tmp" "$PRIME_INI"
+fi
+
+# Launch mprime
+if [ "$MODE" -eq 3 ]; then
+    printf "\033[01;31mTo stop the torture test, press any key.\033[0m\n"
 
     PID_LIST=""
     trap 'trap - 17; kill $PID_LIST; wait; trap - 1 2 3 15; exit 0' 1 2 3 15
 
     for i in `seq 1 $instances`; do
         WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
-        printf "mprime: Starting instance $i of mprime ('$MPRIME -t -w$WORKING_DIR &').\n\n"
-        $MPRIME -t $WORKING_DIR &
+        cp "$PRIME_INI" "$WORKING_DIR"
+        echo "mprime: Starting instance $i of mprime ('/opt/mprime/$VER/mprime -t -w\"$WORKING_DIR\" &')."
+        /opt/mprime/${VER}/mprime -t -w"$WORKING_DIR" &
         PID_LIST="$PID_LIST $!"
     done
 
@@ -177,17 +302,15 @@ if [ "$MODE" -eq "3" ]; then
     echo "mprime: Terminating."
     trap - 17; kill $PID_LIST; wait; trap - 1 2 3 15; exit 0
 else
-    if [ "$MODE" -eq "2" ]; then
+    if [ "$MODE" -eq 2 ]; then
         # ARGS always begins with a space.
         ARGS=" -t$ARGS"
     fi
-    if [ "$NEEDS_TEMP_DIR" = "Y" ]; then
+    if [ "$TEMPDIR" = Y ]; then
         WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
+        cp "$PRIME_INI" "$WORKING_DIR"
         ARGS="$ARGS -w$WORKING_DIR"
     fi
-    printf "Running 1 instance of mprime ('${MPRIME}${ARGS}').\n\n"
-    ${MPRIME}${ARGS}
+    echo "Running 1 instance of mprime ('/opt/mprime/$VER/mprime$ARGS')."
+    exec ./mprime$ARGS
 fi
-
-trap - 1 2 3 15 17
-exit 0

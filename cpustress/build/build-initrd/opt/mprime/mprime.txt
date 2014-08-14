@@ -2,27 +2,100 @@ Help: wrapper for the Mersenne Prime Torture test (mprime)
 ==========================================================
 
 Written by Gert Hulselmans and Explorer.
-Last updated on 14 April 2013.
+Last updated on 7 August 2014.
 
-This wrapper allows the user to choose which version of mprime he wants to use.
-When you run the following in the terminal:
-  mprime          ==> will prompt to ask which version should be used
-  mprime 23       ==> will run 'Mersenne Prime 23.9.2'
-  mprime 27       ==> will run 'Mersenne Prime 27.9 build 1'
+The mprime wrapper script is made to overcome several design limitations of the
+original mprime program and to make a unified command-line interface for use in
+the CPUstress image.
 
-When running mprime 23.9.2, the wrapper automaticly detects the number of CPUs
-to stress them all at the same time. It will run an instance of 'mprime' for
-each CPU in order to heat all CPUs up at the same time. You can do this by
-running the background option (-bn with n= number of processes). However, this
-option does not display any output on the screen. This can be solved by running
-several instances of mprime with the background (&) option of the shell. This
-method displays the output of the multiple instances of mprime.
+The mprime program is from Great Internet Mersenne Prime Search (GIMPS)
+project. Their website is here: http://mersenne.org/
+Please see the terms and conditions at http://mersenne.org/legal/ when using
+the program.
 
-Since version 25.5, a single mprime instance can support multiple CPUs, and it
-runs multi-threaded by default. So the script won't use the workaround above on
-mprime 27.9. (This change is made by Explorer and not Gert Hulselmans.) Note
-that the background option (-b) is no longer supported since 25.5.
+Usage: mprime [VERSION] [OPTIONS...]
 
+The VERSION argument specifies which versions of mprime should be used.
+Currently there are two included in CPUstress:
+        23 (version 23.9.2)
+        27 (version 27.9 build 1)
+If VERSION is unspecified, the wrapper will prompt to ask it during execution.
+
+Mersenne Prime v27.9 is a recent version that supports modern processors and
+multi-threading. Usually you will choose this version over the old one.
+Mersenne Prime v23.9 is a backup version for people who have Pentium III or
+older CPUs, since it is said in the changelog that mprime 24.6+ have worse
+perfomance on Pertium I, II, or III.
+
+Mprime v23.9 does not support multi-threading like recent versions do, but the
+wrapper script will workaround this problem by running multiple instances of
+mprime at the same time. It is done using the background option (&) of the
+shell, so the output of mprime will be displayed.
+
+The wrapper will present you several options to configure the torture test.
+This was a feature available in v25.5+ through the interactive menu, but this
+wrapper makes the options available to v23.9 as well.
+
+You may edit the prime.ini or prime.txt file to configure the torture test
+manually. Change these variables:
+        TortureThreads=    ; Default is to detect automatically.
+        MinTortureFFT=8    ; In K
+        MaxTortureFFT=4096 ; In K
+        TortureMem=8       ; In MiB. Value is per thread.
+        TortureTime=15     ; In minutes
+If TortureMem is set to 8MiB or less, then the torture test does FFTs in-place.
+
+You may look up the cache sizes of your processor when configuring the torture
+test. To do this, bring up mprime's menu ('mprime 27 -m'), and then choose
+"Option/CPU".
+
+Environment variable
+--------------------
+
+instances=N  Specify the number (N) of touture test threads to run.
+
+Command-line options
+--------------------
+
+--noconfig   Skip the touture test configuration.
+--tempdir    Always create a temporary working directory (in
+             "/tmp/torture-test") when running mprime. This is useful if you
+             want to run multiple instances of mprime, each with different
+             torture test settings.
+-h           Print a help message. If you specify '-h' after a version argument
+             (e.g. 'mprime 23 -h'), the help message of that version will be
+             displayed. If you invoke just 'mprime -h' without a version, the
+             help of the wrapper script will be displayed.
+-m           Display mprime's main menu. As the CPUstress image does not have
+             Internet connection you cannot connect to PrimeNet. However, you
+             may run Advanced tests through the menu. The result of Advanced
+             test will be stored in results.txt as usual.
+-v           Print the version number of mprime.
+
+The wrapper script might pass additional switches internally to mprime
+executable, therefore it is not recommended to specify any of the options
+below, or it may conflict with some wrapper script features:
+
+-t           Run the torture test. The wrapper passes this switch internally
+             unless when '-m' is specified. If you specify '-t' manually the
+             wrapper will disable all of its own features.
+-aN          Obsolete. Tells mprime to use a different set of INI and output
+             files. N is a 4-digit integer which becomes part of the filenames
+             like "prim0012.txt" and "loca0012.txt".
+-bN          Mprime 23 only. Run N instances of mprime in the background,
+             displaying no output.
+-wDIRECTORY  Run from a different working directory.
+
+Specifying either '-a', '-b', or '-w' disables torture test configuration,
+temporary directory ('--tempdir'), and can run only single instance of mprime.
+The 'instances' variable may also not work.
+
+These three options are useless without PrimeNet and shouldn't be used in
+CPUstress: '-c', '-d', and '-s'. Mprime can accept these switches but will have
+no effect other than displaying a menu like '-m'.
+
+Running mprime through the isolinux commandline
+-----------------------------------------------
 
 The following entry will prompt to ask which version of mprime you want to run.
 
@@ -44,9 +117,176 @@ If you want to run a specific version of mprime, when you boot the image, use:
 
   This will start 'Mersenne Prime 27.9 build 1'.
 
+If you want to run mprime with specific parameters, when you boot the image,
+use something similar to:
 
-This wrapper avoids specifying the working directory part (-w) and the torture
-(-t) option of the command 'mprime -t -w/tmp/torture-test/torture.XXXXXX',
-so the user can run 'mprime' from a terminal without worrying which parameters
-to add to use the torture test of Mersenne Prime Test.
+    COM32  linux.c32 /ubcd/boot/cpustress/bzImage
+    INITRD /ubcd/boot/cpustress/initrd.xz
+    APPEND noapic ubcdcmd=mprime27 instances=2 ubcdargs='--noconfig'
 
+The ubcdargs parameter contains the options that you want to pass to mprime.
+The instances parameter may be specified for the number of threads to be run.
+Both parameters are optional.
+
+Below the line is the content of "stress.txt" that is included in the original
+mprime (prime95) package:
+-------------------------------------------------------------------------------
+
+                        STRESS TESTING YOUR COMPUTER
+
+BACKGROUND
+----------
+
+Today's computers are not perfect.  Even brand new systems from major
+manufacturers can have hidden flaws.  If any of several key components such
+as CPU, memory, cooling, etc. are not up to spec, it can lead to incorrect
+calculations and/or unexplained system crashes.
+
+Overclocking is the practice of increasing the speed of the CPU and/or
+memory to make a machine faster at little cost.  Typically, overclocking
+involves pushing a machine past its limits and then backing off just a
+little bit.
+
+For these reasons, both non-overclockers and overclockers need programs
+that test the stability of their computers.  This is done by running
+programs that put a heavy load on the computer.  Though not originally
+designed for this purpose, this program is one of a few programs that
+are excellent at stress testing a computer.
+
+
+RESOURCES
+---------
+
+This program is a good stress test for the CPU, memory, L1 and L2 caches,
+CPU cooling, and case cooling.  The torture test runs continuously, comparing
+your computer's results to results that are known to be correct.  Any
+mismatch and you've got a problem!  Note that the torture test sometimes
+reads from and writes to disk but cannot be considered a stress test for
+hard drives.
+
+You'll need other programs to stress video cards, PCI bus, disk access,
+networking and other important components.  In addition, this is only one
+of several good programs that are freely available.  Some people report
+finding problems only when running two or more stress test programs
+concurrently.  You may need to raise prime95's priority when running two
+stress test programs so that each gets about 50% of the CPU time.
+
+Forums are a great place to learn about available stability test programs
+and to get advice on what to do when a problem is found.
+
+The currently popular stability test programs are (sorry, I don't have
+web addresses for these):
+        Prime95 (this program's torture test)
+        3DMark2001
+        CPU Stability test
+        Sisoft sandra
+        Quake and other games
+        Folding@Home
+        Seti@home
+        Genome@home
+
+Several useful websites for help (look for overclocking community or forum):
+        http://www.overclockers.com
+        http://www.arstechnica.com
+        http://www.hardocp.com
+        http://www.anandtech.com
+        http://www.tomshardware.com
+        http://www.sharkyextreme.com
+        Also try the alt.comp.hardware.overclocking Usenet newsgroup.
+
+Utility programs you may find useful (I'm sure there are others - look around):
+        Motherboard monitor from http://mbm.livewiredev.com
+        Memtest86 from http://www.memtest86.com
+        Cpuburn by redelm: http://pages.sbcglobal.net/redelm/
+        TaskInfo2002 from http://www.iarsn.com/
+
+
+WHAT TO DO IF A PROBLEM IS FOUND?
+---------------------------------
+
+The exact cause of a hardware problem can be very hard to find.
+
+If you are not overclocking, the most likely cause is an overheating CPU
+or memory DIMMs that are not quite up to spec.  Another possibility is
+you might need a better power supply.  Try running MotherBoard monitor
+and browse the forums above to see if your CPU is running too hot.
+If so, make sure the heat sink is properly attached, fans are operational,
+and air flow inside the case is good.  For isolating memory problems, try
+swapping memory DIMMs with a co-worker's or friend's machine.  If the errors
+go away, then you can be fairly confidant that memory was the cause of
+the trouble.  A power supply problem can often be identified by a significant
+drop in the voltages when prime95 starts running.  Once again the overclocker
+forums are a good resource for what voltages are acceptable.
+
+If you are overclocking then try increasing the core voltage, reduce the
+CPU speed, reduce the front side bus speed, or change the memory timings
+(CAS latency).  Also try asking for help in one of the forums above - they
+may have other ideas to try.
+
+
+CAN I IGNORE THE PROBLEM?
+-------------------------
+
+Ignoring the problem is a matter of personal preference.  There are
+two schools of thought on this subject.
+
+Most programs you run will not stress your computer enough to cause a
+wrong result or system crash.  If you ignore the problem, then video games
+may stress your machine resulting in a system crash.  Also, stay away from
+distributed computing projects where an incorrect calculation might cause
+you to return wrong results.  Bad data will not help these projects!
+In conclusion, if you are comfortable with a small risk of an occasional
+system crash then feel free to live a little dangerously!  Keep in mind
+that the faster prime95 finds a hardware error the more likely it is that
+other programs will experience problems.
+
+The second school of thought is, "Why run a stress test if you are going
+to ignore the results?"  These people want a guaranteed 100% rock solid
+machine.  Passing these stability tests gives them the ability to run
+CPU intensive programs with confidence.
+
+
+FREQUENTLY ASKED QUESTIONS
+--------------------------
+
+Q)  My machine is not overclocked.  If I'm getting an error, then there must
+be a bug in the program, right?
+
+        A)  The torture test is comparing your machines results against
+        KNOWN CORRECT RESULTS.  If your machine cannot generate correct
+        results, you have a hardware problem.  HOWEVER, if you are failing
+        the torture test in the SAME SPOT with the SAME ERROR MESSAGE
+        every time, then ask for help at http://mersenneforum.org - it is
+        possible that a recent change to the torture test code may have
+        introduced a software bug.
+
+Q)  How long should I run the torture test?
+
+        A)  I recommend running it for somewhere between 6 and 24 hours.
+        The program has been known to fail only after several hours and in
+        some cases several weeks of operation.  In most cases though, it will
+        fail within a few minutes on a flaky machine.
+
+Q)  Prime95 reports errors during the torture test, but other stability
+tests don't.  Do I have a problem?
+
+        A)  Yes, you've reached the point where your machine has been
+        pushed just beyond its limits.  Follow the recommendations above
+        to make your machine 100% stable or decide to live with a
+        machine that could have problems in rare circumstances.
+
+Q)  A forum member said "Don't bother with prime95, it always pukes on me,
+and my system is stable!.  What do you make of that?"
+
+        or
+
+"We had a server at work that ran for 2 MONTHS straight, without a reboot
+I installed Prime95 on it and ran it - a couple minutes later I get an error.
+You are going to tell me that the server wasn't stable?"
+
+        A)  These users obviously do not subscribe to the 100% rock solid
+        school of thought.  THEIR MACHINES DO HAVE HARDWARE PROBLEMS.
+        But since they are not presently running any programs that reveal
+        the hardware problem, the machines are quite stable.  As long as
+        these machines never run a program that uncovers the hardware problem,
+        then the machines will continue to be stable.
