@@ -1,11 +1,16 @@
-1 July 2014
+14 August 2014
 
 Systester download page:
 http://systester.sourceforge.net/downloads.php
 
-Systester is compiled on Ubuntu 12.04.4 LTS (32-bit).
+The Systester binary is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom
+cross-toolchain described in "toolchain.txt". Before compiling, make sure you
+have the toolchain built already and the PATH variable containing the 'bin'
+directory of the toolchain:
 
-It requires GMP library in order to build. You can download GMP form the
+ $ export PATH="${TOOLS_DIR}/bin:${PATH}"
+
+It requires GMP library in order to build. You can download GMP from the
 website <http://gmplib.org/> or use the direct link below.
 
 For the shell commands below, I assume that you would unpack GMP at the home
@@ -18,16 +23,15 @@ directory, but you may change the path if you like.
 
 Configure and build GMP:
 
- $ ./configure --build=i486-pc-linux-gnu --enable-fat --disable-shared \
-     CFLAGS='-m32 -O2 -pedantic -fomit-frame-pointer -mtune=i686 -march=i486'
+ $ ./configure --host=i486-pc-linux-gnu --enable-fat --disable-shared
  $ make
 
-Notes about the configure options:
-* Most Linux distros like Ubuntu configure their gcc to generate i686 code by
-  default, which might break compatibility with older CPUs. (Notably because
-  CMOV instructions are used.) '-march=i486' overrides the compiler default.
-* With '--enable-fat', configure script will no longer add '-mtune' or '-march'
-  automatically in CFLAGS.
+(Optional) Because GMP is cross-compiled, Systester will show "Compiler used
+for GMP: i486-pc-linux-gnu-gcc" when compiled with this library. I want the
+field to show "gcc" instead, as if Systester and GMP were compiled with a
+native compiler. Edit gmp.h to do this:
+
+ $ sed -i.bak -e 's/__GMP_CC[^\n]*/__GMP_CC "gcc -std=gnu99"/' gmp.h
 
 Unpack Systester:
 
@@ -46,7 +50,12 @@ Build Systester (CLI version):
 
  $ cd cli
  $ CPPFLAGS='-L${HOME}/gmp-6.0.0/.libs -I${HOME}/gmp-6.0.0' \
-     CFLAGS='-O2 -mtune=i686 -march=i486' make cli
+     CC=i486-pc-linux-gnu-gcc make cli
+
+Note:
+* Don't override the CPPFLAGS variable here because the makefile has an
+  additional flag to add. Specifying CPPFLAGS as an environment variable
+  prevents the override, and this makefile is able to detect it.
 
 (Optional) Change the mode of the binary:
 
