@@ -3,11 +3,24 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-1 July 2014
+14 August 2014
 
+Programs updated or rebuilt:
 - Updated Intel LINPACK to v11.1.3 (from v11.1.2)
 - Rebuilt systester-cli with GMP 6.0.0. Also GMP is now built as a fat binary.
-- Updated libgcc to v4.7.4 (from v4.7.3)
+- Rebuilt BusyBox and added 'mv' command.
+- Updated libgcc to v4.9.1 (from v4.7.3)
+- Updated kernel to 3.15.9.
+- All programs and libraries (except cpuburn-in, linpack, and mprime) are re-
+  compiled with a custom toolchain so that they are compatible with i486 CPUs.
+  All CPUstress releases since v2.1expl3 and until this version are not really
+  compatible with i486 and Pentium CPUs, due to the Ubuntu GCC that generates
+  i686-only code. Now this regression is fixed with the custom toolchain.
+Changes:
+- New wrapper script for Mersenne Prime test (mprime). This wrapper can now ask
+  user for which type of torture test to run, and tune the torture test
+  settings. Help document for mprime is also re-written.
+- Various optimizations in shell scripts.
 
 Changes in v2.4.0
 -----------------
