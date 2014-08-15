@@ -195,6 +195,10 @@ else
         instances="$CPUS"
         echo "Detecting the number of CPUs: $CPUS detected."
     else
+        if [ "$instances" -gt 32 ]; then
+            echo "Warning: Maximum number of worker threads supported is 32." >&2
+            instances=32
+        fi
         AWK_SUB="sub(/^(; )?TortureThreads[^\n]*\$/, \"TortureThreads=$instances\");"
     fi
     if [ "$MODE" -gt 1 ] && [ "$CONFIG" = Y ]; then
