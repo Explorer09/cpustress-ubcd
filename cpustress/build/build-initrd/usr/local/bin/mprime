@@ -152,11 +152,7 @@ if [ "$VER" = 0 ]; then
     fi
 fi
 
-if [ "$instances" -gt 0 ] 2>/dev/null; then
-    :
-else
-    instances=0
-fi
+[ "$instances" -gt 0 ] 2>/dev/null || instances=0
 
 AWK_SUB=""
 MAXFFT_MIN=8
