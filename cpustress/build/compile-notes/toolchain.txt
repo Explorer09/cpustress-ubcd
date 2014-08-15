@@ -239,7 +239,7 @@ Stripping binaries (Optional)
 The ".so" binary files in CPUstress are stripped binaries.
 
  $ cd ${SYSROOT_DIR}/lib
- $ strip --strip-unneeded ${SYSROOT_DIR}/lib/libgcc_s.so.1
+ $ strip --strip-unneeded libgcc_s.so.1
  $ strip --strip-unneeded *-2.19.so
 
 Change mode bits (Optional)
