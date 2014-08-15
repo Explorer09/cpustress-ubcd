@@ -225,7 +225,11 @@ libstdc++, are built as static libraries only.
      --with-sysroot=${SYSROOT_DIR} --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make distclean && rm -r *
+
+(Some target libraries will generate errors when doing 'make distclean'. '-k'
+switch added to workaround this.)
+
+ $ make -k distclean && rm -r *
  $ cd ..
 
 Copy libgcc_s.so.1 from 'tools' directory to the target's 'sysroot' directory,
