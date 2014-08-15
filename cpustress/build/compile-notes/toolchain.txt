@@ -146,10 +146,10 @@ Notes:
 3. Linux kernel headers for libc
 --------------------------------
 
- $ cd ../linux-3.16.1
+ $ cd linux-3.16.1
  $ make mrproper
  $ make INSTALL_HDR_PATH=${SYSROOT_DIR}/usr headers_install
- $ cd ${BASEDIR}
+ $ cd ..
 
 4. EGLIBC headers and startup files
 -----------------------------------
