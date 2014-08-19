@@ -11,7 +11,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 20 June 2014.
+# Last updated on 19 August 2014.
 
 
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
@@ -109,8 +109,8 @@ CPUSTRESS_TEXT
         mprime23)
             mprime 23 $ubcdargs
             ;;
-        mprime27)
-            mprime 27 $ubcdargs
+        mprime28)
+            mprime 28 $ubcdargs
             ;;
         sensors)
             sensors $ubcdargs

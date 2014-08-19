@@ -31,7 +31,7 @@ kernel /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=mprime23
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title Mersenne Prime Test V27.9\n Mersenne Prime Search program that stresses the CPU.
+title Mersenne Prime Test V28.5\n Mersenne Prime Search program that stresses the CPU.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=mprime27
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff

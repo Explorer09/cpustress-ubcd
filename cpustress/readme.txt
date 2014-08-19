@@ -5,7 +5,7 @@ Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 30 July 2014.
+Last edited on 19 August 2014.
 
 
 Content of this package:
@@ -244,16 +244,16 @@ If you want to run a specific version of mprime, when you boot the image, use:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.xz
-    APPEND noapic ubcdcmd=mprime27
+    APPEND noapic ubcdcmd=mprime28
 
-      This will start 'Mersenne Prime 27.9 build 1'.
+      This will start 'Mersenne Prime 28.5 build 2'.
 
 If you want to run mprime with specific parameters, when you boot the image,
 use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.xz
-    APPEND noapic ubcdcmd=mprime27 instances=2 ubcdargs='--noconfig'
+    APPEND noapic ubcdcmd=mprime28 instances=2 ubcdargs='--noconfig'
 
 The ubcdargs parameter contains the options that you want to pass to mprime.
 The instances parameter may be specified for the number of threads to be run.
@@ -328,13 +328,11 @@ boot time.
 You can specify how many child processes or threads the program creates. The
 way to specify this is different among programs.
 
-    burn, cpuburn-in, and mprime23: Add instances=N to the APPEND line,
-                                    where N is a positive integer.
+    burn, cpuburn-in, and mprime: Add instances=N to the APPEND line,
+                                  where N is a positive integer.
     linpack:    Add OMP_NUM_THREADS=N to the APPEND line.
     stresscpu2: Add ubcdargs="-n N" to the APPEND line.
     systester:  Add ubcdargs="-threads N" to the APPEND line.
-    mprime27:   You need to use the interactive menu. Adding ubcdargs="-m" will
-                take you to the menu.
 
 
 Thanks:
