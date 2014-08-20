@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-08-20 14:55:25.2832195150 +0800" .git_cache_meta
+touch -c -h -d "2014-08-20 15:06:45.5422515560 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -108,7 +108,7 @@ touch -c -h -d "2013-05-28 20:38:00.8311826750 +0800" cpustress/build/build-init
 chmod 0644 cpustress/build/build-initrd/opt/stress/stress.txt
 touch -c -h -d "2014-01-11 23:18:05.9109684040 +0800" cpustress/build/build-initrd/opt/stress/stress.txt
 chmod 0755 cpustress/build/build-initrd/runonce
-touch -c -h -d "2014-08-19 10:29:50.4405534240 +0800" cpustress/build/build-initrd/runonce
+touch -c -h -d "2014-08-20 14:59:21.2216584810 +0800" cpustress/build/build-initrd/runonce
 touch -c -h -d "2014-06-24 11:44:51.6439788810 +0800" cpustress/build/build-initrd/sbin/halt
 touch -c -h -d "2014-06-24 11:44:51.6479788310 +0800" cpustress/build/build-initrd/sbin/init
 touch -c -h -d "2014-06-24 11:44:51.6519787800 +0800" cpustress/build/build-initrd/sbin/mdev
@@ -136,7 +136,7 @@ touch -c -h -d "2014-06-20 00:50:08.4459001650 +0800" cpustress/build/build-init
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/help
 touch -c -h -d "2014-06-19 23:51:50.8134870580 +0800" cpustress/build/build-initrd/usr/local/bin/help
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/helpinfo
-touch -c -h -d "2014-08-19 10:29:02.9440561490 +0800" cpustress/build/build-initrd/usr/local/bin/helpinfo
+touch -c -h -d "2014-08-20 14:59:21.2216584810 +0800" cpustress/build/build-initrd/usr/local/bin/helpinfo
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/linpack
 touch -c -h -d "2014-06-22 15:26:26.8347096670 +0800" cpustress/build/build-initrd/usr/local/bin/linpack
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/menu
@@ -233,7 +233,7 @@ touch -c -h -d "2014-05-06 21:03:22.9432341320 +0800" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2014-06-24 11:45:37.7321406560 +0800" cpustress/build/prepare
 chmod 0664 cpustress/changes.txt
-touch -c -h -d "2014-08-20 14:33:29.5496183850 +0800" cpustress/changes.txt
+touch -c -h -d "2014-08-20 15:02:54.8878672120 +0800" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000 +0800" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
@@ -260,8 +260,8 @@ chmod 0644 cpustress/help/systester.txt
 touch -c -h -d "2014-01-11 23:18:19.6829677900 +0800" cpustress/help/systester.txt
 chmod 0644 cpustress/nonfree.txt
 touch -c -h -d "2013-09-05 20:54:44.5159490880 +0800" cpustress/nonfree.txt
-chmod 0644 cpustress/readme.txt
-touch -c -h -d "2014-08-20 14:54:50.0788555960 +0800" cpustress/readme.txt
+chmod 0664 cpustress/readme.txt
+touch -c -h -d "2014-08-20 15:02:09.0873937580 +0800" cpustress/readme.txt
 chmod 0644 iso/boot/grub/grldr
 touch -c -h -d "2014-08-13 08:07:28.0000000000 +0800" iso/boot/grub/grldr
 chmod 0644 iso/boot/grub/menu.lst
@@ -279,9 +279,9 @@ touch -c -h -d "2013-04-03 12:23:08.0991211180 +0800" iso/boot/syslinux/syslinux
 chmod 0644 iso/ubcd/boot/cpustress/NOTICE.txt
 touch -c -h -d "2013-09-05 21:02:57.0119380990 +0800" iso/ubcd/boot/cpustress/NOTICE.txt
 chmod 0644 iso/ubcd/menus/grub4dos/cpu.lst
-touch -c -h -d "2014-08-20 14:49:18.9954330910 +0800" iso/ubcd/menus/grub4dos/cpu.lst
+touch -c -h -d "2014-08-20 15:04:44.5370006880 +0800" iso/ubcd/menus/grub4dos/cpu.lst
 chmod 0644 iso/ubcd/menus/syslinux/cpu.cfg
-touch -c -h -d "2014-08-20 14:49:11.4993556000 +0800" iso/ubcd/menus/syslinux/cpu.cfg
+touch -c -h -d "2014-08-20 15:05:11.1972762850 +0800" iso/ubcd/menus/syslinux/cpu.cfg
 chmod 0644 iso/ubcd/menus/syslinux/defaults.cfg
 touch -c -h -d "2013-04-03 12:23:08.0991211180 +0800" iso/ubcd/menus/syslinux/defaults.cfg
 chmod 0644 screenshots/cpustress-burn.png
@@ -303,15 +303,15 @@ touch -c -h -d "2013-04-09 10:48:54.0000000000 +0800" screenshots/cpustress-stre
 chmod 0644 screenshots/cpustress-systester.png
 touch -c -h -d "2013-07-20 15:21:43.8627110000 +0800" screenshots/cpustress-systester.png
 chmod 0755 scripts/clean.sh
-touch -c -h -d "2014-02-24 09:02:34.7831402800 +0800" scripts/clean.sh
+touch -c -h -d "2014-08-20 15:05:39.5175690380 +0800" scripts/clean.sh
 chmod 0755 scripts/git-cache-meta.sh
 touch -c -h -d "2014-02-24 18:02:30.2368276960 +0800" scripts/git-cache-meta.sh
 chmod 0644 scripts/make_7z.bat
-touch -c -h -d "2014-02-24 09:02:53.7831394320 +0800" scripts/make_7z.bat
+touch -c -h -d "2014-08-20 15:05:54.6257252150 +0800" scripts/make_7z.bat
 chmod 0755 scripts/make_7z.sh
-touch -c -h -d "2014-02-24 09:03:07.5271388200 +0800" scripts/make_7z.sh
+touch -c -h -d "2014-08-20 15:06:02.0858023330 +0800" scripts/make_7z.sh
 chmod 0755 scripts/make_iso.sh
-touch -c -h -d "2014-02-24 09:03:20.5631382390 +0800" scripts/make_iso.sh
+touch -c -h -d "2014-08-20 15:06:16.9459559470 +0800" scripts/make_iso.sh
 chmod 0755 scripts/pack_buildtxz.sh
 touch -c -h -d "2014-01-12 12:34:30.2516709500 +0800" scripts/pack_buildtxz.sh
 mkdir -p cpustress/build/build-initrd/dev
