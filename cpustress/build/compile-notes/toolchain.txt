@@ -1,4 +1,4 @@
-18 August 2014
+20 August 2014
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -228,12 +228,14 @@ libstdc++, are built as static libraries only.
      --with-sysroot=${SYSROOT_DIR} --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
-
-(Some target libraries will generate errors when doing 'make distclean'. '-k'
-switch added to workaround this.)
-
  $ make -k distclean && rm -r *
  $ cd ..
+
+Notes:
+* __cxa_atexit should be enabled by default for glibc. There's no need to
+  explicitly specify '--enable-__cxa_atexit' IIRC.
+* Some target libraries will generate errors when doing 'make distclean'. '-k'
+  switch added to workaround this.
 
 Copy libgcc_s.so.1 from 'tools' directory to the target's 'sysroot' directory,
 because GCC's makefile won't do this automatically when installing:
