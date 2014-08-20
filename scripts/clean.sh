@@ -7,9 +7,9 @@
 cd `dirname $0`
 cd ..
 
-ISO_FILENAME="cpustress-2.5.0.iso"
+ISO_FILENAME="cpustress-2.5.1.iso"
 
-ARCHIVE_NAME="cpustress-2.5.0"
+ARCHIVE_NAME="cpustress-2.5.1"
 
 rm -f "$ISO_FILENAME"
 rm -f "${ARCHIVE_NAME}.7z"

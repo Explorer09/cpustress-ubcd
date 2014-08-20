@@ -9,8 +9,9 @@
 *.sh text=auto eol=lf
 *.bat text=auto eol=crlf
 
-# Patch files in compile-notes.
-*.patch text eol.lf
+# Patch files in compile-notes. Because some patch files have mixed line
+# endings, don't normalize them or else hunk fail may occur.
+*.patch -text
 
 # Grub4dos config file. Use CRLF line ending like in UBCD.
 *.lst text=auto eol=crlf

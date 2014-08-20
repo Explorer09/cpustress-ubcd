@@ -92,7 +92,7 @@ Intel Optimized LINPACK Benchmark
 * http://software.intel.com/en-us/articles/intel-math-kernel-library-linpack-download
 
 Mersenne Prime test (Prime95)
-* http://www.mersenne.org/download/index.php
+* http://www.mersenne.org/download/
 
 Stress
 * http://web.archive.org/web/20130520190152/http://weather.ou.edu/~apw/projects/stress/

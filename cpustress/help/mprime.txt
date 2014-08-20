@@ -1,8 +1,8 @@
-Help: wrapper for the Mersenne Prime Torture test (mprime)
+Help: wrapper for the Mersenne Prime torture test (mprime)
 ==========================================================
 
 Written by Gert Hulselmans and Explorer.
-Last updated on 7 August 2014.
+Last updated on 19 August 2014.
 
 The mprime wrapper script is made to overcome several design limitations of the
 original mprime program and to make a unified command-line interface for use in
@@ -18,10 +18,10 @@ Usage: mprime [VERSION] [OPTIONS...]
 The VERSION argument specifies which versions of mprime should be used.
 Currently there are two included in CPUstress:
         23 (version 23.9.2)
-        27 (version 27.9 build 1)
+        28 (version 28.5 build 2)
 If VERSION is unspecified, the wrapper will prompt to ask it during execution.
 
-Mersenne Prime v27.9 is a recent version that supports modern processors and
+Mersenne Prime v28.5 is a recent version that supports modern processors and
 multi-threading. Usually you will choose this version over the old one.
 Mersenne Prime v23.9 is a backup version for people who have Pentium III or
 older CPUs, since it is said in the changelog that mprime 24.6+ have worse
@@ -46,7 +46,7 @@ manually. Change these variables:
 If TortureMem is set to 8MiB or less, then the torture test does FFTs in-place.
 
 You may look up the cache sizes of your processor when configuring the torture
-test. To do this, bring up mprime's menu ('mprime 27 -m'), and then choose
+test. To do this, bring up mprime's menu ('mprime 28 -m'), and then choose
 "Option/CPU".
 
 Environment variable
@@ -113,16 +113,16 @@ If you want to run a specific version of mprime, when you boot the image, use:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.xz
-    APPEND noapic ubcdcmd=mprime27
+    APPEND noapic ubcdcmd=mprime28
 
-  This will start 'Mersenne Prime 27.9 build 1'.
+  This will start 'Mersenne Prime 28.5 build 2'.
 
 If you want to run mprime with specific parameters, when you boot the image,
 use something similar to:
 
     COM32  linux.c32 /ubcd/boot/cpustress/bzImage
     INITRD /ubcd/boot/cpustress/initrd.xz
-    APPEND noapic ubcdcmd=mprime27 instances=2 ubcdargs='--noconfig'
+    APPEND noapic ubcdcmd=mprime28 instances=2 ubcdargs='--noconfig'
 
 The ubcdargs parameter contains the options that you want to pass to mprime.
 The instances parameter may be specified for the number of threads to be run.

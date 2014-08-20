@@ -1,4 +1,4 @@
-15 August 2014
+20 August 2014
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -136,6 +136,9 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
 Notes:
 * The --disable-libstdcxx switch doesn't seem to work, so here I use the old,
   undocumented switch --disable-libstdc++-v3 .
+* The --with-arch-32=i486 and --with-tune=generic switches ensures that the new
+  target code compiled after this new compiler will support i486 (-march=i486)
+  and tuned for generic CPUs (-mtune=generic) by default.
 * Without libc headers, the TARGET_LIBC_PROVIDES_SSP macro should be undefined
   (in "gcc/auto-host.h") now. Trying to build EGLIBC at this time will result
   in "undefined reference to __stack_chk_guard" error. Linux From Scratch (LFS)
@@ -146,10 +149,10 @@ Notes:
 3. Linux kernel headers for libc
 --------------------------------
 
- $ cd ../linux-3.16.1
+ $ cd linux-3.16.1
  $ make mrproper
  $ make INSTALL_HDR_PATH=${SYSROOT_DIR}/usr headers_install
- $ cd ${BASEDIR}
+ $ cd ..
 
 4. EGLIBC headers and startup files
 -----------------------------------
@@ -225,8 +228,14 @@ libstdc++, are built as static libraries only.
      --with-sysroot=${SYSROOT_DIR} --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make distclean && rm -r *
+ $ make -k distclean && rm -r *
  $ cd ..
+
+Notes:
+* __cxa_atexit should be enabled by default for glibc. There's no need to
+  explicitly specify '--enable-__cxa_atexit' IIRC.
+* Some target libraries will generate errors when doing 'make distclean'. '-k'
+  switch added to workaround this.
 
 Copy libgcc_s.so.1 from 'tools' directory to the target's 'sysroot' directory,
 because GCC's makefile won't do this automatically when installing:
@@ -239,7 +248,7 @@ Stripping binaries (Optional)
 The ".so" binary files in CPUstress are stripped binaries.
 
  $ cd ${SYSROOT_DIR}/lib
- $ strip --strip-unneeded ${SYSROOT_DIR}/lib/libgcc_s.so.1
+ $ strip --strip-unneeded libgcc_s.so.1
  $ strip --strip-unneeded *-2.19.so
 
 Change mode bits (Optional)

@@ -1,13 +1,16 @@
-5 September 2013
+20 August 2014
 
 The cpuburn-in program included in the image is the official binary from
 cpuburnin.com, which can be downloaded here:
-    http://cpuburnin.com/downloads/cpuburn-in.tar.gz
+http://cpuburnin.com/downloads/cpuburn-in.tar.gz
 
-After downloading, make sure you unpack it to an empty directory. (You don't
-want your files to be replaced, do you?)
+After downloading, make sure you unpack it to an EMPTY directory. The archive
+does not have a top-level directory like most other source packages do, so
+EXISTING FILES MIGHT GET OVERWRITTEN if the directory is not empty.
 
- $ tar -x -v -z -f cpuburn-in.tar.gz
+ $ mkdir cpuburn-in
+ $ cd cpuburn-in
+ $ tar -x -v -z -f ../cpuburn-in.tar.gz
 
 The mode of the cpuburn-in binary after unpacking is 644, change it to 755:
 

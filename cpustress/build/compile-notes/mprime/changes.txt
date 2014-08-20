@@ -1,0 +1,108 @@
+20 August 2014
+
+Changes in mprime-changes.patch:
+- Wrap several parts of the code with a preprocessor conditional: "#ifdef \
+  BUILD_PRIMENET", so that mprime can be built without PrimeNet support and can
+  work completely offline when built. This applies to command-line builds only.
+  The GUI (Prime95) code is unchanged, so to build GUI version, the macro has
+  to be explicitly defined with compiler switch "-DBUILD_PRIMENET" or the build
+  will fail.
+  (This change is such an invasive one that it might never get accepted
+  upstream. But it can remove libcurl dependency.)
+- Reordered the code in "Options/CPU" so that the CPU information is displayed
+  first, before the interactive configuration of time and memory.
+- Added short description for each menu selections. This applies to command-
+  line builds only. GUI code is unchanged.
+- TortureThreads INI parameter now checks if it exceeds the bound
+  (MAX_NUM_WORKER_THREADS). Bug reported upstream:
+  (http://www.mersenneforum.org/showthread.php?t=19611)
+
+-------------------------------------------------------------------------------
+Technical notes about the mprime patches
+
+List of symbols (functions and global variables) that are no longer available
+if BUILD_PRIMENET is undefined:
+
+In comm95c.c and os_routines.c:
+/* These 2 symbols are also forward-declared in commonc.h */
+int          LoadPrimeNet(void) /* UPPERCASE 'N' */
+void         UnloadPrimeNet(void)
+
+In commonc.c:
+char         USERID[]
+char         COMPID[]
+int          DIAL_UP
+unsigned int DAYS_OF_WORK
+unsigned int WORK_PREFERENCE[]
+int          MANUAL_COMM
+unsigned int MODEM_RETRY_TIME
+unsigned int NETWORK_RETRY_TIME
+double       DAYS_BETWEEN_CHECKINS
+void         initCommCode(void)
+void         init_spool_file_and_comm_code(void)
+void         set_comm_timers(void)
+void         do_manual_comm_now(void)
+void         clear_comm_rate_limits(void)
+void         pingServer(void)
+void         UpdateEndDates(void)
+void         spoolMessage(short msgType, void *msg)
+void         spoolExistingResultsFile(void)
+int          unreserve(unsigned long p)
+void         readMessage(int fd, long *offset, short *msgType, void *msg)
+int          sendMessage(short msgType, void *msg)
+int          getProgramOptions(void)
+int          sendProgramOptions(int *talked_to_server)
+void         communicateWithServer(void *arg)
+void         salvageCorruptSpoolFile(void)
+
+In primenet.c:
+/* This file is no longer included from prime.c if BUILD_PRIMENET is
+   undefined. Also, PRIMENET is forward-declared in commonc.h */
+void         LoadPrimenet() /* lowercase 'n' */
+int          PRIMENET(short operation, void *pkt)
+
+In menu.c:
+void         test_primenet(void)
+void         advanced_manualcomm(void)
+void         advanced_unreserve(void)
+void         help_about_server(void)
+
+List of modified global variables and function codes:
+
+In commonb.c:
+Launcher
+primeContinue
+primeFactor
+prime
+factorBench
+primeBench
+prp
+
+In commonc.c:
+USE_PRIMENET /* Will be a "const int" when BUILD_PRIMENET is undefined. */
+getCpuSpeed
+nameAndReadIniFiles
+readIniFiles
+formatMsgForResultsFile
+timed_events_scheduler
+
+/* In timed_events_scheduler function, these 3 timed events should be never
+   used when PrimeNet is not built: TE_COMM_SERVER, TE_COMPLETION_DATES,
+   TE_WORK_QUEUE_CHECK . If one of the events is ever get fired, it will do
+   nothing and deactivates itself. */
+
+In ecm.c:
+ecm
+pminus1
+
+In menu.c:
+test_worker_threads
+advanced_quit
+options_cpu
+options_preferences
+test_welcome
+main_menu
+
+In prime.c:
+/* No longer #include "primenet.c" */
+main

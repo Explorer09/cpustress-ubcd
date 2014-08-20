@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Wrapper for the Mersenne Prime Torture test (mprime)
+# Wrapper for the Mersenne Prime torture test (mprime)
 # ====================================================
 #
 # 'mprime' is a wrapper that does the following tasks:
@@ -16,12 +16,13 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 7 August 2014.
+# Last updated on 19 August 2014.
 
 
 set -m
 CPUS=`awk '/^processor/ {CPU=$3}; END {print CPU+1}' /proc/cpuinfo`
 SSE2=`awk '/sse2/ {print "Y"; exit}' /proc/cpuinfo`
+AVX=`awk '/avx/ {print "Y"; exit}' /proc/cpuinfo`
 MEMTOTAL=`awk '/^MemTotal/ {print $2}' /proc/meminfo`
 # Convert KiB to MiB
 MEMTOTAL=$(($MEMTOTAL/1024))
@@ -62,7 +63,7 @@ fi
 
 mkdir -p /tmp/torture-test/
 
-printf "\033[0;32mMersenne Prime Torture test:\n"
+printf "\033[0;32mMersenne Prime torture test:\n"
 printf "============================\033[0m\n\n"
 
 # 3: '-t', multiple instances of mprime, temp directories always created.
@@ -85,7 +86,7 @@ while [ "X$1" != X ]; do
                 cat << HELP
 Usage: $0 [VERSION] [OPTIONS...]
 
-VERSION must be either 27 or 23. If unspecified, mprime wrapper will prompt it
+VERSION must be either 28 or 23. If unspecified, mprime wrapper will prompt it
 during execution.
 
 --noconfig  Skip the touture test configuration.
@@ -105,7 +106,7 @@ HELP
                 MODE=1; TEMPDIR=N; ARGS="$ARGS -h"
             fi
             ;;
-        23 | 27)
+        23 | 28)
             VER="$1"
             ;;
         --noconfig)
@@ -142,27 +143,21 @@ fi
 
 if [ "$VER" = 0 ]; then
     echo "Which version of 'Mersenne Prime' do you want to use?"
-    echo "  1) version 27.9 (default)"
+    echo "  1) version 28.5 (default)"
     echo "  2) version 23.9.2"
     read_num "Choose" 1 1 2
     if [ "$REPLY" = 2 ]; then
         VER=23
     else
-        VER=27
+        VER=28
     fi
 fi
 
-if [ "$instances" -gt 0 ] 2>/dev/null; then
-    :
-else
-    instances=0
-fi
+[ "$instances" -gt 0 ] 2>/dev/null || instances=0
 
 AWK_SUB=""
-MAXFFT_MIN=8
 MAXFFT_MAX=4096
 BLENDMEMORY=8
-TIMEFFT=15
 
 if [ "$VER" = 23 ]; then
     echo "The torture test will be executed with 'Mersenne Prime 23.9.2'."
@@ -178,15 +173,17 @@ if [ "$VER" = 23 ]; then
     elif [ "$MODE" -eq 2 ]; then
         echo "1 instance of mprime will be run."
     fi
+    MINFFT_MIN=8; MAXFFT_MIN=8
     if [ "$MEMTOTAL" -gt 256 ]; then
         BLENDMEMORY=$(($MEMTOTAL-128))
     elif [ "$MEMTOTAL" -gt 32 ]; then
         BLENDMEMORY=$(($MEMTOTAL/2))
     fi
     MEMORY_MAX="$BLENDMEMORY"
+    TIMEFFT=15
     PRIME_INI=prime.ini
 else
-    echo "The torture test will be executed with 'Mersenne Prime 27.9 build 1'."
+    echo "The torture test will be executed with 'Mersenne Prime 28.5 build 2'."
     if [ "$ARG_B" = Y ]; then
         MODE=1
     fi
@@ -195,6 +192,10 @@ else
         instances="$CPUS"
         echo "Detecting the number of CPUs: $CPUS detected."
     else
+        if [ "$instances" -gt 32 ]; then
+            echo "Warning: Maximum number of worker threads supported is 32." >&2
+            instances=32
+        fi
         AWK_SUB="sub(/^(; )?TortureThreads[^\n]*\$/, \"TortureThreads=$instances\");"
     fi
     if [ "$MODE" -gt 1 ] && [ "$CONFIG" = Y ]; then
@@ -204,6 +205,11 @@ else
         else
             echo "$instances touture test threads will be run."
         fi
+    fi
+    if [ "X$AVX" = XY ]; then
+        MINFFT_MIN=0; MAXFFT_MIN=1
+    else
+        MINFFT_MIN=7; MAXFFT_MIN=7
     fi
     if [ "X$SSE2" = XY ]; then
         MAXFFT_MAX=32768
@@ -216,6 +222,7 @@ else
         BLENDMEMORY=$(($MEMTOTAL/2))
     fi
     MEMORY_MAX="$MEMTOTAL"
+    TIMEFFT=3
     PRIME_INI=prime.txt
 fi
 
@@ -257,7 +264,7 @@ TORTURE_TYPE
         esac
     done
     if [ "X$REPLY" = XY ]; then
-        read_num "Min FFT size (in K)" "$MINFFT" "$MAXFFT_MIN" "$MAXFFT_MAX"
+        read_num "Min FFT size (in K)" "$MINFFT" "$MINFFT_MIN" "$MAXFFT_MAX"
         MINFFT="$REPLY"
         read_num "Max FFT size (in K)" "$MAXFFT" "$MAXFFT_MIN" "$MAXFFT_MAX"
         MAXFFT="$REPLY"
