@@ -1,6 +1,6 @@
 diff -r -u a/comm95c.c b/comm95c.c
 --- a/comm95c.c	2009-04-04 20:43:32.000000000 +0800
-+++ b/comm95c.c	2014-08-20 00:04:42.325120085 +0800
++++ b/comm95c.c	2014-08-20 13:27:25.664642528 +0800
 @@ -17,6 +17,7 @@
  
  /* Load the PrimeNet DLL, make sure an internet connection is active */
@@ -31,7 +31,7 @@ diff -r -u a/comm95c.c b/comm95c.c
  
 diff -r -u a/commonb.c b/commonb.c
 --- a/commonb.c	2014-05-28 23:39:04.000000000 +0800
-+++ b/commonb.c	2014-08-20 00:04:42.345120292 +0800
++++ b/commonb.c	2014-08-20 13:27:25.668642569 +0800
 @@ -2957,7 +2957,9 @@
  /* to try something and if it doesn't work, ESC and choose Test/Continue */
  /* to try some other system settings (without waiting an hour). */
@@ -221,7 +221,7 @@ diff -r -u a/commonb.c b/commonb.c
  
 diff -r -u a/commonc.c b/commonc.c
 --- a/commonc.c	2014-05-28 20:32:56.000000000 +0800
-+++ b/commonc.c	2014-08-20 00:04:42.369120540 +0800
++++ b/commonc.c	2014-08-20 13:27:25.668642569 +0800
 @@ -20,35 +20,47 @@
  char	SPOOL_FILE[80] = {0};
  char	LOGFILE[80] = {0};
@@ -611,7 +611,7 @@ diff -r -u a/commonc.c b/commonc.c
  				timed_events[i].time_to_fire =
 diff -r -u a/commonc.h b/commonc.h
 --- a/commonc.h	2014-05-28 20:35:30.000000000 +0800
-+++ b/commonc.h	2014-08-20 00:04:42.377120623 +0800
++++ b/commonc.h	2014-08-20 13:27:25.668642569 +0800
 @@ -144,26 +144,36 @@
  extern char USERID[21];			/* User's ID */
  extern char COMPID[21];			/* Computer name */
@@ -692,7 +692,7 @@ diff -r -u a/commonc.h b/commonc.h
  *                           Timed Events Handler                              *
 diff -r -u a/ecm.c b/ecm.c
 --- a/ecm.c	2014-02-25 18:31:22.000000000 +0800
-+++ b/ecm.c	2014-08-20 00:04:42.397120830 +0800
++++ b/ecm.c	2014-08-20 13:27:25.672642610 +0800
 @@ -3360,6 +3360,7 @@
  /* Send ECM completed message to the server.  Although don't do it for */
  /* puny B1 values. */
@@ -759,7 +759,7 @@ diff -r -u a/ecm.c b/ecm.c
  
 diff -r -u a/linux/makebsd b/linux/makebsd
 --- a/linux/makebsd	2014-05-29 22:35:16.000000000 +0800
-+++ b/linux/makebsd	2014-08-20 00:04:42.397120830 +0800
++++ b/linux/makebsd	2014-08-20 13:27:25.672642610 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -775,7 +775,7 @@ diff -r -u a/linux/makebsd b/linux/makebsd
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic /usr/local/lib/libcurl.a -lz -lcompat -lstdc++ -Wl,-Bdynamic -lssl
 diff -r -u a/linux/makefile b/linux/makefile
 --- a/linux/makefile	2014-05-29 22:35:16.000000000 +0800
-+++ b/linux/makefile	2014-08-20 00:04:42.397120830 +0800
++++ b/linux/makefile	2014-08-20 13:27:25.672642610 +0800
 @@ -20,10 +20,10 @@
  #	LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic  $(shell pkg-config --static --libs libcurl) -lstdc++ -Wl,-Bdynamic -ldl
  
@@ -791,7 +791,7 @@ diff -r -u a/linux/makefile b/linux/makefile
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic -lcurl -Wl,-Bdynamic -lrt -lstdc++ -ldl
 diff -r -u a/linux/makehaikugcc2 b/linux/makehaikugcc2
 --- a/linux/makehaikugcc2	2014-05-29 22:35:16.000000000 +0800
-+++ b/linux/makehaikugcc2	2014-08-20 00:04:42.401120871 +0800
++++ b/linux/makehaikugcc2	2014-08-20 13:27:25.672642610 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -807,7 +807,7 @@ diff -r -u a/linux/makehaikugcc2 b/linux/makehaikugcc2
  LIBS   = -L/boot/common/lib ../gwnum/gwnum.a ../gwnum/gwnum.ld -lnetwork -lcurl -lstdc++.r4
 diff -r -u a/linux/makehaikugcc4 b/linux/makehaikugcc4
 --- a/linux/makehaikugcc4	2014-05-29 22:35:16.000000000 +0800
-+++ b/linux/makehaikugcc4	2014-08-20 00:04:42.401120871 +0800
++++ b/linux/makehaikugcc4	2014-08-20 13:27:25.672642610 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -823,7 +823,7 @@ diff -r -u a/linux/makehaikugcc4 b/linux/makehaikugcc4
  LIBS   = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lnetwork -lcurl -lstdc++
 diff -r -u a/linux/menu.c b/linux/menu.c
 --- a/linux/menu.c	2014-01-07 15:43:38.000000000 +0800
-+++ b/linux/menu.c	2014-08-20 00:04:42.401120871 +0800
++++ b/linux/menu.c	2014-08-20 13:27:25.672642610 +0800
 @@ -242,6 +242,7 @@
  
  void getProxyInfo (char *, unsigned short *, char *, char *);
@@ -1345,7 +1345,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
 +#endif
 diff -r -u a/linux/os_routines.c b/linux/os_routines.c
 --- a/linux/os_routines.c	2014-05-28 18:10:02.000000000 +0800
-+++ b/linux/os_routines.c	2014-08-20 00:04:42.401120871 +0800
++++ b/linux/os_routines.c	2014-08-20 13:27:25.672642610 +0800
 @@ -407,6 +407,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -1372,7 +1372,7 @@ diff -r -u a/linux/os_routines.c b/linux/os_routines.c
  
 diff -r -u a/linux/prime.c b/linux/prime.c
 --- a/linux/prime.c	2014-05-15 21:45:24.000000000 +0800
-+++ b/linux/prime.c	2014-08-20 00:04:42.401120871 +0800
++++ b/linux/prime.c	2014-08-20 13:28:05.961059084 +0800
 @@ -106,7 +106,9 @@
  #include "commonb.c"
  #include "commonc.c"
@@ -1411,7 +1411,7 @@ diff -r -u a/linux/prime.c b/linux/prime.c
  		do_manual_comm_now ();
  		while (COMMUNICATION_THREAD) Sleep (50);
 +#else
-+		printf ("PrimeNet is not supported in this build\n");
++		printf ("PrimeNet is not supported in this build.\n");
 +		return (1);
 +#endif
  	}
@@ -1419,7 +1419,7 @@ diff -r -u a/linux/prime.c b/linux/prime.c
  /* Bring up the main menu */
 diff -r -u a/linux64/makebsd b/linux64/makebsd
 --- a/linux64/makebsd	2014-05-29 22:35:16.000000000 +0800
-+++ b/linux64/makebsd	2014-08-20 00:04:42.401120871 +0800
++++ b/linux64/makebsd	2014-08-20 13:27:25.672642610 +0800
 @@ -4,10 +4,10 @@
  #
  
@@ -1435,7 +1435,7 @@ diff -r -u a/linux64/makebsd b/linux64/makebsd
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -lcurl -lstdc++ -lcompat
 diff -r -u a/linux64/makefile b/linux64/makefile
 --- a/linux64/makefile	2014-05-29 22:35:16.000000000 +0800
-+++ b/linux64/makefile	2014-08-20 00:04:42.401120871 +0800
++++ b/linux64/makefile	2014-08-20 13:27:25.672642610 +0800
 @@ -13,10 +13,10 @@
  #	LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic $(shell pkg-config --static --libs libcurl) -lstdc++ -Wl,-Bdynamic -ldl
  
@@ -1451,7 +1451,7 @@ diff -r -u a/linux64/makefile b/linux64/makefile
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic -lcurl -Wl,-Bdynamic -lrt -lstdc++ -ldl
 diff -r -u a/linux64/menu.c b/linux64/menu.c
 --- a/linux64/menu.c	2014-01-07 15:43:38.000000000 +0800
-+++ b/linux64/menu.c	2014-08-20 00:04:42.401120871 +0800
++++ b/linux64/menu.c	2014-08-20 13:27:25.676642652 +0800
 @@ -242,6 +242,7 @@
  
  void getProxyInfo (char *, unsigned short *, char *, char *);
@@ -1973,7 +1973,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
 +#endif
 diff -r -u a/linux64/os_routines.c b/linux64/os_routines.c
 --- a/linux64/os_routines.c	2014-05-28 18:10:02.000000000 +0800
-+++ b/linux64/os_routines.c	2014-08-20 00:04:42.401120871 +0800
++++ b/linux64/os_routines.c	2014-08-20 13:27:25.676642652 +0800
 @@ -407,6 +407,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -2000,7 +2000,7 @@ diff -r -u a/linux64/os_routines.c b/linux64/os_routines.c
  
 diff -r -u a/linux64/prime.c b/linux64/prime.c
 --- a/linux64/prime.c	2014-05-15 21:45:24.000000000 +0800
-+++ b/linux64/prime.c	2014-08-20 00:04:42.401120871 +0800
++++ b/linux64/prime.c	2014-08-20 13:28:05.961059000 +0800
 @@ -106,7 +106,9 @@
  #include "commonb.c"
  #include "commonc.c"
@@ -2039,7 +2039,7 @@ diff -r -u a/linux64/prime.c b/linux64/prime.c
  		do_manual_comm_now ();
  		while (COMMUNICATION_THREAD) Sleep (50);
 +#else
-+		printf ("PrimeNet is not supported in this build\n");
++		printf ("PrimeNet is not supported in this build.\n");
 +		return (1);
 +#endif
  	}
@@ -2047,7 +2047,7 @@ diff -r -u a/linux64/prime.c b/linux64/prime.c
  /* Bring up the main menu */
 diff -r -u a/macosx/makefile b/macosx/makefile
 --- a/macosx/makefile	2014-05-29 22:35:18.000000000 +0800
-+++ b/macosx/makefile	2014-08-20 00:04:42.401120871 +0800
++++ b/macosx/makefile	2014-08-20 13:27:25.676642652 +0800
 @@ -4,10 +4,10 @@
  ENVP= MACOSX_DEPLOYMENT_TARGET=10.4
  
@@ -2063,7 +2063,7 @@ diff -r -u a/macosx/makefile b/macosx/makefile
  LIBS   = ../gwnum/release/gwnum.a -lm -lpthread -lcurl -framework IOKit -framework CoreFoundation -lstdc++
 diff -r -u a/macosx/menu.c b/macosx/menu.c
 --- a/macosx/menu.c	2014-01-07 15:43:38.000000000 +0800
-+++ b/macosx/menu.c	2014-08-20 00:04:42.405120912 +0800
++++ b/macosx/menu.c	2014-08-20 13:27:25.676642652 +0800
 @@ -242,6 +242,7 @@
  
  void getProxyInfo (char *, unsigned short *, char *, char *);
@@ -2585,7 +2585,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
 +#endif
 diff -r -u a/macosx/os_routines.c b/macosx/os_routines.c
 --- a/macosx/os_routines.c	2014-05-28 18:10:02.000000000 +0800
-+++ b/macosx/os_routines.c	2014-08-20 00:04:42.405120912 +0800
++++ b/macosx/os_routines.c	2014-08-20 13:27:25.676642652 +0800
 @@ -407,6 +407,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -2612,7 +2612,7 @@ diff -r -u a/macosx/os_routines.c b/macosx/os_routines.c
  
 diff -r -u a/macosx/prime.c b/macosx/prime.c
 --- a/macosx/prime.c	2014-05-15 21:45:24.000000000 +0800
-+++ b/macosx/prime.c	2014-08-20 00:04:42.405120912 +0800
++++ b/macosx/prime.c	2014-08-20 13:28:05.961059000 +0800
 @@ -106,7 +106,9 @@
  #include "commonb.c"
  #include "commonc.c"
@@ -2651,7 +2651,7 @@ diff -r -u a/macosx/prime.c b/macosx/prime.c
  		do_manual_comm_now ();
  		while (COMMUNICATION_THREAD) Sleep (50);
 +#else
-+		printf ("PrimeNet is not supported in this build\n");
++		printf ("PrimeNet is not supported in this build.\n");
 +		return (1);
 +#endif
  	}
@@ -2659,7 +2659,7 @@ diff -r -u a/macosx/prime.c b/macosx/prime.c
  /* Bring up the main menu */
 diff -r -u a/macosx64/makefile b/macosx64/makefile
 --- a/macosx64/makefile	2014-05-29 22:35:20.000000000 +0800
-+++ b/macosx64/makefile	2014-08-20 00:04:42.405120912 +0800
++++ b/macosx64/makefile	2014-08-20 13:27:25.676642652 +0800
 @@ -4,10 +4,10 @@
  ENVP= MACOSX_DEPLOYMENT_TARGET=10.4
  
@@ -2675,7 +2675,7 @@ diff -r -u a/macosx64/makefile b/macosx64/makefile
  LIBS   = ../gwnum/amd64/release/gwnum.a -lm -lpthread -lcurl -framework IOKit -framework CoreFoundation -lstdc++
 diff -r -u a/macosx64/menu.c b/macosx64/menu.c
 --- a/macosx64/menu.c	2014-01-07 15:43:38.000000000 +0800
-+++ b/macosx64/menu.c	2014-08-20 00:04:42.405120912 +0800
++++ b/macosx64/menu.c	2014-08-20 13:27:25.676642652 +0800
 @@ -242,6 +242,7 @@
  
  void getProxyInfo (char *, unsigned short *, char *, char *);
@@ -3197,7 +3197,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
 +#endif
 diff -r -u a/macosx64/os_routines.c b/macosx64/os_routines.c
 --- a/macosx64/os_routines.c	2014-05-28 18:10:02.000000000 +0800
-+++ b/macosx64/os_routines.c	2014-08-20 00:04:42.405120912 +0800
++++ b/macosx64/os_routines.c	2014-08-20 13:27:25.676642652 +0800
 @@ -407,6 +407,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -3224,7 +3224,7 @@ diff -r -u a/macosx64/os_routines.c b/macosx64/os_routines.c
  
 diff -r -u a/macosx64/prime.c b/macosx64/prime.c
 --- a/macosx64/prime.c	2014-05-15 21:45:24.000000000 +0800
-+++ b/macosx64/prime.c	2014-08-20 00:04:42.409120954 +0800
++++ b/macosx64/prime.c	2014-08-20 13:28:05.961059000 +0800
 @@ -106,7 +106,9 @@
  #include "commonb.c"
  #include "commonc.c"
@@ -3263,7 +3263,7 @@ diff -r -u a/macosx64/prime.c b/macosx64/prime.c
  		do_manual_comm_now ();
  		while (COMMUNICATION_THREAD) Sleep (50);
 +#else
-+		printf ("PrimeNet is not supported in this build\n");
++		printf ("PrimeNet is not supported in this build.\n");
 +		return (1);
 +#endif
  	}
@@ -3271,7 +3271,7 @@ diff -r -u a/macosx64/prime.c b/macosx64/prime.c
  /* Bring up the main menu */
 diff -r -u a/os2/makefile b/os2/makefile
 --- a/os2/makefile	2008-06-01 15:10:18.000000000 +0800
-+++ b/os2/makefile	2014-08-20 00:04:42.409120954 +0800
++++ b/os2/makefile	2014-08-20 13:27:25.680642693 +0800
 @@ -5,7 +5,7 @@
  
  CC = wcc386
@@ -3283,7 +3283,7 @@ diff -r -u a/os2/makefile b/os2/makefile
  
 diff -r -u a/prime95/prime95.vcproj b/prime95/prime95.vcproj
 --- a/prime95/prime95.vcproj	2013-05-09 21:58:40.000000000 +0800
-+++ b/prime95/prime95.vcproj	2014-08-20 00:07:54.115103065 +0800
++++ b/prime95/prime95.vcproj	2014-08-20 13:27:25.680642693 +0800
 @@ -54,7 +54,7 @@
  				Name="VCCLCompilerTool"
  				InlineFunctionExpansion="1"
@@ -3340,7 +3340,7 @@ diff -r -u a/prime95/prime95.vcproj b/prime95/prime95.vcproj
  			<Tool
 diff -r -u a/winnt/compil64 b/winnt/compil64
 --- a/winnt/compil64	2008-11-16 16:37:58.000000000 +0800
-+++ b/winnt/compil64	2014-08-20 00:04:42.409120954 +0800
++++ b/winnt/compil64	2014-08-20 13:27:25.680642693 +0800
 @@ -1,7 +1,7 @@
  # Choose compiler switches 
  
@@ -3353,7 +3353,7 @@ diff -r -u a/winnt/compil64 b/winnt/compil64
  copt=/I.. /I..\gwnum /I\libcurl
 diff -r -u a/winnt/compile b/winnt/compile
 --- a/winnt/compile	2008-12-14 16:54:46.000000000 +0800
-+++ b/winnt/compile	2014-08-20 00:04:42.409120954 +0800
++++ b/winnt/compile	2014-08-20 13:27:25.680642693 +0800
 @@ -1,7 +1,7 @@
  # Choose compiler switches 
  
