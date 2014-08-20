@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-08-20 00:54:45.0398397340 +0800" .git_cache_meta
+touch -c -h -d "2014-08-20 11:38:22.3312244820 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -97,10 +97,10 @@ chmod 0755 cpustress/build/build-initrd/opt/mprime/23/mprime
 touch -c -h -d "2013-04-12 00:15:09.0000000000 +0800" cpustress/build/build-initrd/opt/mprime/23/mprime
 chmod 0644 cpustress/build/build-initrd/opt/mprime/23/prime.ini
 touch -c -h -d "2014-05-31 17:13:17.4240537700 +0800" cpustress/build/build-initrd/opt/mprime/23/prime.ini
-chmod 0755 cpustress/build/build-initrd/opt/mprime/27/mprime
-touch -c -h -d "2013-04-12 00:15:09.0000000000 +0800" cpustress/build/build-initrd/opt/mprime/27/mprime
-chmod 0644 cpustress/build/build-initrd/opt/mprime/27/prime.txt
-touch -c -h -d "2014-05-31 17:11:33.6269387380 +0800" cpustress/build/build-initrd/opt/mprime/27/prime.txt
+chmod 0755 cpustress/build/build-initrd/opt/mprime/28/mprime
+touch -c -h -d "2014-08-20 00:37:15.7590842840 +0800" cpustress/build/build-initrd/opt/mprime/28/mprime
+chmod 0644 cpustress/build/build-initrd/opt/mprime/28/prime.txt
+touch -c -h -d "2014-05-31 17:11:33.6269380000 +0800" cpustress/build/build-initrd/opt/mprime/28/prime.txt
 chmod 0644 cpustress/build/build-initrd/opt/mprime/mprime.txt
 touch -c -h -d "2014-08-19 10:19:32.9677323460 +0800" cpustress/build/build-initrd/opt/mprime/mprime.txt
 chmod 0644 cpustress/build/build-initrd/opt/sensors/sensors.txt
@@ -195,7 +195,11 @@ touch -c -h -d "2014-08-14 22:59:45.7034399650 +0800" cpustress/build/compile-no
 chmod 0644 cpustress/build/compile-notes/linpack.txt
 touch -c -h -d "2014-05-13 14:34:11.4584945630 +0800" cpustress/build/compile-notes/linpack.txt
 chmod 0644 cpustress/build/compile-notes/mprime.txt
-touch -c -h -d "2014-06-13 21:10:54.9269853970 +0800" cpustress/build/compile-notes/mprime.txt
+touch -c -h -d "2014-08-20 11:33:47.7123913280 +0800" cpustress/build/compile-notes/mprime.txt
+chmod 0644 cpustress/build/compile-notes/mprime/changes.txt
+touch -c -h -d "2014-08-20 10:08:01.1601467550 +0800" cpustress/build/compile-notes/mprime/changes.txt
+chmod 0644 cpustress/build/compile-notes/mprime/mprime-changes.patch
+touch -c -h -d "2014-08-20 00:15:01.1275158610 +0800" cpustress/build/compile-notes/mprime/mprime-changes.patch
 chmod 0644 cpustress/build/compile-notes/mprime/note.txt
 touch -c -h -d "2014-07-30 14:20:27.9579466360 +0800" cpustress/build/compile-notes/mprime/note.txt
 chmod 0755 cpustress/build/compile-notes/mprime/torture-conf.sh

@@ -1,43 +1,90 @@
-2 June 2014
+20 August 2014
 
 Website of the Mersenne Prime test program (a.k.a. mprime or prime95):
 http://www.mersenne.org/download/
 
-The mprime programs included in the CPUstress image are official binaries.
-Both are dynamically linked versions (not static).
+The mprime program v23.9 included in CPUstress image is the official binary.
+Mprime v28.5 is a custom build with the PrimeNet functionality removed. Both
+are dynamically linked versions (not static).
 
 Below are direct download links:
 mprime v23.9
 ftp://www.mersenne.org/gimps_archive/archived_executables/mprime239.tar.gz
-mprime v27.9 (there may be other mirrors)
-ftp://mersenne.org/gimps/p95v279.linux32.tar.gz
-http://mersenneforum.org/gimps/p95v279.linux32.tar.gz
+mprime v28.5 (there may be other mirrors)
+ftp://mersenne.org/gimps/p95v285.source.zip
+http://mersenneforum.org/gimps/p95v285.source.zip
 
-After downloading, make sure you unpack them to 2 separate empty directories,
-such as 'mprime239' and 'p95v279'. (You don't want your files to be replaced,
-do you?)
+After downloading the packages, make sure you unpack them to 2 separate EMPTY
+directories, such as 'mprime239' and 'p95v285.source'. These 2 archives do not
+have a top-level directory like most other source packages do, so EXISTING
+FILES MIGHT GET OVERWRITTEN if the directory is not empty.
+
+ $ mkdir mprime239 p95v285.source
+ $ cd mprime239
+ $ tar -x -v -z -f ../mprime239.tar.gz
+ $ cd ..
+ $ cd p95v285.source
+ $ unzip ../p95v285.source.zip
+ $ cd ..
+
+Mprime v28.5 is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom cross-
+toolchain described in "toolchain.txt". Before compiling, make sure you have
+the toolchain built already and the PATH variable containing the 'bin'
+directory of the toolchain:
+
+ $ export PATH="${TOOLS_DIR}/bin:${PATH}"
+
+Apply a patch that allows mprime to be built without PrimeNet functionality:
+(This patch also contains other changes, for details see "changes.txt" in
+"compile-notes/mprime".)
+
+ $ cd p95v285.source
+ $ patch -p 1 <mprime-changes.patch
+
+Build mprime by following these steps:
+
+ $ cd gwnum
+ $ sed -i.bak -e 's/ -march=i486//g' makefile
+ $ make -f makefile CC=i486-pc-linux-gnu-gcc CPP=i486-pc-linux-gnu-g++
+ $ cd ../linux
+ $ sed -i.bak -e 's/ -DBUILD_PRIMENET//g' -e 's/ -march=i486//g' \
+     -e 's/-lpthread[^\n]*/-lpthread/' makefile
+ $ make -f makefile CC=i486-pc-linux-gnu-gcc CPP=i486-pc-linux-gnu-g++
+ $ cd ../..
+
+The mprime executable (v28.5) will be available in the 'linux' subdirectory.
+
+Note:
+* The makefiles in Prime95 source code do not distinguish between preprocessor
+  flags and compiler flags, and incorrectly uses CPPFLAGS for C++ compiler
+  flags where it should use CXXFLAGS. And incorrectly CPP instead of CXX.
+* The CFLAGS variable has '-march=i486' but has no '-mtune'. This will let the
+  the compiler tune the object code for i486 instead of generic processors. I
+  remove the switch so that it uses the cross-compiler default '-march' (=i486)
+  and '-mtune' (=generic).
+* Without PrimeNet functionality, these libraries are no longer needed for
+  linking: -lcurl -lrt -lstdc++ -ldl
 
 (Optional) Change the mode of the binaries:
 
  $ chmod 755 mprime239/mprime
- $ chmod 755 p95v279/mprime
+ $ chmod 755 p95v285.source/linux/mprime
 
 (Optional) You can strip the binary file to save a few bytes. I did so in my
 CPUstress image:
 
  $ strip mprime239/mprime
- $ strip p95v279/mprime
+ $ strip p95v285.source/linux/mprime
 
 (Optional) I also used UPX to compress the executable so the file size could
 be much smaller: <http://upx.sourceforge.net/>
 
  $ upx --ultra-brute mprime239/mprime
- $ upx --ultra-brute p95v279/mprime
+ $ upx --ultra-brute p95v285.source/linux/mprime
 
 The programs depend on these libraries:
     libm.so.6
-    libpthread.so.0 (mprime27 only)
-    libdl.so.2 (mprime27 only)
+    libpthread.so.0 (mprime28 only)
     libc.so.6
     /lib/ld-linux.so.2
 
