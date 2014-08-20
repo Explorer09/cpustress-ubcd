@@ -3,8 +3,10 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-15 August 2014
+20 August 2014
 
+- Updated Mersenne Prime test to v28.5 build 2 (from v27.9 build 1)
+- Minor fixes in scripts and documentation.
 
 Changes in v2.5.0
 -----------------
