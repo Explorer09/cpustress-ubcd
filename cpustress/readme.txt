@@ -219,7 +219,7 @@ The following isolinux entry will display the menu.
     APPEND noapic ubcdcmd=menu
 
 
-Mersenne Prime Torture test: mprime
+Mersenne Prime torture test: mprime
 ----------------------------
 
 The following isolinux entry will prompt to ask which version of mprime you
