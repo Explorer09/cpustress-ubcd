@@ -7,14 +7,15 @@ cd ../cpustress
 
 if [ -d "build" ]; then
     rm -Ri build.txz build.tar
-    # The --exclude switch excludes files in build/build-initrd, but not the
+    # The sed command excludes files in build/build-initrd, but not the
     # directory itself.
     case `tar --version | sed -n -e '1 p'` in
     *GNU*)
         find build \( -type d -exec printf '%s/\n' '{}' \; \) -o -print |
             LC_ALL=C sort |
+            sed -e '/build\/build-initrd\/[^\n][^\n]*/ d
+                /build\/initrd\.xz/ d' |
             tar -c -v --no-recursion --format=ustar -f build.tar -T - \
-                --exclude='build/build-initrd/*' --exclude='build/initrd.xz' \
                 --exclude-backups --exclude-vcs
         STATUS="$?"
         ;;
@@ -24,8 +25,9 @@ if [ -d "build" ]; then
         # --seek.)
         find build \( -type d -exec printf '%s/\n' '{}' \; \) -o -print |
             LC_ALL=C sort |
-            tar -c -v -n --format ustar -f build.tar -T - \
-                --exclude 'build/build-initrd/*' --exclude 'build/initrd.xz'
+            sed -e '/build\/build-initrd\/[^\n][^\n]*/ d
+                /build\/initrd\.xz/ d' |
+            tar -c -v -n --format ustar -f build.tar -T -
         STATUS="$?"
         ;;
     *)
