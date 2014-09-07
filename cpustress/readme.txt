@@ -1,11 +1,11 @@
-CPUstress image - version 2.5.1:
+CPUstress image - version 2.5.2:
 ================================
 
 Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 20 August 2014.
+Last edited on 7 September 2014.
 
 
 Content of this package:
@@ -68,12 +68,12 @@ e.g.: If you have extracted UBCD to ~/ubcd-extract/, this place is:
 How to edit the CPUstress image?
 ________________________________
 
-Unpack the cpustress-2.5.1.7z archive (you probably already did this, else you
+Unpack the cpustress-2.5.2.7z archive (you probably already did this, else you
 couldn't read this README.
-$ 7z x "./path/to/file/cpustress-2.5.1.7z"
+$ 7z x "./path/to/file/cpustress-2.5.2.7z"
 
 Extract the ./build tar archive and the initrd.xz file:
-$ cd cpustress-2.5.1
+$ cd cpustress-2.5.2
 $ tar xvJf build.txz
 $ cd build
 $ cp ../initrd.xz .
@@ -193,7 +193,7 @@ You can change the ubcdargs parameter to:
     - systester
 
 
-Intel Optimized LINPACK 11.1.3: linpack
+Intel Optimized LINPACK 11.2.0: linpack
 -------------------------------
 
 The following isolinux entry will run the LINPACK benchmark in interactive
@@ -219,7 +219,7 @@ The following isolinux entry will display the menu.
     APPEND noapic ubcdcmd=menu
 
 
-Mersenne Prime Torture test: mprime
+Mersenne Prime torture test: mprime
 ----------------------------
 
 The following isolinux entry will prompt to ask which version of mprime you

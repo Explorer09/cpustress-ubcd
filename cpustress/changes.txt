@@ -1,5 +1,13 @@
-This file documents the changes of CPUstress test from v2.1 to v2.5.1.
+This file documents the changes of CPUstress test from v2.1 to v2.5.2.
 Changes are made by Explorer <explorer09@gmail.com>
+
+Changes in v2.5.2
+-----------------
+7 September 2014
+
+- Updated Intel LINPACK to v11.2.0 (from v11.1.3)
+- Updated kernel to 3.16.2. Enabled CONFIG_RELOCATABLE due to recent change in
+  the kernel code. See the Linux changelog for details.
 
 Changes in v2.5.1
 -----------------
