@@ -65,7 +65,7 @@ ln -s ../../bin/busybox which
 cd ../..
 
 cd lib
-if ls ld-*.so >>/dev/null; then
+if ls ld-*.so >/dev/null; then
     GLIBC_VER=`ls ld-*.so | sed -n -e 's/^ld-\(.*\)\.so/\1/' -e '1 p'`
     ln -s "ld-${GLIBC_VER}.so" ld-linux.so.2
     ln -s "libc-${GLIBC_VER}.so" libc.so.6
@@ -74,8 +74,5 @@ if ls ld-*.so >>/dev/null; then
     ln -s "libnss_files-${GLIBC_VER}.so" libnss_files.so.2
     ln -s "libpthread-${GLIBC_VER}.so" libpthread.so.0
 fi
-cd ..
-
-cd usr/lib
 ln -s libgcc_s.so.1 libgcc_s.so
-cd ../..
+cd ..
