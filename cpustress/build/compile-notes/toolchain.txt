@@ -136,7 +136,7 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
 Notes:
 * The --disable-libstdcxx switch doesn't seem to work, so here I use the old,
   undocumented switch --disable-libstdc++-v3 .
-* The --with-arch-32=i486 and --with-tune=generic switches ensures that the new
+* The --with-arch-32=i486 and --with-tune=generic switches ensure that the new
   target code compiled after this new compiler will support i486 (-march=i486)
   and tuned for generic CPUs (-mtune=generic) by default.
 * Without libc headers, the TARGET_LIBC_PROVIDES_SSP macro should be undefined
