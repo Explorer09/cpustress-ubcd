@@ -25,7 +25,7 @@ sigchld_handler () {
     CHLD_COUNT=$(($CHLD_COUNT+1))
     if [ "$CHLD_COUNT" -ge "$instances" ]; then
         trap - 1 2 3 15
-        exit 0;
+        exit 0
     fi
     trap 'sigchld_handler' 17
     read -s -n1 REPLY
