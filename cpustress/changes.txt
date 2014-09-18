@@ -3,8 +3,11 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-7 September 2014
+18 September 2014
 
+- Updated kernel to 3.16.3. Disabled CONFIG_INTEL_IDLE as there are problems
+  reported with the driver.
+  (See http://www.ultimatebootcd.com/forums/viewtopic.php?p=25464#p25464)
 
 Changes in v2.5.2
 -----------------
