@@ -16,7 +16,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 19 August 2014.
+# Last updated on 18 September 2014.
 
 
 set -m
@@ -33,7 +33,7 @@ sigchld_handler () {
     CHLD_COUNT=$(($CHLD_COUNT+1))
     if [ "$CHLD_COUNT" -ge "$instances" ]; then
         trap - 1 2 3 15
-        exit 0;
+        exit 0
     fi
     trap 'sigchld_handler' 17
     read -s -n1 REPLY
@@ -103,11 +103,13 @@ variable before running this script. e.g. 'export instances=1'
 HELP
                 exit 0
             else
-                MODE=1; TEMPDIR=N; ARGS="$ARGS -h"
+                MODE=1 TEMPDIR=N ARGS="$ARGS -h"
             fi
             ;;
         23 | 28)
             VER="$1"
+            ;;
+        [0-9]*) # Wrong version. Silently ignore.
             ;;
         --noconfig)
             CONFIG=N
@@ -117,20 +119,20 @@ HELP
             ;;
         -[WwAa]*)
             [ "$MODE" -gt 2 ] && MODE=2
-            CONFIG=N; TEMPDIR=N; ARGS="$ARGS $1"
+            CONFIG=N TEMPDIR=N ARGS="$ARGS $1"
             ;;
         -[Bb]*)
             [ "$MODE" -gt 2 ] && MODE=2
-            CONFIG=N; TEMPDIR=N; ARG_B=Y; ARGS="$ARGS $1"
+            CONFIG=N TEMPDIR=N ARG_B=Y ARGS="$ARGS $1"
             ;;
         -[Tt]*)
-            MODE=1; ARG_T=Y; ARGS="$ARGS $1"
+            MODE=1 ARG_T=Y ARGS="$ARGS $1"
             ;;
         -[CcMmSsDd]*)
-            MODE=1; ARGS="$ARGS $1"
+            MODE=1 ARGS="$ARGS $1"
             ;;
         *)
-            MODE=1; TEMPDIR=N; ARGS="$ARGS $1"
+            MODE=1 TEMPDIR=N ARGS="$ARGS $1"
             ;;
     esac
     shift
@@ -173,7 +175,7 @@ if [ "$VER" = 23 ]; then
     elif [ "$MODE" -eq 2 ]; then
         echo "1 instance of mprime will be run."
     fi
-    MINFFT_MIN=8; MAXFFT_MIN=8
+    MINFFT_MIN=8 MAXFFT_MIN=8
     if [ "$MEMTOTAL" -gt 256 ]; then
         BLENDMEMORY=$(($MEMTOTAL-128))
     elif [ "$MEMTOTAL" -gt 32 ]; then
@@ -207,9 +209,9 @@ else
         fi
     fi
     if [ "X$AVX" = XY ]; then
-        MINFFT_MIN=0; MAXFFT_MIN=1
+        MINFFT_MIN=0 MAXFFT_MIN=1
     else
-        MINFFT_MIN=7; MAXFFT_MIN=7
+        MINFFT_MIN=7 MAXFFT_MIN=7
     fi
     if [ "X$SSE2" = XY ]; then
         MAXFFT_MAX=32768
@@ -244,9 +246,9 @@ FFT test then your problem is likely bad memory or a bad memory controller.
 TORTURE_TYPE
     read_num "Type of torture test to run" 3 1 3
     case "$REPLY" in
-        1) MINFFT=8  ; MAXFFT=64  ; TORTURE_MEM=0 ;;
-        2) MINFFT=128; MAXFFT=1024; TORTURE_MEM=0 ;;
-        3) MINFFT=8  ; MAXFFT=4096; TORTURE_MEM="$BLENDMEMORY" ;;
+        1) MINFFT=8   MAXFFT=64   TORTURE_MEM=0 ;;
+        2) MINFFT=128 MAXFFT=1024 TORTURE_MEM=0 ;;
+        3) MINFFT=8   MAXFFT=4096 TORTURE_MEM="$BLENDMEMORY" ;;
     esac
     printf "Min FFT Size: %5dK" "$MINFFT"
     if [ "$TORTURE_MEM" -le 8 ]; then
@@ -259,7 +261,7 @@ TORTURE_TYPE
         printf "Fine tune the selection [y/N]? "
         read REPLY
         case "$REPLY" in
-            [Yy]) REPLY=Y ; break ;;
+            [Yy]) REPLY=Y; break ;;
             "" | [Nn]) break ;;
         esac
     done

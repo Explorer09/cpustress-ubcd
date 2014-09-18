@@ -41,12 +41,12 @@ echo
 # MAXFFT_MIN: *Minimum* allowed number for user to enter *maximum* FFT size.
 if [ "$VER" -ge 2803 ]; then
     if [ "X$AVX" = XY ]; then
-        MINFFT_MIN=0; MAXFFT_MIN=1
+        MINFFT_MIN=0 MAXFFT_MIN=1
     else
-        MINFFT_MIN=7; MAXFFT_MIN=7
+        MINFFT_MIN=7 MAXFFT_MIN=7
     fi
 else
-    MINFFT_MIN=8; MAXFFT_MIN=8
+    MINFFT_MIN=8 MAXFFT_MIN=8
 fi
 
 # Program-supported maximum of FFT size (in K)
@@ -117,9 +117,9 @@ TORTURE_TYPE
 
 read_num "Type of torture test to run" 3 1 3
 case "$REPLY" in
-    1) MINFFT=8  ; MAXFFT=64  ; TORTURE_MEM=0 ;;
-    2) MINFFT=128; MAXFFT=1024; TORTURE_MEM=0 ;;
-    3) MINFFT=8  ; MAXFFT=4096; TORTURE_MEM="$BLENDMEMORY" ;;
+    1) MINFFT=8   MAXFFT=64   TORTURE_MEM=0 ;;
+    2) MINFFT=128 MAXFFT=1024 TORTURE_MEM=0 ;;
+    3) MINFFT=8   MAXFFT=4096 TORTURE_MEM="$BLENDMEMORY" ;;
 esac
 
 printf "Min FFT Size: %5dK" "$MINFFT"
@@ -135,7 +135,7 @@ while true; do
     printf "Fine tune the selection [y/N]? "
     read REPLY
     case "$REPLY" in
-        [Yy]) REPLY=Y ; break ;;
+        [Yy]) REPLY=Y; break ;;
         "" | [Nn]) break ;;
     esac
 done

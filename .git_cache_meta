@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-09-18 19:55:39.5221869950 +0800" .git_cache_meta
+touch -c -h -d "2014-09-18 20:52:10.5270733180 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -142,7 +142,7 @@ touch -c -h -d "2014-06-22 15:26:26.8347096670 +0800" cpustress/build/build-init
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/menu
 touch -c -h -d "2014-08-29 09:34:53.6638392390 +0800" cpustress/build/build-initrd/usr/local/bin/menu
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/mprime
-touch -c -h -d "2014-08-19 10:24:24.2334792270 +0800" cpustress/build/build-initrd/usr/local/bin/mprime
+touch -c -h -d "2014-09-18 20:50:13.6335642810 +0800" cpustress/build/build-initrd/usr/local/bin/mprime
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/sensors
 touch -c -h -d "2014-09-18 14:45:59.0000000000 +0800" cpustress/build/build-initrd/usr/local/bin/sensors
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/sensors-detect
@@ -201,9 +201,9 @@ touch -c -h -d "2014-08-20 10:08:01.1601467550 +0800" cpustress/build/compile-no
 chmod 0644 cpustress/build/compile-notes/mprime/mprime-changes.patch
 touch -c -h -d "2014-08-20 13:28:50.8375229850 +0800" cpustress/build/compile-notes/mprime/mprime-changes.patch
 chmod 0644 cpustress/build/compile-notes/mprime/note.txt
-touch -c -h -d "2014-07-30 14:20:27.9579466360 +0800" cpustress/build/compile-notes/mprime/note.txt
+touch -c -h -d "2014-09-18 20:08:47.9851968630 +0800" cpustress/build/compile-notes/mprime/note.txt
 chmod 0755 cpustress/build/compile-notes/mprime/torture-conf.sh
-touch -c -h -d "2014-08-19 10:14:21.6595764630 +0800" cpustress/build/compile-notes/mprime/torture-conf.sh
+touch -c -h -d "2014-09-18 20:50:18.2376251430 +0800" cpustress/build/compile-notes/mprime/torture-conf.sh
 chmod 0644 cpustress/build/compile-notes/sensors.txt
 touch -c -h -d "2014-08-14 15:27:41.3354240350 +0800" cpustress/build/compile-notes/sensors.txt
 chmod 0644 cpustress/build/compile-notes/stress.txt
@@ -233,7 +233,7 @@ touch -c -h -d "2014-05-06 21:03:22.9432341320 +0800" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2014-09-13 21:14:08.8132048610 +0800" cpustress/build/prepare
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2014-09-18 19:55:20.3260455520 +0800" cpustress/changes.txt
+touch -c -h -d "2014-09-18 20:52:06.8870273850 +0800" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000 +0800" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
