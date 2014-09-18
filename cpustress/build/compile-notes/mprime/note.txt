@@ -31,6 +31,9 @@ fact the switch is buggy, especially when '-b' and '-m' are set together. The
 wrapper script will workaround this bug by displaying an error message and
 stop when both switches are detected.
 
+Mprime ignores arguments that does not begin with a dash ('-'), and stops
+argument parsing when one such argument is encountered.
+
 When writing the INI file
 -------------------------
 
