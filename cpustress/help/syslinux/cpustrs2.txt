@@ -3,10 +3,10 @@
 For other programs, you may pass the command-line arguments to them by using
 the '0fubcdargs07' option in isolinux. Here are examples for 0fStress07 and 0fStressCPU07:
 
-> .com32 linux.c32 /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=stress
-  0fubcdargs="--quiet -c 1k"07 initrd=/ubcd/boot/cpustress/initrd.xz
-> .com32 linux.c32 /ubcd/boot/cpustress/bzImage noapic quiet ubcdcmd=stresscpu2
-  0fubcdargs="-s -t 48:00:00"07 initrd=/ubcd/boot/cpustress/initrd.xz
+> .com32 linux.c32 /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0
+  ubcdcmd=stress 0fubcdargs="--quiet -c 1k"07 initrd=/ubcd/boot/cpustress/initrd.xz
+> .com32 linux.c32 /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0
+  ubcdcmd=stresscpu2 0fubcdargs="-s"07 initrd=/ubcd/boot/cpustress/initrd.xz
 
 You can specify how many (N) instances or threads the program should create,
 instead of detecting automatically.
