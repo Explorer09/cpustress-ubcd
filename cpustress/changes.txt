@@ -3,7 +3,9 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
+17 October 2014
 
+- Updated kernel to 3.17.1.
 
 Changes in v2.5.3
 -----------------
