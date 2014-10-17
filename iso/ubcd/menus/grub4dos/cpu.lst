@@ -1,12 +1,12 @@
 color cyan/black black/light-gray green/black yellow/black
 color standard=light-gray/black border=blue/black
 
-title CPUstress development\n A minimal Linux boot image that is used to run several stress-testing tools on\n the UBCD. This entry will launch the internal menu, in which you can select\n which stress program to run.
+title CPUstress development\n A minimal Linux boot image that is used to run several stress-testing tools on\n the UBCD. This entry launches the internal menu, in which you can select which\n stress program to run.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=menu
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title CPUburn V1.4a\n Included in CPUstress. CPU testing utilities in optimized assembler for\n maximum loading P6 (Intel Pentium Pro/II/III and Celeron TM), AMD K7 (Athlon/\n Duron/Thunderbird TM) AMD K6, and Intel P5 Pentium chips.
+title CPUburn V1.4a\n Included in CPUstress. CPU testing utilities in optimized assembler for\n maximum loading P6 (Intel Pentium Pro/II/III and Celeron), AMD K7 (Athlon/\n Duron/Thunderbird), AMD K6, and Intel P5 Pentium chips.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=burn
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
@@ -36,7 +36,7 @@ kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=mprime28
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title Stress V1.04\n Included in CPUstress. Workload generator for POSIX systems. Imposes a\n configurable amount of CPU, memory, I/O, and disk stress on the system. This\n entry launches stress with the "--help" parameter that displays all possible\n options. You need to run it again with the test options that you prefer.
+title Stress V1.04\n Included in CPUstress. Workload generator for POSIX systems. Imposes a\n configurable amount of CPU, memory, and I/O stress on the system. This entry\n launches stress with the "--help" parameter that displays all possible\n options. You need to run it again with the test options that you prefer.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=stress ubcdargs="--help"
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
@@ -46,7 +46,7 @@ kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=stresscp
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title System Stability Tester V1.5.1\n Included in CPUstress. Test the system's stability by calculating up to 128\n millions of Pi digits. Supports two calculation algorithms: The Quadratic\n Convergence of Borwein and Gauss-Legendre. Can create up to 64 threads. The\n calculation results of all the threads are compared after each step.
+title System Stability Tester V1.5.1\n Included in CPUstress. Tests the system's stability by calculating up to 128\n millions of Pi digits. Supports two calculation algorithms: The Quadratic\n Convergence of Borwein and Gauss-Legendre. This entry starts the default test\n (QCBorwein 128K digits). You may run it again for other test options.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=systester
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
