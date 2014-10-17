@@ -15,7 +15,7 @@ tty8::askfirst:/bin/sh --login
 tty9::askfirst:/bin/sh --login
 
 # Stuff to do when restarting the init process.
- ::restart:/sbin/init
+::restart:/sbin/init
 
 # Stuff to do before rebooting.
 ::ctrlaltdel:/sbin/reboot
