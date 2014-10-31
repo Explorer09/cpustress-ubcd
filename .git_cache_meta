@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-10-31 16:42:43.9162334490 +0800" .git_cache_meta
+touch -c -h -d "2014-10-31 17:04:21.1055740960 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -8,25 +8,25 @@ chmod 0644 README.md
 touch -c -h -d "2014-08-19 10:37:56.4541087740 +0800" README.md
 chmod 0755 cpustress/build/build
 touch -c -h -d "2014-05-06 21:03:38.4074269580 +0800" cpustress/build/build
-touch -c -h -d "2014-06-24 11:44:51.5119805400 +0800" cpustress/build/build-initrd/bin/ash
+touch -c -h -d "2014-10-31 15:14:54.5682107660 +0800" cpustress/build/build-initrd/bin/ash
 chmod 0755 cpustress/build/build-initrd/bin/busybox
-touch -c -h -d "2014-09-18 15:20:55.0000000000 +0800" cpustress/build/build-initrd/bin/busybox
-touch -c -h -d "2014-06-24 11:44:51.5159804900 +0800" cpustress/build/build-initrd/bin/cat
-touch -c -h -d "2014-06-24 11:44:51.5239803890 +0800" cpustress/build/build-initrd/bin/cp
-touch -c -h -d "2014-06-24 11:44:51.5319802890 +0800" cpustress/build/build-initrd/bin/date
-touch -c -h -d "2014-06-24 11:44:51.5439801380 +0800" cpustress/build/build-initrd/bin/dmesg
-touch -c -h -d "2014-06-24 11:44:51.5519800370 +0800" cpustress/build/build-initrd/bin/kill
-touch -c -h -d "2014-06-24 11:44:51.5599799370 +0800" cpustress/build/build-initrd/bin/ls
-touch -c -h -d "2014-06-24 11:44:51.5679798360 +0800" cpustress/build/build-initrd/bin/mkdir
-touch -c -h -d "2014-06-24 11:44:51.5759797360 +0800" cpustress/build/build-initrd/bin/mktemp
-touch -c -h -d "2014-06-24 11:44:51.5839796350 +0800" cpustress/build/build-initrd/bin/mount
-touch -c -h -d "2014-06-24 11:44:51.5919795350 +0800" cpustress/build/build-initrd/bin/mpstat
-touch -c -h -d "2014-06-24 11:44:51.5959794840 +0800" cpustress/build/build-initrd/bin/mv
-touch -c -h -d "2014-06-24 11:44:51.5999794340 +0800" cpustress/build/build-initrd/bin/ps
-touch -c -h -d "2014-06-24 11:44:51.6039793840 +0800" cpustress/build/build-initrd/bin/sh
-touch -c -h -d "2014-06-24 11:44:51.6119792830 +0800" cpustress/build/build-initrd/bin/umount
-touch -c -h -d "2014-06-24 11:44:51.6159792330 +0800" cpustress/build/build-initrd/bin/uname
-touch -c -h -d "2014-06-24 11:44:51.6239791320 +0800" cpustress/build/build-initrd/bin/vi
+touch -c -h -d "2014-10-31 15:14:54.5602107660 +0800" cpustress/build/build-initrd/bin/busybox
+touch -c -h -d "2014-10-31 15:14:54.5722107670 +0800" cpustress/build/build-initrd/bin/cat
+touch -c -h -d "2014-10-31 15:14:54.5842107670 +0800" cpustress/build/build-initrd/bin/cp
+touch -c -h -d "2014-10-31 15:14:54.5922107680 +0800" cpustress/build/build-initrd/bin/date
+touch -c -h -d "2014-10-31 15:14:54.6002107680 +0800" cpustress/build/build-initrd/bin/dmesg
+touch -c -h -d "2014-10-31 15:14:54.6082107690 +0800" cpustress/build/build-initrd/bin/kill
+touch -c -h -d "2014-10-31 15:14:54.6122107690 +0800" cpustress/build/build-initrd/bin/ls
+touch -c -h -d "2014-10-31 15:14:54.6362107700 +0800" cpustress/build/build-initrd/bin/mkdir
+touch -c -h -d "2014-10-31 15:14:54.6482107710 +0800" cpustress/build/build-initrd/bin/mktemp
+touch -c -h -d "2014-10-31 15:14:54.6522107710 +0800" cpustress/build/build-initrd/bin/mount
+touch -c -h -d "2014-10-31 15:14:54.6562107710 +0800" cpustress/build/build-initrd/bin/mpstat
+touch -c -h -d "2014-10-31 15:14:54.6682107720 +0800" cpustress/build/build-initrd/bin/mv
+touch -c -h -d "2014-10-31 15:14:54.6802107730 +0800" cpustress/build/build-initrd/bin/ps
+touch -c -h -d "2014-10-31 15:14:54.6842107730 +0800" cpustress/build/build-initrd/bin/sh
+touch -c -h -d "2014-10-31 15:14:54.6922107740 +0800" cpustress/build/build-initrd/bin/umount
+touch -c -h -d "2014-10-31 15:14:54.7002107740 +0800" cpustress/build/build-initrd/bin/uname
+touch -c -h -d "2014-10-31 15:14:54.7042107740 +0800" cpustress/build/build-initrd/bin/vi
 chmod 0644 cpustress/build/build-initrd/etc/group
 touch -c -h -d "2014-10-17 14:28:03.4668011060 +0800" cpustress/build/build-initrd/etc/group
 chmod 0755 cpustress/build/build-initrd/etc/init.d/rcS
@@ -41,7 +41,7 @@ chmod 0644 cpustress/build/build-initrd/etc/profile
 touch -c -h -d "2014-10-17 14:28:19.2229733580 +0800" cpustress/build/build-initrd/etc/profile
 chmod 0644 cpustress/build/build-initrd/etc/sensors3.conf
 touch -c -h -d "2013-09-05 21:09:19.4079295670 +0800" cpustress/build/build-initrd/etc/sensors3.conf
-touch -c -h -d "2014-06-24 11:44:51.6319790320 +0800" cpustress/build/build-initrd/init
+touch -c -h -d "2014-10-31 17:03:16.2129132060 +0800" cpustress/build/build-initrd/init
 chmod 0755 cpustress/build/build-initrd/lib/ld-2.19.so
 touch -c -h -d "2014-10-31 12:47:53.8356958860 +0800" cpustress/build/build-initrd/lib/ld-2.19.so
 touch -c -h -d "2014-02-15 21:43:08.9574272140 +0800" cpustress/build/build-initrd/lib/ld-linux.so.2
@@ -109,23 +109,21 @@ chmod 0644 cpustress/build/build-initrd/opt/stress/stress.txt
 touch -c -h -d "2014-01-11 23:18:05.9109684040 +0800" cpustress/build/build-initrd/opt/stress/stress.txt
 chmod 0755 cpustress/build/build-initrd/runonce
 touch -c -h -d "2014-10-09 14:52:14.3086964020 +0800" cpustress/build/build-initrd/runonce
-touch -c -h -d "2014-06-24 11:44:51.6439788810 +0800" cpustress/build/build-initrd/sbin/halt
-touch -c -h -d "2014-06-24 11:44:51.6479788310 +0800" cpustress/build/build-initrd/sbin/init
-touch -c -h -d "2014-06-24 11:44:51.6519787800 +0800" cpustress/build/build-initrd/sbin/mdev
-touch -c -h -d "2014-06-24 11:44:51.6599786800 +0800" cpustress/build/build-initrd/sbin/poweroff
-touch -c -h -d "2014-06-24 11:44:51.6679785790 +0800" cpustress/build/build-initrd/sbin/reboot
-touch -c -h -d "2014-06-24 11:44:51.6759784790 +0800" cpustress/build/build-initrd/usr/bin/awk
-touch -c -h -d "2014-06-24 11:44:51.6839783780 +0800" cpustress/build/build-initrd/usr/bin/clear
-touch -c -h -d "2014-06-24 11:44:51.6919782770 +0800" cpustress/build/build-initrd/usr/bin/cut
-touch -c -h -d "2014-06-24 11:44:51.6959782270 +0800" cpustress/build/build-initrd/usr/bin/expr
-touch -c -h -d "2014-06-24 11:44:51.6999781770 +0800" cpustress/build/build-initrd/usr/bin/free
-touch -c -h -d "2014-06-24 11:44:51.7039781270 +0800" cpustress/build/build-initrd/usr/bin/hexdump
-touch -c -h -d "2014-06-24 11:44:51.7119780260 +0800" cpustress/build/build-initrd/usr/bin/less
-touch -c -h -d "2014-06-24 11:44:51.7159779760 +0800" cpustress/build/build-initrd/usr/bin/pkill
-touch -c -h -d "2014-06-24 11:44:51.7199779250 +0800" cpustress/build/build-initrd/usr/bin/seq
-touch -c -h -d "2014-06-24 11:44:51.7239778750 +0800" cpustress/build/build-initrd/usr/bin/top
-touch -c -h -d "2014-06-24 11:44:51.7279778250 +0800" cpustress/build/build-initrd/usr/bin/uptime
-touch -c -h -d "2014-06-24 11:44:51.7319777750 +0800" cpustress/build/build-initrd/usr/bin/which
+touch -c -h -d "2014-10-31 15:14:54.7122107750 +0800" cpustress/build/build-initrd/sbin/halt
+touch -c -h -d "2014-10-31 15:14:54.7162107750 +0800" cpustress/build/build-initrd/sbin/init
+touch -c -h -d "2014-10-31 15:14:54.7242107750 +0800" cpustress/build/build-initrd/sbin/mdev
+touch -c -h -d "2014-10-31 15:14:54.7362107760 +0800" cpustress/build/build-initrd/sbin/poweroff
+touch -c -h -d "2014-10-31 15:14:54.7402107760 +0800" cpustress/build/build-initrd/sbin/reboot
+touch -c -h -d "2014-10-31 15:14:54.7482107770 +0800" cpustress/build/build-initrd/usr/bin/awk
+touch -c -h -d "2014-10-31 15:14:54.7682107780 +0800" cpustress/build/build-initrd/usr/bin/clear
+touch -c -h -d "2014-10-31 15:14:54.7722107780 +0800" cpustress/build/build-initrd/usr/bin/free
+touch -c -h -d "2014-10-31 15:14:54.7802107790 +0800" cpustress/build/build-initrd/usr/bin/hexdump
+touch -c -h -d "2014-10-31 15:14:54.7882107790 +0800" cpustress/build/build-initrd/usr/bin/less
+touch -c -h -d "2014-10-31 15:14:54.7922107790 +0800" cpustress/build/build-initrd/usr/bin/pkill
+touch -c -h -d "2014-10-31 15:14:54.7962107800 +0800" cpustress/build/build-initrd/usr/bin/seq
+touch -c -h -d "2014-10-31 15:14:54.8122107810 +0800" cpustress/build/build-initrd/usr/bin/top
+touch -c -h -d "2014-10-31 15:14:54.8202107810 +0800" cpustress/build/build-initrd/usr/bin/uptime
+touch -c -h -d "2014-10-31 15:14:54.8322107820 +0800" cpustress/build/build-initrd/usr/bin/which
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/burn
 touch -c -h -d "2014-09-18 20:56:48.6584261460 +0800" cpustress/build/build-initrd/usr/local/bin/burn
 touch -c -h -d "2013-04-16 21:23:38.1153474510 +0800" cpustress/build/build-initrd/usr/local/bin/cpuburn-in
