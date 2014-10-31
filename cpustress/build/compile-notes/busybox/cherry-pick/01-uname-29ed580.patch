@@ -1,0 +1,39 @@
+From 29ed580668865d68ab8c1020bf3a79e2f2ceaa55 Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier@gentoo.org>
+Date: Fri, 31 Jan 2014 05:28:42 +0000
+Subject: uname: fix up usage documentation
+
+The -i/-o options were missing, and the -r/-s/-v options were
+incorrectly labeled as "OS" instead of "kernel".
+
+Signed-off-by: Mike Frysinger <vapier@gentoo.org>
+---
+diff --git a/coreutils/uname.c b/coreutils/uname.c
+index b96d76b..1c6aa5f 100644
+--- a/coreutils/uname.c
++++ b/coreutils/uname.c
+@@ -49,16 +49,18 @@
+  */
+ 
+ //usage:#define uname_trivial_usage
+-//usage:       "[-amnrspv]"
++//usage:       "[-amnrspvio]"
+ //usage:#define uname_full_usage "\n\n"
+ //usage:       "Print system information\n"
+ //usage:     "\n	-a	Print all"
+ //usage:     "\n	-m	The machine (hardware) type"
+ //usage:     "\n	-n	Hostname"
+-//usage:     "\n	-r	OS release"
+-//usage:     "\n	-s	OS name (default)"
++//usage:     "\n	-r	Kernel release"
++//usage:     "\n	-s	Kernel name (default)"
+ //usage:     "\n	-p	Processor type"
+-//usage:     "\n	-v	OS version"
++//usage:     "\n	-v	Kernel version"
++//usage:     "\n	-i	The hardware platform"
++//usage:     "\n	-o	OS name"
+ //usage:
+ //usage:#define uname_example_usage
+ //usage:       "$ uname -a\n"
+--
+cgit v0.9.1

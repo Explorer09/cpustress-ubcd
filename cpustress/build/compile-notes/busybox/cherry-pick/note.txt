@@ -1,0 +1,49 @@
+Patch cherry-picked from upstream git:
+
+uname: fix up usage documentation
+http://git.busybox.net/busybox/commit/?id=29ed580668865d68ab8c1020bf3a79e2f2ceaa55
+libbb: don't die if crypt() returns NULL
+http://git.busybox.net/busybox/commit/?id=8ed96726603a59969b99e4ea30dbd9b06955084b
+ls: make "ls -s DIR" show total too. Clases 4946
+http://git.busybox.net/busybox/commit/?id=fca0ee5959f212e46b9a5bb324a1482899172750
+libbb: fix empty PATH components handling
+http://git.busybox.net/busybox/commit/?id=15a357e5962634c94ee322fee4da897312090a89
+libbb: rename execable -> executable. No code changes
+http://git.busybox.net/busybox/commit/?id=e765b5ac349a8f9305e52b3ab2c3ac78c17bf283
+which: rewrite
+http://git.busybox.net/busybox/commit/?id=a875d59d24dc4e501131a2d5cb6a4afdb48745c1
+awk: fix handling of "if ... break ; else ..." - closes 7226
+http://git.busybox.net/busybox/commit/?id=5f8daefb835687e428215f90d26fdf1f0206149d
+test: fix mishandling of "test '(' = '('" and similar
+http://git.busybox.net/busybox/commit/?id=98654b995bb460733d94eba9ff2ee3d746c1e344
+top: fix and merge code to parse /proc/meminfo
+http://git.busybox.net/busybox/commit/?id=7df1f1dda1f997c44800d16a9a12cf6cae2ed7e7
+top: fix memset length (sizeof(ptr) vs sizeof(array) problem)
+http://git.busybox.net/busybox/commit/?id=6c6d37ee4526f77fe07e46f05b0378ce43421e84
+ash: factor out ASH_HELP config option
+http://git.busybox.net/busybox/commit/?id=2ec34969e73c5262e20d3b4599196ff03913e66e
+ash: fix off-by-one in "jobs %4" handling. closes 7310
+http://git.busybox.net/busybox/commit/?id=07f7ea70edd0fdc7ad7da36df3f487111e14d0d1
+mdev: treat zero-length /dev/mdev.seq the same as "\n" one. Closes 7334
+http://git.busybox.net/busybox/commit/?id=26a8b9f1967d910033c516462c101100e041a9b4
+less: trivial code shrink
+http://git.busybox.net/busybox/commit/?id=865814a617cc2b197ef0ad12ee331a7a01d30e1a
+less: make -E work
+http://git.busybox.net/busybox/commit/?id=307d26c0ebfb0d22a81070379675f6287f6e9d95
+
+wget -O 01-uname-29ed580.patch http://git.busybox.net/busybox/patch/?id=29ed580668865d68ab8c1020bf3a79e2f2ceaa55
+wget -O 02-libbb-8ed9672.patch http://git.busybox.net/busybox/patch/?id=8ed96726603a59969b99e4ea30dbd9b06955084b
+wget -O 03-ls-fca0ee5.patch http://git.busybox.net/busybox/patch/?id=fca0ee5959f212e46b9a5bb324a1482899172750
+wget -O 04-libbb-15a357e.patch http://git.busybox.net/busybox/patch/?id=15a357e5962634c94ee322fee4da897312090a89
+wget -O 05-libbb-e765b5a.patch http://git.busybox.net/busybox/patch/?id=e765b5ac349a8f9305e52b3ab2c3ac78c17bf283
+# Commit e765b5a moves a file: mv libbb/execable.c libbb/executable.c
+wget -O 06-which-a875d59.patch http://git.busybox.net/busybox/patch/?id=a875d59d24dc4e501131a2d5cb6a4afdb48745c1
+wget -O 07-awk-5f8daef.patch http://git.busybox.net/busybox/patch/?id=5f8daefb835687e428215f90d26fdf1f0206149d
+wget -O 08-test-98654b9.patch http://git.busybox.net/busybox/patch/?id=98654b995bb460733d94eba9ff2ee3d746c1e344
+wget -O 09-top-7df1f1d.patch http://git.busybox.net/busybox/patch/?id=7df1f1dda1f997c44800d16a9a12cf6cae2ed7e7
+wget -O 10-top-6c6d37e.patch http://git.busybox.net/busybox/patch/?id=6c6d37ee4526f77fe07e46f05b0378ce43421e84
+wget -O 11-ash-2ec3496.patch http://git.busybox.net/busybox/patch/?id=2ec34969e73c5262e20d3b4599196ff03913e66e
+wget -O 12-ash-07f7ea7.patch http://git.busybox.net/busybox/patch/?id=07f7ea70edd0fdc7ad7da36df3f487111e14d0d1
+wget -O 13-mdev-26a8b9f.patch http://git.busybox.net/busybox/patch/?id=26a8b9f1967d910033c516462c101100e041a9b4
+wget -O 14-less-865814a.patch http://git.busybox.net/busybox/patch/?id=865814a617cc2b197ef0ad12ee331a7a01d30e1a
+wget -O 15-less-307d26c.patch http://git.busybox.net/busybox/patch/?id=307d26c0ebfb0d22a81070379675f6287f6e9d95

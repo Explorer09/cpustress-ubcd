@@ -1,0 +1,22 @@
+From 07f7ea70edd0fdc7ad7da36df3f487111e14d0d1 Mon Sep 17 00:00:00 2001
+From: Denys Vlasenko <vda.linux@googlemail.com>
+Date: Mon, 08 Sep 2014 15:21:52 +0000
+Subject: ash: fix off-by-one in "jobs %4" handling. closes 7310
+
+Signed-off-by: Denys Vlasenko <vda.linux@googlemail.com>
+---
+diff --git a/shell/ash.c b/shell/ash.c
+index 293f151..705fe9f 100644
+--- a/shell/ash.c
++++ b/shell/ash.c
+@@ -3647,7 +3647,7 @@ getjob(const char *name, int getctl)
+ 
+ 	if (is_number(p)) {
+ 		num = atoi(p);
+-		if (num < njobs) {
++		if (num <= njobs) {
+ 			jp = jobtab + num - 1;
+ 			if (jp->used)
+ 				goto gotit;
+--
+cgit v0.9.1

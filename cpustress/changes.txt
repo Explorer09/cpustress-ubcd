@@ -5,6 +5,12 @@ Changes in development version
 ------------------------------
 31 October 2014
 
+- Rebuilt BusyBox. Changes in this build:
+  1. Applied temporary patches from upstream Git master to fix important bugs.
+  2. Removed 'cut' and 'expr'. (Unused in scripts and "$(())" is better.)
+  3. Removed unnecessary features in 'ash' and 'mount', but enable 'help'
+     builtin and fancy prompts.
+  4. Disable some useless config options to reduce size.
 - Updated kernel to 3.17.2.
 
 Changes in v2.5.3
