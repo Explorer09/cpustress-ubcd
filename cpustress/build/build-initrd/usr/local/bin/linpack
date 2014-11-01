@@ -12,7 +12,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 22 June 2014.
+# Last updated on 1 November 2014.
 
 
 # Setting up affinity for better threading performance
@@ -37,7 +37,7 @@ case "$ARGS" in
         exit 0
         ;;
     -e)
-        exec less -~ /opt/linpack/xhelp.lpk
+        exec less -M -~ /opt/linpack/xhelp.lpk
         ;;
 esac
 

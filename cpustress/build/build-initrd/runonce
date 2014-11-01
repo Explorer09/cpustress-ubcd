@@ -11,7 +11,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 9 October 2014.
+# Last updated on 1 November 2014.
 
 
 set -m
@@ -92,7 +92,7 @@ CPUSTRESS_TEXT
             cpuinfo
             ;;
         dmesg)
-            dmesg | less -~
+            dmesg | less -M
             ;;
         helpinfo)
             helpinfo $ubcdargs

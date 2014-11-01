@@ -12,17 +12,12 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 29 August 2014.
+# Last updated on 1 November 2014.
 
 
 if [ "X$1" = X--help ]; then
     # Displays a simple help. Needed by 'helpinfo'.
     cat << HELP
-
-                                 ********
-                                 * Menu *
-                                 ********
-
 'menu' displays a simple menu from which you can choose which program you want
 to run.
 

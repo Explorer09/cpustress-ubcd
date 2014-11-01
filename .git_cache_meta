@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-10-31 17:04:21.1055740960 +0800" .git_cache_meta
+touch -c -h -d "2014-11-01 10:15:33.0321750160 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -108,7 +108,7 @@ touch -c -h -d "2013-05-28 20:38:00.8311826750 +0800" cpustress/build/build-init
 chmod 0644 cpustress/build/build-initrd/opt/stress/stress.txt
 touch -c -h -d "2014-01-11 23:18:05.9109684040 +0800" cpustress/build/build-initrd/opt/stress/stress.txt
 chmod 0755 cpustress/build/build-initrd/runonce
-touch -c -h -d "2014-10-09 14:52:14.3086964020 +0800" cpustress/build/build-initrd/runonce
+touch -c -h -d "2014-11-01 10:13:46.0431932530 +0800" cpustress/build/build-initrd/runonce
 touch -c -h -d "2014-10-31 15:14:54.7122107750 +0800" cpustress/build/build-initrd/sbin/halt
 touch -c -h -d "2014-10-31 15:14:54.7162107750 +0800" cpustress/build/build-initrd/sbin/init
 touch -c -h -d "2014-10-31 15:14:54.7242107750 +0800" cpustress/build/build-initrd/sbin/mdev
@@ -130,13 +130,13 @@ touch -c -h -d "2013-04-16 21:23:38.1153474510 +0800" cpustress/build/build-init
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/cpuburn-m
 touch -c -h -d "2014-09-18 20:58:08.2913409310 +0800" cpustress/build/build-initrd/usr/local/bin/cpuburn-m
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/cpuinfo
-touch -c -h -d "2014-06-20 00:50:08.4459001650 +0800" cpustress/build/build-initrd/usr/local/bin/cpuinfo
+touch -c -h -d "2014-11-01 10:14:13.8634476200 +0800" cpustress/build/build-initrd/usr/local/bin/cpuinfo
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/helpinfo
-touch -c -h -d "2014-08-29 09:35:11.5280391140 +0800" cpustress/build/build-initrd/usr/local/bin/helpinfo
+touch -c -h -d "2014-11-01 10:14:26.5555639000 +0800" cpustress/build/build-initrd/usr/local/bin/helpinfo
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/linpack
-touch -c -h -d "2014-06-22 15:26:26.8347096670 +0800" cpustress/build/build-initrd/usr/local/bin/linpack
+touch -c -h -d "2014-11-01 10:14:40.1796888700 +0800" cpustress/build/build-initrd/usr/local/bin/linpack
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/menu
-touch -c -h -d "2014-08-29 09:34:53.6638392390 +0800" cpustress/build/build-initrd/usr/local/bin/menu
+touch -c -h -d "2014-11-01 10:15:25.9481097410 +0800" cpustress/build/build-initrd/usr/local/bin/menu
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/mprime
 touch -c -h -d "2014-09-18 20:50:13.6335642810 +0800" cpustress/build/build-initrd/usr/local/bin/mprime
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/sensors
@@ -269,7 +269,7 @@ touch -c -h -d "2014-05-06 21:03:22.9432341320 +0800" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2014-10-31 16:37:08.5447765240 +0800" cpustress/build/prepare
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2014-10-31 16:29:12.4079272790 +0800" cpustress/changes.txt
+touch -c -h -d "2014-11-01 10:13:18.8149450430 +0800" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000 +0800" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
