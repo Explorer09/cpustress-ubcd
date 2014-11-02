@@ -12,10 +12,9 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 18 September 2014.
 
 
-LAST_EDITED="18 September 2014"
+LAST_EDITED="2 November 2014"
 
 showcontrols () {
     printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
@@ -112,7 +111,7 @@ cpuburn-in), use the following:
     INITRD /ubcd/boot/cpustress/initrd.xz
     APPEND noapic ubcdcmd=helpinfo ubcdargs=cpuburn-in
 HELPINFO2
-    exec less -~ /tmp/helpinfo/helpinfo.txt
+    exec less -M -~ /tmp/helpinfo/helpinfo.txt
 else
     printf "\n"
     printf "\033[0;32m                            ##################\n"
@@ -129,15 +128,15 @@ else
     case "$1" in
         burn)
             showcontrols
-            exec less -~ /opt/burn/burn.txt
+            exec less -M -~ /opt/burn/burn.txt
             ;;
         cpuburn-m | cpuburn-in)
             showcontrols
-            exec less -~ /opt/cpuburn-in/cpuburn-in.txt
+            exec less -M -~ /opt/cpuburn-in/cpuburn-in.txt
             ;;
         cpuinfo)
             showcontrols
-            exec less -~ /opt/cpuinfo/cpuinfo.txt
+            exec less -M -~ /opt/cpuinfo/cpuinfo.txt
             ;;
         help | helpinfo | -h | --help)
             showcontrols
@@ -145,19 +144,19 @@ else
             ;;
         linpack)
             showcontrols
-            exec less -~ /opt/linpack/xhelp.lpk
+            exec less -M -~ /opt/linpack/xhelp.lpk
             ;;
         mprime)
             showcontrols
-            exec less -~ /opt/mprime/mprime.txt
+            exec less -M -~ /opt/mprime/mprime.txt
             ;;
         sensors)
             showcontrols
-            exec less -~ /opt/sensors/sensors.txt
+            exec less -M -~ /opt/sensors/sensors.txt
             ;;
         stress)
             showcontrols
-            exec less -~ /opt/stress/stress.txt
+            exec less -M -~ /opt/stress/stress.txt
             ;;
         stresscpu2)
             showcontrols
@@ -176,7 +175,7 @@ image, use something similar to:
 The ubcdargs parameter contains the options that you want to pass to
 stresscpu2.
 CMDSTRESSCPU2
-            exec less -~ /tmp/helpinfo/stresscpu2.txt
+            exec less -M -~ /tmp/helpinfo/stresscpu2.txt
             ;;
         systester | systester-cli)
             showcontrols
@@ -192,13 +191,13 @@ use something similar to:
 
 The ubcdargs parameter contains the options that you want to pass to systester.
 CMDSYSTESTER
-            exec less -~ /tmp/helpinfo/systester.txt
+            exec less -M -~ /tmp/helpinfo/systester.txt
             ;;
         *)
             EXE=`which -- "$1"`
             if [ -x "$EXE" ]; then
                 showcontrols
-                "$EXE" --help 2>&1 | less -~
+                "$EXE" --help 2>&1 | less -M -~
             else
                 printf "'\033[01;37m$1\033[0m' is no executable and therefore there is no help text.\n"
                 printf "See '\033[01;37mhelpinfo\033[0m' for which executables are supported.\n"

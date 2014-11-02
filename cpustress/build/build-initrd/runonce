@@ -11,9 +11,10 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 18 September 2014.
+# Last updated on 2 November 2014.
 
 
+set -m
 export PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
 
 # Check if this script is run for the first time or not.
@@ -33,7 +34,7 @@ if [ ! -e /tmp/firstrun ]; then
  \____|_|    \___/|___/\__|_|  \___||___/___/  \__\___||___/\__|   \_/ |_____|
 
 CPUSTRESS_TEXT
-    printf "\033[0;37m                      v2.5.3    \033[01;37mbootable image by Gert Hulselmans and Explorer\033[0m\n\n"
+    printf "\033[0;37m                      v2.5.4    \033[01;37mbootable image by Gert Hulselmans and Explorer\033[0m\n\n"
     printf "                            To \033[0;32mreboot\033[0m, press: '\033[0;31m<Ctrl> + <Alt> + <Del>\033[0m'\n"
     printf "                    To \033[0;32mquit\033[0m a program, press: '\033[0;31m<Ctrl> + C\033[0m' or '\033[0;31mq\033[0m'\n"
     printf "To switch to another \033[0;32mvirtual terminal\033[0m, press: '\033[0;31m<Alt> + <Left / Right>\033[0m'\n\n"
@@ -65,7 +66,7 @@ CPUSTRESS_TEXT
     # Pressing any key will result in immediate execution of the rest of the script.
 
     printf "Press any key to continue directly.\n"
-    KEYPRESS="none"
+    KEYPRESS=none
     for i in `seq 30 -1 1`; do
         if [ "$i" -eq 1 ]; then
             printf "  Booting will start automatically in \033[01;37m1\033[0m second.  \r"
@@ -74,7 +75,7 @@ CPUSTRESS_TEXT
         fi
 
         read -s -n1 -t 1 KEYPRESS
-        if [ "X$KEYPRESS" != "Xnone" ]; then
+        if [ "X$KEYPRESS" != Xnone ]; then
             break
         fi
     done
@@ -91,7 +92,7 @@ CPUSTRESS_TEXT
             cpuinfo
             ;;
         dmesg)
-            dmesg | less -~
+            dmesg | less -M
             ;;
         helpinfo)
             helpinfo $ubcdargs

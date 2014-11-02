@@ -10,7 +10,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 24 June 2014.
+# Last updated on 31 October 2014.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -52,8 +52,6 @@ cd ..
 cd usr/bin
 ln -s ../../bin/busybox awk
 ln -s ../../bin/busybox clear
-ln -s ../../bin/busybox cut
-ln -s ../../bin/busybox expr
 ln -s ../../bin/busybox free
 ln -s ../../bin/busybox hexdump
 ln -s ../../bin/busybox less

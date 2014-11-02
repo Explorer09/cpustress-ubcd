@@ -1,4 +1,4 @@
-18 September 2014
+31 October 2014
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -42,8 +42,8 @@ Preparation
      wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.2.tar.gz
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.12.2.tar.bz2
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/cloog-0.18.1.tar.gz
-     wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.9.1/gcc-4.9.1.tar.bz2
-     wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.16.3.tar.xz
+     wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.9.2/gcc-4.9.2.tar.bz2
+     wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.17.2.tar.xz
      svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
      }
  $ extract () {
@@ -53,18 +53,18 @@ Preparation
      tar -x -z -f mpc-1.0.2.tar.gz
      tar -x --bzip2 -f isl-0.12.2.tar.bz2
      tar -x -z -f cloog-0.18.1.tar.gz
-     tar -x --bzip2 -f gcc-4.9.1.tar.bz2
-     tar -x --xz -f linux-3.16.3.tar.xz
-     mv gmp-6.0.0    gcc-4.9.1/gmp
-     mv mpfr-3.1.2   gcc-4.9.1/mpfr
-     mv mpc-1.0.2    gcc-4.9.1/mpc
-     mv isl-0.12.2   gcc-4.9.1/isl
-     mv cloog-0.18.1 gcc-4.9.1/cloog
+     tar -x --bzip2 -f gcc-4.9.2.tar.bz2
+     tar -x --xz -f linux-3.17.2.tar.xz
+     mv gmp-6.0.0    gcc-4.9.2/gmp
+     mv mpfr-3.1.2   gcc-4.9.2/mpfr
+     mv mpc-1.0.2    gcc-4.9.2/mpc
+     mv isl-0.12.2   gcc-4.9.2/isl
+     mv cloog-0.18.1 gcc-4.9.2/cloog
      }
 
  $ download
  $ extract
- $ for i in binutils-2.24 gcc-4.9.1 linux-3.16.3 libc; do
+ $ for i in binutils-2.24 gcc-4.9.2 linux-3.17.2 libc; do
      if [ ! -d "$i" ]; then exit 1; fi; done
 
 Copy the "option-groups.config" file from the compile-notes directory to
@@ -123,7 +123,7 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
      --disable-libgomp --disable-libitm --disable-libatomic"
 
  $ cd gcc-build
- $ ../gcc-4.9.1/configure --prefix=${TOOLS_DIR} --target=i486-pc-linux-gnu \
+ $ ../gcc-4.9.2/configure --prefix=${TOOLS_DIR} --target=i486-pc-linux-gnu \
      --enable-languages=c,c++ --disable-shared --disable-threads \
      --enable-linker-build-id --disable-bootstrap --disable-multilib \
      ${DISABLE_TARGET_LIBS} --without-headers --with-newlib \
@@ -149,7 +149,7 @@ Notes:
 3. Linux kernel headers for libc
 --------------------------------
 
- $ cd linux-3.16.3
+ $ cd linux-3.17.2
  $ make mrproper
  $ make INSTALL_HDR_PATH=${SYSROOT_DIR}/usr headers_install
  $ cd ..
@@ -190,7 +190,7 @@ Make dummy libc.so:
 Note the switch '--enable-shared=libgcc'.
 
  $ cd gcc-build
- $ ../gcc-4.9.1/configure --prefix=${TOOLS_DIR} --target=i486-pc-linux-gnu \
+ $ ../gcc-4.9.2/configure --prefix=${TOOLS_DIR} --target=i486-pc-linux-gnu \
      --enable-languages=c,c++ --enable-shared=libgcc --disable-threads \
      --enable-linker-build-id --disable-bootstrap --disable-multilib \
      ${DISABLE_TARGET_LIBS} \
@@ -221,7 +221,7 @@ Only libgcc is built with a shared library. Other target libraries, including
 libstdc++, are built as static libraries only.
 
  $ cd gcc-build
- $ ../gcc-4.9.1/configure --prefix=${TOOLS_DIR} --target=i486-pc-linux-gnu \
+ $ ../gcc-4.9.2/configure --prefix=${TOOLS_DIR} --target=i486-pc-linux-gnu \
      --enable-languages=c,c++ --enable-shared=libgcc --enable-threads=posix \
      --enable-clocale=gnu --enable-lto \
      --enable-linker-build-id --disable-bootstrap --disable-multilib \

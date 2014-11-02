@@ -1,52 +1,52 @@
 color cyan/black black/light-gray green/black yellow/black
 color standard=light-gray/black border=blue/black
 
-title CPUstress V2.5.3\n A minimal Linux boot image that is used to run several stress-testing tools on\n the UBCD. This entry will launch the internal menu, in which you can select\n which stress program to run.
+title CPUstress V2.5.4\n A minimal Linux boot image that is used to run several stress-testing tools on\n the UBCD. This entry launches the internal menu, in which you can select which\n stress program to run.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=menu
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title CPUburn V1.4a\n CPU testing utilities in optimized assembler for maximum loading P6 (Intel\n Pentium Pro/II/III and Celeron TM), AMD K7 (Athlon/Duron/Thunderbird TM) AMD\n K6, and Intel P5 Pentium chips.
+title CPUburn V1.4a\n Included in CPUstress. CPU testing utilities in optimized assembler for\n maximum loading P6 (Intel Pentium Pro/II/III and Celeron), AMD K7 (Athlon/\n Duron/Thunderbird), AMD K6, and Intel P5 Pentium chips.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=burn
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title CPU Burn-in V1.00\n Heats up any x86 CPU to the maximum possible operating temperature that is\n achievable by using ordinary software. This allows the user to adjust the CPU\n speed up to the practical maximum while still being sure that stability is\n achieved even under the most stressful conditions.
+title CPU Burn-in V1.00\n Included in CPUstress. Heats up any x86 CPU to the maximum possible operating\n temperature that is achievable by using ordinary software. This allows the\n user to adjust the CPU speed up to the practical maximum while still being\n sure that stability is achieved even under the most stressful conditions.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=cpuburn
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title CPUinfo\n Gives info about your CPU: number of processors, vendor, CPU family, CPU model\n name, CPU speed, cache size, possible construction bugs of your cpu, which\n extensions (flags) your CPU supports.
+title CPUinfo\n Included in CPUstress. Gives info about your CPU: number of processors,\n vendor, CPU family, CPU model name, CPU speed, cache size, possible\n construction bugs of your cpu, which extensions (flags) your CPU supports.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=cpuinfo
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title Intel Optimized LINPACK Benchmark V11.2.0\n A generalization of the LINPACK 1000 benchmark. Solves a dense (real*8) system\n of linear equations (Ax=b), measures the amount of time it takes to factor and\n solve the system, converts that time into a performance rate, and tests the\n results for accuracy.
+title Intel Optimized LINPACK Benchmark V11.2.0\n Included in CPUstress. A generalization of the LINPACK 1000 benchmark. Solves\n a dense (real*8) system of linear equations (Ax=b), measures the amount of\n time it takes to factor and solve the system, converts that time into a\n performance rate, and tests the results for accuracy.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=linpack
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title Mersenne Prime Test V23.9.2\n Older version of the Mersenne Prime Search program that works with Pentium III\n or older CPUs.
+title Mersenne Prime Test V23.9.2\n Included in CPUstress. Older version of the Mersenne Prime Search program that\n works with Pentium III or older CPUs.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=mprime23
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title Mersenne Prime Test V28.5\n Mersenne Prime Search program that stresses the CPU.
+title Mersenne Prime Test V28.5\n Included in CPUstress. Mersenne Prime Search program that stresses the CPU.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=mprime28
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title Stress V1.04\n Simple workload generator for POSIX systems. It imposes a configurable amount\n of CPU, memory, I/O, and disk stress on the system. This menu item launches\n stress with the "--help" parameter that displays all possible options. You\n need to run it again with the stress test options that you prefer.
+title Stress V1.04\n Included in CPUstress. Workload generator for POSIX systems. Imposes a\n configurable amount of CPU, memory, and I/O stress on the system. This entry\n launches stress with the "--help" parameter that displays all possible\n options. You need to run it again with the test options that you prefer.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=stress ubcdargs="--help"
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title StressCPU V2.0 (requires CPU with SSE)\n Torture-test your CPU in order to make sure that you don't have overheating\n problems. Requires SSE-equipped x86 CPUs. Executes a special version of the\n Gromacs innerloops that mixes SSE and normal assembly instructions to heat\n your CPU as much as possible.
+title StressCPU V2.0 (requires CPU with SSE)\n Included in CPUstress. Torture-test your CPU in order to make sure that you\n don't have overheating problems. Requires SSE-equipped x86 CPUs. Executes\n special version of the Gromacs innerloops that mixes SSE and normal assembly\n instructions to heat your CPU as much as possible.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=stresscpu2
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title System Stability Tester V1.5.1\n Test the system's stability by calculating up to 128 millions of Pi digits.\n Supports two calculation algorithms: The Quadratic Convergence of Borwein and\n Gauss-Legendre. Can create up to 64 threads. The calculation results of all\n the threads are compared after each step.
+title System Stability Tester V1.5.1\n Included in CPUstress. Tests the system's stability by calculating up to 128\n millions of Pi digits. Supports two calculation algorithms: The Quadratic\n Convergence of Borwein and Gauss-Legendre. This entry starts the default test\n (QCBorwein 128K digits). You may run it again for other test options.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=systester
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff

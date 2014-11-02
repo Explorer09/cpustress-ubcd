@@ -1,4 +1,4 @@
-5 September 2013
+1 November 2014
 
 Homepage of cpuburn by Robert Redelmeier:
 http://web.archive.org/web/20110623074500/http://pages.sbcglobal.net/redelm/
@@ -15,12 +15,18 @@ Unpack and build the code:
  $ cd cpuburn-1.4a
  $ make
 
-Copy the executables:
+(The source code is written in assembly language, so there is little for you to
+configure. Even so I build this with a custom cross-toolchain described in
+"toolchain.txt", and before running 'make' I edited Makefile to use
+i486-pc-linux-gnu-gcc instead.)
+
+(Optional) Change the mode of the binaries:
+
+ $ chmod 755 burnP5 burnP6 burnK6 burnK7 burnBX burnMMX
+
+Copy the executables and that's it:
 
  $ cp -a burnP5 burnP6 burnK6 burnK7 burnBX burnMMX \
          ${cpustress_initrd}/opt/burn
-
-That's it. Because the code is written in assembly language there is nothing
-for you to configure.
 
 --Explorer <explorer09@gmail.com>

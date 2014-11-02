@@ -1,4 +1,4 @@
-14 August 2014
+1 November 2014
 
 lm-sensors website:
 http://lm-sensors.org/
@@ -25,8 +25,8 @@ Originally lm-sensors will produce 'libsensors.so' shared library and the
 'sensors' program that depends on it. We don't want to copy the whole library
 when only one program needs it. So I edit the linker flags in the makefile:
 
- $ sed -e 's/-Llib -lsensors/-Llib -l:libsensors.a -lc -lm/' \
-     -i.old prog/sensors/Module.mk
+ $ sed -i.bak -e 's/-Llib -lsensors/-Llib -l:libsensors.a -lc -lm/' \
+     prog/sensors/Module.mk
 
 This forces the linker to link to the static 'libsensors.a'.
 Build the code:

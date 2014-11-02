@@ -1,4 +1,4 @@
-18 September 2014
+31 October 2014
 
 The Linux kernel for CPUstress is compiled on Ubuntu 12.04.5 LTS (32-bit), with
 a custom cross-toolchain described in "toolchain.txt". Before compiling, make
@@ -12,15 +12,15 @@ additional patch is applied.
 
 Download the source code and then prepare the source directory for building:
 
- $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.16.3.tar.xz
- $ tar -x -v --xz -f linux-3.16.3.tar.xz
- $ cd linux-3.16.3
+ $ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.17.2.tar.xz
+ $ tar -x -v --xz -f linux-3.17.2.tar.xz
+ $ cd linux-3.17.2
  $ make mrproper
 
-Copy the "config-3.16-cpustress" file into the source code directory, then
+Copy the "config-3.17-cpustress" file into the source code directory, then
 rename it:
 
- $ mv config-3.16-cpustress .config
+ $ mv config-3.17-cpustress .config
 
 Build the kernel, if you don't want to configure anything else:
 
