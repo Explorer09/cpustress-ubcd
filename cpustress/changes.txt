@@ -5,6 +5,11 @@ Changes in development version
 ------------------------------
 2 November 2014
 
+
+Changes in v2.5.3
+-----------------
+2 November 2014
+
 - Rebuilt BusyBox. Changes in this build:
   1. Applied temporary patches from upstream Git master to fix important bugs.
   2. Removed 'cut' and 'expr'. (Unused in scripts and "$(())" is better.)
