@@ -1,8 +1,8 @@
-This file documents the changes of CPUstress test from v2.1 to [development].
+This file documents the changes of CPUstress test from v2.1 to v2.5.4.
 Changes are made by Explorer <explorer09@gmail.com>
 
-Changes in development version
-------------------------------
+Changes in v2.5.4
+-----------------
 2 November 2014
 
 - Rebuilt BusyBox. Changes in this build:

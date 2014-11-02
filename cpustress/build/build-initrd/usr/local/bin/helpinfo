@@ -14,7 +14,7 @@
 # Written by Gert Hulselmans and Explorer.
 
 
-LAST_EDITED="1 November 2014"
+LAST_EDITED="2 November 2014"
 
 showcontrols () {
     printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
