@@ -3,7 +3,7 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-1 November 2014
+2 November 2014
 
 - Rebuilt BusyBox. Changes in this build:
   1. Applied temporary patches from upstream Git master to fix important bugs.
@@ -13,6 +13,7 @@ Changes in development version
   4. Disable some useless config options to reduce size.
 - Updated kernel to 3.17.2.
 - All scripts that invoke 'less' command now invoke with '-M' option.
+- Minor bug fixes in shell scripts.
 
 Changes in v2.5.3
 -----------------
