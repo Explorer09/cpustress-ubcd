@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-11-02 10:06:50.8043349730 +0800" .git_cache_meta
+touch -c -h -d "2014-11-02 10:08:18.5510554790 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -325,7 +325,7 @@ touch -c -h -d "2014-11-01 22:02:59.9319060000 +0800" screenshots/cpustress-burn
 chmod 0644 screenshots/cpustress-cpuburn-in.png
 touch -c -h -d "2014-11-01 22:12:31.9308470000 +0800" screenshots/cpustress-cpuburn-in.png
 chmod 0644 screenshots/cpustress-helpinfo.png
-touch -c -h -d "2014-02-24 09:49:41.2933400000 +0800" screenshots/cpustress-helpinfo.png
+touch -c -h -d "2014-11-02 09:41:41.7050510000 +0800" screenshots/cpustress-helpinfo.png
 chmod 0644 screenshots/cpustress-intel-linpack.png
 touch -c -h -d "2014-11-01 22:12:33.6349440000 +0800" screenshots/cpustress-intel-linpack.png
 chmod 0644 screenshots/cpustress-mprime.png
