@@ -38,7 +38,7 @@ of execution as the number of the processors of the SMP system. One can
 override the default number of threads by setting the environment variable
 OMP_NUM_THREADS to any positive number. Note that performance is usually
 maximized when the number of the threads is equal to the number of cores (so,
-for a two socket dual-core system, 4 would be ideal.)
+for a two socket dual-core system, 4 would be ideal).
 
 Usage:
 

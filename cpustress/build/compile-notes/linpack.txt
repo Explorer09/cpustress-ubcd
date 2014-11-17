@@ -1,17 +1,17 @@
-29 August 2014
+17 November 2014
 
 The Intel Optimized LINPACK Benchmark can be downloaded here:
-http://software.intel.com/en-us/articles/intel-math-kernel-library-linpack-download
+https://software.intel.com/en-us/articles/intel-math-kernel-library-linpack-download
 
 Direct link:
-http://registrationcenter.intel.com/irc_nas/4547/l_lpk_p_11.2.0.003.tgz
+http://registrationcenter.intel.com/irc_nas/4942/l_lpk_p_11.2.1.009.tgz
 
- $ tar -x -v -z -f l_lpk_p_11.2.0.003.tgz
+ $ tar -x -v -z -f l_lpk_p_11.2.1.009.tgz
 
 After unpacking the archive, you will find the binaries of Intel LINPACK at
-this directory: "linpack_11.2.0/benchmarks/linpack"
+this directory: "l_lpk_p_11.2.1.009/linpack_11.2.1/benchmarks/linpack"
 
- $ cd linpack_11.2.0/benchmarks/linpack
+ $ cd l_lpk_p_11.2.1.009/linpack_11.2.1/benchmarks/linpack
 
 We need only these files:
     help.lpk and xhelp.lpk (help files)

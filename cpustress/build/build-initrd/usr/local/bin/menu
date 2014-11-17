@@ -12,7 +12,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 1 November 2014.
+# Last updated on 17 November 2014.
 
 
 if [ "X$1" = X--help ]; then
@@ -34,7 +34,7 @@ printf "                                 ********\n"
 printf "\n"
 printf "                 \033[01;37m1)\033[0m CPUburn v1.4a                   (burn)\n"
 printf "                 \033[01;37m2)\033[0m CPU Burn-in v1.00               (cpuburn-in)\n"
-printf "                 \033[01;37m3)\033[0m Intel Optimized LINPACK 11.2.0  (linpack)\n"
+printf "                 \033[01;37m3)\033[0m Intel Optimized LINPACK 11.2.1  (linpack)\n"
 printf "                 \033[01;37m4)\033[0m Mersenne Prime test v23.9.2     (mprime 23)\n"
 printf "                 \033[01;37m5)\033[0m Mersenne Prime test v28.5       (mprime 28)\n"
 printf "                 \033[01;37m6)\033[0m Stress v1.0.4                   (stress)\n"

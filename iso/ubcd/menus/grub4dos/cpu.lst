@@ -21,7 +21,7 @@ kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=cpuinfo
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
 
-title Intel Optimized LINPACK Benchmark V11.2.0\n Included in CPUstress. A generalization of the LINPACK 1000 benchmark. Solves\n a dense (real*8) system of linear equations (Ax=b), measures the amount of\n time it takes to factor and solve the system, converts that time into a\n performance rate, and tests the results for accuracy.
+title Intel Optimized LINPACK Benchmark V11.2.1\n Included in CPUstress. A generalization of the LINPACK 1000 benchmark. Solves\n a dense (real*8) system of linear equations (Ax=b), measures the amount of\n time it takes to factor and solve the system, converts that time into a\n performance rate, and tests the results for accuracy.
 kernel /ubcd/boot/cpustress/bzImage noapic quiet consoleblank=0 ubcdcmd=linpack
 initrd /ubcd/boot/cpustress/initrd.xz
 map --unmap=0:0xff
