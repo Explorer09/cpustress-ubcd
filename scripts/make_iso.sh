@@ -19,20 +19,14 @@ ROOT_OF_ISO_PATH="$(pwd)/iso-tmp"
 if [ ! -f "cpustress/initrd.xz" ]; then
     if [ ! -f "cpustress/build/initrd.xz" ]; then
         echo "Executing ./cpustress/build/build ..."
-        sh ./cpustress/build/build
-        if [ "$?" -ne "0" ]; then
-            exit 1
-        fi
+        sh ./cpustress/build/build || exit $?
     fi
     echo 'cp -PRp "cpustress/build/initrd.xz" "cpustress/initrd.xz"'
     cp -PRp "cpustress/build/initrd.xz" "cpustress/initrd.xz"
 fi
 if [ ! -f "cpustress/build.txz" ]; then
     echo "Executing ./scripts/pack_buildtxz.sh ..."
-    sh ./scripts/pack_buildtxz.sh
-    if [ "$?" -ne "0" ]; then
-        exit 1
-    fi
+    sh ./scripts/pack_buildtxz.sh || exit $?
 fi
 
 if [ -e "$ROOT_OF_ISO_PATH" ]; then
