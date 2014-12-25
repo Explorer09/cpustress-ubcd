@@ -1,4 +1,4 @@
-31 October 2014
+25 December 2014
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -36,25 +36,25 @@ Preparation
 -----------
 
  $ download () {
-     wget http://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.bz2
+     wget http://ftp.gnu.org/gnu/binutils/binutils-2.25.tar.bz2
      wget https://ftp.gnu.org/gnu/gmp/gmp-6.0.0a.tar.xz
      wget http://www.mpfr.org/mpfr-current/mpfr-3.1.2.tar.xz
      wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.2.tar.gz
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.12.2.tar.bz2
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/cloog-0.18.1.tar.gz
      wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.9.2/gcc-4.9.2.tar.bz2
-     wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.17.2.tar.xz
+     wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.18.1.tar.xz
      svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
      }
  $ extract () {
-     tar -x --bzip2 -f binutils-2.24.tar.bz2
+     tar -x --bzip2 -f binutils-2.25.tar.bz2
      tar -x --xz -f gmp-6.0.0a.tar.xz
      tar -x --xz -f mpfr-3.1.2.tar.xz
      tar -x -z -f mpc-1.0.2.tar.gz
      tar -x --bzip2 -f isl-0.12.2.tar.bz2
      tar -x -z -f cloog-0.18.1.tar.gz
      tar -x --bzip2 -f gcc-4.9.2.tar.bz2
-     tar -x --xz -f linux-3.17.2.tar.xz
+     tar -x --xz -f linux-3.18.1.tar.xz
      mv gmp-6.0.0    gcc-4.9.2/gmp
      mv mpfr-3.1.2   gcc-4.9.2/mpfr
      mv mpc-1.0.2    gcc-4.9.2/mpc
@@ -64,7 +64,7 @@ Preparation
 
  $ download
  $ extract
- $ for i in binutils-2.24 gcc-4.9.2 linux-3.17.2 libc; do
+ $ for i in binutils-2.25 gcc-4.9.2 linux-3.18.1 libc; do
      if [ ! -d "$i" ]; then exit 1; fi; done
 
 Copy the "option-groups.config" file from the compile-notes directory to
@@ -96,19 +96,12 @@ soon as they are no longer needed.
 -----------------
 
  $ cd binutils-build
- $ ../binutils-2.24/configure --prefix=${TOOLS_DIR} \
+ $ ../binutils-2.25/configure --prefix=${TOOLS_DIR} \
      --target=i486-pc-linux-gnu --with-sysroot=${SYSROOT_DIR}
  $ make
  $ make install
  $ make distclean && rm -r *
  $ cd ..
-
-Note: If you build Binutils 2.24 with GCC 4.9, you'll see a compile error. This
-is a bug known upstream. Read these web pages for information and patches:
-https://sourceware.org/ml/binutils/2014-01/msg00334.html
-https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;a=commit;h=27b829ee701e29804216b3803fbaeb629be27491
-https://sourceware.org/ml/binutils/2014-02/msg00000.html
-https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;a=commit;h=0a09fb4a09e80c36fa3ef763ae276fd13d272a36
 
 2. Cross-GCC without libc headers
 ---------------------------------
@@ -149,7 +142,7 @@ Notes:
 3. Linux kernel headers for libc
 --------------------------------
 
- $ cd linux-3.17.2
+ $ cd linux-3.18.1
  $ make mrproper
  $ make INSTALL_HDR_PATH=${SYSROOT_DIR}/usr headers_install
  $ cd ..
