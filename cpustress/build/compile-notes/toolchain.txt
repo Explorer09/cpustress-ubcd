@@ -221,7 +221,7 @@ libstdc++, are built as static libraries only.
      --with-sysroot=${SYSROOT_DIR} --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make -k distclean && rm -r *
+ $ make -k distclean; rm -r *
  $ cd ..
 
 Notes:
