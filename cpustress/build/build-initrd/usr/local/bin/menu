@@ -12,7 +12,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 17 November 2014.
+# Last updated on 31 December 2014.
 
 
 if [ "X$1" = X--help ]; then
@@ -78,7 +78,7 @@ case "$CHOICE" in
         ;;
     8 | systester | systester-cli)
         systester-cli
-        printf "Test completed. Type '\033[01;37msystester-cli -help\033[0m' for other test options.\n"
+        printf "Type '\033[01;37msystester-cli -help\033[0m' for other test options.\n"
         ;;
     9 | cpuinfo)
         cpuinfo

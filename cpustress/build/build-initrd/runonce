@@ -65,7 +65,7 @@ CPUSTRESS_TEXT
     # Pause for 30 seconds to make it possible to read the text on the screen.
     # Pressing any key will result in immediate execution of the rest of the script.
 
-    printf "Press any key to continue directly.\n"
+    echo "Press any key to continue directly."
     KEYPRESS=none
     for i in `seq 30 -1 1`; do
         if [ "$i" -eq 1 ]; then
@@ -120,7 +120,7 @@ CPUSTRESS_TEXT
             stress $ubcdargs
             case "$ubcdargs" in
                 "" | -? | --help)
-                    echo "Press any key to continue."
+                    echo "Press any key to go to the console."
                     read -s -n1 REPLY
                     ;;
             esac
@@ -132,7 +132,9 @@ CPUSTRESS_TEXT
         systester | systester-cli)
             printf "\033[0;32m\nStarting 'System Stability Tester 1.5.1'   (systester).\033[0m\n"
             systester-cli $ubcdargs
-            printf "Test completed. Type '\033[01;37msystester-cli -help\033[0m' for other test options.\n"
+            printf "Type '\033[01;37msystester-cli -help\033[0m' for other test options.\n"
+            echo "Press any key to go to the console."
+            read -s -n1 REPLY
             ;;
         uname)
             printf "\033[01;37m'uname -a' result:\033[0m\n"
