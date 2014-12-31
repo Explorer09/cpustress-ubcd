@@ -11,7 +11,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 17 November 2014.
+# Last updated on 31 December 2014.
 
 
 set -m
@@ -143,8 +143,7 @@ CPUSTRESS_TEXT
             ;;
     esac
 
-    printf "\r\n"
-    printf "\n\nType '\033[01;37mhelpinfo\033[0m' to see which programs are available.\n"
+    printf "\r\nType '\033[01;37mhelpinfo\033[0m' to see which programs are available.\n"
     printf "Type '\033[01;37mmenu\033[0m' to select the available programs from a list.\n\n"
     printf "Use '\033[0;31m<Alt> + <Left / Right>\033[0m', to switch to the other virtual terminals.\n\n"
     printf "To \033[0;32mreboot\033[0m, press: '\033[0;31m<Ctrl> + <Alt> + <Del>\033[0m' or type '\033[01;37mreboot\033[0m'.\n"
