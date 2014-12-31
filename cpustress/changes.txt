@@ -3,10 +3,11 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-11 December 2014
+31 December 2014
 
 - Updated Intel LINPACK to v11.2.1 (from v11.2.0)
 - Updated eglibc to 2.19-r25890 (from 2.19-r25243)
+- Added "vga=ext" options to 'linpack' and 'systester' boot entries.
 
 Changes in v2.5.4
 -----------------
