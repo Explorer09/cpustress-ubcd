@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2014-12-25 10:10:23.8341296970 +0800" .git_cache_meta
+touch -c -h -d "2014-12-31 13:22:55.7928590160 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -291,7 +291,7 @@ touch -c -h -d "2014-01-11 23:18:21.2189677220 +0800" cpustress/help/stresscpu2.
 chmod 0644 cpustress/help/syslinux/cpustrs1.txt
 touch -c -h -d "2014-09-18 22:45:32.1410348450 +0800" cpustress/help/syslinux/cpustrs1.txt
 chmod 0644 cpustress/help/syslinux/cpustrs2.txt
-touch -c -h -d "2014-09-18 22:45:40.5651091780 +0800" cpustress/help/syslinux/cpustrs2.txt
+touch -c -h -d "2014-12-31 13:22:08.2763901300 +0800" cpustress/help/syslinux/cpustrs2.txt
 chmod 0644 cpustress/help/systester.txt
 touch -c -h -d "2014-01-11 23:18:19.6829677900 +0800" cpustress/help/systester.txt
 chmod 0644 cpustress/nonfree.txt
