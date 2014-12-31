@@ -14,7 +14,7 @@
 # Written by Gert Hulselmans and Explorer.
 
 
-LAST_EDITED="17 November 2014"
+LAST_EDITED="31 December 2014"
 
 showcontrols () {
     printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
@@ -48,7 +48,7 @@ through the text. Press 'q' to quit 'helpinfo'.
 Some general commands for all programs:
                             To reboot, press: '<Ctrl> + <Alt> + <Del>'
                     To quit a program, press: '<Ctrl> + C' or 'q'
-To switch to another virtual terminal, press: '<Alt> + <Left/Right>'
+To switch to another virtual terminal, press: '<Alt> + <Left / Right>'
 
 
 'top' is a useful program to see the percentage of processing power used by a
