@@ -90,9 +90,11 @@ case "$CHOICE" in
         sensors
         ;;
     12 | reboot)
+        HINT=N
         reboot
         ;;
     13 | poweroff)
+        HINT=N
         poweroff
         ;;
     14)
@@ -103,12 +105,8 @@ case "$CHOICE" in
         ;;
 esac
 
-case "$CHOICE" in
-    12 | 13 | reboot | poweroff)
-        ;;
-    *)
-        printf "menu: Type '\033[01;37mmenu\033[0m' to return to main menu.\n\n"
-        ;;
-esac
+if [ "X$HINT" != XN ]; then
+    printf "menu: Type '\033[01;37mmenu\033[0m' to return to main menu.\n\n"
+fi
 
 exit 0

@@ -102,7 +102,7 @@ CPUSTRESS_TEXT
             linpack
             ;;
         menu)
-            menu
+            HINT=N menu
             ;;
         mprime)
             mprime $ubcdargs
