@@ -82,7 +82,7 @@ NOTE: This cpustress image supports up to 4GB of memory, and does not support
 NOTE: Don't use the following options!
       This cpustress image doesn't support writing to a disk.
       If you want to stress the hard disk also, use a real linux distribution
-      (e.g. Parted Magic) and run it from there.
+      and run it from there.
 `-d FORKS'
 `--hdd FORKS'
      Spawn FORKS processes each spinning on `write()'.
@@ -130,7 +130,7 @@ the command to self-terminate after 1 minute.
 NOTE: Don't use the following options!
       This cpustress image doesn't support writing to a disk.
       If you want to stress the hard disk also, use a real linux distribution
-      (e.g. Parted Magic) and run it from there.
+      and run it from there.
 
    You can write a file of arbitrary length to disk.  The file is
 created with mkstemp() in the current directory, the default is to

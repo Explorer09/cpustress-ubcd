@@ -12,7 +12,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 6 May 2014.
+# Last updated on 2 January 2015.
 
 
 echo "The sensors-detect script is not included in the CPUstress image."
@@ -20,4 +20,3 @@ echo "The kernel used by CPUstress has all hardware monitoring drivers built-in,
 echo "the 'sensors' program should have detected all sensors on your system."
 echo "If not, please report the missing drivers on the Ultimate Boot CD forums."
 echo "<http://www.ultimatebootcd.com/forums/>"
-echo "You can use sensors-detect in Parted Magic to determine which drivers you need."

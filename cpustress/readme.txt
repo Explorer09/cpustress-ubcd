@@ -5,7 +5,7 @@ Made by Gert Hulselmans ("Icecube") and modified by Kang-Che Sung ("Explorer").
 
 Released under the GNU General Public License, version 2.
 
-Last edited on 17 November 2014.
+Last edited on 2 January 2015.
 
 
 Content of this package:
@@ -14,7 +14,7 @@ _________________________
 ./build.txz      ==> tar archive that contains the files that you need to
                      rebuild the image and the kernel
 
-./bzImage        ==> kernel image (from Parted Magic)
+./bzImage        ==> kernel image
 
 ./changes.txt    ==> a changelog
 
