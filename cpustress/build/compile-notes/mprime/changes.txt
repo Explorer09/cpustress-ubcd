@@ -1,4 +1,4 @@
-20 August 2014
+3 January 2015
 
 Changes in mprime-changes.patch:
 - Wrap several parts of the code with a preprocessor conditional: "#ifdef \
@@ -7,12 +7,14 @@ Changes in mprime-changes.patch:
   The GUI (Prime95) code is unchanged, so to build GUI version, the macro has
   to be explicitly defined with compiler switch "-DBUILD_PRIMENET" or the build
   will fail.
-  (This change is such an invasive one that it might never get accepted
-  upstream. But it can remove libcurl dependency.)
+  (This change is an invasive one that it might never get accepted upstream.
+  But it can remove libcurl dependency.)
 - Reordered the code in "Options/CPU" so that the CPU information is displayed
   first, before the interactive configuration of time and memory.
 - Added short description for each menu selections. This applies to command-
   line builds only. GUI code is unchanged.
+- Edited some mprime output messages so that they aren't line-wrapped weirdly
+  in 80-column terminals. (http://www.mersenneforum.org/showthread.php?t=19953)
 - TortureThreads INI parameter now checks if it exceeds the bound
   (MAX_NUM_WORKER_THREADS). Bug reported upstream:
   (http://www.mersenneforum.org/showthread.php?t=19611)

@@ -1,4 +1,4 @@
-20 August 2014
+3 January 2015
 
 Website of the Mersenne Prime test program (a.k.a. mprime or prime95):
 http://www.mersenne.org/download/

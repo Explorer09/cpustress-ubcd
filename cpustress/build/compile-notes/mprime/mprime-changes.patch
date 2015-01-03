@@ -1,6 +1,6 @@
 diff -r -u a/comm95c.c b/comm95c.c
 --- a/comm95c.c	2009-04-04 20:43:32.000000000 +0800
-+++ b/comm95c.c	2014-08-20 13:27:25.664642528 +0800
++++ b/comm95c.c	2015-01-03 21:48:14.138299706 +0800
 @@ -17,6 +17,7 @@
  
  /* Load the PrimeNet DLL, make sure an internet connection is active */
@@ -31,7 +31,43 @@ diff -r -u a/comm95c.c b/comm95c.c
  
 diff -r -u a/commonb.c b/commonb.c
 --- a/commonb.c	2014-05-28 23:39:04.000000000 +0800
-+++ b/commonb.c	2014-08-20 13:27:25.668642569 +0800
++++ b/commonb.c	2015-01-03 21:48:49.090701597 +0800
+@@ -26,7 +26,7 @@
+ char ERRMSG1D[] = "ERROR: Shift counter corrupt.\n";
+ char ERRMSG1E[] = "ERROR: Illegal double encountered.\n";
+ char ERRMSG1F[] = "ERROR: FFT data has been zeroed!\n";
+-char ERRMSG2[] = "Possible hardware failure, consult the readme.txt file.\n";
++char ERRMSG2[] = "Possible hardware failure, consult readme.txt file.\n";
+ char ERRMSG3[] = "Continuing from last save file.\n";
+ char ERRMSG4[] = "Waiting five minutes before restarting.\n";
+ char ERRMSG5[] = "For added safety, redoing iteration using a slower, more reliable method.\n";
+@@ -550,7 +550,7 @@
+ 			if (diff == 99999) {
+ 				AFFINITY_SCRAMBLE_STATE = 0;
+ 			} else {
+-				OutputStr (MAIN_THREAD_NUM, "Enough information obtained to make a reasonable guess.\n");
++				OutputStr (MAIN_THREAD_NUM, "Have enough information to make a reasonable guess.\n");
+ 			}
+ 		}
+ 		if (AFFINITY_SCRAMBLE_STATE == 0 && scramble[0] == '*') {
+@@ -578,7 +578,7 @@
+ 
+ no_auto_detect:
+ 	if (scramble[0] != '*') {
+-		OutputStr (MAIN_THREAD_NUM, "Using AffinityScramble2 settings to set affinity mask.\n");
++		OutputStr (MAIN_THREAD_NUM, "Using AffinityScramble2 setting to set affinity mask.\n");
+ 		AFFINITY_SCRAMBLE_STATE = 2;
+ 		for (i = 0; i < MAX_NUM_WORKER_THREADS && i < strlen (scramble); i++) {
+ 			if (scramble[i] >= '0' && scramble[i] <= '9')
+@@ -1063,7 +1063,7 @@
+ 	int	thread_num)
+ {
+ 	if (WORKER_THREADS_ACTIVE && ! STOP_FOR_PRIORITY_WORK[thread_num]) {
+-		OutputStr (thread_num, "Restarting worker to do factoring prior to an LL test.\n");
++		OutputStr (thread_num, "Restarting worker to do factoring prior to LL test.\n");
+ 		STOP_FOR_PRIORITY_WORK[thread_num] = 1;
+ 	}
+ }
 @@ -2957,7 +2957,9 @@
  /* to try something and if it doesn't work, ESC and choose Test/Continue */
  /* to try some other system settings (without waiting an hour). */
@@ -132,7 +168,34 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Delete the continuation files - assuming the results file write */
  /* was successful. */
-@@ -7740,12 +7754,14 @@
+@@ -5870,15 +5884,14 @@
+ /* Torture test code */
+ /*********************/
+ 
+-#define TORTURE1 "Beginning a continuous self-test to check your computer.\n"
++#define TORTURE1 "Beginning a continuous self-test on your computer.\n"
+ #if defined (__linux__) || defined (__FreeBSD__) || defined (__EMX__)
+ #define TORTURE2 "Please read stress.txt.  Hit ^C to end this test.\n"
+ #else
+ #define TORTURE2 "Please read stress.txt.  Choose Test/Stop to end this test.\n"
+ #endif
+-#define SELFMSG1A "The program will now perform a self-test to make sure the\n"
+-#define SELFMSG1B "Lucas-Lehmer code is working properly on your computer.\n"
+-#define SELFMSG1C "This will take about an hour.\n"
++#define SELFMSG1A "The program will now perform a self-test to make sure the Lucas-Lehmer code is working properly on your computer.\n"
++#define SELFMSG1B "This will take about an hour.\n"
+ #define SELF1 "Test %i, %i Lucas-Lehmer iterations of M%ld using %s.\n"
+ #define SELFFAIL "FATAL ERROR: Final result was %08lX, expected: %08lX.\n"
+ char SELFFAIL1[] = "ERROR: ILLEGAL SUMOUT\n";
+@@ -6835,7 +6848,6 @@
+ 
+ 	OutputStr (thread_num, SELFMSG1A);
+ 	OutputStr (thread_num, SELFMSG1B);
+-	OutputStr (thread_num, SELFMSG1C);
+ 
+ /* Do the self test */
+ 
+@@ -7740,12 +7752,14 @@
  
  /* Accumulate best times to send to the server */
  
@@ -147,7 +210,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  	}
  
-@@ -8098,12 +8114,16 @@
+@@ -8098,12 +8112,16 @@
  	int	is_a_5678, bench_hyperthreading, bench_multithreading, bench_one_or_all, bench_arch;
  	unsigned long fftlen, min_FFT_length, max_FFT_length;
  	double	timers[2];
@@ -164,7 +227,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Output startup message */
  
-@@ -8341,6 +8361,7 @@
+@@ -8341,6 +8359,7 @@
  /* Accumulate best times to send to the server.  Limit the number sent since */
  /* we can only send fifty. */
  
@@ -172,7 +235,7 @@ diff -r -u a/commonb.c b/commonb.c
  		  if (!all_bench && is_a_5678 && !plus1 && hypercpu == 1 &&
  		      (cpu == 1 || (fftlen / 1024 > 768 && (cpu == 2 || cpu == 4))) &&
  		      pkt.num_data_points < PRIMENET_BENCH_MAX_DATAPOINTS) {
-@@ -8353,6 +8374,7 @@
+@@ -8353,6 +8372,7 @@
  			pkt.data_points[pkt.num_data_points].timing = timer_value (timers, 0);
  			pkt.num_data_points++;
  		  }
@@ -180,7 +243,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Time next FFT */
  
-@@ -8369,7 +8391,11 @@
+@@ -8369,7 +8389,11 @@
  /* Now benchmark the trial factoring code */
  
  	if (IniGetInt (INI_FILE, "BenchTrialFactoring", 0)) {
@@ -192,7 +255,7 @@ diff -r -u a/commonb.c b/commonb.c
  		if (stop_reason) return (stop_reason);
  	}
  
-@@ -8383,8 +8409,10 @@
+@@ -8383,8 +8407,10 @@
  //only do this if guid is registered? Or should we auto-register computer
  //under ANONYMOUS userid for stress-testers.
  
@@ -203,7 +266,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Now benchmark running multiple workers.  This will measure the effect of memory bandwidth */
  /* on LL testing. */
-@@ -9086,6 +9114,7 @@
+@@ -9086,6 +9112,7 @@
  
  /* Output results to the server */
  
@@ -211,7 +274,7 @@ diff -r -u a/commonb.c b/commonb.c
  	{
  		struct primenetAssignmentResult pkt;
  		memset (&pkt, 0, sizeof (pkt));
-@@ -9104,6 +9133,7 @@
+@@ -9104,6 +9131,7 @@
  		pkt.done = TRUE;
  		spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  	}
@@ -221,7 +284,7 @@ diff -r -u a/commonb.c b/commonb.c
  
 diff -r -u a/commonc.c b/commonc.c
 --- a/commonc.c	2014-05-28 20:32:56.000000000 +0800
-+++ b/commonc.c	2014-08-20 13:27:25.668642569 +0800
++++ b/commonc.c	2015-01-03 21:48:14.142299751 +0800
 @@ -20,35 +20,47 @@
  char	SPOOL_FILE[80] = {0};
  char	LOGFILE[80] = {0};
@@ -611,7 +674,7 @@ diff -r -u a/commonc.c b/commonc.c
  				timed_events[i].time_to_fire =
 diff -r -u a/commonc.h b/commonc.h
 --- a/commonc.h	2014-05-28 20:35:30.000000000 +0800
-+++ b/commonc.h	2014-08-20 13:27:25.668642569 +0800
++++ b/commonc.h	2015-01-03 21:48:14.146299795 +0800
 @@ -144,26 +144,36 @@
  extern char USERID[21];			/* User's ID */
  extern char COMPID[21];			/* Computer name */
@@ -692,7 +755,7 @@ diff -r -u a/commonc.h b/commonc.h
  *                           Timed Events Handler                              *
 diff -r -u a/ecm.c b/ecm.c
 --- a/ecm.c	2014-02-25 18:31:22.000000000 +0800
-+++ b/ecm.c	2014-08-20 13:27:25.672642610 +0800
++++ b/ecm.c	2015-01-03 21:48:14.146299795 +0800
 @@ -3360,6 +3360,7 @@
  /* Send ECM completed message to the server.  Although don't do it for */
  /* puny B1 values. */
@@ -759,7 +822,7 @@ diff -r -u a/ecm.c b/ecm.c
  
 diff -r -u a/linux/makebsd b/linux/makebsd
 --- a/linux/makebsd	2014-05-29 22:35:16.000000000 +0800
-+++ b/linux/makebsd	2014-08-20 13:27:25.672642610 +0800
++++ b/linux/makebsd	2015-01-03 21:48:14.146299795 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -775,7 +838,7 @@ diff -r -u a/linux/makebsd b/linux/makebsd
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic /usr/local/lib/libcurl.a -lz -lcompat -lstdc++ -Wl,-Bdynamic -lssl
 diff -r -u a/linux/makefile b/linux/makefile
 --- a/linux/makefile	2014-05-29 22:35:16.000000000 +0800
-+++ b/linux/makefile	2014-08-20 13:27:25.672642610 +0800
++++ b/linux/makefile	2015-01-03 21:48:14.146299795 +0800
 @@ -20,10 +20,10 @@
  #	LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic  $(shell pkg-config --static --libs libcurl) -lstdc++ -Wl,-Bdynamic -ldl
  
@@ -791,7 +854,7 @@ diff -r -u a/linux/makefile b/linux/makefile
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic -lcurl -Wl,-Bdynamic -lrt -lstdc++ -ldl
 diff -r -u a/linux/makehaikugcc2 b/linux/makehaikugcc2
 --- a/linux/makehaikugcc2	2014-05-29 22:35:16.000000000 +0800
-+++ b/linux/makehaikugcc2	2014-08-20 13:27:25.672642610 +0800
++++ b/linux/makehaikugcc2	2015-01-03 21:48:14.146299795 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -807,7 +870,7 @@ diff -r -u a/linux/makehaikugcc2 b/linux/makehaikugcc2
  LIBS   = -L/boot/common/lib ../gwnum/gwnum.a ../gwnum/gwnum.ld -lnetwork -lcurl -lstdc++.r4
 diff -r -u a/linux/makehaikugcc4 b/linux/makehaikugcc4
 --- a/linux/makehaikugcc4	2014-05-29 22:35:16.000000000 +0800
-+++ b/linux/makehaikugcc4	2014-08-20 13:27:25.672642610 +0800
++++ b/linux/makehaikugcc4	2015-01-03 21:48:14.146299795 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -823,7 +886,7 @@ diff -r -u a/linux/makehaikugcc4 b/linux/makehaikugcc4
  LIBS   = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lnetwork -lcurl -lstdc++
 diff -r -u a/linux/menu.c b/linux/menu.c
 --- a/linux/menu.c	2014-01-07 15:43:38.000000000 +0800
-+++ b/linux/menu.c	2014-08-20 13:27:25.672642610 +0800
++++ b/linux/menu.c	2015-01-03 21:48:14.146299795 +0800
 @@ -242,6 +242,7 @@
  
  void getProxyInfo (char *, unsigned short *, char *, char *);
@@ -1345,7 +1408,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
 +#endif
 diff -r -u a/linux/os_routines.c b/linux/os_routines.c
 --- a/linux/os_routines.c	2014-05-28 18:10:02.000000000 +0800
-+++ b/linux/os_routines.c	2014-08-20 13:27:25.672642610 +0800
++++ b/linux/os_routines.c	2015-01-03 21:48:14.146299795 +0800
 @@ -407,6 +407,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -1372,7 +1435,7 @@ diff -r -u a/linux/os_routines.c b/linux/os_routines.c
  
 diff -r -u a/linux/prime.c b/linux/prime.c
 --- a/linux/prime.c	2014-05-15 21:45:24.000000000 +0800
-+++ b/linux/prime.c	2014-08-20 13:28:05.961059084 +0800
++++ b/linux/prime.c	2015-01-03 21:48:14.150299840 +0800
 @@ -106,7 +106,9 @@
  #include "commonb.c"
  #include "commonc.c"
@@ -1419,7 +1482,7 @@ diff -r -u a/linux/prime.c b/linux/prime.c
  /* Bring up the main menu */
 diff -r -u a/linux64/makebsd b/linux64/makebsd
 --- a/linux64/makebsd	2014-05-29 22:35:16.000000000 +0800
-+++ b/linux64/makebsd	2014-08-20 13:27:25.672642610 +0800
++++ b/linux64/makebsd	2015-01-03 21:48:14.150299840 +0800
 @@ -4,10 +4,10 @@
  #
  
@@ -1435,7 +1498,7 @@ diff -r -u a/linux64/makebsd b/linux64/makebsd
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -lcurl -lstdc++ -lcompat
 diff -r -u a/linux64/makefile b/linux64/makefile
 --- a/linux64/makefile	2014-05-29 22:35:16.000000000 +0800
-+++ b/linux64/makefile	2014-08-20 13:27:25.672642610 +0800
++++ b/linux64/makefile	2015-01-03 21:48:14.150299840 +0800
 @@ -13,10 +13,10 @@
  #	LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic $(shell pkg-config --static --libs libcurl) -lstdc++ -Wl,-Bdynamic -ldl
  
@@ -1451,7 +1514,7 @@ diff -r -u a/linux64/makefile b/linux64/makefile
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic -lcurl -Wl,-Bdynamic -lrt -lstdc++ -ldl
 diff -r -u a/linux64/menu.c b/linux64/menu.c
 --- a/linux64/menu.c	2014-01-07 15:43:38.000000000 +0800
-+++ b/linux64/menu.c	2014-08-20 13:27:25.676642652 +0800
++++ b/linux64/menu.c	2015-01-03 21:48:14.158299932 +0800
 @@ -242,6 +242,7 @@
  
  void getProxyInfo (char *, unsigned short *, char *, char *);
@@ -1973,7 +2036,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
 +#endif
 diff -r -u a/linux64/os_routines.c b/linux64/os_routines.c
 --- a/linux64/os_routines.c	2014-05-28 18:10:02.000000000 +0800
-+++ b/linux64/os_routines.c	2014-08-20 13:27:25.676642652 +0800
++++ b/linux64/os_routines.c	2015-01-03 21:48:14.158299932 +0800
 @@ -407,6 +407,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -2000,7 +2063,7 @@ diff -r -u a/linux64/os_routines.c b/linux64/os_routines.c
  
 diff -r -u a/linux64/prime.c b/linux64/prime.c
 --- a/linux64/prime.c	2014-05-15 21:45:24.000000000 +0800
-+++ b/linux64/prime.c	2014-08-20 13:28:05.961059000 +0800
++++ b/linux64/prime.c	2015-01-03 21:48:14.158299932 +0800
 @@ -106,7 +106,9 @@
  #include "commonb.c"
  #include "commonc.c"
@@ -2047,7 +2110,7 @@ diff -r -u a/linux64/prime.c b/linux64/prime.c
  /* Bring up the main menu */
 diff -r -u a/macosx/makefile b/macosx/makefile
 --- a/macosx/makefile	2014-05-29 22:35:18.000000000 +0800
-+++ b/macosx/makefile	2014-08-20 13:27:25.676642652 +0800
++++ b/macosx/makefile	2015-01-03 21:48:14.158299932 +0800
 @@ -4,10 +4,10 @@
  ENVP= MACOSX_DEPLOYMENT_TARGET=10.4
  
@@ -2063,7 +2126,7 @@ diff -r -u a/macosx/makefile b/macosx/makefile
  LIBS   = ../gwnum/release/gwnum.a -lm -lpthread -lcurl -framework IOKit -framework CoreFoundation -lstdc++
 diff -r -u a/macosx/menu.c b/macosx/menu.c
 --- a/macosx/menu.c	2014-01-07 15:43:38.000000000 +0800
-+++ b/macosx/menu.c	2014-08-20 13:27:25.676642652 +0800
++++ b/macosx/menu.c	2015-01-03 21:48:14.158299932 +0800
 @@ -242,6 +242,7 @@
  
  void getProxyInfo (char *, unsigned short *, char *, char *);
@@ -2585,7 +2648,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
 +#endif
 diff -r -u a/macosx/os_routines.c b/macosx/os_routines.c
 --- a/macosx/os_routines.c	2014-05-28 18:10:02.000000000 +0800
-+++ b/macosx/os_routines.c	2014-08-20 13:27:25.676642652 +0800
++++ b/macosx/os_routines.c	2015-01-03 21:48:14.162299978 +0800
 @@ -407,6 +407,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -2612,7 +2675,7 @@ diff -r -u a/macosx/os_routines.c b/macosx/os_routines.c
  
 diff -r -u a/macosx/prime.c b/macosx/prime.c
 --- a/macosx/prime.c	2014-05-15 21:45:24.000000000 +0800
-+++ b/macosx/prime.c	2014-08-20 13:28:05.961059000 +0800
++++ b/macosx/prime.c	2015-01-03 21:48:14.162299978 +0800
 @@ -106,7 +106,9 @@
  #include "commonb.c"
  #include "commonc.c"
@@ -2659,7 +2722,7 @@ diff -r -u a/macosx/prime.c b/macosx/prime.c
  /* Bring up the main menu */
 diff -r -u a/macosx64/makefile b/macosx64/makefile
 --- a/macosx64/makefile	2014-05-29 22:35:20.000000000 +0800
-+++ b/macosx64/makefile	2014-08-20 13:27:25.676642652 +0800
++++ b/macosx64/makefile	2015-01-03 21:48:14.162299978 +0800
 @@ -4,10 +4,10 @@
  ENVP= MACOSX_DEPLOYMENT_TARGET=10.4
  
@@ -2675,7 +2738,7 @@ diff -r -u a/macosx64/makefile b/macosx64/makefile
  LIBS   = ../gwnum/amd64/release/gwnum.a -lm -lpthread -lcurl -framework IOKit -framework CoreFoundation -lstdc++
 diff -r -u a/macosx64/menu.c b/macosx64/menu.c
 --- a/macosx64/menu.c	2014-01-07 15:43:38.000000000 +0800
-+++ b/macosx64/menu.c	2014-08-20 13:27:25.676642652 +0800
++++ b/macosx64/menu.c	2015-01-03 21:48:14.162299978 +0800
 @@ -242,6 +242,7 @@
  
  void getProxyInfo (char *, unsigned short *, char *, char *);
@@ -3197,7 +3260,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
 +#endif
 diff -r -u a/macosx64/os_routines.c b/macosx64/os_routines.c
 --- a/macosx64/os_routines.c	2014-05-28 18:10:02.000000000 +0800
-+++ b/macosx64/os_routines.c	2014-08-20 13:27:25.676642652 +0800
++++ b/macosx64/os_routines.c	2015-01-03 21:48:14.162299978 +0800
 @@ -407,6 +407,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -3224,7 +3287,7 @@ diff -r -u a/macosx64/os_routines.c b/macosx64/os_routines.c
  
 diff -r -u a/macosx64/prime.c b/macosx64/prime.c
 --- a/macosx64/prime.c	2014-05-15 21:45:24.000000000 +0800
-+++ b/macosx64/prime.c	2014-08-20 13:28:05.961059000 +0800
++++ b/macosx64/prime.c	2015-01-03 21:48:14.162299978 +0800
 @@ -106,7 +106,9 @@
  #include "commonb.c"
  #include "commonc.c"
@@ -3271,7 +3334,7 @@ diff -r -u a/macosx64/prime.c b/macosx64/prime.c
  /* Bring up the main menu */
 diff -r -u a/os2/makefile b/os2/makefile
 --- a/os2/makefile	2008-06-01 15:10:18.000000000 +0800
-+++ b/os2/makefile	2014-08-20 13:27:25.680642693 +0800
++++ b/os2/makefile	2015-01-03 21:48:14.162299978 +0800
 @@ -5,7 +5,7 @@
  
  CC = wcc386
@@ -3283,7 +3346,7 @@ diff -r -u a/os2/makefile b/os2/makefile
  
 diff -r -u a/prime95/prime95.vcproj b/prime95/prime95.vcproj
 --- a/prime95/prime95.vcproj	2013-05-09 21:58:40.000000000 +0800
-+++ b/prime95/prime95.vcproj	2014-08-20 13:27:25.680642693 +0800
++++ b/prime95/prime95.vcproj	2015-01-03 21:48:14.162299978 +0800
 @@ -54,7 +54,7 @@
  				Name="VCCLCompilerTool"
  				InlineFunctionExpansion="1"
@@ -3340,7 +3403,7 @@ diff -r -u a/prime95/prime95.vcproj b/prime95/prime95.vcproj
  			<Tool
 diff -r -u a/winnt/compil64 b/winnt/compil64
 --- a/winnt/compil64	2008-11-16 16:37:58.000000000 +0800
-+++ b/winnt/compil64	2014-08-20 13:27:25.680642693 +0800
++++ b/winnt/compil64	2015-01-03 21:48:14.162299978 +0800
 @@ -1,7 +1,7 @@
  # Choose compiler switches 
  
@@ -3353,7 +3416,7 @@ diff -r -u a/winnt/compil64 b/winnt/compil64
  copt=/I.. /I..\gwnum /I\libcurl
 diff -r -u a/winnt/compile b/winnt/compile
 --- a/winnt/compile	2008-12-14 16:54:46.000000000 +0800
-+++ b/winnt/compile	2014-08-20 13:27:25.680642693 +0800
++++ b/winnt/compile	2015-01-03 21:48:14.162299978 +0800
 @@ -1,7 +1,7 @@
  # Choose compiler switches 
  
