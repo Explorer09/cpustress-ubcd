@@ -3,12 +3,12 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-3 January 2015
+4 January 2015
 
 - Updated Intel LINPACK to v11.2.1 (from v11.2.0)
 - Updated eglibc to 2.19-r25890 (from 2.19-r25243)
-- Rebuilt mprime v28.5. Changes some of the messages in it to fix line wrapping
-  problems.
+- Rebuilt mprime v28.5 with some source code changes. See the compile note for
+  details.
 - Added "vga=ext" options to 'linpack' and 'systester' boot entries.
 
 Changes in v2.5.4

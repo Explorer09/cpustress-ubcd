@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2015-01-03 22:05:33.4459773130 +0800" .git_cache_meta
+touch -c -h -d "2015-01-04 12:40:32.2407117300 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -231,11 +231,11 @@ touch -c -h -d "2014-10-31 14:10:34.6039850000 +0800" cpustress/build/compile-no
 chmod 0644 cpustress/build/compile-notes/linpack.txt
 touch -c -h -d "2014-11-17 10:35:01.8159575160 +0800" cpustress/build/compile-notes/linpack.txt
 chmod 0644 cpustress/build/compile-notes/mprime.txt
-touch -c -h -d "2015-01-03 21:59:47.0585470700 +0800" cpustress/build/compile-notes/mprime.txt
+touch -c -h -d "2015-01-04 11:21:18.0073597280 +0800" cpustress/build/compile-notes/mprime.txt
 chmod 0644 cpustress/build/compile-notes/mprime/changes.txt
-touch -c -h -d "2015-01-03 21:55:44.9194189680 +0800" cpustress/build/compile-notes/mprime/changes.txt
-chmod 0664 cpustress/build/compile-notes/mprime/mprime-changes.patch
-touch -c -h -d "2015-01-03 21:59:08.5501480000 +0800" cpustress/build/compile-notes/mprime/mprime-changes.patch
+touch -c -h -d "2015-01-04 11:04:04.8085705170 +0800" cpustress/build/compile-notes/mprime/changes.txt
+chmod 0644 cpustress/build/compile-notes/mprime/mprime-changes.patch
+touch -c -h -d "2015-01-04 10:37:27.9488743730 +0800" cpustress/build/compile-notes/mprime/mprime-changes.patch
 chmod 0644 cpustress/build/compile-notes/mprime/note.txt
 touch -c -h -d "2014-09-18 20:08:47.9851968630 +0800" cpustress/build/compile-notes/mprime/note.txt
 chmod 0755 cpustress/build/compile-notes/mprime/torture-conf.sh
@@ -269,7 +269,7 @@ touch -c -h -d "2014-05-06 21:03:22.9432341320 +0800" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2014-10-31 16:37:08.5447765240 +0800" cpustress/build/prepare
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2015-01-03 22:05:12.8057337870 +0800" cpustress/changes.txt
+touch -c -h -d "2015-01-04 12:38:24.3274141610 +0800" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000 +0800" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt
