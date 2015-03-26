@@ -1,4 +1,4 @@
-25 December 2014
+26 March 2015
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -39,32 +39,32 @@ Preparation
      wget http://ftp.gnu.org/gnu/binutils/binutils-2.25.tar.bz2
      wget https://ftp.gnu.org/gnu/gmp/gmp-6.0.0a.tar.xz
      wget http://www.mpfr.org/mpfr-current/mpfr-3.1.2.tar.xz
-     wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.2.tar.gz
+     wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.12.2.tar.bz2
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/cloog-0.18.1.tar.gz
      wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.9.2/gcc-4.9.2.tar.bz2
-     wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.18.1.tar.xz
+     wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.19.2.tar.xz
      svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
      }
  $ extract () {
      tar -x --bzip2 -f binutils-2.25.tar.bz2
      tar -x --xz -f gmp-6.0.0a.tar.xz
      tar -x --xz -f mpfr-3.1.2.tar.xz
-     tar -x -z -f mpc-1.0.2.tar.gz
+     tar -x -z -f mpc-1.0.3.tar.gz
      tar -x --bzip2 -f isl-0.12.2.tar.bz2
      tar -x -z -f cloog-0.18.1.tar.gz
      tar -x --bzip2 -f gcc-4.9.2.tar.bz2
-     tar -x --xz -f linux-3.18.1.tar.xz
+     tar -x --xz -f linux-3.19.2.tar.xz
      mv gmp-6.0.0    gcc-4.9.2/gmp
      mv mpfr-3.1.2   gcc-4.9.2/mpfr
-     mv mpc-1.0.2    gcc-4.9.2/mpc
+     mv mpc-1.0.3    gcc-4.9.2/mpc
      mv isl-0.12.2   gcc-4.9.2/isl
      mv cloog-0.18.1 gcc-4.9.2/cloog
      }
 
  $ download
  $ extract
- $ for i in binutils-2.25 gcc-4.9.2 linux-3.18.1 libc; do
+ $ for i in binutils-2.25 gcc-4.9.2 linux-3.19.2 libc; do
      if [ ! -d "$i" ]; then exit 1; fi; done
 
 Copy the "option-groups.config" file from the compile-notes directory to
@@ -142,7 +142,7 @@ Notes:
 3. Linux kernel headers for libc
 --------------------------------
 
- $ cd linux-3.18.1
+ $ cd linux-3.19.2
  $ make mrproper
  $ make INSTALL_HDR_PATH=${SYSROOT_DIR}/usr headers_install
  $ cd ..
