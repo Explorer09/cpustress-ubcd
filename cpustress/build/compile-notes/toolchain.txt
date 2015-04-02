@@ -1,4 +1,4 @@
-26 March 2015
+2 April 2015
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -73,11 +73,13 @@ manually - the script can't locate where the file is.)
 
  $ [ -f option-groups.config ] || exit 1
 
-Make two directories, 'sysroot' and 'tools':
+Make 'sysroot' and 'tools' directories:
 
- $ mkdir sysroot  # This stores the target (i486) libraries and include files.
- $ mkdir tools    # This stores the cross-compile tools (binutils & GCC).
+ $ mkdir sysroot    # This stores i486 target libraries and include files.
+ $ mkdir sysroot64  # This stores x86_64 target libraries and include files.
+ $ mkdir tools      # This stores the cross-compile tools (binutils & GCC).
  $ SYSROOT_DIR="${PWD}/sysroot"
+ $ SYSROOT64_DIR="${PWD}/sysroot64"
  $ TOOLS_DIR="${PWD}/tools"
 
 Add the 'tools' directory to PATH, so that our cross tools (binutils & GCC) can
@@ -96,11 +98,19 @@ soon as they are no longer needed.
 -----------------
 
  $ cd binutils-build
- $ ../binutils-2.25/configure --prefix=${TOOLS_DIR} \
-     --target=i486-pc-linux-gnu --with-sysroot=${SYSROOT_DIR}
+
+ $ ../binutils-2.25/configure --prefix="${TOOLS_DIR}" \
+     --target=i486-pc-linux-gnu --with-sysroot="${SYSROOT_DIR}"
  $ make
  $ make install
  $ make distclean && rm -r *
+
+ $ ../binutils-2.25/configure --prefix="${TOOLS_DIR}" \
+     --target=x86_64-pc-linux-gnu --with-sysroot="${SYSROOT64_DIR}"
+ $ make
+ $ make install
+ $ make distclean && rm -r *
+
  $ cd ..
 
 2. Cross-GCC without libc headers
@@ -116,35 +126,52 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
      --disable-libgomp --disable-libitm --disable-libatomic"
 
  $ cd gcc-build
- $ ../gcc-4.9.2/configure --prefix=${TOOLS_DIR} --target=i486-pc-linux-gnu \
-     --enable-languages=c,c++ --disable-shared --disable-threads \
-     --enable-linker-build-id --disable-bootstrap --disable-multilib \
-     ${DISABLE_TARGET_LIBS} --without-headers --with-newlib \
-     --with-sysroot=${SYSROOT_DIR} --with-arch-32=i486 --with-tune=generic
+
+ $ ../gcc-4.9.2/configure --prefix="${TOOLS_DIR}" \
+     --target=i486-pc-linux-gnu --enable-languages=c,c++ \
+     --disable-shared --disable-threads \
+     --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
+     --without-headers --with-newlib \
+     --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
  $ make distclean && rm -r *
+
+ $ ../gcc-4.9.2/configure --prefix="${TOOLS_DIR}" \
+     --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
+     --disable-shared --disable-threads \
+     --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
+     --without-headers --with-newlib \
+     --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
+ $ make
+ $ make install-strip
+ $ make distclean && rm -r *
+
  $ cd ..
 
 Notes:
-* The --disable-libstdcxx switch doesn't seem to work, so here I use the old,
-  undocumented switch --disable-libstdc++-v3 instead.
-* The --with-arch-32=i486 and --with-tune=generic switches ensure that the new
+* The --disable-libstdcxx option doesn't seem to work, so here I use the old,
+  undocumented option --disable-libstdc++-v3 instead.
+* The --with-arch-32=i486 and --with-tune=generic options ensure that the new
   target code compiled after this new compiler will support i486 (-march=i486)
   and be tuned for generic CPUs (-mtune=generic) by default.
 * Without libc headers, the TARGET_LIBC_PROVIDES_SSP macro should be undefined
-  (in "gcc/auto-host.h") now. Trying to build EGLIBC at this time will result
-  in "undefined reference to __stack_chk_guard" error. Linux From Scratch (LFS)
-  solves this by hacking GCC's configure script to force
-  "gcc_cv_libc_provides_ssp=yes". I don't take this approach, instead I install
-  the libc headers first and then re-configure GCC.
+  (in "gcc/auto-host.h") now. Trying to build glibc at this time will result in
+  "undefined reference to __stack_chk_guard" error. Linux From Scratch solves
+  this by adding "gcc_cv_libc_provides_ssp=yes" into GCC's configure script
+  (a hack). The --with-glibc-version option (new in GCC 4.9) was also designed
+  to solve this problem and allow glibc to be built with the initial compiler
+  (with no libc headers or shared libgcc). However, the libc binaries built
+  with the initial compiler is not bit-identical to the binaries rebuilt later,
+  so I don't take either approach.
 
 3. Linux kernel headers for libc
 --------------------------------
 
  $ cd linux-3.19.2
  $ make mrproper
- $ make INSTALL_HDR_PATH=${SYSROOT_DIR}/usr headers_install
+ $ make INSTALL_HDR_PATH="${SYSROOT_DIR}/usr" headers_install
+ $ make INSTALL_HDR_PATH="${SYSROOT64_DIR}/usr" headers_install
  $ cd ..
 
 4. EGLIBC headers and startup files
@@ -157,53 +184,107 @@ Notes:
      --build=$(../libc/scripts/config.guess) --host=i486-pc-linux-gnu \
      --enable-kernel=2.6.36 --enable-add-ons=nptl --disable-nscd \
      --disable-profile --without-gd --without-selinux \
-     --with-headers=${SYSROOT_DIR}/usr/include
+     --with-headers="${SYSROOT_DIR}/usr/include"
 
 Install libc headers:
 
  $ make install-headers install-bootstrap-headers=yes \
-     install_root=${SYSROOT_DIR}
+     install_root="${SYSROOT_DIR}"
 
 Make startup files (crt*.o):
 
  $ make csu/subdir_lib
- $ mkdir ${SYSROOT_DIR}/usr/lib
- $ cp csu/crt*.o ${SYSROOT_DIR}/usr/lib
+ $ mkdir "${SYSROOT_DIR}/usr/lib"
+ $ cp csu/crt*.o "${SYSROOT_DIR}/usr/lib"
 
 Make dummy libc.so:
 
  $ i486-pc-linux-gnu-gcc -nostdlib -shared -x c /dev/null \
-     -o ${SYSROOT_DIR}/usr/lib/libc.so
+     -o "${SYSROOT_DIR}/usr/lib/libc.so"
+
+ $ make distclean && rm -r *
+
+Do the same for x86_64:
+
+ $ cp ../option-groups.config .
+ $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib \
+     --build=$(../libc/scripts/config.guess) --host=x86_64-pc-linux-gnu \
+     --enable-kernel=2.6.36 --enable-add-ons=nptl --disable-nscd \
+     --disable-profile --without-gd --without-selinux \
+     --with-headers="${SYSROOT64_DIR}/usr/include"
+
+ $ make install-headers install-bootstrap-headers=yes \
+     install_root="${SYSROOT64_DIR}"
+
+ $ make csu/subdir_lib
+ $ mkdir "${SYSROOT64_DIR}/usr/lib" "${SYSROOT64_DIR}/usr/lib64"
+ $ cp csu/crt*.o "${SYSROOT64_DIR}/usr/lib64"
+
+ $ x86_64-pc-linux-gnu-gcc -nostdlib -shared -x c /dev/null \
+     -o "${SYSROOT64_DIR}/usr/lib64/libc.so"
+
+ $ make distclean && rm -r *
 
  $ cd ..
+
+Note:
+* "${SYSROOT64_DIR}/usr/lib" _must_ be created even though it's empty at this
+  step, otherwise the absence of the directory will hinder the library search
+  for the compiler that will be built later. (It searches "usr/lib/../lib64"
+  instead of "usr/lib64" directly.)
 
 5. Cross-GCC for building libc
 ------------------------------
 
-Note the switch '--enable-shared=libgcc'.
+Note the option '--enable-shared=libgcc'.
 
  $ cd gcc-build
- $ ../gcc-4.9.2/configure --prefix=${TOOLS_DIR} --target=i486-pc-linux-gnu \
-     --enable-languages=c,c++ --enable-shared=libgcc --disable-threads \
-     --enable-linker-build-id --disable-bootstrap --disable-multilib \
-     ${DISABLE_TARGET_LIBS} \
-     --with-sysroot=${SYSROOT_DIR} --with-arch-32=i486 --with-tune=generic
+
+ $ ../gcc-4.9.2/configure --prefix="${TOOLS_DIR}" \
+     --target=i486-pc-linux-gnu --enable-languages=c,c++ \
+     --enable-shared=libgcc --disable-threads \
+     --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
+     --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
  $ make distclean && rm -r *
+
+ $ ../gcc-4.9.2/configure --prefix="${TOOLS_DIR}" \
+     --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
+     --enable-shared=libgcc --disable-threads \
+     --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
+     --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
+ $ make
+ $ make install-strip
+ $ make distclean && rm -r *
+
  $ cd ..
 
 6. EGLIBC, full
 ---------------
 
-If you didn't clean up the eglibc-build directory at section 4, you don't need
-to run 'configure' again. Just use the last configuration.
-
  $ cd eglibc-build
- $ make clean
+
+ $ cp ../option-groups.config .
+ $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib \
+     --build=$(../libc/scripts/config.guess) --host=i486-pc-linux-gnu \
+     --enable-kernel=2.6.36 --enable-add-ons=nptl --disable-nscd \
+     --disable-profile --without-gd --without-selinux \
+     --with-headers="${SYSROOT_DIR}/usr/include"
  $ make
- $ make install install_root=${SYSROOT_DIR}
+ $ make install install_root="${SYSROOT_DIR}"
  $ make distclean && rm -r *
+
+ $ cp ../option-groups.config .
+ $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib \
+     --build=$(../libc/scripts/config.guess) --host=x86_64-pc-linux-gnu \
+     --enable-kernel=2.6.36 --enable-add-ons=nptl --disable-nscd \
+     --disable-profile --without-gd --without-selinux \
+     --with-headers="${SYSROOT64_DIR}/usr/include"
+ $ make
+ $ make install install_root="${SYSROOT64_DIR}"
+ $ make distclean && rm -r *
+
  $ cd ..
 
 7. Cross-GCC, full
@@ -214,40 +295,58 @@ Only libgcc is built with a shared library. Other target libraries, including
 libstdc++, are built as static libraries only.
 
  $ cd gcc-build
- $ ../gcc-4.9.2/configure --prefix=${TOOLS_DIR} --target=i486-pc-linux-gnu \
-     --enable-languages=c,c++ --enable-shared=libgcc --enable-threads=posix \
-     --enable-clocale=gnu --enable-lto \
-     --enable-linker-build-id --disable-bootstrap --disable-multilib \
-     --with-sysroot=${SYSROOT_DIR} --with-arch-32=i486 --with-tune=generic
+
+ $ ../gcc-4.9.2/configure --prefix="${TOOLS_DIR}" \
+     --target=i486-pc-linux-gnu --enable-languages=c,c++ \
+     --enable-shared=libgcc --enable-threads=posix --enable-clocale=gnu \
+     --enable-lto --disable-bootstrap --disable-multilib \
+     --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
  $ make -k distclean; rm -r *
+
+ $ ../gcc-4.9.2/configure --prefix="${TOOLS_DIR}" \
+     --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
+     --enable-shared=libgcc --enable-threads=posix --enable-clocale=gnu \
+     --enable-lto --disable-bootstrap --disable-multilib \
+     --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
+ $ make
+ $ make install-strip
+ $ make -k distclean; rm -r *
+
  $ cd ..
 
 Notes:
-* __cxa_atexit should be enabled by default for glibc. There's no need to
-  explicitly specify '--enable-__cxa_atexit' IIRC.
-* Some target libraries will generate errors when doing 'make distclean'. '-k'
-  switch added to workaround this.
+* __cxa_atexit should have been enabled by default for glibc. There's no need
+  to explicitly specify '--enable-__cxa_atexit'.
+* Some target libraries generate errors when doing 'make distclean' (a bug).
+  '-k' option is added to workaround this.
 
 Copy libgcc_s.so.1 from 'tools' directory to the target's 'sysroot' directory,
 because GCC's makefile won't do this automatically when installing:
 
- $ cp -d ${TOOLS_DIR}/i486-pc-linux-gnu/lib/libgcc_s.so* ${SYSROOT_DIR}/lib
+ $ cp -d "${TOOLS_DIR}"/i486-pc-linux-gnu/lib/libgcc_s.so* \
+     "${SYSROOT_DIR}/lib"
+ $ cp -d "${TOOLS_DIR}"/x86_64-pc-linux-gnu/lib64/libgcc_s.so* \
+     "${SYSROOT64_DIR}/lib64"
 
 Stripping binaries (Optional)
 -----------------------------
 
 The ".so" binary files in CPUstress are stripped binaries.
 
- $ cd ${SYSROOT_DIR}/lib
- $ strip --strip-unneeded libgcc_s.so.1
- $ strip --strip-unneeded *-2.19.so
+ $ cd "${SYSROOT_DIR}/lib"
+ $ strip --strip-unneeded libgcc_s.so.1 *-2.19.so
+ $ cd "${SYSROOT64_DIR}/lib64"
+ $ strip --strip-unneeded libgcc_s.so.1 *-2.19.so
 
 Change mode bits (Optional)
 ---------------------------
 
- $ cd ${SYSROOT_DIR}/lib
+ $ cd "${SYSROOT_DIR}/lib"
+ $ chmod 644 *-2.19.so
+ $ chmod 755 ld-2.19.so libc-2.19.so libpthread-2.19.so
+ $ cd "${SYSROOT64_DIR}/lib64"
  $ chmod 644 *-2.19.so
  $ chmod 755 ld-2.19.so libc-2.19.so libpthread-2.19.so
 

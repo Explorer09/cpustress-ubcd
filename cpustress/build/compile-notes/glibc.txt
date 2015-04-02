@@ -1,4 +1,4 @@
-15 August 2014
+2 April 2015
 
 EGLIBC is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom cross-
 toolchain described in "toolchain.txt". The library must now be built together
@@ -53,9 +53,10 @@ The precompiled libraries in CPUstress were compiled with different
 "enable-kernel" switches. Although this is unnecessary and time-consuming, I
 did this to minimize the version requirements of the individual file, while
 keeping the code optimized for the latest kernel. The switches are as follows:
-   libdl.so, libm.so: --enable-kernel=2.6.16
-   libnss_files.so:   --enable-kernel=2.6.23
-   libpthread.so:     --enable-kernel=2.6.29
-   ld.so, libc.so:    --enable-kernel=2.6.36
+   libdl.so, libm.so:      --enable-kernel=2.6.16
+   libnss_files.so:        --enable-kernel=2.6.23
+   libpthread.so (32-bit): --enable-kernel=2.6.29
+   libpthread.so (64-bit): --enable-kernel=2.6.32
+   ld.so, libc.so:         --enable-kernel=2.6.36
 
 --Explorer <explorer09@gmail.com>
