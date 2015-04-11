@@ -1,6 +1,6 @@
-2 April 2015
+11 April 2015
 
-EGLIBC is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom cross-
+EGLIBC is compiled on Ubuntu 12.04.5 LTS (64-bit), with a custom cross-
 toolchain described in "toolchain.txt". The library must now be built together
 with the cross-toolchain, so read "toolchain.txt" for build instructions.
 This document shows some additional information when building EGLIBC.

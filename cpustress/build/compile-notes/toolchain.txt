@@ -1,4 +1,4 @@
-2 April 2015
+11 April 2015
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -10,7 +10,7 @@ compiled code in libgcc, building it to work with i486 CPUs requires building
 the whole toolchain. This document describes how to build a cross-toolchain for
 CPUstress image.
 
-I build this toolchain on Ubuntu 12.04.5 LTS (32-bit). Other distros are not
+I build this toolchain on Ubuntu 12.04.5 LTS (64-bit). Other distros are not
 tested.
 
 This document assumes that you are familiar with the build process of GNU
@@ -43,7 +43,7 @@ Preparation
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.12.2.tar.bz2
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/cloog-0.18.1.tar.gz
      wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.9.2/gcc-4.9.2.tar.bz2
-     wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.19.2.tar.xz
+     wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.19.3.tar.xz
      svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
      }
  $ extract () {
@@ -54,7 +54,7 @@ Preparation
      tar -x --bzip2 -f isl-0.12.2.tar.bz2
      tar -x -z -f cloog-0.18.1.tar.gz
      tar -x --bzip2 -f gcc-4.9.2.tar.bz2
-     tar -x --xz -f linux-3.19.2.tar.xz
+     tar -x --xz -f linux-3.19.3.tar.xz
      mv gmp-6.0.0    gcc-4.9.2/gmp
      mv mpfr-3.1.2   gcc-4.9.2/mpfr
      mv mpc-1.0.3    gcc-4.9.2/mpc
@@ -64,7 +64,7 @@ Preparation
 
  $ download
  $ extract
- $ for i in binutils-2.25 gcc-4.9.2 linux-3.19.2 libc; do
+ $ for i in binutils-2.25 gcc-4.9.2 linux-3.19.3 libc; do
      if [ ! -d "$i" ]; then exit 1; fi; done
 
 Copy the "option-groups.config" file from the compile-notes directory to
@@ -168,7 +168,7 @@ Notes:
 3. Linux kernel headers for libc
 --------------------------------
 
- $ cd linux-3.19.2
+ $ cd linux-3.19.3
  $ make mrproper
  $ make INSTALL_HDR_PATH="${SYSROOT_DIR}/usr" headers_install
  $ make INSTALL_HDR_PATH="${SYSROOT64_DIR}/usr" headers_install
