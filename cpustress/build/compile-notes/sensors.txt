@@ -1,9 +1,9 @@
-1 November 2014
+11 April 2015
 
 lm-sensors website:
 http://lm-sensors.org/
 
-The 'sensors' program is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom
+The 'sensors' program is compiled on Ubuntu 12.04.5 LTS (64-bit), with a custom
 cross-toolchain described in "toolchain.txt". Before compiling, make sure you
 have the toolchain built already and the PATH variable containing the 'bin'
 directory of the toolchain:

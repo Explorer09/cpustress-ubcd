@@ -1,9 +1,9 @@
-14 August 2014
+11 April 2015
 
 Systester download page:
 http://systester.sourceforge.net/downloads.php
 
-The Systester binary is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom
+The Systester binary is compiled on Ubuntu 12.04.5 LTS (64-bit), with a custom
 cross-toolchain described in "toolchain.txt". Before compiling, make sure you
 have the toolchain built already and the PATH variable containing the 'bin'
 directory of the toolchain:

@@ -1,4 +1,4 @@
-4 January 2015
+12 April 2015
 
 Website of the Mersenne Prime test program (a.k.a. mprime or prime95):
 http://www.mersenne.org/download/
@@ -27,7 +27,7 @@ FILES MIGHT GET OVERWRITTEN if the directory is not empty.
  $ unzip ../p95v285.source.zip
  $ cd ..
 
-Mprime v28.5 is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom cross-
+Mprime v28.5 is compiled on Ubuntu 12.04.5 LTS (64-bit), with a custom cross-
 toolchain described in "toolchain.txt". Before compiling, make sure you have
 the toolchain built already and the PATH variable containing the 'bin'
 directory of the toolchain:
@@ -65,22 +65,24 @@ Note:
 * Without PrimeNet functionality, these libraries are no longer needed for
   linking: -lcurl -lrt -lstdc++ -ldl
 
+If you are building a 64-bit mprime executable, you should (1) specify the
+x86_64 compiler instead in CC and CPP, (2) specify '-f make64' when making
+gwnum, and (3) change to 'linux64' subdirectory when making mprime. Other
+procedures are the same.
+
 (Optional) Change the mode of the binaries:
 
- $ chmod 755 mprime239/mprime
- $ chmod 755 p95v285.source/linux/mprime
+ $ chmod 755 mprime239/mprime p95v285.source/linux/mprime
 
 (Optional) You can strip the binary file to save a few bytes. I did so in my
 CPUstress image:
 
- $ strip mprime239/mprime
- $ strip p95v285.source/linux/mprime
+ $ strip mprime239/mprime p95v285.source/linux/mprime
 
 (Optional) I also used UPX to compress the executable so the file size could
 be much smaller: <http://upx.sourceforge.net/>
 
- $ upx --ultra-brute mprime239/mprime
- $ upx --ultra-brute p95v285.source/linux/mprime
+ $ upx --ultra-brute mprime239/mprime p95v285.source/linux/mprime
 
 The programs depend on these libraries:
     libm.so.6
