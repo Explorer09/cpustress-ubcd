@@ -65,10 +65,10 @@ Note:
 * Without PrimeNet functionality, these libraries are no longer needed for
   linking: -lcurl -lrt -lstdc++ -ldl
 
-If you are building a 64-bit mprime executable, you should (1) specify the
-x86_64 compiler instead in CC and CPP, (2) specify '-f make64' when making
-gwnum, and (3) change to 'linux64' subdirectory when making mprime. Other
-procedures are the same.
+If you are building a 64-bit mprime executable, you should instead (1) specify
+the x86_64 compiler in CC and CPP, (2) specify '-f make64' when making gwnum,
+and (3) change to 'linux64' subdirectory when making mprime. Other procedures
+are the same.
 
 (Optional) Change the mode of the binaries:
 
