@@ -1,5 +1,5 @@
 chmod 0644 .git_cache_meta
-touch -c -h -d "2015-04-23 20:18:15.4233249390 +0800" .git_cache_meta
+touch -c -h -d "2015-04-23 20:20:47.7609107340 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -150,6 +150,8 @@ touch -c -h -d "2014-11-01 11:12:44.3248709290 +0800" cpustress/build/build-init
 touch -c -h -d "2013-04-13 22:54:21.7614506540 +0800" cpustress/build/build-initrd/usr/local/bin/systester
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/systester-cli
 touch -c -h -d "2014-11-01 11:25:05.6008484800 +0800" cpustress/build/build-initrd/usr/local/bin/systester-cli
+chmod 0755 cpustress/build/build-initrd64/usr/local/bin/mprime
+touch -c -h -d "2015-04-09 11:59:07.3784841280 +0800" cpustress/build/build-initrd64/usr/local/bin/mprime
 chmod 0644 cpustress/build/compile-notes/burn.txt
 touch -c -h -d "2014-11-01 14:00:35.3906414700 +0800" cpustress/build/compile-notes/burn.txt
 chmod 0644 cpustress/build/compile-notes/busybox.txt
