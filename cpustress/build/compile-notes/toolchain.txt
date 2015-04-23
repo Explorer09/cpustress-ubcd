@@ -1,4 +1,4 @@
-11 April 2015
+23 April 2015
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -40,10 +40,9 @@ Preparation
      wget https://ftp.gnu.org/gnu/gmp/gmp-6.0.0a.tar.xz
      wget http://www.mpfr.org/mpfr-current/mpfr-3.1.2.tar.xz
      wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
-     wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.12.2.tar.bz2
-     wget ftp://gcc.gnu.org/pub/gcc/infrastructure/cloog-0.18.1.tar.gz
-     wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.9.2/gcc-4.9.2.tar.bz2
-     wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.19.3.tar.xz
+     wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.14.tar.bz2
+     wget ftp://ftp.gnu.org/gnu/gcc/gcc-5.1.0/gcc-5.1.0.tar.bz2
+     wget https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.tar.xz
      svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
      }
  $ extract () {
@@ -51,20 +50,18 @@ Preparation
      tar -x --xz -f gmp-6.0.0a.tar.xz
      tar -x --xz -f mpfr-3.1.2.tar.xz
      tar -x -z -f mpc-1.0.3.tar.gz
-     tar -x --bzip2 -f isl-0.12.2.tar.bz2
-     tar -x -z -f cloog-0.18.1.tar.gz
-     tar -x --bzip2 -f gcc-4.9.2.tar.bz2
-     tar -x --xz -f linux-3.19.3.tar.xz
-     mv gmp-6.0.0    gcc-4.9.2/gmp
-     mv mpfr-3.1.2   gcc-4.9.2/mpfr
-     mv mpc-1.0.3    gcc-4.9.2/mpc
-     mv isl-0.12.2   gcc-4.9.2/isl
-     mv cloog-0.18.1 gcc-4.9.2/cloog
+     tar -x --bzip2 -f isl-0.14.tar.bz2
+     tar -x --bzip2 -f gcc-5.1.0.tar.bz2
+     tar -x --xz -f linux-4.0.tar.xz
+     mv gmp-6.0.0  gcc-5.1.0/gmp
+     mv mpfr-3.1.2 gcc-5.1.0/mpfr
+     mv mpc-1.0.3  gcc-5.1.0/mpc
+     mv isl-0.14   gcc-5.1.0/isl
      }
 
  $ download
  $ extract
- $ for i in binutils-2.25 gcc-4.9.2 linux-3.19.3 libc; do
+ $ for i in binutils-2.25 gcc-5.1.0 linux-4.0 libc; do
      if [ ! -d "$i" ]; then exit 1; fi; done
 
 Copy the "option-groups.config" file from the compile-notes directory to
@@ -127,7 +124,7 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
 
  $ cd gcc-build
 
- $ ../gcc-4.9.2/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.1.0/configure --prefix="${TOOLS_DIR}" \
      --target=i486-pc-linux-gnu --enable-languages=c,c++ \
      --disable-shared --disable-threads \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -137,7 +134,7 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
  $ make install-strip
  $ make distclean && rm -r *
 
- $ ../gcc-4.9.2/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.1.0/configure --prefix="${TOOLS_DIR}" \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
      --disable-shared --disable-threads \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -168,7 +165,7 @@ Notes:
 3. Linux kernel headers for libc
 --------------------------------
 
- $ cd linux-3.19.3
+ $ cd linux-4.0
  $ make mrproper
  $ make INSTALL_HDR_PATH="${SYSROOT_DIR}/usr" headers_install
  $ make INSTALL_HDR_PATH="${SYSROOT64_DIR}/usr" headers_install
@@ -240,7 +237,7 @@ Note the option '--enable-shared=libgcc'.
 
  $ cd gcc-build
 
- $ ../gcc-4.9.2/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.1.0/configure --prefix="${TOOLS_DIR}" \
      --target=i486-pc-linux-gnu --enable-languages=c,c++ \
      --enable-shared=libgcc --disable-threads \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -249,7 +246,7 @@ Note the option '--enable-shared=libgcc'.
  $ make install-strip
  $ make distclean && rm -r *
 
- $ ../gcc-4.9.2/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.1.0/configure --prefix="${TOOLS_DIR}" \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
      --enable-shared=libgcc --disable-threads \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -296,7 +293,7 @@ libstdc++, are built as static libraries only.
 
  $ cd gcc-build
 
- $ ../gcc-4.9.2/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.1.0/configure --prefix="${TOOLS_DIR}" \
      --target=i486-pc-linux-gnu --enable-languages=c,c++ \
      --enable-shared=libgcc --enable-threads=posix --enable-clocale=gnu \
      --enable-lto --disable-bootstrap --disable-multilib \
@@ -305,7 +302,7 @@ libstdc++, are built as static libraries only.
  $ make install-strip
  $ make -k distclean; rm -r *
 
- $ ../gcc-4.9.2/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.1.0/configure --prefix="${TOOLS_DIR}" \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
      --enable-shared=libgcc --enable-threads=posix --enable-clocale=gnu \
      --enable-lto --disable-bootstrap --disable-multilib \
