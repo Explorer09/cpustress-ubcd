@@ -1,4 +1,4 @@
-12 April 2015
+27 April 2015
 
 Website of the Mersenne Prime test program (a.k.a. mprime or prime95):
 http://www.mersenne.org/download/
@@ -44,11 +44,14 @@ Apply a patch that allows mprime to be built without PrimeNet functionality:
 Build mprime by following these steps:
 
  $ cd gwnum
- $ sed -i.bak -e 's/ -march=i486//g' makefile
- $ make -f makefile CC=i486-pc-linux-gnu-gcc CPP=i486-pc-linux-gnu-g++
+ $ sed -i.bak -e 's/ -march=i486//g' -e 's/^CFLAGS[^\n]*/& -flto/' \
+     -e 's/^CPPFLAGS[^\n]*/& -flto/' -e 's/^\tar/\t$(AR)/' makefile
+ $ make -f makefile CC=i486-pc-linux-gnu-gcc CPP=i486-pc-linux-gnu-g++ \
+     AR=i486-pc-linux-gnu-gcc-ar
  $ cd ../linux
  $ sed -i.bak -e 's/ -DBUILD_PRIMENET//g' -e 's/ -march=i486//g' \
-     -e 's/-lpthread[^\n]*/-lpthread/' makefile
+     -e 's/-lpthread[^\n]*/-lpthread/' -e 's/^CFLAGS[^\n]*/& -flto/' \
+     -e 's/^CPPFLAGS[^\n]*/& -flto/' -e 's/^LFLAGS[^\n]*/& -flto/' makefile
  $ make -f makefile CC=i486-pc-linux-gnu-gcc CPP=i486-pc-linux-gnu-g++
  $ cd ../..
 
@@ -64,6 +67,8 @@ Note:
   and '-mtune' (=generic).
 * Without PrimeNet functionality, these libraries are no longer needed for
   linking: -lcurl -lrt -lstdc++ -ldl
+* This build enables Link Time Optimization (-flto) from gcc to produce a
+  smaller binary.
 
 If you are building a 64-bit mprime executable, you should instead (1) specify
 the x86_64 compiler in CC and CPP, (2) specify '-f make64' when making gwnum,
