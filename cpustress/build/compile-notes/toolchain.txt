@@ -1,4 +1,4 @@
-23 April 2015
+27 April 2015
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -91,7 +91,7 @@ Make separate build directories:
 Note that we will clean up the build directories (make distclean && rm -r *) as
 soon as they are no longer needed.
 
-1. Cross-Binutils
+1. Cross-binutils
 -----------------
 
  $ cd binutils-build
@@ -319,13 +319,27 @@ Notes:
 * Some target libraries generate errors when doing 'make distclean' (a bug).
   '-k' option is added to workaround this.
 
+Final tuning
+------------
+
 Copy libgcc_s.so.1 from 'tools' directory to the target's 'sysroot' directory,
-because GCC's makefile won't do this automatically when installing:
+because GCC's makefile doesn't do this automatically when installing:
 
  $ cp -d "${TOOLS_DIR}"/i486-pc-linux-gnu/lib/libgcc_s.so* \
      "${SYSROOT_DIR}/lib"
  $ cp -d "${TOOLS_DIR}"/x86_64-pc-linux-gnu/lib64/libgcc_s.so* \
      "${SYSROOT64_DIR}/lib64"
+
+GCC does not make binutils aware of GCC's LTO feature, so some programs (namely
+ar, nm and ranlib) don't work with object codes compiled with LTO. Although GCC
+provides wrapper programs (gcc-ar, gcc-nm, gcc-ranlib) to launch the LTO plugin
+with the programs, it is better to let them load the plugin automatically,
+without wrappers. Create a symlink in "lib/bfd-plugins" to achieve this:
+
+ $ mkdir "${TOOLS_DIR}/lib/bfd-plugins"
+ $ cd "${TOOLS_DIR}/lib/bfd-plugins"
+ $ ln -s ../../libexec/gcc/x86_64-pc-linux-gnu/5.1.0/liblto_plugin.so.0.0.0 \
+     liblto_plugin.so
 
 Stripping binaries (Optional)
 -----------------------------
