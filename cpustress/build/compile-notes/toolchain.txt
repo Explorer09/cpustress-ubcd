@@ -1,4 +1,4 @@
-27 April 2015
+9 May 2015
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -69,6 +69,16 @@ the current directory where we have the source code. (You need to do this
 manually - the script can't locate where the file is.)
 
  $ [ -f option-groups.config ] || exit 1
+
+Apply a patch to fix a bug in libsanitizer:
+(https://gcc.gnu.org/bugzilla/show_bug.cgi?id=64839 This patch is temporary and
+may be fixed in the next GCC release.)
+
+ $ cd gcc-5.1.0
+ $ svn diff http://gcc.gnu.org/svn/gcc/@222042 \
+     http://gcc.gnu.org/svn/gcc/@222043 > gcc-libsanitizer-r222043.patch
+ $ patch -p 1 < gcc-libsanitizer-r222043.patch
+ $ cd ..
 
 Make 'sysroot' and 'tools' directories:
 
@@ -300,7 +310,7 @@ libstdc++, are built as static libraries only.
      --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make -k distclean; rm -r *
+ $ make distclean && rm -r *
 
  $ ../gcc-5.1.0/configure --prefix="${TOOLS_DIR}" \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
@@ -309,15 +319,13 @@ libstdc++, are built as static libraries only.
      --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make -k distclean; rm -r *
+ $ make distclean && rm -r *
 
  $ cd ..
 
 Notes:
 * __cxa_atexit should have been enabled by default for glibc. There's no need
   to explicitly specify '--enable-__cxa_atexit'.
-* Some target libraries generate errors when doing 'make distclean' (a bug).
-  '-k' option is added to workaround this.
 
 Final tuning
 ------------
