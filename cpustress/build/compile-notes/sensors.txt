@@ -1,4 +1,4 @@
-11 April 2015
+21 May 2015
 
 lm-sensors website:
 http://lm-sensors.org/
@@ -22,8 +22,8 @@ Download and unpack the code:
  $ cd lm_sensors-3.3.5
 
 Originally lm-sensors will produce 'libsensors.so' shared library and the
-'sensors' program that depends on it. We don't want to copy the whole library
-when only one program needs it. So I edit the linker flags in the makefile:
+'sensors' program that depends on it. We don't need the whole library when only
+one program needs it. So I edit the linker flags in the makefile:
 
  $ sed -i.bak -e 's/-Llib -lsensors/-Llib -l:libsensors.a -lc -lm/' \
      prog/sensors/Module.mk
@@ -31,20 +31,22 @@ when only one program needs it. So I edit the linker flags in the makefile:
 This forces the linker to link to the static 'libsensors.a'.
 Build the code:
 
- $ make CC=i486-pc-linux-gnu-gcc
+ $ make CC=i486-pc-linux-gnu-gcc CFLAGS='-flto' AR=i486-pc-linux-gnu-ar
 
-Install lm-sensors to a temporary directory: (I put them in the directory
-"${HOME}/lm-sensors-install", but you may change the path if you like.)
+Note:
+* This build enables Link Time Optimization (-flto) from gcc to produce a
+  smaller binary.
 
- $ make CC=i486-pc-linux-gnu-gcc DESTDIR="${HOME}/lm-sensors-install" install
+Install lm-sensors to a temporary directory (for example "lm-sensors-install"):
 
-In the temporary directory, we need to copy only these files to the CPUstress
-image:
+ $ make DESTDIR="${HOME}/lm-sensors-install" install
+
+In the temporary directory, we need only these files in the CPUstress image:
     etc/sensors3.conf, usr/local/bin/sensors
 The other files are either not needed at the time of this writing, or they
 require command interpreters (Bash or Perl) that CPUstress doesn't have.
 
-Copy the files:  (Replace ${cpustress_initrd} with the root path of your
+Copy the files: (Replace ${cpustress_initrd} with the root path of your
 extracted initrd image.)
 
  $ cd ${HOME}/lm-sensors-install
