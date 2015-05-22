@@ -1,4 +1,4 @@
-16 May 2015
+22 May 2015
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -37,7 +37,7 @@ Preparation
 
  $ download () {
      wget http://ftp.gnu.org/gnu/binutils/binutils-2.25.tar.bz2
-     wget https://ftp.gnu.org/gnu/gmp/gmp-6.0.0a.tar.xz
+     wget https://gmplib.org/download/gmp/gmp-6.0.0a.tar.xz
      wget http://www.mpfr.org/mpfr-current/mpfr-3.1.2.tar.xz
      wget -O mpfr-allpatches.patch http://www.mpfr.org/mpfr-current/allpatches
      wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz

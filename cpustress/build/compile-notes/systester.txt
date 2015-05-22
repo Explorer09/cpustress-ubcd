@@ -1,4 +1,4 @@
-11 April 2015
+22 May 2015
 
 Systester download page:
 http://systester.sourceforge.net/downloads.php
@@ -17,7 +17,7 @@ For the shell commands below, I assume that you would unpack GMP at the home
 directory, but you may change the path if you like.
 
  $ cd ${HOME}
- $ wget ftp://ftp.gmplib.org/pub/gmp/gmp-6.0.0a.tar.xz
+ $ wget https://gmplib.org/download/gmp/gmp-6.0.0a.tar.xz
  $ tar -x -v --xz -f gmp-6.0.0a.tar.xz
  $ cd gmp-6.0.0
 
