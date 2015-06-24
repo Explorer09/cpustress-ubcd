@@ -1,4 +1,4 @@
-22 May 2015
+25 June 2015
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -38,8 +38,7 @@ Preparation
  $ download () {
      wget http://ftp.gnu.org/gnu/binutils/binutils-2.25.tar.bz2
      wget https://gmplib.org/download/gmp/gmp-6.0.0a.tar.xz
-     wget http://www.mpfr.org/mpfr-current/mpfr-3.1.2.tar.xz
-     wget -O mpfr-allpatches.patch http://www.mpfr.org/mpfr-current/allpatches
+     wget http://www.mpfr.org/mpfr-current/mpfr-3.1.3.tar.xz
      wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.14.tar.bz2
      wget ftp://ftp.gnu.org/gnu/gcc/gcc-5.1.0/gcc-5.1.0.tar.bz2
@@ -51,13 +50,13 @@ Preparation
  $ extract () {
      tar -x --bzip2 -f binutils-2.25.tar.bz2
      tar -x --xz -f gmp-6.0.0a.tar.xz
-     tar -x --xz -f mpfr-3.1.2.tar.xz
+     tar -x --xz -f mpfr-3.1.3.tar.xz
      tar -x -z -f mpc-1.0.3.tar.gz
      tar -x --bzip2 -f isl-0.14.tar.bz2
      tar -x --bzip2 -f gcc-5.1.0.tar.bz2
      tar -x --xz -f linux-4.0.3.tar.xz
      mv gmp-6.0.0  gcc-5.1.0/gmp
-     mv mpfr-3.1.2 gcc-5.1.0/mpfr
+     mv mpfr-3.1.3 gcc-5.1.0/mpfr
      mv mpc-1.0.3  gcc-5.1.0/mpc
      mv isl-0.14   gcc-5.1.0/isl
      }
@@ -73,12 +72,10 @@ manually - the script can't locate where the file is.)
 
  $ [ -f option-groups.config ] || exit 1
 
-Apply the MPFR official patches:
-(Note: the version of latest MPFR patch before this build is 3.1.2-p11.)
-
- $ cd gcc-5.1.0/mpfr
- $ patch -p 1 < ../mpfr-allpatches.patch
- $ cd ../..
+At the time of this build, there are no patches for this MPFR release.
+(You may check <http://www.mpfr.org/mpfr-current/#fixed> for latest bug fixes.
+If there are new fixes, the cumulative patch for them will be available at
+<http://www.mpfr.org/mpfr-current/allpatches>)
 
 Apply a patch to fix a bug in libsanitizer:
 (https://gcc.gnu.org/bugzilla/show_bug.cgi?id=64839 This patch is temporary and
