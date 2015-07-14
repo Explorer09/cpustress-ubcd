@@ -1,4 +1,4 @@
-21 May 2015
+14 July 2015
 
 lm-sensors website:
 http://lm-sensors.org/
@@ -17,9 +17,9 @@ Install these in Ubuntu:
 
 Download and unpack the code:
 
- $ wget http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-3.3.5.tar.bz2
- $ tar -x -v --bzip2 -f lm_sensors-3.3.5.tar.bz2
- $ cd lm_sensors-3.3.5
+ $ wget http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-3.4.0.tar.bz2
+ $ tar -x -v --bzip2 -f lm_sensors-3.4.0.tar.bz2
+ $ cd lm_sensors-3.4.0
 
 Originally lm-sensors will produce 'libsensors.so' shared library and the
 'sensors' program that depends on it. We don't need the whole library when only
