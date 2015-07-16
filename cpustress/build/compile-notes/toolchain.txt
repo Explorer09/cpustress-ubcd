@@ -1,4 +1,4 @@
-13 July 2015
+17 July 2015
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -42,9 +42,7 @@ Preparation
      wget -O mpfr-allpatches.patch http://www.mpfr.org/mpfr-current/allpatches
      wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.14.tar.bz2
-     wget ftp://ftp.gnu.org/gnu/gcc/gcc-5.1.0/gcc-5.1.0.tar.bz2
-     svn diff http://gcc.gnu.org/svn/gcc/@222042 \
-       http://gcc.gnu.org/svn/gcc/@222043 > gcc-libsanitizer-r222043.patch
+     wget ftp://ftp.gnu.org/gnu/gcc/gcc-5.2.0/gcc-5.2.0.tar.bz2
      wget https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.2.tar.xz
      svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
      }
@@ -54,17 +52,17 @@ Preparation
      tar -x --xz -f mpfr-3.1.3.tar.xz
      tar -x -z -f mpc-1.0.3.tar.gz
      tar -x --bzip2 -f isl-0.14.tar.bz2
-     tar -x --bzip2 -f gcc-5.1.0.tar.bz2
+     tar -x --bzip2 -f gcc-5.2.0.tar.bz2
      tar -x --xz -f linux-4.1.2.tar.xz
-     mv gmp-6.0.0  gcc-5.1.0/gmp
-     mv mpfr-3.1.3 gcc-5.1.0/mpfr
-     mv mpc-1.0.3  gcc-5.1.0/mpc
-     mv isl-0.14   gcc-5.1.0/isl
+     mv gmp-6.0.0  gcc-5.2.0/gmp
+     mv mpfr-3.1.3 gcc-5.2.0/mpfr
+     mv mpc-1.0.3  gcc-5.2.0/mpc
+     mv isl-0.14   gcc-5.2.0/isl
      }
 
  $ download
  $ extract
- $ for i in binutils-2.25 gcc-5.1.0 linux-4.1.2 libc; do
+ $ for i in binutils-2.25 gcc-5.2.0 linux-4.1.2 libc; do
      if [ ! -d "$i" ]; then exit 1; fi; done
 
 Copy the "option-groups.config" file from the compile-notes directory to
@@ -76,17 +74,9 @@ manually - the script can't locate where the file is.)
 Apply the official cumulative patch for MPFR:
 (Note: the version of latest MPFR patch before this build is 3.1.3-p2.)
 
- $ cd gcc-5.1.0/mpfr
+ $ cd gcc-5.2.0/mpfr
  $ patch -p 1 < ../mpfr-allpatches.patch
  $ cd ../..
-
-Apply a patch to fix a bug in libsanitizer:
-(https://gcc.gnu.org/bugzilla/show_bug.cgi?id=64839 This patch is temporary and
-may be fixed in the next GCC release.)
-
- $ cd gcc-5.1.0
- $ patch -p 1 < ../gcc-libsanitizer-r222043.patch
- $ cd ..
 
 Make 'sysroot' and 'tools' directories:
 
@@ -142,7 +132,7 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
 
  $ cd gcc-build
 
- $ ../gcc-5.1.0/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.2.0/configure --prefix="${TOOLS_DIR}" \
      --target=i486-pc-linux-gnu --enable-languages=c,c++ \
      --disable-shared --disable-threads \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -152,7 +142,7 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
  $ make install-strip
  $ make distclean && rm -r *
 
- $ ../gcc-5.1.0/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.2.0/configure --prefix="${TOOLS_DIR}" \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
      --disable-shared --disable-threads \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -255,7 +245,7 @@ Note the option '--enable-shared=libgcc'.
 
  $ cd gcc-build
 
- $ ../gcc-5.1.0/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.2.0/configure --prefix="${TOOLS_DIR}" \
      --target=i486-pc-linux-gnu --enable-languages=c,c++ \
      --enable-shared=libgcc --disable-threads \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -264,7 +254,7 @@ Note the option '--enable-shared=libgcc'.
  $ make install-strip
  $ make distclean && rm -r *
 
- $ ../gcc-5.1.0/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.2.0/configure --prefix="${TOOLS_DIR}" \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
      --enable-shared=libgcc --disable-threads \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -311,7 +301,7 @@ libstdc++, are built as static libraries only.
 
  $ cd gcc-build
 
- $ ../gcc-5.1.0/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.2.0/configure --prefix="${TOOLS_DIR}" \
      --target=i486-pc-linux-gnu --enable-languages=c,c++ \
      --enable-shared=libgcc --enable-threads=posix --enable-clocale=gnu \
      --enable-lto --disable-bootstrap --disable-multilib \
@@ -320,7 +310,7 @@ libstdc++, are built as static libraries only.
  $ make install-strip
  $ make distclean && rm -r *
 
- $ ../gcc-5.1.0/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.2.0/configure --prefix="${TOOLS_DIR}" \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
      --enable-shared=libgcc --enable-threads=posix --enable-clocale=gnu \
      --enable-lto --disable-bootstrap --disable-multilib \
@@ -354,7 +344,7 @@ without wrappers. Create a symlink in "lib/bfd-plugins" to achieve this:
 
  $ mkdir "${TOOLS_DIR}/lib/bfd-plugins"
  $ cd "${TOOLS_DIR}/lib/bfd-plugins"
- $ ln -s ../../libexec/gcc/x86_64-pc-linux-gnu/5.1.0/liblto_plugin.so.0.0.0 \
+ $ ln -s ../../libexec/gcc/x86_64-pc-linux-gnu/5.2.0/liblto_plugin.so.0.0.0 \
      liblto_plugin.so
 
 Stripping binaries (Optional)
