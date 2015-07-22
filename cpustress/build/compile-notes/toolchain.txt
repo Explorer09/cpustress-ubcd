@@ -36,7 +36,7 @@ Preparation
 -----------
 
  $ download () {
-     wget http://ftp.gnu.org/gnu/binutils/binutils-2.25.tar.bz2
+     wget http://ftp.gnu.org/gnu/binutils/binutils-2.25.1.tar.bz2
      wget https://gmplib.org/download/gmp/gmp-6.0.0a.tar.xz
      wget http://www.mpfr.org/mpfr-current/mpfr-3.1.3.tar.xz
      wget -O mpfr-allpatches.patch http://www.mpfr.org/mpfr-current/allpatches
@@ -47,7 +47,7 @@ Preparation
      svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
      }
  $ extract () {
-     tar -x --bzip2 -f binutils-2.25.tar.bz2
+     tar -x --bzip2 -f binutils-2.25.1.tar.bz2
      tar -x --xz -f gmp-6.0.0a.tar.xz
      tar -x --xz -f mpfr-3.1.3.tar.xz
      tar -x -z -f mpc-1.0.3.tar.gz
@@ -62,7 +62,7 @@ Preparation
 
  $ download
  $ extract
- $ for i in binutils-2.25 gcc-5.2.0 linux-4.1.2 libc; do
+ $ for i in binutils-2.25.1 gcc-5.2.0 linux-4.1.2 libc; do
      if [ ! -d "$i" ]; then exit 1; fi; done
 
 Copy the "option-groups.config" file from the compile-notes directory to
@@ -104,13 +104,13 @@ soon as they are no longer needed.
 
  $ cd binutils-build
 
- $ ../binutils-2.25/configure --prefix="${TOOLS_DIR}" \
+ $ ../binutils-2.25.1/configure --prefix="${TOOLS_DIR}" \
      --target=i486-pc-linux-gnu --with-sysroot="${SYSROOT_DIR}"
  $ make
  $ make install
  $ make distclean && rm -r *
 
- $ ../binutils-2.25/configure --prefix="${TOOLS_DIR}" \
+ $ ../binutils-2.25.1/configure --prefix="${TOOLS_DIR}" \
      --target=x86_64-pc-linux-gnu --with-sysroot="${SYSROOT64_DIR}"
  $ make
  $ make install
