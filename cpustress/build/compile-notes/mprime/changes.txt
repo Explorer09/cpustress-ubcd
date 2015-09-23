@@ -17,6 +17,8 @@ Changes in mprime-changes.patch:
   calls into one. (http://www.mersenneforum.org/showthread.php?t=20502)
 - Changed format in IniSectionWriteFloat() from "%f" to "%11g" to avoid a
   buffer overflow. (http://www.mersenneforum.org/showthread.php?t=20503)
+- Replace a strlen() call in get_line() with a loop whose code is slightly
+  smaller. (http://www.mersenneforum.org/showpost.php?p=401626&postcount=3)
 
 -------------------------------------------------------------------------------
 Technical notes about the mprime patches
