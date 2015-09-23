@@ -1,4 +1,4 @@
-4 January 2015
+23 September 2015
 
 Changes in mprime-changes.patch:
 - Wrap several parts of the code with a preprocessor conditional: "#ifdef \
@@ -13,14 +13,10 @@ Changes in mprime-changes.patch:
   first, before the interactive configuration of time and memory.
 - Added short description for each menu selections. This applies to command-
   line builds only. GUI code is unchanged.
-- Edited some mprime output messages so that they aren't line-wrapped weirdly
-  in 80-column terminals. (http://www.mersenneforum.org/showthread.php?t=19953)
-- TortureThreads INI parameter now checks if it exceeds the bound
-  (MAX_NUM_WORKER_THREADS). Bug reported upstream:
-  (http://www.mersenneforum.org/showthread.php?t=19611)
-- Some global, constant buffers are now really 'const' when being compiled.
-  Global, constant string messages are now defined as macros rather than
-  mutable arrays.
+- Removed fmt_mask[] and mask[] buffers and changed syntaxes of two sprintf()
+  calls into one. (http://www.mersenneforum.org/showthread.php?t=20502)
+- Changed format in IniSectionWriteFloat() from "%f" to "%11g" to avoid a
+  buffer overflow. (http://www.mersenneforum.org/showthread.php?t=20503)
 
 -------------------------------------------------------------------------------
 Technical notes about the mprime patches
@@ -42,7 +38,7 @@ unsigned int WORK_PREFERENCE[]
 int          MANUAL_COMM
 unsigned int MODEM_RETRY_TIME
 unsigned int NETWORK_RETRY_TIME
-double       DAYS_BETWEEN_CHECKINS
+float        DAYS_BETWEEN_CHECKINS
 void         initCommCode(void)
 void         init_spool_file_and_comm_code(void)
 void         set_comm_timers(void)
