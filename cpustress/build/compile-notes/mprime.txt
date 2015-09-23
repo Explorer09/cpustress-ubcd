@@ -45,7 +45,7 @@ Build mprime by following these steps:
 
  $ cd gwnum
  $ sed -i.bak -e 's/ -march=i486//g' -e 's/^CFLAGS[^\n]*/& -flto/' \
-     -e 's/^CPPFLAGS[^\n]*/& -flto/' -e 's/^\tar/\t$(AR)/' makefile
+     -e 's/^CPPFLAGS[^\n]*/& -flto/' makefile
  $ make -f makefile CC=i486-pc-linux-gnu-gcc CPP=i486-pc-linux-gnu-g++ \
      AR=i486-pc-linux-gnu-ar
  $ cd ../linux
