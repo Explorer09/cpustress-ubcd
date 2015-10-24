@@ -1,4 +1,4 @@
-31 October 2014
+24 October 2015
 
 The Linux kernel for CPUstress is compiled on Ubuntu 12.04.5 LTS (32-bit), with
 a custom cross-toolchain described in "toolchain.txt". Before compiling, make
@@ -31,6 +31,6 @@ Copy the kernel bzImage, which is located at "arch/x86/boot/bzImage", to a
 directory that you can boot from. For example in UBCD it's
 "${ubcd_extract}/ubcd/boot/cpustress/bzImage".
 
- $ cp -a arch/x86/boot/bzImage "${ubcd_extract}/ubcd/boot/cpustress/bzImage"
+ $ cp -p arch/x86/boot/bzImage "${ubcd_extract}/ubcd/boot/cpustress/bzImage"
 
 --Explorer <explorer09@gmail.com>

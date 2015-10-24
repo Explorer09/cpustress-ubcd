@@ -1,4 +1,4 @@
-14 July 2015
+24 October 2015
 
 lm-sensors website:
 http://lm-sensors.org/
@@ -50,8 +50,8 @@ Copy the files: (Replace ${cpustress_initrd} with the root path of your
 extracted initrd image.)
 
  $ cd ${HOME}/lm-sensors-install
- $ cp -a "etc/sensors3.conf"     "${cpustress_initrd}/etc/sensors3.conf"
- $ cp -a "usr/local/bin/sensors" "${cpustress_initrd}/usr/local/bin/sensors"
+ $ cp -p "etc/sensors3.conf"     "${cpustress_initrd}/etc/sensors3.conf"
+ $ cp -p "usr/local/bin/sensors" "${cpustress_initrd}/usr/local/bin/sensors"
 
 (Optional) The help text of 'sensors' is copied from the man page in the temp
 directory at "usr/local/man/man1/sensors.1". It is viewed in a terminal window

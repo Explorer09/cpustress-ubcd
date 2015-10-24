@@ -1,4 +1,4 @@
-1 November 2014
+24 October 2015
 
 Homepage of cpuburn by Robert Redelmeier:
 http://web.archive.org/web/20110623074500/http://pages.sbcglobal.net/redelm/
@@ -26,7 +26,7 @@ i486-pc-linux-gnu-gcc instead.)
 
 Copy the executables and that's it:
 
- $ cp -a burnP5 burnP6 burnK6 burnK7 burnBX burnMMX \
+ $ cp -p burnP5 burnP6 burnK6 burnK7 burnBX burnMMX \
          ${cpustress_initrd}/opt/burn
 
 --Explorer <explorer09@gmail.com>
