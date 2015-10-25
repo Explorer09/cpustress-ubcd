@@ -1,4 +1,4 @@
-20 August 2014
+25 October 2015
 
 The cpuburn-in program included in the image is the official binary from
 cpuburnin.com, which can be downloaded here:
@@ -17,9 +17,11 @@ The mode of the cpuburn-in binary after unpacking is 644, change it to 755:
  $ chmod 755 cpuburn-in
 
 (Optional) You can strip the binary file to save a few bytes. I did so in my
-CPUstress image.
+CPUstress image: (The strip tool is from the cross-toolchain described in
+"toolchain.txt")
 
- $ strip cpuburn-in
+ $ export PATH="${TOOLS_DIR}/bin:${PATH}"
+ $ i486-pc-linux-gnu-strip cpuburn-in
 
 CPU Burn-in is a closed-source program.
 

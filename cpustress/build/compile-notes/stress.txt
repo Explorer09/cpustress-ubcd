@@ -1,4 +1,4 @@
-11 April 2015
+25 October 2015
 
 Homepage of stress by Amos Waterland:
 http://web.archive.org/web/20130520190152/http://weather.ou.edu/~apw/projects/stress/
@@ -31,9 +31,9 @@ Then run the configure script and then "make":
 
  $ chmod 755 src/stress
 
-(Optional) To reduce the file size, I stripped the binary after compilation:
+(Optional) To reduce file size, I stripped the binary after compilation:
 
- $ strip src/stress
+ $ i486-pc-linux-gnu-strip src/stress
 
 (Optional) I also used UPX to compress the executable so the file size could
 be much smaller: <http://upx.sourceforge.net/>

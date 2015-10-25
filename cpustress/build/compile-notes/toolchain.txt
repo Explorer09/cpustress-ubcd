@@ -1,4 +1,4 @@
-24 October 2015
+25 October 2015
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -365,9 +365,9 @@ Stripping binaries (Optional)
 The ".so" binary files in CPUstress are stripped binaries.
 
  $ cd "${SYSROOT_DIR}/lib"
- $ strip --strip-unneeded libgcc_s.so.1 *-2.19.so
+ $ i486-pc-linux-gnu-strip --strip-unneeded libgcc_s.so.1 *-2.19.so
  $ cd "${SYSROOT64_DIR}/lib64"
- $ strip --strip-unneeded libgcc_s.so.1 *-2.19.so
+ $ x86_64-pc-linux-gnu-strip --strip-unneeded libgcc_s.so.1 *-2.19.so
 
 Change mode bits (Optional)
 ---------------------------

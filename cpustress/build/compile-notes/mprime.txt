@@ -1,4 +1,4 @@
-23 September 2015
+25 October 2015
 
 Website of the Mersenne Prime test program (a.k.a. mprime or prime95):
 http://www.mersenne.org/download/
@@ -79,10 +79,9 @@ are the same.
 
  $ chmod 755 mprime239/mprime p95v287.source/linux/mprime
 
-(Optional) You can strip the binary file to save a few bytes. I did so in my
-CPUstress image:
+(Optional) To reduce file size, I stripped the binaries after compilation:
 
- $ strip mprime239/mprime p95v287.source/linux/mprime
+ $ i486-pc-linux-gnu-strip mprime239/mprime p95v287.source/linux/mprime
 
 (Optional) I also used UPX to compress the executable so the file size could
 be much smaller: <http://upx.sourceforge.net/>

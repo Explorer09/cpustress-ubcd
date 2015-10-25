@@ -1,4 +1,4 @@
-22 May 2015
+25 October 2015
 
 Systester download page:
 http://systester.sourceforge.net/downloads.php
@@ -61,9 +61,9 @@ Note:
 
  $ chmod 755 systester-cli
 
-(Optional) To reduce the file size, I stripped the binary after compilation:
+(Optional) To reduce file size, I stripped the binary after compilation:
 
- $ strip systester-cli
+ $ i486-pc-linux-gnu-strip systester-cli
 
 (Optional) I also used UPX to compress the executable so the file size could
 be much smaller: <http://upx.sourceforge.net/>

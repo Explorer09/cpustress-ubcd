@@ -1,4 +1,4 @@
-17 November 2014
+25 October 2015
 
 The Intel Optimized LINPACK Benchmark can be downloaded here:
 https://software.intel.com/en-us/articles/intel-math-kernel-library-linpack-download
@@ -28,9 +28,11 @@ Note: Don't rename help.lpk or xhelp.lpk as xlinpack_xeon32 reads these files
 for displaying its help text.
 
 (Optional) You can strip the binary file to save a few bytes. I did so in my
-CPUstress image:
+CPUstress image: (The strip tool is from the cross-toolchain described in
+"toolchain.txt")
 
- $ strip xlinpack_xeon32
+ $ export PATH="${TOOLS_DIR}/bin:${PATH}"
+ $ i486-pc-linux-gnu-strip xlinpack_xeon32
 
 (Optional) I also used UPX to compress the executable so the file size could
 be much smaller: <http://upx.sourceforge.net/>
