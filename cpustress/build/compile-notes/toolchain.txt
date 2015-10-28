@@ -1,4 +1,4 @@
-25 October 2015
+28 October 2015
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -92,7 +92,9 @@ be found as soon as they are available.
 
  $ export PATH="${TOOLS_DIR}/bin:${PATH}"
 
-Make separate build directories:
+All of the binutils, GCC, and glibc documentation recommend building them in a
+separate build directory (while glibc REQUIRES that), so make the build
+directories:
 
  $ mkdir binutils-build gcc-build eglibc-build
 
