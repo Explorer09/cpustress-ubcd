@@ -88,8 +88,8 @@ CPUburn
 CPU Burn-in
 * http://cpuburnin.com/
 
-Intel Optimized LINPACK Benchmark
-* http://software.intel.com/en-us/articles/intel-math-kernel-library-linpack-download
+Intel Optimized LINPACK Benchmark (part of Intel MKL Benchmarks Suite)
+* https://software.intel.com/en-us/articles/intel-mkl-benchmarks-suite
 
 Mersenne Prime test (Prime95)
 * http://www.mersenne.org/download/
