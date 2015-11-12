@@ -98,8 +98,8 @@ directories:
 
  $ mkdir binutils-build gcc-build eglibc-build
 
-Note that we will clean up the build directories (make distclean ; rm -r *) as
-soon as they are no longer needed.
+Note that we will clean up the build directories (make -k distclean ; rm -r *)
+as soon as they are no longer needed.
 
 1. Cross-binutils
 -----------------
@@ -110,14 +110,14 @@ soon as they are no longer needed.
      --target=i486-pc-linux-gnu --with-sysroot="${SYSROOT_DIR}"
  $ make
  $ make install
- $ make distclean
+ $ make -k distclean
  $ rm -r *
 
  $ ../binutils-2.25.1/configure --prefix="${TOOLS_DIR}" \
      --target=x86_64-pc-linux-gnu --with-sysroot="${SYSROOT64_DIR}"
  $ make
  $ make install
- $ make distclean
+ $ make -k distclean
  $ rm -r *
 
  $ cd ..
@@ -144,7 +144,7 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
      --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make distclean
+ $ make -k distclean
  $ rm -r *
 
  $ ../gcc-5.2.0/configure --prefix="${TOOLS_DIR}" \
@@ -155,7 +155,7 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
      --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make distclean
+ $ make -k distclean
  $ rm -r *
 
  $ cd ..
@@ -213,7 +213,7 @@ Make dummy libc.so:
  $ i486-pc-linux-gnu-gcc -nostdlib -shared -x c /dev/null \
      -o "${SYSROOT_DIR}/usr/lib/libc.so"
 
- $ make distclean
+ $ make -k distclean
  $ rm -r *
 
 Do the same for x86_64:
@@ -235,7 +235,7 @@ Do the same for x86_64:
  $ x86_64-pc-linux-gnu-gcc -nostdlib -shared -x c /dev/null \
      -o "${SYSROOT64_DIR}/usr/lib64/libc.so"
 
- $ make distclean
+ $ make -k distclean
  $ rm -r *
 
  $ cd ..
@@ -260,7 +260,7 @@ Note the option '--enable-shared=libgcc'.
      --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make distclean
+ $ make -k distclean
  $ rm -r *
 
  $ ../gcc-5.2.0/configure --prefix="${TOOLS_DIR}" \
@@ -270,7 +270,7 @@ Note the option '--enable-shared=libgcc'.
      --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make distclean
+ $ make -k distclean
  $ rm -r *
 
  $ cd ..
@@ -293,7 +293,7 @@ GCC compiler (a cross-compiler is fine, though).
      --with-headers="${SYSROOT_DIR}/usr/include"
  $ make
  $ make install install_root="${SYSROOT_DIR}"
- $ make distclean
+ $ make -k distclean
  $ rm -r *
 
  $ cp ../option-groups.config .
@@ -304,7 +304,7 @@ GCC compiler (a cross-compiler is fine, though).
      --with-headers="${SYSROOT64_DIR}/usr/include"
  $ make
  $ make install install_root="${SYSROOT64_DIR}"
- $ make distclean
+ $ make -k distclean
  $ rm -r *
 
  $ cd ..
@@ -325,7 +325,7 @@ libstdc++, are built as static libraries only.
      --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make distclean
+ $ make -k distclean
  $ rm -r *
 
  $ ../gcc-5.2.0/configure --prefix="${TOOLS_DIR}" \
@@ -335,7 +335,7 @@ libstdc++, are built as static libraries only.
      --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make distclean
+ $ make -k distclean
  $ rm -r *
 
  $ cd ..
