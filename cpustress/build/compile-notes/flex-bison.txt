@@ -1,0 +1,103 @@
+10 January 2016
+
+The 'sensors' program in the lm-sensors package requires flex and Bison in
+order to build. The versions of flex and Bison will significantly affect the
+generated parser code, which in turn affects the generated binary. Therefore I
+don't use the flex and Bison packages provided by the distro, and instead
+compile a version for our own.
+
+This document describes how to build flex, Bison and their dependencies. This
+assumes that you have already completed building a cross-toolchain as described
+in "toolchain.txt".
+
+Both flex and Bison requires GNU M4 at runtime, and GNU M4 has an optional
+dependency on libsigsegv.
+
+ $ [ -d toolchain/tools ] || exit 1
+ $ cd toolchain
+
+Preparation
+-----------
+
+ $ download () {
+     wget http://ftp.gnu.org/gnu/libsigsegv/libsigsegv-2.10.tar.gz
+     wget http://ftp.gnu.org/gnu/m4/m4-1.4.17.tar.xz
+     # SourceForge automatically detects the user agent when visiting this URL,
+     # and for Wget, it responds with a 302 redirect to the file in a (nearest)
+     # mirror (without going to a download page).
+     wget http://downloads.sourceforge.net/project/flex/flex-2.6.0.tar.xz
+     wget http://ftp.gnu.org/gnu/bison/bison-3.0.4.tar.xz
+     }
+ $ extract () {
+     tar -x -z -f libsigsegv-2.10.tar.gz
+     tar -x --xz -f m4-1.4.17.tar.xz
+     tar -x --xz -f flex-2.6.0.tar.xz
+     tar -x --xz -f bison-3.0.4.tar.xz
+     }
+
+ $ download
+ $ extract
+ $ for i in libsigsegv-2.10 m4-1.4.17 flex-2.6.0 bison-3.0.4
+     do [ -d "$i" ] || exit 1 ; done
+
+ $ TOOLS_DIR="${PWD}/tools"
+
+ $ export PATH="${TOOLS_DIR}/bin:${PATH}"
+
+1. libsigsegv
+-------------
+
+ $ cd libsigsegv-2.10
+ $ ./configure --prefix="${TOOLS_DIR}" --enable-static --disable-shared
+ $ make
+ $ make install
+ $ cd ..
+
+2. M4
+-----
+
+ $ cd m4-1.4.17
+ $ ./configure --prefix="${TOOLS_DIR}"
+ $ make
+ $ make install
+ $ cd ..
+
+After installing M4, it's fine to remove libsigsegv from the 'tools' directory:
+
+ $ cd libsigsegv-2.10
+ $ make uninstall
+ $ cd ..
+
+3. flex
+-------
+
+Flex ships with a -lfl library which contains some default routines intended to
+be linked with flex-gererated lexers. This is not applicable to cross-compile
+environments. However, flex doesn't provide a configure option to disable
+building libfl, so we have to do so via a hack.
+
+ $ cd flex-2.6.0
+ $ sed -i.bak -e 's/lib_LTLIBRARIES = \\$/lib_LTLIBRARIES =/' \
+     -e 's/\tlibfl.la \\$/#&/' -e 's/\tlibfl_pic.la$/#&/' src/Makefile.in
+ $ ./configure --prefix="${TOOLS_DIR}" --disable-shared
+ $ make
+ $ make install
+ $ cd ..
+
+4. Bison
+--------
+
+Bison ships with a -ly library which contains some default routines intended to
+be linked with Bison-generated parsers. This is not applicable to cross-compile
+environments. We disables liby via the --disable-yacc option. (--disable-yacc
+also disables 'yacc' command wrapper which is not relevant to us.)
+
+ $ cd bison-3.0.4
+ $ ./configure --prefix="${TOOLS_DIR}" --disable-yacc
+ $ make
+ $ make install
+ $ cd ..
+
+After building all 4 packages, you are free to delete all 4 source directories.
+
+--Explorer <explorer09@gmail.com>

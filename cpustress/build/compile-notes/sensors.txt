@@ -1,19 +1,15 @@
-25 October 2015
+10 January 2016
 
 lm-sensors website:
 http://lm-sensors.org/
 
 The 'sensors' program is compiled on Ubuntu 12.04.5 LTS (64-bit), with a custom
-cross-toolchain described in "toolchain.txt". Before compiling, make sure you
-have the toolchain built already and the PATH variable containing the 'bin'
-directory of the toolchain:
+cross-toolchain described in "toolchain.txt", and custom versions of flex and
+Bison as described in "flex-bison.txt". Before compiling, make sure you have
+the toolchain, flex and Bison built already, and the PATH variable containing
+the 'bin' directory of the toolchain:
 
  $ export PATH="${TOOLS_DIR}/bin:${PATH}"
-
-In addition to the build-essential tools, you also need Bison and Flex.
-Install these in Ubuntu:
-
- $ sudo apt-get install bison flex
 
 Download and unpack the code:
 
