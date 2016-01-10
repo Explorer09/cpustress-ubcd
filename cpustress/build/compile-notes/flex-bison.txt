@@ -10,6 +10,9 @@ This document describes how to build flex, Bison and their dependencies. This
 assumes that you have already completed building a cross-toolchain as described
 in "toolchain.txt".
 
+This document may be converted to a workable shell script. To do this, run
+"doc-to-sh.sh".
+
 Both flex and Bison requires GNU M4 at runtime, and GNU M4 has an optional
 dependency on libsigsegv.
 
