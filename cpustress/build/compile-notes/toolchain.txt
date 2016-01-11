@@ -1,4 +1,4 @@
-16 December 2015
+11 January 2016
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -385,5 +385,7 @@ Change mode bits (Optional)
  $ cd "${SYSROOT64_DIR}/lib64"
  $ chmod 644 *-2.19.so
  $ chmod 755 ld-2.19.so libc-2.19.so libpthread-2.19.so
+
+ $ cd ../../..
 
 --Explorer <explorer09@gmail.com>

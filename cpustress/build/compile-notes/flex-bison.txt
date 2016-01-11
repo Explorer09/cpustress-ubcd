@@ -1,4 +1,4 @@
-10 January 2016
+11 January 2016
 
 The 'sensors' program in the lm-sensors package requires flex and Bison in
 order to build. The versions of flex and Bison will significantly affect the
@@ -102,5 +102,7 @@ also disables 'yacc' command wrapper which is not relevant to us.)
  $ cd ..
 
 After building all 4 packages, you are free to delete all 4 source directories.
+
+ $ cd ..
 
 --Explorer <explorer09@gmail.com>
