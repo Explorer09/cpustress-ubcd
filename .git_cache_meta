@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2016-01-11 10:52:28.4297009810 +0800" .git_cache_meta
+touch -c -h -d "2016-01-12 15:46:31.8232586550 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -247,7 +247,7 @@ touch -c -h -d "2014-09-18 20:08:47.9851968630 +0800" cpustress/build/compile-no
 chmod 0755 cpustress/build/compile-notes/mprime/torture-conf.sh
 touch -c -h -d "2014-09-18 20:50:18.2376251430 +0800" cpustress/build/compile-notes/mprime/torture-conf.sh
 chmod 0644 cpustress/build/compile-notes/sensors.txt
-touch -c -h -d "2016-01-10 20:09:54.0206610320 +0800" cpustress/build/compile-notes/sensors.txt
+touch -c -h -d "2016-01-12 15:43:37.6308326380 +0800" cpustress/build/compile-notes/sensors.txt
 chmod 0644 cpustress/build/compile-notes/stress.txt
 touch -c -h -d "2015-10-25 10:49:56.8792474890 +0800" cpustress/build/compile-notes/stress.txt
 chmod 0644 cpustress/build/compile-notes/stress/stress-no-hdd.patch

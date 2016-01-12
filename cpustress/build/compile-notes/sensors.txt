@@ -1,4 +1,4 @@
-10 January 2016
+12 January 2016
 
 lm-sensors website:
 http://lm-sensors.org/
@@ -45,7 +45,7 @@ require command interpreters (Bash or Perl) that CPUstress doesn't have.
 Copy the files: (Replace ${cpustress_initrd} with the root path of your
 extracted initrd image.)
 
- $ cd ${HOME}/lm-sensors-install
+ $ cd "${HOME}/lm-sensors-install"
  $ cp -p "etc/sensors3.conf"     "${cpustress_initrd}/etc/sensors3.conf"
  $ cp -p "usr/local/bin/sensors" "${cpustress_initrd}/usr/local/bin/sensors"
 
@@ -57,7 +57,7 @@ that is 82-column wide. The 'man' command is invoked like this:
 
 (Optional) To reduce file size, I stripped the binary after compilation:
 
- $ cd ${cpustress_initrd}/usr/local/bin
+ $ cd "${cpustress_initrd}/usr/local/bin"
  $ i486-pc-linux-gnu-strip sensors
 
 (Optional) I also used UPX to compress the executable so the file size could
