@@ -1,4 +1,4 @@
-11 January 2016
+26 January 2016
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -36,7 +36,7 @@ Preparation
 -----------
 
  $ download () {
-     wget http://ftp.gnu.org/gnu/binutils/binutils-2.25.1.tar.bz2
+     wget http://ftp.gnu.org/gnu/binutils/binutils-2.26.tar.bz2
      wget https://gmplib.org/download/gmp/gmp-6.1.0.tar.xz
      wget http://www.mpfr.org/mpfr-current/mpfr-3.1.3.tar.xz
      wget -O mpfr-allpatches.patch http://www.mpfr.org/mpfr-current/allpatches
@@ -47,7 +47,7 @@ Preparation
      svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
      }
  $ extract () {
-     tar -x --bzip2 -f binutils-2.25.1.tar.bz2
+     tar -x --bzip2 -f binutils-2.26.tar.bz2
      tar -x --xz -f gmp-6.1.0.tar.xz
      tar -x --xz -f mpfr-3.1.3.tar.xz
      tar -x -z -f mpc-1.0.3.tar.gz
@@ -62,7 +62,7 @@ Preparation
 
  $ download
  $ extract
- $ for i in binutils-2.25.1 gcc-5.3.0 linux-4.4 libc
+ $ for i in binutils-2.26 gcc-5.3.0 linux-4.4 libc
      do [ -d "$i" ] || exit 1 ; done
 
 Copy the "option-groups.config" file from the compile-notes directory to
@@ -106,14 +106,20 @@ as soon as they are no longer needed.
 
  $ cd binutils-build
 
- $ ../binutils-2.25.1/configure --prefix="${TOOLS_DIR}" \
+In case that the output of config.guess matches the system type we specify in
+--target (or --host later for building libc), we hack the string so that
+configure will always build cross tools and not native ones:
+
+ $ BUILD=$(../binutils-2.26/config.guess | sed -e 's/-pc-/-buildpc-/')
+
+ $ ../binutils-2.26/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --with-sysroot="${SYSROOT_DIR}"
  $ make
  $ make install
  $ make -k distclean
  $ rm -r *
 
- $ ../binutils-2.25.1/configure --prefix="${TOOLS_DIR}" \
+ $ ../binutils-2.26/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --with-sysroot="${SYSROOT64_DIR}"
  $ make
  $ make install
@@ -135,8 +141,9 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
      --disable-libgomp --disable-libitm --disable-libatomic"
 
  $ cd gcc-build
+ $ BUILD=$(../gcc-5.3.0/config.guess | sed -e 's/-pc-/-buildpc-/')
 
- $ ../gcc-5.3.0/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --enable-languages=c,c++ \
      --disable-shared --disable-threads \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -147,7 +154,7 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
  $ make -k distclean
  $ rm -r *
 
- $ ../gcc-5.3.0/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
      --disable-shared --disable-threads \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -189,12 +196,12 @@ Notes:
 -----------------------------------
 
  $ cd eglibc-build
+ $ BUILD=$(../libc/scripts/config.guess | sed -e 's/-pc-/-buildpc-/')
 
  $ cp ../option-groups.config .
- $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib \
-     --build=$(../libc/scripts/config.guess) --host=i486-pc-linux-gnu \
-     --enable-kernel=2.6.36 --enable-add-ons=nptl --disable-nscd \
-     --disable-profile --without-gd --without-selinux \
+ $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib --build=${BUILD} \
+     --host=i486-pc-linux-gnu --enable-kernel=2.6.36 --enable-add-ons=nptl \
+     --disable-nscd --disable-profile --without-gd --without-selinux \
      --with-headers="${SYSROOT_DIR}/usr/include"
 
 Install libc headers:
@@ -219,10 +226,9 @@ Make dummy libc.so:
 Do the same for x86_64:
 
  $ cp ../option-groups.config .
- $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib \
-     --build=$(../libc/scripts/config.guess) --host=x86_64-pc-linux-gnu \
-     --enable-kernel=2.6.36 --enable-add-ons=nptl --disable-nscd \
-     --disable-profile --without-gd --without-selinux \
+ $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib --build=${BUILD} \
+     --host=x86_64-pc-linux-gnu --enable-kernel=2.6.36 --enable-add-ons=nptl \
+     --disable-nscd --disable-profile --without-gd --without-selinux \
      --with-headers="${SYSROOT64_DIR}/usr/include"
 
  $ make install-headers install-bootstrap-headers=yes \
@@ -252,8 +258,9 @@ Note:
 Note the option '--enable-shared=libgcc'.
 
  $ cd gcc-build
+ $ BUILD=$(../gcc-5.3.0/config.guess | sed -e 's/-pc-/-buildpc-/')
 
- $ ../gcc-5.3.0/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --enable-languages=c,c++ \
      --enable-shared=libgcc --disable-threads \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -263,7 +270,7 @@ Note the option '--enable-shared=libgcc'.
  $ make -k distclean
  $ rm -r *
 
- $ ../gcc-5.3.0/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
      --enable-shared=libgcc --disable-threads \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -284,12 +291,12 @@ more information. For example, this libc cannot be used to bootstrap a native
 GCC compiler (a cross-compiler is fine, though).
 
  $ cd eglibc-build
+ $ BUILD=$(../libc/scripts/config.guess | sed -e 's/-pc-/-buildpc-/')
 
  $ cp ../option-groups.config .
- $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib \
-     --build=$(../libc/scripts/config.guess) --host=i486-pc-linux-gnu \
-     --enable-kernel=2.6.36 --enable-add-ons=nptl --disable-nscd \
-     --disable-profile --without-gd --without-selinux \
+ $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib --build=${BUILD} \
+     --host=i486-pc-linux-gnu --enable-kernel=2.6.36 --enable-add-ons=nptl \
+     --disable-nscd --disable-profile --without-gd --without-selinux \
      --with-headers="${SYSROOT_DIR}/usr/include"
  $ make
  $ make install install_root="${SYSROOT_DIR}"
@@ -297,10 +304,9 @@ GCC compiler (a cross-compiler is fine, though).
  $ rm -r *
 
  $ cp ../option-groups.config .
- $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib \
-     --build=$(../libc/scripts/config.guess) --host=x86_64-pc-linux-gnu \
-     --enable-kernel=2.6.36 --enable-add-ons=nptl --disable-nscd \
-     --disable-profile --without-gd --without-selinux \
+ $ ../libc/configure --prefix=/usr --libexecdir=/usr/lib --build=${BUILD} \
+     --host=x86_64-pc-linux-gnu --enable-kernel=2.6.36 --enable-add-ons=nptl \
+     --disable-nscd --disable-profile --without-gd --without-selinux \
      --with-headers="${SYSROOT64_DIR}/usr/include"
  $ make
  $ make install install_root="${SYSROOT64_DIR}"
@@ -317,8 +323,9 @@ Only libgcc is built with a shared library. Other target libraries, including
 libstdc++, are built as static libraries only.
 
  $ cd gcc-build
+ $ BUILD=$(../gcc-5.3.0/config.guess | sed -e 's/-pc-/-buildpc-/')
 
- $ ../gcc-5.3.0/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --enable-languages=c,c++ \
      --enable-shared=libgcc --enable-threads=posix --enable-clocale=gnu \
      --enable-lto --disable-bootstrap --disable-multilib \
@@ -328,7 +335,7 @@ libstdc++, are built as static libraries only.
  $ make -k distclean
  $ rm -r *
 
- $ ../gcc-5.3.0/configure --prefix="${TOOLS_DIR}" \
+ $ ../gcc-5.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
      --enable-shared=libgcc --enable-threads=posix --enable-clocale=gnu \
      --enable-lto --disable-bootstrap --disable-multilib \
