@@ -3846,3 +3846,964 @@ diff -Naurd mpfr-3.1.3-a/tests/troot.c mpfr-3.1.3-b/tests/troot.c
    tests_end_mpfr ();
    return 0;
  }
+diff -Naurd mpfr-3.1.3-a/PATCHES mpfr-3.1.3-b/PATCHES
+--- mpfr-3.1.3-a/PATCHES	2016-02-23 07:43:23.702095604 +0000
++++ mpfr-3.1.3-b/PATCHES	2016-02-23 07:43:23.726095285 +0000
+@@ -0,0 +1 @@
++gamma
+diff -Naurd mpfr-3.1.3-a/VERSION mpfr-3.1.3-b/VERSION
+--- mpfr-3.1.3-a/VERSION	2016-02-15 15:20:51.306696441 +0000
++++ mpfr-3.1.3-b/VERSION	2016-02-23 07:43:23.726095285 +0000
+@@ -1 +1 @@
+-3.1.3-p12
++3.1.3-p13
+diff -Naurd mpfr-3.1.3-a/src/gamma.c mpfr-3.1.3-b/src/gamma.c
+--- mpfr-3.1.3-a/src/gamma.c	2015-06-19 19:55:09.000000000 +0000
++++ mpfr-3.1.3-b/src/gamma.c	2016-02-23 07:43:23.718095391 +0000
+@@ -70,6 +70,9 @@
+ {
+   mpfr_t x, y;
+   unsigned long r, k;
++  MPFR_SAVE_EXPO_DECL (expo);
++
++  MPFR_SAVE_EXPO_MARK (expo);
+   mpfr_init2 (x, 38);
+   mpfr_init2 (y, 38);
+   mpfr_set_ui (x, n, MPFR_RNDZ);
+@@ -86,6 +89,8 @@
+     r -= n / k;
+   mpfr_clear (x);
+   mpfr_clear (y);
++  MPFR_SAVE_EXPO_FREE (expo);
++
+   return r;
+ }
+ 
+diff -Naurd mpfr-3.1.3-a/src/mpfr.h mpfr-3.1.3-b/src/mpfr.h
+--- mpfr-3.1.3-a/src/mpfr.h	2016-02-15 15:20:51.302696439 +0000
++++ mpfr-3.1.3-b/src/mpfr.h	2016-02-23 07:43:23.726095285 +0000
+@@ -27,7 +27,7 @@
+ #define MPFR_VERSION_MAJOR 3
+ #define MPFR_VERSION_MINOR 1
+ #define MPFR_VERSION_PATCHLEVEL 3
+-#define MPFR_VERSION_STRING "3.1.3-p12"
++#define MPFR_VERSION_STRING "3.1.3-p13"
+ 
+ /* Macros dealing with MPFR VERSION */
+ #define MPFR_VERSION_NUM(a,b,c) (((a) << 16L) | ((b) << 8) | (c))
+diff -Naurd mpfr-3.1.3-a/src/version.c mpfr-3.1.3-b/src/version.c
+--- mpfr-3.1.3-a/src/version.c	2016-02-15 15:20:51.306696441 +0000
++++ mpfr-3.1.3-b/src/version.c	2016-02-23 07:43:23.726095285 +0000
+@@ -25,5 +25,5 @@
+ const char *
+ mpfr_get_version (void)
+ {
+-  return "3.1.3-p12";
++  return "3.1.3-p13";
+ }
+diff -Naurd mpfr-3.1.3-a/tests/tgamma.c mpfr-3.1.3-b/tests/tgamma.c
+--- mpfr-3.1.3-a/tests/tgamma.c	2015-06-19 19:55:10.000000000 +0000
++++ mpfr-3.1.3-b/tests/tgamma.c	2016-02-23 07:43:23.718095391 +0000
+@@ -192,6 +192,18 @@
+       exit (1);
+     }
+ 
++  mpfr_set_prec (x, 2);
++  mpfr_set_prec (y, 2);
++  mpfr_set_ui (x, 2, MPFR_RNDN);
++  mpfr_clear_inexflag ();
++  mpfr_gamma (y, x, MPFR_RNDN);
++  if (mpfr_inexflag_p ())
++    {
++      printf ("Wrong inexact flag for gamma(2)\n");
++      printf ("expected 0, got 1\n");
++      exit (1);
++    }
++
+   mpfr_clear (x);
+   mpfr_clear (y);
+ }
+diff -Naurd mpfr-3.1.3-a/PATCHES mpfr-3.1.3-b/PATCHES
+--- mpfr-3.1.3-a/PATCHES	2016-02-23 07:54:06.617533218 +0000
++++ mpfr-3.1.3-b/PATCHES	2016-02-23 07:54:06.641532898 +0000
+@@ -0,0 +1 @@
++rem1
+diff -Naurd mpfr-3.1.3-a/VERSION mpfr-3.1.3-b/VERSION
+--- mpfr-3.1.3-a/VERSION	2016-02-23 07:43:23.726095285 +0000
++++ mpfr-3.1.3-b/VERSION	2016-02-23 07:54:06.641532898 +0000
+@@ -1 +1 @@
+-3.1.3-p13
++3.1.3-p14
+diff -Naurd mpfr-3.1.3-a/src/mpfr.h mpfr-3.1.3-b/src/mpfr.h
+--- mpfr-3.1.3-a/src/mpfr.h	2016-02-23 07:43:23.726095285 +0000
++++ mpfr-3.1.3-b/src/mpfr.h	2016-02-23 07:54:06.641532898 +0000
+@@ -27,7 +27,7 @@
+ #define MPFR_VERSION_MAJOR 3
+ #define MPFR_VERSION_MINOR 1
+ #define MPFR_VERSION_PATCHLEVEL 3
+-#define MPFR_VERSION_STRING "3.1.3-p13"
++#define MPFR_VERSION_STRING "3.1.3-p14"
+ 
+ /* Macros dealing with MPFR VERSION */
+ #define MPFR_VERSION_NUM(a,b,c) (((a) << 16L) | ((b) << 8) | (c))
+diff -Naurd mpfr-3.1.3-a/src/rem1.c mpfr-3.1.3-b/src/rem1.c
+--- mpfr-3.1.3-a/src/rem1.c	2015-06-19 19:55:10.000000000 +0000
++++ mpfr-3.1.3-b/src/rem1.c	2016-02-23 07:54:06.633533004 +0000
+@@ -59,6 +59,7 @@
+   mpfr_exp_t ex, ey;
+   int compare, inex, q_is_odd, sign, signx = MPFR_SIGN (x);
+   mpz_t mx, my, r;
++  int tiny = 0;
+ 
+   MPFR_ASSERTD (rnd_q == MPFR_RNDN || rnd_q == MPFR_RNDZ);
+ 
+@@ -109,13 +110,27 @@
+   if (ex <= ey)
+     {
+       /* q = x/y = mx/(my*2^(ey-ex)) */
+-      mpz_mul_2exp (my, my, ey - ex);   /* divide mx by my*2^(ey-ex) */
+-      if (rnd_q == MPFR_RNDZ)
+-        /* 0 <= |r| <= |my|, r has the same sign as mx */
+-        mpz_tdiv_qr (mx, r, mx, my);
++
++      /* First detect cases where q=0, to avoid creating a huge number
++         my*2^(ey-ex): if sx = mpz_sizeinbase (mx, 2) and sy =
++         mpz_sizeinbase (my, 2), we have x < 2^(ex + sx) and
++         y >= 2^(ey + sy - 1), thus if ex + sx <= ey + sy - 1
++         the quotient is 0 */
++      if (ex + (mpfr_exp_t) mpz_sizeinbase (mx, 2) <
++          ey + (mpfr_exp_t) mpz_sizeinbase (my, 2))
++        {
++          tiny = 1;
++          mpz_set (r, mx);
++          mpz_set_ui (mx, 0);
++        }
+       else
+-        /* 0 <= |r| <= |my|, r has the same sign as my */
+-        mpz_fdiv_qr (mx, r, mx, my);
++        {
++          mpz_mul_2exp (my, my, ey - ex);   /* divide mx by my*2^(ey-ex) */
++
++          /* since mx > 0 and my > 0, we can use mpz_tdiv_qr in all cases */
++          mpz_tdiv_qr (mx, r, mx, my);
++          /* 0 <= |r| <= |my|, r has the same sign as mx */
++        }
+ 
+       if (rnd_q == MPFR_RNDN)
+         q_is_odd = mpz_tstbit (mx, 0);
+@@ -181,7 +196,20 @@
+           /* FIXME: the comparison 2*r < my could be done more efficiently
+              at the mpn level */
+           mpz_mul_2exp (r, r, 1);
+-          compare = mpz_cmpabs (r, my);
++          /* if tiny=1, we should compare r with my*2^(ey-ex) */
++          if (tiny)
++            {
++              if (ex + (mpfr_exp_t) mpz_sizeinbase (r, 2) <
++                  ey + (mpfr_exp_t) mpz_sizeinbase (my, 2))
++                compare = 0; /* r*2^ex < my*2^ey */
++              else
++                {
++                  mpz_mul_2exp (my, my, ey - ex);
++                  compare = mpz_cmpabs (r, my);
++                }
++            }
++          else
++            compare = mpz_cmpabs (r, my);
+           mpz_fdiv_q_2exp (r, r, 1);
+           compare = ((compare > 0) ||
+                      ((rnd_q == MPFR_RNDN) && (compare == 0) && q_is_odd));
+diff -Naurd mpfr-3.1.3-a/src/version.c mpfr-3.1.3-b/src/version.c
+--- mpfr-3.1.3-a/src/version.c	2016-02-23 07:43:23.726095285 +0000
++++ mpfr-3.1.3-b/src/version.c	2016-02-23 07:54:06.641532898 +0000
+@@ -25,5 +25,5 @@
+ const char *
+ mpfr_get_version (void)
+ {
+-  return "3.1.3-p13";
++  return "3.1.3-p14";
+ }
+diff -Naurd mpfr-3.1.3-a/tests/tfmod.c mpfr-3.1.3-b/tests/tfmod.c
+--- mpfr-3.1.3-a/tests/tfmod.c	2015-06-19 19:55:10.000000000 +0000
++++ mpfr-3.1.3-b/tests/tfmod.c	2016-02-23 07:54:06.633533004 +0000
+@@ -137,89 +137,90 @@
+ special (void)
+ {
+   int inexact;
+-  mpfr_t x, y, r, nan;
+-  mpfr_inits (x, y, r, nan, (mpfr_ptr) 0);
++  mpfr_t x, y, r, t;
+ 
+-  mpfr_set_nan (nan);
++  mpfr_inits (x, y, r, t, (mpfr_ptr) 0);
++
++  mpfr_set_nan (t);
+ 
+   /* fmod (NaN, NaN) is NaN */
+   mpfr_set_nan (x);
+   mpfr_set_nan (y);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (NaN, +0) is NaN */
+   mpfr_set_ui (y, 0, MPFR_RNDN);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (+1, 0) is NaN */
+   mpfr_set_ui (x, 1, MPFR_RNDN);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (0, 0) is NaN */
+   mpfr_set_ui (x, 0, MPFR_RNDN);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (+inf, +0) is NaN */
+   mpfr_set_inf (x, +1);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (-inf, +0) is NaN */
+   mpfr_set_inf (x, -1);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (-inf, -0) is NaN */
+   mpfr_neg (x, x, MPFR_RNDN);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (-inf, +1) is NaN */
+   mpfr_set_ui (y, +1, MPFR_RNDN);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (+inf, +1) is NaN */
+   mpfr_neg (x, x, MPFR_RNDN);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (+inf, -inf) is NaN */
+   mpfr_set_inf (y, -1);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (-inf, -inf) is NaN */
+   mpfr_neg (x, x, MPFR_RNDN);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (-inf, +inf) is NaN */
+   mpfr_neg (y, y, MPFR_RNDN);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (+inf, +inf) is NaN */
+   mpfr_neg (x, x, MPFR_RNDN);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (x, +inf) = x, if x is finite */
+   mpfr_set_ui (x, 1, MPFR_RNDN);
+@@ -271,13 +272,13 @@
+   mpfr_set_ui (y, 0, MPFR_RNDN);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (+0, -0) is NaN */
+   mpfr_neg (y, y, MPFR_RNDN);
+   inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
+   if (!mpfr_nan_p (r) || inexact != 0)
+-    test_failed (r, nan, 0, inexact, x, y, MPFR_RNDN);
++    test_failed (r, t, 0, inexact, x, y, MPFR_RNDN);
+ 
+   /* fmod (+0, +1) = +0 */
+   mpfr_set_ui (y, 1, MPFR_RNDN);
+@@ -303,7 +304,18 @@
+   if (!mpfr_equal_p (r, x) || inexact != 0)
+     test_failed (r, x, 0, inexact, x, y, MPFR_RNDN);
+ 
+-  mpfr_clears (x, y, r, nan, (mpfr_ptr) 0);
++  mpfr_set_prec (x, 380);
++  mpfr_set_prec (y, 385);
++  mpfr_set_str_binary (x, "0.11011010010110011101011000100100101100101011010001011100110001100101111001010100001011111110111100101110101010110011010101000100000100011101101100001011101110100111101111111010001001000010000110010110011100111000001110111010000100101001010111100100010001101001110100011110010000000001110001111001101100111011001000110110011100100011111110010100011001000001001011010111010000000000E0");
++  mpfr_set_str_binary (y, "0.1100011000011101011010001100010111001110110111001101010010111100111100011010010011011101111101111001010111111110001001100001111101001000000010100101111001001110010110000111001000101010111001001000100101011111000010100110001111000110011011010101111101100110010101011010011101100001011101001000101111110110110110000001001101110111110110111110111111001001011110001110011111100000000000000E-1");
++  mpfr_set_prec (r, 2);
++  inexact = mpfr_fmod (r, x, y, MPFR_RNDA);
++  mpfr_set_prec (t, 2);
++  mpfr_set_ui_2exp (t, 3, -5, MPFR_RNDN);
++  if (mpfr_cmp_ui_2exp (r, 3, -5) || inexact <= 0)
++    test_failed (r, t, 1, inexact, x, y, MPFR_RNDA);
++
++  mpfr_clears (x, y, r, t, (mpfr_ptr) 0);
+   return;
+ }
+ 
+@@ -313,6 +325,7 @@
+ {
+   mpfr_t x, y, r;
+   int inexact;
++
+   mpfr_inits2 (100, x, y, r, (mpfr_ptr) 0);
+ 
+   mpfr_set_prec (x, 3);
+@@ -353,7 +366,46 @@
+   mpfr_sin (y, y, MPFR_RNDN);
+   check (r, x, y, MPFR_RNDN);
+ 
+-  mpfr_clears(r, x, y, (mpfr_ptr) 0);
++  mpfr_clears (x, y, r, (mpfr_ptr) 0);
++}
++
++static void
++bug20160217 (void)
++{
++  mpfr_t x, y, r;
++  int inexact, i;
++  mpfr_exp_t emin, emax;
++
++  mpfr_inits2 (53, x, y, r, (mpfr_ptr) 0);
++
++  emin = mpfr_get_emin ();
++  emax = mpfr_get_emax ();
++
++  for (i = 0; i <= 1; i++)
++    {
++      mpfr_set_zero (x, 1);
++      mpfr_nextabove (x);
++      mpfr_set_inf (y, 1);
++      mpfr_nextbelow (y);
++      inexact = mpfr_fmod (r, x, y, MPFR_RNDN);
++      if (!mpfr_equal_p (r, x) || inexact != 0)
++        {
++          printf ("Error for mpfr_fmod (r, nextabove(0), nextbelow(+inf),"
++                  " MPFR_RNDN)%s\n", i ? "extended exponent range" : "");
++          printf ("Expected inex = 0, r = ");
++          mpfr_dump (x);
++          printf ("Got      inex = %d, r = ", inexact);
++          mpfr_dump (r);
++          exit (1);
++        }
++      set_emin (MPFR_EMIN_MIN);
++      set_emax (MPFR_EMAX_MAX);
++    }
++
++  set_emin (emin);
++  set_emax (emax);
++
++  mpfr_clears (x, y, r, (mpfr_ptr) 0);
+ }
+ 
+ int
+@@ -362,6 +414,7 @@
+   tests_start_mpfr ();
+ 
+   bug20090519 ();
++  bug20160217 ();
+ 
+   test_generic (2, 100, 100);
+ 
+diff -Naurd mpfr-3.1.3-a/tests/tremquo.c mpfr-3.1.3-b/tests/tremquo.c
+--- mpfr-3.1.3-a/tests/tremquo.c	2015-06-19 19:55:10.000000000 +0000
++++ mpfr-3.1.3-b/tests/tremquo.c	2016-02-23 07:54:06.633533004 +0000
+@@ -59,6 +59,7 @@
+ {
+   mpfr_t x, y, r;
+   long q[1];
++  int inex;
+ 
+   if (argc == 3) /* usage: tremquo x y (rnd=MPFR_RNDN implicit) */
+     {
+@@ -281,6 +282,15 @@
+   MPFR_ASSERTN (mpfr_zero_p (r) && MPFR_SIGN (r) > 0);
+   MPFR_ASSERTN (q[0] == 0);
+ 
++  mpfr_set_prec (x, 380);
++  mpfr_set_prec (y, 385);
++  mpfr_set_str_binary (x, "0.11011010010110011101011000100100101100101011010001011100110001100101111001010100001011111110111100101110101010110011010101000100000100011101101100001011101110100111101111111010001001000010000110010110011100111000001110111010000100101001010111100100010001101001110100011110010000000001110001111001101100111011001000110110011100100011111110010100011001000001001011010111010000000000E-2");
++  mpfr_set_str_binary (y, "0.1100011000011101011010001100010111001110110111001101010010111100111100011010010011011101111101111001010111111110001001100001111101001000000010100101111001001110010110000111001000101010111001001000100101011111000010100110001111000110011011010101111101100110010101011010011101100001011101001000101111110110110110000001001101110111110110111110111111001001011110001110011111100000000000000E-1");
++  mpfr_set_prec (r, 2);
++  inex = mpfr_remainder (r, x, y, MPFR_RNDA);
++  MPFR_ASSERTN(mpfr_cmp_si_2exp (r, -3, -4) == 0);
++  MPFR_ASSERTN(inex < 0);
++
+   mpfr_clear (x);
+   mpfr_clear (y);
+   mpfr_clear (r);
+diff -Naurd mpfr-3.1.3-a/PATCHES mpfr-3.1.3-b/PATCHES
+--- mpfr-3.1.3-a/PATCHES	2016-02-23 07:55:17.208593082 +0000
++++ mpfr-3.1.3-b/PATCHES	2016-02-23 07:55:17.232592762 +0000
+@@ -0,0 +1 @@
++agm-eq
+diff -Naurd mpfr-3.1.3-a/VERSION mpfr-3.1.3-b/VERSION
+--- mpfr-3.1.3-a/VERSION	2016-02-23 07:54:06.641532898 +0000
++++ mpfr-3.1.3-b/VERSION	2016-02-23 07:55:17.232592762 +0000
+@@ -1 +1 @@
+-3.1.3-p14
++3.1.3-p15
+diff -Naurd mpfr-3.1.3-a/src/agm.c mpfr-3.1.3-b/src/agm.c
+--- mpfr-3.1.3-a/src/agm.c	2015-06-19 19:55:10.000000000 +0000
++++ mpfr-3.1.3-b/src/agm.c	2016-02-23 07:55:17.224592868 +0000
+@@ -96,10 +96,7 @@
+   /* b (op2) and a (op1) are the 2 operands but we want b >= a */
+   compare = mpfr_cmp (op1, op2);
+   if (MPFR_UNLIKELY( compare == 0 ))
+-    {
+-      mpfr_set (r, op1, rnd_mode);
+-      MPFR_RET (0); /* exact */
+-    }
++    return mpfr_set (r, op1, rnd_mode);
+   else if (compare > 0)
+     {
+       mpfr_srcptr t = op1;
+diff -Naurd mpfr-3.1.3-a/src/mpfr.h mpfr-3.1.3-b/src/mpfr.h
+--- mpfr-3.1.3-a/src/mpfr.h	2016-02-23 07:54:06.641532898 +0000
++++ mpfr-3.1.3-b/src/mpfr.h	2016-02-23 07:55:17.232592762 +0000
+@@ -27,7 +27,7 @@
+ #define MPFR_VERSION_MAJOR 3
+ #define MPFR_VERSION_MINOR 1
+ #define MPFR_VERSION_PATCHLEVEL 3
+-#define MPFR_VERSION_STRING "3.1.3-p14"
++#define MPFR_VERSION_STRING "3.1.3-p15"
+ 
+ /* Macros dealing with MPFR VERSION */
+ #define MPFR_VERSION_NUM(a,b,c) (((a) << 16L) | ((b) << 8) | (c))
+diff -Naurd mpfr-3.1.3-a/src/version.c mpfr-3.1.3-b/src/version.c
+--- mpfr-3.1.3-a/src/version.c	2016-02-23 07:54:06.641532898 +0000
++++ mpfr-3.1.3-b/src/version.c	2016-02-23 07:55:17.232592762 +0000
+@@ -25,5 +25,5 @@
+ const char *
+ mpfr_get_version (void)
+ {
+-  return "3.1.3-p14";
++  return "3.1.3-p15";
+ }
+diff -Naurd mpfr-3.1.3-a/tests/tagm.c mpfr-3.1.3-b/tests/tagm.c
+--- mpfr-3.1.3-a/tests/tagm.c	2015-06-19 19:55:10.000000000 +0000
++++ mpfr-3.1.3-b/tests/tagm.c	2016-02-23 07:55:17.224592868 +0000
+@@ -169,6 +169,45 @@
+ }
+ 
+ static void
++check_eq (void)
++{
++  mpfr_t a, b, agm;
++  int p;
++
++  mpfr_init2 (a, 17);
++  mpfr_init2 (b, 9);
++
++  mpfr_set_str_binary (b, "0.101000000E-3");
++  mpfr_set (a, b, MPFR_RNDN);
++
++  for (p = MPFR_PREC_MIN; p <= 2; p++)
++    {
++      int inex;
++
++      mpfr_init2 (agm, p);
++      inex = mpfr_agm (agm, a, b, MPFR_RNDU);
++      if (mpfr_cmp_ui_2exp (agm, 5 - p, -5) != 0)
++        {
++          printf ("Error in check_eq for p = %d: expected %d*2^(-5), got ",
++                  p, 5 - p);
++          mpfr_dump (agm);
++          exit (1);
++        }
++      if (inex <= 0)
++        {
++          printf ("Wrong ternary value in check_eq for p = %d\n", p);
++          printf ("expected 1\n");
++          printf ("got      %d\n", inex);
++          exit (1);
++        }
++      mpfr_clear (agm);
++    }
++
++  mpfr_clear (a);
++  mpfr_clear (b);
++}
++
++static void
+ check_nans (void)
+ {
+   mpfr_t  x, y, m;
+@@ -260,6 +299,7 @@
+   check_nans ();
+ 
+   check_large ();
++  check_eq ();
+   check4 ("2.0", "1.0", MPFR_RNDN, "1.456791031046906869", -1);
+   check4 ("6.0", "4.0", MPFR_RNDN, "4.949360872472608925", 1);
+   check4 ("62.0", "61.0", MPFR_RNDN, "61.498983718845075902", -1);
+diff -Naurd mpfr-3.1.3-a/PATCHES mpfr-3.1.3-b/PATCHES
+--- mpfr-3.1.3-a/PATCHES	2016-02-23 07:55:54.028346753 +0000
++++ mpfr-3.1.3-b/PATCHES	2016-02-23 07:55:54.052346433 +0000
+@@ -0,0 +1 @@
++sum
+diff -Naurd mpfr-3.1.3-a/VERSION mpfr-3.1.3-b/VERSION
+--- mpfr-3.1.3-a/VERSION	2016-02-23 07:55:17.232592762 +0000
++++ mpfr-3.1.3-b/VERSION	2016-02-23 07:55:54.052346433 +0000
+@@ -1 +1 @@
+-3.1.3-p15
++3.1.3-p16
+diff -Naurd mpfr-3.1.3-a/src/mpfr-impl.h mpfr-3.1.3-b/src/mpfr-impl.h
+--- mpfr-3.1.3-a/src/mpfr-impl.h	2015-06-19 19:55:09.000000000 +0000
++++ mpfr-3.1.3-b/src/mpfr-impl.h	2016-02-23 07:55:54.040346593 +0000
+@@ -1876,7 +1876,8 @@
+ __MPFR_DECLSPEC int mpfr_check _MPFR_PROTO ((mpfr_srcptr));
+ 
+ __MPFR_DECLSPEC int mpfr_sum_sort _MPFR_PROTO ((mpfr_srcptr *const,
+-                                                unsigned long, mpfr_srcptr *));
++                                                unsigned long, mpfr_srcptr *,
++                                                mpfr_prec_t *));
+ 
+ __MPFR_DECLSPEC int mpfr_get_cputime _MPFR_PROTO ((void));
+ 
+diff -Naurd mpfr-3.1.3-a/src/mpfr.h mpfr-3.1.3-b/src/mpfr.h
+--- mpfr-3.1.3-a/src/mpfr.h	2016-02-23 07:55:17.232592762 +0000
++++ mpfr-3.1.3-b/src/mpfr.h	2016-02-23 07:55:54.052346433 +0000
+@@ -27,7 +27,7 @@
+ #define MPFR_VERSION_MAJOR 3
+ #define MPFR_VERSION_MINOR 1
+ #define MPFR_VERSION_PATCHLEVEL 3
+-#define MPFR_VERSION_STRING "3.1.3-p15"
++#define MPFR_VERSION_STRING "3.1.3-p16"
+ 
+ /* Macros dealing with MPFR VERSION */
+ #define MPFR_VERSION_NUM(a,b,c) (((a) << 16L) | ((b) << 8) | (c))
+diff -Naurd mpfr-3.1.3-a/src/sum.c mpfr-3.1.3-b/src/sum.c
+--- mpfr-3.1.3-a/src/sum.c	2015-06-19 19:55:09.000000000 +0000
++++ mpfr-3.1.3-b/src/sum.c	2016-02-23 07:55:54.040346593 +0000
+@@ -45,9 +45,13 @@
+                         mpfr_exp_t, mpfr_uexp_t);
+ 
+ /* Either sort the tab in perm and returns 0
+-   Or returns 1 for +INF, -1 for -INF and 2 for NAN */
++   Or returns 1 for +INF, -1 for -INF and 2 for NAN.
++   Also set *maxprec to the maximal precision of tab[0..n-1] and of the
++   initial value of *maxprec.
++*/
+ int
+-mpfr_sum_sort (mpfr_srcptr *const tab, unsigned long n, mpfr_srcptr *perm)
++mpfr_sum_sort (mpfr_srcptr *const tab, unsigned long n, mpfr_srcptr *perm,
++               mpfr_prec_t *maxprec)
+ {
+   mpfr_exp_t min, max;
+   mpfr_uexp_t exp_num;
+@@ -79,6 +83,8 @@
+           if (MPFR_GET_EXP (tab[i]) > max)
+             max = MPFR_GET_EXP(tab[i]);
+         }
++      if (MPFR_PREC (tab[i]) > *maxprec)
++        *maxprec = MPFR_PREC (tab[i]);
+     }
+   if (MPFR_UNLIKELY (sign_inf != 0))
+     return sign_inf;
+@@ -213,7 +219,8 @@
+ 
+ 
+ /* Sum a list of float with order given by permutation perm,
+- * intermediate size set to F.
++ * intermediate size set to F. Return non-zero if at least one of
++ * the operations is inexact (thus 0 implies that the sum is exact).
+  * Internal use function.
+  */
+ static int
+@@ -230,16 +237,19 @@
+   for (i = 1; i < n - 1; i++)
+     {
+       MPFR_ASSERTD (!MPFR_IS_NAN (sum) && !MPFR_IS_INF (sum));
+-      error_trap |= mpfr_add (sum, sum, tab[i], MPFR_RNDN);
++      if (mpfr_add (sum, sum, tab[i], MPFR_RNDN))
++        error_trap = 1;
+     }
+-  error_trap |= mpfr_add (ret, sum, tab[n - 1], MPFR_RNDN);
++  if (mpfr_add (ret, sum, tab[n - 1], MPFR_RNDN))
++    error_trap = 1;
+   mpfr_clear (sum);
+   return error_trap;
+ }
+ 
+ /* Sum a list of floating-point numbers.
++ * If the return value is 0, then the sum is exact.
++ * Otherwise the return value gives no information.
+  */
+-
+ int
+ mpfr_sum (mpfr_ptr ret, mpfr_ptr *const tab_p, unsigned long n, mpfr_rnd_t rnd)
+ {
+@@ -266,7 +276,8 @@
+   /* Sort and treat special cases */
+   MPFR_TMP_MARK (marker);
+   perm = (mpfr_srcptr *) MPFR_TMP_ALLOC (n * sizeof *perm);
+-  error_trap = mpfr_sum_sort (tab, n, perm);
++  prec = MPFR_PREC (ret);
++  error_trap = mpfr_sum_sort (tab, n, perm, &prec);
+   /* Check if there was a NAN or a INF */
+   if (MPFR_UNLIKELY (error_trap != 0))
+     {
+@@ -281,8 +292,7 @@
+       MPFR_RET (0);
+     }
+ 
+-  /* Initial precision */
+-  prec = MAX (MPFR_PREC (tab[0]), MPFR_PREC (ret));
++  /* Initial precision is max(prec(ret),prec(tab[0]),...,prec(tab[n-1])) */
+   k = MPFR_INT_CEIL_LOG2 (n) + 1;
+   prec += k + 2;
+   mpfr_init2 (cur_sum, prec);
+@@ -295,8 +305,7 @@
+       error_trap = sum_once (cur_sum, perm, n, prec + k);
+       if (MPFR_LIKELY (error_trap == 0 ||
+                        (!MPFR_IS_ZERO (cur_sum) &&
+-                        mpfr_can_round (cur_sum,
+-                                        MPFR_GET_EXP (cur_sum) - prec + 2,
++                        mpfr_can_round (cur_sum, prec - 2,
+                                         MPFR_RNDN, rnd, MPFR_PREC (ret)))))
+         break;
+       MPFR_ZIV_NEXT (loop, prec);
+@@ -305,11 +314,13 @@
+   MPFR_ZIV_FREE (loop);
+   MPFR_TMP_FREE (marker);
+ 
+-  error_trap |= mpfr_set (ret, cur_sum, rnd);
++  if (mpfr_set (ret, cur_sum, rnd))
++    error_trap = 1;
+   mpfr_clear (cur_sum);
+ 
+   MPFR_SAVE_EXPO_FREE (expo);
+-  error_trap |= mpfr_check_range (ret, 0, rnd);
++  if (mpfr_check_range (ret, 0, rnd))
++    error_trap = 1;
+   return error_trap; /* It doesn't return the ternary value */
+ }
+ 
+diff -Naurd mpfr-3.1.3-a/src/version.c mpfr-3.1.3-b/src/version.c
+--- mpfr-3.1.3-a/src/version.c	2016-02-23 07:55:17.232592762 +0000
++++ mpfr-3.1.3-b/src/version.c	2016-02-23 07:55:54.052346433 +0000
+@@ -25,5 +25,5 @@
+ const char *
+ mpfr_get_version (void)
+ {
+-  return "3.1.3-p15";
++  return "3.1.3-p16";
+ }
+diff -Naurd mpfr-3.1.3-a/tests/tsum.c mpfr-3.1.3-b/tests/tsum.c
+--- mpfr-3.1.3-a/tests/tsum.c	2015-06-19 19:55:10.000000000 +0000
++++ mpfr-3.1.3-b/tests/tsum.c	2016-02-23 07:55:54.040346593 +0000
+@@ -126,6 +126,7 @@
+   mpfr_ptr *tabtmp;
+   mpfr_srcptr *perm;
+   unsigned long i;
++  mpfr_prec_t prec = MPFR_PREC_MIN;
+ 
+   /* Init stuff */
+   tab = (mpfr_t *) (*__gmp_allocate_func) (n * sizeof (mpfr_t));
+@@ -140,7 +141,7 @@
+       tabtmp[i] = tab[i];
+     }
+ 
+-  mpfr_sum_sort ((mpfr_srcptr *)tabtmp, n, perm);
++  mpfr_sum_sort ((mpfr_srcptr *)tabtmp, n, perm, &prec);
+ 
+   if (check_is_sorted (n, perm) == 0)
+     {
+@@ -300,6 +301,41 @@
+   mpfr_clears (tab[0], tab[1], tab[2], r, (mpfr_ptr) 0);
+ }
+ 
++/* bug reported by Joseph S. Myers on 2013-10-27
++   https://sympa.inria.fr/sympa/arc/mpfr/2013-10/msg00015.html */
++static void
++bug20131027 (void)
++{
++  mpfr_t r, t[4];
++  mpfr_ptr p[4];
++  char *s[4] = {
++    "0x1p1000",
++    "-0x0.fffffffffffff80000000000000001p1000",
++    "-0x1p947",
++    "0x1p880"
++  };
++  int i;
++
++  mpfr_init2 (r, 53);
++  for (i = 0; i < 4; i++)
++    {
++      mpfr_init2 (t[i], i == 0 ? 53 : 1000);
++      mpfr_set_str (t[i], s[i], 0, MPFR_RNDN);
++      p[i] = t[i];
++    }
++  mpfr_sum (r, p, 4, MPFR_RNDN);
++
++  if (MPFR_NOTZERO (r))
++    {
++      printf ("mpfr_sum incorrect in bug20131027: expected 0, got\n");
++      mpfr_dump (r);
++      exit (1);
++    }
++
++  for (i = 0; i < 4; i++)
++    mpfr_clear (t[i]);
++  mpfr_clear (r);
++}
+ 
+ int
+ main (void)
+@@ -310,6 +346,7 @@
+   tests_start_mpfr ();
+ 
+   check_special ();
++  bug20131027 ();
+   test_sort (1764, 1026);
+   for (p = 2 ; p < 444 ; p += 17)
+     for (n = 2 ; n < 1026 ; n += 42 + p)
+diff -Naurd mpfr-3.1.3-a/PATCHES mpfr-3.1.3-b/PATCHES
+--- mpfr-3.1.3-a/PATCHES	2016-02-23 12:28:35.578442642 +0000
++++ mpfr-3.1.3-b/PATCHES	2016-02-23 12:28:35.602442321 +0000
+@@ -0,0 +1 @@
++cmp_d
+diff -Naurd mpfr-3.1.3-a/VERSION mpfr-3.1.3-b/VERSION
+--- mpfr-3.1.3-a/VERSION	2016-02-23 07:55:54.052346433 +0000
++++ mpfr-3.1.3-b/VERSION	2016-02-23 12:28:35.602442321 +0000
+@@ -1 +1 @@
+-3.1.3-p16
++3.1.3-p17
+diff -Naurd mpfr-3.1.3-a/src/cmp_d.c mpfr-3.1.3-b/src/cmp_d.c
+--- mpfr-3.1.3-a/src/cmp_d.c	2015-06-19 19:55:10.000000000 +0000
++++ mpfr-3.1.3-b/src/cmp_d.c	2016-02-23 12:28:35.590442481 +0000
+@@ -27,12 +27,19 @@
+ {
+   mpfr_t tmp;
+   int res;
++  MPFR_SAVE_EXPO_DECL (expo);
++
++  MPFR_SAVE_EXPO_MARK (expo);
+ 
+   mpfr_init2 (tmp, IEEE_DBL_MANT_DIG);
+   res = mpfr_set_d (tmp, d, MPFR_RNDN);
+   MPFR_ASSERTD (res == 0);
++
++  mpfr_clear_flags ();
+   res = mpfr_cmp (b, tmp);
+-  mpfr_clear (tmp);
++  MPFR_SAVE_EXPO_UPDATE_FLAGS (expo, __gmpfr_flags);
+ 
++  mpfr_clear (tmp);
++  MPFR_SAVE_EXPO_FREE (expo);
+   return res;
+ }
+diff -Naurd mpfr-3.1.3-a/src/cmp_ld.c mpfr-3.1.3-b/src/cmp_ld.c
+--- mpfr-3.1.3-a/src/cmp_ld.c	2015-06-19 19:55:10.000000000 +0000
++++ mpfr-3.1.3-b/src/cmp_ld.c	2016-02-23 12:28:35.590442481 +0000
+@@ -27,12 +27,19 @@
+ {
+   mpfr_t tmp;
+   int res;
++  MPFR_SAVE_EXPO_DECL (expo);
++
++  MPFR_SAVE_EXPO_MARK (expo);
+ 
+   mpfr_init2 (tmp, MPFR_LDBL_MANT_DIG);
+   res = mpfr_set_ld (tmp, d, MPFR_RNDN);
+   MPFR_ASSERTD (res == 0);
++
++  mpfr_clear_flags ();
+   res = mpfr_cmp (b, tmp);
+-  mpfr_clear (tmp);
++  MPFR_SAVE_EXPO_UPDATE_FLAGS (expo, __gmpfr_flags);
+ 
++  mpfr_clear (tmp);
++  MPFR_SAVE_EXPO_FREE (expo);
+   return res;
+ }
+diff -Naurd mpfr-3.1.3-a/src/mpfr.h mpfr-3.1.3-b/src/mpfr.h
+--- mpfr-3.1.3-a/src/mpfr.h	2016-02-23 07:55:54.052346433 +0000
++++ mpfr-3.1.3-b/src/mpfr.h	2016-02-23 12:28:35.598442376 +0000
+@@ -27,7 +27,7 @@
+ #define MPFR_VERSION_MAJOR 3
+ #define MPFR_VERSION_MINOR 1
+ #define MPFR_VERSION_PATCHLEVEL 3
+-#define MPFR_VERSION_STRING "3.1.3-p16"
++#define MPFR_VERSION_STRING "3.1.3-p17"
+ 
+ /* Macros dealing with MPFR VERSION */
+ #define MPFR_VERSION_NUM(a,b,c) (((a) << 16L) | ((b) << 8) | (c))
+diff -Naurd mpfr-3.1.3-a/src/version.c mpfr-3.1.3-b/src/version.c
+--- mpfr-3.1.3-a/src/version.c	2016-02-23 07:55:54.052346433 +0000
++++ mpfr-3.1.3-b/src/version.c	2016-02-23 12:28:35.598442376 +0000
+@@ -25,5 +25,5 @@
+ const char *
+ mpfr_get_version (void)
+ {
+-  return "3.1.3-p16";
++  return "3.1.3-p17";
+ }
+diff -Naurd mpfr-3.1.3-a/tests/tcmp_d.c mpfr-3.1.3-b/tests/tcmp_d.c
+--- mpfr-3.1.3-a/tests/tcmp_d.c	2015-06-19 19:55:10.000000000 +0000
++++ mpfr-3.1.3-b/tests/tcmp_d.c	2016-02-23 12:28:35.590442481 +0000
+@@ -29,8 +29,10 @@
+ main (void)
+ {
+   mpfr_t x;
++  mpfr_exp_t emin;
+ 
+   tests_start_mpfr ();
++  emin = mpfr_get_emin ();
+ 
+   mpfr_init2(x, IEEE_DBL_MANT_DIG);
+ 
+@@ -67,16 +69,31 @@
+       exit (1);
+     }
+ 
++  /* Test in reduced exponent range. */
++  set_emin (1);
++  mpfr_set_ui (x, 1, MPFR_RNDN);
++  if (mpfr_cmp_d (x, 0.9) <= 0)
++    {
++      printf ("Error in reduced exponent range.\n");
++      exit (1);
++    }
++  set_emin (emin);
++
+ #if !defined(MPFR_ERRDIVZERO)
+   /* Check NAN */
+   {
+     int c;
+ 
+-    mpfr_clear_erangeflag ();
++    mpfr_clear_flags ();
+     c = mpfr_cmp_d (x, DBL_NAN);
+-    if (c != 0 || !mpfr_erangeflag_p ())
++    if (c != 0 || __gmpfr_flags != MPFR_FLAGS_ERANGE)
+       {
+         printf ("ERROR for NAN (1)\n");
++        printf ("Expected 0, got %d\n", c);
++        printf ("Expected flags:");
++        flags_out (MPFR_FLAGS_ERANGE);
++        printf ("Got flags:     ");
++        flags_out (__gmpfr_flags);
+ #ifdef MPFR_NANISNAN
+         printf ("The reason is that NAN == NAN. Please look at the configure "
+                 "output\nand Section \"In case of problem\" of the INSTALL "
+@@ -84,12 +101,18 @@
+ #endif
+         exit (1);
+       }
++
+     mpfr_set_nan (x);
+-    mpfr_clear_erangeflag ();
++    mpfr_clear_flags ();
+     c = mpfr_cmp_d (x, 2.0);
+-    if (c != 0 || !mpfr_erangeflag_p ())
++    if (c != 0 || __gmpfr_flags != MPFR_FLAGS_ERANGE)
+       {
+         printf ("ERROR for NAN (2)\n");
++        printf ("Expected 0, got %d\n", c);
++        printf ("Expected flags:");
++        flags_out (MPFR_FLAGS_ERANGE);
++        printf ("Got flags:     ");
++        flags_out (__gmpfr_flags);
+ #ifdef MPFR_NANISNAN
+         printf ("The reason is that NAN == NAN. Please look at the configure "
+                 "output\nand Section \"In case of problem\" of the INSTALL "
+diff -Naurd mpfr-3.1.3-a/tests/tcmp_ld.c mpfr-3.1.3-b/tests/tcmp_ld.c
+--- mpfr-3.1.3-a/tests/tcmp_ld.c	2015-06-19 19:55:10.000000000 +0000
++++ mpfr-3.1.3-b/tests/tcmp_ld.c	2016-02-23 12:28:35.590442481 +0000
+@@ -28,8 +28,10 @@
+ main (void)
+ {
+   mpfr_t x;
++  mpfr_exp_t emin;
+ 
+   tests_start_mpfr ();
++  emin = mpfr_get_emin ();
+ 
+   mpfr_init2(x, MPFR_LDBL_MANT_DIG);
+ 
+@@ -66,16 +68,31 @@
+       exit (1);
+     }
+ 
++  /* Test in reduced exponent range. */
++  set_emin (1);
++  mpfr_set_ui (x, 1, MPFR_RNDN);
++  if (mpfr_cmp_ld (x, 0.9) <= 0)
++    {
++      printf ("Error in reduced exponent range.\n");
++      exit (1);
++    }
++  set_emin (emin);
++
+ #if !defined(MPFR_ERRDIVZERO)
+   /* Check NAN */
+   {
+     int c;
+ 
+-    mpfr_clear_erangeflag ();
++    mpfr_clear_flags ();
+     c = mpfr_cmp_ld (x, DBL_NAN);
+-    if (c != 0 || !mpfr_erangeflag_p ())
++    if (c != 0 || __gmpfr_flags != MPFR_FLAGS_ERANGE)
+       {
+         printf ("ERROR for NAN (1)\n");
++        printf ("Expected 0, got %d\n", c);
++        printf ("Expected flags:");
++        flags_out (MPFR_FLAGS_ERANGE);
++        printf ("Got flags:     ");
++        flags_out (__gmpfr_flags);
+ #ifdef MPFR_NANISNAN
+         printf ("The reason is that NAN == NAN. Please look at the configure "
+                 "output\nand Section \"In case of problem\" of the INSTALL "
+@@ -83,12 +100,18 @@
+ #endif
+         exit (1);
+       }
++
+     mpfr_set_nan (x);
+-    mpfr_clear_erangeflag ();
++    mpfr_clear_flags ();
+     c = mpfr_cmp_ld (x, 2.0);
+-    if (c != 0 || !mpfr_erangeflag_p ())
++    if (c != 0 || __gmpfr_flags != MPFR_FLAGS_ERANGE)
+       {
+         printf ("ERROR for NAN (2)\n");
++        printf ("Expected 0, got %d\n", c);
++        printf ("Expected flags:");
++        flags_out (MPFR_FLAGS_ERANGE);
++        printf ("Got flags:     ");
++        flags_out (__gmpfr_flags);
+ #ifdef MPFR_NANISNAN
+         printf ("The reason is that NAN == NAN. Please look at the configure "
+                 "output\nand Section \"In case of problem\" of the INSTALL "
