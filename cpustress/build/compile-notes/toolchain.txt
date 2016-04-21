@@ -41,9 +41,7 @@ Preparation
      wget -O gmp-67d4ee9dead1.patch \
        https://gmplib.org/repo/gmp-6.1/raw-rev/67d4ee9dead1
      wget http://www.mpfr.org/mpfr-current/mpfr-3.1.4.tar.xz
-     # No MPFR patches are available at this time.
-     # wget -O mpfr-allpatches.patch \
-     #   http://www.mpfr.org/mpfr-current/allpatches
+     wget -O mpfr-allpatches.patch http://www.mpfr.org/mpfr-current/allpatches
      wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.14.tar.bz2
      wget ftp://ftp.gnu.org/gnu/gcc/gcc-5.3.0/gcc-5.3.0.tar.bz2
@@ -81,8 +79,12 @@ Apply an official patch for GMP:
  $ patch -p 1 < ../../gmp-67d4ee9dead1.patch
  $ cd ../..
 
-At the time of this build, there are no patches for this MPFR release.
-(You may check <http://www.mpfr.org/mpfr-current/#fixed> for latest bug fixes.)
+Apply the official cumulative patch for MPFR:
+(Note: the version of latest MPFR patch before this build is 3.1.4-p1.)
+
+ $ cd gcc-5.3.0/mpfr
+ $ patch -p 1 < ../../mpfr-allpatches.patch
+ $ cd ../..
 
 Make 'sysroot' and 'tools' directories:
 
