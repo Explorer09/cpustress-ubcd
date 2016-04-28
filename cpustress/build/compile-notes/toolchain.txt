@@ -154,7 +154,7 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
 
  $ ../gcc-6.1.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --enable-languages=c,c++ \
-     --disable-shared --disable-threads \
+     --disable-shared --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
      --without-headers --with-newlib \
      --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
@@ -165,7 +165,7 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
 
  $ ../gcc-6.1.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
-     --disable-shared --disable-threads \
+     --disable-shared --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
      --without-headers --with-newlib \
      --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
@@ -271,7 +271,7 @@ Note the option '--enable-shared=libgcc'.
 
  $ ../gcc-6.1.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --enable-languages=c,c++ \
-     --enable-shared=libgcc --disable-threads \
+     --enable-shared=libgcc --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
      --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
@@ -281,7 +281,7 @@ Note the option '--enable-shared=libgcc'.
 
  $ ../gcc-6.1.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
-     --enable-shared=libgcc --disable-threads \
+     --enable-shared=libgcc --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
      --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
@@ -335,7 +335,7 @@ libstdc++, are built as static libraries only.
  $ BUILD=$(../gcc-6.1.0/config.guess | sed -e 's/-pc-/-buildpc-/')
 
  $ ../gcc-6.1.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
-     --target=i486-pc-linux-gnu --enable-languages=c,c++ \
+     --target=i486-pc-linux-gnu --enable-languages=c,c++,lto \
      --enable-shared=libgcc --enable-threads=posix --enable-clocale=gnu \
      --enable-lto --disable-bootstrap --disable-multilib \
      --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
@@ -345,7 +345,7 @@ libstdc++, are built as static libraries only.
  $ rm -r *
 
  $ ../gcc-6.1.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
-     --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
+     --target=x86_64-pc-linux-gnu --enable-languages=c,c++,lto \
      --enable-shared=libgcc --enable-threads=posix --enable-clocale=gnu \
      --enable-lto --disable-bootstrap --disable-multilib \
      --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
