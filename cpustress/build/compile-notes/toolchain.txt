@@ -144,9 +144,10 @@ system. Disable these until we have EGLIBC in the final build of GCC:  (If you
 have GCC 4.8 or older, you should also --disable-libmudflap .)
 
  $ DISABLE_TARGET_LIBS="
-     --disable-libstdc++-v3 --disable-libsanitizer --disable-libvtv
-     --disable-libcilkrts --disable-libssp --disable-libquadmath
-     --disable-libgomp --disable-libitm --disable-libatomic"
+     --disable-libstdc++-v3 --disable-libsanitizer --disable-libmpx
+     --disable-libvtv --disable-libcilkrts --disable-libssp
+     --disable-libquadmath --disable-libgomp --disable-libitm
+     --disable-libatomic"
 
  $ cd gcc-build
  $ BUILD=$(../gcc-6.1.0/config.guess | sed -e 's/-pc-/-buildpc-/')
