@@ -1,4 +1,4 @@
-14 January 2016
+7 May 2016
 
 Changes in mprime-changes.patch:
 - Wrap several parts of the code with a preprocessor conditional: "#ifdef \
@@ -13,10 +13,6 @@ Changes in mprime-changes.patch:
   first, before the interactive configuration of time and memory.
 - Added short description for each menu selections. This applies to command-
   line builds only. GUI code is unchanged.
-- Removed fmt_mask[] and mask[] buffers and changed syntaxes of two sprintf()
-  calls into one. (http://www.mersenneforum.org/showthread.php?t=20502)
-- Changed format in IniSectionWriteFloat() from "%f" to "%11g" to avoid a
-  buffer overflow. (http://www.mersenneforum.org/showthread.php?t=20503)
 
 -------------------------------------------------------------------------------
 Technical notes about the mprime patches

@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2016-05-05 09:53:27.5639532090 +0800" .git_cache_meta
+touch -c -h -d "2016-05-07 18:25:47.8514065820 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -239,11 +239,11 @@ touch -c -h -d "2015-10-25 10:55:48.9270798520 +0800" cpustress/build/compile-no
 chmod 0644 cpustress/build/compile-notes/mpfr/mpfr-3.1.4-p1.patch
 touch -c -h -d "2016-04-14 05:46:53.0000000000 +0800" cpustress/build/compile-notes/mpfr/mpfr-3.1.4-p1.patch
 chmod 0644 cpustress/build/compile-notes/mprime.txt
-touch -c -h -d "2015-10-25 10:49:39.4750592510 +0800" cpustress/build/compile-notes/mprime.txt
+touch -c -h -d "2016-05-07 18:24:02.8342216420 +0800" cpustress/build/compile-notes/mprime.txt
 chmod 0644 cpustress/build/compile-notes/mprime/changes.txt
-touch -c -h -d "2016-01-14 11:00:30.9962633990 +0800" cpustress/build/compile-notes/mprime/changes.txt
+touch -c -h -d "2016-05-07 18:21:33.6925388370 +0800" cpustress/build/compile-notes/mprime/changes.txt
 chmod 0644 cpustress/build/compile-notes/mprime/mprime-changes.patch
-touch -c -h -d "2016-01-14 10:55:22.9491366170 +0800" cpustress/build/compile-notes/mprime/mprime-changes.patch
+touch -c -h -d "2016-05-07 18:19:41.5392733810 +0800" cpustress/build/compile-notes/mprime/mprime-changes.patch
 chmod 0644 cpustress/build/compile-notes/mprime/note.txt
 touch -c -h -d "2014-09-18 20:08:47.9851968630 +0800" cpustress/build/compile-notes/mprime/note.txt
 chmod 0755 cpustress/build/compile-notes/mprime/torture-conf.sh

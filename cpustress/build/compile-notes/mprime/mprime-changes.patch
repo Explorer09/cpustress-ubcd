@@ -1,6 +1,6 @@
 diff -r -u a/comm95c.c b/comm95c.c
 --- a/comm95c.c	2009-04-05 08:43:31.000000000 +0800
-+++ b/comm95c.c	2016-01-14 10:55:08.641000660 +0800
++++ b/comm95c.c	2016-05-07 18:15:57.208742197 +0800
 @@ -17,6 +17,7 @@
  
  /* Load the PrimeNet DLL, make sure an internet connection is active */
@@ -30,9 +30,9 @@ diff -r -u a/comm95c.c b/comm95c.c
  /* Get Windows Serial Number */
  
 diff -r -u a/commonb.c b/commonb.c
---- a/commonb.c	2015-08-10 08:37:56.000000000 +0800
-+++ b/commonb.c	2016-01-14 10:55:08.641000660 +0800
-@@ -2957,7 +2957,9 @@
+--- a/commonb.c	2016-03-28 04:43:01.000000000 +0800
++++ b/commonb.c	2016-05-07 18:15:57.520745716 +0800
+@@ -2955,7 +2955,9 @@
  /* to try something and if it doesn't work, ESC and choose Test/Continue */
  /* to try some other system settings (without waiting an hour). */
  
@@ -42,7 +42,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Clear array of active thread handles */
  
-@@ -3402,7 +3404,9 @@
+@@ -3400,7 +3402,9 @@
  /* Spool a message to check the work queue.  Since we have no work queued */
  /* up, this should cause us to get some work from the server. */
  
@@ -52,16 +52,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Wait for a mem-changed event OR communication attempt (it might get work) */
  /* OR user entering new work via the dialog boxes OR the discovery of a .add */
-@@ -4075,7 +4079,7 @@
- 
- /* Trial factor a Mersenne number prior to running a Lucas-Lehmer test */
- 
--static const char FACMSG[] = "Trial factoring M%%ld to 2^%%d is %%.%df%%%% complete.";
-+static const char FACMSG[] = "Trial factoring M%ld to 2^%d is %.*f%% complete.";
- static const char SHORT_FACMSG[] = "Trial factoring M%ld to 2^%d.";
- 
- #define FACTOR_MAGICNUM		0x1567234D
-@@ -4122,6 +4126,7 @@
+@@ -4859,6 +4863,7 @@
  
  	if (bits >= test_bits) {
  		if (w->work_type == WORK_FACTOR) {
@@ -69,7 +60,7 @@ diff -r -u a/commonb.c b/commonb.c
  			struct primenetAssignmentResult pkt;
  			memset (&pkt, 0, sizeof (pkt));
  			strcpy (pkt.computer_guid, COMPUTER_GUID);
-@@ -4130,6 +4135,7 @@
+@@ -4867,6 +4872,7 @@
  			pkt.n = p;
  			pkt.done = TRUE;
  			spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
@@ -77,45 +68,7 @@ diff -r -u a/commonb.c b/commonb.c
  			return (STOP_WORK_UNIT_COMPLETE);
  		}
  		return (0);
-@@ -4371,21 +4377,18 @@
- /* is close to zero. */
- 
- 			if (++iters >= ITER_OUTPUT || first_iter_msg) {
--				char	fmt_mask[80];
- 				double	pct;
--				pct = trunc_percent (w->pct_complete);
- 				if (first_iter_msg == 2) {
- 					sprintf (buf, "M%ld to 2^%d", p, end_bits);
- 				} else {
--					sprintf (fmt_mask, "%%.%df%%%% of M%%ld to 2^%%d", PRECISION);
--					sprintf (buf, fmt_mask, pct, p, end_bits);
-+					pct = trunc_percent (w->pct_complete);
-+					sprintf (buf, "%.*f%% of M%ld to 2^%d", (int) PRECISION, pct, p, end_bits);
- 				}
- 				title (thread_num, buf);
- 				if (first_iter_msg == 2) {
- 					sprintf (buf, SHORT_FACMSG, p, end_bits);
- 				} else {
--					sprintf (fmt_mask, FACMSG, PRECISION);
--					sprintf (buf, fmt_mask, p, end_bits, pct);
-+					sprintf (buf, FACMSG, p, end_bits, (int) PRECISION, pct);
- 				}
- 				if (first_iter_msg) {
- 					strcat (buf, "\n");
-@@ -4403,11 +4406,7 @@
- 
- 			if (++iters_r >= ITER_OUTPUT_RES ||
- 			    (NO_GUI && stop_reason)) {
--				char	fmt_mask[80];
--				double	pct;
--				pct = trunc_percent (w->pct_complete);
--				sprintf (fmt_mask, FACMSG, PRECISION);
--				sprintf (buf, fmt_mask, p, end_bits, pct);
-+				sprintf (buf, FACMSG, p, end_bits, (int) PRECISION, trunc_percent (w->pct_complete));
- 				strcat (buf, "\n");
- 				writeResults (buf);
- 				iters_r = 0;
-@@ -4471,6 +4470,7 @@
+@@ -5195,6 +5201,7 @@
  /* with small factors from users needlessly redoing factoring work, make */
  /* sure the factor is more than 50 bits or so. */
  
@@ -123,7 +76,7 @@ diff -r -u a/commonb.c b/commonb.c
  		if (strlen (str) >= 15 ||
  		    IniGetInt (INI_FILE, "SendAllFactorData", 0)) {
  			struct primenetAssignmentResult pkt;
-@@ -4486,6 +4486,7 @@
+@@ -5210,6 +5217,7 @@
  			pkt.done = !find_smaller_factor;
  			spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  		}
@@ -131,7 +84,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* If we're looking for smaller factors, set a new end point.  Otherwise, */
  /* skip all remaining passes. */
-@@ -4510,6 +4511,7 @@
+@@ -5234,6 +5242,7 @@
  /* message if we continued to look for a smaller factor. */
  
  	    if (factor_found) {
@@ -139,7 +92,7 @@ diff -r -u a/commonb.c b/commonb.c
  		if (w->assignment_uid[0] && find_smaller_factor) {
  			struct primenetAssignmentResult pkt;
  			memset (&pkt, 0, sizeof (pkt));
-@@ -4519,6 +4521,7 @@
+@@ -5243,6 +5252,7 @@
  			pkt.done = TRUE;
  			spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  		}
@@ -147,7 +100,7 @@ diff -r -u a/commonb.c b/commonb.c
  		break;
  	    }
  
-@@ -4546,6 +4549,7 @@
+@@ -5270,6 +5280,7 @@
  /* the server with needless data, do not send small bit level */
  /* messages - that work has already been done. */
  
@@ -155,7 +108,7 @@ diff -r -u a/commonb.c b/commonb.c
  		if (end_bits >= 50 ||
  		    IniGetInt (INI_FILE, "SendAllFactorData", 0)) {
  			struct primenetAssignmentResult pkt;
-@@ -4561,6 +4565,7 @@
+@@ -5285,6 +5296,7 @@
  				   (end_bits >= test_bits);
  			spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  		}
@@ -163,44 +116,7 @@ diff -r -u a/commonb.c b/commonb.c
  	    }
  
  /* Advance the how far factored variable */
-@@ -5656,9 +5661,7 @@
- 		actual_frequency = (int) (ITER_OUTPUT * output_title_frequency);
- 		if (actual_frequency < 1) actual_frequency = 1;
- 		if (counter % actual_frequency == 0 || first_iter_msg) {
--			char	fmt_mask[80];
--			sprintf (fmt_mask, "%%.%df%%%% of M%%ld", PRECISION);
--			sprintf (buf, fmt_mask, trunc_percent (w->pct_complete), p);
-+			sprintf (buf, "%.*f%% of M%ld", (int) PRECISION, trunc_percent (w->pct_complete), p);
- 			title (thread_num, buf);
- 		}
- 
-@@ -5667,9 +5670,7 @@
- 		actual_frequency = (int) (ITER_OUTPUT * output_frequency);
- 		if (actual_frequency < 1) actual_frequency = 1;
- 		if (counter % actual_frequency == 0 || first_iter_msg) {
--			char	fmt_mask[80];
--			sprintf (fmt_mask, "Iteration: %%ld / %%ld [%%.%df%%%%]", PRECISION);
--			sprintf (buf, fmt_mask, counter, p, trunc_percent (w->pct_complete));
-+			sprintf (buf, "Iteration: %ld / %ld [%.*f%%]", counter, p, (int) PRECISION, trunc_percent (w->pct_complete));
- 			/* Append a short form total errors message */
- 			if (error_count_messages == 1)
- 				make_error_count_message (error_count, error_count_messages,
-@@ -5744,11 +5745,9 @@
- /* If an escape key was hit, write out the results and return */
- 
- 		if (stop_reason) {
--			char	fmt_mask[80];
--			sprintf (fmt_mask,
--				 "Stopping primality test of M%%ld at iteration %%ld [%%.%df%%%%]\n",
--				 PRECISION);
--			sprintf (buf, fmt_mask, p, counter, trunc_percent (w->pct_complete));
-+			sprintf (buf, 
-+				 "Stopping primality test of M%ld at iteration %ld [%.*f%%]\n",
-+				 p, counter, (int) PRECISION, trunc_percent (w->pct_complete));
- 			OutputStr (thread_num, buf);
- 			lucasDone (&lldata);
- 			return (stop_reason);
-@@ -5829,6 +5828,7 @@
+@@ -6571,6 +6583,7 @@
  
  /* Send results to the server if they might possibly be of interest */
  
@@ -208,7 +124,7 @@ diff -r -u a/commonb.c b/commonb.c
  	if (p > 1000000 && (!isPrime || !isKnownMersennePrime (p))) {
  		struct primenetAssignmentResult pkt;
  		memset (&pkt, 0, sizeof (pkt));
-@@ -5845,6 +5845,7 @@
+@@ -6587,6 +6600,7 @@
  		pkt.done = TRUE;
  		spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  	}
@@ -216,7 +132,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Delete the continuation files - assuming the results file write */
  /* was successful. */
-@@ -7767,12 +7768,14 @@
+@@ -8510,12 +8524,14 @@
  
  /* Accumulate best times to send to the server */
  
@@ -231,7 +147,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  	}
  
-@@ -8125,12 +8128,16 @@
+@@ -8866,12 +8882,16 @@
  	int	is_a_5678, bench_hyperthreading, bench_multithreading, bench_one_or_all, bench_arch;
  	unsigned long fftlen, min_FFT_length, max_FFT_length;
  	double	timers[2];
@@ -248,7 +164,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Output startup message */
  
-@@ -8368,6 +8375,7 @@
+@@ -9113,6 +9133,7 @@
  /* Accumulate best times to send to the server.  Limit the number sent since */
  /* we can only send fifty. */
  
@@ -256,7 +172,7 @@ diff -r -u a/commonb.c b/commonb.c
  		  if (!all_bench && is_a_5678 && !plus1 && hypercpu == 1 &&
  		      (cpu == 1 || (fftlen / 1024 > 768 && (cpu == 2 || cpu == 4))) &&
  		      pkt.num_data_points < PRIMENET_BENCH_MAX_DATAPOINTS) {
-@@ -8380,6 +8388,7 @@
+@@ -9125,6 +9146,7 @@
  			pkt.data_points[pkt.num_data_points].timing = timer_value (timers, 0);
  			pkt.num_data_points++;
  		  }
@@ -264,7 +180,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Time next FFT */
  
-@@ -8396,7 +8405,11 @@
+@@ -9141,7 +9163,11 @@
  /* Now benchmark the trial factoring code */
  
  	if (IniGetInt (INI_FILE, "BenchTrialFactoring", 0)) {
@@ -276,7 +192,7 @@ diff -r -u a/commonb.c b/commonb.c
  		if (stop_reason) return (stop_reason);
  	}
  
-@@ -8410,8 +8423,10 @@
+@@ -9155,8 +9181,10 @@
  //only do this if guid is registered? Or should we auto-register computer
  //under ANONYMOUS userid for stress-testers.
  
@@ -287,45 +203,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Now benchmark running multiple workers.  This will measure the effect of memory bandwidth */
  /* on LL testing. */
-@@ -8941,9 +8956,7 @@
- 		actual_frequency = (int) (ITER_OUTPUT * output_title_frequency);
- 		if (actual_frequency < 1) actual_frequency = 1;
- 		if (counter % actual_frequency == 0 || first_iter_msg) {
--			char	fmt_mask[80];
--			sprintf (fmt_mask, "%%.%df%%%% of %%s", PRECISION);
--			sprintf (buf, fmt_mask, trunc_percent (w->pct_complete), string_rep);
-+			sprintf (buf, "%.*f%% of %s", (int) PRECISION, trunc_percent (w->pct_complete), string_rep);
- 			title (thread_num, buf);
- 		}
- 
-@@ -8952,9 +8965,7 @@
- 		actual_frequency = (int) (ITER_OUTPUT * output_frequency);
- 		if (actual_frequency < 1) actual_frequency = 1;
- 		if (counter % actual_frequency == 0 || first_iter_msg) {
--			char	fmt_mask[80];
--			sprintf (fmt_mask, "Iteration: %%ld / %%ld [%%.%df%%%%]", PRECISION);
--			sprintf (buf, fmt_mask, counter, Nlen-1, trunc_percent (w->pct_complete));
-+			sprintf (buf, "Iteration: %ld / %ld [%.*f%%]", counter, Nlen-1, (int) PRECISION, trunc_percent (w->pct_complete));
- 			/* Append a short form total errors message */
- 			if (error_count_messages == 1)
- 				make_error_count_message (error_count, error_count_messages,
-@@ -9029,12 +9040,9 @@
- /* If an escape key was hit, write out the results and return */
- 
- 		if (stop_reason) {
--			char	fmt_mask[80];
--			sprintf (fmt_mask,
--				 "Stopping PRP test of %%s at iteration %%ld [%%.%df%%%%]\n",
--				 PRECISION);
--			sprintf (buf, fmt_mask, string_rep,
--				 counter, trunc_percent (w->pct_complete));
-+			sprintf (buf, 
-+				 "Stopping PRP test of %s at iteration %ld [%.*f%%]\n",
-+				 string_rep, counter, (int) PRECISION, trunc_percent (w->pct_complete));
- 			OutputStr (thread_num, buf);
- 			goto exit;
- 		}
-@@ -9129,6 +9137,7 @@
+@@ -9867,6 +9895,7 @@
  
  /* Output results to the server */
  
@@ -333,7 +211,7 @@ diff -r -u a/commonb.c b/commonb.c
  	{
  		struct primenetAssignmentResult pkt;
  		memset (&pkt, 0, sizeof (pkt));
-@@ -9147,6 +9156,7 @@
+@@ -9885,6 +9914,7 @@
  		pkt.done = TRUE;
  		spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  	}
@@ -342,8 +220,8 @@ diff -r -u a/commonb.c b/commonb.c
  /* Print known factors */
  
 diff -r -u a/commonc.c b/commonc.c
---- a/commonc.c	2015-03-26 05:27:12.000000000 +0800
-+++ b/commonc.c	2016-01-14 10:55:08.641000660 +0800
+--- a/commonc.c	2016-03-26 07:03:39.000000000 +0800
++++ b/commonc.c	2016-05-07 18:15:57.524745762 +0800
 @@ -20,35 +20,47 @@
  char	SPOOL_FILE[80] = {0};
  char	LOGFILE[80] = {0};
@@ -403,7 +281,7 @@ diff -r -u a/commonc.c b/commonc.c
  		}
  	}
  }
-@@ -713,8 +727,10 @@
+@@ -720,8 +734,10 @@
  
  /* Perform other one-time initializations */
  
@@ -414,7 +292,7 @@ diff -r -u a/commonc.c b/commonc.c
  	init_timed_event_handler ();
  
  /* Create and name the main window */
-@@ -792,6 +808,7 @@
+@@ -799,6 +815,7 @@
  /* nameAndReadIniFiles, but running mprime with the -s or -t argument */
  /* caused spurious creation of a prime.spl file. */
  
@@ -422,7 +300,7 @@ diff -r -u a/commonc.c b/commonc.c
  void initCommCode (void) {
  
  /* Start or stop the communication timers.  This needs to be called */
-@@ -814,6 +831,7 @@
+@@ -821,6 +838,7 @@
  	if (USE_PRIMENET && USERID[0] == 0)
  		spoolMessage (PRIMENET_UPDATE_COMPUTER_INFO, NULL);
  }
@@ -430,7 +308,7 @@ diff -r -u a/commonc.c b/commonc.c
  
  /* Read or re-read the INI files & and do other initialization */
  
-@@ -855,6 +873,7 @@
+@@ -861,6 +879,7 @@
  	IniGetString (LOCALINI_FILE, "ComputerGUID", COMPUTER_GUID, sizeof (COMPUTER_GUID), NULL);
  	FIXED_GUIDS = IniGetInt (INI_FILE, "FixedHardwareUID", 0);
  
@@ -438,15 +316,15 @@ diff -r -u a/commonc.c b/commonc.c
  	IniGetString (INI_FILE, "V5UserID", USERID, sizeof (USERID), NULL);
  	IniGetString (LOCALINI_FILE, "ComputerID", COMPID, sizeof (COMPID), NULL);
  	sanitizeString (COMPID);
-@@ -862,6 +881,7 @@
+@@ -868,6 +887,7 @@
  	DIAL_UP = (int) IniGetInt (INI_FILE, "DialUp", 0);
- 	DAYS_OF_WORK = (unsigned int) IniGetInt (INI_FILE, "DaysOfWork", 5);
+ 	DAYS_OF_WORK = (unsigned int) IniGetInt (INI_FILE, "DaysOfWork", 3);
  	if (DAYS_OF_WORK > 180) DAYS_OF_WORK = 180;
 +#endif
  
  	CPU_HOURS = (unsigned int) IniGetInt (LOCALINI_FILE, "CPUHours", 24);
  	if (CPU_HOURS < 1) CPU_HOURS = 1;
-@@ -889,6 +909,7 @@
+@@ -895,6 +915,7 @@
  	if (ITER_OUTPUT_RES > 999999999) ITER_OUTPUT_RES = 999999999;
  	if (ITER_OUTPUT_RES < 1000) ITER_OUTPUT_RES = 1000;
  	DISK_WRITE_TIME = IniGetInt (INI_FILE, "DiskWriteTime", 30);
@@ -454,15 +332,15 @@ diff -r -u a/commonc.c b/commonc.c
  	MODEM_RETRY_TIME = (unsigned int) IniGetInt (INI_FILE, "NetworkRetryTime", 2);
  	if (MODEM_RETRY_TIME < 1) MODEM_RETRY_TIME = 1;
  	if (MODEM_RETRY_TIME > 300) MODEM_RETRY_TIME = 300;
-@@ -902,6 +923,7 @@
- 	DAYS_BETWEEN_CHECKINS = (float) atof (buf);
+@@ -907,6 +928,7 @@
+ 	DAYS_BETWEEN_CHECKINS = IniGetFloat (INI_FILE, "DaysBetweenCheckins", 1.0);
  	if (DAYS_BETWEEN_CHECKINS > 7.0) DAYS_BETWEEN_CHECKINS = 7.0;				/* 7 day maximum */
  	if (DAYS_BETWEEN_CHECKINS * 24.0 < 1.0) DAYS_BETWEEN_CHECKINS = (float) (1.0 / 24.0);	/* 1 hour minimum */
 +#endif
  	SILENT_VICTORY = (int) IniGetInt (INI_FILE, "SilentVictory", 0);
  	SILENT_VICTORY_PRP = (int) IniGetInt (INI_FILE, "SilentVictoryPRP", 1);
  	RUN_ON_BATTERY = (int) IniGetInt (LOCALINI_FILE, "RunOnBattery", 1);
-@@ -919,10 +941,14 @@
+@@ -924,10 +946,14 @@
  	PRIORITY = (unsigned int) IniGetInt (INI_FILE, "Priority", 1);
  	if (PRIORITY < 1) PRIORITY = 1;
  	if (PRIORITY > 10) PRIORITY = 10;
@@ -470,26 +348,14 @@ diff -r -u a/commonc.c b/commonc.c
  	PTOGetAll (INI_FILE, "WorkPreference", WORK_PREFERENCE, 0);
 +#endif
  	PTOGetAll (LOCALINI_FILE, "Affinity", CPU_AFFINITY, 100);
- 	PTOGetAll (LOCALINI_FILE, "ThreadsPerTest", THREADS_PER_TEST, 1);
+ 	PTOGetAll (LOCALINI_FILE, "ThreadsPerTest", THREADS_PER_TEST, NUM_CPUS / NUM_WORKER_THREADS);
 +#ifdef BUILD_PRIMENET
  	MANUAL_COMM = (int) IniGetInt (INI_FILE, "ManualComm", 0);
 +#endif
  	HIDE_ICON = (int) IniGetInt (INI_FILE, "HideIcon", 0);
  	TRAY_ICON = (int) IniGetInt (INI_FILE, "TrayIcon", 1);
  	MERGE_WINDOWS = (int) IniGetInt (INI_FILE, "MergeWindows", MERGE_MAINCOMM_WINDOWS);
-@@ -1745,8 +1771,10 @@
- 	const char *keyword,
- 	float	val)
- {
-+	/* Assume FLT_MAX is 3.40282e+038, the maximum significant digits that
-+	can be stored in this buf is 12. ((sizeof(buf))-sizeof("-.E+038")) */
- 	char	buf[20];
--	sprintf (buf, "%f", val);
-+	sprintf (buf, "%11g", val);
- 	IniSectionWriteString (filename, section, keyword, buf);
- }
- 
-@@ -4516,12 +4544,16 @@
+@@ -4575,12 +4601,16 @@
  
  /* Output a USERID/COMPID prefix for result messages */
  
@@ -506,7 +372,7 @@ diff -r -u a/commonc.c b/commonc.c
  
  /* Output the assignment ID too.  That alone should be enough info to */
  /* credit the correct userID.  However, we still output the user ID as it */
-@@ -4615,20 +4647,25 @@
+@@ -4679,20 +4709,25 @@
  #define HEADER_FLAG_UC		0x0020	/* computer info has changed */
  #define HEADER_FLAG_WORK_QUEUE	0x0040	/* check if enough work is queued */
  
@@ -532,7 +398,7 @@ diff -r -u a/commonc.c b/commonc.c
  void set_comm_timers (void)
  {
  	time_t	last_time, current_time;
-@@ -4683,10 +4720,12 @@
+@@ -4747,10 +4782,12 @@
  
  	add_timed_event (TE_WORK_QUEUE_CHECK, 5);  /* Start in 5 seconds */
  }
@@ -545,7 +411,7 @@ diff -r -u a/commonc.c b/commonc.c
  void do_manual_comm_now (void)
  {
  	gwmutex_lock (&SPOOL_FILE_MUTEX);
-@@ -4695,6 +4734,7 @@
+@@ -4759,6 +4796,7 @@
  				 &communicateWithServer, NULL);
  	gwmutex_unlock (&SPOOL_FILE_MUTEX);
  }
@@ -553,7 +419,7 @@ diff -r -u a/commonc.c b/commonc.c
  
  /* Clear rate-limiting counters and timers.  Any time the user explicitly */
  /* chooses Test/Continue, we reset the rate limits.  We do this so that */
-@@ -4702,6 +4742,7 @@
+@@ -4766,6 +4804,7 @@
  /* in the short term, the user has a way to do it.  The rate limits are */
  /* here to guard against runaway clients from pummeling the server. */
  
@@ -561,7 +427,7 @@ diff -r -u a/commonc.c b/commonc.c
  void clear_comm_rate_limits (void)
  {
  //bug - clear other rate limiters here....
-@@ -4720,10 +4761,12 @@
+@@ -4784,10 +4823,12 @@
  	}
  	gwmutex_unlock (&SPOOL_FILE_MUTEX);
  }
@@ -574,7 +440,7 @@ diff -r -u a/commonc.c b/commonc.c
  void pingServer (void)
  {
  
-@@ -4737,17 +4780,21 @@
+@@ -4801,17 +4842,21 @@
  				 &communicateWithServer, NULL);
  	gwmutex_unlock (&SPOOL_FILE_MUTEX);
  }
@@ -596,7 +462,7 @@ diff -r -u a/commonc.c b/commonc.c
  void spoolMessage (
  	short	msgType,
  	void	*msg)
-@@ -4882,12 +4929,14 @@
+@@ -4946,12 +4991,14 @@
  
  	gwmutex_unlock (&SPOOL_FILE_MUTEX);
  }
@@ -611,7 +477,7 @@ diff -r -u a/commonc.c b/commonc.c
  void spoolExistingResultsFile (void)
  {
  	int	i;
-@@ -4919,9 +4968,11 @@
+@@ -4983,9 +5030,11 @@
  		fclose (fd);
  	}
  }
@@ -623,7 +489,7 @@ diff -r -u a/commonc.c b/commonc.c
  int unreserve (
  	unsigned long p)
  {
-@@ -4979,6 +5030,7 @@
+@@ -5043,6 +5092,7 @@
  
  	return (0);
  }
@@ -631,7 +497,7 @@ diff -r -u a/commonc.c b/commonc.c
  
  /* Output message to screen and prime.log file */
  
-@@ -5123,6 +5175,7 @@
+@@ -5187,6 +5237,7 @@
  
  /* Read a spooled message */
  
@@ -639,7 +505,7 @@ diff -r -u a/commonc.c b/commonc.c
  void readMessage (
  	int	fd,
  	long	*offset,	/* Offset of the message */
-@@ -5165,10 +5218,12 @@
+@@ -5229,10 +5280,12 @@
  	
  	*msgType = 0;
  }
@@ -652,7 +518,7 @@ diff -r -u a/commonc.c b/commonc.c
  int sendMessage (
  	short	msgType,
  	void	*msg)
-@@ -5287,10 +5342,12 @@
+@@ -5351,10 +5404,12 @@
  
  	return (return_code);
  }
@@ -665,7 +531,7 @@ diff -r -u a/commonc.c b/commonc.c
  int getProgramOptions (void)
  {
  	struct primenetProgramOptions pkt;
-@@ -5428,10 +5485,12 @@
+@@ -5492,10 +5547,12 @@
  	if (original_rob != RUN_ON_BATTERY) run_on_battery_changed ();
  	return (0);
  }
@@ -678,7 +544,7 @@ diff -r -u a/commonc.c b/commonc.c
  int sendProgramOptions (
  	int	*talked_to_server)
  {
-@@ -5576,6 +5635,7 @@
+@@ -5640,6 +5697,7 @@
  	}
  	return (0);
  }
@@ -686,7 +552,7 @@ diff -r -u a/commonc.c b/commonc.c
  
  
  /* Send any queued up messages to the server.  See if we have enough */
-@@ -5583,6 +5643,7 @@
+@@ -5647,6 +5705,7 @@
  
  #define RETRY_EXCEEDED "Retry count exceeded.\n"
  
@@ -694,7 +560,7 @@ diff -r -u a/commonc.c b/commonc.c
  void communicateWithServer (void *arg)
  {
  static	int	obsolete_client = FALSE;
-@@ -6352,9 +6413,11 @@
+@@ -6416,9 +6475,11 @@
  		title (COMM_THREAD_NUM, "Inactive");
  	}
  }
@@ -706,7 +572,7 @@ diff -r -u a/commonc.c b/commonc.c
  void salvageCorruptSpoolFile (void)
  {
  	int	fd;
-@@ -6418,6 +6481,7 @@
+@@ -6482,6 +6543,7 @@
  
  	_unlink (filename);
  }
@@ -714,7 +580,7 @@ diff -r -u a/commonc.c b/commonc.c
  
  /****************************************************************************/
  /*                        Timed Events Handler                              */
-@@ -6546,12 +6610,18 @@
+@@ -6610,12 +6672,18 @@
  				checkPauseWhileRunning ();
  				break;
  			case TE_WORK_QUEUE_CHECK:	/* Check work queue event */
@@ -733,7 +599,7 @@ diff -r -u a/commonc.c b/commonc.c
  				break;
  			case TE_COMM_KILL:	/* Kill hung communication thread */
  				timed_events[i].active = FALSE;
-@@ -6566,7 +6636,9 @@
+@@ -6630,7 +6698,9 @@
  				break;
  			case TE_COMPLETION_DATES:	/* Send expected completion dates event */
  				timed_events[i].active = FALSE;
@@ -744,8 +610,8 @@ diff -r -u a/commonc.c b/commonc.c
  			case TE_THROTTLE:	/* Sleep due to Throttle=n event */
  				timed_events[i].time_to_fire =
 diff -r -u a/commonc.h b/commonc.h
---- a/commonc.h	2015-04-22 04:13:05.000000000 +0800
-+++ b/commonc.h	2016-01-14 10:55:08.645000697 +0800
+--- a/commonc.h	2016-03-24 08:23:50.000000000 +0800
++++ b/commonc.h	2016-05-07 18:15:57.524745762 +0800
 @@ -144,26 +144,36 @@
  extern char USERID[21];			/* User's ID */
  extern char COMPID[21];			/* Computer name */
@@ -808,7 +674,7 @@ diff -r -u a/commonc.h b/commonc.h
  int readIniFiles (void);
  
  void IniSectionGetString (const char *, const char *, const char *, char *, unsigned int, const char *);
-@@ -423,6 +437,7 @@
+@@ -427,6 +441,7 @@
  *                 Spool File and Server Communication Code                    *
  ******************************************************************************/
  
@@ -816,7 +682,7 @@ diff -r -u a/commonc.h b/commonc.h
  void init_spool_file_and_comm_code (void);
  void set_comm_timers (void);
  void clear_comm_rate_limits (void);
-@@ -440,6 +455,7 @@
+@@ -444,6 +459,7 @@
  int LoadPrimeNet (void);
  void UnloadPrimeNet (void);
  int PRIMENET (short, void *);
@@ -825,57 +691,9 @@ diff -r -u a/commonc.h b/commonc.h
  /******************************************************************************
  *                           Timed Events Handler                              *
 diff -r -u a/ecm.c b/ecm.c
---- a/ecm.c	2015-04-05 08:02:51.000000000 +0800
-+++ b/ecm.c	2016-01-14 10:55:08.645000697 +0800
-@@ -2811,9 +2811,8 @@
- 		if (first_iter_msg ||
- 		    (ITER_OUTPUT != 999999999 &&
- 		     gw_get_fft_count (&ecmdata.gwdata) >= last_output_t + 2 * ITER_OUTPUT * output_title_frequency)) {
--			char	mask[80];
--			sprintf (mask, "%%.%df%%%% of %%s ECM curve %%d stage 1", PRECISION);
--			sprintf (buf, mask, trunc_percent (w->pct_complete), gwmodulo_as_string (&ecmdata.gwdata), curve);
-+			sprintf (buf, "%.*f%% of %s ECM curve %d stage 1",
-+				 (int) PRECISION, trunc_percent (w->pct_complete), gwmodulo_as_string (&ecmdata.gwdata), curve);
- 			title (thread_num, buf);
- 			last_output_t = gw_get_fft_count (&ecmdata.gwdata);
- 		}
-@@ -2823,9 +2822,8 @@
- 		if (first_iter_msg ||
- 		    (ITER_OUTPUT != 999999999 &&
- 		     gw_get_fft_count (&ecmdata.gwdata) >= last_output + 2 * ITER_OUTPUT * output_frequency)) {
--			char	mask[80];
--			sprintf (mask, "%%s curve %%d stage 1 at prime %%.0f [%%.%df%%%%].", PRECISION);
--			sprintf (buf, mask, gwmodulo_as_string (&ecmdata.gwdata), curve, (double) prime, trunc_percent (w->pct_complete));
-+			sprintf (buf, "%s curve %d stage 1 at prime %.0f [%.*f%%].",
-+				 gwmodulo_as_string (&ecmdata.gwdata), curve, (double) prime, (int) PRECISION, trunc_percent (w->pct_complete));
- 			end_timer (timers, 0);
- 			if (first_iter_msg) {
- 				strcat (buf, "\n");
-@@ -3247,9 +3245,8 @@
- 		if (first_iter_msg ||
- 		    (ITER_OUTPUT != 999999999 &&
- 		     gw_get_fft_count (&ecmdata.gwdata) >= last_output_t + 2 * ITER_OUTPUT * output_title_frequency)) {
--			char	mask[80];
--			sprintf (mask, "%%.%df%%%% of %%s ECM curve %%d stage 2", PRECISION);
--			sprintf (buf, mask, trunc_percent (w->pct_complete), gwmodulo_as_string (&ecmdata.gwdata), curve);
-+			sprintf (buf, "%.*f%% of %s ECM curve %d stage 2",
-+				 (int) PRECISION, trunc_percent (w->pct_complete), gwmodulo_as_string (&ecmdata.gwdata), curve);
- 			title (thread_num, buf);
- 			last_output_t = gw_get_fft_count (&ecmdata.gwdata);
- 		}
-@@ -3259,9 +3256,8 @@
- 		if (first_iter_msg ||
- 		    (ITER_OUTPUT != 999999999 &&
- 		     gw_get_fft_count (&ecmdata.gwdata) >= last_output + 2 * ITER_OUTPUT * output_frequency)) {
--			char	mask[80];
--			sprintf (mask, "%%s curve %%d stage 2 at prime %%.0f [%%.%df%%%%].", PRECISION);
--			sprintf (buf, mask, gwmodulo_as_string (&ecmdata.gwdata), curve, (double) prime, trunc_percent (w->pct_complete));
-+			sprintf (buf, "%s curve %d stage 2 at prime %.0f [%.*f%%].",
-+				 gwmodulo_as_string (&ecmdata.gwdata), curve, (double) prime, (int) PRECISION, trunc_percent (w->pct_complete));
- 			end_timer (timers, 0);
- 			if (first_iter_msg) {
- 				strcat (buf, "\n");
-@@ -3360,6 +3356,7 @@
+--- a/ecm.c	2016-03-23 05:14:21.000000000 +0800
++++ b/ecm.c	2016-05-07 18:15:57.524745762 +0800
+@@ -3416,6 +3416,7 @@
  /* Send ECM completed message to the server.  Although don't do it for */
  /* puny B1 values. */
  
@@ -883,7 +701,7 @@ diff -r -u a/ecm.c b/ecm.c
  	if (B >= 10000 || IniGetInt (INI_FILE, "SendAllFactorData", 0)) {
  		struct primenetAssignmentResult pkt;
  		memset (&pkt, 0, sizeof (pkt));
-@@ -3378,6 +3375,7 @@
+@@ -3434,6 +3435,7 @@
  		pkt.done = TRUE;
  		spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  	}
@@ -891,7 +709,7 @@ diff -r -u a/ecm.c b/ecm.c
  
  /* Delete the save file */
  
-@@ -3453,6 +3451,7 @@
+@@ -3509,6 +3511,7 @@
  
  	if (strlen (str) >= 15 ||
  	    IniGetInt (INI_FILE, "SendAllFactorData", 0)) {
@@ -899,7 +717,7 @@ diff -r -u a/ecm.c b/ecm.c
  		struct primenetAssignmentResult pkt;
  		memset (&pkt, 0, sizeof (pkt));
  		strcpy (pkt.computer_guid, COMPUTER_GUID);
-@@ -3471,6 +3470,7 @@
+@@ -3527,6 +3530,7 @@
  		pkt.fftlen = gwfftlen (&ecmdata.gwdata);
  		pkt.done = !continueECM;
  		spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
@@ -907,133 +725,7 @@ diff -r -u a/ecm.c b/ecm.c
  
  /* If continuing ECM, subtract the curves we just reported from the */
  /* worktodo count of curves to run.  Otherwise, delete all ECM entries */
-@@ -4965,9 +4965,8 @@
- 		if (first_iter_msg ||
- 		    (ITER_OUTPUT != 999999999 &&
- 		     gw_get_fft_count (&pm1data.gwdata) >= last_output_t + 2 * ITER_OUTPUT * output_title_frequency)) {
--			char	mask[80];
--			sprintf (mask, "%%.%df%%%% of %%s P-1 stage 1", PRECISION);
--			sprintf (buf, mask, trunc_percent (w->pct_complete), gwmodulo_as_string (&pm1data.gwdata));
-+			sprintf (buf, "%.*f%% of %s P-1 stage 1",
-+				 (int) PRECISION, trunc_percent (w->pct_complete), gwmodulo_as_string (&pm1data.gwdata));
- 			title (thread_num, buf);
- 			last_output_t = gw_get_fft_count (&pm1data.gwdata);
- 		}
-@@ -4977,9 +4976,8 @@
- 		if (first_iter_msg ||
- 		    (ITER_OUTPUT != 999999999 &&
- 		     gw_get_fft_count (&pm1data.gwdata) >= last_output + 2 * ITER_OUTPUT * output_frequency)) {
--			char	mask[80];
--			sprintf (mask, "%%s stage 1 is %%.%df%%%% complete.", PRECISION);
--			sprintf (buf, mask, gwmodulo_as_string (&pm1data.gwdata), trunc_percent (w->pct_complete));
-+			sprintf (buf, "%s stage 1 is %.*f%% complete.",
-+				 gwmodulo_as_string (&pm1data.gwdata), (int) PRECISION, trunc_percent (w->pct_complete));
- 			end_timer (timers, 0);
- 			if (first_iter_msg) {
- 				strcat (buf, "\n");
-@@ -4999,11 +4997,8 @@
- 
- 		if ((ITER_OUTPUT_RES != 999999999 && gw_get_fft_count (&pm1data.gwdata) >= last_output_r + 2 * ITER_OUTPUT_RES) ||
- 		    (NO_GUI && stop_reason)) {
--			char	mask[80];
--			double	pct;
--			pct = trunc_percent (w->pct_complete);
--			sprintf (mask, "%%s stage 1 is %%.%df%%%% complete.\n", PRECISION);
--			sprintf (buf, mask, gwmodulo_as_string (&pm1data.gwdata), pct);
-+			sprintf (buf, "%s stage 1 is %.*f%% complete.\n",
-+				 gwmodulo_as_string (&pm1data.gwdata), (int) PRECISION, trunc_percent (w->pct_complete));
- 			writeResults (buf);
- 			last_output_r = gw_get_fft_count (&pm1data.gwdata);
- 		}
-@@ -5091,9 +5086,8 @@
- 		if (first_iter_msg ||
- 		    (ITER_OUTPUT != 999999999 &&
- 		     gw_get_fft_count (&pm1data.gwdata) >= last_output_t + 2 * ITER_OUTPUT * output_title_frequency)) {
--			char	mask[80];
--			sprintf (mask, "%%.%df%%%% of %%s P-1 stage 1", PRECISION);
--			sprintf (buf, mask, trunc_percent (w->pct_complete), gwmodulo_as_string (&pm1data.gwdata));
-+			sprintf (buf, "%.*f%% of %s P-1 stage 1",
-+				 (int) PRECISION, trunc_percent (w->pct_complete), gwmodulo_as_string (&pm1data.gwdata));
- 			title (thread_num, buf);
- 			last_output_t = gw_get_fft_count (&pm1data.gwdata);
- 		}
-@@ -5103,9 +5097,8 @@
- 		if (first_iter_msg ||
- 		    (ITER_OUTPUT != 999999999 &&
- 		     gw_get_fft_count (&pm1data.gwdata) >= last_output + 2 * ITER_OUTPUT * output_frequency)) {
--			char	mask[80];
--			sprintf (mask, "%%s stage 1 is %%.%df%%%% complete.", PRECISION);
--			sprintf (buf, mask, gwmodulo_as_string (&pm1data.gwdata), trunc_percent (w->pct_complete));
-+			sprintf (buf, "%s stage 1 is %.*f%% complete.",
-+				 gwmodulo_as_string (&pm1data.gwdata), (int) PRECISION, trunc_percent (w->pct_complete));
- 			end_timer (timers, 0);
- 			if (first_iter_msg) {
- 				strcat (buf, "\n");
-@@ -5125,11 +5118,8 @@
- 		if ((ITER_OUTPUT_RES != 999999999 &&
- 		     gw_get_fft_count (&pm1data.gwdata) >= last_output_r + 2 * ITER_OUTPUT_RES) ||
- 		    (NO_GUI && stop_reason)) {
--			char	mask[80];
--			double	pct;
--			pct = trunc_percent (w->pct_complete);
--			sprintf (mask, "%%s stage 1 is %%.%df%%%% complete.\n", PRECISION);
--			sprintf (buf, mask, gwmodulo_as_string (&pm1data.gwdata), pct);
-+			sprintf (buf, "%s stage 1 is %.*f%% complete.\n",
-+				 gwmodulo_as_string (&pm1data.gwdata), (int) PRECISION, trunc_percent (w->pct_complete));
- 			writeResults (buf);
- 			last_output_r = gw_get_fft_count (&pm1data.gwdata);
- 		}
-@@ -5404,9 +5394,8 @@
- /* Stage 2 init complete, change the title */
- 
- 	{
--		char	mask[80];
--		sprintf (mask, "%%.%df%%%% of %%s P-1 stage 2 (using %%dMB)", PRECISION);
--		sprintf (buf, mask, trunc_percent (w->pct_complete), gwmodulo_as_string (&pm1data.gwdata), memused);
-+		sprintf (buf, "%.*f%% of %s P-1 stage 2 (using %dMB)",
-+			 (int) PRECISION, trunc_percent (w->pct_complete), gwmodulo_as_string (&pm1data.gwdata), memused);
- 		title (thread_num, buf);
- 	}
- 
-@@ -5482,9 +5471,8 @@
- 		if (first_iter_msg ||
- 		    (ITER_OUTPUT != 999999999 &&
- 		     gw_get_fft_count (&pm1data.gwdata) >= last_output_t + 2 * ITER_OUTPUT * output_title_frequency)) {
--			char	mask[80];
--			sprintf (mask, "%%.%df%%%% of %%s P-1 stage 2 (using %%dMB)", PRECISION);
--			sprintf (buf, mask, trunc_percent (w->pct_complete), gwmodulo_as_string (&pm1data.gwdata), memused);
-+			sprintf (buf, "%.*f%% of %s P-1 stage 2 (using %dMB)",
-+				 (int) PRECISION, trunc_percent (w->pct_complete), gwmodulo_as_string (&pm1data.gwdata), memused);
- 			title (thread_num, buf);
- 			last_output_t = gw_get_fft_count (&pm1data.gwdata);
- 		}
-@@ -5494,9 +5482,8 @@
- 		if (first_iter_msg ||
- 		    (ITER_OUTPUT != 999999999 &&
- 		     gw_get_fft_count (&pm1data.gwdata) >= last_output + 2 * ITER_OUTPUT * output_frequency)) {
--			char	mask[80];
--			sprintf (mask, "%%s stage 2 is %%.%df%%%% complete.", PRECISION);
--			sprintf (buf, mask, gwmodulo_as_string (&pm1data.gwdata), trunc_percent (w->pct_complete));
-+			sprintf (buf, "%s stage 2 is %.*f%% complete.",
-+				 gwmodulo_as_string (&pm1data.gwdata), (int) PRECISION, trunc_percent (w->pct_complete));
- 			end_timer (timers, 0);
- 			if (first_iter_msg) {
- 				strcat (buf, "\n");
-@@ -5516,11 +5503,8 @@
- 		if ((ITER_OUTPUT_RES != 999999999 &&
- 		     gw_get_fft_count (&pm1data.gwdata) >= last_output_r + 2 * ITER_OUTPUT_RES) ||
- 		    (NO_GUI && stop_reason)) {
--			char	mask[80];
--			double	pct;
--			pct = trunc_percent (w->pct_complete);
--			sprintf (mask, "%%s stage 2 is %%.%df%%%% complete.\n", PRECISION);
--			sprintf (buf, mask, gwmodulo_as_string (&pm1data.gwdata), pct);
-+			sprintf (buf, "%s stage 2 is %.*f%% complete.\n",
-+				 gwmodulo_as_string (&pm1data.gwdata), (int) PRECISION, trunc_percent (w->pct_complete));
- 			writeResults (buf);
- 			last_output_r = gw_get_fft_count (&pm1data.gwdata);
- 		}
-@@ -5648,6 +5632,7 @@
+@@ -5689,6 +5693,7 @@
  /* Send P-1 completed message to the server.  Although don't do it for puny */
  /* B1 values as this is just the user tinkering with P-1 factoring. */
  
@@ -1041,7 +733,7 @@ diff -r -u a/ecm.c b/ecm.c
  	if (B >= 10000 || IniGetInt (INI_FILE, "SendAllFactorData", 0)) {
  		struct primenetAssignmentResult pkt;
  		memset (&pkt, 0, sizeof (pkt));
-@@ -5666,6 +5651,7 @@
+@@ -5707,6 +5712,7 @@
  			    w->work_type == WORK_PFACTOR);
  		spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  	}
@@ -1049,7 +741,7 @@ diff -r -u a/ecm.c b/ecm.c
  
  /* Create save file so that we can expand bound 1 or bound 2 at a later date */
  /* If this is pre-factoring for an LL or PRP test, then delete the large */
-@@ -5771,6 +5757,7 @@
+@@ -5812,6 +5818,7 @@
  /* with small factors from users needlessly redoing factoring work, make */
  /* sure the factor is more than 50 bits or so. */
  
@@ -1057,7 +749,7 @@ diff -r -u a/ecm.c b/ecm.c
  	if (strlen (str) >= 15 ||
  	    IniGetInt (INI_FILE, "SendAllFactorData", 0)) {
  		struct primenetAssignmentResult pkt;
-@@ -5790,6 +5777,7 @@
+@@ -5831,6 +5838,7 @@
  		pkt.done = TRUE;
  		spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  	}
@@ -1066,8 +758,8 @@ diff -r -u a/ecm.c b/ecm.c
  /* If LL testing, free all save files -- including possible LL save files */
  
 diff -r -u a/linux/makebsd b/linux/makebsd
---- a/linux/makebsd	2015-08-10 09:06:18.000000000 +0800
-+++ b/linux/makebsd	2016-01-14 10:55:08.645000697 +0800
+--- a/linux/makebsd	2016-04-26 04:31:17.000000000 +0800
++++ b/linux/makebsd	2016-05-07 18:15:57.524745762 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -1082,8 +774,8 @@ diff -r -u a/linux/makebsd b/linux/makebsd
  LFLAGS = -Wl,-M
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic /usr/local/lib/libcurl.a -lz -lcompat -lstdc++ -Wl,-Bdynamic -lssl
 diff -r -u a/linux/makefile b/linux/makefile
---- a/linux/makefile	2015-08-10 09:06:18.000000000 +0800
-+++ b/linux/makefile	2016-01-14 10:55:08.645000697 +0800
+--- a/linux/makefile	2016-04-26 04:31:17.000000000 +0800
++++ b/linux/makefile	2016-05-07 18:15:57.524745762 +0800
 @@ -20,10 +20,10 @@
  #	LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic  $(shell pkg-config --static --libs libcurl) -lstdc++ -Wl,-Bdynamic -ldl
  
@@ -1098,8 +790,8 @@ diff -r -u a/linux/makefile b/linux/makefile
  LFLAGS = -Wl,-M -Wl,-L/usr/local/lib
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic -lcurl -Wl,-Bdynamic -lrt -lstdc++ -ldl
 diff -r -u a/linux/makehaikugcc2 b/linux/makehaikugcc2
---- a/linux/makehaikugcc2	2015-08-10 09:06:18.000000000 +0800
-+++ b/linux/makehaikugcc2	2016-01-14 10:55:08.645000697 +0800
+--- a/linux/makehaikugcc2	2016-04-26 04:31:17.000000000 +0800
++++ b/linux/makehaikugcc2	2016-05-07 18:15:57.524745762 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -1114,8 +806,8 @@ diff -r -u a/linux/makehaikugcc2 b/linux/makehaikugcc2
  LFLAGS = -Wl,-M
  LIBS   = -L/boot/common/lib ../gwnum/gwnum.a ../gwnum/gwnum.ld -lnetwork -lcurl -lstdc++.r4
 diff -r -u a/linux/makehaikugcc4 b/linux/makehaikugcc4
---- a/linux/makehaikugcc4	2015-08-10 09:06:18.000000000 +0800
-+++ b/linux/makehaikugcc4	2016-01-14 10:55:08.645000697 +0800
+--- a/linux/makehaikugcc4	2016-04-26 04:31:17.000000000 +0800
++++ b/linux/makehaikugcc4	2016-05-07 18:15:57.524745762 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -1130,8 +822,8 @@ diff -r -u a/linux/makehaikugcc4 b/linux/makehaikugcc4
  LFLAGS = -Wl,-M
  LIBS   = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lnetwork -lcurl -lstdc++
 diff -r -u a/linux/menu.c b/linux/menu.c
---- a/linux/menu.c	2015-05-04 21:51:32.000000000 +0800
-+++ b/linux/menu.c	2016-01-14 10:55:08.645000697 +0800
+--- a/linux/menu.c	2016-03-26 06:03:34.000000000 +0800
++++ b/linux/menu.c	2016-05-07 18:15:57.528745808 +0800
 @@ -17,11 +17,12 @@
  void get_line (
  	char	*buf)
@@ -1183,7 +875,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	unsigned long m_affinity[MAX_NUM_WORKER_THREADS];
  	unsigned long m_numcpus[MAX_NUM_WORKER_THREADS];
  	int	i;
-@@ -407,11 +414,15 @@
+@@ -407,20 +414,26 @@
  	m_num_thread = NUM_WORKER_THREADS;
  	m_priority = PRIORITY;
  	for (i = 0; i < MAX_NUM_WORKER_THREADS; i++) {
@@ -1197,9 +889,8 @@ diff -r -u a/linux/menu.c b/linux/menu.c
 +	printf ("Edit properties of worker threads.\n\n");
 +
  again:	if (max_num_workers () > 1)
- 		askNum ("Number of workers to run", &m_num_thread,
- 			1, max_num_workers ());
-@@ -419,9 +430,11 @@
+ 		askNum ("Number of workers to run", &m_num_thread, 1, max_num_workers ());
+ 
  	outputLongLine ("\nPick a priority between 1 and 10 where 1 is the lowest priority and 10 is the highest.  It is strongly recommended that you use the default priority of 1.  Your throughput will probably not improve by using a higher priority.  The only time you should raise the priority is when another process, such as a screen saver, is stealing CPU cycles from this program.\n");
  	askNum ("Priority", &m_priority, 1, 10);
  
@@ -1209,18 +900,21 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	}
 +#endif
  
- 	if (USE_PRIMENET || NUM_CPUS * CPU_HYPERTHREADS > 1) {
+ 	if (USE_PRIMENET || NUM_CPUS * user_configurable_hyperthreads () > 1) {
  	    for (i = 0; i < m_num_thread; i++) {
-@@ -430,8 +443,10 @@
+@@ -429,11 +442,13 @@
  		else
  			printf ("\n");
  
 +#ifdef BUILD_PRIMENET
- 		if (USE_PRIMENET)
+ 		if (USE_PRIMENET) {
  			askNum ("Type of work to get", &m_work_pref[i], 0, 150);
+ 			if (m_numcpus[i] < min_cores_for_work_type (m_work_pref[i]))
+ 				m_numcpus[i] = min_cores_for_work_type (m_work_pref[i]);
+ 		}
 +#endif
  
- 		if (NUM_CPUS * CPU_HYPERTHREADS > 1) {
+ 		if (NUM_CPUS * user_configurable_hyperthreads () > 1) {
  			char question[200];
 @@ -503,6 +518,7 @@
  /* If the user changes any of the work preferences record it in the INI file */
@@ -1361,7 +1055,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	m_memory_editable =
  		read_memory_settings (&day_memory, &night_memory,
  				      &day_start_time, &day_end_time);
-@@ -854,9 +897,6 @@
+@@ -855,9 +898,6 @@
  		}
  	}
  
@@ -1371,7 +1065,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	if (askOkCancel ()) {
  		unsigned int new_day_start_time, new_day_end_time;
  
-@@ -866,9 +906,11 @@
+@@ -867,9 +907,11 @@
  			ROLLING_AVERAGE = 1000;
  			IniWriteInt (LOCALINI_FILE, "RollingAverage", 1000);
  			IniWriteInt (LOCALINI_FILE, "RollingStartTime", 0);
@@ -1383,7 +1077,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  		}
  		new_day_start_time = strToMinutes ((char *) &m_start_time);
  		new_day_end_time = strToMinutes ((char *) &m_end_time);
-@@ -881,7 +923,9 @@
+@@ -882,7 +924,9 @@
  					       new_day_start_time, new_day_end_time);
  			mem_settings_have_changed ();
  		}
@@ -1391,9 +1085,9 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  		spoolMessage (PRIMENET_PROGRAM_OPTIONS, NULL);
 +#endif
  
- 		if (!IniGetInt (INI_FILE, "AskedAboutMemory", 0)) {
- 			IniWriteInt (INI_FILE, "AskedAboutMemory", 1);
-@@ -899,25 +943,34 @@
+ // Now that Primenet almost always hands out LL assignments that are P-1'ed,
+ // there is little reason to prompt user into allowing us to use more memory.
+@@ -902,25 +946,34 @@
  void options_preferences (void)
  {
  	unsigned long m_iter, m_r_iter, m_disk_write_time;
@@ -1428,7 +1122,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	if (USE_PRIMENET && DIAL_UP)
  		askNum ("Minutes between modem retries", &m_modem, 1, 300);
  	if (USE_PRIMENET)
-@@ -926,6 +979,7 @@
+@@ -929,6 +982,7 @@
  		askNum ("Days of work to queue up", &m_work, 1, 90);
  	if (USE_PRIMENET)
  		askFloat ("Days between sending end dates", &m_end_dates, 0.125, 7);
@@ -1436,7 +1130,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	askNum ("Number of Backup Files", &m_backup, 1, 3);
  	askYN ("Make noise if new Mersenne prime is found", &m_noise);
  	askYN ("Run program even when using laptop battery power", &m_battery);
-@@ -934,10 +988,12 @@
+@@ -937,10 +991,12 @@
  		ITER_OUTPUT = m_iter;
  		ITER_OUTPUT_RES = m_r_iter;
  		DISK_WRITE_TIME = m_disk_write_time;
@@ -1449,7 +1143,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  		NUM_BACKUP_FILES = m_backup;
  		SILENT_VICTORY = !m_noise;
  		if (RUN_ON_BATTERY != m_battery) {
-@@ -948,13 +1004,17 @@
+@@ -951,13 +1007,17 @@
  		IniWriteInt (INI_FILE, "OutputIterations", ITER_OUTPUT);
  		IniWriteInt (INI_FILE, "ResultsFileIterations", ITER_OUTPUT_RES);
  		IniWriteInt (INI_FILE, "DiskWriteTime", DISK_WRITE_TIME);
@@ -1467,7 +1161,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	}
  }
  
-@@ -979,6 +1039,8 @@
+@@ -982,6 +1042,8 @@
  	}
  	m_timefft = 3;
  
@@ -1476,7 +1170,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	if (NUM_CPUS * CPU_HYPERTHREADS > 1)
  		askNum ("Number of torture test threads to run", &m_thread,
  			1, NUM_CPUS * CPU_HYPERTHREADS);
-@@ -1040,6 +1102,7 @@
+@@ -1043,6 +1105,7 @@
  
  /* Help/About PrimeNet Server */
  
@@ -1484,7 +1178,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  void help_about_server (void)
  {
  	char	*buildId;
-@@ -1048,9 +1111,11 @@
+@@ -1051,9 +1114,11 @@
  
  	pingServer ();
  }
@@ -1496,7 +1190,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  void test_welcome (void)
  {
  	int	m_join = 1;
-@@ -1089,9 +1154,20 @@
+@@ -1092,9 +1157,20 @@
  	}
  	main_menu ();
  }
@@ -1517,7 +1211,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  void main_menu (void)
  {
  	unsigned long choice;
-@@ -1265,3 +1341,150 @@
+@@ -1268,3 +1344,150 @@
  	}
  	goto mloop;
  }
@@ -1669,9 +1363,9 @@ diff -r -u a/linux/menu.c b/linux/menu.c
 +}
 +#endif
 diff -r -u a/linux/os_routines.c b/linux/os_routines.c
---- a/linux/os_routines.c	2014-05-29 06:10:02.000000000 +0800
-+++ b/linux/os_routines.c	2016-01-14 10:55:08.645000697 +0800
-@@ -407,6 +407,7 @@
+--- a/linux/os_routines.c	2016-03-28 08:27:51.000000000 +0800
++++ b/linux/os_routines.c	2016-05-07 18:15:57.528745808 +0800
+@@ -411,6 +411,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
  
@@ -1679,7 +1373,7 @@ diff -r -u a/linux/os_routines.c b/linux/os_routines.c
  int LoadPrimeNet (void)
  {
  
-@@ -463,12 +464,15 @@
+@@ -467,12 +468,15 @@
  	OutputStr (COMM_THREAD_NUM, "You are not connected to the Internet.\n");
  	return FALSE;
  }
@@ -1696,8 +1390,8 @@ diff -r -u a/linux/os_routines.c b/linux/os_routines.c
  /* Check if a program is currently running - not implemented for OS/2 */
  
 diff -r -u a/linux/prime.c b/linux/prime.c
---- a/linux/prime.c	2015-03-25 22:29:19.000000000 +0800
-+++ b/linux/prime.c	2016-01-14 10:55:08.645000697 +0800
+--- a/linux/prime.c	2016-04-24 04:06:40.000000000 +0800
++++ b/linux/prime.c	2016-05-07 18:15:57.528745808 +0800
 @@ -106,7 +106,9 @@
  #include "commonb.c"
  #include "commonc.c"
@@ -1733,8 +1427,8 @@ diff -r -u a/linux/prime.c b/linux/prime.c
  
  /* Bring up the main menu */
 diff -r -u a/linux64/makebsd b/linux64/makebsd
---- a/linux64/makebsd	2015-08-10 09:06:19.000000000 +0800
-+++ b/linux64/makebsd	2016-01-14 10:55:08.645000697 +0800
+--- a/linux64/makebsd	2016-04-26 04:31:18.000000000 +0800
++++ b/linux64/makebsd	2016-05-07 18:15:57.528745808 +0800
 @@ -4,10 +4,10 @@
  #
  
@@ -1749,8 +1443,8 @@ diff -r -u a/linux64/makebsd b/linux64/makebsd
  LFLAGS = -L/usr/local/lib -Wl,-M
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -lcurl -lstdc++ -lcompat
 diff -r -u a/linux64/makefile b/linux64/makefile
---- a/linux64/makefile	2015-08-10 09:06:19.000000000 +0800
-+++ b/linux64/makefile	2016-01-14 10:55:08.649000736 +0800
+--- a/linux64/makefile	2016-04-26 04:31:18.000000000 +0800
++++ b/linux64/makefile	2016-05-07 18:15:57.528745808 +0800
 @@ -13,10 +13,10 @@
  #	LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic $(shell pkg-config --static --libs libcurl) -lstdc++ -Wl,-Bdynamic -ldl
  
@@ -1765,8 +1459,8 @@ diff -r -u a/linux64/makefile b/linux64/makefile
  LFLAGS = -Wl,-M -Wl,-L/usr/local/lib
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic -lcurl -Wl,-Bdynamic -lrt -lstdc++ -ldl
 diff -r -u a/linux64/menu.c b/linux64/menu.c
---- a/linux64/menu.c	2015-05-04 21:51:32.000000000 +0800
-+++ b/linux64/menu.c	2016-01-14 10:55:08.649000736 +0800
+--- a/linux64/menu.c	2016-03-26 06:03:34.000000000 +0800
++++ b/linux64/menu.c	2016-05-07 18:15:57.528745808 +0800
 @@ -17,11 +17,12 @@
  void get_line (
  	char	*buf)
@@ -1818,7 +1512,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	unsigned long m_affinity[MAX_NUM_WORKER_THREADS];
  	unsigned long m_numcpus[MAX_NUM_WORKER_THREADS];
  	int	i;
-@@ -407,11 +414,15 @@
+@@ -407,20 +414,26 @@
  	m_num_thread = NUM_WORKER_THREADS;
  	m_priority = PRIORITY;
  	for (i = 0; i < MAX_NUM_WORKER_THREADS; i++) {
@@ -1832,9 +1526,8 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
 +	printf ("Edit properties of worker threads.\n\n");
 +
  again:	if (max_num_workers () > 1)
- 		askNum ("Number of workers to run", &m_num_thread,
- 			1, max_num_workers ());
-@@ -419,9 +430,11 @@
+ 		askNum ("Number of workers to run", &m_num_thread, 1, max_num_workers ());
+ 
  	outputLongLine ("\nPick a priority between 1 and 10 where 1 is the lowest priority and 10 is the highest.  It is strongly recommended that you use the default priority of 1.  Your throughput will probably not improve by using a higher priority.  The only time you should raise the priority is when another process, such as a screen saver, is stealing CPU cycles from this program.\n");
  	askNum ("Priority", &m_priority, 1, 10);
  
@@ -1844,18 +1537,21 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	}
 +#endif
  
- 	if (USE_PRIMENET || NUM_CPUS * CPU_HYPERTHREADS > 1) {
+ 	if (USE_PRIMENET || NUM_CPUS * user_configurable_hyperthreads () > 1) {
  	    for (i = 0; i < m_num_thread; i++) {
-@@ -430,8 +443,10 @@
+@@ -429,11 +442,13 @@
  		else
  			printf ("\n");
  
 +#ifdef BUILD_PRIMENET
- 		if (USE_PRIMENET)
+ 		if (USE_PRIMENET) {
  			askNum ("Type of work to get", &m_work_pref[i], 0, 150);
+ 			if (m_numcpus[i] < min_cores_for_work_type (m_work_pref[i]))
+ 				m_numcpus[i] = min_cores_for_work_type (m_work_pref[i]);
+ 		}
 +#endif
  
- 		if (NUM_CPUS * CPU_HYPERTHREADS > 1) {
+ 		if (NUM_CPUS * user_configurable_hyperthreads () > 1) {
  			char question[200];
 @@ -503,6 +518,7 @@
  /* If the user changes any of the work preferences record it in the INI file */
@@ -1996,7 +1692,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	m_memory_editable =
  		read_memory_settings (&day_memory, &night_memory,
  				      &day_start_time, &day_end_time);
-@@ -854,9 +897,6 @@
+@@ -855,9 +898,6 @@
  		}
  	}
  
@@ -2006,7 +1702,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	if (askOkCancel ()) {
  		unsigned int new_day_start_time, new_day_end_time;
  
-@@ -866,9 +906,11 @@
+@@ -867,9 +907,11 @@
  			ROLLING_AVERAGE = 1000;
  			IniWriteInt (LOCALINI_FILE, "RollingAverage", 1000);
  			IniWriteInt (LOCALINI_FILE, "RollingStartTime", 0);
@@ -2018,7 +1714,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  		}
  		new_day_start_time = strToMinutes ((char *) &m_start_time);
  		new_day_end_time = strToMinutes ((char *) &m_end_time);
-@@ -881,7 +923,9 @@
+@@ -882,7 +924,9 @@
  					       new_day_start_time, new_day_end_time);
  			mem_settings_have_changed ();
  		}
@@ -2026,9 +1722,9 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  		spoolMessage (PRIMENET_PROGRAM_OPTIONS, NULL);
 +#endif
  
- 		if (!IniGetInt (INI_FILE, "AskedAboutMemory", 0)) {
- 			IniWriteInt (INI_FILE, "AskedAboutMemory", 1);
-@@ -899,25 +943,34 @@
+ // Now that Primenet almost always hands out LL assignments that are P-1'ed,
+ // there is little reason to prompt user into allowing us to use more memory.
+@@ -902,25 +946,34 @@
  void options_preferences (void)
  {
  	unsigned long m_iter, m_r_iter, m_disk_write_time;
@@ -2063,7 +1759,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	if (USE_PRIMENET && DIAL_UP)
  		askNum ("Minutes between modem retries", &m_modem, 1, 300);
  	if (USE_PRIMENET)
-@@ -926,6 +979,7 @@
+@@ -929,6 +982,7 @@
  		askNum ("Days of work to queue up", &m_work, 1, 90);
  	if (USE_PRIMENET)
  		askFloat ("Days between sending end dates", &m_end_dates, 0.125, 7);
@@ -2071,7 +1767,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	askNum ("Number of Backup Files", &m_backup, 1, 3);
  	askYN ("Make noise if new Mersenne prime is found", &m_noise);
  	askYN ("Run program even when using laptop battery power", &m_battery);
-@@ -934,10 +988,12 @@
+@@ -937,10 +991,12 @@
  		ITER_OUTPUT = m_iter;
  		ITER_OUTPUT_RES = m_r_iter;
  		DISK_WRITE_TIME = m_disk_write_time;
@@ -2084,7 +1780,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  		NUM_BACKUP_FILES = m_backup;
  		SILENT_VICTORY = !m_noise;
  		if (RUN_ON_BATTERY != m_battery) {
-@@ -948,13 +1004,17 @@
+@@ -951,13 +1007,17 @@
  		IniWriteInt (INI_FILE, "OutputIterations", ITER_OUTPUT);
  		IniWriteInt (INI_FILE, "ResultsFileIterations", ITER_OUTPUT_RES);
  		IniWriteInt (INI_FILE, "DiskWriteTime", DISK_WRITE_TIME);
@@ -2102,7 +1798,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	}
  }
  
-@@ -979,6 +1039,8 @@
+@@ -982,6 +1042,8 @@
  	}
  	m_timefft = 3;
  
@@ -2111,7 +1807,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	if (NUM_CPUS * CPU_HYPERTHREADS > 1)
  		askNum ("Number of torture test threads to run", &m_thread,
  			1, NUM_CPUS * CPU_HYPERTHREADS);
-@@ -1040,6 +1102,7 @@
+@@ -1043,6 +1105,7 @@
  
  /* Help/About PrimeNet Server */
  
@@ -2119,7 +1815,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  void help_about_server (void)
  {
  	char	*buildId;
-@@ -1048,9 +1111,11 @@
+@@ -1051,9 +1114,11 @@
  
  	pingServer ();
  }
@@ -2131,7 +1827,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  void test_welcome (void)
  {
  	int	m_join = 1;
-@@ -1089,9 +1154,20 @@
+@@ -1092,9 +1157,20 @@
  	}
  	main_menu ();
  }
@@ -2152,7 +1848,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  void main_menu (void)
  {
  	unsigned long choice;
-@@ -1265,3 +1341,150 @@
+@@ -1268,3 +1344,150 @@
  	}
  	goto mloop;
  }
@@ -2304,9 +2000,9 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
 +}
 +#endif
 diff -r -u a/linux64/os_routines.c b/linux64/os_routines.c
---- a/linux64/os_routines.c	2014-05-29 06:10:02.000000000 +0800
-+++ b/linux64/os_routines.c	2016-01-14 10:55:08.649000736 +0800
-@@ -407,6 +407,7 @@
+--- a/linux64/os_routines.c	2016-03-28 08:27:51.000000000 +0800
++++ b/linux64/os_routines.c	2016-05-07 18:15:57.528745808 +0800
+@@ -411,6 +411,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
  
@@ -2314,7 +2010,7 @@ diff -r -u a/linux64/os_routines.c b/linux64/os_routines.c
  int LoadPrimeNet (void)
  {
  
-@@ -463,12 +464,15 @@
+@@ -467,12 +468,15 @@
  	OutputStr (COMM_THREAD_NUM, "You are not connected to the Internet.\n");
  	return FALSE;
  }
@@ -2331,8 +2027,8 @@ diff -r -u a/linux64/os_routines.c b/linux64/os_routines.c
  /* Check if a program is currently running - not implemented for OS/2 */
  
 diff -r -u a/linux64/prime.c b/linux64/prime.c
---- a/linux64/prime.c	2015-03-25 22:29:19.000000000 +0800
-+++ b/linux64/prime.c	2016-01-14 10:55:08.649000736 +0800
+--- a/linux64/prime.c	2016-04-24 04:06:40.000000000 +0800
++++ b/linux64/prime.c	2016-05-07 18:15:57.528745808 +0800
 @@ -106,7 +106,9 @@
  #include "commonb.c"
  #include "commonc.c"
@@ -2368,8 +2064,8 @@ diff -r -u a/linux64/prime.c b/linux64/prime.c
  
  /* Bring up the main menu */
 diff -r -u a/macosx/makefile b/macosx/makefile
---- a/macosx/makefile	2015-08-10 09:06:21.000000000 +0800
-+++ b/macosx/makefile	2016-01-14 10:55:08.649000736 +0800
+--- a/macosx/makefile	2016-04-26 04:31:21.000000000 +0800
++++ b/macosx/makefile	2016-05-07 18:15:57.528745808 +0800
 @@ -4,10 +4,10 @@
  ENVP= MACOSX_DEPLOYMENT_TARGET=10.4
  
@@ -2384,8 +2080,8 @@ diff -r -u a/macosx/makefile b/macosx/makefile
  LFLAGS = -Wl,-no_pie
  LIBS   = ../gwnum/release/gwnum.a -lm -lpthread -lcurl -framework IOKit -framework CoreFoundation -lstdc++
 diff -r -u a/macosx/menu.c b/macosx/menu.c
---- a/macosx/menu.c	2015-05-04 21:51:32.000000000 +0800
-+++ b/macosx/menu.c	2016-01-14 10:55:08.649000736 +0800
+--- a/macosx/menu.c	2016-03-26 06:03:34.000000000 +0800
++++ b/macosx/menu.c	2016-05-07 18:15:57.528745808 +0800
 @@ -17,11 +17,12 @@
  void get_line (
  	char	*buf)
@@ -2437,7 +2133,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	unsigned long m_affinity[MAX_NUM_WORKER_THREADS];
  	unsigned long m_numcpus[MAX_NUM_WORKER_THREADS];
  	int	i;
-@@ -407,11 +414,15 @@
+@@ -407,20 +414,26 @@
  	m_num_thread = NUM_WORKER_THREADS;
  	m_priority = PRIORITY;
  	for (i = 0; i < MAX_NUM_WORKER_THREADS; i++) {
@@ -2451,9 +2147,8 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
 +	printf ("Edit properties of worker threads.\n\n");
 +
  again:	if (max_num_workers () > 1)
- 		askNum ("Number of workers to run", &m_num_thread,
- 			1, max_num_workers ());
-@@ -419,9 +430,11 @@
+ 		askNum ("Number of workers to run", &m_num_thread, 1, max_num_workers ());
+ 
  	outputLongLine ("\nPick a priority between 1 and 10 where 1 is the lowest priority and 10 is the highest.  It is strongly recommended that you use the default priority of 1.  Your throughput will probably not improve by using a higher priority.  The only time you should raise the priority is when another process, such as a screen saver, is stealing CPU cycles from this program.\n");
  	askNum ("Priority", &m_priority, 1, 10);
  
@@ -2463,18 +2158,21 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	}
 +#endif
  
- 	if (USE_PRIMENET || NUM_CPUS * CPU_HYPERTHREADS > 1) {
+ 	if (USE_PRIMENET || NUM_CPUS * user_configurable_hyperthreads () > 1) {
  	    for (i = 0; i < m_num_thread; i++) {
-@@ -430,8 +443,10 @@
+@@ -429,11 +442,13 @@
  		else
  			printf ("\n");
  
 +#ifdef BUILD_PRIMENET
- 		if (USE_PRIMENET)
+ 		if (USE_PRIMENET) {
  			askNum ("Type of work to get", &m_work_pref[i], 0, 150);
+ 			if (m_numcpus[i] < min_cores_for_work_type (m_work_pref[i]))
+ 				m_numcpus[i] = min_cores_for_work_type (m_work_pref[i]);
+ 		}
 +#endif
  
- 		if (NUM_CPUS * CPU_HYPERTHREADS > 1) {
+ 		if (NUM_CPUS * user_configurable_hyperthreads () > 1) {
  			char question[200];
 @@ -503,6 +518,7 @@
  /* If the user changes any of the work preferences record it in the INI file */
@@ -2615,7 +2313,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	m_memory_editable =
  		read_memory_settings (&day_memory, &night_memory,
  				      &day_start_time, &day_end_time);
-@@ -854,9 +897,6 @@
+@@ -855,9 +898,6 @@
  		}
  	}
  
@@ -2625,7 +2323,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	if (askOkCancel ()) {
  		unsigned int new_day_start_time, new_day_end_time;
  
-@@ -866,9 +906,11 @@
+@@ -867,9 +907,11 @@
  			ROLLING_AVERAGE = 1000;
  			IniWriteInt (LOCALINI_FILE, "RollingAverage", 1000);
  			IniWriteInt (LOCALINI_FILE, "RollingStartTime", 0);
@@ -2637,7 +2335,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  		}
  		new_day_start_time = strToMinutes ((char *) &m_start_time);
  		new_day_end_time = strToMinutes ((char *) &m_end_time);
-@@ -881,7 +923,9 @@
+@@ -882,7 +924,9 @@
  					       new_day_start_time, new_day_end_time);
  			mem_settings_have_changed ();
  		}
@@ -2645,9 +2343,9 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  		spoolMessage (PRIMENET_PROGRAM_OPTIONS, NULL);
 +#endif
  
- 		if (!IniGetInt (INI_FILE, "AskedAboutMemory", 0)) {
- 			IniWriteInt (INI_FILE, "AskedAboutMemory", 1);
-@@ -899,25 +943,34 @@
+ // Now that Primenet almost always hands out LL assignments that are P-1'ed,
+ // there is little reason to prompt user into allowing us to use more memory.
+@@ -902,25 +946,34 @@
  void options_preferences (void)
  {
  	unsigned long m_iter, m_r_iter, m_disk_write_time;
@@ -2682,7 +2380,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	if (USE_PRIMENET && DIAL_UP)
  		askNum ("Minutes between modem retries", &m_modem, 1, 300);
  	if (USE_PRIMENET)
-@@ -926,6 +979,7 @@
+@@ -929,6 +982,7 @@
  		askNum ("Days of work to queue up", &m_work, 1, 90);
  	if (USE_PRIMENET)
  		askFloat ("Days between sending end dates", &m_end_dates, 0.125, 7);
@@ -2690,7 +2388,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	askNum ("Number of Backup Files", &m_backup, 1, 3);
  	askYN ("Make noise if new Mersenne prime is found", &m_noise);
  	askYN ("Run program even when using laptop battery power", &m_battery);
-@@ -934,10 +988,12 @@
+@@ -937,10 +991,12 @@
  		ITER_OUTPUT = m_iter;
  		ITER_OUTPUT_RES = m_r_iter;
  		DISK_WRITE_TIME = m_disk_write_time;
@@ -2703,7 +2401,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  		NUM_BACKUP_FILES = m_backup;
  		SILENT_VICTORY = !m_noise;
  		if (RUN_ON_BATTERY != m_battery) {
-@@ -948,13 +1004,17 @@
+@@ -951,13 +1007,17 @@
  		IniWriteInt (INI_FILE, "OutputIterations", ITER_OUTPUT);
  		IniWriteInt (INI_FILE, "ResultsFileIterations", ITER_OUTPUT_RES);
  		IniWriteInt (INI_FILE, "DiskWriteTime", DISK_WRITE_TIME);
@@ -2721,7 +2419,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	}
  }
  
-@@ -979,6 +1039,8 @@
+@@ -982,6 +1042,8 @@
  	}
  	m_timefft = 3;
  
@@ -2730,7 +2428,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	if (NUM_CPUS * CPU_HYPERTHREADS > 1)
  		askNum ("Number of torture test threads to run", &m_thread,
  			1, NUM_CPUS * CPU_HYPERTHREADS);
-@@ -1040,6 +1102,7 @@
+@@ -1043,6 +1105,7 @@
  
  /* Help/About PrimeNet Server */
  
@@ -2738,7 +2436,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  void help_about_server (void)
  {
  	char	*buildId;
-@@ -1048,9 +1111,11 @@
+@@ -1051,9 +1114,11 @@
  
  	pingServer ();
  }
@@ -2750,7 +2448,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  void test_welcome (void)
  {
  	int	m_join = 1;
-@@ -1089,9 +1154,20 @@
+@@ -1092,9 +1157,20 @@
  	}
  	main_menu ();
  }
@@ -2771,7 +2469,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  void main_menu (void)
  {
  	unsigned long choice;
-@@ -1265,3 +1341,150 @@
+@@ -1268,3 +1344,150 @@
  	}
  	goto mloop;
  }
@@ -2923,9 +2621,9 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
 +}
 +#endif
 diff -r -u a/macosx/os_routines.c b/macosx/os_routines.c
---- a/macosx/os_routines.c	2014-05-29 06:10:02.000000000 +0800
-+++ b/macosx/os_routines.c	2016-01-14 10:55:08.649000736 +0800
-@@ -407,6 +407,7 @@
+--- a/macosx/os_routines.c	2016-03-28 08:27:51.000000000 +0800
++++ b/macosx/os_routines.c	2016-05-07 18:15:57.528745808 +0800
+@@ -411,6 +411,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
  
@@ -2933,7 +2631,7 @@ diff -r -u a/macosx/os_routines.c b/macosx/os_routines.c
  int LoadPrimeNet (void)
  {
  
-@@ -463,12 +464,15 @@
+@@ -467,12 +468,15 @@
  	OutputStr (COMM_THREAD_NUM, "You are not connected to the Internet.\n");
  	return FALSE;
  }
@@ -2950,8 +2648,8 @@ diff -r -u a/macosx/os_routines.c b/macosx/os_routines.c
  /* Check if a program is currently running - not implemented for OS/2 */
  
 diff -r -u a/macosx/prime.c b/macosx/prime.c
---- a/macosx/prime.c	2015-03-25 22:29:19.000000000 +0800
-+++ b/macosx/prime.c	2016-01-14 10:55:08.649000736 +0800
+--- a/macosx/prime.c	2016-04-24 04:06:40.000000000 +0800
++++ b/macosx/prime.c	2016-05-07 18:15:57.532745852 +0800
 @@ -106,7 +106,9 @@
  #include "commonb.c"
  #include "commonc.c"
@@ -2987,8 +2685,8 @@ diff -r -u a/macosx/prime.c b/macosx/prime.c
  
  /* Bring up the main menu */
 diff -r -u a/macosx64/makefile b/macosx64/makefile
---- a/macosx64/makefile	2015-08-10 09:06:21.000000000 +0800
-+++ b/macosx64/makefile	2016-01-14 10:55:08.649000736 +0800
+--- a/macosx64/makefile	2016-04-26 04:31:22.000000000 +0800
++++ b/macosx64/makefile	2016-05-07 18:15:57.532745852 +0800
 @@ -4,10 +4,10 @@
  ENVP= MACOSX_DEPLOYMENT_TARGET=10.4
  
@@ -3003,8 +2701,8 @@ diff -r -u a/macosx64/makefile b/macosx64/makefile
  LFLAGS = -m64 -Wl,-no_pie
  LIBS   = ../gwnum/amd64/release/gwnum.a -lm -lpthread -lcurl -framework IOKit -framework CoreFoundation -lstdc++
 diff -r -u a/macosx64/menu.c b/macosx64/menu.c
---- a/macosx64/menu.c	2015-05-04 21:51:32.000000000 +0800
-+++ b/macosx64/menu.c	2016-01-14 10:55:08.649000736 +0800
+--- a/macosx64/menu.c	2016-03-26 06:03:34.000000000 +0800
++++ b/macosx64/menu.c	2016-05-07 18:15:57.532745852 +0800
 @@ -17,11 +17,12 @@
  void get_line (
  	char	*buf)
@@ -3056,7 +2754,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	unsigned long m_affinity[MAX_NUM_WORKER_THREADS];
  	unsigned long m_numcpus[MAX_NUM_WORKER_THREADS];
  	int	i;
-@@ -407,11 +414,15 @@
+@@ -407,20 +414,26 @@
  	m_num_thread = NUM_WORKER_THREADS;
  	m_priority = PRIORITY;
  	for (i = 0; i < MAX_NUM_WORKER_THREADS; i++) {
@@ -3070,9 +2768,8 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
 +	printf ("Edit properties of worker threads.\n\n");
 +
  again:	if (max_num_workers () > 1)
- 		askNum ("Number of workers to run", &m_num_thread,
- 			1, max_num_workers ());
-@@ -419,9 +430,11 @@
+ 		askNum ("Number of workers to run", &m_num_thread, 1, max_num_workers ());
+ 
  	outputLongLine ("\nPick a priority between 1 and 10 where 1 is the lowest priority and 10 is the highest.  It is strongly recommended that you use the default priority of 1.  Your throughput will probably not improve by using a higher priority.  The only time you should raise the priority is when another process, such as a screen saver, is stealing CPU cycles from this program.\n");
  	askNum ("Priority", &m_priority, 1, 10);
  
@@ -3082,18 +2779,21 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	}
 +#endif
  
- 	if (USE_PRIMENET || NUM_CPUS * CPU_HYPERTHREADS > 1) {
+ 	if (USE_PRIMENET || NUM_CPUS * user_configurable_hyperthreads () > 1) {
  	    for (i = 0; i < m_num_thread; i++) {
-@@ -430,8 +443,10 @@
+@@ -429,11 +442,13 @@
  		else
  			printf ("\n");
  
 +#ifdef BUILD_PRIMENET
- 		if (USE_PRIMENET)
+ 		if (USE_PRIMENET) {
  			askNum ("Type of work to get", &m_work_pref[i], 0, 150);
+ 			if (m_numcpus[i] < min_cores_for_work_type (m_work_pref[i]))
+ 				m_numcpus[i] = min_cores_for_work_type (m_work_pref[i]);
+ 		}
 +#endif
  
- 		if (NUM_CPUS * CPU_HYPERTHREADS > 1) {
+ 		if (NUM_CPUS * user_configurable_hyperthreads () > 1) {
  			char question[200];
 @@ -503,6 +518,7 @@
  /* If the user changes any of the work preferences record it in the INI file */
@@ -3234,7 +2934,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	m_memory_editable =
  		read_memory_settings (&day_memory, &night_memory,
  				      &day_start_time, &day_end_time);
-@@ -854,9 +897,6 @@
+@@ -855,9 +898,6 @@
  		}
  	}
  
@@ -3244,7 +2944,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	if (askOkCancel ()) {
  		unsigned int new_day_start_time, new_day_end_time;
  
-@@ -866,9 +906,11 @@
+@@ -867,9 +907,11 @@
  			ROLLING_AVERAGE = 1000;
  			IniWriteInt (LOCALINI_FILE, "RollingAverage", 1000);
  			IniWriteInt (LOCALINI_FILE, "RollingStartTime", 0);
@@ -3256,7 +2956,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  		}
  		new_day_start_time = strToMinutes ((char *) &m_start_time);
  		new_day_end_time = strToMinutes ((char *) &m_end_time);
-@@ -881,7 +923,9 @@
+@@ -882,7 +924,9 @@
  					       new_day_start_time, new_day_end_time);
  			mem_settings_have_changed ();
  		}
@@ -3264,9 +2964,9 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  		spoolMessage (PRIMENET_PROGRAM_OPTIONS, NULL);
 +#endif
  
- 		if (!IniGetInt (INI_FILE, "AskedAboutMemory", 0)) {
- 			IniWriteInt (INI_FILE, "AskedAboutMemory", 1);
-@@ -899,25 +943,34 @@
+ // Now that Primenet almost always hands out LL assignments that are P-1'ed,
+ // there is little reason to prompt user into allowing us to use more memory.
+@@ -902,25 +946,34 @@
  void options_preferences (void)
  {
  	unsigned long m_iter, m_r_iter, m_disk_write_time;
@@ -3301,7 +3001,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	if (USE_PRIMENET && DIAL_UP)
  		askNum ("Minutes between modem retries", &m_modem, 1, 300);
  	if (USE_PRIMENET)
-@@ -926,6 +979,7 @@
+@@ -929,6 +982,7 @@
  		askNum ("Days of work to queue up", &m_work, 1, 90);
  	if (USE_PRIMENET)
  		askFloat ("Days between sending end dates", &m_end_dates, 0.125, 7);
@@ -3309,7 +3009,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	askNum ("Number of Backup Files", &m_backup, 1, 3);
  	askYN ("Make noise if new Mersenne prime is found", &m_noise);
  	askYN ("Run program even when using laptop battery power", &m_battery);
-@@ -934,10 +988,12 @@
+@@ -937,10 +991,12 @@
  		ITER_OUTPUT = m_iter;
  		ITER_OUTPUT_RES = m_r_iter;
  		DISK_WRITE_TIME = m_disk_write_time;
@@ -3322,7 +3022,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  		NUM_BACKUP_FILES = m_backup;
  		SILENT_VICTORY = !m_noise;
  		if (RUN_ON_BATTERY != m_battery) {
-@@ -948,13 +1004,17 @@
+@@ -951,13 +1007,17 @@
  		IniWriteInt (INI_FILE, "OutputIterations", ITER_OUTPUT);
  		IniWriteInt (INI_FILE, "ResultsFileIterations", ITER_OUTPUT_RES);
  		IniWriteInt (INI_FILE, "DiskWriteTime", DISK_WRITE_TIME);
@@ -3340,7 +3040,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	}
  }
  
-@@ -979,6 +1039,8 @@
+@@ -982,6 +1042,8 @@
  	}
  	m_timefft = 3;
  
@@ -3349,7 +3049,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	if (NUM_CPUS * CPU_HYPERTHREADS > 1)
  		askNum ("Number of torture test threads to run", &m_thread,
  			1, NUM_CPUS * CPU_HYPERTHREADS);
-@@ -1040,6 +1102,7 @@
+@@ -1043,6 +1105,7 @@
  
  /* Help/About PrimeNet Server */
  
@@ -3357,7 +3057,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  void help_about_server (void)
  {
  	char	*buildId;
-@@ -1048,9 +1111,11 @@
+@@ -1051,9 +1114,11 @@
  
  	pingServer ();
  }
@@ -3369,7 +3069,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  void test_welcome (void)
  {
  	int	m_join = 1;
-@@ -1089,9 +1154,20 @@
+@@ -1092,9 +1157,20 @@
  	}
  	main_menu ();
  }
@@ -3390,7 +3090,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  void main_menu (void)
  {
  	unsigned long choice;
-@@ -1265,3 +1341,150 @@
+@@ -1268,3 +1344,150 @@
  	}
  	goto mloop;
  }
@@ -3542,9 +3242,9 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
 +}
 +#endif
 diff -r -u a/macosx64/os_routines.c b/macosx64/os_routines.c
---- a/macosx64/os_routines.c	2014-05-29 06:10:02.000000000 +0800
-+++ b/macosx64/os_routines.c	2016-01-14 10:55:08.649000736 +0800
-@@ -407,6 +407,7 @@
+--- a/macosx64/os_routines.c	2016-03-28 08:27:51.000000000 +0800
++++ b/macosx64/os_routines.c	2016-05-07 18:15:57.532745852 +0800
+@@ -411,6 +411,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
  
@@ -3552,7 +3252,7 @@ diff -r -u a/macosx64/os_routines.c b/macosx64/os_routines.c
  int LoadPrimeNet (void)
  {
  
-@@ -463,12 +464,15 @@
+@@ -467,12 +468,15 @@
  	OutputStr (COMM_THREAD_NUM, "You are not connected to the Internet.\n");
  	return FALSE;
  }
@@ -3569,8 +3269,8 @@ diff -r -u a/macosx64/os_routines.c b/macosx64/os_routines.c
  /* Check if a program is currently running - not implemented for OS/2 */
  
 diff -r -u a/macosx64/prime.c b/macosx64/prime.c
---- a/macosx64/prime.c	2015-03-25 22:29:19.000000000 +0800
-+++ b/macosx64/prime.c	2016-01-14 10:55:08.649000736 +0800
+--- a/macosx64/prime.c	2016-04-24 04:06:40.000000000 +0800
++++ b/macosx64/prime.c	2016-05-07 18:15:57.532745852 +0800
 @@ -106,7 +106,9 @@
  #include "commonb.c"
  #include "commonc.c"
@@ -3607,7 +3307,7 @@ diff -r -u a/macosx64/prime.c b/macosx64/prime.c
  /* Bring up the main menu */
 diff -r -u a/os2/makefile b/os2/makefile
 --- a/os2/makefile	2008-06-02 03:10:17.000000000 +0800
-+++ b/os2/makefile	2016-01-14 10:55:08.653000774 +0800
++++ b/os2/makefile	2016-05-07 18:15:57.532745852 +0800
 @@ -5,7 +5,7 @@
  
  CC = wcc386
@@ -3619,7 +3319,7 @@ diff -r -u a/os2/makefile b/os2/makefile
  
 diff -r -u a/prime95/prime95.vcproj b/prime95/prime95.vcproj
 --- a/prime95/prime95.vcproj	2013-05-10 09:58:40.000000000 +0800
-+++ b/prime95/prime95.vcproj	2016-01-14 10:55:08.653000774 +0800
++++ b/prime95/prime95.vcproj	2016-05-07 18:15:57.532745852 +0800
 @@ -54,7 +54,7 @@
  				Name="VCCLCompilerTool"
  				InlineFunctionExpansion="1"
@@ -3676,7 +3376,7 @@ diff -r -u a/prime95/prime95.vcproj b/prime95/prime95.vcproj
  			<Tool
 diff -r -u a/winnt/compil64 b/winnt/compil64
 --- a/winnt/compil64	2008-11-17 04:37:57.000000000 +0800
-+++ b/winnt/compil64	2016-01-14 10:55:08.653000774 +0800
++++ b/winnt/compil64	2016-05-07 18:15:57.532745852 +0800
 @@ -1,7 +1,7 @@
  # Choose compiler switches 
  
@@ -3689,7 +3389,7 @@ diff -r -u a/winnt/compil64 b/winnt/compil64
  copt=/I.. /I..\gwnum /I\libcurl
 diff -r -u a/winnt/compile b/winnt/compile
 --- a/winnt/compile	2008-12-15 04:54:45.000000000 +0800
-+++ b/winnt/compile	2016-01-14 10:55:08.653000774 +0800
++++ b/winnt/compile	2016-05-07 18:15:57.532745852 +0800
 @@ -1,7 +1,7 @@
  # Choose compiler switches 
  
