@@ -1,4 +1,4 @@
-7 May 2016
+8 May 2016
 
 Changes in mprime-changes.patch:
 - Wrap several parts of the code with a preprocessor conditional: "#ifdef \
@@ -65,6 +65,9 @@ void         advanced_unreserve(void)
 void         help_about_server(void)
 
 List of modified global variables and function codes:
+
+In commona.c:
+min_cores_for_work_type
 
 In commonb.c:
 Launcher
