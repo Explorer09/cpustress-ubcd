@@ -3,12 +3,15 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-4 January 2015
+23 May 2016
+
+- (64-bit support. A separate 64-bit kernel and CPUstress image will be available)
+- (binaries that are now built with LTO: mprime, sensors, stresscpu2(already LTO in 2.5.0))
+- Updated Sensors to v3.4.0 (from v3.3.5)
+- Updated Mersenne Prime Test to v28.9 build 2 (from 28.5 build 2).
 
 - Updated Intel LINPACK to v11.2.1 (from v11.2.0)
 - Updated eglibc to 2.19-r25890 (from 2.19-r25243)
-- Rebuilt mprime v28.5 with some source code changes. See the compile note for
-  details.
 - Added "vga=ext" options to 'linpack' and 'systester' boot entries.
 
 Changes in v2.5.4
