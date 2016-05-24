@@ -10,7 +10,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 31 October 2014.
+# Last updated on 24 May 2016.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -36,6 +36,7 @@ ln -s busybox mpstat
 ln -s busybox mv
 ln -s busybox ps
 ln -s busybox sh
+ln -s busybox sleep
 ln -s busybox umount
 ln -s busybox uname
 ln -s busybox vi
@@ -50,12 +51,12 @@ ln -s ../bin/busybox reboot
 cd ..
 
 cd usr/bin
+ln -s ../../bin/busybox acpi
 ln -s ../../bin/busybox awk
 ln -s ../../bin/busybox clear
 ln -s ../../bin/busybox free
 ln -s ../../bin/busybox hexdump
 ln -s ../../bin/busybox less
-ln -s ../../bin/busybox pkill
 ln -s ../../bin/busybox seq
 ln -s ../../bin/busybox top
 ln -s ../../bin/busybox uptime

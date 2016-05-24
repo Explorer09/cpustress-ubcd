@@ -1,4 +1,4 @@
-31 October 2014
+24 May 2016
 
 The BusyBox binary is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom
 cross-toolchain described in "toolchain.txt". Before compiling, make sure you
@@ -8,41 +8,48 @@ directory of the toolchain:
  $ export PATH="${TOOLS_DIR}/bin:${PATH}"
 
 Download BusyBox source code and the official patches:
-http://busybox.net/downloads/busybox-1.22.1.tar.bz2
-http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-ash.patch
-http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-date.patch
-http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-iplink.patch
-http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-lzop.patch
-http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-nc.patch
-http://busybox.net/downloads/fixes-1.22.1/busybox-1.22.1-zcat-no-ext.patch
-(Note: the date of latest BusyBox patch before this build is 2014-10-21.)
+http://busybox.net/downloads/busybox-1.24.2.tar.bz2
+http://busybox.net/downloads/fixes-1.24.2/busybox-1.24.2-CVE-2016-2147.patch
+http://busybox.net/downloads/fixes-1.24.2/busybox-1.24.2-CVE-2016-2148.patch
+http://busybox.net/downloads/fixes-1.24.2/busybox-1.24.2-ash-recursive-heredocs.patch
+(Note: the date of latest BusyBox patch before this build is 2016-03-21.)
 
- $ tar -x -v --bzip2 -f busybox-1.22.1.tar.bz2
+The BusyBox binary in CPUstress also includes the 'acpi' applet, which is not
+yet available in the official source release. The source code and patch for
+'acpi' ("busybox-acpi.patch") was obtained here:
+http://lists.busybox.net/pipermail/busybox/2014-December/082065.html
+
+Unpack the code:
+
+ $ tar -x -v --bzip2 -f busybox-1.24.2.tar.bz2
 
 Copy the file "config" and the ".patch" files into the source code directory.
 Then apply the patches and the config:
 
- $ cd busybox-1.22.1
- $ patch -p 1 <busybox-1.22.1-ash.patch
- $ patch -p 1 <busybox-1.22.1-date.patch
- $ patch -p 1 <busybox-1.22.1-iplink.patch
- $ patch -p 1 <busybox-1.22.1-lzop.patch
- $ patch -p 1 <busybox-1.22.1-nc.patch
- $ patch -p 1 <busybox-1.22.1-zcat-no-ext.patch
-
-(This build of BusyBox contains 15 additional patches that are cherry-picked
-from the Git master branch upstream. These patches are temporary and will be
-dropped when new BusyBox version is released.
-See "busybox/cherry-pick/note.txt".)
+ $ cd busybox-1.24.2
+ $ patch -p 1 <busybox-1.24.2-CVE-2016-2147.patch
+ $ patch -p 1 <busybox-1.24.2-CVE-2016-2148.patch
+ $ patch -p 1 <busybox-1.24.2-ash-recursive-heredocs.patch
+ $ patch -p 1 <busybox-acpi.patch
 
  $ mv config .config
+
+Notes:
+* We specifically build the 'kill' applet in BusyBox even though the command is
+  supported as 'ash' builtin, because we want to include its help text. There
+  are also help text for 'echo' and 'printf' in BusyBox, but we don't include
+  them for a few reasons: They are built to be primitive in CPUstress, their
+  main use are in shell scripts and seldom by user, and their behaviors of
+  "--help" option are no standard.
+* This build enables Link Time Optimization (-flto) from gcc to produce a
+  smaller binary.
 
 Finally, build BusyBox:
 
  $ make CROSS_COMPILE="i486-pc-linux-gnu-"
  $ make CROSS_COMPILE="i486-pc-linux-gnu-" install
 
-The binary will be ready in a directory named "_install" inside the busybox
+The binary will be ready in a directory named "_install" inside the BusyBox
 source, as well as the necessary symlinks. BusyBox doesn't create the symlink
 "/init" which is needed for an initramfs image, so create it manually:
 
