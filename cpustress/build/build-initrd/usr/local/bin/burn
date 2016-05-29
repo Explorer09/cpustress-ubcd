@@ -209,7 +209,7 @@ if [ "$instances" -eq 1 ]; then
 else
     printf "\033[01;31mTo stop burn$MODE, press any key.\033[0m\n"
     PID_LIST=""
-    trap 'trap - 1 2 3 15 CHLD; kill $PID_LIST; wait; exit 0' 1 2 3 15
+    trap 'trap - CHLD; trap "" 1 2 3 15; kill $PID_LIST; trap - 1 2 3 15; wait; exit 0' 1 2 3 15
     for i in `seq 1 $instances`; do
         echo "burn: Starting instance $i of burn$MODE ('/opt/burn/print-pid /opt/burn/burn$MODE$ARGS &')."
         /opt/burn/print-pid /opt/burn/burn$MODE$ARGS & PID_LIST="$PID_LIST $!"
@@ -217,5 +217,5 @@ else
     trap 'trap - 1 2 3 15 CHLD; wait; exit 0' CHLD
     read -s -n1 REPLY # May be interrupted by a SIGCHLD.
     echo "burn: Terminating."
-    trap - 1 2 3 15 CHLD; kill $PID_LIST; wait; exit 0
+    trap - CHLD; trap '' 1 2 3 15; kill $PID_LIST; trap - 1 2 3 15; wait; exit 0
 fi

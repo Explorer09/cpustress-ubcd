@@ -277,7 +277,7 @@ fi
 if [ "$MODE" -eq 3 ]; then
     printf "\033[01;31mTo stop the torture test, press any key.\033[0m\n"
     PID_LIST=""
-    trap 'trap - 1 2 3 15 CHLD; kill $PID_LIST; wait; exit 0' 1 2 3 15
+    trap 'trap - CHLD; trap "" 1 2 3 15; kill $PID_LIST; trap - 1 2 3 15; wait; exit 0' 1 2 3 15
     for i in `seq 1 $instances`; do
         WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
         cp "$PRIME_INI" "$WORKING_DIR"
@@ -287,7 +287,7 @@ if [ "$MODE" -eq 3 ]; then
     trap 'trap - 1 2 3 15 CHLD; wait; exit 0' CHLD
     read -s -n1 REPLY # May be interrupted by a SIGCHLD.
     echo "mprime: Terminating."
-    trap - 1 2 3 15 CHLD; kill $PID_LIST; wait; exit 0
+    trap - CHLD; trap '' 1 2 3 15; kill $PID_LIST; trap - 1 2 3 15; wait; exit 0
 else
     [ "$MODE" -eq 2 ] && ARGS=" -t$ARGS"
     if [ "$TEMPDIR" = Y ]; then

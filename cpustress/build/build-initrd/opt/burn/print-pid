@@ -26,12 +26,13 @@ if [ -x "`which -- "$1"`" ]; then
     trap 'trap - 1 2 3 15; kill $PID' 1 2 3 15
     echo "print-pid: [`date +'%b %d %T'`] PID $PID, '$@ &' started."
     wait $PID; STATUS=$?
+    trap - 1 2 3 15
     SIGNAL=""
     if [ "$STATUS" -gt 128 ] && [ "$STATUS" -le 159 ]; then
         SIGNAL=" (`kill -l "$STATUS"`)"
     fi
     echo "print-pid: [`date +'%b %d %T'`] PID $PID exited with status $STATUS$SIGNAL."
-    trap - 1 2 3 15; exit $STATUS
+    exit $STATUS
 else
     echo "print-pid ERROR: '$1' is not executable." >&2
     echo "Usage: $0 COMMAND [ARGS]" >&2
