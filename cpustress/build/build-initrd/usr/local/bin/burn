@@ -17,7 +17,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 18 September 2014.
+# Last updated on 29 May 2016.
 
 
 set -m
@@ -26,21 +26,9 @@ VENDOR=`awk '/^vendor_id/ {for (i = 3; i < NF; i++) printf("%s ", $i); print $NF
 FAMILY=`awk '/^cpu family/ {print $4; exit}' /proc/cpuinfo`
 MODEL=`awk '/^model/ {print $3; exit}' /proc/cpuinfo`
 MMX=`awk '/mmx/ {print "Y"; exit}' /proc/cpuinfo`
-CHLD_COUNT=0
 
-sigchld_handler () {
-    trap - 17
-    CHLD_COUNT=$(($CHLD_COUNT+1))
-    if [ "$CHLD_COUNT" -ge "$instances" ]; then
-        trap - 1 2 3 15
-        exit 0
-    fi
-    trap 'sigchld_handler' 17
-    read -s -n1 REPLY
-}
-
-# This script expects that 'read' be interrupted by a signal. Notably bash
-# doesn't do this.
+# We expect 'read' may be interrupted by a signal. Bash's 'read' blocks signals
+# instead.
 if [ "X$BASH" != X ]; then
     echo "Don't run this script in bash." >&2
     exit 1
@@ -220,20 +208,14 @@ if [ "$instances" -eq 1 ]; then
     exec /opt/burn/print-pid /opt/burn/burn$MODE$ARGS
 else
     printf "\033[01;31mTo stop burn$MODE, press any key.\033[0m\n"
-
     PID_LIST=""
-    trap 'trap - 17; kill $PID_LIST; wait; trap - 1 2 3 15; exit 0' 1 2 3 15
-
+    trap 'trap - 1 2 3 15 CHLD; kill $PID_LIST; wait; exit 0' 1 2 3 15
     for i in `seq 1 $instances`; do
         echo "burn: Starting instance $i of burn$MODE ('/opt/burn/print-pid /opt/burn/burn$MODE$ARGS &')."
-        /opt/burn/print-pid /opt/burn/burn$MODE$ARGS &
-        PID_LIST="$PID_LIST $!"
+        /opt/burn/print-pid /opt/burn/burn$MODE$ARGS & PID_LIST="$PID_LIST $!"
     done
-
-    trap 'sigchld_handler' 17
-    # This 'read' may be interrupted by a SIGCHLD.
-    read -s -n1 REPLY
-
+    trap 'trap - 1 2 3 15 CHLD; wait; exit 0' CHLD
+    read -s -n1 REPLY # May be interrupted by a SIGCHLD.
     echo "burn: Terminating."
-    trap - 17; kill $PID_LIST; wait; trap - 1 2 3 15; exit 0
+    trap - 1 2 3 15 CHLD; kill $PID_LIST; wait; exit 0
 fi

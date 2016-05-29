@@ -5,7 +5,7 @@
 #
 # 'mprime' is a wrapper that does the following tasks:
 # 1. Shows the user the options to configure the torture test.
-# 2. Creates temporary working directories if needed.
+# 2. Creates temporary working directories when needed.
 # See '/opt/mprime/mprime.txt' for details.
 #
 #
@@ -14,7 +14,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 7 April 2015.
+# Last updated on 29 May 2016.
 
 
 set -m
@@ -23,8 +23,7 @@ SSE2=`awk '/sse2/ {print "Y"; exit}' /proc/cpuinfo`
 AVX=`awk '/avx/ {print "Y"; exit}' /proc/cpuinfo`
 MEMTOTAL=`awk '/^MemTotal/ {print $2}' /proc/meminfo`
 # Convert KiB to MiB
-MEMTOTAL=$(($MEMTOTAL/1024))
-CHLD_COUNT=0
+MEMTOTAL=$((MEMTOTAL/1024))
 
 read_num () {
     printf "$1 [$2]: "
@@ -174,7 +173,7 @@ TORTURE_TYPE
     if [ "$TORTURE_MEM" -le 8 ]; then
         printf "  Memory to use:           (in-place FFTs)\n"
     else
-        printf "  Memory to use: %5dMiB, %5dMiB/thread\n" "$TORTURE_MEM" $(($TORTURE_MEM/$instances))
+        printf "  Memory to use: %5dMiB, %5dMiB/thread\n" "$TORTURE_MEM" $((TORTURE_MEM/instances))
     fi
     printf "Max FFT size: %5dK  Time to run each FFT size: %5d minutes\n" "$MAXFFT" "$TIMEFFT"
     while :; do
@@ -197,7 +196,7 @@ TORTURE_TYPE
         read_num "Time to run each FFT size (in minutes)" "$TIMEFFT" 1 60
         TIMEFFT="$REPLY"
     fi
-    TORTURE_MEM=$(($TORTURE_MEM/$instances))
+    TORTURE_MEM=$((TORTURE_MEM/instances))
     awk "{sub(/^(; )?MinTortureFFT[^\n]*\$/, \"MinTortureFFT=$MINFFT\");
           sub(/^(; )?MaxTortureFFT[^\n]*\$/, \"MaxTortureFFT=$MAXFFT\");
           sub(/^(; )?TortureMem[^\n]*\$/, \"TortureMem=$TORTURE_MEM\");
@@ -210,10 +209,7 @@ elif [ "$TEMPDIR" != N ] && [ "X$AWK_SUB" != X ]; then
 fi
 
 # Launch mprime
-if [ "$MODE" -eq 2 ]; then
-    # ARGS always begins with a space.
-    ARGS=" -t$ARGS"
-fi
+[ "$MODE" -eq 2 ] && ARGS=" -t$ARGS"
 if [ "$TEMPDIR" = Y ]; then
     WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
     cp "$PRIME_INI" "$WORKING_DIR"

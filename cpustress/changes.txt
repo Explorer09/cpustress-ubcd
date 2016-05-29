@@ -3,7 +3,7 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-24 May 2016
+29 May 2016
 
 - (64-bit support. A separate 64-bit kernel and CPUstress image will be available)
 - (binaries that are now built with LTO: mprime, sensors, stresscpu2(already LTO in 2.5.0), busybox)
@@ -11,6 +11,13 @@ Changes in development version
 - Updated Mersenne Prime Test to v28.9 build 2 (from 28.5 build 2).
 - Updated BusyBox to v1.24.2 (from v1.22.1). Added 'acpi' and 'sleep' applets.
   Removed 'pkill'.
+- Improved signal handling in 'burn', 'cpuburn-m', 'mprime' and 'print-pid'
+  scripts. In particular, their risks of signals races are minimized. The
+  scripts now exit properly when their child processes die simultaneously, and
+  they no longer kill twice when two signals appear together (which might
+  wrongly kill something that reuses the original child's PID when the PID had
+  been released). As a side effect, these scripts no longer read keyboard
+  inputs when a child they launched has exited.
 
 - Updated Intel LINPACK to v11.2.1 (from v11.2.0)
 - Updated eglibc to 2.19-r25890 (from 2.19-r25243)
