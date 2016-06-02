@@ -1,4 +1,4 @@
-23 May 2016
+2 June 2016
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -80,7 +80,7 @@ Apply an official patch for GMP:
  $ cd ../..
 
 Apply the official cumulative patch for MPFR:
-(Note: the version of latest MPFR patch before this build is 3.1.4-p2.)
+(Note: the version of latest MPFR patch before this build is 3.1.4-p3.)
 
  $ cd gcc-6.1.0/mpfr
  $ patch -p 1 < ../../mpfr-allpatches.patch
