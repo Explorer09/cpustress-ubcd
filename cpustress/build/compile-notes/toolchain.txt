@@ -1,4 +1,4 @@
-2 June 2016
+22 June 2016
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -37,9 +37,7 @@ Preparation
 
  $ download () {
      wget http://ftp.gnu.org/gnu/binutils/binutils-2.26.tar.bz2
-     wget https://gmplib.org/download/gmp/gmp-6.1.0.tar.xz
-     wget -O gmp-67d4ee9dead1.patch \
-       https://gmplib.org/repo/gmp-6.1/raw-rev/67d4ee9dead1
+     wget https://gmplib.org/download/gmp/gmp-6.1.1.tar.xz
      wget http://www.mpfr.org/mpfr-current/mpfr-3.1.4.tar.xz
      wget -O mpfr-allpatches.patch http://www.mpfr.org/mpfr-current/allpatches
      wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
@@ -50,13 +48,13 @@ Preparation
      }
  $ extract () {
      tar -x --bzip2 -f binutils-2.26.tar.bz2
-     tar -x --xz -f gmp-6.1.0.tar.xz
+     tar -x --xz -f gmp-6.1.1.tar.xz
      tar -x --xz -f mpfr-3.1.4.tar.xz
      tar -x -z -f mpc-1.0.3.tar.gz
      tar -x --bzip2 -f isl-0.16.1.tar.bz2
      tar -x --bzip2 -f gcc-6.1.0.tar.bz2
      tar -x --xz -f linux-4.6.1.tar.xz
-     mv gmp-6.1.0  gcc-6.1.0/gmp
+     mv gmp-6.1.1  gcc-6.1.0/gmp
      mv mpfr-3.1.4 gcc-6.1.0/mpfr
      mv mpc-1.0.3  gcc-6.1.0/mpc
      mv isl-0.16.1 gcc-6.1.0/isl
@@ -72,12 +70,6 @@ the current directory where we have the source code. (You need to do this
 manually - the script can't locate where the file is.)
 
  $ [ -f option-groups.config ] || exit 1
-
-Apply an official patch for GMP:
-
- $ cd gcc-6.1.0/gmp
- $ patch -p 1 < ../../gmp-67d4ee9dead1.patch
- $ cd ../..
 
 Apply the official cumulative patch for MPFR:
 (Note: the version of latest MPFR patch before this build is 3.1.4-p3.)
