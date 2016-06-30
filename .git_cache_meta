@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2016-06-29 23:48:19.3403833320 +0800" .git_cache_meta
+touch -c -h -d "2016-06-30 16:50:08.3431540170 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -155,17 +155,13 @@ touch -c -h -d "2016-05-29 12:21:21.3719242030 +0800" cpustress/build/build-init
 chmod 0644 cpustress/build/compile-notes/burn.txt
 touch -c -h -d "2015-10-24 19:13:00.3308899490 +0800" cpustress/build/compile-notes/burn.txt
 chmod 0644 cpustress/build/compile-notes/busybox.txt
-touch -c -h -d "2016-05-24 14:36:42.5829828560 +0800" cpustress/build/compile-notes/busybox.txt
-chmod 0644 cpustress/build/compile-notes/busybox/busybox-1.24.2-CVE-2016-2147.patch
-touch -c -h -d "2016-03-22 02:23:56.0000000000 +0800" cpustress/build/compile-notes/busybox/busybox-1.24.2-CVE-2016-2147.patch
-chmod 0644 cpustress/build/compile-notes/busybox/busybox-1.24.2-CVE-2016-2148.patch
-touch -c -h -d "2016-03-22 02:23:56.0000000000 +0800" cpustress/build/compile-notes/busybox/busybox-1.24.2-CVE-2016-2148.patch
-chmod 0644 cpustress/build/compile-notes/busybox/busybox-1.24.2-ash-recursive-heredocs.patch
-touch -c -h -d "2016-03-22 02:31:33.0000000000 +0800" cpustress/build/compile-notes/busybox/busybox-1.24.2-ash-recursive-heredocs.patch
+touch -c -h -d "2016-06-30 16:44:51.7031681350 +0800" cpustress/build/compile-notes/busybox.txt
+chmod 0644 cpustress/build/compile-notes/busybox/busybox-acpi-2.patch
+touch -c -h -d "2016-06-28 16:22:18.8327768000 +0800" cpustress/build/compile-notes/busybox/busybox-acpi-2.patch
 chmod 0644 cpustress/build/compile-notes/busybox/busybox-acpi.patch
 touch -c -h -d "2015-01-29 20:18:26.7477660000 +0800" cpustress/build/compile-notes/busybox/busybox-acpi.patch
 chmod 0644 cpustress/build/compile-notes/busybox/config
-touch -c -h -d "2016-05-24 12:18:05.8340910000 +0800" cpustress/build/compile-notes/busybox/config
+touch -c -h -d "2016-06-23 21:37:16.0000000000 +0800" cpustress/build/compile-notes/busybox/config
 chmod 0644 cpustress/build/compile-notes/cpuburn-in.txt
 touch -c -h -d "2015-10-25 10:55:49.4190852400 +0800" cpustress/build/compile-notes/cpuburn-in.txt
 chmod 0755 cpustress/build/compile-notes/doc-to-sh.sh

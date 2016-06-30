@@ -1,4 +1,4 @@
-24 May 2016
+30 June 2016
 
 The BusyBox binary is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom
 cross-toolchain described in "toolchain.txt". Before compiling, make sure you
@@ -8,11 +8,10 @@ directory of the toolchain:
  $ export PATH="${TOOLS_DIR}/bin:${PATH}"
 
 Download BusyBox source code and the official patches:
-http://busybox.net/downloads/busybox-1.24.2.tar.bz2
-http://busybox.net/downloads/fixes-1.24.2/busybox-1.24.2-CVE-2016-2147.patch
-http://busybox.net/downloads/fixes-1.24.2/busybox-1.24.2-CVE-2016-2148.patch
-http://busybox.net/downloads/fixes-1.24.2/busybox-1.24.2-ash-recursive-heredocs.patch
-(Note: the date of latest BusyBox patch before this build is 2016-03-21.)
+http://busybox.net/downloads/busybox-1.25.0.tar.bz2
+(At the time of the writing, there were no official patches for 1.25.0. You can
+can check the official patches at
+<http://busybox.net/downloads/fixes-1.25.0/>.)
 
 The BusyBox binary in CPUstress also includes the 'acpi' applet, which is not
 yet available in the official source release. The source code and patch for
@@ -21,16 +20,14 @@ http://lists.busybox.net/pipermail/busybox/2014-December/082065.html
 
 Unpack the code:
 
- $ tar -x -v --bzip2 -f busybox-1.24.2.tar.bz2
+ $ tar -x -v --bzip2 -f busybox-1.25.0.tar.bz2
 
 Copy the file "config" and the ".patch" files into the source code directory.
 Then apply the patches and the config:
 
- $ cd busybox-1.24.2
- $ patch -p 1 <busybox-1.24.2-CVE-2016-2147.patch
- $ patch -p 1 <busybox-1.24.2-CVE-2016-2148.patch
- $ patch -p 1 <busybox-1.24.2-ash-recursive-heredocs.patch
+ $ cd busybox-1.25.0
  $ patch -p 1 <busybox-acpi.patch
+ $ patch -p 1 <busybox-acpi-2.patch
 
  $ mv config .config
 
@@ -43,6 +40,12 @@ Notes:
   "--help" option are no standard.
 * This build enables Link Time Optimization (-flto) from gcc to produce a
   smaller binary.
+
+BusyBox's internal FAST_FUNC macro can obstruct the optimizations of functions
+by GCC's LTO, making the binaries slightly larger than optimal. Disable it:
+
+ $ sed -i.bak -e 's#__attribute__((regparm(3),stdcall))#/* & */#' \
+     include/platform.h
 
 Finally, build BusyBox:
 

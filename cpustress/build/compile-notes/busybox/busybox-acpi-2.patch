@@ -1,0 +1,50 @@
+From 7b5ca1da6575e4c5fb46888159ab86375d359162 Mon Sep 17 00:00:00 2001
+From: Kang-Che Sung <explorer09@gmail.com>
+Date: Tue, 28 Jun 2016 16:09:46 +0800
+Subject: [PATCH] Make "acpi" applet work with busybox-1.25.0
+
+BusyBox 1.25.0 (specifically, e6a2f4cc5a47d3022bdf5ca2cacbaa5a8c5baf7a
+commit) changes the way how bb_common_bufsiz1 is initialized and used,
+which breaks build of applets that does not adopt to new usage syntax.
+
+Update "acpi" applet (original author: Isaac Dunham) with this.
+
+Signed-off-by: Kang-Che Sung <explorer09@gmail.com>
+---
+ miscutils/acpi.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/miscutils/acpi.c b/miscutils/acpi.c
+index f2a5601..54fd978 100644
+--- a/miscutils/acpi.c
++++ b/miscutils/acpi.c
+@@ -44,6 +44,7 @@
+ #define FLAG_V	16
+ 
+ #include "libbb.h"
++#include "common_bufsiz.h"
+ #include <glob.h>
+ 
+ #define G_BUFSIZ 64
+@@ -54,7 +55,8 @@ struct globals {
+     int cool;
+     char buf[G_BUFSIZ];
+ } FIX_ALIASING;
+-#define G (*(struct globals*)&bb_common_bufsiz1)
++#define G (*(struct globals*)bb_common_bufsiz1)
++#define INIT_G() do { setup_common_bufsiz(); } while (0)
+ 
+ static int read_int_at(int dirfd, const char *name)
+ {
+@@ -88,6 +90,8 @@ int acpi_main(int argc UNUSED_PARAM, char **argv)
+     int dfd, on, cur, max, temp, i;
+     unsigned opts = getopt32(argv, "abctV");
+ 
++    INIT_G();
++
+     if (opts & FLAG_V)
+ 	opts = FLAG_a | FLAG_b | FLAG_c | FLAG_t;
+     if (!opts)
+-- 
+2.9.0
+
