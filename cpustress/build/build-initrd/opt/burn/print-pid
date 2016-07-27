@@ -17,6 +17,15 @@
 
 
 set +m
+
+print_status_and_exit () {
+    trap - 1 2 3 14 15 USR1 USR2 CONT TSTP
+    SIG=""
+    [ "$1" -gt 128 ] && [ "$1" -le 159 ] && SIG=" (`kill -l "$1"`)"
+    echo "print-pid: [`date +'%b %d %T'`] PID $PID exited with status $1$SIG."
+    exit "$1"
+}
+
 if [ "X$1" = X ] || [ "X$1" = X--help ]; then
     echo "Usage: $0 COMMAND [ARGS]"
     exit 1
@@ -32,23 +41,16 @@ if [ -x "`which -- "$1"`" ]; then
     # well documented. Beware.)
     trap '' USR1 USR2 PIPE TTIN TTOU XFSZ
     "$@" & PID=$!
-    trap 'trap - 2 3 14 15; kill $PID; kill -s CONT $PID' 2 3 14 15
+    trap 'trap - 2 3 14 15; kill $PID; kill -s CONT $PID; wait $PID; print_status_and_exit $?' 2 3 14 15
     trap 'trap - HUP; kill -s HUP $PID $$' HUP
     for s in USR1 USR2 CONT; do
-        trap "kill -s $s $PID" $s
+        trap 'kill -s '$s' $PID; wait $PID; print_status_and_exit $?' $s
     done
-    trap "kill -s TSTP $PID; kill -s STOP $$" TSTP
+    trap 'kill -s TSTP $PID; kill -s STOP $$' TSTP
     echo "print-pid: [`date +'%b %d %T'`] PID $PID, '$@ &' started."
-    wait $PID; STATUS=$?
-    trap - 1 2 3 14 15 USR1 USR2 CONT
-    SIG=""
-    if [ "$STATUS" -gt 128 ] && [ "$STATUS" -le 159 ]; then
-        SIG=" (`kill -l "$STATUS"`)"
-    fi
-    echo "print-pid: [`date +'%b %d %T'`] PID $PID exited with status $STATUS$SIG."
-    exit $STATUS
+    wait $PID; print_status_and_exit $?
 else
     echo "print-pid ERROR: '$1' is not executable." >&2
     echo "Usage: $0 COMMAND [ARGS]" >&2
-    exit 1
+    exit 126
 fi
