@@ -13,7 +13,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 27 July 2016.
+# Last updated on 28 July 2016.
 
 
 set +m
@@ -52,5 +52,5 @@ if [ -x "`which -- "$1"`" ]; then
 else
     echo "print-pid ERROR: '$1' is not executable." >&2
     echo "Usage: $0 COMMAND [ARGS]" >&2
-    exit 126
+    exit 1
 fi
