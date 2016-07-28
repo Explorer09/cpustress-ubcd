@@ -14,7 +14,7 @@
 # Written by Gert Hulselmans and Explorer.
 
 
-LAST_EDITED="31 December 2014"
+LAST_EDITED="28 July 2016"
 
 showcontrols () {
     printf "Use '\033[0;31m<SPACE>\033[0m', '\033[0;31m<PageUp>\033[0m', '\033[0;31m<PageDown>\033[0m', '\033[0;31m<Up>\033[0m' and '\033[0;31m<Down>\033[0m' to move through\n"
@@ -201,6 +201,7 @@ CMDSYSTESTER
             else
                 printf "'\033[01;37m$1\033[0m' is no executable and therefore there is no help text.\n"
                 printf "See '\033[01;37mhelpinfo\033[0m' for which executables are supported.\n"
+                exit 1
             fi
             ;;
     esac
