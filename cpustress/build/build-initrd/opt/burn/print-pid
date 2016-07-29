@@ -4,8 +4,7 @@
 # =========
 #
 # Runs a specified command and prints its process ID and exit status.
-# This small script is useful for Redelmeier's cpuburn programs which print
-# nothing to stdout.
+# Useful for Redelmeier's cpuburn programs which print nothing to stdout.
 #
 #
 # Licensed under the GNU General Public License, version 2 or later.
@@ -13,7 +12,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 28 July 2016.
+# Last updated on 29 July 2016.
 
 
 set +m
