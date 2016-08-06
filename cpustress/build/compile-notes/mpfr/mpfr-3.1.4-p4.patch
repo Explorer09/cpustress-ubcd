@@ -354,3 +354,100 @@ diff -Naurd mpfr-3.1.4-a/tests/tsub.c mpfr-3.1.4-b/tests/tsub.c
    bug_ddefour ();
    for (p=2; p<200; p++)
      for (i=0; i<50; i++)
+diff -Naurd mpfr-3.1.4-a/PATCHES mpfr-3.1.4-b/PATCHES
+--- mpfr-3.1.4-a/PATCHES	2016-08-04 20:41:14.097592781 +0000
++++ mpfr-3.1.4-b/PATCHES	2016-08-04 20:41:14.121592350 +0000
+@@ -0,0 +1 @@
++c++11-compat
+diff -Naurd mpfr-3.1.4-a/VERSION mpfr-3.1.4-b/VERSION
+--- mpfr-3.1.4-a/VERSION	2016-06-01 13:00:30.772711162 +0000
++++ mpfr-3.1.4-b/VERSION	2016-08-04 20:41:14.121592350 +0000
+@@ -1 +1 @@
+-3.1.4-p3
++3.1.4-p4
+diff -Naurd mpfr-3.1.4-a/src/mpfr.h mpfr-3.1.4-b/src/mpfr.h
+--- mpfr-3.1.4-a/src/mpfr.h	2016-06-01 13:00:30.772711162 +0000
++++ mpfr-3.1.4-b/src/mpfr.h	2016-08-04 20:41:14.121592350 +0000
+@@ -27,7 +27,7 @@
+ #define MPFR_VERSION_MAJOR 3
+ #define MPFR_VERSION_MINOR 1
+ #define MPFR_VERSION_PATCHLEVEL 4
+-#define MPFR_VERSION_STRING "3.1.4-p3"
++#define MPFR_VERSION_STRING "3.1.4-p4"
+ 
+ /* Macros dealing with MPFR VERSION */
+ #define MPFR_VERSION_NUM(a,b,c) (((a) << 16L) | ((b) << 8) | (c))
+diff -Naurd mpfr-3.1.4-a/src/version.c mpfr-3.1.4-b/src/version.c
+--- mpfr-3.1.4-a/src/version.c	2016-06-01 13:00:30.772711162 +0000
++++ mpfr-3.1.4-b/src/version.c	2016-08-04 20:41:14.121592350 +0000
+@@ -25,5 +25,5 @@
+ const char *
+ mpfr_get_version (void)
+ {
+-  return "3.1.4-p3";
++  return "3.1.4-p4";
+ }
+diff -Naurd mpfr-3.1.4-a/tests/tpow_z.c mpfr-3.1.4-b/tests/tpow_z.c
+--- mpfr-3.1.4-a/tests/tpow_z.c	2016-03-06 11:33:03.000000000 +0000
++++ mpfr-3.1.4-b/tests/tpow_z.c	2016-08-04 20:41:14.113592494 +0000
+@@ -26,7 +26,7 @@
+ 
+ #include "mpfr-test.h"
+ 
+-#define ERROR(str) do { printf("Error for "str"\n"); exit (1); } while (0)
++#define ERROR(str) do { printf ("Error for " str "\n"); exit (1); } while (0)
+ 
+ static void
+ check_special (void)
+diff -Naurd mpfr-3.1.4-a/tests/tset_si.c mpfr-3.1.4-b/tests/tset_si.c
+--- mpfr-3.1.4-a/tests/tset_si.c	2016-03-06 11:33:03.000000000 +0000
++++ mpfr-3.1.4-b/tests/tset_si.c	2016-08-04 20:41:14.113592494 +0000
+@@ -26,7 +26,7 @@
+ 
+ #include "mpfr-test.h"
+ 
+-#define ERROR(str) {printf("Error for "str"\n"); exit(1);}
++#define ERROR(str) do { printf ("Error for " str "\n"); exit (1); } while (0)
+ 
+ static void
+ test_2exp (void)
+diff -Naurd mpfr-3.1.4-a/tests/tset_sj.c mpfr-3.1.4-b/tests/tset_sj.c
+--- mpfr-3.1.4-a/tests/tset_sj.c	2016-03-06 11:33:03.000000000 +0000
++++ mpfr-3.1.4-b/tests/tset_sj.c	2016-08-04 20:41:14.113592494 +0000
+@@ -42,7 +42,7 @@
+ 
+ #else
+ 
+-#define ERROR(str) {printf("Error for "str"\n"); exit(1);}
++#define ERROR(str) do { printf ("Error for " str "\n"); exit (1); } while (0)
+ 
+ static int
+ inexact_sign (int x)
+diff -Naurd mpfr-3.1.4-a/tests/tsi_op.c mpfr-3.1.4-b/tests/tsi_op.c
+--- mpfr-3.1.4-a/tests/tsi_op.c	2016-03-06 11:33:03.000000000 +0000
++++ mpfr-3.1.4-b/tests/tsi_op.c	2016-08-04 20:41:14.113592494 +0000
+@@ -26,14 +26,16 @@
+ 
+ #include "mpfr-test.h"
+ 
+-#define ERROR1(s, i, z, exp) \
+-{\
+-  printf("Error for "s" and i=%d\n", i);\
+-  printf("Expected %s\n", exp);\
+-  printf("Got      "); mpfr_out_str (stdout, 16, 0, z, MPFR_RNDN);\
+-  putchar ('\n');\
+-  exit(1);\
+-}
++#define ERROR1(s,i,z,exp)                                               \
++  do                                                                    \
++    {                                                                   \
++      printf ("Error for " s " and i=%d\n", i);                         \
++      printf ("Expected %s\n", exp);                                    \
++      printf ("Got      "); mpfr_out_str (stdout, 16, 0, z, MPFR_RNDN); \
++      putchar ('\n');                                                   \
++      exit(1);                                                          \
++    }                                                                   \
++  while (0)
+ 
+ const struct {
+   const char * op1;
