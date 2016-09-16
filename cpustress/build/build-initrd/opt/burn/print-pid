@@ -12,13 +12,13 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 29 July 2016.
+# Last updated on 17 September 2016.
 
 
 set +m
 
 print_status_and_exit () {
-    trap - 1 2 3 14 15 USR1 USR2 CONT TSTP
+    trap - 1 2 3 14 15 USR1 USR2 CONT TSTP TTOU
     SIG=""
     [ "$1" -gt 128 ] && [ "$1" -le 159 ] && SIG=" (`kill -l "$1"`)"
     echo "print-pid: [`date +'%b %d %T'`] PID $PID exited with status $1$SIG."
