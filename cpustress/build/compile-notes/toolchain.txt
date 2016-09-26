@@ -1,4 +1,4 @@
-27 August 2016
+26 September 2016
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -72,7 +72,7 @@ manually - the script can't locate where the file is.)
  $ [ -f option-groups.config ] || exit 1
 
 Apply the official cumulative patch for MPFR:
-(Note: the version of latest MPFR patch before this build is 3.1.4-p4.)
+(Note: the version of latest MPFR patch before this build is 3.1.4-p6.)
 
  $ cd gcc-6.2.0/mpfr
  $ patch -p 1 < ../../mpfr-allpatches.patch
