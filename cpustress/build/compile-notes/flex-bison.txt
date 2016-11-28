@@ -1,4 +1,4 @@
-26 October 2016
+11 January 2016
 
 The 'sensors' program in the lm-sensors package requires flex and Bison in
 order to build. The versions of flex and Bison will significantly affect the
@@ -25,19 +25,22 @@ Preparation
  $ download () {
      wget http://ftp.gnu.org/gnu/libsigsegv/libsigsegv-2.10.tar.gz
      wget http://ftp.gnu.org/gnu/m4/m4-1.4.17.tar.xz
-     wget https://github.com/westes/flex/releases/download/v2.6.2/flex-2.6.2.tar.gz
+     # SourceForge automatically detects the user agent when visiting this URL,
+     # and for Wget, it responds with a 302 redirect to the file in a (nearest)
+     # mirror (without going to a download page).
+     wget http://downloads.sourceforge.net/project/flex/flex-2.6.0.tar.xz
      wget http://ftp.gnu.org/gnu/bison/bison-3.0.4.tar.xz
      }
  $ extract () {
      tar -x -z -f libsigsegv-2.10.tar.gz
      tar -x --xz -f m4-1.4.17.tar.xz
-     tar -x -z -f flex-2.6.2.tar.gz
+     tar -x --xz -f flex-2.6.0.tar.xz
      tar -x --xz -f bison-3.0.4.tar.xz
      }
 
  $ download
  $ extract
- $ for i in libsigsegv-2.10 m4-1.4.17 flex-2.6.2 bison-3.0.4
+ $ for i in libsigsegv-2.10 m4-1.4.17 flex-2.6.0 bison-3.0.4
      do [ -d "$i" ] || exit 1 ; done
 
  $ TOOLS_DIR="${PWD}/tools"
@@ -76,7 +79,7 @@ be linked with flex-gererated lexers. This is not applicable to cross-compile
 environments. However, flex doesn't provide a configure option to disable
 building libfl, so we have to do so via a hack.
 
- $ cd flex-2.6.2
+ $ cd flex-2.6.0
  $ sed -i.bak -e 's/lib_LTLIBRARIES = \\$/lib_LTLIBRARIES =/' \
      -e 's/\tlibfl.la \\$/#&/' -e 's/\tlibfl_pic.la$/#&/' src/Makefile.in
  $ ./configure --prefix="${TOOLS_DIR}" --disable-shared
