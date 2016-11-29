@@ -1,4 +1,4 @@
-11 January 2016
+29 November 2016
 
 The 'sensors' program in the lm-sensors package requires flex and Bison in
 order to build. The versions of flex and Bison will significantly affect the
@@ -14,7 +14,12 @@ This document may be converted to a workable shell script. To do this, run
 "doc-to-sh.sh".
 
 Both flex and Bison requires GNU M4 at runtime, and GNU M4 has an optional
-dependency on libsigsegv.
+dependency on libsigsegv. Essentialy, flex and Bison are interdependent on each
+other for generating C code of their own lexers and parsers, but such code is
+pre-generated in release tarballs and it's safe for us to just use it.
+Bootstrapping is not necessary. For lm-sensors, the generated lexer and parser
+code will be identical for the same respective flex and Bison versions, despite
+whether flex and Bison binaries are bootstrapped or neither.
 
  $ [ -d toolchain/tools ] || exit 1
  $ cd toolchain
