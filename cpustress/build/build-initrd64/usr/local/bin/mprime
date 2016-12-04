@@ -14,7 +14,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 29 May 2016.
+# Last updated on 4 December 2016.
 
 
 set -m
@@ -40,7 +40,8 @@ read_num () {
     done
 }
 
-mkdir -p /tmp/torture-test/
+mkdir -p /tmp/mprime
+[ -d /tmp/mprime ] || exit 1
 
 printf "\033[0;32mMersenne Prime torture test (64-bit):\n"
 printf "=====================================\033[0m\n\n"
@@ -201,18 +202,18 @@ TORTURE_TYPE
           sub(/^(; )?MaxTortureFFT[^\n]*\$/, \"MaxTortureFFT=$MAXFFT\");
           sub(/^(; )?TortureMem[^\n]*\$/, \"TortureMem=$TORTURE_MEM\");
           sub(/^(; )?TortureTime[^\n]*\$/, \"TortureTime=$TIMEFFT\");
-          $AWK_SUB print}" "$PRIME_INI" > "$PRIME_INI.tmp"
-    mv -f "$PRIME_INI.tmp" "$PRIME_INI"
+          $AWK_SUB print}" $PRIME_INI >$PRIME_INI.tmp
+    mv -f $PRIME_INI.tmp $PRIME_INI
 elif [ "$TEMPDIR" != N ] && [ "X$AWK_SUB" != X ]; then
-    awk "{$AWK_SUB print}" "$PRIME_INI" > "$PRIME_INI.tmp"
-    mv -f "$PRIME_INI.tmp" "$PRIME_INI"
+    awk "{$AWK_SUB print}" $PRIME_INI >$PRIME_INI.tmp
+    mv -f $PRIME_INI.tmp $PRIME_INI
 fi
 
 # Launch mprime
 [ "$MODE" -eq 2 ] && ARGS=" -t$ARGS"
 if [ "$TEMPDIR" = Y ]; then
-    WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
-    cp "$PRIME_INI" "$WORKING_DIR"
+    WORKING_DIR=`mktemp -d -p /tmp/mprime XXXXXX`
+    cp $PRIME_INI $WORKING_DIR
     ARGS="$ARGS -w$WORKING_DIR"
 fi
 echo "Running 1 instance of mprime ('/opt/mprime/28/mprime$ARGS')."

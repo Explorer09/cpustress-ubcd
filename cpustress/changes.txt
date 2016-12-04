@@ -3,7 +3,7 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-29 May 2016
+4 December 2016
 
 - (64-bit support. A separate 64-bit kernel and CPUstress image will be available)
 - (binaries that are now built with LTO: mprime, sensors, stresscpu2(already LTO in 2.5.0), busybox)
@@ -18,6 +18,11 @@ Changes in development version
   wrongly kill something that reuses the original child's PID when the PID had
   been released). As a side effect, these scripts no longer read keyboard
   inputs when a child they launched has exited.
+- Changed the naming scheme of mprime temporary directories,
+  from "/tmp/torture-test/torture.XXXXXX" to "/tmp/mprime/XXXXXX". Multiple
+  instances of mprime will now have their working directories created as
+  subdirectories of one random identifier (e.g. "/tmp/mprime/ABCDEF/5"), rather
+  than each having a distinct random ID.
 
 - Updated Intel LINPACK to v11.2.1 (from v11.2.0)
 - Updated eglibc to 2.19-r25890 (from 2.19-r25243)

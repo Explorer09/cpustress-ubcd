@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2016-11-29 15:22:56.0782359970 +0800" .git_cache_meta
+touch -c -h -d "2016-12-04 21:10:02.1726820230 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -138,7 +138,7 @@ touch -c -h -d "2014-11-01 10:14:40.1796888700 +0800" cpustress/build/build-init
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/menu
 touch -c -h -d "2014-12-31 15:49:28.5458764110 +0800" cpustress/build/build-initrd/usr/local/bin/menu
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/mprime
-touch -c -h -d "2016-05-29 17:25:58.1871719470 +0800" cpustress/build/build-initrd/usr/local/bin/mprime
+touch -c -h -d "2016-12-04 20:03:52.9520447290 +0800" cpustress/build/build-initrd/usr/local/bin/mprime
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/sensors
 touch -c -h -d "2014-11-01 10:36:18.5449371220 +0800" cpustress/build/build-initrd/usr/local/bin/sensors
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/sensors-detect
@@ -151,7 +151,7 @@ touch -c -h -d "2013-04-13 22:54:21.7614506540 +0800" cpustress/build/build-init
 chmod 0755 cpustress/build/build-initrd/usr/local/bin/systester-cli
 touch -c -h -d "2014-11-01 11:25:05.6008484800 +0800" cpustress/build/build-initrd/usr/local/bin/systester-cli
 chmod 0755 cpustress/build/build-initrd64/usr/local/bin/mprime
-touch -c -h -d "2016-05-29 12:21:21.3719242030 +0800" cpustress/build/build-initrd64/usr/local/bin/mprime
+touch -c -h -d "2016-12-04 20:02:59.5600416310 +0800" cpustress/build/build-initrd64/usr/local/bin/mprime
 chmod 0644 cpustress/build/compile-notes/burn.txt
 touch -c -h -d "2015-10-24 19:13:00.3308899490 +0800" cpustress/build/compile-notes/burn.txt
 chmod 0644 cpustress/build/compile-notes/busybox.txt
@@ -233,7 +233,7 @@ touch -c -h -d "2014-05-06 21:03:22.9432341320 +0800" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
 touch -c -h -d "2016-05-24 10:57:16.0293181810 +0800" cpustress/build/prepare
 chmod 0644 cpustress/changes.txt
-touch -c -h -d "2016-05-29 13:07:28.9718998780 +0800" cpustress/changes.txt
+touch -c -h -d "2016-12-04 21:09:51.6966814160 +0800" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt
 touch -c -h -d "2013-02-26 13:59:23.0000000000 +0800" cpustress/gpl-2.0.txt
 chmod 0644 cpustress/help/burn.txt

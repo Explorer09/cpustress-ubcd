@@ -16,7 +16,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 29 May 2016.
+# Last updated on 4 December 2016.
 
 
 set -m
@@ -49,7 +49,8 @@ if [ "X$BASH" != X ]; then
     exit 1
 fi
 
-mkdir -p /tmp/torture-test/
+mkdir -p /tmp/mprime
+[ -d /tmp/mprime ] || exit 1
 
 printf "\033[0;32mMersenne Prime torture test:\n"
 printf "============================\033[0m\n\n"
@@ -266,11 +267,11 @@ TORTURE_TYPE
           sub(/^(; )?MaxTortureFFT[^\n]*\$/, \"MaxTortureFFT=$MAXFFT\");
           sub(/^(; )?TortureMem[^\n]*\$/, \"TortureMem=$TORTURE_MEM\");
           sub(/^(; )?TortureTime[^\n]*\$/, \"TortureTime=$TIMEFFT\");
-          $AWK_SUB print}" "$PRIME_INI" > "$PRIME_INI.tmp"
-    mv -f "$PRIME_INI.tmp" "$PRIME_INI"
+          $AWK_SUB print}" $PRIME_INI >$PRIME_INI.tmp
+    mv -f $PRIME_INI.tmp $PRIME_INI
 elif [ "$TEMPDIR" != N ] && [ "X$AWK_SUB" != X ]; then
-    awk "{$AWK_SUB print}" "$PRIME_INI" > "$PRIME_INI.tmp"
-    mv -f "$PRIME_INI.tmp" "$PRIME_INI"
+    awk "{$AWK_SUB print}" $PRIME_INI >$PRIME_INI.tmp
+    mv -f $PRIME_INI.tmp $PRIME_INI
 fi
 
 # Launch mprime
@@ -278,11 +279,12 @@ if [ "$MODE" -eq 3 ]; then
     printf "\033[01;31mTo stop the torture test, press any key.\033[0m\n"
     PID_LIST=""
     trap 'trap - CHLD; trap "" 1 2 3 15; kill $PID_LIST; trap - 1 2 3 15; wait; exit 0' 1 2 3 15
+    WORKING_DIR=`mktemp -d -p /tmp/mprime XXXXXX`
     for i in `seq 1 $instances`; do
-        WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
-        cp "$PRIME_INI" "$WORKING_DIR"
-        echo "mprime: Starting instance $i of mprime ('/opt/mprime/$VER/mprime -t -w\"$WORKING_DIR\" &')."
-        /opt/mprime/$VER/mprime -t -w"$WORKING_DIR" & PID_LIST="$PID_LIST $!"
+        mkdir $WORKING_DIR/$i
+        cp $PRIME_INI $WORKING_DIR/$i
+        echo "mprime: Starting instance $i of mprime ('/opt/mprime/$VER/mprime -t -w$WORKING_DIR/$i &')."
+        /opt/mprime/$VER/mprime -t -w$WORKING_DIR/$i & PID_LIST="$PID_LIST $!"
     done
     trap 'trap - 1 2 3 15 CHLD; wait; exit 0' CHLD
     read -s -n1 REPLY # May be interrupted by a SIGCHLD.
@@ -291,8 +293,8 @@ if [ "$MODE" -eq 3 ]; then
 else
     [ "$MODE" -eq 2 ] && ARGS=" -t$ARGS"
     if [ "$TEMPDIR" = Y ]; then
-        WORKING_DIR=`mktemp -d -p /tmp/torture-test torture.XXXXXX`
-        cp "$PRIME_INI" "$WORKING_DIR"
+        WORKING_DIR=`mktemp -d -p /tmp/mprime XXXXXX`
+        cp $PRIME_INI $WORKING_DIR
         ARGS="$ARGS -w$WORKING_DIR"
     fi
     echo "Running 1 instance of mprime ('/opt/mprime/$VER/mprime$ARGS')."
