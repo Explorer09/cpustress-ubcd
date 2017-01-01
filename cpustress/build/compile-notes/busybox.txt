@@ -1,4 +1,4 @@
-30 June 2016
+1 January 2017
 
 The BusyBox binary is compiled on Ubuntu 12.04.5 LTS (32-bit), with a custom
 cross-toolchain described in "toolchain.txt". Before compiling, make sure you
@@ -8,10 +8,10 @@ directory of the toolchain:
  $ export PATH="${TOOLS_DIR}/bin:${PATH}"
 
 Download BusyBox source code and the official patches:
-http://busybox.net/downloads/busybox-1.25.0.tar.bz2
-(At the time of the writing, there were no official patches for 1.25.0. You can
+http://busybox.net/downloads/busybox-1.26.0.tar.bz2
+(At the time of the writing, there were no official patches for 1.26.0. You can
 can check the official patches at
-<http://busybox.net/downloads/fixes-1.25.0/>.)
+<http://busybox.net/downloads/fixes-1.26.0/>.)
 
 The BusyBox binary in CPUstress also includes the 'acpi' applet, which is not
 yet available in the official source release. The source code and patch for
@@ -20,12 +20,12 @@ http://lists.busybox.net/pipermail/busybox/2014-December/082065.html
 
 Unpack the code:
 
- $ tar -x -v --bzip2 -f busybox-1.25.0.tar.bz2
+ $ tar -x -v --bzip2 -f busybox-1.26.0.tar.bz2
 
 Copy the file "config" and the ".patch" files into the source code directory.
 Then apply the patches and the config:
 
- $ cd busybox-1.25.0
+ $ cd busybox-1.26.0
  $ patch -p 1 <busybox-acpi.patch
  $ patch -p 1 <busybox-acpi-2.patch
 
