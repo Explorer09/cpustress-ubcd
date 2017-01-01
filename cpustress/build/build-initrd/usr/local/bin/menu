@@ -12,7 +12,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 31 December 2014.
+# Last updated on 2 January 2017.
 
 
 if [ "X$1" = X--help ]; then
@@ -54,7 +54,7 @@ printf "Choose: "
 read CHOICE
 printf "\n"
 
-case "$CHOICE" in
+case $CHOICE in
     1 | burn)
         burn
         ;;

@@ -13,7 +13,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 29 May 2016.
+# Last updated on 2 January 2017.
 
 
 set -m
@@ -29,7 +29,7 @@ fi
 printf "\033[0;32mCPU Burn-in v1.00:\n"
 printf "==================\033[0m\n\n"
 
-case "$1" in
+case $1 in
     --help | -h)
         cat << HELP
 Usage: $0 [TIME]
@@ -47,13 +47,13 @@ esac
 # $days, $hours, and $minutes are environment variables as well as boot
 # parameters.
 if [ "X$1" != X ]; then
-    TIME="$1"
+    TIME=$1
 elif [ "X$days" != X ]; then
     TIME=$((days*24*60))
 elif [ "X$hours" != X ]; then
     TIME=$((hours*60))
 elif [ "X$minutes" != X ]; then
-    TIME="$minutes"
+    TIME=$minutes
 else
     TIME=10080
 fi
@@ -62,7 +62,7 @@ if [ "$instances" -gt 0 ] 2>/dev/null; then
     :
 else
     echo "Detecting the number of CPUs: $CPUS detected."
-    instances="$CPUS"
+    instances=$CPUS
 fi
 
 if [ "$instances" -eq 1 ]; then

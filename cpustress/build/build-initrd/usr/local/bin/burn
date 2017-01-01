@@ -17,7 +17,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 29 May 2016.
+# Last updated on 2 January 2017.
 
 
 set -m
@@ -39,7 +39,7 @@ printf "==============\033[0m\n\n"
 
 # Detect processor type
 MODE=""
-case "$VENDOR" in
+case $VENDOR in
     GenuineIntel)
         if [ "$MODEL" -ge 16 ]; then # Core, Atom or newer
             MODE=P6
@@ -80,7 +80,7 @@ fi
 # Parse command-line arguments.
 RAMSIZE=""
 ASK_RAMSIZE=N
-case "$1" in
+case $1 in
     --help | -h)
         cat << HELP
 Usage: $0 [MODE [RAMSIZE]]
@@ -108,10 +108,10 @@ HELP
         exit 0
         ;;
     P5 | P6 | K6 | K7)
-        MODE="$1"
+        MODE=$1
         ;;
     MMX | BX)
-        MODE="$1" RAMSIZE="$2"
+        MODE=$1 RAMSIZE=$2
         ;;
     *)
         ASK_RAMSIZE=Y
@@ -128,7 +128,7 @@ MODE
             printf "  Default choice is \033[01;37m$MODE\033[0m.\n"
             printf "Choose: "
             read CHOICE
-            case "$CHOICE" in
+            case $CHOICE in
                 1 | P5 | p5)   MODE=P5;  break ;;
                 2 | P6 | p6)   MODE=P6;  break ;;
                 3 | K6 | k6)   MODE=K6;  break ;;
@@ -146,7 +146,7 @@ if [ "$instances" -gt 0 ] 2>/dev/null; then
     :
 else
     echo "Detecting the number of CPUs: $CPUS detected."
-    instances="$CPUS"
+    instances=$CPUS
 fi
 if [ "$instances" -eq 1 ]; then
     echo "1 instance of burn$MODE will be run."
@@ -163,7 +163,7 @@ while :; do
     else
         break
     fi
-    case "$RAMSIZE" in
+    case $RAMSIZE in
         [Aa] | 2[Kk] | 2[Kk][Bb])     ARGS=" A"; break ;;
         [Bb] | 4[Kk] | 4[Kk][Bb])     ARGS=" B"; break ;;
         [Cc] | 8[Kk] | 8[Kk][Bb])     ARGS=" C"; break ;;

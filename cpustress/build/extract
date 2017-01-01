@@ -6,7 +6,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 6 May 2014.
+# Last updated on 2 January 2017.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -27,7 +27,7 @@ echo "Extracting initrd.xz..."
 xz -d -v -c initrd.xz >build-initrd/initrd
 cd build-initrd
 cpio -i -m -d -u <initrd
-STATUS="$?"
+STATUS=$?
 rm initrd
 if [ "$STATUS" -ne "0" ]; then
     echo "ERROR: cpio error with exit code ${STATUS}." >&2

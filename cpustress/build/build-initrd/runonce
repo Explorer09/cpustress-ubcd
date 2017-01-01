@@ -11,7 +11,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Gert Hulselmans and Explorer.
-# Last updated on 31 December 2014.
+# Last updated on 2 January 2017.
 
 
 set -m
@@ -81,7 +81,7 @@ CPUSTRESS_TEXT
     done
     printf "\n\n"
 
-    case "$ubcdcmd" in
+    case $ubcdcmd in
         burn)
             burn $ubcdargs
             ;;
@@ -118,7 +118,7 @@ CPUSTRESS_TEXT
             ;;
         stress)
             stress $ubcdargs
-            case "$ubcdargs" in
+            case $ubcdargs in
                 "" | -? | --help)
                     echo "Press any key to go to the console."
                     read -s -n1 REPLY

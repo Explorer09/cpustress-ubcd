@@ -5,7 +5,7 @@
 # The ! and * are interpreted differently by the shell, so they have to be
 # escaped.
 
-ARCHIVE_NAME="cpustress-develop"
+ARCHIVE_NAME=cpustress-develop
 
 # Change working directory to the parent directory of the script.
 cd `dirname $0`
@@ -34,7 +34,7 @@ P7ZIP=""
 for n in 7z 7za 7zr; do
     for d in $PATH ; do
         if [ -x "$d/$n" ]; then
-            P7ZIP="$n"
+            P7ZIP=$n
             break 2
         fi
     done

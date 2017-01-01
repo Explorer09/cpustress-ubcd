@@ -17,7 +17,7 @@ if [ -d "build" ]; then
                 /build\/initrd\.xz/ d' |
             tar -c -v --no-recursion --format=ustar -f build.tar -T - \
                 --exclude-backups --exclude-vcs
-        STATUS="$?"
+        STATUS=$?
         ;;
     *bsdtar*)
         # Note: --no-recursion is a synonym of -n but does not work with old
@@ -28,7 +28,7 @@ if [ -d "build" ]; then
             sed -e '/build\/build-initrd\/[^\n][^\n]*/ d
                 /build\/initrd\.xz/ d' |
             tar -c -v -n --format ustar -f build.tar -T -
-        STATUS="$?"
+        STATUS=$?
         ;;
     *)
         echo "ERROR: This script requires a GNU tar or bsdtar." >&2
@@ -36,7 +36,7 @@ if [ -d "build" ]; then
     esac
     if [ "$STATUS" -eq 0 ]; then
         xz -F xz -6 -c <build.tar >build.txz
-        STATUS="$?"
+        STATUS=$?
     fi
     rm -f build.tar
     exit $STATUS

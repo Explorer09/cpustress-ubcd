@@ -11,7 +11,7 @@ read_num () {
     while :; do
         read REPLY
         if [ "X$REPLY" = X ]; then
-            REPLY="$2"
+            REPLY=$2
             return
         fi
         if [ "$REPLY" -ge "$3" ] 2>/dev/null && [ "$REPLY" -le "$4" ]; then
@@ -102,7 +102,7 @@ fi
 # segfault.
 if [ "$VER" -ge 2505 ]; then
     read_num "Number of torture test threads to run" "$CPUS" 1 "$CPUS"
-    THREADS="$REPLY"
+    THREADS=$REPLY
 fi
 
 cat << TORTURE_TYPE
@@ -116,10 +116,10 @@ FFT test then your problem is likely bad memory or a bad memory controller.
 TORTURE_TYPE
 
 read_num "Type of torture test to run" 3 1 3
-case "$REPLY" in
+case $REPLY in
     1) MINFFT=8   MAXFFT=64   TORTURE_MEM=0 ;;
     2) MINFFT=128 MAXFFT=1024 TORTURE_MEM=0 ;;
-    3) MINFFT=8   MAXFFT=4096 TORTURE_MEM="$BLENDMEMORY" ;;
+    3) MINFFT=8   MAXFFT=4096 TORTURE_MEM=$BLENDMEMORY ;;
 esac
 
 printf "Min FFT Size: %5dK" "$MINFFT"
@@ -134,7 +134,7 @@ printf "Max FFT size: %5dK  Time to run each FFT size: %5d minutes\n" \
 while true; do
     printf "Fine tune the selection [y/N]? "
     read REPLY
-    case "$REPLY" in
+    case $REPLY in
         [Yy]) REPLY=Y; break ;;
         "" | [Nn]) break ;;
     esac
@@ -142,16 +142,16 @@ done
 
 if [ "X$REPLY" = XY ]; then
     read_num "Min FFT size (in K)" "$MINFFT" "$MINFFT_MIN" "$MAXFFT_MAX"
-    MINFFT="$REPLY"
+    MINFFT=$REPLY
     read_num "Max FFT size (in K)" "$MAXFFT" "$MAXFFT_MIN" "$MAXFFT_MAX"
-    MAXFFT="$REPLY"
+    MAXFFT=$REPLY
     if [ "$BLENDMEMORY" -gt 8 ]; then
         read_num "Memory to use (in MiB, 0 = in-place FFTs)" \
             "$TORTURE_MEM" 0 "$MEMORY_MAX"
-        TORTURE_MEM="$REPLY"
+        TORTURE_MEM=$REPLY
     fi
     read_num "Time to run each FFT size (in minutes)" "$TIMEFFT" 1 60
-    TIMEFFT="$REPLY"
+    TIMEFFT=$REPLY
 fi
 
 # The TortureThreads in INI specifies per-thread memory, not total memory.

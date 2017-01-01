@@ -5,15 +5,15 @@
 # This script is modified from ubcd2iso.sh script in Ultimate Boot CD.
 
 # Define VOLUME_ID (LABEL) of the ISO
-VOLUME_ID="CPUSTRESS"
+VOLUME_ID=CPUSTRESS
 
 # Define ISO filename
-ISO_FILENAME="cpustress-develop.iso"
+ISO_FILENAME=cpustress-develop.iso
 
 # Change working directory to the parent directory of the script.
 cd `dirname $0`
 cd ..
-ROOT_OF_ISO_PATH="$(pwd)/iso-tmp"
+ROOT_OF_ISO_PATH=`pwd`/iso-tmp
 
 # Execute other build scripts when needed.
 if [ ! -f "cpustress/initrd.xz" ]; then
@@ -49,7 +49,7 @@ MKISOFS=''
 IFS=:
 for i in $PATH ; do
     if [ -x "$i/mkisofs" ]; then
-        MKISOFS="$i/mkisofs"
+        MKISOFS=$i/mkisofs
         break
     fi
 done

@@ -1,4 +1,4 @@
-1 January 2017
+2 January 2017
 
 The 'sensors' program in the lm-sensors package requires flex and Bison in
 order to build. The versions of flex and Bison will significantly affect the
@@ -45,7 +45,7 @@ Preparation
  $ for i in libsigsegv-2.10 m4-1.4.18 flex-2.6.3 bison-3.0.4
      do [ -d "$i" ] || exit 1 ; done
 
- $ TOOLS_DIR="${PWD}/tools"
+ $ TOOLS_DIR=${PWD}/tools
 
  $ export PATH="${TOOLS_DIR}/bin:${PATH}"
 
