@@ -59,10 +59,7 @@ cd build-initrd
 # Some VCS, notably Subversion, may create hidden directories all over the
 # place. I have to ignore instead of remove them.
 # http://www.gnu.org/software/tar/manual/html_section/exclude.html
-if [ -e "../filelist-tmp.sed" ]; then
-    rm -Ri ../filelist-tmp.sed
-fi
-cat >../filelist-tmp.sed <<FILELIST_SED
+FILELIST_SED='
 /\.#/ d
 /~$/ d
 /CVS\// d
@@ -73,7 +70,7 @@ cat >../filelist-tmp.sed <<FILELIST_SED
 /\.git/ d
 /\.bzr/ d
 /\.hg/ d
-FILELIST_SED
+'
 
 echo "Making cpio archive..."
 
@@ -82,11 +79,9 @@ echo "Making cpio archive..."
 # --owner (synonym of -R) might be GNU-only.
 find . \( -type d -exec printf '%s/\n' '{}' \; \) -o -print |
     LC_ALL=C sort |
-    sed -f ../filelist-tmp.sed |
+    sed -e "$FILELIST_SED" |
     cpio -o --format newc -R 0:0 >../initrd
 STATUS=$?
-
-rm ../filelist-tmp.sed
 
 if [ "$STATUS" -ne "0" ]; then
     echo "ERROR: cpio error with exit code ${STATUS}." >&2
