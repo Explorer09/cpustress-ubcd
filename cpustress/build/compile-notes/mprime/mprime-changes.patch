@@ -1,6 +1,6 @@
 diff -r -u a/comm95c.c b/comm95c.c
 --- a/comm95c.c	2009-04-05 08:43:31.000000000 +0800
-+++ b/comm95c.c	2017-01-22 00:17:14.034982183 +0800
++++ b/comm95c.c	2017-01-22 00:52:44.931105838 +0800
 @@ -17,6 +17,7 @@
  
  /* Load the PrimeNet DLL, make sure an internet connection is active */
@@ -31,7 +31,7 @@ diff -r -u a/comm95c.c b/comm95c.c
  
 diff -r -u a/commona.c b/commona.c
 --- a/commona.c	2016-09-14 12:31:33.000000000 +0800
-+++ b/commona.c	2017-01-22 00:17:14.398982204 +0800
++++ b/commona.c	2017-01-22 00:52:44.931105838 +0800
 @@ -217,10 +217,12 @@
  
  // If LL testing 100M digit numbers, use at least 4 cores (or all cores)
@@ -47,7 +47,7 @@ diff -r -u a/commona.c b/commona.c
  
 diff -r -u a/commonb.c b/commonb.c
 --- a/commonb.c	2016-09-14 03:05:24.000000000 +0800
-+++ b/commonb.c	2017-01-22 00:17:14.398982204 +0800
++++ b/commonb.c	2017-01-22 00:52:44.939105839 +0800
 @@ -2955,7 +2955,9 @@
  /* to try something and if it doesn't work, ESC and choose Test/Continue */
  /* to try some other system settings (without waiting an hour). */
@@ -237,7 +237,7 @@ diff -r -u a/commonb.c b/commonb.c
  
 diff -r -u a/commonc.c b/commonc.c
 --- a/commonc.c	2016-09-14 11:33:00.000000000 +0800
-+++ b/commonc.c	2017-01-22 00:17:14.398982204 +0800
++++ b/commonc.c	2017-01-22 00:52:44.939105839 +0800
 @@ -20,35 +20,47 @@
  char	SPOOL_FILE[80] = {0};
  char	LOGFILE[80] = {0};
@@ -627,7 +627,7 @@ diff -r -u a/commonc.c b/commonc.c
  				timed_events[i].time_to_fire =
 diff -r -u a/commonc.h b/commonc.h
 --- a/commonc.h	2016-10-30 22:28:37.000000000 +0800
-+++ b/commonc.h	2017-01-22 00:17:14.398982204 +0800
++++ b/commonc.h	2017-01-22 00:52:44.939105839 +0800
 @@ -144,26 +144,36 @@
  extern char USERID[21];			/* User's ID */
  extern char COMPID[21];			/* Computer name */
@@ -708,7 +708,7 @@ diff -r -u a/commonc.h b/commonc.h
  *                           Timed Events Handler                              *
 diff -r -u a/ecm.c b/ecm.c
 --- a/ecm.c	2016-05-02 12:44:52.000000000 +0800
-+++ b/ecm.c	2017-01-22 00:17:14.398982204 +0800
++++ b/ecm.c	2017-01-22 00:52:44.939105839 +0800
 @@ -3335,6 +3335,7 @@
  /* Send ECM completed message to the server.  Although don't do it for */
  /* puny B1 values. */
@@ -775,7 +775,7 @@ diff -r -u a/ecm.c b/ecm.c
  
 diff -r -u a/linux/makebsd b/linux/makebsd
 --- a/linux/makebsd	2016-10-31 02:42:15.000000000 +0800
-+++ b/linux/makebsd	2017-01-22 00:17:14.398982204 +0800
++++ b/linux/makebsd	2017-01-22 00:52:44.939105839 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -791,7 +791,7 @@ diff -r -u a/linux/makebsd b/linux/makebsd
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic /usr/local/lib/libcurl.a -lz -lcompat -lstdc++ -Wl,-Bdynamic -lssl
 diff -r -u a/linux/makefile b/linux/makefile
 --- a/linux/makefile	2016-10-31 02:42:15.000000000 +0800
-+++ b/linux/makefile	2017-01-22 00:17:14.402982204 +0800
++++ b/linux/makefile	2017-01-22 00:52:44.939105839 +0800
 @@ -20,10 +20,10 @@
  #	LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic  $(shell pkg-config --static --libs libcurl) -lstdc++ -Wl,-Bdynamic -ldl
  
@@ -807,7 +807,7 @@ diff -r -u a/linux/makefile b/linux/makefile
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic -lcurl -Wl,-Bdynamic -lrt -lstdc++ -ldl
 diff -r -u a/linux/makehaikugcc2 b/linux/makehaikugcc2
 --- a/linux/makehaikugcc2	2016-10-31 02:42:15.000000000 +0800
-+++ b/linux/makehaikugcc2	2017-01-22 00:17:14.402982204 +0800
++++ b/linux/makehaikugcc2	2017-01-22 00:52:44.943105839 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -823,7 +823,7 @@ diff -r -u a/linux/makehaikugcc2 b/linux/makehaikugcc2
  LIBS   = -L/boot/common/lib ../gwnum/gwnum.a ../gwnum/gwnum.ld -lnetwork -lcurl -lstdc++.r4
 diff -r -u a/linux/makehaikugcc4 b/linux/makehaikugcc4
 --- a/linux/makehaikugcc4	2016-10-31 02:42:15.000000000 +0800
-+++ b/linux/makehaikugcc4	2017-01-22 00:17:14.402982204 +0800
++++ b/linux/makehaikugcc4	2017-01-22 00:52:44.943105839 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -839,7 +839,7 @@ diff -r -u a/linux/makehaikugcc4 b/linux/makehaikugcc4
  LIBS   = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lnetwork -lcurl -lstdc++
 diff -r -u a/linux/menu.c b/linux/menu.c
 --- a/linux/menu.c	2016-09-15 10:15:10.000000000 +0800
-+++ b/linux/menu.c	2017-01-22 00:17:14.402982204 +0800
++++ b/linux/menu.c	2017-01-22 00:52:44.943105839 +0800
 @@ -23,7 +23,7 @@
  void get_line (
  	char	*buf)
@@ -1456,7 +1456,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	}
 diff -r -u a/linux/os_routines.c b/linux/os_routines.c
 --- a/linux/os_routines.c	2016-03-28 08:27:51.000000000 +0800
-+++ b/linux/os_routines.c	2017-01-22 00:17:14.402982204 +0800
++++ b/linux/os_routines.c	2017-01-22 00:52:44.943105839 +0800
 @@ -411,6 +411,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -1483,7 +1483,7 @@ diff -r -u a/linux/os_routines.c b/linux/os_routines.c
  
 diff -r -u a/linux/prime.c b/linux/prime.c
 --- a/linux/prime.c	2016-09-13 14:06:10.000000000 +0800
-+++ b/linux/prime.c	2017-01-22 00:17:14.402982204 +0800
++++ b/linux/prime.c	2017-01-22 00:52:44.943105839 +0800
 @@ -11,6 +11,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -1554,9 +1554,23 @@ diff -r -u a/linux/prime.c b/linux/prime.c
  	}
  
  /* Bring up the main menu */
+diff -r -u a/linux/prime.h b/linux/prime.h
+--- a/linux/prime.h	2016-09-13 13:52:36.000000000 +0800
++++ b/linux/prime.h	2017-01-22 00:52:44.943105839 +0800
+@@ -99,6 +99,10 @@
+ extern int volatile KILL_MENUS;		/* TRUE if program should terminate */
+ extern int MENUING;			/* TRUE when main menu active */
+ 
++/* Signal handlers */
++
++void sigterm_handler (int);
++
+ /* Internal routines */
+ 
+ void main_menu (void);
 diff -r -u a/linux64/makebsd b/linux64/makebsd
 --- a/linux64/makebsd	2016-10-31 02:42:16.000000000 +0800
-+++ b/linux64/makebsd	2017-01-22 00:17:14.402982204 +0800
++++ b/linux64/makebsd	2017-01-22 00:52:44.943105839 +0800
 @@ -4,10 +4,10 @@
  #
  
@@ -1572,7 +1586,7 @@ diff -r -u a/linux64/makebsd b/linux64/makebsd
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -lcurl -lstdc++ -lcompat
 diff -r -u a/linux64/makefile b/linux64/makefile
 --- a/linux64/makefile	2016-10-31 02:42:16.000000000 +0800
-+++ b/linux64/makefile	2017-01-22 00:17:14.402982204 +0800
++++ b/linux64/makefile	2017-01-22 00:52:44.943105839 +0800
 @@ -13,10 +13,10 @@
  #	LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic $(shell pkg-config --static --libs libcurl) -lstdc++ -Wl,-Bdynamic -ldl
  
@@ -1588,7 +1602,7 @@ diff -r -u a/linux64/makefile b/linux64/makefile
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic -lcurl -Wl,-Bdynamic -lrt -lstdc++ -ldl
 diff -r -u a/linux64/menu.c b/linux64/menu.c
 --- a/linux64/menu.c	2016-09-15 10:15:10.000000000 +0800
-+++ b/linux64/menu.c	2017-01-22 00:17:14.402982204 +0800
++++ b/linux64/menu.c	2017-01-22 00:52:44.943105839 +0800
 @@ -23,7 +23,7 @@
  void get_line (
  	char	*buf)
@@ -2205,7 +2219,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	}
 diff -r -u a/linux64/os_routines.c b/linux64/os_routines.c
 --- a/linux64/os_routines.c	2016-03-28 08:27:51.000000000 +0800
-+++ b/linux64/os_routines.c	2017-01-22 00:17:14.402982204 +0800
++++ b/linux64/os_routines.c	2017-01-22 00:52:44.943105839 +0800
 @@ -411,6 +411,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -2232,7 +2246,7 @@ diff -r -u a/linux64/os_routines.c b/linux64/os_routines.c
  
 diff -r -u a/linux64/prime.c b/linux64/prime.c
 --- a/linux64/prime.c	2016-09-13 14:06:10.000000000 +0800
-+++ b/linux64/prime.c	2017-01-22 00:17:14.402982204 +0800
++++ b/linux64/prime.c	2017-01-22 00:52:44.943105839 +0800
 @@ -11,6 +11,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -2303,9 +2317,23 @@ diff -r -u a/linux64/prime.c b/linux64/prime.c
  	}
  
  /* Bring up the main menu */
+diff -r -u a/linux64/prime.h b/linux64/prime.h
+--- a/linux64/prime.h	2016-09-13 13:52:36.000000000 +0800
++++ b/linux64/prime.h	2017-01-22 00:52:44.947105839 +0800
+@@ -99,6 +99,10 @@
+ extern int volatile KILL_MENUS;		/* TRUE if program should terminate */
+ extern int MENUING;			/* TRUE when main menu active */
+ 
++/* Signal handlers */
++
++void sigterm_handler (int);
++
+ /* Internal routines */
+ 
+ void main_menu (void);
 diff -r -u a/macosx/makefile b/macosx/makefile
 --- a/macosx/makefile	2016-10-31 02:42:19.000000000 +0800
-+++ b/macosx/makefile	2017-01-22 00:17:14.402982204 +0800
++++ b/macosx/makefile	2017-01-22 00:52:44.947105839 +0800
 @@ -4,10 +4,10 @@
  ENVP= MACOSX_DEPLOYMENT_TARGET=10.4
  
@@ -2321,7 +2349,7 @@ diff -r -u a/macosx/makefile b/macosx/makefile
  LIBS   = ../gwnum/release/gwnum.a -lm -lpthread -lcurl -framework IOKit -framework CoreFoundation -lstdc++
 diff -r -u a/macosx/menu.c b/macosx/menu.c
 --- a/macosx/menu.c	2016-09-15 10:15:10.000000000 +0800
-+++ b/macosx/menu.c	2017-01-22 00:17:14.406982205 +0800
++++ b/macosx/menu.c	2017-01-22 00:52:44.947105839 +0800
 @@ -23,7 +23,7 @@
  void get_line (
  	char	*buf)
@@ -2938,7 +2966,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	}
 diff -r -u a/macosx/os_routines.c b/macosx/os_routines.c
 --- a/macosx/os_routines.c	2016-03-28 08:27:51.000000000 +0800
-+++ b/macosx/os_routines.c	2017-01-22 00:17:14.406982205 +0800
++++ b/macosx/os_routines.c	2017-01-22 00:52:44.947105839 +0800
 @@ -411,6 +411,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -2965,7 +2993,7 @@ diff -r -u a/macosx/os_routines.c b/macosx/os_routines.c
  
 diff -r -u a/macosx/prime.c b/macosx/prime.c
 --- a/macosx/prime.c	2016-09-13 14:06:10.000000000 +0800
-+++ b/macosx/prime.c	2017-01-22 00:17:14.406982205 +0800
++++ b/macosx/prime.c	2017-01-22 00:52:44.947105839 +0800
 @@ -11,6 +11,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -3036,9 +3064,23 @@ diff -r -u a/macosx/prime.c b/macosx/prime.c
  	}
  
  /* Bring up the main menu */
+diff -r -u a/macosx/prime.h b/macosx/prime.h
+--- a/macosx/prime.h	2016-09-13 13:52:36.000000000 +0800
++++ b/macosx/prime.h	2017-01-22 00:52:44.947105839 +0800
+@@ -99,6 +99,10 @@
+ extern int volatile KILL_MENUS;		/* TRUE if program should terminate */
+ extern int MENUING;			/* TRUE when main menu active */
+ 
++/* Signal handlers */
++
++void sigterm_handler (int);
++
+ /* Internal routines */
+ 
+ void main_menu (void);
 diff -r -u a/macosx64/makefile b/macosx64/makefile
 --- a/macosx64/makefile	2016-10-31 02:42:20.000000000 +0800
-+++ b/macosx64/makefile	2017-01-22 00:17:14.406982205 +0800
++++ b/macosx64/makefile	2017-01-22 00:52:44.947105839 +0800
 @@ -4,10 +4,10 @@
  ENVP= MACOSX_DEPLOYMENT_TARGET=10.4
  
@@ -3054,7 +3096,7 @@ diff -r -u a/macosx64/makefile b/macosx64/makefile
  LIBS   = ../gwnum/amd64/release/gwnum.a -lm -lpthread -lcurl -framework IOKit -framework CoreFoundation -lstdc++
 diff -r -u a/macosx64/menu.c b/macosx64/menu.c
 --- a/macosx64/menu.c	2016-09-15 10:15:10.000000000 +0800
-+++ b/macosx64/menu.c	2017-01-22 00:17:14.406982205 +0800
++++ b/macosx64/menu.c	2017-01-22 00:52:44.947105839 +0800
 @@ -23,7 +23,7 @@
  void get_line (
  	char	*buf)
@@ -3671,7 +3713,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	}
 diff -r -u a/macosx64/os_routines.c b/macosx64/os_routines.c
 --- a/macosx64/os_routines.c	2016-03-28 08:27:51.000000000 +0800
-+++ b/macosx64/os_routines.c	2017-01-22 00:17:14.406982205 +0800
++++ b/macosx64/os_routines.c	2017-01-22 00:52:44.947105839 +0800
 @@ -411,6 +411,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -3698,7 +3740,7 @@ diff -r -u a/macosx64/os_routines.c b/macosx64/os_routines.c
  
 diff -r -u a/macosx64/prime.c b/macosx64/prime.c
 --- a/macosx64/prime.c	2016-09-13 14:06:10.000000000 +0800
-+++ b/macosx64/prime.c	2017-01-22 00:17:14.406982205 +0800
++++ b/macosx64/prime.c	2017-01-22 00:52:44.947105839 +0800
 @@ -11,6 +11,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -3769,9 +3811,23 @@ diff -r -u a/macosx64/prime.c b/macosx64/prime.c
  	}
  
  /* Bring up the main menu */
+diff -r -u a/macosx64/prime.h b/macosx64/prime.h
+--- a/macosx64/prime.h	2016-09-13 13:52:36.000000000 +0800
++++ b/macosx64/prime.h	2017-01-22 00:52:44.947105839 +0800
+@@ -99,6 +99,10 @@
+ extern int volatile KILL_MENUS;		/* TRUE if program should terminate */
+ extern int MENUING;			/* TRUE when main menu active */
+ 
++/* Signal handlers */
++
++void sigterm_handler (int);
++
+ /* Internal routines */
+ 
+ void main_menu (void);
 diff -r -u a/os2/makefile b/os2/makefile
 --- a/os2/makefile	2008-06-02 03:10:17.000000000 +0800
-+++ b/os2/makefile	2017-01-22 00:17:14.406982205 +0800
++++ b/os2/makefile	2017-01-22 00:52:44.947105839 +0800
 @@ -5,7 +5,7 @@
  
  CC = wcc386
@@ -3783,7 +3839,7 @@ diff -r -u a/os2/makefile b/os2/makefile
  
 diff -r -u a/prime95/prime95.vcproj b/prime95/prime95.vcproj
 --- a/prime95/prime95.vcproj	2016-10-31 02:20:53.000000000 +0800
-+++ b/prime95/prime95.vcproj	2017-01-22 00:17:14.406982205 +0800
++++ b/prime95/prime95.vcproj	2017-01-22 00:52:44.947105839 +0800
 @@ -54,7 +54,7 @@
  				Name="VCCLCompilerTool"
  				InlineFunctionExpansion="1"
@@ -3840,7 +3896,7 @@ diff -r -u a/prime95/prime95.vcproj b/prime95/prime95.vcproj
  			<Tool
 diff -r -u a/primenet.c b/primenet.c
 --- a/primenet.c	2015-03-25 22:37:57.000000000 +0800
-+++ b/primenet.c	2017-01-22 00:17:14.406982205 +0800
++++ b/primenet.c	2017-01-22 00:52:44.951105839 +0800
 @@ -369,7 +369,7 @@
  		return (PRIMENET_ERROR_CONNECT_FAILED);
  	}
@@ -3865,7 +3921,7 @@ diff -r -u a/primenet.c b/primenet.c
  			 getLastSocketError ());
 diff -r -u a/winnt/compil64 b/winnt/compil64
 --- a/winnt/compil64	2008-11-17 04:37:57.000000000 +0800
-+++ b/winnt/compil64	2017-01-22 00:17:14.406982205 +0800
++++ b/winnt/compil64	2017-01-22 00:52:44.951105839 +0800
 @@ -1,7 +1,7 @@
  # Choose compiler switches 
  
@@ -3878,7 +3934,7 @@ diff -r -u a/winnt/compil64 b/winnt/compil64
  copt=/I.. /I..\gwnum /I\libcurl
 diff -r -u a/winnt/compile b/winnt/compile
 --- a/winnt/compile	2008-12-15 04:54:45.000000000 +0800
-+++ b/winnt/compile	2017-01-22 00:17:14.406982205 +0800
++++ b/winnt/compile	2017-01-22 00:52:44.951105839 +0800
 @@ -1,7 +1,7 @@
  # Choose compiler switches 
  

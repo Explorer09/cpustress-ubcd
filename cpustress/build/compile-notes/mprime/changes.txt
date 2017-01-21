@@ -17,6 +17,8 @@ Changes in mprime-changes.patch:
   through 'nohup', and added SIGPIPE handling when we can disable SIGPIPE on
   network sockets on the system, or when PrimeNet is disabled.
   (http://www.mersenneforum.org/showthread.php?t=21672)
+- Fix a "implicit function declaration" compiler warning in v28.10
+  (http://www.mersenneforum.org/showthread.php?t=21956)
 
 -------------------------------------------------------------------------------
 Technical notes about the mprime patches
