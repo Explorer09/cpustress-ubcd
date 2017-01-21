@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Prompts for mprime torture test options and prints out prime.txt entries for
+# the desired touture test.
+
 # read_num ()
 # $1: Prompt string
 # $2: Default value
@@ -27,7 +30,7 @@ AVX=`awk '/avx/ {print "Y"; exit}' /proc/cpuinfo`
 MEMTOTAL=`awk '/^MemTotal/ {print $2}' /proc/meminfo`
 
 VER=$1
-[ "X$1" = X ] && VER=2805
+[ "X$1" = X ] && VER=2810
 
 # Version 23.8 or above is required for 'TortureMem' INI parameter to work.
 # Before 'TortureMem', mprime uses 'DayMemory' and 'NightMemory' from
@@ -168,4 +171,3 @@ echo "MinTortureFFT=$MINFFT"
 echo "MaxTortureFFT=$MAXFFT"
 echo "TortureMem=$TORTURE_MEM"
 echo "TortureTime=$TIMEFFT"
-

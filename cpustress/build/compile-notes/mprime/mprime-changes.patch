@@ -1,6 +1,6 @@
 diff -r -u a/comm95c.c b/comm95c.c
 --- a/comm95c.c	2009-04-05 08:43:31.000000000 +0800
-+++ b/comm95c.c	2016-05-08 09:46:45.022078036 +0800
++++ b/comm95c.c	2017-01-22 00:17:14.034982183 +0800
 @@ -17,6 +17,7 @@
  
  /* Load the PrimeNet DLL, make sure an internet connection is active */
@@ -30,14 +30,14 @@ diff -r -u a/comm95c.c b/comm95c.c
  /* Get Windows Serial Number */
  
 diff -r -u a/commona.c b/commona.c
---- a/commona.c	2016-03-25 16:41:01.000000000 +0800
-+++ b/commona.c	2016-05-08 09:46:45.022078036 +0800
+--- a/commona.c	2016-09-14 12:31:33.000000000 +0800
++++ b/commona.c	2017-01-22 00:17:14.398982204 +0800
 @@ -217,10 +217,12 @@
  
  // If LL testing 100M digit numbers, use at least 4 cores (or all cores)
  
 +#ifdef BUILD_PRIMENET
- 	if (work_type == PRIMENET_WP_LL_100M && cores < 4) {
+ 	if (work_type == PRIMENET_WP_LL_100M) {
  		if (NUM_CPUS < 8) cores = NUM_CPUS;
  		else cores = 4;
  	}
@@ -46,8 +46,8 @@ diff -r -u a/commona.c b/commona.c
  // If we aren't using the computer 24 hours a day, then scale the minimum number of cores up
  
 diff -r -u a/commonb.c b/commonb.c
---- a/commonb.c	2016-03-28 04:43:01.000000000 +0800
-+++ b/commonb.c	2016-05-08 09:46:45.026078077 +0800
+--- a/commonb.c	2016-09-14 03:05:24.000000000 +0800
++++ b/commonb.c	2017-01-22 00:17:14.398982204 +0800
 @@ -2955,7 +2955,9 @@
  /* to try something and if it doesn't work, ESC and choose Test/Continue */
  /* to try some other system settings (without waiting an hour). */
@@ -132,7 +132,7 @@ diff -r -u a/commonb.c b/commonb.c
  	    }
  
  /* Advance the how far factored variable */
-@@ -6571,6 +6583,7 @@
+@@ -6533,6 +6545,7 @@
  
  /* Send results to the server if they might possibly be of interest */
  
@@ -140,7 +140,7 @@ diff -r -u a/commonb.c b/commonb.c
  	if (p > 1000000 && (!isPrime || !isKnownMersennePrime (p))) {
  		struct primenetAssignmentResult pkt;
  		memset (&pkt, 0, sizeof (pkt));
-@@ -6587,6 +6600,7 @@
+@@ -6549,6 +6562,7 @@
  		pkt.done = TRUE;
  		spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  	}
@@ -148,7 +148,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Delete the continuation files - assuming the results file write */
  /* was successful. */
-@@ -8510,12 +8524,14 @@
+@@ -8468,12 +8482,14 @@
  
  /* Accumulate best times to send to the server */
  
@@ -163,7 +163,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  	}
  
-@@ -8866,12 +8882,16 @@
+@@ -8828,12 +8844,16 @@
  	int	is_a_5678, bench_hyperthreading, bench_multithreading, bench_one_or_all, bench_arch;
  	unsigned long fftlen, min_FFT_length, max_FFT_length;
  	double	timers[2];
@@ -180,7 +180,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Output startup message */
  
-@@ -9113,6 +9133,7 @@
+@@ -9075,6 +9095,7 @@
  /* Accumulate best times to send to the server.  Limit the number sent since */
  /* we can only send fifty. */
  
@@ -188,7 +188,7 @@ diff -r -u a/commonb.c b/commonb.c
  		  if (!all_bench && is_a_5678 && !plus1 && hypercpu == 1 &&
  		      (cpu == 1 || (fftlen / 1024 > 768 && (cpu == 2 || cpu == 4))) &&
  		      pkt.num_data_points < PRIMENET_BENCH_MAX_DATAPOINTS) {
-@@ -9125,6 +9146,7 @@
+@@ -9087,6 +9108,7 @@
  			pkt.data_points[pkt.num_data_points].timing = timer_value (timers, 0);
  			pkt.num_data_points++;
  		  }
@@ -196,7 +196,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Time next FFT */
  
-@@ -9141,7 +9163,11 @@
+@@ -9103,7 +9125,11 @@
  /* Now benchmark the trial factoring code */
  
  	if (IniGetInt (INI_FILE, "BenchTrialFactoring", 0)) {
@@ -208,7 +208,7 @@ diff -r -u a/commonb.c b/commonb.c
  		if (stop_reason) return (stop_reason);
  	}
  
-@@ -9155,8 +9181,10 @@
+@@ -9117,8 +9143,10 @@
  //only do this if guid is registered? Or should we auto-register computer
  //under ANONYMOUS userid for stress-testers.
  
@@ -219,7 +219,7 @@ diff -r -u a/commonb.c b/commonb.c
  
  /* Now benchmark running multiple workers.  This will measure the effect of memory bandwidth */
  /* on LL testing. */
-@@ -9867,6 +9895,7 @@
+@@ -9829,6 +9857,7 @@
  
  /* Output results to the server */
  
@@ -227,7 +227,7 @@ diff -r -u a/commonb.c b/commonb.c
  	{
  		struct primenetAssignmentResult pkt;
  		memset (&pkt, 0, sizeof (pkt));
-@@ -9885,6 +9914,7 @@
+@@ -9847,6 +9876,7 @@
  		pkt.done = TRUE;
  		spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  	}
@@ -236,8 +236,8 @@ diff -r -u a/commonb.c b/commonb.c
  /* Print known factors */
  
 diff -r -u a/commonc.c b/commonc.c
---- a/commonc.c	2016-03-26 07:03:39.000000000 +0800
-+++ b/commonc.c	2016-05-08 09:46:45.030078118 +0800
+--- a/commonc.c	2016-09-14 11:33:00.000000000 +0800
++++ b/commonc.c	2017-01-22 00:17:14.398982204 +0800
 @@ -20,35 +20,47 @@
  char	SPOOL_FILE[80] = {0};
  char	LOGFILE[80] = {0};
@@ -286,7 +286,7 @@ diff -r -u a/commonc.c b/commonc.c
  int	NUM_BACKUP_FILES = 3;
  int	SILENT_VICTORY = 0;
  int	SILENT_VICTORY_PRP = 1;
-@@ -330,8 +342,10 @@
+@@ -328,8 +340,10 @@
  				ROLLING_AVERAGE = 1000;
  			IniWriteInt (LOCALINI_FILE, "RollingAverage", ROLLING_AVERAGE);
  			IniWriteInt (LOCALINI_FILE, "RollingStartTime", 0);
@@ -297,7 +297,7 @@ diff -r -u a/commonc.c b/commonc.c
  		}
  	}
  }
-@@ -720,8 +734,10 @@
+@@ -716,8 +730,10 @@
  
  /* Perform other one-time initializations */
  
@@ -308,7 +308,7 @@ diff -r -u a/commonc.c b/commonc.c
  	init_timed_event_handler ();
  
  /* Create and name the main window */
-@@ -799,6 +815,7 @@
+@@ -795,6 +811,7 @@
  /* nameAndReadIniFiles, but running mprime with the -s or -t argument */
  /* caused spurious creation of a prime.spl file. */
  
@@ -316,7 +316,7 @@ diff -r -u a/commonc.c b/commonc.c
  void initCommCode (void) {
  
  /* Start or stop the communication timers.  This needs to be called */
-@@ -821,6 +838,7 @@
+@@ -817,6 +834,7 @@
  	if (USE_PRIMENET && USERID[0] == 0)
  		spoolMessage (PRIMENET_UPDATE_COMPUTER_INFO, NULL);
  }
@@ -324,7 +324,7 @@ diff -r -u a/commonc.c b/commonc.c
  
  /* Read or re-read the INI files & and do other initialization */
  
-@@ -861,6 +879,7 @@
+@@ -857,6 +875,7 @@
  	IniGetString (LOCALINI_FILE, "ComputerGUID", COMPUTER_GUID, sizeof (COMPUTER_GUID), NULL);
  	FIXED_GUIDS = IniGetInt (INI_FILE, "FixedHardwareUID", 0);
  
@@ -332,7 +332,7 @@ diff -r -u a/commonc.c b/commonc.c
  	IniGetString (INI_FILE, "V5UserID", USERID, sizeof (USERID), NULL);
  	IniGetString (LOCALINI_FILE, "ComputerID", COMPID, sizeof (COMPID), NULL);
  	sanitizeString (COMPID);
-@@ -868,6 +887,7 @@
+@@ -864,6 +883,7 @@
  	DIAL_UP = (int) IniGetInt (INI_FILE, "DialUp", 0);
  	DAYS_OF_WORK = (unsigned int) IniGetInt (INI_FILE, "DaysOfWork", 3);
  	if (DAYS_OF_WORK > 180) DAYS_OF_WORK = 180;
@@ -340,7 +340,7 @@ diff -r -u a/commonc.c b/commonc.c
  
  	CPU_HOURS = (unsigned int) IniGetInt (LOCALINI_FILE, "CPUHours", 24);
  	if (CPU_HOURS < 1) CPU_HOURS = 1;
-@@ -895,6 +915,7 @@
+@@ -891,6 +911,7 @@
  	if (ITER_OUTPUT_RES > 999999999) ITER_OUTPUT_RES = 999999999;
  	if (ITER_OUTPUT_RES < 1000) ITER_OUTPUT_RES = 1000;
  	DISK_WRITE_TIME = IniGetInt (INI_FILE, "DiskWriteTime", 30);
@@ -348,7 +348,7 @@ diff -r -u a/commonc.c b/commonc.c
  	MODEM_RETRY_TIME = (unsigned int) IniGetInt (INI_FILE, "NetworkRetryTime", 2);
  	if (MODEM_RETRY_TIME < 1) MODEM_RETRY_TIME = 1;
  	if (MODEM_RETRY_TIME > 300) MODEM_RETRY_TIME = 300;
-@@ -907,6 +928,7 @@
+@@ -903,6 +924,7 @@
  	DAYS_BETWEEN_CHECKINS = IniGetFloat (INI_FILE, "DaysBetweenCheckins", 1.0);
  	if (DAYS_BETWEEN_CHECKINS > 7.0) DAYS_BETWEEN_CHECKINS = 7.0;				/* 7 day maximum */
  	if (DAYS_BETWEEN_CHECKINS * 24.0 < 1.0) DAYS_BETWEEN_CHECKINS = (float) (1.0 / 24.0);	/* 1 hour minimum */
@@ -356,7 +356,7 @@ diff -r -u a/commonc.c b/commonc.c
  	SILENT_VICTORY = (int) IniGetInt (INI_FILE, "SilentVictory", 0);
  	SILENT_VICTORY_PRP = (int) IniGetInt (INI_FILE, "SilentVictoryPRP", 1);
  	RUN_ON_BATTERY = (int) IniGetInt (LOCALINI_FILE, "RunOnBattery", 1);
-@@ -924,10 +946,14 @@
+@@ -920,10 +942,14 @@
  	PRIORITY = (unsigned int) IniGetInt (INI_FILE, "Priority", 1);
  	if (PRIORITY < 1) PRIORITY = 1;
  	if (PRIORITY > 10) PRIORITY = 10;
@@ -371,7 +371,7 @@ diff -r -u a/commonc.c b/commonc.c
  	HIDE_ICON = (int) IniGetInt (INI_FILE, "HideIcon", 0);
  	TRAY_ICON = (int) IniGetInt (INI_FILE, "TrayIcon", 1);
  	MERGE_WINDOWS = (int) IniGetInt (INI_FILE, "MergeWindows", MERGE_MAINCOMM_WINDOWS);
-@@ -4575,12 +4601,16 @@
+@@ -3628,12 +3654,16 @@
  
  /* Output a USERID/COMPID prefix for result messages */
  
@@ -388,7 +388,7 @@ diff -r -u a/commonc.c b/commonc.c
  
  /* Output the assignment ID too.  That alone should be enough info to */
  /* credit the correct userID.  However, we still output the user ID as it */
-@@ -4679,20 +4709,25 @@
+@@ -3732,20 +3762,25 @@
  #define HEADER_FLAG_UC		0x0020	/* computer info has changed */
  #define HEADER_FLAG_WORK_QUEUE	0x0040	/* check if enough work is queued */
  
@@ -414,7 +414,7 @@ diff -r -u a/commonc.c b/commonc.c
  void set_comm_timers (void)
  {
  	time_t	last_time, current_time;
-@@ -4747,10 +4782,12 @@
+@@ -3800,10 +3835,12 @@
  
  	add_timed_event (TE_WORK_QUEUE_CHECK, 5);  /* Start in 5 seconds */
  }
@@ -427,7 +427,7 @@ diff -r -u a/commonc.c b/commonc.c
  void do_manual_comm_now (void)
  {
  	gwmutex_lock (&SPOOL_FILE_MUTEX);
-@@ -4759,6 +4796,7 @@
+@@ -3812,6 +3849,7 @@
  				 &communicateWithServer, NULL);
  	gwmutex_unlock (&SPOOL_FILE_MUTEX);
  }
@@ -435,7 +435,7 @@ diff -r -u a/commonc.c b/commonc.c
  
  /* Clear rate-limiting counters and timers.  Any time the user explicitly */
  /* chooses Test/Continue, we reset the rate limits.  We do this so that */
-@@ -4766,6 +4804,7 @@
+@@ -3819,6 +3857,7 @@
  /* in the short term, the user has a way to do it.  The rate limits are */
  /* here to guard against runaway clients from pummeling the server. */
  
@@ -443,7 +443,7 @@ diff -r -u a/commonc.c b/commonc.c
  void clear_comm_rate_limits (void)
  {
  //bug - clear other rate limiters here....
-@@ -4784,10 +4823,12 @@
+@@ -3837,10 +3876,12 @@
  	}
  	gwmutex_unlock (&SPOOL_FILE_MUTEX);
  }
@@ -456,7 +456,7 @@ diff -r -u a/commonc.c b/commonc.c
  void pingServer (void)
  {
  
-@@ -4801,17 +4842,21 @@
+@@ -3854,17 +3895,21 @@
  				 &communicateWithServer, NULL);
  	gwmutex_unlock (&SPOOL_FILE_MUTEX);
  }
@@ -478,7 +478,7 @@ diff -r -u a/commonc.c b/commonc.c
  void spoolMessage (
  	short	msgType,
  	void	*msg)
-@@ -4946,12 +4991,14 @@
+@@ -3999,12 +4044,14 @@
  
  	gwmutex_unlock (&SPOOL_FILE_MUTEX);
  }
@@ -493,7 +493,7 @@ diff -r -u a/commonc.c b/commonc.c
  void spoolExistingResultsFile (void)
  {
  	int	i;
-@@ -4983,9 +5030,11 @@
+@@ -4036,9 +4083,11 @@
  		fclose (fd);
  	}
  }
@@ -505,7 +505,7 @@ diff -r -u a/commonc.c b/commonc.c
  int unreserve (
  	unsigned long p)
  {
-@@ -5043,6 +5092,7 @@
+@@ -4096,6 +4145,7 @@
  
  	return (0);
  }
@@ -513,7 +513,7 @@ diff -r -u a/commonc.c b/commonc.c
  
  /* Output message to screen and prime.log file */
  
-@@ -5187,6 +5237,7 @@
+@@ -4240,6 +4290,7 @@
  
  /* Read a spooled message */
  
@@ -521,7 +521,7 @@ diff -r -u a/commonc.c b/commonc.c
  void readMessage (
  	int	fd,
  	long	*offset,	/* Offset of the message */
-@@ -5229,10 +5280,12 @@
+@@ -4282,10 +4333,12 @@
  	
  	*msgType = 0;
  }
@@ -534,7 +534,7 @@ diff -r -u a/commonc.c b/commonc.c
  int sendMessage (
  	short	msgType,
  	void	*msg)
-@@ -5351,10 +5404,12 @@
+@@ -4404,10 +4457,12 @@
  
  	return (return_code);
  }
@@ -547,7 +547,7 @@ diff -r -u a/commonc.c b/commonc.c
  int getProgramOptions (void)
  {
  	struct primenetProgramOptions pkt;
-@@ -5492,10 +5547,12 @@
+@@ -4545,10 +4600,12 @@
  	if (original_rob != RUN_ON_BATTERY) run_on_battery_changed ();
  	return (0);
  }
@@ -560,7 +560,7 @@ diff -r -u a/commonc.c b/commonc.c
  int sendProgramOptions (
  	int	*talked_to_server)
  {
-@@ -5640,6 +5697,7 @@
+@@ -4693,6 +4750,7 @@
  	}
  	return (0);
  }
@@ -568,7 +568,7 @@ diff -r -u a/commonc.c b/commonc.c
  
  
  /* Send any queued up messages to the server.  See if we have enough */
-@@ -5647,6 +5705,7 @@
+@@ -4700,6 +4758,7 @@
  
  #define RETRY_EXCEEDED "Retry count exceeded.\n"
  
@@ -576,7 +576,7 @@ diff -r -u a/commonc.c b/commonc.c
  void communicateWithServer (void *arg)
  {
  static	int	obsolete_client = FALSE;
-@@ -6416,9 +6475,11 @@
+@@ -5470,9 +5529,11 @@
  		title (COMM_THREAD_NUM, "Inactive");
  	}
  }
@@ -588,7 +588,7 @@ diff -r -u a/commonc.c b/commonc.c
  void salvageCorruptSpoolFile (void)
  {
  	int	fd;
-@@ -6482,6 +6543,7 @@
+@@ -5536,6 +5597,7 @@
  
  	_unlink (filename);
  }
@@ -596,7 +596,7 @@ diff -r -u a/commonc.c b/commonc.c
  
  /****************************************************************************/
  /*                        Timed Events Handler                              */
-@@ -6610,12 +6672,18 @@
+@@ -5664,12 +5726,18 @@
  				checkPauseWhileRunning ();
  				break;
  			case TE_WORK_QUEUE_CHECK:	/* Check work queue event */
@@ -615,7 +615,7 @@ diff -r -u a/commonc.c b/commonc.c
  				break;
  			case TE_COMM_KILL:	/* Kill hung communication thread */
  				timed_events[i].active = FALSE;
-@@ -6630,7 +6698,9 @@
+@@ -5684,7 +5752,9 @@
  				break;
  			case TE_COMPLETION_DATES:	/* Send expected completion dates event */
  				timed_events[i].active = FALSE;
@@ -626,8 +626,8 @@ diff -r -u a/commonc.c b/commonc.c
  			case TE_THROTTLE:	/* Sleep due to Throttle=n event */
  				timed_events[i].time_to_fire =
 diff -r -u a/commonc.h b/commonc.h
---- a/commonc.h	2016-03-24 08:23:50.000000000 +0800
-+++ b/commonc.h	2016-05-08 09:46:45.030078118 +0800
+--- a/commonc.h	2016-10-30 22:28:37.000000000 +0800
++++ b/commonc.h	2017-01-22 00:17:14.398982204 +0800
 @@ -144,26 +144,36 @@
  extern char USERID[21];			/* User's ID */
  extern char COMPID[21];			/* Computer name */
@@ -689,8 +689,8 @@ diff -r -u a/commonc.h b/commonc.h
 +#endif
  int readIniFiles (void);
  
- void IniSectionGetString (const char *, const char *, const char *, char *, unsigned int, const char *);
-@@ -427,6 +441,7 @@
+ void processTimedIniFile (const char *);
+@@ -404,6 +418,7 @@
  *                 Spool File and Server Communication Code                    *
  ******************************************************************************/
  
@@ -698,7 +698,7 @@ diff -r -u a/commonc.h b/commonc.h
  void init_spool_file_and_comm_code (void);
  void set_comm_timers (void);
  void clear_comm_rate_limits (void);
-@@ -444,6 +459,7 @@
+@@ -421,6 +436,7 @@
  int LoadPrimeNet (void);
  void UnloadPrimeNet (void);
  int PRIMENET (short, void *);
@@ -707,9 +707,9 @@ diff -r -u a/commonc.h b/commonc.h
  /******************************************************************************
  *                           Timed Events Handler                              *
 diff -r -u a/ecm.c b/ecm.c
---- a/ecm.c	2016-03-23 05:14:21.000000000 +0800
-+++ b/ecm.c	2016-05-08 09:46:45.034078158 +0800
-@@ -3416,6 +3416,7 @@
+--- a/ecm.c	2016-05-02 12:44:52.000000000 +0800
++++ b/ecm.c	2017-01-22 00:17:14.398982204 +0800
+@@ -3335,6 +3335,7 @@
  /* Send ECM completed message to the server.  Although don't do it for */
  /* puny B1 values. */
  
@@ -717,7 +717,7 @@ diff -r -u a/ecm.c b/ecm.c
  	if (B >= 10000 || IniGetInt (INI_FILE, "SendAllFactorData", 0)) {
  		struct primenetAssignmentResult pkt;
  		memset (&pkt, 0, sizeof (pkt));
-@@ -3434,6 +3435,7 @@
+@@ -3353,6 +3354,7 @@
  		pkt.done = TRUE;
  		spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  	}
@@ -725,7 +725,7 @@ diff -r -u a/ecm.c b/ecm.c
  
  /* Delete the save file */
  
-@@ -3509,6 +3511,7 @@
+@@ -3428,6 +3430,7 @@
  
  	if (strlen (str) >= 15 ||
  	    IniGetInt (INI_FILE, "SendAllFactorData", 0)) {
@@ -733,7 +733,7 @@ diff -r -u a/ecm.c b/ecm.c
  		struct primenetAssignmentResult pkt;
  		memset (&pkt, 0, sizeof (pkt));
  		strcpy (pkt.computer_guid, COMPUTER_GUID);
-@@ -3527,6 +3530,7 @@
+@@ -3446,6 +3449,7 @@
  		pkt.fftlen = gwfftlen (&ecmdata.gwdata);
  		pkt.done = !continueECM;
  		spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
@@ -741,7 +741,7 @@ diff -r -u a/ecm.c b/ecm.c
  
  /* If continuing ECM, subtract the curves we just reported from the */
  /* worktodo count of curves to run.  Otherwise, delete all ECM entries */
-@@ -5689,6 +5693,7 @@
+@@ -5608,6 +5612,7 @@
  /* Send P-1 completed message to the server.  Although don't do it for puny */
  /* B1 values as this is just the user tinkering with P-1 factoring. */
  
@@ -749,7 +749,7 @@ diff -r -u a/ecm.c b/ecm.c
  	if (B >= 10000 || IniGetInt (INI_FILE, "SendAllFactorData", 0)) {
  		struct primenetAssignmentResult pkt;
  		memset (&pkt, 0, sizeof (pkt));
-@@ -5707,6 +5712,7 @@
+@@ -5626,6 +5631,7 @@
  			    w->work_type == WORK_PFACTOR);
  		spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  	}
@@ -757,7 +757,7 @@ diff -r -u a/ecm.c b/ecm.c
  
  /* Create save file so that we can expand bound 1 or bound 2 at a later date */
  /* If this is pre-factoring for an LL or PRP test, then delete the large */
-@@ -5812,6 +5818,7 @@
+@@ -5731,6 +5737,7 @@
  /* with small factors from users needlessly redoing factoring work, make */
  /* sure the factor is more than 50 bits or so. */
  
@@ -765,7 +765,7 @@ diff -r -u a/ecm.c b/ecm.c
  	if (strlen (str) >= 15 ||
  	    IniGetInt (INI_FILE, "SendAllFactorData", 0)) {
  		struct primenetAssignmentResult pkt;
-@@ -5831,6 +5838,7 @@
+@@ -5750,6 +5757,7 @@
  		pkt.done = TRUE;
  		spoolMessage (PRIMENET_ASSIGNMENT_RESULT, &pkt);
  	}
@@ -774,8 +774,8 @@ diff -r -u a/ecm.c b/ecm.c
  /* If LL testing, free all save files -- including possible LL save files */
  
 diff -r -u a/linux/makebsd b/linux/makebsd
---- a/linux/makebsd	2016-04-26 04:31:17.000000000 +0800
-+++ b/linux/makebsd	2016-05-08 09:46:45.034078158 +0800
+--- a/linux/makebsd	2016-10-31 02:42:15.000000000 +0800
++++ b/linux/makebsd	2017-01-22 00:17:14.398982204 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -790,8 +790,8 @@ diff -r -u a/linux/makebsd b/linux/makebsd
  LFLAGS = -Wl,-M
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic /usr/local/lib/libcurl.a -lz -lcompat -lstdc++ -Wl,-Bdynamic -lssl
 diff -r -u a/linux/makefile b/linux/makefile
---- a/linux/makefile	2016-04-26 04:31:17.000000000 +0800
-+++ b/linux/makefile	2016-05-08 09:46:45.038078198 +0800
+--- a/linux/makefile	2016-10-31 02:42:15.000000000 +0800
++++ b/linux/makefile	2017-01-22 00:17:14.402982204 +0800
 @@ -20,10 +20,10 @@
  #	LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic  $(shell pkg-config --static --libs libcurl) -lstdc++ -Wl,-Bdynamic -ldl
  
@@ -806,8 +806,8 @@ diff -r -u a/linux/makefile b/linux/makefile
  LFLAGS = -Wl,-M -Wl,-L/usr/local/lib
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic -lcurl -Wl,-Bdynamic -lrt -lstdc++ -ldl
 diff -r -u a/linux/makehaikugcc2 b/linux/makehaikugcc2
---- a/linux/makehaikugcc2	2016-04-26 04:31:17.000000000 +0800
-+++ b/linux/makehaikugcc2	2016-05-08 09:46:45.038078198 +0800
+--- a/linux/makehaikugcc2	2016-10-31 02:42:15.000000000 +0800
++++ b/linux/makehaikugcc2	2017-01-22 00:17:14.402982204 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -822,8 +822,8 @@ diff -r -u a/linux/makehaikugcc2 b/linux/makehaikugcc2
  LFLAGS = -Wl,-M
  LIBS   = -L/boot/common/lib ../gwnum/gwnum.a ../gwnum/gwnum.ld -lnetwork -lcurl -lstdc++.r4
 diff -r -u a/linux/makehaikugcc4 b/linux/makehaikugcc4
---- a/linux/makehaikugcc4	2016-04-26 04:31:17.000000000 +0800
-+++ b/linux/makehaikugcc4	2016-05-08 09:46:45.038078198 +0800
+--- a/linux/makehaikugcc4	2016-10-31 02:42:15.000000000 +0800
++++ b/linux/makehaikugcc4	2017-01-22 00:17:14.402982204 +0800
 @@ -2,10 +2,10 @@
  #
  
@@ -838,25 +838,18 @@ diff -r -u a/linux/makehaikugcc4 b/linux/makehaikugcc4
  LFLAGS = -Wl,-M
  LIBS   = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lnetwork -lcurl -lstdc++
 diff -r -u a/linux/menu.c b/linux/menu.c
---- a/linux/menu.c	2016-03-26 06:03:34.000000000 +0800
-+++ b/linux/menu.c	2016-05-08 09:46:45.038078198 +0800
-@@ -17,11 +17,12 @@
+--- a/linux/menu.c	2016-09-15 10:15:10.000000000 +0800
++++ b/linux/menu.c	2017-01-22 00:17:14.402982204 +0800
+@@ -23,7 +23,7 @@
  void get_line (
  	char	*buf)
  {
 -	int	len;
 +	size_t	len;
  	buf[0] = 0;
--	(void) fgets (buf, 80, stdin);
-+	if (!fgets (buf, 80, stdin)) return;
-+	/* Cut the '\n' at end of fgets string. */
- 	len = strlen (buf);
--	if (len > 0 && buf[len-1] == '\n') buf[len-1] = 0;
-+	if (len > 0 && buf[len-1] == '\n') buf[--len] = '\0';
- }
- 
- /* Get a number from the user */
-@@ -271,6 +272,7 @@
+ 	if (fgets (buf, 80, stdin) == NULL) sigterm_handler (SIGTERM);	// Treat EOF the same as a termination signal
+ 	if (KILL_MENUS) longjmp (MENU_JMPBUF, 1); // If a signal occurred while waiting for user input, longjmp to exit menus
+@@ -285,6 +285,7 @@
  
  void getProxyInfo (char *, unsigned short *, char *, char *);
  
@@ -864,7 +857,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  void test_primenet (void)
  {
  	int	m_primenet, m_dialup;
-@@ -296,6 +298,8 @@
+@@ -310,6 +311,8 @@
  	strcpy (orig_proxy_pwd, m_proxy_pwd);
  	m_debug = primenet_debug;
  
@@ -873,7 +866,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	askYN ("Use PrimeNet to get work and report results", &m_primenet);
  	if (!m_primenet) goto done;
  
-@@ -368,6 +372,7 @@
+@@ -382,6 +385,7 @@
  	} else
  		STARTUP_IN_PROGRESS = 0;
  }
@@ -881,7 +874,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  
  /* Test/Worker threads dialog */
  
-@@ -399,7 +404,9 @@
+@@ -413,7 +417,9 @@
  void test_worker_threads (void)
  {
  	unsigned long m_num_thread, m_priority;
@@ -891,7 +884,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	unsigned long m_affinity[MAX_NUM_WORKER_THREADS];
  	unsigned long m_numcpus[MAX_NUM_WORKER_THREADS];
  	int	i;
-@@ -407,20 +414,26 @@
+@@ -421,20 +427,26 @@
  	m_num_thread = NUM_WORKER_THREADS;
  	m_priority = PRIORITY;
  	for (i = 0; i < MAX_NUM_WORKER_THREADS; i++) {
@@ -918,7 +911,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  
  	if (USE_PRIMENET || NUM_CPUS * user_configurable_hyperthreads () > 1) {
  	    for (i = 0; i < m_num_thread; i++) {
-@@ -429,11 +442,13 @@
+@@ -443,11 +455,13 @@
  		else
  			printf ("\n");
  
@@ -932,7 +925,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  
  		if (NUM_CPUS * user_configurable_hyperthreads () > 1) {
  			char question[200];
-@@ -450,7 +465,11 @@
+@@ -464,7 +478,11 @@
  
  		if (NUM_CPUS * user_configurable_hyperthreads () > 1) {
  			int min_cores, max_cores;
@@ -943,8 +936,8 @@ diff -r -u a/linux/menu.c b/linux/menu.c
 +#endif
  			max_cores = NUM_CPUS * user_configurable_hyperthreads () - m_num_thread + 1;
  			if (max_cores < min_cores) max_cores = min_cores;
- 			askNum ("CPUs to use (multithreading)", &m_numcpus[i], min_cores, max_cores);
-@@ -503,6 +522,7 @@
+ 			if (m_numcpus[i] < min_cores) m_numcpus[i] = min_cores;
+@@ -519,6 +537,7 @@
  /* If the user changes any of the work preferences record it in the INI file */
  /* and tell the server */
  
@@ -952,7 +945,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  		if (AreAllTheSame (m_work_pref, m_num_thread)) {
  			if (! PTOIsGlobalOption (WORK_PREFERENCE) ||
  			    WORK_PREFERENCE[0] != m_work_pref[0]) {
-@@ -520,6 +540,7 @@
+@@ -536,6 +555,7 @@
  				new_options = TRUE;
  			}
  		}
@@ -960,7 +953,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  
  /* If the user changes any of the affinities record it in the INI file. */
  
-@@ -547,7 +568,9 @@
+@@ -563,7 +583,9 @@
  
  /* Send new settings to the server */
  
@@ -970,7 +963,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  
  /* Restart worker threads with new options */
  
-@@ -609,6 +632,8 @@
+@@ -625,6 +647,8 @@
  	unsigned long m_thread, m_p;
  #define NOTPRIMEERR "This number is not prime, there is no need to test it.\n"
  
@@ -979,7 +972,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  loop:	m_p = 0;
  
  	m_thread = 1;
-@@ -647,6 +672,8 @@
+@@ -663,6 +687,8 @@
  	m_p = 10000000;
  	m_iter = 10;
  
@@ -988,7 +981,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	askNum ("Exponent to time", &m_p, MIN_PRIME,
  	        CPU_FLAGS & CPU_SSE2 ? MAX_PRIME_SSE2 : MAX_PRIME);
  	askNum ("Number of Iterations", &m_iter, 1, 1000);
-@@ -670,6 +697,8 @@
+@@ -686,6 +712,8 @@
  	m_bound1 = 50000.0;
  	m_bound2 = 0.0;
  
@@ -997,7 +990,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	m_thread = 1;
  	if (NUM_WORKER_THREADS > 1)
  		askNum ("Worker number", &m_thread, 1, NUM_WORKER_THREADS);
-@@ -715,6 +744,8 @@
+@@ -731,6 +759,8 @@
  	m_bound2 = 0.0;
  	m_num_curves = 100;
  
@@ -1006,7 +999,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	m_thread = 1;
  	if (NUM_WORKER_THREADS > 1)
  		askNum ("Worker number", &m_thread, 1, NUM_WORKER_THREADS);
-@@ -749,6 +780,7 @@
+@@ -765,6 +795,7 @@
  
  /* Advanced/Manual Communication dialog */
  
@@ -1014,7 +1007,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  void advanced_manualcomm (void)
  {
  	int	m_manual_comm, m_comm_now, m_new_dates;
-@@ -757,6 +789,8 @@
+@@ -773,6 +804,8 @@
  	m_comm_now = 1;
  	m_new_dates = 0;
  
@@ -1023,7 +1016,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	m_manual_comm = !m_manual_comm;
  	askYN ("Contact PrimeNet server automatically", &m_manual_comm);
  	m_manual_comm = !m_manual_comm;
-@@ -774,24 +808,30 @@
+@@ -790,24 +823,30 @@
  		if (m_comm_now) do_manual_comm_now ();
  	}
  }
@@ -1055,7 +1048,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  
  	if (!USE_PRIMENET) {
  		outputLongLine (MANUAL_QUIT);
-@@ -802,6 +842,7 @@
+@@ -818,6 +857,7 @@
  			stop_workers_for_escape ();
  		}
  	} else {
@@ -1063,7 +1056,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  		int	res;
  		outputLongLine (PRIMENET_QUIT);
  		res = askYesNoCancel ('C');
-@@ -815,6 +856,7 @@
+@@ -831,6 +871,7 @@
  			spoolMessage (MSG_QUIT_GIMPS, NULL);
  			askOK ();
  		}
@@ -1071,7 +1064,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	}
  }
  
-@@ -829,6 +871,11 @@
+@@ -845,6 +886,11 @@
  	char m_end_time[13];
  	char buf[512];
  
@@ -1083,7 +1076,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	m_memory_editable =
  		read_memory_settings (&day_memory, &night_memory,
  				      &day_start_time, &day_end_time);
-@@ -855,9 +902,6 @@
+@@ -871,9 +917,6 @@
  		}
  	}
  
@@ -1093,7 +1086,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	if (askOkCancel ()) {
  		unsigned int new_day_start_time, new_day_end_time;
  
-@@ -867,9 +911,11 @@
+@@ -883,9 +926,11 @@
  			ROLLING_AVERAGE = 1000;
  			IniWriteInt (LOCALINI_FILE, "RollingAverage", 1000);
  			IniWriteInt (LOCALINI_FILE, "RollingStartTime", 0);
@@ -1105,7 +1098,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  		}
  		new_day_start_time = strToMinutes ((char *) &m_start_time);
  		new_day_end_time = strToMinutes ((char *) &m_end_time);
-@@ -882,7 +928,9 @@
+@@ -898,7 +943,9 @@
  					       new_day_start_time, new_day_end_time);
  			mem_settings_have_changed ();
  		}
@@ -1115,7 +1108,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  
  // Now that Primenet almost always hands out LL assignments that are P-1'ed,
  // there is little reason to prompt user into allowing us to use more memory.
-@@ -902,25 +950,34 @@
+@@ -918,25 +965,34 @@
  void options_preferences (void)
  {
  	unsigned long m_iter, m_r_iter, m_disk_write_time;
@@ -1150,7 +1143,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	if (USE_PRIMENET && DIAL_UP)
  		askNum ("Minutes between modem retries", &m_modem, 1, 300);
  	if (USE_PRIMENET)
-@@ -929,6 +986,7 @@
+@@ -945,6 +1001,7 @@
  		askNum ("Days of work to queue up", &m_work, 1, 90);
  	if (USE_PRIMENET)
  		askFloat ("Days between sending end dates", &m_end_dates, 0.125, 7);
@@ -1158,7 +1151,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	askNum ("Number of Backup Files", &m_backup, 1, 3);
  	askYN ("Make noise if new Mersenne prime is found", &m_noise);
  	askYN ("Run program even when using laptop battery power", &m_battery);
-@@ -937,10 +995,12 @@
+@@ -953,10 +1010,12 @@
  		ITER_OUTPUT = m_iter;
  		ITER_OUTPUT_RES = m_r_iter;
  		DISK_WRITE_TIME = m_disk_write_time;
@@ -1171,7 +1164,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  		NUM_BACKUP_FILES = m_backup;
  		SILENT_VICTORY = !m_noise;
  		if (RUN_ON_BATTERY != m_battery) {
-@@ -951,13 +1011,17 @@
+@@ -967,13 +1026,17 @@
  		IniWriteInt (INI_FILE, "OutputIterations", ITER_OUTPUT);
  		IniWriteInt (INI_FILE, "ResultsFileIterations", ITER_OUTPUT_RES);
  		IniWriteInt (INI_FILE, "DiskWriteTime", DISK_WRITE_TIME);
@@ -1189,7 +1182,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	}
  }
  
-@@ -982,6 +1046,8 @@
+@@ -998,6 +1061,8 @@
  	}
  	m_timefft = 3;
  
@@ -1198,7 +1191,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  	if (NUM_CPUS * CPU_HYPERTHREADS > 1)
  		askNum ("Number of torture test threads to run", &m_thread,
  			1, NUM_CPUS * CPU_HYPERTHREADS);
-@@ -1043,6 +1109,7 @@
+@@ -1059,6 +1124,7 @@
  
  /* Help/About PrimeNet Server */
  
@@ -1206,7 +1199,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  void help_about_server (void)
  {
  	char	*buildId;
-@@ -1051,9 +1118,11 @@
+@@ -1067,9 +1133,11 @@
  
  	pingServer ();
  }
@@ -1218,7 +1211,7 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  void test_welcome (void)
  {
  	int	m_join = 1;
-@@ -1092,9 +1161,20 @@
+@@ -1108,6 +1176,16 @@
  	}
  	main_menu ();
  }
@@ -1235,22 +1228,19 @@ diff -r -u a/linux/menu.c b/linux/menu.c
  
  /* Display the main menu */
  
+@@ -1121,6 +1199,7 @@
+ 
+ 	printf ("\t     Main Menu\n");
+ 	printf ("\n");
 +#ifdef BUILD_PRIMENET
- void main_menu (void)
- {
- 	unsigned long choice;
-@@ -1268,3 +1348,150 @@
- 	}
- 	goto mloop;
- }
+ 	printf ("\t 1.  Test/Primenet\n");
+ 	printf ("\t 2.  Test/Worker threads\n");
+ 	printf ("\t 3.  Test/Status\n");
+@@ -1144,9 +1223,34 @@
+ 	printf ("\t16.  Options/Benchmark\n");
+ 	printf ("\t17.  Help/About\n");
+ 	printf ("\t18.  Help/About PrimeNet Server\n");
 +#else
-+void main_menu (void)
-+{
-+	unsigned long choice;
-+
-+mloop:	if (THREAD_KILL) return;
-+	printf ("\t     Main Menu\n");
-+loop:	printf ("\n");
 +	printf ("\t 1.  Test/Worker threads\n");
 +	printf ("\t 2.  Test/Status\n");
 +	if (WORKER_THREADS_ACTIVE && active_workers_count () < WORKER_THREADS_ACTIVE)
@@ -1270,129 +1260,203 @@ diff -r -u a/linux/menu.c b/linux/menu.c
 +	printf ("\t12.  Options/Torture Test\n");
 +	printf ("\t13.  Options/Benchmark\n");
 +	printf ("\t14.  Help/About\n");
-+	printf ("Your choice: ");
-+	choice = get_number (0);
-+	if (choice <= 0 || choice >= 15) {
-+		printf ("\t     Invalid choice\n");
-+		goto loop;
-+	}
-+
-+/* Display the main menu and switch off the users choice */
-+
-+	printf ("\n");
-+	switch (choice) {
-+
-+/* Test/User Information dialog */
-+
-+	case 1:
-+		test_worker_threads ();
-+		break;
-+
-+/* Test/Status message */
-+
-+	case 2:
-+		test_status ();
-+		askOK ();
-+		break;
-+
-+/* Test/Continue or Stop or Test/Continue or Test/Stop */
-+
-+	case 3:
-+		if (WORKER_THREADS_ACTIVE && active_workers_count () < WORKER_THREADS_ACTIVE)
-+			test_continue_or_stop ();
-+		else if (NUM_WORKER_THREADS > 1 && active_workers_count () < WORKER_THREADS_ACTIVE - 1)
-+			test_continue ();
-+		else if (!WORKER_THREADS_ACTIVE || WORKER_THREADS_STOPPING) {
-+			while (WORKER_THREADS_STOPPING) Sleep (50);
-+			linuxContinue ("Another mprime is running.\n", ALL_WORKERS, FALSE);
-+		} else if (active_workers_count () > 1)
-+			test_stop ();
-+		else
-+			stop_workers_for_escape ();
-+		break;
-+
-+/* Test/Exit */
-+
-+	case 4:
-+		{
-+		int counter = 0;
-+		if (WORKER_THREADS_ACTIVE && !WORKER_THREADS_STOPPING)
-+			stop_workers_for_escape ();
-+		while (WORKER_THREADS_STOPPING) {
-+			if (counter++ % 100 == 0) printf ("Waiting for worker threads to stop.\n");
-+			Sleep (50);
-+		}
-+		}
-+		return;
-+
-+/* Advanced/Test dialog */
-+
-+	case 5:
-+		advanced_test ();
-+		break;
-+
-+/* Advanced/Time dialog */
-+
-+	case 6:
-+		advanced_time ();
-+		break;
-+
-+/* Advanced/P-1 dialog */
-+
-+	case 7:
-+		advanced_pminus1 ();
-+		break;
-+
-+/* Advanced/ECM dialog */
-+
-+	case 8:
-+		advanced_ecm ();
-+		break;
-+
-+/* Advanced/Quit Gimps dialog */
-+
-+	case 9:
-+		advanced_quit ();
-+		break;
-+
-+/* Options/CPU dialog */
-+
-+	case 10:
-+		options_cpu ();
-+		break;
-+
-+/* Options/Preferences dialog */
-+
-+	case 11:
-+		options_preferences ();
-+		break;
-+
-+/* Options/Torture Test */
-+
-+	case 12:
-+		torture ();
-+		askOK ();
-+		break;
-+
-+/* Options/Benchmark Test */
-+
-+	case 13:
-+		LaunchBench ();
-+		askOK ();
-+		break;
-+
-+/* Help/About */
-+
-+	case 14:
-+		help_about ();
-+		break;
-+	}
-+	goto mloop;
-+}
 +#endif
+ 	printf ("Your choice: ");
+ 	choice = get_number (0);
++#ifdef BUILD_PRIMENET
+ 	if (choice <= 0 || choice >= 19) {
++#else
++	if (choice <= 0 || choice >= 15) {
++#endif
+ 		printf ("\n\t     Invalid choice\n\n");
+ 		continue;
+ 	}
+@@ -1158,26 +1262,40 @@
+ 
+ /* Test/Primenet dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 1:
+ 		test_primenet ();
+ 		break;
++#endif
+ 
+ /* Test/User Information dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 2:
++#else
++	case 1:
++#endif
+ 		test_worker_threads ();
+ 		break;
+ 
+ /* Test/Status message */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 3:
++#else
++	case 2:
++#endif
+ 		test_status ();
+ 		askOK ();
+ 		break;
+ 
+ /* Test/Continue or Stop or Test/Continue or Test/Stop */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 4:
++#else
++	case 3:
++#endif
+ 		if (WORKER_THREADS_ACTIVE && active_workers_count () < WORKER_THREADS_ACTIVE)
+ 			test_continue_or_stop ();
+ 		else if (NUM_WORKER_THREADS > 1 && active_workers_count () < WORKER_THREADS_ACTIVE - 1)
+@@ -1193,7 +1311,11 @@
+ 
+ /* Test/Exit */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 5:
++#else
++	case 4:
++#endif
+ 		{
+ 		int counter = 0;
+ 		if (WORKER_THREADS_ACTIVE && !WORKER_THREADS_STOPPING)
+@@ -1207,83 +1329,129 @@
+ 
+ /* Advanced/Test dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 6:
++#else
++	case 5:
++#endif
+ 		advanced_test ();
+ 		break;
+ 
+ /* Advanced/Time dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 7:
++#else
++	case 6:
++#endif
+ 		advanced_time ();
+ 		break;
+ 
+ /* Advanced/P-1 dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 8:
++#else
++	case 7:
++#endif
+ 		advanced_pminus1 ();
+ 		break;
+ 
+ /* Advanced/ECM dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 9:
++#else
++	case 8:
++#endif
+ 		advanced_ecm ();
+ 		break;
+ 
+ /* Advanced/Manual Communication dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 10:
+ 		advanced_manualcomm ();
+ 		break;
++#endif
+ 
+ /* Advanced/Unreserve exponent dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 11:
+ 		advanced_unreserve ();
+ 		break;
++#endif
+ 
+ /* Advanced/Quit Gimps dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 12:
++#else
++	case 9:
++#endif
+ 		advanced_quit ();
+ 		break;
+ 
+ /* Options/CPU dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 13:
++#else
++	case 10:
++#endif
+ 		options_cpu ();
+ 		break;
+ 
+ /* Options/Preferences dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 14:
++#else
++	case 11:
++#endif
+ 		options_preferences ();
+ 		break;
+ 
+ /* Options/Torture Test */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 15:
++#else
++	case 12:
++#endif
+ 		torture ();
+ 		askOK ();
+ 		break;
+ 
+ /* Options/Benchmark Test */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 16:
++#else
++	case 13:
++#endif
+ 		LaunchBench ();
+ 		askOK ();
+ 		break;
+ 
+ /* Help/About */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 17:
++#else
++	case 14:
++#endif
+ 		help_about ();
+ 		break;
+ 
+ /* Help/About PrimeNet Server */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 18:
+ 		help_about_server ();
+ 		break;
++#endif
+ 	}
+ 
+ 	}
 diff -r -u a/linux/os_routines.c b/linux/os_routines.c
 --- a/linux/os_routines.c	2016-03-28 08:27:51.000000000 +0800
-+++ b/linux/os_routines.c	2016-05-08 09:46:45.042078238 +0800
++++ b/linux/os_routines.c	2017-01-22 00:17:14.402982204 +0800
 @@ -411,6 +411,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -1418,9 +1482,17 @@ diff -r -u a/linux/os_routines.c b/linux/os_routines.c
  /* Check if a program is currently running - not implemented for OS/2 */
  
 diff -r -u a/linux/prime.c b/linux/prime.c
---- a/linux/prime.c	2016-04-24 04:06:40.000000000 +0800
-+++ b/linux/prime.c	2016-05-08 09:46:45.042078238 +0800
-@@ -106,7 +106,9 @@
+--- a/linux/prime.c	2016-09-13 14:06:10.000000000 +0800
++++ b/linux/prime.c	2017-01-22 00:17:14.402982204 +0800
+@@ -11,6 +11,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <sys/socket.h>
+ #include <sys/stat.h>
+ #include "prime.h"
+ 
+@@ -106,7 +107,9 @@
  #include "commonb.c"
  #include "commonc.c"
  #include "ecm.c"
@@ -1430,7 +1502,35 @@ diff -r -u a/linux/prime.c b/linux/prime.c
  #include "gwtest.c"
  
  /* Signal handlers */
-@@ -255,7 +257,9 @@
+@@ -137,8 +140,25 @@
+ /* catch termination signals */
+ 
+ 	(void)signal(SIGTERM, sigterm_handler);
+-	(void)signal(SIGINT, sigterm_handler);
+-	(void)signal(SIGHUP, sigterm_handler);	/* See discussion in http://www.mersenneforum.org/showthread.php?t=21496 */
++	if (signal(SIGINT, sigterm_handler) == SIG_DFL) {
++		/* If we are run asynchronously, keep SIGINT ignored. */
++		/* (e.g. `sh -c 'mprime & other_command'`) */
++		(void)signal(SIGHUP, SIG_DFL);
++	}
++	/* See discussion in http://www.mersenneforum.org/showthread.php?t=21496 */
++	if (signal(SIGHUP, sigterm_handler) == SIG_DFL) {
++		/* If we are run through 'nohup', keep SIGHUP ignored. */
++		(void)signal(SIGHUP, SIG_DFL);
++	}
++#if BUILD_PRIMENET && !defined(SO_NOSIGPIPE) && !defined(MSG_NOSIGNAL)
++	(void)signal(SIGPIPE, SIG_IGN);
++#else
++	/* SIGPIPE might be generated when user pipes stdout to another */
++	/* program, e.g. `mprime | tee log.txt`, and that "tee" dies. */
++	/* Handle this to terminate when we're sure we never receive */
++	/* SIGPIPE from sockets. */
++	(void)signal(SIGPIPE, sigterm_handler);
++#endif
+ 
+ /* No buffering of output */
+ 
+@@ -259,7 +279,9 @@
  /* or running a torture test */
  
  	nameAndReadIniFiles (named_ini_files);
@@ -1440,7 +1540,7 @@ diff -r -u a/linux/prime.c b/linux/prime.c
  
  /* If not running a torture test, set the program to nice priority. */
  /* Technically, this is not necessary since worker threads are set to */
-@@ -308,8 +312,13 @@
+@@ -312,8 +334,13 @@
  /* or when the ISP is contacted, etc. */
  
  	else if (contact_server) {
@@ -1455,8 +1555,8 @@ diff -r -u a/linux/prime.c b/linux/prime.c
  
  /* Bring up the main menu */
 diff -r -u a/linux64/makebsd b/linux64/makebsd
---- a/linux64/makebsd	2016-04-26 04:31:18.000000000 +0800
-+++ b/linux64/makebsd	2016-05-08 09:46:45.042078238 +0800
+--- a/linux64/makebsd	2016-10-31 02:42:16.000000000 +0800
++++ b/linux64/makebsd	2017-01-22 00:17:14.402982204 +0800
 @@ -4,10 +4,10 @@
  #
  
@@ -1471,8 +1571,8 @@ diff -r -u a/linux64/makebsd b/linux64/makebsd
  LFLAGS = -L/usr/local/lib -Wl,-M
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -lcurl -lstdc++ -lcompat
 diff -r -u a/linux64/makefile b/linux64/makefile
---- a/linux64/makefile	2016-04-26 04:31:18.000000000 +0800
-+++ b/linux64/makefile	2016-05-08 09:46:45.042078238 +0800
+--- a/linux64/makefile	2016-10-31 02:42:16.000000000 +0800
++++ b/linux64/makefile	2017-01-22 00:17:14.402982204 +0800
 @@ -13,10 +13,10 @@
  #	LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic $(shell pkg-config --static --libs libcurl) -lstdc++ -Wl,-Bdynamic -ldl
  
@@ -1487,25 +1587,18 @@ diff -r -u a/linux64/makefile b/linux64/makefile
  LFLAGS = -Wl,-M -Wl,-L/usr/local/lib
  LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic -lcurl -Wl,-Bdynamic -lrt -lstdc++ -ldl
 diff -r -u a/linux64/menu.c b/linux64/menu.c
---- a/linux64/menu.c	2016-03-26 06:03:34.000000000 +0800
-+++ b/linux64/menu.c	2016-05-08 09:46:45.042078238 +0800
-@@ -17,11 +17,12 @@
+--- a/linux64/menu.c	2016-09-15 10:15:10.000000000 +0800
++++ b/linux64/menu.c	2017-01-22 00:17:14.402982204 +0800
+@@ -23,7 +23,7 @@
  void get_line (
  	char	*buf)
  {
 -	int	len;
 +	size_t	len;
  	buf[0] = 0;
--	(void) fgets (buf, 80, stdin);
-+	if (!fgets (buf, 80, stdin)) return;
-+	/* Cut the '\n' at end of fgets string. */
- 	len = strlen (buf);
--	if (len > 0 && buf[len-1] == '\n') buf[len-1] = 0;
-+	if (len > 0 && buf[len-1] == '\n') buf[--len] = '\0';
- }
- 
- /* Get a number from the user */
-@@ -271,6 +272,7 @@
+ 	if (fgets (buf, 80, stdin) == NULL) sigterm_handler (SIGTERM);	// Treat EOF the same as a termination signal
+ 	if (KILL_MENUS) longjmp (MENU_JMPBUF, 1); // If a signal occurred while waiting for user input, longjmp to exit menus
+@@ -285,6 +285,7 @@
  
  void getProxyInfo (char *, unsigned short *, char *, char *);
  
@@ -1513,7 +1606,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  void test_primenet (void)
  {
  	int	m_primenet, m_dialup;
-@@ -296,6 +298,8 @@
+@@ -310,6 +311,8 @@
  	strcpy (orig_proxy_pwd, m_proxy_pwd);
  	m_debug = primenet_debug;
  
@@ -1522,7 +1615,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	askYN ("Use PrimeNet to get work and report results", &m_primenet);
  	if (!m_primenet) goto done;
  
-@@ -368,6 +372,7 @@
+@@ -382,6 +385,7 @@
  	} else
  		STARTUP_IN_PROGRESS = 0;
  }
@@ -1530,7 +1623,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  
  /* Test/Worker threads dialog */
  
-@@ -399,7 +404,9 @@
+@@ -413,7 +417,9 @@
  void test_worker_threads (void)
  {
  	unsigned long m_num_thread, m_priority;
@@ -1540,7 +1633,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	unsigned long m_affinity[MAX_NUM_WORKER_THREADS];
  	unsigned long m_numcpus[MAX_NUM_WORKER_THREADS];
  	int	i;
-@@ -407,20 +414,26 @@
+@@ -421,20 +427,26 @@
  	m_num_thread = NUM_WORKER_THREADS;
  	m_priority = PRIORITY;
  	for (i = 0; i < MAX_NUM_WORKER_THREADS; i++) {
@@ -1567,7 +1660,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  
  	if (USE_PRIMENET || NUM_CPUS * user_configurable_hyperthreads () > 1) {
  	    for (i = 0; i < m_num_thread; i++) {
-@@ -429,11 +442,13 @@
+@@ -443,11 +455,13 @@
  		else
  			printf ("\n");
  
@@ -1581,7 +1674,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  
  		if (NUM_CPUS * user_configurable_hyperthreads () > 1) {
  			char question[200];
-@@ -450,7 +465,11 @@
+@@ -464,7 +478,11 @@
  
  		if (NUM_CPUS * user_configurable_hyperthreads () > 1) {
  			int min_cores, max_cores;
@@ -1592,8 +1685,8 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
 +#endif
  			max_cores = NUM_CPUS * user_configurable_hyperthreads () - m_num_thread + 1;
  			if (max_cores < min_cores) max_cores = min_cores;
- 			askNum ("CPUs to use (multithreading)", &m_numcpus[i], min_cores, max_cores);
-@@ -503,6 +522,7 @@
+ 			if (m_numcpus[i] < min_cores) m_numcpus[i] = min_cores;
+@@ -519,6 +537,7 @@
  /* If the user changes any of the work preferences record it in the INI file */
  /* and tell the server */
  
@@ -1601,7 +1694,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  		if (AreAllTheSame (m_work_pref, m_num_thread)) {
  			if (! PTOIsGlobalOption (WORK_PREFERENCE) ||
  			    WORK_PREFERENCE[0] != m_work_pref[0]) {
-@@ -520,6 +540,7 @@
+@@ -536,6 +555,7 @@
  				new_options = TRUE;
  			}
  		}
@@ -1609,7 +1702,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  
  /* If the user changes any of the affinities record it in the INI file. */
  
-@@ -547,7 +568,9 @@
+@@ -563,7 +583,9 @@
  
  /* Send new settings to the server */
  
@@ -1619,7 +1712,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  
  /* Restart worker threads with new options */
  
-@@ -609,6 +632,8 @@
+@@ -625,6 +647,8 @@
  	unsigned long m_thread, m_p;
  #define NOTPRIMEERR "This number is not prime, there is no need to test it.\n"
  
@@ -1628,7 +1721,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  loop:	m_p = 0;
  
  	m_thread = 1;
-@@ -647,6 +672,8 @@
+@@ -663,6 +687,8 @@
  	m_p = 10000000;
  	m_iter = 10;
  
@@ -1637,7 +1730,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	askNum ("Exponent to time", &m_p, MIN_PRIME,
  	        CPU_FLAGS & CPU_SSE2 ? MAX_PRIME_SSE2 : MAX_PRIME);
  	askNum ("Number of Iterations", &m_iter, 1, 1000);
-@@ -670,6 +697,8 @@
+@@ -686,6 +712,8 @@
  	m_bound1 = 50000.0;
  	m_bound2 = 0.0;
  
@@ -1646,7 +1739,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	m_thread = 1;
  	if (NUM_WORKER_THREADS > 1)
  		askNum ("Worker number", &m_thread, 1, NUM_WORKER_THREADS);
-@@ -715,6 +744,8 @@
+@@ -731,6 +759,8 @@
  	m_bound2 = 0.0;
  	m_num_curves = 100;
  
@@ -1655,7 +1748,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	m_thread = 1;
  	if (NUM_WORKER_THREADS > 1)
  		askNum ("Worker number", &m_thread, 1, NUM_WORKER_THREADS);
-@@ -749,6 +780,7 @@
+@@ -765,6 +795,7 @@
  
  /* Advanced/Manual Communication dialog */
  
@@ -1663,7 +1756,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  void advanced_manualcomm (void)
  {
  	int	m_manual_comm, m_comm_now, m_new_dates;
-@@ -757,6 +789,8 @@
+@@ -773,6 +804,8 @@
  	m_comm_now = 1;
  	m_new_dates = 0;
  
@@ -1672,7 +1765,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	m_manual_comm = !m_manual_comm;
  	askYN ("Contact PrimeNet server automatically", &m_manual_comm);
  	m_manual_comm = !m_manual_comm;
-@@ -774,24 +808,30 @@
+@@ -790,24 +823,30 @@
  		if (m_comm_now) do_manual_comm_now ();
  	}
  }
@@ -1704,7 +1797,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  
  	if (!USE_PRIMENET) {
  		outputLongLine (MANUAL_QUIT);
-@@ -802,6 +842,7 @@
+@@ -818,6 +857,7 @@
  			stop_workers_for_escape ();
  		}
  	} else {
@@ -1712,7 +1805,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  		int	res;
  		outputLongLine (PRIMENET_QUIT);
  		res = askYesNoCancel ('C');
-@@ -815,6 +856,7 @@
+@@ -831,6 +871,7 @@
  			spoolMessage (MSG_QUIT_GIMPS, NULL);
  			askOK ();
  		}
@@ -1720,7 +1813,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	}
  }
  
-@@ -829,6 +871,11 @@
+@@ -845,6 +886,11 @@
  	char m_end_time[13];
  	char buf[512];
  
@@ -1732,7 +1825,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	m_memory_editable =
  		read_memory_settings (&day_memory, &night_memory,
  				      &day_start_time, &day_end_time);
-@@ -855,9 +902,6 @@
+@@ -871,9 +917,6 @@
  		}
  	}
  
@@ -1742,7 +1835,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	if (askOkCancel ()) {
  		unsigned int new_day_start_time, new_day_end_time;
  
-@@ -867,9 +911,11 @@
+@@ -883,9 +926,11 @@
  			ROLLING_AVERAGE = 1000;
  			IniWriteInt (LOCALINI_FILE, "RollingAverage", 1000);
  			IniWriteInt (LOCALINI_FILE, "RollingStartTime", 0);
@@ -1754,7 +1847,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  		}
  		new_day_start_time = strToMinutes ((char *) &m_start_time);
  		new_day_end_time = strToMinutes ((char *) &m_end_time);
-@@ -882,7 +928,9 @@
+@@ -898,7 +943,9 @@
  					       new_day_start_time, new_day_end_time);
  			mem_settings_have_changed ();
  		}
@@ -1764,7 +1857,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  
  // Now that Primenet almost always hands out LL assignments that are P-1'ed,
  // there is little reason to prompt user into allowing us to use more memory.
-@@ -902,25 +950,34 @@
+@@ -918,25 +965,34 @@
  void options_preferences (void)
  {
  	unsigned long m_iter, m_r_iter, m_disk_write_time;
@@ -1799,7 +1892,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	if (USE_PRIMENET && DIAL_UP)
  		askNum ("Minutes between modem retries", &m_modem, 1, 300);
  	if (USE_PRIMENET)
-@@ -929,6 +986,7 @@
+@@ -945,6 +1001,7 @@
  		askNum ("Days of work to queue up", &m_work, 1, 90);
  	if (USE_PRIMENET)
  		askFloat ("Days between sending end dates", &m_end_dates, 0.125, 7);
@@ -1807,7 +1900,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	askNum ("Number of Backup Files", &m_backup, 1, 3);
  	askYN ("Make noise if new Mersenne prime is found", &m_noise);
  	askYN ("Run program even when using laptop battery power", &m_battery);
-@@ -937,10 +995,12 @@
+@@ -953,10 +1010,12 @@
  		ITER_OUTPUT = m_iter;
  		ITER_OUTPUT_RES = m_r_iter;
  		DISK_WRITE_TIME = m_disk_write_time;
@@ -1820,7 +1913,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  		NUM_BACKUP_FILES = m_backup;
  		SILENT_VICTORY = !m_noise;
  		if (RUN_ON_BATTERY != m_battery) {
-@@ -951,13 +1011,17 @@
+@@ -967,13 +1026,17 @@
  		IniWriteInt (INI_FILE, "OutputIterations", ITER_OUTPUT);
  		IniWriteInt (INI_FILE, "ResultsFileIterations", ITER_OUTPUT_RES);
  		IniWriteInt (INI_FILE, "DiskWriteTime", DISK_WRITE_TIME);
@@ -1838,7 +1931,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	}
  }
  
-@@ -982,6 +1046,8 @@
+@@ -998,6 +1061,8 @@
  	}
  	m_timefft = 3;
  
@@ -1847,7 +1940,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  	if (NUM_CPUS * CPU_HYPERTHREADS > 1)
  		askNum ("Number of torture test threads to run", &m_thread,
  			1, NUM_CPUS * CPU_HYPERTHREADS);
-@@ -1043,6 +1109,7 @@
+@@ -1059,6 +1124,7 @@
  
  /* Help/About PrimeNet Server */
  
@@ -1855,7 +1948,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  void help_about_server (void)
  {
  	char	*buildId;
-@@ -1051,9 +1118,11 @@
+@@ -1067,9 +1133,11 @@
  
  	pingServer ();
  }
@@ -1867,7 +1960,7 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  void test_welcome (void)
  {
  	int	m_join = 1;
-@@ -1092,9 +1161,20 @@
+@@ -1108,6 +1176,16 @@
  	}
  	main_menu ();
  }
@@ -1884,22 +1977,19 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
  
  /* Display the main menu */
  
+@@ -1121,6 +1199,7 @@
+ 
+ 	printf ("\t     Main Menu\n");
+ 	printf ("\n");
 +#ifdef BUILD_PRIMENET
- void main_menu (void)
- {
- 	unsigned long choice;
-@@ -1268,3 +1348,150 @@
- 	}
- 	goto mloop;
- }
+ 	printf ("\t 1.  Test/Primenet\n");
+ 	printf ("\t 2.  Test/Worker threads\n");
+ 	printf ("\t 3.  Test/Status\n");
+@@ -1144,9 +1223,34 @@
+ 	printf ("\t16.  Options/Benchmark\n");
+ 	printf ("\t17.  Help/About\n");
+ 	printf ("\t18.  Help/About PrimeNet Server\n");
 +#else
-+void main_menu (void)
-+{
-+	unsigned long choice;
-+
-+mloop:	if (THREAD_KILL) return;
-+	printf ("\t     Main Menu\n");
-+loop:	printf ("\n");
 +	printf ("\t 1.  Test/Worker threads\n");
 +	printf ("\t 2.  Test/Status\n");
 +	if (WORKER_THREADS_ACTIVE && active_workers_count () < WORKER_THREADS_ACTIVE)
@@ -1919,129 +2009,203 @@ diff -r -u a/linux64/menu.c b/linux64/menu.c
 +	printf ("\t12.  Options/Torture Test\n");
 +	printf ("\t13.  Options/Benchmark\n");
 +	printf ("\t14.  Help/About\n");
-+	printf ("Your choice: ");
-+	choice = get_number (0);
-+	if (choice <= 0 || choice >= 15) {
-+		printf ("\t     Invalid choice\n");
-+		goto loop;
-+	}
-+
-+/* Display the main menu and switch off the users choice */
-+
-+	printf ("\n");
-+	switch (choice) {
-+
-+/* Test/User Information dialog */
-+
-+	case 1:
-+		test_worker_threads ();
-+		break;
-+
-+/* Test/Status message */
-+
-+	case 2:
-+		test_status ();
-+		askOK ();
-+		break;
-+
-+/* Test/Continue or Stop or Test/Continue or Test/Stop */
-+
-+	case 3:
-+		if (WORKER_THREADS_ACTIVE && active_workers_count () < WORKER_THREADS_ACTIVE)
-+			test_continue_or_stop ();
-+		else if (NUM_WORKER_THREADS > 1 && active_workers_count () < WORKER_THREADS_ACTIVE - 1)
-+			test_continue ();
-+		else if (!WORKER_THREADS_ACTIVE || WORKER_THREADS_STOPPING) {
-+			while (WORKER_THREADS_STOPPING) Sleep (50);
-+			linuxContinue ("Another mprime is running.\n", ALL_WORKERS, FALSE);
-+		} else if (active_workers_count () > 1)
-+			test_stop ();
-+		else
-+			stop_workers_for_escape ();
-+		break;
-+
-+/* Test/Exit */
-+
-+	case 4:
-+		{
-+		int counter = 0;
-+		if (WORKER_THREADS_ACTIVE && !WORKER_THREADS_STOPPING)
-+			stop_workers_for_escape ();
-+		while (WORKER_THREADS_STOPPING) {
-+			if (counter++ % 100 == 0) printf ("Waiting for worker threads to stop.\n");
-+			Sleep (50);
-+		}
-+		}
-+		return;
-+
-+/* Advanced/Test dialog */
-+
-+	case 5:
-+		advanced_test ();
-+		break;
-+
-+/* Advanced/Time dialog */
-+
-+	case 6:
-+		advanced_time ();
-+		break;
-+
-+/* Advanced/P-1 dialog */
-+
-+	case 7:
-+		advanced_pminus1 ();
-+		break;
-+
-+/* Advanced/ECM dialog */
-+
-+	case 8:
-+		advanced_ecm ();
-+		break;
-+
-+/* Advanced/Quit Gimps dialog */
-+
-+	case 9:
-+		advanced_quit ();
-+		break;
-+
-+/* Options/CPU dialog */
-+
-+	case 10:
-+		options_cpu ();
-+		break;
-+
-+/* Options/Preferences dialog */
-+
-+	case 11:
-+		options_preferences ();
-+		break;
-+
-+/* Options/Torture Test */
-+
-+	case 12:
-+		torture ();
-+		askOK ();
-+		break;
-+
-+/* Options/Benchmark Test */
-+
-+	case 13:
-+		LaunchBench ();
-+		askOK ();
-+		break;
-+
-+/* Help/About */
-+
-+	case 14:
-+		help_about ();
-+		break;
-+	}
-+	goto mloop;
-+}
 +#endif
+ 	printf ("Your choice: ");
+ 	choice = get_number (0);
++#ifdef BUILD_PRIMENET
+ 	if (choice <= 0 || choice >= 19) {
++#else
++	if (choice <= 0 || choice >= 15) {
++#endif
+ 		printf ("\n\t     Invalid choice\n\n");
+ 		continue;
+ 	}
+@@ -1158,26 +1262,40 @@
+ 
+ /* Test/Primenet dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 1:
+ 		test_primenet ();
+ 		break;
++#endif
+ 
+ /* Test/User Information dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 2:
++#else
++	case 1:
++#endif
+ 		test_worker_threads ();
+ 		break;
+ 
+ /* Test/Status message */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 3:
++#else
++	case 2:
++#endif
+ 		test_status ();
+ 		askOK ();
+ 		break;
+ 
+ /* Test/Continue or Stop or Test/Continue or Test/Stop */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 4:
++#else
++	case 3:
++#endif
+ 		if (WORKER_THREADS_ACTIVE && active_workers_count () < WORKER_THREADS_ACTIVE)
+ 			test_continue_or_stop ();
+ 		else if (NUM_WORKER_THREADS > 1 && active_workers_count () < WORKER_THREADS_ACTIVE - 1)
+@@ -1193,7 +1311,11 @@
+ 
+ /* Test/Exit */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 5:
++#else
++	case 4:
++#endif
+ 		{
+ 		int counter = 0;
+ 		if (WORKER_THREADS_ACTIVE && !WORKER_THREADS_STOPPING)
+@@ -1207,83 +1329,129 @@
+ 
+ /* Advanced/Test dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 6:
++#else
++	case 5:
++#endif
+ 		advanced_test ();
+ 		break;
+ 
+ /* Advanced/Time dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 7:
++#else
++	case 6:
++#endif
+ 		advanced_time ();
+ 		break;
+ 
+ /* Advanced/P-1 dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 8:
++#else
++	case 7:
++#endif
+ 		advanced_pminus1 ();
+ 		break;
+ 
+ /* Advanced/ECM dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 9:
++#else
++	case 8:
++#endif
+ 		advanced_ecm ();
+ 		break;
+ 
+ /* Advanced/Manual Communication dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 10:
+ 		advanced_manualcomm ();
+ 		break;
++#endif
+ 
+ /* Advanced/Unreserve exponent dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 11:
+ 		advanced_unreserve ();
+ 		break;
++#endif
+ 
+ /* Advanced/Quit Gimps dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 12:
++#else
++	case 9:
++#endif
+ 		advanced_quit ();
+ 		break;
+ 
+ /* Options/CPU dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 13:
++#else
++	case 10:
++#endif
+ 		options_cpu ();
+ 		break;
+ 
+ /* Options/Preferences dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 14:
++#else
++	case 11:
++#endif
+ 		options_preferences ();
+ 		break;
+ 
+ /* Options/Torture Test */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 15:
++#else
++	case 12:
++#endif
+ 		torture ();
+ 		askOK ();
+ 		break;
+ 
+ /* Options/Benchmark Test */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 16:
++#else
++	case 13:
++#endif
+ 		LaunchBench ();
+ 		askOK ();
+ 		break;
+ 
+ /* Help/About */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 17:
++#else
++	case 14:
++#endif
+ 		help_about ();
+ 		break;
+ 
+ /* Help/About PrimeNet Server */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 18:
+ 		help_about_server ();
+ 		break;
++#endif
+ 	}
+ 
+ 	}
 diff -r -u a/linux64/os_routines.c b/linux64/os_routines.c
 --- a/linux64/os_routines.c	2016-03-28 08:27:51.000000000 +0800
-+++ b/linux64/os_routines.c	2016-05-08 09:46:45.042078238 +0800
++++ b/linux64/os_routines.c	2017-01-22 00:17:14.402982204 +0800
 @@ -411,6 +411,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -2067,9 +2231,17 @@ diff -r -u a/linux64/os_routines.c b/linux64/os_routines.c
  /* Check if a program is currently running - not implemented for OS/2 */
  
 diff -r -u a/linux64/prime.c b/linux64/prime.c
---- a/linux64/prime.c	2016-04-24 04:06:40.000000000 +0800
-+++ b/linux64/prime.c	2016-05-08 09:46:45.042078238 +0800
-@@ -106,7 +106,9 @@
+--- a/linux64/prime.c	2016-09-13 14:06:10.000000000 +0800
++++ b/linux64/prime.c	2017-01-22 00:17:14.402982204 +0800
+@@ -11,6 +11,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <sys/socket.h>
+ #include <sys/stat.h>
+ #include "prime.h"
+ 
+@@ -106,7 +107,9 @@
  #include "commonb.c"
  #include "commonc.c"
  #include "ecm.c"
@@ -2079,7 +2251,35 @@ diff -r -u a/linux64/prime.c b/linux64/prime.c
  #include "gwtest.c"
  
  /* Signal handlers */
-@@ -255,7 +257,9 @@
+@@ -137,8 +140,25 @@
+ /* catch termination signals */
+ 
+ 	(void)signal(SIGTERM, sigterm_handler);
+-	(void)signal(SIGINT, sigterm_handler);
+-	(void)signal(SIGHUP, sigterm_handler);	/* See discussion in http://www.mersenneforum.org/showthread.php?t=21496 */
++	if (signal(SIGINT, sigterm_handler) == SIG_DFL) {
++		/* If we are run asynchronously, keep SIGINT ignored. */
++		/* (e.g. `sh -c 'mprime & other_command'`) */
++		(void)signal(SIGHUP, SIG_DFL);
++	}
++	/* See discussion in http://www.mersenneforum.org/showthread.php?t=21496 */
++	if (signal(SIGHUP, sigterm_handler) == SIG_DFL) {
++		/* If we are run through 'nohup', keep SIGHUP ignored. */
++		(void)signal(SIGHUP, SIG_DFL);
++	}
++#if BUILD_PRIMENET && !defined(SO_NOSIGPIPE) && !defined(MSG_NOSIGNAL)
++	(void)signal(SIGPIPE, SIG_IGN);
++#else
++	/* SIGPIPE might be generated when user pipes stdout to another */
++	/* program, e.g. `mprime | tee log.txt`, and that "tee" dies. */
++	/* Handle this to terminate when we're sure we never receive */
++	/* SIGPIPE from sockets. */
++	(void)signal(SIGPIPE, sigterm_handler);
++#endif
+ 
+ /* No buffering of output */
+ 
+@@ -259,7 +279,9 @@
  /* or running a torture test */
  
  	nameAndReadIniFiles (named_ini_files);
@@ -2089,7 +2289,7 @@ diff -r -u a/linux64/prime.c b/linux64/prime.c
  
  /* If not running a torture test, set the program to nice priority. */
  /* Technically, this is not necessary since worker threads are set to */
-@@ -308,8 +312,13 @@
+@@ -312,8 +334,13 @@
  /* or when the ISP is contacted, etc. */
  
  	else if (contact_server) {
@@ -2104,8 +2304,8 @@ diff -r -u a/linux64/prime.c b/linux64/prime.c
  
  /* Bring up the main menu */
 diff -r -u a/macosx/makefile b/macosx/makefile
---- a/macosx/makefile	2016-04-26 04:31:21.000000000 +0800
-+++ b/macosx/makefile	2016-05-08 09:46:45.042078238 +0800
+--- a/macosx/makefile	2016-10-31 02:42:19.000000000 +0800
++++ b/macosx/makefile	2017-01-22 00:17:14.402982204 +0800
 @@ -4,10 +4,10 @@
  ENVP= MACOSX_DEPLOYMENT_TARGET=10.4
  
@@ -2120,25 +2320,18 @@ diff -r -u a/macosx/makefile b/macosx/makefile
  LFLAGS = -Wl,-no_pie
  LIBS   = ../gwnum/release/gwnum.a -lm -lpthread -lcurl -framework IOKit -framework CoreFoundation -lstdc++
 diff -r -u a/macosx/menu.c b/macosx/menu.c
---- a/macosx/menu.c	2016-03-26 06:03:34.000000000 +0800
-+++ b/macosx/menu.c	2016-05-08 09:46:45.042078238 +0800
-@@ -17,11 +17,12 @@
+--- a/macosx/menu.c	2016-09-15 10:15:10.000000000 +0800
++++ b/macosx/menu.c	2017-01-22 00:17:14.406982205 +0800
+@@ -23,7 +23,7 @@
  void get_line (
  	char	*buf)
  {
 -	int	len;
 +	size_t	len;
  	buf[0] = 0;
--	(void) fgets (buf, 80, stdin);
-+	if (!fgets (buf, 80, stdin)) return;
-+	/* Cut the '\n' at end of fgets string. */
- 	len = strlen (buf);
--	if (len > 0 && buf[len-1] == '\n') buf[len-1] = 0;
-+	if (len > 0 && buf[len-1] == '\n') buf[--len] = '\0';
- }
- 
- /* Get a number from the user */
-@@ -271,6 +272,7 @@
+ 	if (fgets (buf, 80, stdin) == NULL) sigterm_handler (SIGTERM);	// Treat EOF the same as a termination signal
+ 	if (KILL_MENUS) longjmp (MENU_JMPBUF, 1); // If a signal occurred while waiting for user input, longjmp to exit menus
+@@ -285,6 +285,7 @@
  
  void getProxyInfo (char *, unsigned short *, char *, char *);
  
@@ -2146,7 +2339,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  void test_primenet (void)
  {
  	int	m_primenet, m_dialup;
-@@ -296,6 +298,8 @@
+@@ -310,6 +311,8 @@
  	strcpy (orig_proxy_pwd, m_proxy_pwd);
  	m_debug = primenet_debug;
  
@@ -2155,7 +2348,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	askYN ("Use PrimeNet to get work and report results", &m_primenet);
  	if (!m_primenet) goto done;
  
-@@ -368,6 +372,7 @@
+@@ -382,6 +385,7 @@
  	} else
  		STARTUP_IN_PROGRESS = 0;
  }
@@ -2163,7 +2356,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  
  /* Test/Worker threads dialog */
  
-@@ -399,7 +404,9 @@
+@@ -413,7 +417,9 @@
  void test_worker_threads (void)
  {
  	unsigned long m_num_thread, m_priority;
@@ -2173,7 +2366,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	unsigned long m_affinity[MAX_NUM_WORKER_THREADS];
  	unsigned long m_numcpus[MAX_NUM_WORKER_THREADS];
  	int	i;
-@@ -407,20 +414,26 @@
+@@ -421,20 +427,26 @@
  	m_num_thread = NUM_WORKER_THREADS;
  	m_priority = PRIORITY;
  	for (i = 0; i < MAX_NUM_WORKER_THREADS; i++) {
@@ -2200,7 +2393,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  
  	if (USE_PRIMENET || NUM_CPUS * user_configurable_hyperthreads () > 1) {
  	    for (i = 0; i < m_num_thread; i++) {
-@@ -429,11 +442,13 @@
+@@ -443,11 +455,13 @@
  		else
  			printf ("\n");
  
@@ -2214,7 +2407,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  
  		if (NUM_CPUS * user_configurable_hyperthreads () > 1) {
  			char question[200];
-@@ -450,7 +465,11 @@
+@@ -464,7 +478,11 @@
  
  		if (NUM_CPUS * user_configurable_hyperthreads () > 1) {
  			int min_cores, max_cores;
@@ -2225,8 +2418,8 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
 +#endif
  			max_cores = NUM_CPUS * user_configurable_hyperthreads () - m_num_thread + 1;
  			if (max_cores < min_cores) max_cores = min_cores;
- 			askNum ("CPUs to use (multithreading)", &m_numcpus[i], min_cores, max_cores);
-@@ -503,6 +522,7 @@
+ 			if (m_numcpus[i] < min_cores) m_numcpus[i] = min_cores;
+@@ -519,6 +537,7 @@
  /* If the user changes any of the work preferences record it in the INI file */
  /* and tell the server */
  
@@ -2234,7 +2427,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  		if (AreAllTheSame (m_work_pref, m_num_thread)) {
  			if (! PTOIsGlobalOption (WORK_PREFERENCE) ||
  			    WORK_PREFERENCE[0] != m_work_pref[0]) {
-@@ -520,6 +540,7 @@
+@@ -536,6 +555,7 @@
  				new_options = TRUE;
  			}
  		}
@@ -2242,7 +2435,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  
  /* If the user changes any of the affinities record it in the INI file. */
  
-@@ -547,7 +568,9 @@
+@@ -563,7 +583,9 @@
  
  /* Send new settings to the server */
  
@@ -2252,7 +2445,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  
  /* Restart worker threads with new options */
  
-@@ -609,6 +632,8 @@
+@@ -625,6 +647,8 @@
  	unsigned long m_thread, m_p;
  #define NOTPRIMEERR "This number is not prime, there is no need to test it.\n"
  
@@ -2261,7 +2454,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  loop:	m_p = 0;
  
  	m_thread = 1;
-@@ -647,6 +672,8 @@
+@@ -663,6 +687,8 @@
  	m_p = 10000000;
  	m_iter = 10;
  
@@ -2270,7 +2463,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	askNum ("Exponent to time", &m_p, MIN_PRIME,
  	        CPU_FLAGS & CPU_SSE2 ? MAX_PRIME_SSE2 : MAX_PRIME);
  	askNum ("Number of Iterations", &m_iter, 1, 1000);
-@@ -670,6 +697,8 @@
+@@ -686,6 +712,8 @@
  	m_bound1 = 50000.0;
  	m_bound2 = 0.0;
  
@@ -2279,7 +2472,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	m_thread = 1;
  	if (NUM_WORKER_THREADS > 1)
  		askNum ("Worker number", &m_thread, 1, NUM_WORKER_THREADS);
-@@ -715,6 +744,8 @@
+@@ -731,6 +759,8 @@
  	m_bound2 = 0.0;
  	m_num_curves = 100;
  
@@ -2288,7 +2481,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	m_thread = 1;
  	if (NUM_WORKER_THREADS > 1)
  		askNum ("Worker number", &m_thread, 1, NUM_WORKER_THREADS);
-@@ -749,6 +780,7 @@
+@@ -765,6 +795,7 @@
  
  /* Advanced/Manual Communication dialog */
  
@@ -2296,7 +2489,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  void advanced_manualcomm (void)
  {
  	int	m_manual_comm, m_comm_now, m_new_dates;
-@@ -757,6 +789,8 @@
+@@ -773,6 +804,8 @@
  	m_comm_now = 1;
  	m_new_dates = 0;
  
@@ -2305,7 +2498,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	m_manual_comm = !m_manual_comm;
  	askYN ("Contact PrimeNet server automatically", &m_manual_comm);
  	m_manual_comm = !m_manual_comm;
-@@ -774,24 +808,30 @@
+@@ -790,24 +823,30 @@
  		if (m_comm_now) do_manual_comm_now ();
  	}
  }
@@ -2337,7 +2530,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  
  	if (!USE_PRIMENET) {
  		outputLongLine (MANUAL_QUIT);
-@@ -802,6 +842,7 @@
+@@ -818,6 +857,7 @@
  			stop_workers_for_escape ();
  		}
  	} else {
@@ -2345,7 +2538,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  		int	res;
  		outputLongLine (PRIMENET_QUIT);
  		res = askYesNoCancel ('C');
-@@ -815,6 +856,7 @@
+@@ -831,6 +871,7 @@
  			spoolMessage (MSG_QUIT_GIMPS, NULL);
  			askOK ();
  		}
@@ -2353,7 +2546,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	}
  }
  
-@@ -829,6 +871,11 @@
+@@ -845,6 +886,11 @@
  	char m_end_time[13];
  	char buf[512];
  
@@ -2365,7 +2558,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	m_memory_editable =
  		read_memory_settings (&day_memory, &night_memory,
  				      &day_start_time, &day_end_time);
-@@ -855,9 +902,6 @@
+@@ -871,9 +917,6 @@
  		}
  	}
  
@@ -2375,7 +2568,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	if (askOkCancel ()) {
  		unsigned int new_day_start_time, new_day_end_time;
  
-@@ -867,9 +911,11 @@
+@@ -883,9 +926,11 @@
  			ROLLING_AVERAGE = 1000;
  			IniWriteInt (LOCALINI_FILE, "RollingAverage", 1000);
  			IniWriteInt (LOCALINI_FILE, "RollingStartTime", 0);
@@ -2387,7 +2580,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  		}
  		new_day_start_time = strToMinutes ((char *) &m_start_time);
  		new_day_end_time = strToMinutes ((char *) &m_end_time);
-@@ -882,7 +928,9 @@
+@@ -898,7 +943,9 @@
  					       new_day_start_time, new_day_end_time);
  			mem_settings_have_changed ();
  		}
@@ -2397,7 +2590,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  
  // Now that Primenet almost always hands out LL assignments that are P-1'ed,
  // there is little reason to prompt user into allowing us to use more memory.
-@@ -902,25 +950,34 @@
+@@ -918,25 +965,34 @@
  void options_preferences (void)
  {
  	unsigned long m_iter, m_r_iter, m_disk_write_time;
@@ -2432,7 +2625,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	if (USE_PRIMENET && DIAL_UP)
  		askNum ("Minutes between modem retries", &m_modem, 1, 300);
  	if (USE_PRIMENET)
-@@ -929,6 +986,7 @@
+@@ -945,6 +1001,7 @@
  		askNum ("Days of work to queue up", &m_work, 1, 90);
  	if (USE_PRIMENET)
  		askFloat ("Days between sending end dates", &m_end_dates, 0.125, 7);
@@ -2440,7 +2633,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	askNum ("Number of Backup Files", &m_backup, 1, 3);
  	askYN ("Make noise if new Mersenne prime is found", &m_noise);
  	askYN ("Run program even when using laptop battery power", &m_battery);
-@@ -937,10 +995,12 @@
+@@ -953,10 +1010,12 @@
  		ITER_OUTPUT = m_iter;
  		ITER_OUTPUT_RES = m_r_iter;
  		DISK_WRITE_TIME = m_disk_write_time;
@@ -2453,7 +2646,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  		NUM_BACKUP_FILES = m_backup;
  		SILENT_VICTORY = !m_noise;
  		if (RUN_ON_BATTERY != m_battery) {
-@@ -951,13 +1011,17 @@
+@@ -967,13 +1026,17 @@
  		IniWriteInt (INI_FILE, "OutputIterations", ITER_OUTPUT);
  		IniWriteInt (INI_FILE, "ResultsFileIterations", ITER_OUTPUT_RES);
  		IniWriteInt (INI_FILE, "DiskWriteTime", DISK_WRITE_TIME);
@@ -2471,7 +2664,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	}
  }
  
-@@ -982,6 +1046,8 @@
+@@ -998,6 +1061,8 @@
  	}
  	m_timefft = 3;
  
@@ -2480,7 +2673,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  	if (NUM_CPUS * CPU_HYPERTHREADS > 1)
  		askNum ("Number of torture test threads to run", &m_thread,
  			1, NUM_CPUS * CPU_HYPERTHREADS);
-@@ -1043,6 +1109,7 @@
+@@ -1059,6 +1124,7 @@
  
  /* Help/About PrimeNet Server */
  
@@ -2488,7 +2681,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  void help_about_server (void)
  {
  	char	*buildId;
-@@ -1051,9 +1118,11 @@
+@@ -1067,9 +1133,11 @@
  
  	pingServer ();
  }
@@ -2500,7 +2693,7 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  void test_welcome (void)
  {
  	int	m_join = 1;
-@@ -1092,9 +1161,20 @@
+@@ -1108,6 +1176,16 @@
  	}
  	main_menu ();
  }
@@ -2517,22 +2710,19 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
  
  /* Display the main menu */
  
+@@ -1121,6 +1199,7 @@
+ 
+ 	printf ("\t     Main Menu\n");
+ 	printf ("\n");
 +#ifdef BUILD_PRIMENET
- void main_menu (void)
- {
- 	unsigned long choice;
-@@ -1268,3 +1348,150 @@
- 	}
- 	goto mloop;
- }
+ 	printf ("\t 1.  Test/Primenet\n");
+ 	printf ("\t 2.  Test/Worker threads\n");
+ 	printf ("\t 3.  Test/Status\n");
+@@ -1144,9 +1223,34 @@
+ 	printf ("\t16.  Options/Benchmark\n");
+ 	printf ("\t17.  Help/About\n");
+ 	printf ("\t18.  Help/About PrimeNet Server\n");
 +#else
-+void main_menu (void)
-+{
-+	unsigned long choice;
-+
-+mloop:	if (THREAD_KILL) return;
-+	printf ("\t     Main Menu\n");
-+loop:	printf ("\n");
 +	printf ("\t 1.  Test/Worker threads\n");
 +	printf ("\t 2.  Test/Status\n");
 +	if (WORKER_THREADS_ACTIVE && active_workers_count () < WORKER_THREADS_ACTIVE)
@@ -2552,129 +2742,203 @@ diff -r -u a/macosx/menu.c b/macosx/menu.c
 +	printf ("\t12.  Options/Torture Test\n");
 +	printf ("\t13.  Options/Benchmark\n");
 +	printf ("\t14.  Help/About\n");
-+	printf ("Your choice: ");
-+	choice = get_number (0);
-+	if (choice <= 0 || choice >= 15) {
-+		printf ("\t     Invalid choice\n");
-+		goto loop;
-+	}
-+
-+/* Display the main menu and switch off the users choice */
-+
-+	printf ("\n");
-+	switch (choice) {
-+
-+/* Test/User Information dialog */
-+
-+	case 1:
-+		test_worker_threads ();
-+		break;
-+
-+/* Test/Status message */
-+
-+	case 2:
-+		test_status ();
-+		askOK ();
-+		break;
-+
-+/* Test/Continue or Stop or Test/Continue or Test/Stop */
-+
-+	case 3:
-+		if (WORKER_THREADS_ACTIVE && active_workers_count () < WORKER_THREADS_ACTIVE)
-+			test_continue_or_stop ();
-+		else if (NUM_WORKER_THREADS > 1 && active_workers_count () < WORKER_THREADS_ACTIVE - 1)
-+			test_continue ();
-+		else if (!WORKER_THREADS_ACTIVE || WORKER_THREADS_STOPPING) {
-+			while (WORKER_THREADS_STOPPING) Sleep (50);
-+			linuxContinue ("Another mprime is running.\n", ALL_WORKERS, FALSE);
-+		} else if (active_workers_count () > 1)
-+			test_stop ();
-+		else
-+			stop_workers_for_escape ();
-+		break;
-+
-+/* Test/Exit */
-+
-+	case 4:
-+		{
-+		int counter = 0;
-+		if (WORKER_THREADS_ACTIVE && !WORKER_THREADS_STOPPING)
-+			stop_workers_for_escape ();
-+		while (WORKER_THREADS_STOPPING) {
-+			if (counter++ % 100 == 0) printf ("Waiting for worker threads to stop.\n");
-+			Sleep (50);
-+		}
-+		}
-+		return;
-+
-+/* Advanced/Test dialog */
-+
-+	case 5:
-+		advanced_test ();
-+		break;
-+
-+/* Advanced/Time dialog */
-+
-+	case 6:
-+		advanced_time ();
-+		break;
-+
-+/* Advanced/P-1 dialog */
-+
-+	case 7:
-+		advanced_pminus1 ();
-+		break;
-+
-+/* Advanced/ECM dialog */
-+
-+	case 8:
-+		advanced_ecm ();
-+		break;
-+
-+/* Advanced/Quit Gimps dialog */
-+
-+	case 9:
-+		advanced_quit ();
-+		break;
-+
-+/* Options/CPU dialog */
-+
-+	case 10:
-+		options_cpu ();
-+		break;
-+
-+/* Options/Preferences dialog */
-+
-+	case 11:
-+		options_preferences ();
-+		break;
-+
-+/* Options/Torture Test */
-+
-+	case 12:
-+		torture ();
-+		askOK ();
-+		break;
-+
-+/* Options/Benchmark Test */
-+
-+	case 13:
-+		LaunchBench ();
-+		askOK ();
-+		break;
-+
-+/* Help/About */
-+
-+	case 14:
-+		help_about ();
-+		break;
-+	}
-+	goto mloop;
-+}
 +#endif
+ 	printf ("Your choice: ");
+ 	choice = get_number (0);
++#ifdef BUILD_PRIMENET
+ 	if (choice <= 0 || choice >= 19) {
++#else
++	if (choice <= 0 || choice >= 15) {
++#endif
+ 		printf ("\n\t     Invalid choice\n\n");
+ 		continue;
+ 	}
+@@ -1158,26 +1262,40 @@
+ 
+ /* Test/Primenet dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 1:
+ 		test_primenet ();
+ 		break;
++#endif
+ 
+ /* Test/User Information dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 2:
++#else
++	case 1:
++#endif
+ 		test_worker_threads ();
+ 		break;
+ 
+ /* Test/Status message */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 3:
++#else
++	case 2:
++#endif
+ 		test_status ();
+ 		askOK ();
+ 		break;
+ 
+ /* Test/Continue or Stop or Test/Continue or Test/Stop */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 4:
++#else
++	case 3:
++#endif
+ 		if (WORKER_THREADS_ACTIVE && active_workers_count () < WORKER_THREADS_ACTIVE)
+ 			test_continue_or_stop ();
+ 		else if (NUM_WORKER_THREADS > 1 && active_workers_count () < WORKER_THREADS_ACTIVE - 1)
+@@ -1193,7 +1311,11 @@
+ 
+ /* Test/Exit */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 5:
++#else
++	case 4:
++#endif
+ 		{
+ 		int counter = 0;
+ 		if (WORKER_THREADS_ACTIVE && !WORKER_THREADS_STOPPING)
+@@ -1207,83 +1329,129 @@
+ 
+ /* Advanced/Test dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 6:
++#else
++	case 5:
++#endif
+ 		advanced_test ();
+ 		break;
+ 
+ /* Advanced/Time dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 7:
++#else
++	case 6:
++#endif
+ 		advanced_time ();
+ 		break;
+ 
+ /* Advanced/P-1 dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 8:
++#else
++	case 7:
++#endif
+ 		advanced_pminus1 ();
+ 		break;
+ 
+ /* Advanced/ECM dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 9:
++#else
++	case 8:
++#endif
+ 		advanced_ecm ();
+ 		break;
+ 
+ /* Advanced/Manual Communication dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 10:
+ 		advanced_manualcomm ();
+ 		break;
++#endif
+ 
+ /* Advanced/Unreserve exponent dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 11:
+ 		advanced_unreserve ();
+ 		break;
++#endif
+ 
+ /* Advanced/Quit Gimps dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 12:
++#else
++	case 9:
++#endif
+ 		advanced_quit ();
+ 		break;
+ 
+ /* Options/CPU dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 13:
++#else
++	case 10:
++#endif
+ 		options_cpu ();
+ 		break;
+ 
+ /* Options/Preferences dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 14:
++#else
++	case 11:
++#endif
+ 		options_preferences ();
+ 		break;
+ 
+ /* Options/Torture Test */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 15:
++#else
++	case 12:
++#endif
+ 		torture ();
+ 		askOK ();
+ 		break;
+ 
+ /* Options/Benchmark Test */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 16:
++#else
++	case 13:
++#endif
+ 		LaunchBench ();
+ 		askOK ();
+ 		break;
+ 
+ /* Help/About */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 17:
++#else
++	case 14:
++#endif
+ 		help_about ();
+ 		break;
+ 
+ /* Help/About PrimeNet Server */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 18:
+ 		help_about_server ();
+ 		break;
++#endif
+ 	}
+ 
+ 	}
 diff -r -u a/macosx/os_routines.c b/macosx/os_routines.c
 --- a/macosx/os_routines.c	2016-03-28 08:27:51.000000000 +0800
-+++ b/macosx/os_routines.c	2016-05-08 09:46:45.042078238 +0800
++++ b/macosx/os_routines.c	2017-01-22 00:17:14.406982205 +0800
 @@ -411,6 +411,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -2700,9 +2964,17 @@ diff -r -u a/macosx/os_routines.c b/macosx/os_routines.c
  /* Check if a program is currently running - not implemented for OS/2 */
  
 diff -r -u a/macosx/prime.c b/macosx/prime.c
---- a/macosx/prime.c	2016-04-24 04:06:40.000000000 +0800
-+++ b/macosx/prime.c	2016-05-08 09:46:45.042078238 +0800
-@@ -106,7 +106,9 @@
+--- a/macosx/prime.c	2016-09-13 14:06:10.000000000 +0800
++++ b/macosx/prime.c	2017-01-22 00:17:14.406982205 +0800
+@@ -11,6 +11,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <sys/socket.h>
+ #include <sys/stat.h>
+ #include "prime.h"
+ 
+@@ -106,7 +107,9 @@
  #include "commonb.c"
  #include "commonc.c"
  #include "ecm.c"
@@ -2712,7 +2984,35 @@ diff -r -u a/macosx/prime.c b/macosx/prime.c
  #include "gwtest.c"
  
  /* Signal handlers */
-@@ -255,7 +257,9 @@
+@@ -137,8 +140,25 @@
+ /* catch termination signals */
+ 
+ 	(void)signal(SIGTERM, sigterm_handler);
+-	(void)signal(SIGINT, sigterm_handler);
+-	(void)signal(SIGHUP, sigterm_handler);	/* See discussion in http://www.mersenneforum.org/showthread.php?t=21496 */
++	if (signal(SIGINT, sigterm_handler) == SIG_DFL) {
++		/* If we are run asynchronously, keep SIGINT ignored. */
++		/* (e.g. `sh -c 'mprime & other_command'`) */
++		(void)signal(SIGHUP, SIG_DFL);
++	}
++	/* See discussion in http://www.mersenneforum.org/showthread.php?t=21496 */
++	if (signal(SIGHUP, sigterm_handler) == SIG_DFL) {
++		/* If we are run through 'nohup', keep SIGHUP ignored. */
++		(void)signal(SIGHUP, SIG_DFL);
++	}
++#if BUILD_PRIMENET && !defined(SO_NOSIGPIPE) && !defined(MSG_NOSIGNAL)
++	(void)signal(SIGPIPE, SIG_IGN);
++#else
++	/* SIGPIPE might be generated when user pipes stdout to another */
++	/* program, e.g. `mprime | tee log.txt`, and that "tee" dies. */
++	/* Handle this to terminate when we're sure we never receive */
++	/* SIGPIPE from sockets. */
++	(void)signal(SIGPIPE, sigterm_handler);
++#endif
+ 
+ /* No buffering of output */
+ 
+@@ -259,7 +279,9 @@
  /* or running a torture test */
  
  	nameAndReadIniFiles (named_ini_files);
@@ -2722,7 +3022,7 @@ diff -r -u a/macosx/prime.c b/macosx/prime.c
  
  /* If not running a torture test, set the program to nice priority. */
  /* Technically, this is not necessary since worker threads are set to */
-@@ -308,8 +312,13 @@
+@@ -312,8 +334,13 @@
  /* or when the ISP is contacted, etc. */
  
  	else if (contact_server) {
@@ -2737,8 +3037,8 @@ diff -r -u a/macosx/prime.c b/macosx/prime.c
  
  /* Bring up the main menu */
 diff -r -u a/macosx64/makefile b/macosx64/makefile
---- a/macosx64/makefile	2016-04-26 04:31:22.000000000 +0800
-+++ b/macosx64/makefile	2016-05-08 09:46:45.042078238 +0800
+--- a/macosx64/makefile	2016-10-31 02:42:20.000000000 +0800
++++ b/macosx64/makefile	2017-01-22 00:17:14.406982205 +0800
 @@ -4,10 +4,10 @@
  ENVP= MACOSX_DEPLOYMENT_TARGET=10.4
  
@@ -2753,25 +3053,18 @@ diff -r -u a/macosx64/makefile b/macosx64/makefile
  LFLAGS = -m64 -Wl,-no_pie
  LIBS   = ../gwnum/amd64/release/gwnum.a -lm -lpthread -lcurl -framework IOKit -framework CoreFoundation -lstdc++
 diff -r -u a/macosx64/menu.c b/macosx64/menu.c
---- a/macosx64/menu.c	2016-03-26 06:03:34.000000000 +0800
-+++ b/macosx64/menu.c	2016-05-08 09:46:45.046078279 +0800
-@@ -17,11 +17,12 @@
+--- a/macosx64/menu.c	2016-09-15 10:15:10.000000000 +0800
++++ b/macosx64/menu.c	2017-01-22 00:17:14.406982205 +0800
+@@ -23,7 +23,7 @@
  void get_line (
  	char	*buf)
  {
 -	int	len;
 +	size_t	len;
  	buf[0] = 0;
--	(void) fgets (buf, 80, stdin);
-+	if (!fgets (buf, 80, stdin)) return;
-+	/* Cut the '\n' at end of fgets string. */
- 	len = strlen (buf);
--	if (len > 0 && buf[len-1] == '\n') buf[len-1] = 0;
-+	if (len > 0 && buf[len-1] == '\n') buf[--len] = '\0';
- }
- 
- /* Get a number from the user */
-@@ -271,6 +272,7 @@
+ 	if (fgets (buf, 80, stdin) == NULL) sigterm_handler (SIGTERM);	// Treat EOF the same as a termination signal
+ 	if (KILL_MENUS) longjmp (MENU_JMPBUF, 1); // If a signal occurred while waiting for user input, longjmp to exit menus
+@@ -285,6 +285,7 @@
  
  void getProxyInfo (char *, unsigned short *, char *, char *);
  
@@ -2779,7 +3072,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  void test_primenet (void)
  {
  	int	m_primenet, m_dialup;
-@@ -296,6 +298,8 @@
+@@ -310,6 +311,8 @@
  	strcpy (orig_proxy_pwd, m_proxy_pwd);
  	m_debug = primenet_debug;
  
@@ -2788,7 +3081,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	askYN ("Use PrimeNet to get work and report results", &m_primenet);
  	if (!m_primenet) goto done;
  
-@@ -368,6 +372,7 @@
+@@ -382,6 +385,7 @@
  	} else
  		STARTUP_IN_PROGRESS = 0;
  }
@@ -2796,7 +3089,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  
  /* Test/Worker threads dialog */
  
-@@ -399,7 +404,9 @@
+@@ -413,7 +417,9 @@
  void test_worker_threads (void)
  {
  	unsigned long m_num_thread, m_priority;
@@ -2806,7 +3099,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	unsigned long m_affinity[MAX_NUM_WORKER_THREADS];
  	unsigned long m_numcpus[MAX_NUM_WORKER_THREADS];
  	int	i;
-@@ -407,20 +414,26 @@
+@@ -421,20 +427,26 @@
  	m_num_thread = NUM_WORKER_THREADS;
  	m_priority = PRIORITY;
  	for (i = 0; i < MAX_NUM_WORKER_THREADS; i++) {
@@ -2833,7 +3126,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  
  	if (USE_PRIMENET || NUM_CPUS * user_configurable_hyperthreads () > 1) {
  	    for (i = 0; i < m_num_thread; i++) {
-@@ -429,11 +442,13 @@
+@@ -443,11 +455,13 @@
  		else
  			printf ("\n");
  
@@ -2847,7 +3140,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  
  		if (NUM_CPUS * user_configurable_hyperthreads () > 1) {
  			char question[200];
-@@ -450,7 +465,11 @@
+@@ -464,7 +478,11 @@
  
  		if (NUM_CPUS * user_configurable_hyperthreads () > 1) {
  			int min_cores, max_cores;
@@ -2858,8 +3151,8 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
 +#endif
  			max_cores = NUM_CPUS * user_configurable_hyperthreads () - m_num_thread + 1;
  			if (max_cores < min_cores) max_cores = min_cores;
- 			askNum ("CPUs to use (multithreading)", &m_numcpus[i], min_cores, max_cores);
-@@ -503,6 +522,7 @@
+ 			if (m_numcpus[i] < min_cores) m_numcpus[i] = min_cores;
+@@ -519,6 +537,7 @@
  /* If the user changes any of the work preferences record it in the INI file */
  /* and tell the server */
  
@@ -2867,7 +3160,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  		if (AreAllTheSame (m_work_pref, m_num_thread)) {
  			if (! PTOIsGlobalOption (WORK_PREFERENCE) ||
  			    WORK_PREFERENCE[0] != m_work_pref[0]) {
-@@ -520,6 +540,7 @@
+@@ -536,6 +555,7 @@
  				new_options = TRUE;
  			}
  		}
@@ -2875,7 +3168,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  
  /* If the user changes any of the affinities record it in the INI file. */
  
-@@ -547,7 +568,9 @@
+@@ -563,7 +583,9 @@
  
  /* Send new settings to the server */
  
@@ -2885,7 +3178,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  
  /* Restart worker threads with new options */
  
-@@ -609,6 +632,8 @@
+@@ -625,6 +647,8 @@
  	unsigned long m_thread, m_p;
  #define NOTPRIMEERR "This number is not prime, there is no need to test it.\n"
  
@@ -2894,7 +3187,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  loop:	m_p = 0;
  
  	m_thread = 1;
-@@ -647,6 +672,8 @@
+@@ -663,6 +687,8 @@
  	m_p = 10000000;
  	m_iter = 10;
  
@@ -2903,7 +3196,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	askNum ("Exponent to time", &m_p, MIN_PRIME,
  	        CPU_FLAGS & CPU_SSE2 ? MAX_PRIME_SSE2 : MAX_PRIME);
  	askNum ("Number of Iterations", &m_iter, 1, 1000);
-@@ -670,6 +697,8 @@
+@@ -686,6 +712,8 @@
  	m_bound1 = 50000.0;
  	m_bound2 = 0.0;
  
@@ -2912,7 +3205,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	m_thread = 1;
  	if (NUM_WORKER_THREADS > 1)
  		askNum ("Worker number", &m_thread, 1, NUM_WORKER_THREADS);
-@@ -715,6 +744,8 @@
+@@ -731,6 +759,8 @@
  	m_bound2 = 0.0;
  	m_num_curves = 100;
  
@@ -2921,7 +3214,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	m_thread = 1;
  	if (NUM_WORKER_THREADS > 1)
  		askNum ("Worker number", &m_thread, 1, NUM_WORKER_THREADS);
-@@ -749,6 +780,7 @@
+@@ -765,6 +795,7 @@
  
  /* Advanced/Manual Communication dialog */
  
@@ -2929,7 +3222,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  void advanced_manualcomm (void)
  {
  	int	m_manual_comm, m_comm_now, m_new_dates;
-@@ -757,6 +789,8 @@
+@@ -773,6 +804,8 @@
  	m_comm_now = 1;
  	m_new_dates = 0;
  
@@ -2938,7 +3231,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	m_manual_comm = !m_manual_comm;
  	askYN ("Contact PrimeNet server automatically", &m_manual_comm);
  	m_manual_comm = !m_manual_comm;
-@@ -774,24 +808,30 @@
+@@ -790,24 +823,30 @@
  		if (m_comm_now) do_manual_comm_now ();
  	}
  }
@@ -2970,7 +3263,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  
  	if (!USE_PRIMENET) {
  		outputLongLine (MANUAL_QUIT);
-@@ -802,6 +842,7 @@
+@@ -818,6 +857,7 @@
  			stop_workers_for_escape ();
  		}
  	} else {
@@ -2978,7 +3271,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  		int	res;
  		outputLongLine (PRIMENET_QUIT);
  		res = askYesNoCancel ('C');
-@@ -815,6 +856,7 @@
+@@ -831,6 +871,7 @@
  			spoolMessage (MSG_QUIT_GIMPS, NULL);
  			askOK ();
  		}
@@ -2986,7 +3279,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	}
  }
  
-@@ -829,6 +871,11 @@
+@@ -845,6 +886,11 @@
  	char m_end_time[13];
  	char buf[512];
  
@@ -2998,7 +3291,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	m_memory_editable =
  		read_memory_settings (&day_memory, &night_memory,
  				      &day_start_time, &day_end_time);
-@@ -855,9 +902,6 @@
+@@ -871,9 +917,6 @@
  		}
  	}
  
@@ -3008,7 +3301,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	if (askOkCancel ()) {
  		unsigned int new_day_start_time, new_day_end_time;
  
-@@ -867,9 +911,11 @@
+@@ -883,9 +926,11 @@
  			ROLLING_AVERAGE = 1000;
  			IniWriteInt (LOCALINI_FILE, "RollingAverage", 1000);
  			IniWriteInt (LOCALINI_FILE, "RollingStartTime", 0);
@@ -3020,7 +3313,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  		}
  		new_day_start_time = strToMinutes ((char *) &m_start_time);
  		new_day_end_time = strToMinutes ((char *) &m_end_time);
-@@ -882,7 +928,9 @@
+@@ -898,7 +943,9 @@
  					       new_day_start_time, new_day_end_time);
  			mem_settings_have_changed ();
  		}
@@ -3030,7 +3323,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  
  // Now that Primenet almost always hands out LL assignments that are P-1'ed,
  // there is little reason to prompt user into allowing us to use more memory.
-@@ -902,25 +950,34 @@
+@@ -918,25 +965,34 @@
  void options_preferences (void)
  {
  	unsigned long m_iter, m_r_iter, m_disk_write_time;
@@ -3065,7 +3358,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	if (USE_PRIMENET && DIAL_UP)
  		askNum ("Minutes between modem retries", &m_modem, 1, 300);
  	if (USE_PRIMENET)
-@@ -929,6 +986,7 @@
+@@ -945,6 +1001,7 @@
  		askNum ("Days of work to queue up", &m_work, 1, 90);
  	if (USE_PRIMENET)
  		askFloat ("Days between sending end dates", &m_end_dates, 0.125, 7);
@@ -3073,7 +3366,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	askNum ("Number of Backup Files", &m_backup, 1, 3);
  	askYN ("Make noise if new Mersenne prime is found", &m_noise);
  	askYN ("Run program even when using laptop battery power", &m_battery);
-@@ -937,10 +995,12 @@
+@@ -953,10 +1010,12 @@
  		ITER_OUTPUT = m_iter;
  		ITER_OUTPUT_RES = m_r_iter;
  		DISK_WRITE_TIME = m_disk_write_time;
@@ -3086,7 +3379,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  		NUM_BACKUP_FILES = m_backup;
  		SILENT_VICTORY = !m_noise;
  		if (RUN_ON_BATTERY != m_battery) {
-@@ -951,13 +1011,17 @@
+@@ -967,13 +1026,17 @@
  		IniWriteInt (INI_FILE, "OutputIterations", ITER_OUTPUT);
  		IniWriteInt (INI_FILE, "ResultsFileIterations", ITER_OUTPUT_RES);
  		IniWriteInt (INI_FILE, "DiskWriteTime", DISK_WRITE_TIME);
@@ -3104,7 +3397,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	}
  }
  
-@@ -982,6 +1046,8 @@
+@@ -998,6 +1061,8 @@
  	}
  	m_timefft = 3;
  
@@ -3113,7 +3406,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  	if (NUM_CPUS * CPU_HYPERTHREADS > 1)
  		askNum ("Number of torture test threads to run", &m_thread,
  			1, NUM_CPUS * CPU_HYPERTHREADS);
-@@ -1043,6 +1109,7 @@
+@@ -1059,6 +1124,7 @@
  
  /* Help/About PrimeNet Server */
  
@@ -3121,7 +3414,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  void help_about_server (void)
  {
  	char	*buildId;
-@@ -1051,9 +1118,11 @@
+@@ -1067,9 +1133,11 @@
  
  	pingServer ();
  }
@@ -3133,7 +3426,7 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  void test_welcome (void)
  {
  	int	m_join = 1;
-@@ -1092,9 +1161,20 @@
+@@ -1108,6 +1176,16 @@
  	}
  	main_menu ();
  }
@@ -3150,22 +3443,19 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
  
  /* Display the main menu */
  
+@@ -1121,6 +1199,7 @@
+ 
+ 	printf ("\t     Main Menu\n");
+ 	printf ("\n");
 +#ifdef BUILD_PRIMENET
- void main_menu (void)
- {
- 	unsigned long choice;
-@@ -1268,3 +1348,150 @@
- 	}
- 	goto mloop;
- }
+ 	printf ("\t 1.  Test/Primenet\n");
+ 	printf ("\t 2.  Test/Worker threads\n");
+ 	printf ("\t 3.  Test/Status\n");
+@@ -1144,9 +1223,34 @@
+ 	printf ("\t16.  Options/Benchmark\n");
+ 	printf ("\t17.  Help/About\n");
+ 	printf ("\t18.  Help/About PrimeNet Server\n");
 +#else
-+void main_menu (void)
-+{
-+	unsigned long choice;
-+
-+mloop:	if (THREAD_KILL) return;
-+	printf ("\t     Main Menu\n");
-+loop:	printf ("\n");
 +	printf ("\t 1.  Test/Worker threads\n");
 +	printf ("\t 2.  Test/Status\n");
 +	if (WORKER_THREADS_ACTIVE && active_workers_count () < WORKER_THREADS_ACTIVE)
@@ -3185,129 +3475,203 @@ diff -r -u a/macosx64/menu.c b/macosx64/menu.c
 +	printf ("\t12.  Options/Torture Test\n");
 +	printf ("\t13.  Options/Benchmark\n");
 +	printf ("\t14.  Help/About\n");
-+	printf ("Your choice: ");
-+	choice = get_number (0);
-+	if (choice <= 0 || choice >= 15) {
-+		printf ("\t     Invalid choice\n");
-+		goto loop;
-+	}
-+
-+/* Display the main menu and switch off the users choice */
-+
-+	printf ("\n");
-+	switch (choice) {
-+
-+/* Test/User Information dialog */
-+
-+	case 1:
-+		test_worker_threads ();
-+		break;
-+
-+/* Test/Status message */
-+
-+	case 2:
-+		test_status ();
-+		askOK ();
-+		break;
-+
-+/* Test/Continue or Stop or Test/Continue or Test/Stop */
-+
-+	case 3:
-+		if (WORKER_THREADS_ACTIVE && active_workers_count () < WORKER_THREADS_ACTIVE)
-+			test_continue_or_stop ();
-+		else if (NUM_WORKER_THREADS > 1 && active_workers_count () < WORKER_THREADS_ACTIVE - 1)
-+			test_continue ();
-+		else if (!WORKER_THREADS_ACTIVE || WORKER_THREADS_STOPPING) {
-+			while (WORKER_THREADS_STOPPING) Sleep (50);
-+			linuxContinue ("Another mprime is running.\n", ALL_WORKERS, FALSE);
-+		} else if (active_workers_count () > 1)
-+			test_stop ();
-+		else
-+			stop_workers_for_escape ();
-+		break;
-+
-+/* Test/Exit */
-+
-+	case 4:
-+		{
-+		int counter = 0;
-+		if (WORKER_THREADS_ACTIVE && !WORKER_THREADS_STOPPING)
-+			stop_workers_for_escape ();
-+		while (WORKER_THREADS_STOPPING) {
-+			if (counter++ % 100 == 0) printf ("Waiting for worker threads to stop.\n");
-+			Sleep (50);
-+		}
-+		}
-+		return;
-+
-+/* Advanced/Test dialog */
-+
-+	case 5:
-+		advanced_test ();
-+		break;
-+
-+/* Advanced/Time dialog */
-+
-+	case 6:
-+		advanced_time ();
-+		break;
-+
-+/* Advanced/P-1 dialog */
-+
-+	case 7:
-+		advanced_pminus1 ();
-+		break;
-+
-+/* Advanced/ECM dialog */
-+
-+	case 8:
-+		advanced_ecm ();
-+		break;
-+
-+/* Advanced/Quit Gimps dialog */
-+
-+	case 9:
-+		advanced_quit ();
-+		break;
-+
-+/* Options/CPU dialog */
-+
-+	case 10:
-+		options_cpu ();
-+		break;
-+
-+/* Options/Preferences dialog */
-+
-+	case 11:
-+		options_preferences ();
-+		break;
-+
-+/* Options/Torture Test */
-+
-+	case 12:
-+		torture ();
-+		askOK ();
-+		break;
-+
-+/* Options/Benchmark Test */
-+
-+	case 13:
-+		LaunchBench ();
-+		askOK ();
-+		break;
-+
-+/* Help/About */
-+
-+	case 14:
-+		help_about ();
-+		break;
-+	}
-+	goto mloop;
-+}
 +#endif
+ 	printf ("Your choice: ");
+ 	choice = get_number (0);
++#ifdef BUILD_PRIMENET
+ 	if (choice <= 0 || choice >= 19) {
++#else
++	if (choice <= 0 || choice >= 15) {
++#endif
+ 		printf ("\n\t     Invalid choice\n\n");
+ 		continue;
+ 	}
+@@ -1158,26 +1262,40 @@
+ 
+ /* Test/Primenet dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 1:
+ 		test_primenet ();
+ 		break;
++#endif
+ 
+ /* Test/User Information dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 2:
++#else
++	case 1:
++#endif
+ 		test_worker_threads ();
+ 		break;
+ 
+ /* Test/Status message */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 3:
++#else
++	case 2:
++#endif
+ 		test_status ();
+ 		askOK ();
+ 		break;
+ 
+ /* Test/Continue or Stop or Test/Continue or Test/Stop */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 4:
++#else
++	case 3:
++#endif
+ 		if (WORKER_THREADS_ACTIVE && active_workers_count () < WORKER_THREADS_ACTIVE)
+ 			test_continue_or_stop ();
+ 		else if (NUM_WORKER_THREADS > 1 && active_workers_count () < WORKER_THREADS_ACTIVE - 1)
+@@ -1193,7 +1311,11 @@
+ 
+ /* Test/Exit */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 5:
++#else
++	case 4:
++#endif
+ 		{
+ 		int counter = 0;
+ 		if (WORKER_THREADS_ACTIVE && !WORKER_THREADS_STOPPING)
+@@ -1207,83 +1329,129 @@
+ 
+ /* Advanced/Test dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 6:
++#else
++	case 5:
++#endif
+ 		advanced_test ();
+ 		break;
+ 
+ /* Advanced/Time dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 7:
++#else
++	case 6:
++#endif
+ 		advanced_time ();
+ 		break;
+ 
+ /* Advanced/P-1 dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 8:
++#else
++	case 7:
++#endif
+ 		advanced_pminus1 ();
+ 		break;
+ 
+ /* Advanced/ECM dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 9:
++#else
++	case 8:
++#endif
+ 		advanced_ecm ();
+ 		break;
+ 
+ /* Advanced/Manual Communication dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 10:
+ 		advanced_manualcomm ();
+ 		break;
++#endif
+ 
+ /* Advanced/Unreserve exponent dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 11:
+ 		advanced_unreserve ();
+ 		break;
++#endif
+ 
+ /* Advanced/Quit Gimps dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 12:
++#else
++	case 9:
++#endif
+ 		advanced_quit ();
+ 		break;
+ 
+ /* Options/CPU dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 13:
++#else
++	case 10:
++#endif
+ 		options_cpu ();
+ 		break;
+ 
+ /* Options/Preferences dialog */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 14:
++#else
++	case 11:
++#endif
+ 		options_preferences ();
+ 		break;
+ 
+ /* Options/Torture Test */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 15:
++#else
++	case 12:
++#endif
+ 		torture ();
+ 		askOK ();
+ 		break;
+ 
+ /* Options/Benchmark Test */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 16:
++#else
++	case 13:
++#endif
+ 		LaunchBench ();
+ 		askOK ();
+ 		break;
+ 
+ /* Help/About */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 17:
++#else
++	case 14:
++#endif
+ 		help_about ();
+ 		break;
+ 
+ /* Help/About PrimeNet Server */
+ 
++#ifdef BUILD_PRIMENET
+ 	case 18:
+ 		help_about_server ();
+ 		break;
++#endif
+ 	}
+ 
+ 	}
 diff -r -u a/macosx64/os_routines.c b/macosx64/os_routines.c
 --- a/macosx64/os_routines.c	2016-03-28 08:27:51.000000000 +0800
-+++ b/macosx64/os_routines.c	2016-05-08 09:46:45.046078279 +0800
++++ b/macosx64/os_routines.c	2017-01-22 00:17:14.406982205 +0800
 @@ -411,6 +411,7 @@
  /* Init PrimeNet communication code, make sure an internet connection is active */
  /* Return false if not connected to internet */
@@ -3333,9 +3697,17 @@ diff -r -u a/macosx64/os_routines.c b/macosx64/os_routines.c
  /* Check if a program is currently running - not implemented for OS/2 */
  
 diff -r -u a/macosx64/prime.c b/macosx64/prime.c
---- a/macosx64/prime.c	2016-04-24 04:06:40.000000000 +0800
-+++ b/macosx64/prime.c	2016-05-08 09:46:45.046078279 +0800
-@@ -106,7 +106,9 @@
+--- a/macosx64/prime.c	2016-09-13 14:06:10.000000000 +0800
++++ b/macosx64/prime.c	2017-01-22 00:17:14.406982205 +0800
+@@ -11,6 +11,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <sys/socket.h>
+ #include <sys/stat.h>
+ #include "prime.h"
+ 
+@@ -106,7 +107,9 @@
  #include "commonb.c"
  #include "commonc.c"
  #include "ecm.c"
@@ -3345,7 +3717,35 @@ diff -r -u a/macosx64/prime.c b/macosx64/prime.c
  #include "gwtest.c"
  
  /* Signal handlers */
-@@ -255,7 +257,9 @@
+@@ -137,8 +140,25 @@
+ /* catch termination signals */
+ 
+ 	(void)signal(SIGTERM, sigterm_handler);
+-	(void)signal(SIGINT, sigterm_handler);
+-	(void)signal(SIGHUP, sigterm_handler);	/* See discussion in http://www.mersenneforum.org/showthread.php?t=21496 */
++	if (signal(SIGINT, sigterm_handler) == SIG_DFL) {
++		/* If we are run asynchronously, keep SIGINT ignored. */
++		/* (e.g. `sh -c 'mprime & other_command'`) */
++		(void)signal(SIGHUP, SIG_DFL);
++	}
++	/* See discussion in http://www.mersenneforum.org/showthread.php?t=21496 */
++	if (signal(SIGHUP, sigterm_handler) == SIG_DFL) {
++		/* If we are run through 'nohup', keep SIGHUP ignored. */
++		(void)signal(SIGHUP, SIG_DFL);
++	}
++#if BUILD_PRIMENET && !defined(SO_NOSIGPIPE) && !defined(MSG_NOSIGNAL)
++	(void)signal(SIGPIPE, SIG_IGN);
++#else
++	/* SIGPIPE might be generated when user pipes stdout to another */
++	/* program, e.g. `mprime | tee log.txt`, and that "tee" dies. */
++	/* Handle this to terminate when we're sure we never receive */
++	/* SIGPIPE from sockets. */
++	(void)signal(SIGPIPE, sigterm_handler);
++#endif
+ 
+ /* No buffering of output */
+ 
+@@ -259,7 +279,9 @@
  /* or running a torture test */
  
  	nameAndReadIniFiles (named_ini_files);
@@ -3355,7 +3755,7 @@ diff -r -u a/macosx64/prime.c b/macosx64/prime.c
  
  /* If not running a torture test, set the program to nice priority. */
  /* Technically, this is not necessary since worker threads are set to */
-@@ -308,8 +312,13 @@
+@@ -312,8 +334,13 @@
  /* or when the ISP is contacted, etc. */
  
  	else if (contact_server) {
@@ -3371,7 +3771,7 @@ diff -r -u a/macosx64/prime.c b/macosx64/prime.c
  /* Bring up the main menu */
 diff -r -u a/os2/makefile b/os2/makefile
 --- a/os2/makefile	2008-06-02 03:10:17.000000000 +0800
-+++ b/os2/makefile	2016-05-08 09:46:45.046078279 +0800
++++ b/os2/makefile	2017-01-22 00:17:14.406982205 +0800
 @@ -5,7 +5,7 @@
  
  CC = wcc386
@@ -3382,8 +3782,8 @@ diff -r -u a/os2/makefile b/os2/makefile
  LFLAGS = LIBPath ..\prime95;..\linux;..\gwnum op m import DosQuerySysState DOSCALLS.368
  
 diff -r -u a/prime95/prime95.vcproj b/prime95/prime95.vcproj
---- a/prime95/prime95.vcproj	2013-05-10 09:58:40.000000000 +0800
-+++ b/prime95/prime95.vcproj	2016-05-08 09:46:45.046078279 +0800
+--- a/prime95/prime95.vcproj	2016-10-31 02:20:53.000000000 +0800
++++ b/prime95/prime95.vcproj	2017-01-22 00:17:14.406982205 +0800
 @@ -54,7 +54,7 @@
  				Name="VCCLCompilerTool"
  				InlineFunctionExpansion="1"
@@ -3438,9 +3838,34 @@ diff -r -u a/prime95/prime95.vcproj b/prime95/prime95.vcproj
  				DebugInformationFormat="3"
  			/>
  			<Tool
+diff -r -u a/primenet.c b/primenet.c
+--- a/primenet.c	2015-03-25 22:37:57.000000000 +0800
++++ b/primenet.c	2017-01-22 00:17:14.406982205 +0800
+@@ -369,7 +369,7 @@
+ 		return (PRIMENET_ERROR_CONNECT_FAILED);
+ 	}
+ 
+-/* Prevent SIGPIPE signals in Linux (and other) environments */
++/* Prevent SIGPIPE signals in OS X, BSD and other environments */
+ 
+ #ifdef SO_NOSIGPIPE
+ 	{
+@@ -442,7 +442,11 @@
+ 			LogMsg (buf);
+ 		}
+ 	}
+-	res = send (s, szURL, (int) strlen (szURL), 0);
++	res = send (s, szURL, strlen (szURL), 0
++#ifdef MSG_NOSIGNAL /* Prevent SIGPIPE in Linux (and others) */
++		    | MSG_NOSIGNAL
++#endif
++		    );
+ 	if (res < 0) {
+ 		sprintf (buf, "Error in send call: %d\n",
+ 			 getLastSocketError ());
 diff -r -u a/winnt/compil64 b/winnt/compil64
 --- a/winnt/compil64	2008-11-17 04:37:57.000000000 +0800
-+++ b/winnt/compil64	2016-05-08 09:46:45.046078279 +0800
++++ b/winnt/compil64	2017-01-22 00:17:14.406982205 +0800
 @@ -1,7 +1,7 @@
  # Choose compiler switches 
  
@@ -3453,7 +3878,7 @@ diff -r -u a/winnt/compil64 b/winnt/compil64
  copt=/I.. /I..\gwnum /I\libcurl
 diff -r -u a/winnt/compile b/winnt/compile
 --- a/winnt/compile	2008-12-15 04:54:45.000000000 +0800
-+++ b/winnt/compile	2016-05-08 09:46:45.046078279 +0800
++++ b/winnt/compile	2017-01-22 00:17:14.406982205 +0800
 @@ -1,7 +1,7 @@
  # Choose compiler switches 
  

@@ -1,11 +1,11 @@
-8 May 2016
+22 January 2017
 
 Changes in mprime-changes.patch:
 - Wrap several parts of the code with a preprocessor conditional: "#ifdef \
   BUILD_PRIMENET", so that mprime can be built without PrimeNet support and can
   work completely offline when built. This applies to command-line builds only.
   The GUI (Prime95) code is unchanged, so to build GUI version, the macro has
-  to be explicitly defined with compiler switch "-DBUILD_PRIMENET" or the build
+  to be explicitly defined with compiler option "-DBUILD_PRIMENET" or the build
   will fail.
   (This change is an invasive one that it might never get accepted upstream.
   But it can remove libcurl dependency.)
@@ -13,6 +13,10 @@ Changes in mprime-changes.patch:
   first, before the interactive configuration of time and memory.
 - Added short description for each menu selections. This applies to command-
   line builds only. GUI code is unchanged.
+- Improved SIGINT and SIGHUP handling when mprime is run asynchronously or
+  through 'nohup', and added SIGPIPE handling when we can disable SIGPIPE on
+  network sockets on the system, or when PrimeNet is disabled.
+  (http://www.mersenneforum.org/showthread.php?t=21672)
 
 -------------------------------------------------------------------------------
 Technical notes about the mprime patches
@@ -67,42 +71,43 @@ void         help_about_server(void)
 List of modified global variables and function codes:
 
 In commona.c:
-min_cores_for_work_type
+int          min_cores_for_work_type(int work_type)
 
 In commonb.c:
-Launcher
-primeContinue
-primeFactor
-prime
-factorBench
-primeBench
-prp
+void         Launcher(void *arg)
+int          primeContinue(int thread_num)
+int          primeFactor(int, struct PriorityInfo *, struct work_unit *,
+                         unsigned int)
+int          prime(int, struct PriorityInfo *, struct work_unit *, int)
+int          factorBench(int thread_num, struct primenetBenchmarkData *pkt)
+int          primeBench(int thread_num)
+int          prp(int, struct PriorityInfo *, struct work_unit *, int)
 
 In commonc.c:
-USE_PRIMENET /* Will be a "const int" when BUILD_PRIMENET is undefined. */
-getCpuSpeed
-nameAndReadIniFiles
-readIniFiles
-formatMsgForResultsFile
-timed_events_scheduler
+int          USE_PRIMENET /* Will be const when BUILD_PRIMENET is undefined. */
+void         getCpuSpeed(void)
+void         nameAndReadIniFiles(int named_ini_files)
+int          readIniFiles(void)
+void         formatMsgForResultsFile(char *buf, struct work_unit *w)
+void         timed_events_scheduler(void *arg)
 
-/* In timed_events_scheduler function, these 3 timed events should be never
-   used when PrimeNet is not built: TE_COMM_SERVER, TE_COMPLETION_DATES,
-   TE_WORK_QUEUE_CHECK . If one of the events is ever get fired, it will do
-   nothing and deactivates itself. */
+/* In timed_events_scheduler function, 3 timed events should be never used when
+   PrimeNet is not built: TE_COMM_SERVER, TE_COMPLETION_DATES and
+   TE_WORK_QUEUE_CHECK. If any of the events is ever get fired, it will do
+   nothing and deactivate itself. */
 
 In ecm.c:
-ecm
-pminus1
+int          ecm(int, struct PriorityInfo *, struct work_unit *)
+int          pminus1(int, struct PriorityInfo *, struct work_unit *)
 
 In menu.c:
-test_worker_threads
-advanced_quit
-options_cpu
-options_preferences
-test_welcome
-main_menu
+void         test_worker_threads(void)
+void         advanced_quit(void)
+void         options_cpu(void)
+void         options_preferences(void)
+void         test_welcome(void)
+void         main_menu(void)
 
 In prime.c:
 /* No longer #include "primenet.c" */
-main
+int          main(int argc, char *argv[])
