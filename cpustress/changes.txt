@@ -3,7 +3,7 @@ Changes are made by Explorer <explorer09@gmail.com>
 
 Changes in development version
 ------------------------------
-4 December 2016
+14 February 2017
 
 - (64-bit support. A separate 64-bit kernel and CPUstress image will be available)
 - (binaries that are now built with LTO: mprime, sensors, stresscpu2(already LTO in 2.5.0), busybox)
@@ -27,6 +27,10 @@ Changes in development version
 - Updated Intel LINPACK to v11.2.1 (from v11.2.0)
 - Updated eglibc to 2.19-r25890 (from 2.19-r25243)
 - Added "vga=ext" options to 'linpack' and 'systester' boot entries.
+- No longer UPX-compress the mprime23 binary. UPX has a drawback that common
+  segments of compressed program won't be shared among multiple processes,
+  which means wasting memory for our mprime23 case that could be launched with
+  multiple instances by wrapper script.
 
 Changes in v2.5.4
 -----------------

@@ -1,4 +1,4 @@
-22 January 2017
+14 February 2017
 
 Website of the Mersenne Prime test program (a.k.a. mprime or prime95):
 http://www.mersenne.org/download/
@@ -86,7 +86,9 @@ are the same.
 (Optional) I also used UPX to compress the executable so the file size could
 be much smaller: <http://upx.sourceforge.net/>
 
- $ upx --ultra-brute mprime239/mprime p95v2810.source/linux/mprime
+ $ upx --ultra-brute p95v2810.source/linux/mprime
+
+mprime v23.9 is not compressed.
 
 The programs depend on these libraries:
     libm.so.6
