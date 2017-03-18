@@ -1,4 +1,4 @@
-14 February 2017
+18 March 2017
 
 Website of the Mersenne Prime test program (a.k.a. mprime or prime95):
 http://www.mersenne.org/download/
@@ -43,15 +43,22 @@ Apply a patch that allows mprime to be built without PrimeNet functionality:
 
 Build mprime by following these steps:
 
+ $ EXTRA_CFLAGS='-flto -fno-exceptions -fno-asynchronous-unwind-tables'
+ $ EXTRA_CXXFLAGS='-flto -fno-exceptions -fno-asynchronous-unwind-tables'
+ $ EXTRA_LDFLAGS='-flto'
+
  $ cd gwnum
- $ sed -i.bak -e 's/ -march=i486//g' -e 's/^CFLAGS[^\n]*/& -flto/' \
-     -e 's/^CPPFLAGS[^\n]*/& -flto/' makefile
+ $ sed -i.bak -e 's/ -march=i486//g' \
+     -e 's/^CFLAGS[^\n]*/& '"${EXTRA_CFLAGS}/" \
+     -e 's/^CPPFLAGS[^\n]*/& '"${EXTRA_CXXFLAGS}/" makefile
  $ make -f makefile CC=i486-pc-linux-gnu-gcc CPP=i486-pc-linux-gnu-g++ \
      AR=i486-pc-linux-gnu-ar
  $ cd ../linux
  $ sed -i.bak -e 's/ -DBUILD_PRIMENET//g' -e 's/ -march=i486//g' \
-     -e 's/-lpthread[^\n]*/-lpthread/' -e 's/^CFLAGS[^\n]*/& -flto/' \
-     -e 's/^CPPFLAGS[^\n]*/& -flto/' -e 's/^LFLAGS[^\n]*/& -flto/' makefile
+     -e 's/-lpthread[^\n]*/-lpthread/' \
+     -e 's/^CFLAGS[^\n]*/& '"${EXTRA_CFLAGS}/" \
+     -e 's/^CPPFLAGS[^\n]*/& '"${EXTRA_CXXFLAGS}/" \
+     -e 's/^LFLAGS[^\n]*/& '"${EXTRA_LDFLAGS}/" makefile
  $ make -f makefile CC=i486-pc-linux-gnu-gcc CPP=i486-pc-linux-gnu-g++
  $ cd ../..
 
@@ -69,6 +76,11 @@ Note:
   linking: -lcurl -lrt -lstdc++ -ldl
 * This build enables Link Time Optimization (-flto) from gcc to produce a
   smaller binary.
+* Due to x86_64 ABI standard, the unwind tables (.eh_frame section) will always
+  be included in binary even though there's no exception handling or backtrace
+  calls in code. The .eh_frame sections are not stripped by 'strip'. To reduce
+  binary size, I suppress its generation via '-fno-exceptions' and
+  '-fno-asynchronous-unwind-tables'.
 
 If you are building a 64-bit mprime executable, you should instead (1) specify
 the x86_64 compiler in CC and CPP, (2) specify '-f make64' when making gwnum,
