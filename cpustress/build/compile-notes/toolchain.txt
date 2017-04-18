@@ -1,4 +1,4 @@
-2 January 2017
+18 April 2017
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -132,11 +132,15 @@ configure will always build cross tools and not native ones:
 ---------------------------------
 
 These target libraries cannot be built because we have no libc in the target
-system. Disable these until we have EGLIBC in the final build of GCC:  (If you
-have GCC 4.8 or older, you should also --disable-libmudflap .)
+system. Disable these until we have EGLIBC in the final build of GCC:
+
+(Notes: If you have GCC 4.8 or before, you should also --disable-libmudflap .
+Due to a bug, the --disable-libstdcxx option didn't work until GCC 5.1, if you
+have GCC 4.9 or before, use --disable-libstdc++-v3 instead. It's undocumented
+but would work.)
 
  $ DISABLE_TARGET_LIBS="
-     --disable-libstdc++-v3 --disable-libsanitizer --disable-libmpx
+     --disable-libstdcxx --disable-libsanitizer --disable-libmpx
      --disable-libvtv --disable-libcilkrts --disable-libssp
      --disable-libquadmath --disable-libgomp --disable-libitm
      --disable-libatomic"
@@ -169,8 +173,6 @@ have GCC 4.8 or older, you should also --disable-libmudflap .)
  $ cd ..
 
 Notes:
-* The --disable-libstdcxx option doesn't seem to work, so here I use the old,
-  undocumented option --disable-libstdc++-v3 instead.
 * The --with-arch-32=i486 and --with-tune=generic options ensure that the new
   target code compiled after this new compiler will support i486 (-march=i486)
   and be tuned for generic CPUs (-mtune=generic) by default.
