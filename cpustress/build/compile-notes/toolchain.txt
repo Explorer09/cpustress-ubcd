@@ -1,4 +1,4 @@
-18 April 2017
+20 April 2017
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -134,11 +134,6 @@ configure will always build cross tools and not native ones:
 These target libraries cannot be built because we have no libc in the target
 system. Disable these until we have EGLIBC in the final build of GCC:
 
-(Notes: If you have GCC 4.8 or before, you should also --disable-libmudflap .
-Due to a bug, the --disable-libstdcxx option didn't work until GCC 5.1, if you
-have GCC 4.9 or before, use --disable-libstdc++-v3 instead. It's undocumented
-but would work.)
-
  $ DISABLE_TARGET_LIBS="
      --disable-libstdcxx --disable-libsanitizer --disable-libmpx
      --disable-libvtv --disable-libcilkrts --disable-libssp
@@ -178,13 +173,13 @@ Notes:
   and be tuned for generic CPUs (-mtune=generic) by default.
 * Without libc headers, the TARGET_LIBC_PROVIDES_SSP macro should be undefined
   (in "gcc/auto-host.h") now. Trying to build glibc at this time will result in
-  "undefined reference to __stack_chk_guard" error. Linux From Scratch solves
-  this by adding "gcc_cv_libc_provides_ssp=yes" into GCC's configure script
-  (a hack). The --with-glibc-version option (new in GCC 4.9) was also designed
-  to solve this problem and allow glibc to be built with the initial compiler
-  (with no libc headers or shared libgcc). However, the libc binaries built
-  with the initial compiler is not bit-identical to the binaries rebuilt later,
-  so I don't take either approach.
+  "undefined reference to __stack_chk_guard" error. Linux From Scratch used to
+  solve this by specifying "gcc_cv_libc_provides_ssp=yes" argument in configure
+  script (a hack). The --with-glibc-version option (new in GCC 4.9) was also
+  designed to solve this problem and allow glibc to be built with the initial
+  compiler (with no libc headers or shared libgcc). However, the libc binaries
+  built with the initial compiler won't be bit-identical to the binaries
+  rebuilt later, so I don't take either approach.
 
 3. Linux kernel headers for libc
 --------------------------------
@@ -350,10 +345,6 @@ libstdc++, are built as static libraries only.
 
  $ cd ..
 
-Notes:
-* __cxa_atexit should have been enabled by default for glibc. There's no need
-  to explicitly specify '--enable-__cxa_atexit'.
-
 Final tuning
 ------------
 
@@ -397,5 +388,23 @@ Change mode bits (Optional)
  $ chmod 755 ld-2.19.so libc-2.19.so libpthread-2.19.so
 
  $ cd ../../..
+
+Other notes
+-----------
+
+Building and using a GCC version older than one described in this document for
+CPUstress is not recommended. Nevertheless, some options may be needed if you
+try to configure an older GCC due to configure script limitations or bugs.
+Below are non-exhaustive mentions, which I note only for historical reference:
+(You might see them in older Linux From Scratch books or other toolchain build
+instructions)
+* GCC 4.8 or before: Need also --disable-libmudflap in ${DISABLE_TARGET_LIBS}.
+* GCC 4.9 or before: Use --disable-libstdc++-v3 instead of --disable-libstdcxx
+  in ${DISABLE_TARGET_LIBS} because the latter (documented) option didn't work
+  then due to a bug.
+* GCC 4.1 or before: Need to explicitly specify --enable-__cxa_atexit during
+  final build of GCC. __cxa_atexit is needed for standard-compliant handling of
+  destructors. Glibc provides it, but GCC didn't enable it by default for Linux
+  targets yet then.
 
 --Explorer <explorer09@gmail.com>
