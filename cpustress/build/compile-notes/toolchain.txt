@@ -325,8 +325,8 @@ libstdc++, are built as static libraries only.
 
  $ ../gcc-6.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --enable-languages=c,c++,lto \
-     --enable-shared=libgcc --enable-threads=posix --enable-clocale=gnu \
-     --enable-lto --disable-bootstrap --disable-multilib \
+     --enable-shared=libgcc --enable-threads=posix --enable-lto \
+     --disable-bootstrap --disable-multilib \
      --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
@@ -335,8 +335,8 @@ libstdc++, are built as static libraries only.
 
  $ ../gcc-6.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++,lto \
-     --enable-shared=libgcc --enable-threads=posix --enable-clocale=gnu \
-     --enable-lto --disable-bootstrap --disable-multilib \
+     --enable-shared=libgcc --enable-threads=posix --enable-lto \
+     --disable-bootstrap --disable-multilib \
      --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
@@ -398,13 +398,19 @@ try to configure an older GCC due to configure script limitations or bugs.
 Below are non-exhaustive mentions, which I note only for historical reference:
 (You might see them in older Linux From Scratch books or other toolchain build
 instructions)
-* GCC 4.8 or before: Need also --disable-libmudflap in ${DISABLE_TARGET_LIBS}.
-* GCC 4.9 or before: Use --disable-libstdc++-v3 instead of --disable-libstdcxx
-  in ${DISABLE_TARGET_LIBS} because the latter (documented) option didn't work
+* Before GCC 4.9.0: Need also --disable-libmudflap in ${DISABLE_TARGET_LIBS}.
+* Before GCC 5.1:   Use --disable-libstdc++-v3 instead of --disable-libstdcxx in
+  ${DISABLE_TARGET_LIBS} because the latter (documented) option didn't work
   then due to a bug.
-* GCC 4.1 or before: Need to explicitly specify --enable-__cxa_atexit during
+* Before GCC 4.2.0: Need to explicitly specify --enable-__cxa_atexit during
   final build of GCC. __cxa_atexit is needed for standard-compliant handling of
   destructors. Glibc provides it, but GCC didn't enable it by default for Linux
   targets yet then.
+* Before GCC 4.6.0: Need to explicitly specify --enable-clocale=gnu during
+  final build of GCC. This option was for libstdc++, otherwise libstdc++'s
+  configure would be conservative and use 'generic' clocale model. (It was to
+  workaround a bug that happened in glibc 2.2.*, but have been using a runtime
+  test. Later libstdc++ releases require glibc 2.3+ and enable 'gnu' model by
+  default when cross-compiling.)
 
 --Explorer <explorer09@gmail.com>
