@@ -1,4 +1,4 @@
-20 April 2017
+21 April 2017
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -144,7 +144,7 @@ system. Disable these until we have EGLIBC in the final build of GCC:
  $ BUILD=$(../gcc-6.3.0/config.guess | sed -e 's/-pc-/-buildpc-/')
 
  $ ../gcc-6.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
-     --target=i486-pc-linux-gnu --enable-languages=c,c++ \
+     --target=i486-pc-linux-gnu --enable-languages=c \
      --disable-shared --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
      --without-headers --with-newlib \
@@ -155,7 +155,7 @@ system. Disable these until we have EGLIBC in the final build of GCC:
  $ rm -r *
 
  $ ../gcc-6.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
-     --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
+     --target=x86_64-pc-linux-gnu --enable-languages=c \
      --disable-shared --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
      --without-headers --with-newlib \
@@ -259,7 +259,7 @@ Note the option '--enable-shared=libgcc'.
  $ BUILD=$(../gcc-6.3.0/config.guess | sed -e 's/-pc-/-buildpc-/')
 
  $ ../gcc-6.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
-     --target=i486-pc-linux-gnu --enable-languages=c,c++ \
+     --target=i486-pc-linux-gnu --enable-languages=c \
      --enable-shared=libgcc --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
      --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
@@ -269,7 +269,7 @@ Note the option '--enable-shared=libgcc'.
  $ rm -r *
 
  $ ../gcc-6.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
-     --target=x86_64-pc-linux-gnu --enable-languages=c,c++ \
+     --target=x86_64-pc-linux-gnu --enable-languages=c \
      --enable-shared=libgcc --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
      --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
