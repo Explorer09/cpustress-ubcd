@@ -140,6 +140,17 @@ system. Disable these until we have EGLIBC in the final build of GCC:
      --disable-libquadmath --disable-libgomp --disable-libitm
      --disable-libatomic"
 
+For some complex (and largely political) reasons, the unwind tables (i.e. the
+.eh_frame section) are always included in binary even when we have no chance to
+use them (i.e. no exception handling or in-code backtracing, and we have no
+intention to debug the code). Because the .eh_frame sections cannot be stripped
+after they're generated, to reduce binary size, we suppress its generation
+except where -fasynchronous-unwind-tables is used explicitly:
+
+ $ GCC_CONFIGURE_SPECS=$(printf '%s%s' \
+     '%{!fasynchronous-unwind-tables:%{!fno-asynchronous-unwind-tables:' \
+     '-fno-asynchronous-unwind-tables}}')
+
  $ cd gcc-build
  $ BUILD=$(../gcc-6.3.0/config.guess | sed -e 's/-pc-/-buildpc-/')
 
@@ -148,7 +159,8 @@ system. Disable these until we have EGLIBC in the final build of GCC:
      --disable-shared --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
      --without-headers --with-newlib \
-     --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
+     --with-sysroot="${SYSROOT_DIR}" --with-specs="${GCC_CONFIGURE_SPECS}" \
+     --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
  $ make -k distclean
@@ -159,7 +171,8 @@ system. Disable these until we have EGLIBC in the final build of GCC:
      --disable-shared --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
      --without-headers --with-newlib \
-     --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
+     --with-sysroot="${SYSROOT64_DIR}" --with-specs="${GCC_CONFIGURE_SPECS}" \
+     --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
  $ make -k distclean
@@ -262,7 +275,8 @@ Note the option '--enable-shared=libgcc'.
      --target=i486-pc-linux-gnu --enable-languages=c \
      --enable-shared=libgcc --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
-     --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
+     --with-sysroot="${SYSROOT_DIR}" --with-specs="${GCC_CONFIGURE_SPECS}" \
+     --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
  $ make -k distclean
@@ -272,7 +286,8 @@ Note the option '--enable-shared=libgcc'.
      --target=x86_64-pc-linux-gnu --enable-languages=c \
      --enable-shared=libgcc --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
-     --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
+     --with-sysroot="${SYSROOT64_DIR}" --with-specs="${GCC_CONFIGURE_SPECS}" \
+     --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
  $ make -k distclean
@@ -327,7 +342,8 @@ libstdc++, are built as static libraries only.
      --target=i486-pc-linux-gnu --enable-languages=c,c++,lto \
      --enable-shared=libgcc --enable-threads=posix --enable-lto \
      --disable-bootstrap --disable-multilib \
-     --with-sysroot="${SYSROOT_DIR}" --with-arch-32=i486 --with-tune=generic
+     --with-sysroot="${SYSROOT_DIR}" --with-specs="${GCC_CONFIGURE_SPECS}" \
+     --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
  $ make -k distclean
@@ -337,7 +353,8 @@ libstdc++, are built as static libraries only.
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++,lto \
      --enable-shared=libgcc --enable-threads=posix --enable-lto \
      --disable-bootstrap --disable-multilib \
-     --with-sysroot="${SYSROOT64_DIR}" --with-arch-32=i486 --with-tune=generic
+     --with-sysroot="${SYSROOT64_DIR}" --with-specs="${GCC_CONFIGURE_SPECS}" \
+     --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
  $ make -k distclean
@@ -398,6 +415,9 @@ try to configure an older GCC due to configure script limitations or bugs.
 Below are non-exhaustive mentions, which I note only for historical reference:
 (You might see them in older Linux From Scratch books or other toolchain build
 instructions)
+* Before GCC 4.6.0: You may add the following into ${GCC_CONFIGURE_SPECS}:
+  '%{!fomit-frame-pointer:%{!fno-omit-frame-pointer:-fomit-frame-pointer}}'
+  This tells GCC to -fomit-frame-pointer by default, where it was not then.
 * Before GCC 4.9.0: Need also --disable-libmudflap in ${DISABLE_TARGET_LIBS}.
 * Before GCC 5.1:   Use --disable-libstdc++-v3 instead of --disable-libstdcxx in
   ${DISABLE_TARGET_LIBS} because the latter (documented) option didn't work
@@ -412,5 +432,13 @@ instructions)
   workaround a bug that happened in glibc 2.2.*, but have been using a runtime
   test. Later libstdc++ releases require glibc 2.3+ and enable 'gnu' model by
   default when cross-compiling.)
+
+The x86_64 ABI standard requires that .eh_frame section be always generated,
+and for 32-bit x86, .eh_frame is generated as long as frame pointer is omitted
+during code generation (which is default in GCC 4.6.0+).
+(Reference: <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=49289>)
+-fno-asynchronous-unwind-tables doesn't affect debugging, because the frame
+unwinding tables will still get generated, but are stored to .debug_frame
+section instead.
 
 --Explorer <explorer09@gmail.com>
