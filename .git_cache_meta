@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2017-09-18 14:13:28.5815523120 +0800" .git_cache_meta
+touch -c -h -d "2017-09-18 14:21:27.7615309480 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -191,8 +191,6 @@ chmod 0644 cpustress/build/compile-notes/kernel/config-3.17-cpustress
 touch -c -h -d "2014-10-31 14:10:34.6039850000 +0800" cpustress/build/compile-notes/kernel/config-3.17-cpustress
 chmod 0644 cpustress/build/compile-notes/linpack.txt
 touch -c -h -d "2015-10-25 10:55:48.9270798520 +0800" cpustress/build/compile-notes/linpack.txt
-chmod 0644 cpustress/build/compile-notes/mpfr/mpfr-3.1.5-p2.patch
-touch -c -h -d "2016-12-20 06:59:47.0000000000 +0800" cpustress/build/compile-notes/mpfr/mpfr-3.1.5-p2.patch
 chmod 0644 cpustress/build/compile-notes/mprime.txt
 touch -c -h -d "2017-04-21 20:27:55.7182463090 +0800" cpustress/build/compile-notes/mprime.txt
 chmod 0644 cpustress/build/compile-notes/mprime/changes.txt
@@ -226,7 +224,7 @@ touch -c -h -d "2013-07-17 07:25:12.9329147000 +0800" cpustress/build/compile-no
 chmod 0644 cpustress/build/compile-notes/systester/systester-log-file-format.patch
 touch -c -h -d "2013-07-16 20:19:17.7908517330 +0800" cpustress/build/compile-notes/systester/systester-log-file-format.patch
 chmod 0644 cpustress/build/compile-notes/toolchain.txt
-touch -c -h -d "2017-09-18 14:12:48.4455541010 +0800" cpustress/build/compile-notes/toolchain.txt
+touch -c -h -d "2017-09-18 14:20:13.2255342710 +0800" cpustress/build/compile-notes/toolchain.txt
 chmod 0755 cpustress/build/extract
 touch -c -h -d "2017-01-02 01:52:20.1287487170 +0800" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
