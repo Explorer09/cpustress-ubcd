@@ -390,18 +390,19 @@ Stripping binaries (Optional)
 The ".so" binary files in CPUstress are stripped binaries.
 
  $ cd "${SYSROOT_DIR}/lib"
- $ i486-pc-linux-gnu-strip --strip-unneeded libgcc_s.so.1 *-2.19.so
+ $ SO_FILES=$(find -type f -name '*.so*')
+ $ i486-pc-linux-gnu-strip --strip-unneeded ${SO_FILES}
  $ cd "${SYSROOT64_DIR}/lib64"
- $ x86_64-pc-linux-gnu-strip --strip-unneeded libgcc_s.so.1 *-2.19.so
+ $ x86_64-pc-linux-gnu-strip --strip-unneeded ${SO_FILES}
 
 Change mode bits (Optional)
 ---------------------------
 
  $ cd "${SYSROOT_DIR}/lib"
- $ chmod 644 *-2.19.so
+ $ chmod 644 ${SO_FILES}
  $ chmod 755 ld-2.19.so libc-2.19.so libpthread-2.19.so
  $ cd "${SYSROOT64_DIR}/lib64"
- $ chmod 644 *-2.19.so
+ $ chmod 644 ${SO_FILES}
  $ chmod 755 ld-2.19.so libc-2.19.so libpthread-2.19.so
 
  $ cd ../../..
