@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2017-04-21 20:28:16.3182453910 +0800" .git_cache_meta
+touch -c -h -d "2017-09-18 13:29:08.6489298280 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -51,7 +51,6 @@ touch -c -h -d "2014-02-15 21:43:08.9614272140 +0800" cpustress/build/build-init
 chmod 0644 cpustress/build/build-initrd/lib/libdl-2.19.so
 touch -c -h -d "2014-10-31 12:47:53.8556958870 +0800" cpustress/build/build-initrd/lib/libdl-2.19.so
 touch -c -h -d "2014-02-15 21:43:08.9654272140 +0800" cpustress/build/build-initrd/lib/libdl.so.2
-touch -c -h -d "2014-08-13 11:54:08.8895914780 +0800" cpustress/build/build-initrd/lib/libgcc_s.so
 chmod 0644 cpustress/build/build-initrd/lib/libgcc_s.so.1
 touch -c -h -d "2014-10-31 11:48:39.0000000000 +0800" cpustress/build/build-initrd/lib/libgcc_s.so.1
 chmod 0644 cpustress/build/build-initrd/lib/libm-2.19.so
@@ -227,11 +226,11 @@ touch -c -h -d "2013-07-17 07:25:12.9329147000 +0800" cpustress/build/compile-no
 chmod 0644 cpustress/build/compile-notes/systester/systester-log-file-format.patch
 touch -c -h -d "2013-07-16 20:19:17.7908517330 +0800" cpustress/build/compile-notes/systester/systester-log-file-format.patch
 chmod 0644 cpustress/build/compile-notes/toolchain.txt
-touch -c -h -d "2017-04-21 20:16:31.4182768180 +0800" cpustress/build/compile-notes/toolchain.txt
+touch -c -h -d "2017-09-18 13:26:52.3249359060 +0800" cpustress/build/compile-notes/toolchain.txt
 chmod 0755 cpustress/build/extract
 touch -c -h -d "2017-01-02 01:52:20.1287487170 +0800" cpustress/build/extract
 chmod 0755 cpustress/build/prepare
-touch -c -h -d "2016-05-24 10:57:16.0293181810 +0800" cpustress/build/prepare
+touch -c -h -d "2017-09-18 13:28:19.8969320010 +0800" cpustress/build/prepare
 chmod 0644 cpustress/changes.txt
 touch -c -h -d "2017-02-14 14:10:02.5048946180 +0800" cpustress/changes.txt
 chmod 0644 cpustress/gpl-2.0.txt

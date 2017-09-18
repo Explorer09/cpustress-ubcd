@@ -1,4 +1,4 @@
-21 April 2017
+18 September 2017
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -368,9 +368,9 @@ Final tuning
 Copy libgcc_s.so.1 from 'tools' directory to the target's 'sysroot' directory,
 because GCC's makefile doesn't do this automatically when installing:
 
- $ cp -Pp "${TOOLS_DIR}"/i486-pc-linux-gnu/lib/libgcc_s.so* \
+ $ cp -Pp "${TOOLS_DIR}"/i486-pc-linux-gnu/lib/libgcc_s.so.1 \
      "${SYSROOT_DIR}/lib"
- $ cp -Pp "${TOOLS_DIR}"/x86_64-pc-linux-gnu/lib64/libgcc_s.so* \
+ $ cp -Pp "${TOOLS_DIR}"/x86_64-pc-linux-gnu/lib64/libgcc_s.so.1 \
      "${SYSROOT64_DIR}/lib64"
 
 GCC does not make binutils aware of GCC's LTO feature, so some programs (namely

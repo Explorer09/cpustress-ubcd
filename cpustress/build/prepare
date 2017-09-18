@@ -10,7 +10,7 @@
 # <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>
 #
 # Written by Explorer.
-# Last updated on 24 May 2016.
+# Last updated on 18 September 2017.
 
 # Change working directory to the directory of the script.
 cd `dirname $0`
@@ -73,5 +73,4 @@ if ls ld-*.so >/dev/null; then
     ln -s "libnss_files-${GLIBC_VER}.so" libnss_files.so.2
     ln -s "libpthread-${GLIBC_VER}.so" libpthread.so.0
 fi
-ln -s libgcc_s.so.1 libgcc_s.so
 cd ..
