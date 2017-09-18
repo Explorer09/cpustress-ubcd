@@ -43,7 +43,7 @@ Preparation
      # wget -O mpfr-allpatches.patch http://www.mpfr.org/mpfr-current/allpatches
      wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.16.1.tar.bz2
-     wget ftp://ftp.gnu.org/gnu/gcc/gcc-6.3.0/gcc-6.3.0.tar.bz2
+     wget ftp://ftp.gnu.org/gnu/gcc/gcc-7.2.0/gcc-7.2.0.tar.xz
      wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.7.5.tar.xz
      svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
      }
@@ -53,17 +53,17 @@ Preparation
      tar -x --xz -f mpfr-3.1.6.tar.xz
      tar -x -z -f mpc-1.0.3.tar.gz
      tar -x --bzip2 -f isl-0.16.1.tar.bz2
-     tar -x --bzip2 -f gcc-6.3.0.tar.bz2
+     tar -x --xz -f gcc-7.2.0.tar.xz
      tar -x --xz -f linux-4.7.5.tar.xz
-     mv gmp-6.1.2  gcc-6.3.0/gmp
-     mv mpfr-3.1.6 gcc-6.3.0/mpfr
-     mv mpc-1.0.3  gcc-6.3.0/mpc
-     mv isl-0.16.1 gcc-6.3.0/isl
+     mv gmp-6.1.2  gcc-7.2.0/gmp
+     mv mpfr-3.1.6 gcc-7.2.0/mpfr
+     mv mpc-1.0.3  gcc-7.2.0/mpc
+     mv isl-0.16.1 gcc-7.2.0/isl
      }
 
  $ download
  $ extract
- $ for i in binutils-2.29 gcc-6.3.0 linux-4.7.5 libc
+ $ for i in binutils-2.29 gcc-7.2.0 linux-4.7.5 libc
      do [ -d "$i" ] || exit 1 ; done
 
 Copy the "option-groups.config" file from the compile-notes directory to
@@ -149,9 +149,9 @@ except where -fasynchronous-unwind-tables is used explicitly:
      '-fno-asynchronous-unwind-tables}}')
 
  $ cd gcc-build
- $ BUILD=$(../gcc-6.3.0/config.guess | sed -e 's/-pc-/-buildpc-/')
+ $ BUILD=$(../gcc-7.2.0/config.guess | sed -e 's/-pc-/-buildpc-/')
 
- $ ../gcc-6.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../gcc-7.2.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --enable-languages=c \
      --disable-shared --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -163,7 +163,7 @@ except where -fasynchronous-unwind-tables is used explicitly:
  $ make -k distclean
  $ rm -r *
 
- $ ../gcc-6.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../gcc-7.2.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --enable-languages=c \
      --disable-shared --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -266,9 +266,9 @@ Note:
 Note the option '--enable-shared=libgcc'.
 
  $ cd gcc-build
- $ BUILD=$(../gcc-6.3.0/config.guess | sed -e 's/-pc-/-buildpc-/')
+ $ BUILD=$(../gcc-7.2.0/config.guess | sed -e 's/-pc-/-buildpc-/')
 
- $ ../gcc-6.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../gcc-7.2.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --enable-languages=c \
      --enable-shared=libgcc --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -279,7 +279,7 @@ Note the option '--enable-shared=libgcc'.
  $ make -k distclean
  $ rm -r *
 
- $ ../gcc-6.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../gcc-7.2.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --enable-languages=c \
      --enable-shared=libgcc --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -333,9 +333,9 @@ Only libgcc is built with a shared library. Other target libraries, including
 libstdc++, are built as static libraries only.
 
  $ cd gcc-build
- $ BUILD=$(../gcc-6.3.0/config.guess | sed -e 's/-pc-/-buildpc-/')
+ $ BUILD=$(../gcc-7.2.0/config.guess | sed -e 's/-pc-/-buildpc-/')
 
- $ ../gcc-6.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../gcc-7.2.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --enable-languages=c,c++,lto \
      --enable-shared=libgcc --enable-threads=posix --enable-lto \
      --disable-bootstrap --disable-multilib \
@@ -346,7 +346,7 @@ libstdc++, are built as static libraries only.
  $ make -k distclean
  $ rm -r *
 
- $ ../gcc-6.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../gcc-7.2.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++,lto \
      --enable-shared=libgcc --enable-threads=posix --enable-lto \
      --disable-bootstrap --disable-multilib \
@@ -378,7 +378,7 @@ without wrappers. Create a symlink in "lib/bfd-plugins" to achieve this:
 
  $ mkdir "${TOOLS_DIR}/lib/bfd-plugins"
  $ cd "${TOOLS_DIR}/lib/bfd-plugins"
- $ ln -s ../../libexec/gcc/x86_64-pc-linux-gnu/6.3.0/liblto_plugin.so.0.0.0 \
+ $ ln -s ../../libexec/gcc/x86_64-pc-linux-gnu/7.2.0/liblto_plugin.so.0.0.0 \
      liblto_plugin.so
 
 Stripping binaries (Optional)
