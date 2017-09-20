@@ -417,8 +417,8 @@ instructions)
   '%{!fomit-frame-pointer:%{!fno-omit-frame-pointer:-fomit-frame-pointer}}'
   This tells GCC to -fomit-frame-pointer by default, where it was not then.
 * Before GCC 4.9.0: Need also --disable-libmudflap in ${DISABLE_TARGET_LIBS}.
-* Before GCC 5.1:   Use --disable-libstdc++-v3 instead of --disable-libstdcxx in
-  ${DISABLE_TARGET_LIBS} because the latter (documented) option didn't work
+* Before GCC 5.1:   Use --disable-libstdc++-v3 instead of --disable-libstdcxx
+  in ${DISABLE_TARGET_LIBS} because the latter (documented) option didn't work
   then due to a bug.
 * Before GCC 4.2.0: Need to explicitly specify --enable-__cxa_atexit during
   final build of GCC. __cxa_atexit is needed for standard-compliant handling of
