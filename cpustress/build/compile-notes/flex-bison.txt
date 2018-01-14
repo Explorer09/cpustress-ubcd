@@ -1,4 +1,4 @@
-16 April 2017
+14 January 2018
 
 The 'sensors' program in the lm-sensors package requires flex and Bison in
 order to build. The versions of flex and Bison will significantly affect the
@@ -30,19 +30,19 @@ Preparation
  $ download () {
      wget http://ftp.gnu.org/gnu/libsigsegv/libsigsegv-2.11.tar.gz
      wget http://ftp.gnu.org/gnu/m4/m4-1.4.18.tar.xz
-     wget https://github.com/westes/flex/releases/download/v2.6.3/flex-2.6.3.tar.gz
+     wget https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz
      wget http://ftp.gnu.org/gnu/bison/bison-3.0.4.tar.xz
      }
  $ extract () {
      tar -x -z -f libsigsegv-2.11.tar.gz
      tar -x --xz -f m4-1.4.18.tar.xz
-     tar -x -z -f flex-2.6.3.tar.gz
+     tar -x -z -f flex-2.6.4.tar.gz
      tar -x --xz -f bison-3.0.4.tar.xz
      }
 
  $ download
  $ extract
- $ for i in libsigsegv-2.11 m4-1.4.18 flex-2.6.3 bison-3.0.4
+ $ for i in libsigsegv-2.11 m4-1.4.18 flex-2.6.4 bison-3.0.4
      do [ -d "$i" ] || exit 1 ; done
 
  $ TOOLS_DIR=${PWD}/tools
@@ -80,7 +80,7 @@ Flex ships with a -lfl library which contains some default routines intended to
 be linked with flex-gererated lexers. This is not applicable to cross-compile
 environments. We disable libfl via the --disable-libfl option.
 
- $ cd flex-2.6.3
+ $ cd flex-2.6.4
  $ ./configure --prefix="${TOOLS_DIR}" --disable-libfl
  $ make
  $ make install
