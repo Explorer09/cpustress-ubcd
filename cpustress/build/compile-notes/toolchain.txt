@@ -1,4 +1,4 @@
-18 September 2017
+14 January 2018
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -38,10 +38,10 @@ Preparation
  $ download () {
      wget http://ftp.gnu.org/gnu/binutils/binutils-2.29.tar.xz
      wget https://gmplib.org/download/gmp/gmp-6.1.2.tar.xz
-     wget http://www.mpfr.org/mpfr-current/mpfr-3.1.6.tar.xz
+     wget http://www.mpfr.org/mpfr-current/mpfr-4.0.0.tar.xz
      # No MPFR patches are available at this time.
      # wget -O mpfr-allpatches.patch http://www.mpfr.org/mpfr-current/allpatches
-     wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
+     wget https://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.16.1.tar.bz2
      wget ftp://ftp.gnu.org/gnu/gcc/gcc-7.2.0/gcc-7.2.0.tar.xz
      wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.13.2.tar.xz
@@ -50,14 +50,14 @@ Preparation
  $ extract () {
      tar -x --xz -f binutils-2.29.tar.xz
      tar -x --xz -f gmp-6.1.2.tar.xz
-     tar -x --xz -f mpfr-3.1.6.tar.xz
-     tar -x -z -f mpc-1.0.3.tar.gz
+     tar -x --xz -f mpfr-4.0.0.tar.xz
+     tar -x -z -f mpc-1.1.0.tar.gz
      tar -x --bzip2 -f isl-0.16.1.tar.bz2
      tar -x --xz -f gcc-7.2.0.tar.xz
      tar -x --xz -f linux-4.13.2.tar.xz
      mv gmp-6.1.2  gcc-7.2.0/gmp
-     mv mpfr-3.1.6 gcc-7.2.0/mpfr
-     mv mpc-1.0.3  gcc-7.2.0/mpc
+     mv mpfr-4.0.0 gcc-7.2.0/mpfr
+     mv mpc-1.1.0  gcc-7.2.0/mpc
      mv isl-0.16.1 gcc-7.2.0/isl
      }
 
