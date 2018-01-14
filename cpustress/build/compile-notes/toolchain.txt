@@ -29,7 +29,7 @@ This document may be converted to a workable shell script. To do this, run
 
 First, prepare an empty directory for building the toolchain:
 
- $ mkdir toolchain || exit 1
+ $ mkdir toolchain || :
  $ cd toolchain
 
 Preparation
@@ -77,9 +77,11 @@ At the time of this build, there are no patches for this MPFR release.
 
 Make 'sysroot' and 'tools' directories:
 
- $ mkdir sysroot    # This stores i486 target libraries and include files.
- $ mkdir sysroot64  # This stores x86_64 target libraries and include files.
- $ mkdir tools      # This stores the cross-compile tools (binutils & GCC).
+ $ mkdir sysroot   || : # This stores i486 target libraries & include files.
+ $ mkdir sysroot64 || : # This stores x86_64 target libraries & include files.
+ $ mkdir tools     || : # This stores the cross-compile tools (binutils & GCC).
+ $ for i in sysroot sysroot64 tools
+     do [ -d "$i" ] || exit 1 ; done
  $ SYSROOT_DIR=${PWD}/sysroot
  $ SYSROOT64_DIR=${PWD}/sysroot64
  $ TOOLS_DIR=${PWD}/tools
