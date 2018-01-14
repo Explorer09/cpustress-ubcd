@@ -95,8 +95,8 @@ directories:
 
  $ mkdir binutils-build gcc-build eglibc-build
 
-Note that we will clean up the build directories (make -k distclean ; rm -r *)
-as soon as they are no longer needed.
+Note that we will clean up (make -k distclean ; rm -r *) and remove the build
+directories as soon as they are no longer needed.
 
 1. Cross-binutils
 -----------------
@@ -124,6 +124,7 @@ configure will always build cross tools and not native ones:
  $ rm -r *
 
  $ cd ..
+ $ rmdir binutils-build
 
 2. Cross-GCC without libc headers
 ---------------------------------
@@ -324,6 +325,7 @@ GCC compiler (a cross-compiler is fine, though).
  $ rm -r *
 
  $ cd ..
+ $ rmdir eglibc-build
 
 7. Cross-GCC, full
 ------------------
@@ -358,6 +360,7 @@ libstdc++, are built as static libraries only.
  $ rm -r *
 
  $ cd ..
+ $ rmdir gcc-build
 
 Final tuning
 ------------
