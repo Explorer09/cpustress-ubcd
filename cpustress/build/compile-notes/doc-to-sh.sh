@@ -2,6 +2,7 @@
 
 for file in toolchain flex-bison; do
     echo "#!/bin/bash" >${file}.sh
+    echo "set -e" >>${file}.sh
     if [ "$file" = toolchain ]; then
         echo "write_option_groups_config () {"
         if [ -f eglibc/option-groups.config ]; then
