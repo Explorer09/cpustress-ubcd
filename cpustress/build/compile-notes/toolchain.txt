@@ -1,4 +1,4 @@
-14 January 2018
+15 January 2018
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -97,8 +97,8 @@ directories:
 
  $ mkdir binutils-build gcc-build eglibc-build
 
-Note that we will clean up (make -k distclean ; rm -r *) and remove the build
-directories as soon as they are no longer needed.
+Note that we will clean up (make -k distclean || : ; rm -r *) and remove the
+build directories as soon as they are no longer needed.
 
 1. Cross-binutils
 -----------------
@@ -115,14 +115,14 @@ configure will always build cross tools and not native ones:
      --target=i486-pc-linux-gnu --with-sysroot="${SYSROOT_DIR}"
  $ make
  $ make install
- $ make -k distclean
+ $ make -k distclean || :
  $ rm -r *
 
  $ ../binutils-2.29.1/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --with-sysroot="${SYSROOT64_DIR}"
  $ make
  $ make install
- $ make -k distclean
+ $ make -k distclean || :
  $ rm -r *
 
  $ cd ..
@@ -163,7 +163,7 @@ except where -fasynchronous-unwind-tables is used explicitly:
      --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make -k distclean
+ $ make -k distclean || :
  $ rm -r *
 
  $ ../gcc-7.2.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
@@ -175,7 +175,7 @@ except where -fasynchronous-unwind-tables is used explicitly:
      --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make -k distclean
+ $ make -k distclean || :
  $ rm -r *
 
  $ cd ..
@@ -231,7 +231,7 @@ Make dummy libc.so:
  $ i486-pc-linux-gnu-gcc -nostdlib -shared -x c /dev/null \
      -o "${SYSROOT_DIR}/usr/lib/libc.so"
 
- $ make -k distclean
+ $ make -k distclean || :
  $ rm -r *
 
 Do the same for x86_64:
@@ -252,7 +252,7 @@ Do the same for x86_64:
  $ x86_64-pc-linux-gnu-gcc -nostdlib -shared -x c /dev/null \
      -o "${SYSROOT64_DIR}/usr/lib64/libc.so"
 
- $ make -k distclean
+ $ make -k distclean || :
  $ rm -r *
 
  $ cd ..
@@ -279,7 +279,7 @@ Note the option '--enable-shared=libgcc'.
      --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make -k distclean
+ $ make -k distclean || :
  $ rm -r *
 
  $ ../gcc-7.2.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
@@ -290,7 +290,7 @@ Note the option '--enable-shared=libgcc'.
      --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make -k distclean
+ $ make -k distclean || :
  $ rm -r *
 
  $ cd ..
@@ -313,7 +313,7 @@ GCC compiler (a cross-compiler is fine, though).
      --with-headers="${SYSROOT_DIR}/usr/include"
  $ make
  $ make install install_root="${SYSROOT_DIR}"
- $ make -k distclean
+ $ make -k distclean || :
  $ rm -r *
 
  $ cp ../option-groups.config .
@@ -323,7 +323,7 @@ GCC compiler (a cross-compiler is fine, though).
      --with-headers="${SYSROOT64_DIR}/usr/include"
  $ make
  $ make install install_root="${SYSROOT64_DIR}"
- $ make -k distclean
+ $ make -k distclean || :
  $ rm -r *
 
  $ cd ..
@@ -347,7 +347,7 @@ libstdc++, are built as static libraries only.
      --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make -k distclean
+ $ make -k distclean || :
  $ rm -r *
 
  $ ../gcc-7.2.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
@@ -358,7 +358,7 @@ libstdc++, are built as static libraries only.
      --with-arch-32=i486 --with-tune=generic
  $ make
  $ make install-strip
- $ make -k distclean
+ $ make -k distclean || :
  $ rm -r *
 
  $ cd ..
