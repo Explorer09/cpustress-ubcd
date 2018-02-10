@@ -44,7 +44,7 @@ Preparation
      wget https://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.18.tar.bz2
      wget ftp://ftp.gnu.org/gnu/gcc/gcc-7.3.0/gcc-7.3.0.tar.xz
-     wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.14.13.tar.xz
+     wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.15.2.tar.xz
      svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
      }
  $ extract () {
@@ -54,7 +54,7 @@ Preparation
      tar -x -z -f mpc-1.1.0.tar.gz
      tar -x --bzip2 -f isl-0.18.tar.bz2
      tar -x --xz -f gcc-7.3.0.tar.xz
-     tar -x --xz -f linux-4.14.13.tar.xz
+     tar -x --xz -f linux-4.15.2.tar.xz
      mv gmp-6.1.2  gcc-7.3.0/gmp
      mv mpfr-4.0.1 gcc-7.3.0/mpfr
      mv mpc-1.1.0  gcc-7.3.0/mpc
@@ -63,7 +63,7 @@ Preparation
 
  $ download
  $ extract
- $ for i in binutils-2.30 gcc-7.3.0 linux-4.14.13 libc
+ $ for i in binutils-2.30 gcc-7.3.0 linux-4.15.2 libc
      do [ -d "$i" ] || exit 1 ; done
 
 Copy the "option-groups.config" file from the compile-notes directory to
@@ -197,7 +197,7 @@ Notes:
 3. Linux kernel headers for libc
 --------------------------------
 
- $ cd linux-4.14.13
+ $ cd linux-4.15.2
  $ make mrproper
  $ make INSTALL_HDR_PATH="${SYSROOT_DIR}/usr" headers_install
  $ make INSTALL_HDR_PATH="${SYSROOT64_DIR}/usr" headers_install
