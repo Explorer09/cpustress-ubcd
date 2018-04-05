@@ -1,5 +1,5 @@
 chmod 0664 .git_cache_meta
-touch -c -h -d "2018-02-10 18:24:48.9149813850 +0800" .git_cache_meta
+touch -c -h -d "2018-04-05 12:56:10.8161880220 +0800" .git_cache_meta
 chmod 0644 .gitattributes
 touch -c -h -d "2014-08-20 00:54:12.8755119350 +0800" .gitattributes
 chmod 0644 .gitignore
@@ -165,6 +165,8 @@ chmod 0644 cpustress/build/compile-notes/cpuburn-in.txt
 touch -c -h -d "2015-10-25 10:55:49.4190852400 +0800" cpustress/build/compile-notes/cpuburn-in.txt
 chmod 0755 cpustress/build/compile-notes/doc-to-sh.sh
 touch -c -h -d "2018-01-14 22:24:00.4700933490 +0800" cpustress/build/compile-notes/doc-to-sh.sh
+chmod 0755 cpustress/build/compile-notes/eglibc/download_eglibc.sh
+touch -c -h -d "2018-04-05 12:52:57.1241960000 +0800" cpustress/build/compile-notes/eglibc/download_eglibc.sh
 chmod 0644 cpustress/build/compile-notes/eglibc/option-groups.config
 touch -c -h -d "2013-09-05 20:08:00.4040116550 +0800" cpustress/build/compile-notes/eglibc/option-groups.config
 chmod 0644 cpustress/build/compile-notes/flex-bison.txt
