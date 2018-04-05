@@ -37,10 +37,12 @@ dist_name=eglibc-$VERSION
 (
     case `tar --version 2>/dev/null | sed '1 q'` in #(
         *GNU*)
+            # GNU tar 1.27 allows specifying "uid" and "uname" simultaneously.
             tar -c --no-recursion --format=pax --owner=root:0 --group=root:0 \
                 --pax-option='' -f - . >/dev/null
             ;; #(
         *)
+            # For now only GNU tar provides the determinism we want.
             exit 1
             ;;
     esac
@@ -91,7 +93,8 @@ pax_options=`printf '%s%s%s%s%s%s' \
     "delete=atime," \
     "delete=ctime"`
 tar -c --no-recursion --format=pax --owner=root:0 --group=root:0 \
-    --pax-option="$pax_options" -f "${tar_name}.tar" "$dist_name"
+    --pax-option="$pax_options" -f "${tar_name}.tar" "$dist_name" ||
+    { s=$?; rm -f "${tar_name}.tar" || : ; exit $s; }
 
 pax_options=`printf '%s%s%s' \
     "exthdr.name=.PaxHeaders/%d/%f," \
@@ -101,16 +104,36 @@ find "$dist_name" ! -path "$dist_name" \
     \( -type d -exec printf '%s/\n' '{}' \; -o -print \) |
     LC_ALL=C sort |
     tar -r --no-recursion --format=pax --owner=root:0 --group=root:0 \
-    --pax-option="$pax_options" -f "${tar_name}.tar" -T -
+    --pax-option="$pax_options" -f "${tar_name}.tar" -T - ||
+    { s=$?; rm -f "${tar_name}.tar" || : ; exit $s; }
+
+trap - 1 2 3 15
+
+[ "$tar_name" != eglibc-2.19-r25890 ] ||
+    printf '%s%s *eglibc-2.19-r25890.tar\n' \
+    5c2a88a63d7b644477c9378b6951995e78d3c10cbf4e01459715e919b5a68585 \
+    ccba74a6c0c12c2eb873ff9620b265520b8bf845926a8f6873e405b451a5ce60 |
+    sha512sum -c
+
+rm -rf "$dist_name" &
 
 # Compression (gzip/xz) can add additional non-deterministic factors.
 # XZ format does not store the original file name or timestamp, and so is
 # deterministic already.
-trap 's=$?; rm -f "${tar_name}.tar.xz" || : ; exit $s' 1 2 3 15
-xz -9e -k "${tar_name}.tar"
+(
+    trap 's=$?; rm -f "${tar_name}.tar.xz" || : ; exit $s' 1 2 3 15
+    xz -9e -k "${tar_name}.tar" ||
+        { s=$?; rm -f "${tar_name}.tar.xz" || : ; exit $s; }
+    # Expected size of eglibc-2.19-r25890.tar.xz: at most 12371840 bytes.
+) &
 
 # Gzip requires either --no-name option or input from stdin for deterministic
 # compression.
-trap 's=$?; rm -f "${tar_name}.tar.gz" || : ; exit $s' 1 2 3 15
-gzip --no-name -9 -k "${tar_name}.tar" &&
-    { advdef -4 -z "${tar_name}.tar.gz" || : ; }
+(
+    trap 's=$?; rm -f "${tar_name}.tar.gz" || : ; exit $s' 1 2 3 15
+    gzip --no-name -9 -k "${tar_name}.tar" ||
+        { s=$?; rm -f "${tar_name}.tar.gz" || : ; exit $s; }
+    advdef -4 -z "${tar_name}.tar.gz" || :
+) &
+
+wait
