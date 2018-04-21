@@ -118,22 +118,27 @@ trap - 1 2 3 15
 rm -rf "$dist_name" &
 
 # Compression (gzip/xz) can add additional non-deterministic factors.
-# XZ format does not store the original file name or timestamp, and so is
-# deterministic already.
 (
     trap 's=$?; rm -f "${tar_name}.tar.xz" || : ; exit $s' 1 2 3 15
+    # XZ format does not store the original file name or timestamp, and so is
+    # deterministic already.
     xz -9e -k "${tar_name}.tar" ||
         { s=$?; rm -f "${tar_name}.tar.xz" || : ; exit $s; }
     # Expected size of eglibc-2.19-r25890.tar.xz: at most 12371840 bytes.
 ) &
 
-# Gzip requires either --no-name option or input from stdin for deterministic
-# compression.
 (
+    zopfli_iters=15
     trap 's=$?; rm -f "${tar_name}.tar.gz" || : ; exit $s' 1 2 3 15
+    # Try zopfli if available. Note that advdef uses 5 iterations by default
+    # instead of zopfli's default of 15 iterations.
+    zopfli --gzip --i"$zopfli_iters" "${tar_name}.tar" && exit 0
+    rm -f "${tar_name}.tar.gz" || :
+    # Gzip requires either --no-name option or input from stdin for
+    # deterministic compression.
     gzip --no-name -9 -k "${tar_name}.tar" ||
         { s=$?; rm -f "${tar_name}.tar.gz" || : ; exit $s; }
-    advdef -4 -z "${tar_name}.tar.gz" || :
+    advdef -4 -i "$zopfli_iters" -z "${tar_name}.tar.gz" || :
 ) &
 
 wait
