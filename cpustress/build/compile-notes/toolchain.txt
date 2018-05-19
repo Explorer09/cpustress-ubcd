@@ -1,4 +1,4 @@
-10 February 2018
+19 May 2018
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -43,7 +43,7 @@ Preparation
      # wget -O mpfr-allpatches.patch http://www.mpfr.org/mpfr-current/allpatches
      wget https://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.18.tar.bz2
-     wget ftp://ftp.gnu.org/gnu/gcc/gcc-7.3.0/gcc-7.3.0.tar.xz
+     wget ftp://ftp.gnu.org/gnu/gcc/gcc-8.1.0/gcc-8.1.0.tar.xz
      wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.15.2.tar.xz
      svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
      }
@@ -53,17 +53,17 @@ Preparation
      tar -x --xz -f mpfr-4.0.1.tar.xz
      tar -x -z -f mpc-1.1.0.tar.gz
      tar -x --bzip2 -f isl-0.18.tar.bz2
-     tar -x --xz -f gcc-7.3.0.tar.xz
+     tar -x --xz -f gcc-8.1.0.tar.xz
      tar -x --xz -f linux-4.15.2.tar.xz
-     mv gmp-6.1.2  gcc-7.3.0/gmp
-     mv mpfr-4.0.1 gcc-7.3.0/mpfr
-     mv mpc-1.1.0  gcc-7.3.0/mpc
-     mv isl-0.18   gcc-7.3.0/isl
+     mv gmp-6.1.2  gcc-8.1.0/gmp
+     mv mpfr-4.0.1 gcc-8.1.0/mpfr
+     mv mpc-1.1.0  gcc-8.1.0/mpc
+     mv isl-0.18   gcc-8.1.0/isl
      }
 
  $ download
  $ extract
- $ for i in binutils-2.30 gcc-7.3.0 linux-4.15.2 libc
+ $ for i in binutils-2.30 gcc-8.1.0 linux-4.15.2 libc
      do [ -d "$i" ] || exit 1 ; done
 
 Copy the "option-groups.config" file from the compile-notes directory to
@@ -136,9 +136,8 @@ system. Disable these until we have EGLIBC in the final build of GCC:
 
  $ DISABLE_TARGET_LIBS="
      --disable-libstdcxx --disable-libsanitizer --disable-libmpx
-     --disable-libvtv --disable-libcilkrts --disable-libssp
-     --disable-libquadmath --disable-libgomp --disable-libitm
-     --disable-libatomic"
+     --disable-libvtv --disable-libssp --disable-libquadmath --disable-libgomp
+     --disable-libitm --disable-libatomic"
 
 For some complex (and largely political) reasons, the unwind tables (i.e. the
 .eh_frame section) are always included in binary even when we have no chance to
@@ -152,9 +151,9 @@ except where -fasynchronous-unwind-tables is used explicitly:
      '-fno-asynchronous-unwind-tables}}')
 
  $ cd gcc-build
- $ BUILD=$(../gcc-7.3.0/config.guess | sed -e 's/-pc-/-buildpc-/')
+ $ BUILD=$(../gcc-8.1.0/config.guess | sed -e 's/-pc-/-buildpc-/')
 
- $ ../gcc-7.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../gcc-8.1.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --enable-languages=c \
      --disable-shared --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -166,7 +165,7 @@ except where -fasynchronous-unwind-tables is used explicitly:
  $ make -k distclean || :
  $ rm -r *
 
- $ ../gcc-7.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../gcc-8.1.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --enable-languages=c \
      --disable-shared --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -269,9 +268,9 @@ Note:
 Note the option '--enable-shared=libgcc'.
 
  $ cd gcc-build
- $ BUILD=$(../gcc-7.3.0/config.guess | sed -e 's/-pc-/-buildpc-/')
+ $ BUILD=$(../gcc-8.1.0/config.guess | sed -e 's/-pc-/-buildpc-/')
 
- $ ../gcc-7.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../gcc-8.1.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --enable-languages=c \
      --enable-shared=libgcc --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -282,7 +281,7 @@ Note the option '--enable-shared=libgcc'.
  $ make -k distclean || :
  $ rm -r *
 
- $ ../gcc-7.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../gcc-8.1.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --enable-languages=c \
      --enable-shared=libgcc --disable-threads --disable-lto \
      --disable-bootstrap --disable-multilib ${DISABLE_TARGET_LIBS} \
@@ -337,9 +336,9 @@ Only libgcc is built with a shared library. Other target libraries, including
 libstdc++, are built as static libraries only.
 
  $ cd gcc-build
- $ BUILD=$(../gcc-7.3.0/config.guess | sed -e 's/-pc-/-buildpc-/')
+ $ BUILD=$(../gcc-8.1.0/config.guess | sed -e 's/-pc-/-buildpc-/')
 
- $ ../gcc-7.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../gcc-8.1.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --enable-languages=c,c++,lto \
      --enable-shared=libgcc --enable-threads=posix --enable-lto \
      --disable-bootstrap --disable-multilib \
@@ -350,7 +349,7 @@ libstdc++, are built as static libraries only.
  $ make -k distclean || :
  $ rm -r *
 
- $ ../gcc-7.3.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../gcc-8.1.0/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --enable-languages=c,c++,lto \
      --enable-shared=libgcc --enable-threads=posix --enable-lto \
      --disable-bootstrap --disable-multilib \
@@ -383,7 +382,7 @@ without wrappers. Create a symlink in "lib/bfd-plugins" to achieve this:
 
  $ mkdir "${TOOLS_DIR}/lib/bfd-plugins"
  $ cd "${TOOLS_DIR}/lib/bfd-plugins"
- $ ln -s ../../libexec/gcc/x86_64-pc-linux-gnu/7.3.0/liblto_plugin.so.0.0.0 \
+ $ ln -s ../../libexec/gcc/x86_64-pc-linux-gnu/8.1.0/liblto_plugin.so.0.0.0 \
      liblto_plugin.so
 
 Stripping binaries (Optional)
@@ -418,13 +417,14 @@ try to configure an older GCC due to configure script limitations or bugs.
 Below are non-exhaustive mentions, which I note only for historical reference:
 (You might see them in older Linux From Scratch books or other toolchain build
 instructions)
-* Before GCC 4.6.0: You may add the following into ${GCC_CONFIGURE_SPECS}:
-  '%{!fomit-frame-pointer:%{!fno-omit-frame-pointer:-fomit-frame-pointer}}'
-  This tells GCC to -fomit-frame-pointer by default, where it was not then.
 * Before GCC 4.9.0: Need also --disable-libmudflap in ${DISABLE_TARGET_LIBS}.
 * Before GCC 5.1:   Use --disable-libstdc++-v3 instead of --disable-libstdcxx
   in ${DISABLE_TARGET_LIBS} because the latter (documented) option didn't work
   then due to a bug.
+* Before GCC 8.1:   Need also --disable-libcilkrts in ${DISABLE_TARGET_LIBS}.
+* Before GCC 4.6.0: You may add the following into ${GCC_CONFIGURE_SPECS}:
+  '%{!fomit-frame-pointer:%{!fno-omit-frame-pointer:-fomit-frame-pointer}}'
+  This tells GCC to -fomit-frame-pointer by default, where it was not then.
 * Before GCC 4.2.0: Need to explicitly specify --enable-__cxa_atexit during
   final build of GCC. __cxa_atexit is needed for standard-compliant handling of
   destructors. Glibc provides it, but GCC didn't enable it by default for Linux
