@@ -39,8 +39,7 @@ Preparation
      wget http://ftp.gnu.org/gnu/binutils/binutils-2.30.tar.xz
      wget https://gmplib.org/download/gmp/gmp-6.1.2.tar.xz
      wget http://www.mpfr.org/mpfr-current/mpfr-4.0.1.tar.xz
-     # No MPFR patches are available at this time.
-     # wget -O mpfr-allpatches.patch http://www.mpfr.org/mpfr-current/allpatches
+     wget -O mpfr-allpatches.patch http://www.mpfr.org/mpfr-current/allpatches
      wget https://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz
      wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.18.tar.bz2
      wget ftp://ftp.gnu.org/gnu/gcc/gcc-8.1.0/gcc-8.1.0.tar.xz
@@ -72,8 +71,12 @@ manually - the script can't locate where the file is.)
 
  $ [ -f option-groups.config ] || exit 1
 
-At the time of this build, there are no patches for this MPFR release.
-(You may check <http://www.mpfr.org/mpfr-current/#fixed> for latest bug fixes.)
+Apply the official cumulative patch for MPFR:
+(Note: the version of latest MPFR patch before this build is 4.0.1-p6.)
+
+ $ cd gcc-8.1.0/mpfr
+ $ patch -p 1 < ../../mpfr-allpatches.patch
+ $ cd ../..
 
 Make 'sysroot' and 'tools' directories:
 
