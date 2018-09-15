@@ -1,4 +1,4 @@
-19 May 2018
+15 September 2018
 
 The compilers in Ubuntu (or other modern Linux distros) are configured to
 generate i686-only code by default. If you compile programs with the native
@@ -36,7 +36,7 @@ Preparation
 -----------
 
  $ download () {
-     wget http://ftp.gnu.org/gnu/binutils/binutils-2.30.tar.xz
+     wget http://ftp.gnu.org/gnu/binutils/binutils-2.31.1.tar.xz
      wget https://gmplib.org/download/gmp/gmp-6.1.2.tar.xz
      wget http://www.mpfr.org/mpfr-current/mpfr-4.0.1.tar.xz
      wget -O mpfr-allpatches.patch http://www.mpfr.org/mpfr-current/allpatches
@@ -47,7 +47,7 @@ Preparation
      svn export http://www.eglibc.org/svn/branches/eglibc-2_19/libc/
      }
  $ extract () {
-     tar -x --xz -f binutils-2.30.tar.xz
+     tar -x --xz -f binutils-2.31.1.tar.xz
      tar -x --xz -f gmp-6.1.2.tar.xz
      tar -x --xz -f mpfr-4.0.1.tar.xz
      tar -x -z -f mpc-1.1.0.tar.gz
@@ -62,7 +62,7 @@ Preparation
 
  $ download
  $ extract
- $ for i in binutils-2.30 gcc-8.1.0 linux-4.16.9 libc
+ $ for i in binutils-2.31.1 gcc-8.1.0 linux-4.16.9 libc
      do [ -d "$i" ] || exit 1 ; done
 
 Copy the "option-groups.config" file from the compile-notes directory to
@@ -112,16 +112,16 @@ In case that the output of config.guess matches the system type we specify in
 --target (or --host later for building libc), we hack the string so that
 configure will always build cross tools and not native ones:
 
- $ BUILD=$(../binutils-2.30/config.guess | sed -e 's/-pc-/-buildpc-/')
+ $ BUILD=$(../binutils-2.31.1/config.guess | sed -e 's/-pc-/-buildpc-/')
 
- $ ../binutils-2.30/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../binutils-2.31.1/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=i486-pc-linux-gnu --with-sysroot="${SYSROOT_DIR}"
  $ make
  $ make install
  $ make -k distclean || :
  $ rm -r *
 
- $ ../binutils-2.30/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
+ $ ../binutils-2.31.1/configure --prefix="${TOOLS_DIR}" --build=${BUILD} \
      --target=x86_64-pc-linux-gnu --with-sysroot="${SYSROOT64_DIR}"
  $ make
  $ make install
